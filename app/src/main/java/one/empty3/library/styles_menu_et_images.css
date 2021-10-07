@@ -1,0 +1,91 @@
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
+
+body
+{
+    font-family: Verdana;
+    padding: 50px;
+    background-color: navy;
+    color: white;
+}
+h1
+{
+    font-family: Comics;
+    background: blue;
+    color: white;
+    font-variant: small-caps;
+    padding: 30px;
+}
+ul, a
+{
+    list-style-type: none;
+    color: white;
+    background: blue;
+}
+li
+{
+    padding: 10px;
+}
+pre
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    font-size: larger;
+    color: black;
+    background: white;
+}
+h2.code
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    color: black;
+    background: gray;
+    text-align: center;
+}
+h2.menu_link, h2.menu_link a
+{
+    background: aqua;
+    color: black;
+    padding: 5px;
+    text-align: right;
+}
+
+.history {
+    background-color: bisque;
+    color: black;
+}
+
+.version {
+    background-color: cyan;
+}

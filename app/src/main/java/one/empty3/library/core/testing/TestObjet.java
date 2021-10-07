@@ -1,0 +1,1051 @@
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
+
+/*
+ *
+
+/*
+ * 2013-2020 Manuel Dahmen
+ */
+package one.empty3.library.core.testing;
+
+import android.graphics.Bitmap;
+import android.media.AudioFormat;
+import android.media.MediaRecorder;
+
+import one.empty3.library.*;
+import one.empty3.library.core.export.ObjExport;
+import one.empty3.library.core.export.STLExport;
+import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
+import one.empty3.library.core.script.Loader;
+import one.empty3.library.core.script.VersionNonSupporteeException;
+
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.logging.Logger;
+
+/*__
+ * @author Manuel DAHMEN
+ */
+public abstract class TestObjet implements Test, Runnable {
+    public static Resolution PAL = new Resolution(1280, 720);
+    public static Resolution HD720 = new Resolution(1280, 720);
+    public static Resolution HD1080 = new Resolution(1920, 1080);
+    public static Resolution UHD = new Resolution(1920 * 2, 1080 * 2);
+    public static Resolution VGAZIZI = new Resolution(640, 480);
+
+    public static final int GENERATE_NOTHING = 0;
+    public static final int GENERATE_IMAGE = 1;
+    public static final int GENERATE_MODEL = 2;
+    public static final int GENERATE_OPENGL = 4;
+    public static final int GENERATE_MOVIE = 8;
+    public static final int GENERATE_OBJ = 16;
+    public static final int GENERATE_NO_IMAGE_FILE_WRITING = 16;
+    public static final ArrayList<TestInstance.Parameter> initParams = new ArrayList<TestInstance.Parameter>();
+    public static final int ON_TEXTURE_ENDS_STOP = 0;
+    public static final int ON_TEXTURE_ENDS_LOOP_TEXTURE = 1;
+    public static final int ON_MAX_FRAMES_STOP = 0;
+    public static final int ON_MAX_FRAMES_CONTINUE = 1;
+    public static final int ENCODER_MONTE = 0;
+    public static final int ENCODER_HUMBLE = 1;
+    protected int encoder = 0;
+    protected Scene scene = new Scene();
+    protected String description = "@ Manuel Dahmen \u2610";
+    protected Camera c;
+    protected int frame = 0;
+    protected ArrayList<TestInstance.Parameter> dynParams;
+    Properties properties = new Properties();
+    private File avif;
+    private MediaRecorder aw ;
+    private boolean aviOpen = false;
+    private String filmName;
+    private int idxFilm;
+    private boolean unterminable = false;
+    private long timeStart;
+    private long lastInfoEllapsedMillis;
+    private int generate = 1 | 8;
+    private int version = 1;
+    private String template = "";
+    private String type = "JPEG";
+    private String filenameZIP = "tests";
+    private String fileextZIP = "diapo";
+    private File file = null;
+    private int resx = 640;
+    private int resy = 480;
+    private File dir = null;
+    private Bitmap ri;
+    private String filename = "frame";
+    private String fileExtension = "JPG";
+    private boolean publish = false;
+    private boolean isometrique = false;
+    private boolean loop = true;
+    private int maxFrames = 5000;
+    private String text = "scene";
+    private File fileScene;
+    private boolean saveTxt = true;
+    private String binaryExtension = "mood";
+    private int serie = 0;
+    private File serid = null;
+    private boolean initialise;
+    private boolean structure = false;
+    private boolean noZoom;
+    private String sousdossier;
+    private boolean D3 = false;
+    private ImageContainer biic;
+    private Bitmap riG;
+    private Bitmap riD;
+    private File fileG;
+    private File fileD;
+    private boolean pause = false;
+    private boolean pauseActive = false;
+    protected ITexture couleurFond;
+    private File directory;
+    private ZipWriter zip;
+    private boolean stop = false;
+    protected ZBufferImpl z;
+    private RegisterOutput o = new RegisterOutput();
+    private int onTextureEnds = ON_TEXTURE_ENDS_STOP;
+    private int onMaxFrameEvent = ON_MAX_FRAMES_STOP;
+    private ExportAnimationData dataWriter;
+    private File audioTrack;
+    private boolean isAudioDone;
+    //private AudioInputStream audioIn;
+    private int audioTrackNo;
+    private int videoTrackNo;
+    private int fps = 25;
+    //private Buffer buf;
+    private boolean isVBR;
+    private AudioFormat audioFormat;
+    private Resolution dimension = HD1080;
+    private String name;
+
+    protected ZBufferImpl z() {
+        return z;
+    }
+
+    public TestObjet() {
+
+        init();
+    }
+
+    public TestObjet(ArrayList<TestInstance.Parameter> params) {
+        init();
+    }
+
+
+    public TestObjet(boolean binit) {
+        if (binit) {
+            init();
+            setResx(dimension.x());
+            setResy(dimension.y());
+            z = ZBufferFactory.instance(resx, resy, D3);
+
+        } else {
+        }
+    }
+
+    public void setProperties(Properties p) {
+        this.getClass();
+    }
+
+    public static void main(String[] args) {
+        TestObjet gui = new TestObjetSub();
+        gui.loop(true);
+        gui.setMaxFrames(2000);
+        new Thread(gui).start();
+    }
+
+    public ExportAnimationData getDataWriter() {
+        return dataWriter;
+    }
+
+    public int getIdxFilm() {
+        return idxFilm;
+    }
+
+    public File getSubfolder() {
+        return directory;
+    }
+
+    public void setResolution(int x, int y) {
+        setResx(x);
+        setResy(y);
+        dimension = new Resolution(x, y);
+    }
+
+    public Bitmap img() {
+        return ri;
+    }
+
+    public void startNewMovie() {
+        idxFilm++;
+        avif = new File(this.dir.getAbsolutePath() + File.separator
+                + sousdossier + this.getClass().getName() + "__" + filmName + idxFilm + ".AVI");
+
+        if ((generate & GENERATE_MOVIE) > 0) {
+
+            if (encoder == 1) {
+
+                initCompiler();
+            } else {
+                if (isAviOpen()) {
+                        aw.stop();
+                        aw = null;
+                        aviOpen = false;
+
+                }
+            }
+        }
+    }
+
+    private boolean unterminable() {
+        return unterminable;
+    }
+
+    public boolean isAviOpen() {
+        return  aviOpen;
+    }
+
+    public void setAviOpen(boolean aviOpen) {
+        this.aviOpen = aviOpen;
+    }
+
+    public boolean getGenerate(int GENERATE) {
+        return (generate & GENERATE) > 0;
+    }
+
+    private String runtimeInfoSucc() {
+        System.nanoTime();
+
+        long displayLastIntervalTimeInterval = (System.nanoTime() - lastInfoEllapsedMillis);
+        long displayPartialTimeInterval = (lastInfoEllapsedMillis - timeStart);
+        lastInfoEllapsedMillis = System.nanoTime();
+        return "Dernier intervalle de temps : " + (displayLastIntervalTimeInterval * 1E-9) + "\nTemps total partiel : " + (displayPartialTimeInterval * 1E-9);
+    }
+
+    public RegisterOutput getO() {
+        return o;
+    }
+
+    public abstract void afterRenderFrame();
+
+    public String applyTemplate(String template, Properties properties) {
+        return "";
+        // throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Camera camera() {
+        return scene().cameraActive ();
+    }
+
+    public void camera(Camera c) {
+        scene(). cameraActive (c);
+    }
+
+    public boolean D3() {
+        return D3;
+    }
+
+    public void description(String d) {
+        description = d;
+    }
+
+    public File directory() {
+        return directory;
+    }
+
+    protected void ecrireImage(Bitmap ri, String type, File fichier) {
+        if (fichier == null) {
+            o.println("Erreur OBJET FICHIER (java.io.File) est NULL");
+            System.exit(1);
+        }
+
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ri.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+
+            baos.flush(); // Is this necessary??
+            byte[] resultImageAsRawBytes = baos.toByteArray();
+            baos.close(); // Not sure how important this is...
+
+            OutputStream out = new FileOutputStream(fichier);
+            out.write(resultImageAsRawBytes);
+            out.close();
+
+            zip.addFile(fichier.getName(), resultImageAsRawBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        o.println(fichier.getAbsolutePath());
+
+    }
+
+    public void exportFrame(String format, String filename) throws IOException {
+
+        STLExport.save(
+                new File(directory.getAbsolutePath() + File.separator + filename + ".stl"),
+                scene(),
+                false);
+        ObjExport.save(
+                new File(directory.getAbsolutePath() + File.separator + filename + ".obj"),
+                scene(),
+                false);
+    }
+
+    public abstract void finit() throws Exception;
+
+    public int frame() {
+        return frame;
+    }
+
+    public TestInstance.Parameter getDynParameter(String name) {
+        Iterator<TestInstance.Parameter> prms = dynParams.iterator();
+
+        while (prms.hasNext()) {
+            TestInstance.Parameter prm = prms.next();
+
+            if (name.equals(prm.name)) {
+                return prm;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<TestInstance.Parameter> getDynParameters() {
+        return dynParams;
+    }
+
+    ArrayList<TestInstance.Parameter> getDynParams() {
+        return this.dynParams;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String fn) {
+        this.filename = fn;
+    }
+
+    public int getGenerate() {
+        return generate;
+    }
+
+    public void setGenerate(int generate) {
+        this.generate = generate;
+    }
+
+    public ArrayList<TestInstance.Parameter> getInitParameters() {
+        return initParams;
+
+    }
+
+    public ArrayList<TestInstance.Parameter> getInitParams() {
+        return initParams;
+    }
+
+    public int getMaxFrames() {
+        return maxFrames;
+    }
+
+    public void setMaxFrames(int maxFrames) {
+        this.maxFrames = maxFrames;
+    }
+
+
+    public int getResx() {
+        return resx;
+    }
+
+    @Deprecated
+    public void setResx(int resx) {
+        this.resx = resx;
+        dimension = new Resolution(resx, resy);
+        z = ZBufferFactory.instance(resx, resy, D3);
+    }
+
+    public int getResy() {
+        return resy;
+    }
+
+    @Deprecated
+    public void setResy(int resy) {
+        this.resy = resy;
+        dimension = new Resolution(resx, resy);
+        z = ZBufferFactory.instance(resx, resy, D3);
+    }
+
+    public abstract void ginit();
+
+    private void init() {
+        o.addOutput(System.out);
+
+        o.addOutput(Logger.getLogger(getClass().getCanonicalName()));
+
+        if (initialise) {
+            return;
+        }
+        c = new Camera(new Point3D(0d, 0d, -10d), Point3D.O0);
+
+        File dir1 = null;
+
+
+        Properties config = new Properties();
+        try {
+            config.load(new FileInputStream(System.getProperty("user.home")
+                    + File.separator + "empty3.config"));
+
+
+        } catch (Exception ex) {
+            config.setProperty("folderoutput", "./EmptyCanvasTests");
+            System.out.println("userHome/empty3.config not found use default");
+        }
+        //          try {
+        if (config.getProperty("folderoutput") != null) {
+            dir1 = new File(config.getProperty("folderoutput"));
+        } else {
+            dir1 = new File("./"
+                    + File.separator + "EmptyCanvas");
+        }
+        // } catch (IOException ex) {
+        //   o.println(ex.getLocalizedMessage());
+        //  }
+        dir1.mkdirs();
+
+        this.dir = new File(dir1.getAbsolutePath() + File.separator
+                + this.getClass().getName());
+        if (!this.dir.exists()) {
+            this.dir.mkdirs();
+        } else {
+            o.println("Repertoire cree avec SUCCES");
+            // System.exit(1);
+        }
+        serid = new File(this.dir.getAbsolutePath() + File.separator
+                + "__SERID");
+
+        sousdossier = "FICHIERS_" + dateForFilename(new Date());
+
+        directory = new File(this.dir.getAbsolutePath() + File.separator
+                + sousdossier);
+        directory.mkdirs();
+//        new File(directory.getAbsolutePath() + File.separator + "GAUCHE").mkdir();
+//        new File(directory.getAbsolutePath() + File.separator + "DROITE").mkdir();
+
+        ///setResolution(dimension.x(), dimension.y());
+        initialise = true;
+        ///publishResult(false);
+        ///setMaxFrames(100);
+        loop(true);
+
+
+        aw = new MediaRecorder();
+    }
+
+    private String dateForFilename(Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        return df.format(date);
+    }
+
+    public void isometrique(boolean isISO) {
+        isometrique = isISO;
+    }
+
+    public void isometrique(boolean isISO, boolean noZoom) {
+        this.isometrique = isISO;
+        this.noZoom = noZoom;
+
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public boolean isPauseActive() {
+        return pauseActive;
+    }
+
+    private boolean isSaveBMood() {
+        return !saveTxt;
+    }
+
+    public boolean isStructure() {
+        return structure;
+    }
+
+    public void setStructure(boolean structure) {
+        this.structure = structure;
+    }
+
+    public boolean loop() {
+        return loop;
+    }
+
+    public void loop(boolean isLooping) {
+        this.loop = isLooping;
+    }
+
+    public boolean nextFrame() {
+        frame++;
+
+        if (D3()) {
+            fileG = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "GAUCHE" + File.separator
+                    + "__SERID_" + (serie) + "__" + filename
+                    + (1000000 + frame) + "." + fileExtension);
+            while (fileG == null || fileG.exists()) {
+                serie++;
+                fileG = new File(this.dir.getAbsolutePath() + File.separator
+                        + sousdossier + File.separator + "GAUCHE"
+                        + File.separator + "__SERID_" + (serie) + "__"
+                        + filename + (1000000 + frame) + "." + fileExtension);
+            }
+
+            fileD = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "DROITE" + File.separator
+                    + "__SERID_" + (serie) + "__" + filename
+                    + (1000000 + frame) + "." + fileExtension);
+            while (fileD == null || fileD.exists()) {
+                serie++;
+                fileD = new File(this.dir.getAbsolutePath() + File.separator
+                        + sousdossier + File.separator + "DROITE"
+                        + File.separator + "__SERID_" + (serie) + "__"
+                        + filename + (1000000 + frame) + "." + fileExtension);
+            }
+        } else {
+            file = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "__SERID_" + (serie)
+                    + "__" + filename + (1000000 + frame) + "." + fileExtension);
+            fileScene = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "__SERID_" + (serie)
+                    + "__" + filename + (1000000 + frame) + "."
+                    + binaryExtension);
+            while (file == null || file.exists()) {
+                serie++;
+
+                String sub = (name == null ? sousdossier : name);
+                if (!(sub.endsWith("/") || sub.endsWith("\\") || sub.endsWith(File.separator)))
+                    sub = sub + File.separator;
+
+                file = new File(this.dir.getAbsolutePath() + File.separator
+                        + sub + "__SERID_" + (serie)
+                        + "__" + filename + (1000000 + frame) + "."
+                        + fileExtension);
+                fileScene = new File(this.dir.getAbsolutePath()
+                        + File.separator + sousdossier + File.separator
+                        + "__SERID_" + (serie) + "__" + filename
+                        + (1000000 + frame) + "." + binaryExtension);
+            }
+        }
+
+
+        /*
+         * ObjectOutputStream oos = null; try { oos = new ObjectOutputStream(new
+         * FileOutputStream(serid)); oos.writeInt(serie); } catch (IOException
+         * ex) { o.println(
+         * null, ex); } finally { try { oos.close(); } catch (IOException ex) {
+         * o.println( null,
+         * ex); } }
+         */
+
+        return !(loop() && frame > maxFrames || (frame > 1 && !loop()));
+
+    }
+
+    public boolean nextFrame2UnknownDiplicate() {
+        if (D3()) {
+            fileG = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "GAUCHE" + File.separator
+                    + "__SERID_" + (serie) + "__" + filename
+                    + (1000000 + frame) + "." + fileExtension);
+            while (fileG == null || fileG.exists()) {
+                serie++;
+                fileG = new File(this.dir.getAbsolutePath() + File.separator
+                        + sousdossier + File.separator + "GAUCHE"
+                        + File.separator + "__SERID_" + (serie) + "__"
+                        + filename + (1000000 + frame) + "." + fileExtension);
+            }
+
+            fileD = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "DROITE" + File.separator
+                    + "__SERID_" + (serie) + "__" + filename
+                    + (1000000 + frame) + "." + fileExtension);
+            while (fileD == null || fileD.exists()) {
+                serie++;
+                fileD = new File(this.dir.getAbsolutePath() + File.separator
+                        + sousdossier + File.separator + "DROITE"
+                        + File.separator + "__SERID_" + (serie) + "__"
+                        + filename + (1000000 + frame) + "." + fileExtension);
+            }
+        } else {
+            file = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "__SERID_" + (serie)
+                    + "__" + filename + (1000000 + frame) + "." + fileExtension);
+            fileScene = new File(this.dir.getAbsolutePath() + File.separator
+                    + sousdossier + File.separator + "__SERID_" + (serie)
+                    + "__" + filename + (1000000 + frame) + "."
+                    + binaryExtension);
+            while (file == null || file.exists()) {
+                serie++;
+                file = new File(this.dir.getAbsolutePath() + File.separator
+                        + sousdossier + File.separator + "__SERID_" + (serie)
+                        + "__" + filename + (1000000 + frame) + "."
+                        + fileExtension);
+                fileScene = new File(this.dir.getAbsolutePath()
+                        + File.separator + sousdossier + File.separator
+                        + "__SERID_" + (serie) + "__" + filename
+                        + (1000000 + frame) + "." + binaryExtension);
+            }
+        }
+        /*
+         * ObjectOutputStream oos = null; try { oos = new ObjectOutputStream(new
+         * FileOutputStream(serid)); oos.writeInt(serie); } catch (IOException
+         * ex) { o.println(
+         * null, ex); } finally { try { oos.close(); } catch (IOException ex) {
+         * o.println( null,
+         * ex); } }
+         */
+
+        return !(loop() && frame > maxFrames || (frame > 1 && !loop()));
+
+    }
+
+    public void PAUSE() {
+
+        pause = !pause;
+
+    }
+
+
+    public void publishResult(boolean publish) {
+        this.publish = publish;
+    }
+
+
+    public void reportPause(boolean phase) {
+    }
+
+    public void reportStop() {
+    }
+
+
+    public boolean copyResources() {
+        // TODO Parcourir les textures de la scène
+        // TODO
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    public void addAudioFile(File audio) {
+        this.audioTrack = audio;
+    }
+
+    public void initCompiler() {
+    }
+
+    public void run() {
+        if (!initialise)
+            init();
+
+
+        z = ZBufferFactory.instance(resx, resy, D3);
+        z.scene(scene);
+        //z.next();
+        timeStart = System.nanoTime();
+        lastInfoEllapsedMillis = System.nanoTime();
+        if ((generate & GENERATE_OPENGL) > 0) {
+            throw new UnsupportedOperationException("No class for OpenGL here");
+        }
+        if ((generate & GENERATE_MOVIE) > 0) {
+            startNewMovie();
+        }
+        serid();
+
+        this.biic = new ImageContainer();
+
+        if(getPublish()) {
+            publishResult();
+
+        }
+
+        File zipf = new File(this.dir.getAbsolutePath() + File.separator
+                + sousdossier + File.separator + filename + ".ZIP");
+        zip = new ZipWriter();
+
+        File dataf = new File(this.dir.getAbsolutePath() + File.separator
+                + filename + ".XML");
+
+        try {
+            dataWriter = new ExportAnimationData(dataf, this);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            zip.init(zipf);
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+            return;
+        }
+
+
+        ginit();
+
+
+        /*if (scene().texture() != null) {
+            z.backgroundTexture(scene().texture());
+        }*/
+
+        o.println("");
+        o.println(directory().getAbsolutePath());
+        o.println("Generate (0 NOTHING  1 IMAGE  2 MODEL  4 OPENGL) {0}" + getGenerate());
+
+        o.println("Starting movie  {0}" + runtimeInfoSucc());
+
+
+        while ((nextFrame() || unterminable()) && !stop) {
+
+
+            pauseActive = true;
+            while (isPause()) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            pauseActive = false;
+
+
+            try {
+                finit();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if ((generate & GENERATE_OPENGL) > 0) {
+                o.println("No OpenGL");
+            } else {
+                try {
+                    testScene();
+
+                } catch (Exception e1) {
+                    return;
+                }
+            }
+
+            //System.out.println(z.scene());
+
+            if ((generate & GENERATE_IMAGE) > 0) {
+                try {
+                    z.draw();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+
+                ri = z.image2();
+
+                afterRenderFrame();
+
+                // ri.getGraphics().drawString(description, 0, 0);
+
+                if ((generate & GENERATE_MOVIE) > 0 && isAviOpen()) {
+                    if (encoder == ENCODER_MONTE) {
+                            dataWriter.writeFrameData(frame(), "Writing movie frame");
+                    } else if (encoder == ENCODER_HUMBLE) {
+                    }
+                } else {
+                    o.println(
+                            "No file open for avi writing");
+
+                }
+                ecrireImage(ri, type, file);
+
+                biic.setStr("" + frame);
+            }
+            if (isSaveBMood()) {
+                try {
+                    File foutm = new File(this.dir.getAbsolutePath()
+                            + File.separator + filename + ".bmood");
+                    new Loader().saveBin(foutm, scene);
+                    dataWriter.writeFrameData(frame(), "Save bin: " + foutm.getAbsolutePath());
+                } catch (VersionNonSupporteeException ex) {
+                    o.println(ex.getLocalizedMessage());
+                } catch (ExtensionFichierIncorrecteException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            if ((generate & GENERATE_MODEL) > 0) {
+                try {
+                    o.println("Start generating model");
+                    String filename = "export-" + frame + ".STL";
+                    exportFrame("export", filename);
+                    dataWriter.writeFrameData(frame(), "Export model: " + filename);
+                    o.println("End generating model");
+                } catch (IOException ex) {
+                    o.println(ex.getLocalizedMessage());
+                } catch (Exception ex) {
+                    o.println("Other exception in generating model" + ex);
+                    ex.printStackTrace();
+                }
+
+            }
+
+/*
+            if(publish) {
+                ImageContainer imageContainer = new ImageContainer();
+                biic.setImage(ri);
+                imageContainer.setImage(biic.getImage());
+
+                str.setImageContainer(imageContainer);
+            }
+  */
+            z.idzpp();
+
+        }
+
+        afterRender();
+
+        o.println("" + frame() + "\n" + runtimeInfoSucc());
+
+        o.println("Fin de la création des image et/u des modèles" + "\n" + runtimeInfoSucc());
+        if (zip != null) {
+            try {
+                zip.end();
+            } catch (IOException e) {
+                //reportException(e);
+            }
+        }
+        if ((generate & GENERATE_MOVIE) > 0 && true) {
+            if (encoder == ENCODER_MONTE) {
+            } else {
+
+            }
+        }
+
+        String cmd;
+
+        if (loop() && avif != null) {
+            try {
+                cmd = avif.getCanonicalPath();
+                Runtime runtime = Runtime.getRuntime();
+                if (runtime != null) {
+                    runtime.exec("start \"" + cmd + "\"");
+                    OutputStream outputStream = runtime.exec(cmd).getOutputStream();
+                    System.out.print(outputStream);
+                }
+            } catch (IOException ex) {
+                o.println(ex.getLocalizedMessage());
+            }
+        } else if (file.exists()) {
+            try {
+                cmd = file.getCanonicalPath();
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("start \"" + cmd + "\"");
+                OutputStream outputStream = runtime.exec(cmd).getOutputStream();
+                System.out.print(outputStream);
+            } catch (IOException ex) {
+                o.println(ex.getLocalizedMessage());
+            }
+        }
+
+        dataWriter.end();
+
+
+        o.println("End movie       " + runtimeInfoSucc());
+        o.println("Quit run method " + runtimeInfoSucc());
+
+    }
+
+
+    public void saveBMood(boolean b) {
+        saveTxt = b;
+    }
+
+    public Scene scene() {
+        return scene;
+    }
+
+    public void paintingAct(Representable representable, PaintingAct pa) {
+        representable.setPaintingAct(getZ(), scene(), pa);
+    }
+
+
+    public void scene(Scene load) {
+        scene = load;
+    }
+
+    private int serid() {
+        return 0;
+    }
+
+    public void set3D(boolean b3D) {
+        this.D3 = b3D;
+
+    }
+
+    public void setCouleurFond(ITexture tColor) {
+        this.couleurFond = tColor;
+    }
+
+    public boolean setDynParameter(TestInstance.Parameter parameter) {
+        Iterator<TestInstance.Parameter> prms = dynParams.iterator();
+
+        while (prms.hasNext()) {
+            TestInstance.Parameter prm = prms.next();
+
+            if (parameter.name.equals(prm.name)) {
+                dynParams.remove(prm);
+                dynParams.add(prm);
+                return true;
+            }
+        }
+        dynParams.add(parameter);
+        return true;
+    }
+
+    public void setFileExtension(String ext) {
+        this.fileExtension = ext;
+    }
+
+    public void STOP() {
+        stop = true;
+        setGenerate(GENERATE_NOTHING);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+
+        }
+        if (isAviOpen()) {
+            //   try {
+            // aw.finish();
+            // //    aw.close();
+            //   aw = null;
+            aviOpen = false;
+            //   } catch (IOException e) {
+            //   o.println("Can't close or flush movie" + runtimeInfoSucc());
+            //  }
+        }
+
+    }
+
+    /*__
+     * Definir la scene scene().add(<<Representable>>)
+     *
+     * @throws java.lang.Exception
+     */
+    public abstract void testScene() throws Exception;
+
+    public void testScene(File f) throws Exception {
+        if (f.getAbsolutePath().toLowerCase().endsWith("mood")
+                || f.getAbsolutePath().toLowerCase().endsWith("moo")
+                || f.getAbsolutePath().toLowerCase().endsWith("bmood")
+                || f.getAbsolutePath().toLowerCase().endsWith("bmoo")) {
+            try {
+                new Loader().load(f, scene);
+
+            } catch (VersionNonSupporteeException ex) {
+                o.println(ex.getLocalizedMessage());
+            } catch (ExtensionFichierIncorrecteException ex) {
+                o.println(ex.getLocalizedMessage());
+            }
+        } else {
+            o.println("Erreur: extension incorrecte");
+            System.exit(1);
+
+        }
+    }
+
+
+    public String getFolder() {
+        return dir.getAbsolutePath();
+    }
+
+    public void unterminable(boolean b) {
+        unterminable = b;
+    }
+
+    public ZBuffer getZ() {
+        if (z == null)
+            z = ZBufferFactory.instance(resx, resy, D3);
+        return z;
+    }
+
+    public void onTextureEnds(ITexture texture, int texture_event) {
+        texture.onTextureEnds = texture_event;
+    }
+
+    public void onMaxFrame(int maxFramesEvent) {
+        this.onMaxFrameEvent = maxFramesEvent;
+    }
+
+    public TestObjet getInstance() throws ClassNotFoundException {
+        try {
+            return this.getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        throw new ClassNotFoundException("Impossible to initialize class");
+    }
+
+    public void setDimension(Resolution dimension) {
+        this.resx = dimension.x();
+        this.resy = dimension.y();
+        this.dimension = dimension;
+    }
+
+    public Resolution getDimension() {
+        return dimension;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getPublish() {
+        return publish;
+    }
+
+    public void setPublish(boolean publish) {
+        this.publish = publish;
+    }
+}

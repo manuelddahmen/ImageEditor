@@ -1,0 +1,10 @@
+package one.empty3.apps.library.shader;
+import java.util.*;
+public class FVecMap  extends List<FVec>{
+     public FVecMap() {
+         fill() ;
+     } 
+     public void fill() {
+     
+     } 
+} 

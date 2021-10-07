@@ -1,0 +1,10 @@
+package one.empty3.library;
+import one.empty3.library.core.testing.TestObjet;
+public class RenderedTexture {
+     public RenderedTexture(int x, int y) {
+     }
+     public void render(TestObjet to){}
+     public void render(Scene scene){}
+     public void render(ITexture it){}
+     
+}

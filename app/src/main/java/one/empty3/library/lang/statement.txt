@@ -1,0 +1,76 @@
+A
+abstract -> modifier
+B
+based on the unicode character set -> character
+boolean -> type_specifier
+break -> statement
+byte -> type_specifier
+C
+case -> switch_statement
+catch -> try_statement
+char -> type_specifier
+class -> class_declaration
+continue -> statement
+D
+d -> float_type_suffix
+default -> switch_statement
+do -> do_statement
+double -> type_specifier
+E
+e -> exponent_part
+else -> if_statement
+extends -> class_declaration
+            -> interface_declaration
+F
+f -> float_type_suffix
+false -> logical_expression
+final -> modifier
+finally -> try_statement
+float -> type_specifier
+for -> for_statement
+I
+if -> if_statement
+implements -> class_declaration
+import -> import_statement
+instanceof -> expression
+int -> type_specifier
+interface -> interface_declaration
+L
+l -> integer_literal
+long -> type_specifier
+N
+native -> modifier
+new -> creating_expression
+null -> expression
+P
+package -> package_statement
+private -> modifier
+protected -> modifier
+public -> modifier
+R
+return -> statement
+S
+short -> type_specifier
+static -> modifier
+            -> static_initializer
+super -> expression
+switch -> switch_statement
+synchronized -> modifier
+            -> statement
+T
+this -> expression
+threadsafe -> modifier
+throw -> statement
+transient -> modifier
+true -> logical_expression
+try -> try_statement
+W
+while -> do_statement
+            -> while_statement
+X
+x -> integer_literal
+--
+Index général - Index concepts - Règles BNF
+© 1996, DIP Genève, Alexandre Maret & Jacques Guyot
+page générée Thu Jun 20 11:52:02 MET DST 1996
+Index général - Index concepts - Règl
