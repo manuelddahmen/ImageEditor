@@ -202,6 +202,7 @@ class GalleryFragment internal constructor() : Fragment() {
                             setData(fromFile(mediaFile.absoluteFile))
                             setType("image/jpg")
                         }
+ i.putExtra("data",mediaFile.absolutePath)
                         startActivity(intent)
                 }
         }
