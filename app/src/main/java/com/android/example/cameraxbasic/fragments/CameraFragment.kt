@@ -377,7 +377,7 @@ class CameraFragment : Fragment() {
         // In the background, load latest photo taken (if any) for gallery thumbnail
         lifecycleScope.launch(Dispatchers.IO) {
             outputDirectory.listFiles { file ->
-                EXTENSION_WHITELIST.contains(file.extension.toUpperCase(Locale.ROOT))
+                EXTENSION_WHITELIST.contains(file.extension.uppercase(Locale.ROOT))
             }?.maxOrNull()?.let {
                 setGalleryThumbnail(Uri.fromFile(it))
             }

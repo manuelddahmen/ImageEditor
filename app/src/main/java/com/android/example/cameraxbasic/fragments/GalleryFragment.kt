@@ -71,8 +71,9 @@ class GalleryFragment internal constructor() : Fragment() {
         viewModel.selectItem(item)
     }
 
-/** Adapter class used to present a fragment containing one photo or video as a page */
-    inner class MediaPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    /** Adapter class used to present a fragment containing one photo or video as a page */
+    inner class MediaPagerAdapter(fm: FragmentManager) :
+        FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getCount(): Int = mediaList.size
         override fun getItem(position: Int): Fragment = PhotoFragment.create(mediaList[position])
         override fun getItemPosition(obj: Any): Int = POSITION_NONE
@@ -132,34 +133,37 @@ class GalleryFragment internal constructor() : Fragment() {
         // Handle share button press
         fragmentGalleryBinding.shareButton.setOnClickListener {
 
-            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)?.let { mediaFile ->
+            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
+                ?.let { mediaFile ->
 
-                // Create a sharing intent
-                val intent = Intent().apply {
-                    // Infer media type from file extension
-                    val mediaType = MimeTypeMap.getSingleton()
+                    // Create a sharing intent
+                    val intent = Intent().apply {
+                        // Infer media type from file extension
+                        val mediaType = MimeTypeMap.getSingleton()
                             .getMimeTypeFromExtension(mediaFile.extension)
-                    // Get URI from our FileProvider implementation
-                    val uri = FileProvider.getUriForFile(
-                            view.context, BuildConfig.APPLICATION_ID + ".provider", mediaFile)
-                    // Set the appropriate intent extra, type, action and flags
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    type = mediaType
-                    action = Intent.ACTION_SEND
-                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                }
+                        // Get URI from our FileProvider implementation
+                        val uri = FileProvider.getUriForFile(
+                            view.context, BuildConfig.APPLICATION_ID + ".provider", mediaFile
+                        )
+                        // Set the appropriate intent extra, type, action and flags
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        type = mediaType
+                        action = Intent.ACTION_SEND
+                        flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    }
 
-                // Launch the intent letting the user choose which app to share with
-                startActivity(Intent.createChooser(intent, getString(R.string.share_hint)))
-            }
+                    // Launch the intent letting the user choose which app to share with
+                    startActivity(Intent.createChooser(intent, getString(R.string.share_hint)))
+                }
         }
 
         // Handle delete button press
         fragmentGalleryBinding.deleteButton.setOnClickListener {
 
-            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)?.let { mediaFile ->
+            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
+                ?.let { mediaFile ->
 
-                AlertDialog.Builder(view.context, android.R.style.Theme_Material_Dialog)
+                    AlertDialog.Builder(view.context, android.R.style.Theme_Material_Dialog)
                         .setTitle(getString(R.string.delete_title))
                         .setMessage(getString(R.string.delete_dialog))
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -170,7 +174,8 @@ class GalleryFragment internal constructor() : Fragment() {
 
                             // Send relevant broadcast to notify other apps of deletion
                             MediaScannerConnection.scanFile(
-                                    view.context, arrayOf(mediaFile.absolutePath), null, null)
+                                view.context, arrayOf(mediaFile.absolutePath), null, null
+                            )
 
                             // Notify our view pager
                             mediaList.removeAt(fragmentGalleryBinding.photoViewPager.currentItem)
@@ -178,25 +183,26 @@ class GalleryFragment internal constructor() : Fragment() {
 
                             // If all photos have been deleted, return to camera
                             if (mediaList.isEmpty()) {
-                                Navigation.findNavController(requireActivity(), R.id.fragment_container).navigateUp()
+                                Navigation.findNavController(
+                                    requireActivity(),
+                                    R.id.fragment_container
+                                ).navigateUp()
                             }
 
                         }
 
                         .setNegativeButton(android.R.string.no, null)
                         .create().showImmersive()
-            }
+                }
         }
         fragmentGalleryBinding.effectButton.setOnClickListener {
             mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
                 ?.let { mediaFile ->
-                    run {
                         val intent = Intent(Intent.ACTION_EDIT).apply {
                             setData(fromFile(mediaFile.absoluteFile))
                             setType("image/jpg")
                         }
                         startActivity(intent)
-              }
                 }
         }
 
@@ -206,8 +212,10 @@ class GalleryFragment internal constructor() : Fragment() {
         _fragmentGalleryBinding = null
         super.onDestroyView()
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 //        outState.put(mediaList, isEditing)
 //        outState.putString(RANDOM_GOOD_DEED_KEY, randomGoodDeed)
-    }}
+    }
+}
