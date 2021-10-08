@@ -33,7 +33,10 @@ class EffectsFragment : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val action: String? = intent?.action
+        val data: Uri? = intent?.data 
+// url scheme.? file? or https://empty3.one 
+// settings.properties file. too massive
         setContentView(R.layout.select_effects)
         effectList = Main.initListProcesses()
         val l : List<String> = List<String>(effectList.size, init = {
