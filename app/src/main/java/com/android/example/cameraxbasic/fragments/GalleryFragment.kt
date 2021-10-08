@@ -198,11 +198,13 @@ class GalleryFragment internal constructor() : Fragment() {
         fragmentGalleryBinding.effectButton.setOnClickListener {
             mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
                 ?.let { mediaFile ->
+                    run {
                         val intent = Intent(Intent.ACTION_EDIT).apply {
                             setData(fromFile(mediaFile.absoluteFile))
                             setType("image/jpg")
+                            putExtra("data",mediaFile.absolutePath)
                         }
- i.putExtra("data",mediaFile.absolutePath)
+                    } 
                         startActivity(intent)
                 }
         }
