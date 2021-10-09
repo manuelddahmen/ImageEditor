@@ -43,11 +43,9 @@ import com.android.example.cameraxbasic.utils.showImmersive
 import com.android.example.cameraxbasic.R
 import com.android.example.cameraxbasic.databinding.FragmentGalleryBinding
 import com.android.example.cameraxbasic.model.ImageItemModel
-import java.lang.reflect.Array.newInstance
-import java.net.URI
-import java.net.URL
+import java.util.ArrayList
 import java.util.Locale
-import javax.xml.datatype.DatatypeFactory.newInstance
+import java.util.function.Consumer
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
@@ -204,8 +202,8 @@ class GalleryFragment internal constructor() : Fragment() {
                             setType("image/jpg")
                             putExtra("data",mediaFile.absolutePath)
                         }
-                    } 
                         startActivity(intent)
+                    }
                 }
         }
 
@@ -218,7 +216,35 @@ class GalleryFragment internal constructor() : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        outState.put(mediaList, isEditing)
-//        outState.putString(RANDOM_GOOD_DEED_KEY, randomGoodDeed)
+        val strs: ArrayList<String> = ArrayList<String>()
+        var i : Int = 0
+        var strsSaved : String = ";"
+        mediaList.forEach {
+            strs.add(it.absolutePath)
+            strsSaved+=it.absolutePath+";"
+        }
+        outState.putString("files", strsSaved)
+    }
+    fun  parseString(str : String) : List<File>{
+        val strs :ArrayList<String> = ArrayList<String>()
+        val files :ArrayList<File>  = ArrayList<File>()
+
+        val split = str.split(";")
+        split.forEach {
+            if (it.length > 1) {
+                strs.add(it)
+            }
+        }
+        strs.forEach({
+            files.add(File(it))
+        })
+        return files
+    }
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
     }
 }
