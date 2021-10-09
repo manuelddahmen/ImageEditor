@@ -63,6 +63,9 @@ class GalleryFragment internal constructor() : Fragment() {
     private val args: GalleryFragmentArgs by navArgs()
 
     private lateinit var mediaList: MutableList<File>
+
+    private lateinit var effectBagImage   : MutableList<File>
+    private lateinit var effectBagEffects : MutableList<File>
     private val viewModel: ImageItemModel by activityViewModels()
 
     // Called when the item is clicked
@@ -198,11 +201,25 @@ class GalleryFragment internal constructor() : Fragment() {
         fragmentGalleryBinding.effectButton.setOnClickListener {
             mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
                 ?.let { mediaFile ->
+                    run {
                         val intent = Intent(Intent.ACTION_EDIT).apply {
                             setData(fromFile(mediaFile.absoluteFile))
                             setType("image/jpg")
                         }
                         startActivity(intent)
+                    }
+                }
+        }
+        fragmentGalleryBinding.checkBoxSelected.setOnClickListener {
+            mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
+                ?.let { mediaFile ->
+                    run {
+                        val intent = Intent(Intent.ACTION_EDIT).apply {
+                            setData(fromFile(mediaFile.absoluteFile))
+                            setType("image/jpg")
+                        }
+                        startActivity(intent)
+                    }
                 }
         }
 
@@ -215,7 +232,7 @@ class GalleryFragment internal constructor() : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        outState.put(mediaList, isEditing)
-//        outState.putString(RANDOM_GOOD_DEED_KEY, randomGoodDeed)
+        //outState.put(mediaList, isEditing)
+        //outState.putString(RANDOM_GOOD_DEED_KEY, randomGoodDeed)
     }
 }

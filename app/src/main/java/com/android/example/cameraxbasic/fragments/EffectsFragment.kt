@@ -1,5 +1,6 @@
 package com.android.example.cameraxbasic.fragments
 
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,8 +34,8 @@ class EffectsFragment : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val action: String? = intent?.action
-        val data: Uri? = intent?.data 
+        //val action: String? = intent?.action
+        //val data: Uri? = intent?.data
 // url scheme.? file? or https://empty3.one 
 // settings.properties file. too massive
         setContentView(R.layout.select_effects)
