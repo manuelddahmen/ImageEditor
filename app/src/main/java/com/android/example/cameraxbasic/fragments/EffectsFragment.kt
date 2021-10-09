@@ -64,4 +64,7 @@ if (savedInstanceState != null) {
     auto.text = autoStr
 }
 }
+public boolean process() {
+//BitmapFactory.decodeFile(filePath)
+} 
 }
