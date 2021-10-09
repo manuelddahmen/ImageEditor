@@ -30,7 +30,7 @@ class EffectsFragment : AppCompatActivity() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var  effectList : ArrayList<ProcessFile>
-
+    lateinit Var auto : AutoCompleteTextView
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +45,27 @@ class EffectsFragment : AppCompatActivity() {
         })
         val adapter : ArrayAdapter<String> = ArrayAdapter<String>(this,
             android.R.layout.select_dialog_item, l)
-        val auto : AutoCompleteTextView = findViewById(R.id.effectsAutoCompleteTextView)
+        auto = findViewById(R.id.effectsAutoCompleteTextView)
         auto.setThreshold(1)
         auto.setAdapter(adapter)
 
     }
 
+@Override
+public void onSaveInstanceState(Bundle outState) {
+outState.putString("classname", auto.text);
+super.onSaveInstanceState(outState);
+}
 
+@Override
+public void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState)
+if (savedInstanceState != null) {
+    String autoStr= savedInstanceState.getString("classname");
+    auto.text = autoStr
+}
+}
+public boolean process() {
+//BitmapFactory.decodeFile(filePath)
+} 
 }
