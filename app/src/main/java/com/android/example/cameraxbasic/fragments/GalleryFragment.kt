@@ -16,6 +16,7 @@
 
 package com.android.example.cameraxbasic.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -200,6 +201,10 @@ class GalleryFragment internal constructor() : Fragment() {
                         val intent = Intent(Intent.ACTION_EDIT).apply {
                             setData(fromFile(mediaFile.absoluteFile))
                             setType("image/jpg")
+                            setClass(EffectsFragment()
+                                .createPackageContext("com.android.example.cameraxbasic.fragments",
+                                0),
+                                Class.forName("com.android.example.cameraxbasic.fragments.EffectsFragment"))
                             putExtra("data",mediaFile.absolutePath)
                         }
                         startActivity(intent)

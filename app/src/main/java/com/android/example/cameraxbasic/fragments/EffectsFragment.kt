@@ -27,7 +27,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [EffectsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EffectsFragment : AppCompatActivity() {
+public class EffectsFragment : AppCompatActivity() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var effectList: ArrayList<ProcessFile>
