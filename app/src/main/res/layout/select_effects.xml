@@ -8,19 +8,25 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="100dp"
+        android:accessibilityLiveRegion="none"
+        android:importantForAccessibility="yes"
+        android:inputType="textMultiLine|textImeMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/effectsAutoCompleteTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_editor_absoluteY="0dp" />
+        app:layout_editor_absoluteY="0dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <AutoCompleteTextView
         android:id="@+id/effectsAutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="631dp"
+        android:accessibilityLiveRegion="none"
+        android:importantForAccessibility="yes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

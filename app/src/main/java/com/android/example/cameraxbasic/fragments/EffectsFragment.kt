@@ -19,7 +19,7 @@ import one.empty3.Main
 import one.empty3.io.ProcessFile
 import java.io.File
 
-public class EffectsFragment : AppCompatActivity() {
+class EffectsFragment : AppCompatActivity() {
     lateinit var effectList: ArrayList<ProcessFile>
     lateinit var auto: AutoCompleteTextView
     @RequiresApi(Build.VERSION_CODES.N)
@@ -29,9 +29,9 @@ public class EffectsFragment : AppCompatActivity() {
         effectList = Main.initListProcesses()
         val editText:EditText = findViewById(R.id.editText)
         val l: List<String> = List<String>(effectList.size, init = {
-            effectList[it].toString()
+            val s0 : String = ((effectList[it]).javaClass.toString())
             val s: String = (editText.text.toString()
-                    +effectList[it].toString()+",")
+                    +s0+",")
             editText.setText(
                 s.subSequence(0, s.length), TextView.BufferType.EDITABLE
             ).toString()
@@ -50,15 +50,18 @@ public class EffectsFragment : AppCompatActivity() {
     }
     override fun onSaveInstanceState(outState : Bundle)
     {
-        outState.putString("classname", auto.text.toString());
-        super.onSaveInstanceState(outState);
+        outState.putString("classname", auto.text.toString())
+        super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
     }
+    /*
     fun process(strsFile: File)
     {
         //BitmapFactory.decodeFile(filePath)
     }
+
+     */
 }
