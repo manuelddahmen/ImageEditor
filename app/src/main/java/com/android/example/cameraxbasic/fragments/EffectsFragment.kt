@@ -17,28 +17,12 @@ import one.empty3.Main
 import one.empty3.io.ProcessFile
 import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EffectsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 public class EffectsFragment : AppCompatActivity() {
-    private var param1: String? = null
-    private var param2: String? = null
     lateinit var effectList: ArrayList<ProcessFile>
     lateinit var auto: AutoCompleteTextView
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //val action: String? = intent?.action
-        //val data: Uri? = intent?.data
-// url scheme.? file? or https://empty3.one 
-// settings.properties file. too massive
         setContentView(R.layout.select_effects)
         effectList = Main.initListProcesses()
         val l: List<String> = List<String>(effectList.size, init = {
@@ -51,6 +35,8 @@ public class EffectsFragment : AppCompatActivity() {
         auto = findViewById(R.id.effectsAutoCompleteTextView)
         auto.setThreshold(1)
         auto.setAdapter(adapter)
+
+
 
     }
     override fun onSaveInstanceState(outState : Bundle)

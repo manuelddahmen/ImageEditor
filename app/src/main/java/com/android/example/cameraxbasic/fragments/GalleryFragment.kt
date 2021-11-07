@@ -198,15 +198,14 @@ class GalleryFragment internal constructor() : Fragment() {
             mediaList.getOrNull(fragmentGalleryBinding.photoViewPager.currentItem)
                 ?.let { mediaFile ->
                     run {
-                        val intent = Intent(Intent.ACTION_EDIT).apply {
-                            setData(fromFile(mediaFile.absoluteFile))
-                            setType("image/jpg")
-                            setClass(EffectsFragment()
-                                .createPackageContext("com.android.example.cameraxbasic.fragments",
-                                0),
+                        val intent = Intent(Intent.ACTION_EDIT)
+                        println("Cick on Effect button")
+                        intent.setDataAndType(Uri.fromFile(mediaFile),
+                            "image/jpg")
+                        intent.setClass(view.context,/*EffectsFragment()
+                                .createPackageContext("com.android.example.cameraxbasic.fragments",*/
                                 Class.forName("com.android.example.cameraxbasic.fragments.EffectsFragment"))
-                            putExtra("data",mediaFile.absolutePath)
-                        }
+                        intent.putExtra("data", mediaFile.absolutePath)
                         startActivity(intent)
                     }
                 }
