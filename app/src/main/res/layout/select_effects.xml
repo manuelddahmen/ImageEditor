@@ -19,7 +19,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_editor_absoluteY="0dp"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:hint="@string/listProcess"
+        android:labelFor="@id/effectsAutoCompleteTextView"
+        android:autofillHints="effectsList"/>
 
     <AutoCompleteTextView
         android:id="@+id/effectsAutoCompleteTextView"
@@ -32,5 +35,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:hint="@string/completeBox"
+        android:autofillHints="effectsSelection"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
