@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.cameraxbasic.R
@@ -25,8 +27,15 @@ public class EffectsFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.select_effects)
         effectList = Main.initListProcesses()
+        val editText:EditText = findViewById(R.id.editText)
         val l: List<String> = List<String>(effectList.size, init = {
             effectList[it].toString()
+            val s: String = (editText.text.toString()
+                    +effectList[it].toString()+",")
+            editText.setText(
+                s.subSequence(0, s.length), TextView.BufferType.EDITABLE
+            ).toString()
+
         })
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
@@ -45,6 +54,9 @@ public class EffectsFragment : AppCompatActivity() {
         super.onSaveInstanceState(outState);
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+    }
     fun process(strsFile: File)
     {
         //BitmapFactory.decodeFile(filePath)
