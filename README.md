@@ -1,4 +1,4 @@
-# CameraXbasic
+# feature App (renamed from CameraX sample) 
 
 CameraXbasic aims to demonstrate how to use CameraX APIs written in Kotlin.
 
