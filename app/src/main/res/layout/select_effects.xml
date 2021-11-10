@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/effectsAutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"

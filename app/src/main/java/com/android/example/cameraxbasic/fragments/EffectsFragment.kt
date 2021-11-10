@@ -24,7 +24,7 @@ import java.io.File
 
 class EffectsFragment : AppCompatActivity() {
     lateinit var effectList: ArrayList<ProcessFile>
-    lateinit var auto: AutoCompleteTextView
+    lateinit var auto: EditText
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,27 +41,21 @@ class EffectsFragment : AppCompatActivity() {
             ).toString()
 
         })
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            this,
-            android.R.layout.select_dialog_item, l
-        )
+
         auto = findViewById(R.id.effectsAutoCompleteTextView)
-        auto.setThreshold(1)
-        auto.setAdapter(adapter)
         auto.setText(savedInstanceState?.getString("classname"))
         auto.addTextChangedListener {object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                var split:MutableList<String> = s.toString().split(",") as MutableList<String>
-                var s1:String
-                val effects = editText.text.toString()
+                val split:MutableList<String> = s.toString().split(",") as MutableList<String>
+                 val effects = editText.text.toString()
                 val splitEffectsList:List<String> = effects.split(",")
                 var i:Int = 0
                 for(s1 in split ) {
-                    if(s1.length>2 && splitEffectsList.contains(s1)) {
-                       var count:Long = splitEffectsList.stream().filter { s1==it }
+                    if(s1.length>2) {
+                       val count:Long = splitEffectsList.stream().filter { it.contains(s1) }
                         .count()
                         if(count==1L) {
-                            split[i] = splitEffectsList.stream().filter{it==s1}.findFirst().toString()
+                            auto.setText(splitEffectsList.stream().filter{it==s1}.findFirst().toString())
                         }
                     }
                     i++
