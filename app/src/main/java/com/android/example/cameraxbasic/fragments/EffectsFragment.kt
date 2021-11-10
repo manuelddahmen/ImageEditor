@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,18 +24,22 @@ import one.empty3.io.ProcessFile
 import java.io.File
 
 class EffectsFragment : AppCompatActivity() {
+    lateinit var editText: EditText
     lateinit var effectList: ArrayList<ProcessFile>
     lateinit var auto: EditText
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("effects#logging", "create Effect Activity")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.select_effects)
+        init(savedInstanceState)
     }
     @RequiresApi(Build.VERSION_CODES.N)
     fun init(savedInstanceState : Bundle?) {
+        Log.i("effects#logging", "init Details Effect Activity")
         effectList = Main.initListProcesses()
-        val editText: EditText = findViewById(R.id.editText)
+        editText = findViewById(R.id.editText)
         val l: List<String> = List<String>(effectList.size, init = {
             val s0: String = ((effectList[it]).javaClass.toString())
             val s: String = (editText.text.toString()
@@ -87,16 +92,22 @@ class EffectsFragment : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        Log.i("effects#logging", "save Effect Activity")
         outState.putString("classname", auto.text.toString())
         super.onSaveInstanceState(outState)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i("effects#logging", "restore Effect Activity")
         init(savedInstanceState)
         super.onRestoreInstanceState(savedInstanceState)
     }
 
+    override fun onDestroy() {
+        Log.i("effects#logging", "destroy Effect Activity")
+        super.onDestroy()
+    }
     /*
     fun process(strsFile: File)
     {
