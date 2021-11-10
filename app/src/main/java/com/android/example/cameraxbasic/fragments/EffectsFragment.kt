@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import com.android.example.cameraxbasic.R
 import one.empty3.Main
 import one.empty3.io.ProcessFile
@@ -34,6 +35,34 @@ class EffectsFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.select_effects)
         init(savedInstanceState)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun complete() {
+        Log.i("autocomplete",
+            "Autocomplete search")
+        val split: List<String> = auto.text.toString().split(",") as List<String>
+        val effects = editText.text.toString()
+        val splitEffectsList: List<String> = effects.split(",")
+        var autoStr : String = ""
+        for ((i, s1) in split.withIndex()) {
+            if (s1.length > 2) {
+                val count: Long = splitEffectsList.stream().filter { it.contains(s1) }
+                    .count()
+                if (count == 1L) {
+                    Log.i("autocomplete",
+                        "Autocomplete replacement: {"+s1+"} by ")
+                    autoStr += splitEffectsList.stream().filter { it.contains(s1) }
+                        .findFirst().toString()
+
+                } else {
+                    autoStr += s1
+                }
+            }
+        }
+        auto.setText(autoStr)
+
+        return
     }
     @RequiresApi(Build.VERSION_CODES.N)
     fun init(savedInstanceState : Bundle?) {
@@ -55,26 +84,7 @@ class EffectsFragment : AppCompatActivity() {
         auto.addTextChangedListener {
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    val split: MutableList<String> = s.toString().split(",") as MutableList<String>
-                    val effects = editText.text.toString()
-                    val splitEffectsList: List<String> = effects.split(",")
-                    var i: Int = 0
-                    var autoStr : String = ""
-                    for (s1 in split) {
-                        if (s1.length > 2) {
-                            val count: Long = splitEffectsList.stream().filter { it.contains(s1) }
-                                .count()
-                            if (count == 1L) {
-                                autoStr += splitEffectsList.stream().filter { it.contains(s1) }
-                                    .findFirst().toString()
-
-                            } else {
-                                autoStr += s1
-                            }
-                        }
-                        i++
-                    }
-                    auto.setText(autoStr)
+                    complete()
                 }
 
                 override fun beforeTextChanged(
@@ -83,9 +93,11 @@ class EffectsFragment : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
+                    complete()
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    complete()
                 }
             }
         }
