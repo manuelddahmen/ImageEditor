@@ -1,33 +1,27 @@
 package com.android.example.cameraxbasic.fragments
 
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import com.android.example.cameraxbasic.R
 import one.empty3.Main
 import one.empty3.io.ProcessFile
-import java.io.File
+import android.widget.MultiAutoCompleteTextView
+import android.widget.MultiAutoCompleteTextView.CommaTokenizer
 
-class EffectsFragment : AppCompatActivity() {
+
+class EffectFragment : AppCompatActivity() {
+    lateinit var autoCompleteTextView: MultiAutoCompleteTextView
     lateinit var editText: EditText
     lateinit var effectList: ArrayList<ProcessFile>
-    lateinit var auto: EditText
+    lateinit var effectListStr: Array<String>
+    lateinit var editText1: EditText
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,13 +33,14 @@ class EffectsFragment : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun complete() {
-        Log.i("autocomplete",
+        /*Log.i("autocomplete",
             "Autocomplete search")
-        val split: List<String> = auto.text.toString().split(",") as List<String>
+        val split: List<String> = editText1.text.toString().split(",") as List<String>
         val effects = editText.text.toString()
         val splitEffectsList: List<String> = effects.split(",")
         var autoStr : String = ""
         for ((i, s1) in split.withIndex()) {
+            Log.i("filters' list", ""+i+" : "+s1)
             if (s1.length > 2) {
                 val count: Long = splitEffectsList.stream().filter { it.contains(s1) }
                     .count()
@@ -60,12 +55,29 @@ class EffectsFragment : AppCompatActivity() {
                 }
             }
         }
-        auto.setText(autoStr)
+        var eff = findViewById<EditText>(R.id.effectsToApply)
+        eff.setText(autoStr)
 
         return
+
+         */
     }
     @RequiresApi(Build.VERSION_CODES.N)
     fun init(savedInstanceState : Bundle?) {
+        autoCompleteTextView = findViewById<MultiAutoCompleteTextView>(R.id.effectsAutoCompleteTextView)
+        val initListProcesses = Main.initListProcesses()
+        effectListStr = Array<String>(initListProcesses.size, {""})
+        var i=0
+        for(i in 0..effectListStr.size) {
+            effectListStr[i] = initListProcesses[i].javaClass.simpleName.substring(
+                "class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.')
+            )
+        }
+        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, effectListStr)
+        autoCompleteTextView.setAdapter(arrayAdapter)
+        autoCompleteTextView.threshold = 2
+        autoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+    /*
         Log.i("effects#logging", "init Details Effect Activity")
         effectList = Main.initListProcesses()
         editText = findViewById(R.id.editText)
@@ -79,9 +91,9 @@ class EffectsFragment : AppCompatActivity() {
 
         })
 
-        auto = findViewById(R.id.effectsAutoCompleteTextView)
-        auto.setText(savedInstanceState?.getString("classname"))
-        auto.addTextChangedListener {
+        editText1 = findViewById(R.id.effectsAutoCompleteTextView)
+        editText1.setText(savedInstanceState?.getString("classname"))
+        editText1.addTextChangedListener {
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     complete()
@@ -101,18 +113,19 @@ class EffectsFragment : AppCompatActivity() {
                 }
             }
         }
+  */
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         Log.i("effects#logging", "save Effect Activity")
-        outState.putString("classname", auto.text.toString())
+        outState.putString("classname", editText1.text.toString())
         super.onSaveInstanceState(outState)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         Log.i("effects#logging", "restore Effect Activity")
-        init(savedInstanceState)
+        //init(savedInstanceState)
         super.onRestoreInstanceState(savedInstanceState)
     }
 

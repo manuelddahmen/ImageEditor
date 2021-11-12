@@ -204,7 +204,7 @@ class GalleryFragment internal constructor() : Fragment() {
                             "image/jpg")
                         intent.setClass(view.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                                Class.forName("com.android.example.cameraxbasic.fragments.EffectsFragment"))
+                                Class.forName("com.android.example.cameraxbasic.EffectFragment"))
                         intent.putExtra("data", mediaFile.absolutePath)
                         startActivity(intent)
                     }
