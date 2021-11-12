@@ -68,10 +68,9 @@ class EffectFragment : AppCompatActivity() {
         val initListProcesses = Main.initListProcesses()
         effectListStr = Array<String>(initListProcesses.size, {""})
         var i=0
-        for(i in 0..effectListStr.size) {
-            effectListStr[i] = initListProcesses[i].javaClass.simpleName.substring(
-                "class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.')
-            )
+        for(i in 0..effectListStr.size-1) {
+            effectListStr[i] = initListProcesses[i].javaClass.canonicalName//.javaClass.simpleName.substring(
+                //"class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.') )
         }
         val arrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, effectListStr)
         autoCompleteTextView.setAdapter(arrayAdapter)

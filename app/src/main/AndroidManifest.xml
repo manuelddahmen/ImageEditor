@@ -87,7 +87,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-        <activity android:name=".fragments.EffectsFragment"
+        <activity android:name="com.android.example.cameraxbasic.fragments.EffectFragment"
             android:clearTaskOnLaunch="true"
             android:theme="@style/AppTheme"
             android:icon="@mipmap/ic_launcher"
