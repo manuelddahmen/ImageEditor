@@ -5,27 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="0dp"
-        android:accessibilityLiveRegion="none"
-        android:autofillHints="effectsList"
-        android:hint="@string/listProcess"
-        android:importantForAccessibility="yes"
-        android:inputType="textMultiLine|textImeMultiLine"
-        android:labelFor="@id/effectsAutoCompleteTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_editor_absoluteY="0dp"
-        app:layout_constraintHeight_min="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/effectsAutoCompleteTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
-
     <MultiAutoCompleteTextView
         android:id="@+id/effectsAutoCompleteTextView"
         android:layout_width="match_parent"
@@ -34,9 +13,14 @@
         android:autofillHints="effectsSelection"
         android:hint="@string/completeBox"
         android:importantForAccessibility="yes"
-        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_editor_absoluteY="0dp"
+        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck"
         android:lines="5"
         />
@@ -46,12 +30,12 @@
         android:layout_height="match_parent"
 
         />
-    <EditText
+    <Button
         android:id="@+id/effectsToApply"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:accessibilityLiveRegion="none"
-        android:autofillHints="effectsSelection"
+        android:autofillHints="Effect's Selection"
         android:hint="@string/completeBox"
         android:importantForAccessibility="yes"
         app:layout_constraintBottom_toBottomOf="parent"
