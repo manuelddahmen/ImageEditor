@@ -1,5 +1,6 @@
 package com.android.example.cameraxbasic.fragments
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -76,55 +77,75 @@ class EffectFragment : AppCompatActivity() {
         autoCompleteTextView.setAdapter(arrayAdapter)
         autoCompleteTextView.threshold = 2
         autoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-    /*
-        Log.i("effects#logging", "init Details Effect Activity")
-        effectList = Main.initListProcesses()
-        editText = findViewById(R.id.editText)
-        val l: List<String> = List<String>(effectList.size, init = {
-            val s0: String = ((effectList[it]).javaClass.toString())
-            val s: String = (editText.text.toString()
-                    + s0 + ",")
-            editText.setText(
-                s.subSequence(0, s.length), TextView.BufferType.EDITABLE
-            ).toString()
 
+        val findViewById = findViewById<Button>(R.id.effectsToApply)
+        findViewById.setOnClickListener({
+            run {
+                val intent = Intent(Intent.ACTION_EDIT)
+                println("Cick on Back to effects'list")
+                /*intent.setDataAndType(
+                    Uri.fromFile(),
+                    "image/jpg")
+                intent.setClass(view.context,/*EffectsFragment()
+                                .createPackageContext("com.android.example.cameraxbasic.fragments",*/
+                    Class.forName("com.android.example.cameraxbasic.fragments.EffectFragment"))
+                intent.putExtra("data", mediaFile.absolutePath)
+                */
+                startActivity(intent)
+            }
         })
 
-        editText1 = findViewById(R.id.effectsAutoCompleteTextView)
-        editText1.setText(savedInstanceState?.getString("classname"))
-        editText1.addTextChangedListener {
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    complete()
-                }
+        /*
+            Log.i("effects#logging", "init Details Effect Activity")
+            effectList = Main.initListProcesses()
+            editText = findViewById(R.id.editText)
+            val l: List<String> = List<String>(effectList.size, init = {
+                val s0: String = ((effectList[it]).javaClass.toString())
+                val s: String = (editText.text.toString()
+                        + s0 + ",")
+                editText.setText(
+                    s.subSequence(0, s.length), TextView.BufferType.EDITABLE
+                ).toString()
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                    complete()
-                }
+            })
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    complete()
+            editText1 = findViewById(R.id.effectsAutoCompleteTextView)
+            editText1.setText(savedInstanceState?.getString("classname"))
+            editText1.addTextChangedListener {
+                object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        complete()
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                        complete()
+                    }
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        complete()
+                    }
                 }
             }
-        }
-  */
+      */
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         Log.i("effects#logging", "save Effect Activity")
-        outState.putString("classname", editText1.text.toString())
+        outState.putString("classname", autoCompleteTextView.text.toString())
         super.onSaveInstanceState(outState)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         Log.i("effects#logging", "restore Effect Activity")
-        //init(savedInstanceState)
+        val string = savedInstanceState?.getString("classname")
+        autoCompleteTextView = findViewById(R.id.effectsAutoCompleteTextView)
+        autoCompleteTextView.setText(string)
         super.onRestoreInstanceState(savedInstanceState)
     }
 
