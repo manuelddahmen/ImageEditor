@@ -1,6 +1,7 @@
 package com.android.example.cameraxbasic.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -15,9 +16,11 @@ import one.empty3.Main
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
 import android.widget.MultiAutoCompleteTextView.CommaTokenizer
+import java.io.File
 
 
 class EffectFragment : AppCompatActivity() {
+    private var mediaFile: Uri? = null
     lateinit var autoCompleteTextView: MultiAutoCompleteTextView
     lateinit var editText: EditText
     lateinit var effectList: ArrayList<ProcessFile>
@@ -30,6 +33,7 @@ class EffectFragment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.select_effects)
         init(savedInstanceState)
+        mediaFile = intent.data
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -63,17 +67,21 @@ class EffectFragment : AppCompatActivity() {
 
          */
     }
+
     @RequiresApi(Build.VERSION_CODES.N)
-    fun init(savedInstanceState : Bundle?) {
-        autoCompleteTextView = findViewById<MultiAutoCompleteTextView>(R.id.effectsAutoCompleteTextView)
+    fun init(savedInstanceState: Bundle?) {
+        autoCompleteTextView =
+            findViewById<MultiAutoCompleteTextView>(R.id.effectsAutoCompleteTextView)
         val initListProcesses = Main.initListProcesses()
-        effectListStr = Array<String>(initListProcesses.size, {""})
-        var i=0
-        for(i in 0..effectListStr.size-1) {
-            effectListStr[i] = initListProcesses[i].javaClass.canonicalName//.javaClass.simpleName.substring(
-                //"class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.') )
+        effectListStr = Array<String>(initListProcesses.size, { "" })
+        var i = 0
+        for (i in 0..effectListStr.size - 1) {
+            effectListStr[i] =
+                initListProcesses[i].javaClass.canonicalName//.javaClass.simpleName.substring(
+            //"class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.') )
         }
-        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, effectListStr)
+        val arrayAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, effectListStr)
         autoCompleteTextView.setAdapter(arrayAdapter)
         autoCompleteTextView.threshold = 2
         autoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
@@ -82,15 +90,16 @@ class EffectFragment : AppCompatActivity() {
         findViewById.setOnClickListener({
             run {
                 val intent = Intent(Intent.ACTION_EDIT)
-                println("Cick on Back to effects'list")
-                /*intent.setDataAndType(
-                    Uri.fromFile(),
-                    "image/jpg")
-                intent.setClass(view.context,/*EffectsFragment()
+                println("Cick on Effect button")
+                intent.setDataAndType(mediaFile, "image/jpg")
+                intent.setClass(
+                    autoCompleteTextView.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                    Class.forName("com.android.example.cameraxbasic.fragments.EffectFragment"))
-                intent.putExtra("data", mediaFile.absolutePath)
-                */
+                    Class.forName("com.android.example.cameraxbasic.fragments.RenderedView")
+                )
+                intent.putExtra(
+                    "data", File(mediaFile.toString())
+                )
                 startActivity(intent)
             }
         })
