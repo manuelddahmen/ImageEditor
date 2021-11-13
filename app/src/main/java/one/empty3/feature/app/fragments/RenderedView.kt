@@ -1,4 +1,4 @@
-package com.android.example.cameraxbasic.fragments
+package one.empty3.feature.app.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -28,7 +28,7 @@ class RenderedView(contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
                         intent.setClass(
                             findViewById.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                            Class.forName("com.android.example.cameraxbasic.fragments.EffectFragment")
+                            Class.forName("one.empty3.feature.app.fragmentsEffectFragment")
                         )
                         intent.putExtra(
                             "data", File(mediaFile.toString())
@@ -46,7 +46,7 @@ class RenderedView(contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
                 intent.setClass(
                     findViewById.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                    Class.forName("com.android.example.cameraxbasic.fragments.GalleryFragment")
+                    Class.forName("one.empty3.feature.app.fragmentsGalleryFragment")
                 )
                 intent.putExtra(
                     "data", File(mediaFile.toString())

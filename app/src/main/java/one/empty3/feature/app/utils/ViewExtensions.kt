@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.cameraxbasic.utils
+package com.android.example.app.utils
 
 import android.os.Build
 import android.view.DisplayCutout

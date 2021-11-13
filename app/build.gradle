@@ -18,14 +18,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
-
+//apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationId "one.empty3.featureapp"
-        minSdkVersion 21
-        targetSdkVersion 30
+        applicationId "one.empty3.feature.app"
+        minSdkVersion 31
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0.0"
     }
@@ -63,12 +63,27 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    // Navigation library
-    def nav_version = "2.3.5"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    def nav_version = "2.3.0"
+    implementation("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+    // Java language implementation
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
 
-    // CameraX core library
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // Jetpack Compose Integration
+    //implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
+
+
+
     def camerax_version = '1.1.0-alpha07'
     implementation "androidx.camera:camera-core:$camerax_version"
 

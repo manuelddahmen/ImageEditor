@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/permissions_fragment"
-        android:name="com.android.example.cameraxbasic.fragments.PermissionsFragment"
+        android:name="one.empty3.feature.app.fragmentsPermissionsFragment"
         android:label="PermissionsFragment" >
 
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/camera_fragment"
-        android:name="com.android.example.cameraxbasic.fragments.CameraFragment"
+        android:name="one.empty3.feature.app.fragmentsCameraFragment"
         android:label="CameraFragment" >
 
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/gallery_fragment"
-        android:name="com.android.example.cameraxbasic.fragments.GalleryFragment"
+        android:name="one.empty3.feature.app.fragmentsGalleryFragment"
         android:label="GalleryFragment" >
         <argument
             android:name="root_directory"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.cameraxbasic.fragments
+package one.empty3.feature.app.fragments
 
 import android.app.Activity
 import android.content.Context
@@ -34,16 +34,16 @@ import android.provider.ContactsContract
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 import com.android.example.cameraxbasic.BuildConfig
-import com.android.example.cameraxbasic.utils.padWithDisplayCutout
+import com.android.example.app.utils.padWithDisplayCutout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.android.example.cameraxbasic.utils.showImmersive
+import com.android.example.app.utils.showImmersive
 import com.android.example.cameraxbasic.R
 import com.android.example.cameraxbasic.databinding.FragmentGalleryBinding
-import com.android.example.cameraxbasic.model.ImageItemModel
+import com.android.example.app.model.ImageItemModel
 import java.util.ArrayList
 import java.util.Locale
 import java.util.function.Consumer
@@ -57,9 +57,6 @@ class GalleryFragment internal constructor() : Fragment() {
     private var _fragmentGalleryBinding: FragmentGalleryBinding? = null
 
     private val fragmentGalleryBinding get() = _fragmentGalleryBinding!!
-
-    /** AndroidX navigation arguments */
-    private val args: GalleryFragmentArgs by navArgs()
 
     private lateinit var mediaList: MutableList<File>
     private val viewModel: ImageItemModel by activityViewModels()
@@ -85,7 +82,7 @@ class GalleryFragment internal constructor() : Fragment() {
         retainInstance = true
 
         // Get root directory of media from navigation arguments
-        val rootDirectory = File(args.rootDirectory)
+        val rootDirectory:File = File("./")
 
         // Walk through all files in the root directory
         // We reverse the order of the list to present the last photos first
@@ -204,7 +201,7 @@ class GalleryFragment internal constructor() : Fragment() {
                             "image/jpg")
                         intent.setClass(view.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                                Class.forName("com.android.example.cameraxbasic.fragments.EffectFragment"))
+                                Class.forName("one.empty3.feature.app.fragmentsEffectFragment"))
                         intent.putExtra("data", mediaFile.absolutePath)
                         startActivity(intent)
                     }

@@ -1,4 +1,4 @@
-package com.android.example.cameraxbasic.model;
+package com.android.example.app.model;
 
 import android.content.ClipData
 import androidx.lifecycle.LiveData

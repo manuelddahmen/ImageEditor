@@ -1,4 +1,4 @@
-package com.android.example.cameraxbasic.fragments
+package one.empty3.feature.app.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -89,13 +89,13 @@ class EffectFragment : AppCompatActivity() {
         val findViewById = findViewById<Button>(R.id.effectsToApply)
         findViewById.setOnClickListener({
             run {
-                val intent = Intent(Intent.ACTION_EDIT)
+                intent = Intent(Intent.ACTION_EDIT)
                 println("Cick on Effect button")
                 intent.setDataAndType(mediaFile, "image/jpg")
                 intent.setClass(
                     autoCompleteTextView.context,/*EffectsFragment()
                                 .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                    Class.forName("com.android.example.cameraxbasic.fragments.RenderedView")
+                    Class.forName("one.empty3.feature.app.fragmentsRenderedView")
                 )
                 intent.putExtra(
                     "data", File(mediaFile.toString())

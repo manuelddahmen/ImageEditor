@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.android.example.cameraxbasic.fragments
+package one.empty3.feature.app.fragments
 
 import android.Manifest
 import android.content.Context
@@ -26,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.android.example.cameraxbasic.R
+import one.empty3.feature.app.fragmentsPermissionsFragmentDirections
 
 private const val PERMISSIONS_REQUEST_CODE = 10
 private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
