@@ -30,20 +30,21 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.net.Uri.fromFile
 import android.os.Build
+import android.provider.Browser
 import android.provider.ContactsContract
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
-import com.android.example.cameraxbasic.BuildConfig
 import com.android.example.app.utils.padWithDisplayCutout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.viewbinding.BuildConfig
 import com.android.example.app.utils.showImmersive
-import com.android.example.cameraxbasic.R
-import com.android.example.cameraxbasic.databinding.FragmentGalleryBinding
 import com.android.example.app.model.ImageItemModel
+import one.empty3.feature.app.R
+import one.empty3.feature.app.databinding.FragmentGalleryBinding
 import java.util.ArrayList
 import java.util.Locale
 import java.util.function.Consumer
@@ -139,8 +140,8 @@ class GalleryFragment internal constructor() : Fragment() {
                             .getMimeTypeFromExtension(mediaFile.extension)
                         // Get URI from our FileProvider implementation
                         val uri = FileProvider.getUriForFile(
-                            view.context, BuildConfig.APPLICATION_ID + ".provider", mediaFile
-                        )
+                            view.context, Browser.EXTRA_APPLICATION_ID + ".provider", mediaFile
+                        )//BuildType.APPLICATION_ID
                         // Set the appropriate intent extra, type, action and flags
                         putExtra(Intent.EXTRA_STREAM, uri)
                         type = mediaType

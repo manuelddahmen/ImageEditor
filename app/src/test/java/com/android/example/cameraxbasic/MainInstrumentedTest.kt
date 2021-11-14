@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.cameraxbasic
+package one.empty3.feature.app
 
 import android.Manifest
 import android.content.Context

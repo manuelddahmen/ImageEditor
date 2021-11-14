@@ -11,11 +11,11 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.android.example.cameraxbasic.R
 import one.empty3.Main
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
 import android.widget.MultiAutoCompleteTextView.CommaTokenizer
+import one.empty3.feature.app.R
 import java.io.File
 
 
