@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -57,9 +56,6 @@ import androidx.window.WindowManager
 import com.android.example.app.KEY_EVENT_ACTION
 import com.android.example.app.KEY_EVENT_EXTRA
 import com.android.example.app.MainActivity
-import com.android.example.cameraxbasic.R
-import com.android.example.cameraxbasic.databinding.CameraUiContainerBinding
-import com.android.example.cameraxbasic.databinding.FragmentCameraBinding
 import com.android.example.app.utils.ANIMATION_FAST_MILLIS
 import com.android.example.app.utils.ANIMATION_SLOW_MILLIS
 import com.android.example.app.utils.simulateClick
@@ -67,9 +63,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import one.empty3.feature.app.R
+import one.empty3.feature.app.fragmentsCameraFragmentDirections
+import one.empty3.feature.app.databinding.CameraUiContainerBinding
+import one.empty3.feature.app.databinding.FragmentCameraBinding
 import java.io.File
 import java.nio.ByteBuffer
-import java.security.Permission
 import java.text.SimpleDateFormat
 import java.util.ArrayDeque
 import java.util.Locale
@@ -149,6 +148,11 @@ class CameraFragment : Fragment() {
         super.onResume()
         // Make sure that all permissions are still present, since the
         // user could have removed them while the app was in paused state.
+        if (!PermissionsFragment.hasPermissions(requireContext())) {
+            Navigation.findNavController(requireActivity(), R.id.fragment_container).navigate(
+                    fragmentsCameraFragmentDirections.actionCameraToPermissions()
+            )
+        }
     }
 
     override fun onDestroyView() {
@@ -478,7 +482,8 @@ class CameraFragment : Fragment() {
             if (true == outputDirectory.listFiles()?.isNotEmpty()) {
                 Navigation.findNavController(
                         requireActivity(), R.id.fragment_container
-                ).navigate(R.id.gallery_fragment)
+                ).navigate(fragmentsCameraFragmentDirections
+                        .actionCameraToGallery(outputDirectory.absolutePath))
             }
         }
     }

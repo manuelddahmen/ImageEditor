@@ -26,8 +26,8 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.android.example.cameraxbasic.R
-import com.android.example.cameraxbasic.databinding.ActivityMainBinding
+import one.empty3.feature.app.R
+import one.empty3.feature.app.databinding.ActivityMainBinding
 import java.io.File
 
 const val KEY_EVENT_ACTION = "key_event_action"

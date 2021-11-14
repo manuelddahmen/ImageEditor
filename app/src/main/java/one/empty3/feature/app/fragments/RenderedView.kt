@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.android.example.cameraxbasic.R
+import one.empty3.feature.app.R
 import java.io.File
 
 class RenderedView(contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
