@@ -47,7 +47,7 @@
             android:rotationAnimation="seamless"
             android:resizeableActivity="true"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
-            tools:targetApi="O"
+            tools:targetApi="S"
             android:exported="true">
 
             <!-- Main app intent filter -->
