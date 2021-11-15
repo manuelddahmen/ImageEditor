@@ -28,8 +28,8 @@ import one.empty3.library.core.physics.Bille;
 import one.empty3.library.core.physics.Force;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import one.empty3.feature.app.replace.java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

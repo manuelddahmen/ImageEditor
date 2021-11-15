@@ -1,6 +1,6 @@
 package one.empty3.library;
 
-import javax.imageio.ImageIO;
+import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import android.graphics.Bitmap;
 import android.os.Build;
 
@@ -111,7 +111,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
 
     private void loadImage(File path) {
         if (path != null) {
-            image.setElem(ImageIO.read(path));
+            image.setElem(one.empty3.feature.app.replace.javax.imageio.ImageIO.read(path));
         }
 
     }

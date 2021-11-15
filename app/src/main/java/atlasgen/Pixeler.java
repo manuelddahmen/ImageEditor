@@ -32,7 +32,7 @@
 //
 //package atlasgen;
 //
-//import java.awt.*;
+//import one.empty3.feature.app.replace.java.awt.*;
 //import android.graphics.Bitmap;
 //import android.graphics.Color;
 //import android.graphics.Point;

@@ -19,7 +19,7 @@ import one.empty3.library.core.lighting.Colors;
 import java.util.List;
 import java.io.File;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class K_Clusterer extends ReadDataset {
     static int k = 4;

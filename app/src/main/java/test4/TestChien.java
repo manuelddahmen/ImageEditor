@@ -8,9 +8,9 @@ import one.empty3.library.*;
 import one.empty3.library.core.tribase.*;
 import one.empty3.library.core.nurbs.*;
 import one.empty3.library.core.testing.*;
-import java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.move.Trajectoires;
-import java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Color;
 public class TestChien extends TestObjetSub {
 
     @RequiresApi(api = Build.VERSION_CODES.O)

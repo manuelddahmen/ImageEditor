@@ -5,7 +5,7 @@ import one.empty3.io.ProcessFile;
 
 import java.io.File;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import one.empty3.library.Point3D;
 

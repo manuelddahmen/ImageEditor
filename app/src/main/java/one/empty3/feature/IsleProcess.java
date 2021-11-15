@@ -5,7 +5,7 @@
 //import java.io.File;
 //import android.graphics.Color;
 //import android.graphics.Bitmap;
-//import javax.imageio.ImageIO;
+//import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 //
 //public class IsleProcess extends ProcessFile {
 //    public boolean process(File in, File out) {

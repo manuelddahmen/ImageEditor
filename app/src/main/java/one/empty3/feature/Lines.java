@@ -3,7 +3,7 @@ package one.empty3.feature;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

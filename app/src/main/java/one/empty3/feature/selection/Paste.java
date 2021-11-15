@@ -5,7 +5,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import android.graphics.Bitmap;
 import android.os.Build;
 

@@ -1,7 +1,7 @@
 //package one.empty3.library.core.testing;
 //
 //import android.graphics.Color;
-//import java.awt.Graphics;
+//import one.empty3.feature.app.replace.java.awt.Graphics;
 //import android.graphics.Bitmap;
 //import java.io.File;
 //

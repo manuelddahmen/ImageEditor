@@ -2,13 +2,13 @@ package one.empty3.feature;
 
 import java.util.*;
 import java.io.*;
-import java.awt.image.*;
+import one.empty3.feature.app.replace.java.awt.image.*;
 
 import one.empty3.feature.kmeans.*;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.core.nurbs.F;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class DBScanProcess extends ProcessFile {
     public List<double[]> ns(List<double[]> points, double eps, double[] ps) {

@@ -6,7 +6,7 @@
 //import org.w3c.dom.Document;
 //import org.w3c.dom.Element;
 //
-//import javax.imageio.ImageIO;
+//import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 //
 //import android.graphics.Bitmap;
 //import android.graphics.Point;

@@ -1,10 +1,10 @@
 //package one.empty3.feature.jviolajones;
 //
-//import javax.imageio.ImageIO;
+//import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 //import javax.swing.*;
 //
-//import java.awt.event.WindowAdapter;
-//import java.awt.event.WindowEvent;
+//import one.empty3.feature.app.replace.java.awt.event.WindowAdapter;
+//import one.empty3.feature.app.replace.java.awt.event.WindowEvent;
 //import java.io.File;
 //import java.io.FileNotFoundException;
 //import java.io.IOException;

@@ -7,7 +7,7 @@ import one.empty3.library.Point3D;
 import one.empty3.io.ProcessFile;
 
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class ProxyValue extends ProcessFile {
 

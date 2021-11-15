@@ -10,7 +10,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import java.io.File;
 import java.util.*;

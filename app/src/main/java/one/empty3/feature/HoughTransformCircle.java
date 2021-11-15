@@ -3,7 +3,7 @@ package one.empty3.feature;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import android.graphics.Bitmap;
 import java.io.File;
 import java.io.FileOutputStream;

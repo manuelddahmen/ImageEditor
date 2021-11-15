@@ -32,7 +32,7 @@
 
 package atlasgen;
 
-import java.awt.*;
+import one.empty3.feature.app.replace.java.awt.*;
 
 /*__
  * Created by manue on 26-04-19.

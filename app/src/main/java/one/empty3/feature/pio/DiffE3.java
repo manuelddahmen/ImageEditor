@@ -12,9 +12,9 @@ import one.empty3.library.shader.Vec;
 
 import android.graphics.Color;
 import java.io.File;
-import java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.Point;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 class Circle {
 

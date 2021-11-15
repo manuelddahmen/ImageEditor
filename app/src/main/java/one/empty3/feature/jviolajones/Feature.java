@@ -1,7 +1,7 @@
 package one.empty3.feature.jviolajones;
 
 
-import java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.Point;
 
 public class Feature {
 

@@ -52,7 +52,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
-import androidx.window.WindowManager
+import androidx.window.layout.WindowMetrics
 import com.android.example.app.KEY_EVENT_ACTION
 import com.android.example.app.KEY_EVENT_EXTRA
 import com.android.example.app.MainActivity
@@ -106,7 +106,7 @@ class CameraFragment : Fragment() {
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
-    private lateinit var windowManager: WindowManager
+    private lateinit var windowManager: WindowMetrics
 
     private val displayManager by lazy {
         requireContext().getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
@@ -209,8 +209,8 @@ class CameraFragment : Fragment() {
         displayManager.registerDisplayListener(displayListener, null)
 
         //Initialize WindowManager to retrieve display metrics
-        windowManager = WindowManager(view.context)
-
+        //windowManager = WindowManager(view.context)
+        val windowMetrics = WindowMetrics(view.clipBounds)
         // Determine the output directory
         outputDirectory = MainActivity.getOutputDirectory(requireContext())
 
@@ -273,7 +273,7 @@ class CameraFragment : Fragment() {
     private fun bindCameraUseCases() {
 
         // Get screen metrics used to setup camera for full screen resolution
-        val metrics = windowManager.getCurrentWindowMetrics().bounds
+        val metrics = windowManager.bounds
         Log.d(TAG, "Screen metrics: ${metrics.width()} x ${metrics.height()}")
 
         val screenAspectRatio = aspectRatio(metrics.width(), metrics.height())

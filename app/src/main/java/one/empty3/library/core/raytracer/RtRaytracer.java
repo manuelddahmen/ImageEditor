@@ -49,7 +49,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class RtRaytracer {
     public static double maxDistance = 999999.9f;            // La distance parcourue par le rayon avant de toucher la node

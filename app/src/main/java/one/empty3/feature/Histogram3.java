@@ -2,7 +2,7 @@ package one.empty3.feature;
 
 import one.empty3.io.ProcessFile;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

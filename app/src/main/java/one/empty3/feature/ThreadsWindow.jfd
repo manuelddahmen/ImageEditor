@@ -19,8 +19,8 @@ new FormModel {
 				"value": "cell 0 1 2 1,dock center"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"location": new one.empty3.feature.app.replace.java.awt.Point( 0, 0 )
+			"size": new one.empty3.feature.app.replace.java.awt.Dimension( 400, 300 )
 		} )
 	}
 }

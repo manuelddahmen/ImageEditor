@@ -8,7 +8,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.*;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 /***
  1 prendre les points entre t=0.0 et t=1.0

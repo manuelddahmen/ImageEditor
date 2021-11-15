@@ -9,7 +9,7 @@ import one.empty3.library.core.testing.*;
 import one.empty3.library.*;
 import one.empty3.library.core.lighting.*;
 import one.empty3.library.core.nurbs.*;
-import java.awt.image.*;
+import one.empty3.feature.app.replace.java.awt.image.*;
 import java.util.*;
 public class TestVoronoiPlus extends TestObjetSub {
 public int pointsSize = 3;

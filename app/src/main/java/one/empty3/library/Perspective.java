@@ -52,18 +52,18 @@ public class Perspective {
         return new Perspective(type);
     }
 
-    java.awt.Point coordonneeEcran(Point3D p) {
+    one.empty3.feature.app.replace.java.awt.Point coordonneeEcran(Point3D p) {
         if (type == P_CUBIQUE_ISOMETRIQUE) {
-            return new java.awt.Point((int) (double) p.getX(), (int) (double) p.getY());
+            return new one.empty3.feature.app.replace.java.awt.Point((int) (double) p.getX(), (int) (double) p.getY());
         } else if (type == P_CUBIQUE_LINEAIRE) {
             if (p.getZ() == 0) {
-                return new java.awt.Point(0, 0);
+                return new one.empty3.feature.app.replace.java.awt.Point(0, 0);
             } else {
-                return new java.awt.Point((int) (p.getX() / p.getZ()),
+                return new one.empty3.feature.app.replace.java.awt.Point((int) (p.getX() / p.getZ()),
                         (int) (p.getY() / p.getZ()));
             }
         } else if (type == P_CUBIQUE_FONCTION) {
-            return new java.awt.Point(
+            return new one.empty3.feature.app.replace.java.awt.Point(
                     (int) (p.getX() / f(p.getZ())),
                     (int) (p.getY() / f(p.getZ())));
         }
