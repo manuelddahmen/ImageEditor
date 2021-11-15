@@ -1,4 +1,4 @@
-package java.awt.image;
+package one.empty3.feature.app.replace.java.awt.image;
 
 import android.graphics.Bitmap;
 

@@ -1,4 +1,4 @@
-package javax.imageio;
+package one.empty3.feature.app.replace.javax.imageio;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
