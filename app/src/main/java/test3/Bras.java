@@ -28,8 +28,9 @@ import one.empty3.library.core.physics.Bille;
 import one.empty3.library.core.physics.Force;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import one.empty3.feature.app.replace.java.awt.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class Bras extends TestObjetSub {
             bille.setPosition(start);
             allPoints.add(bille);
             for (int j = 0; j < nbrChunck; j++) {
-                lastPoint = polyLine.getPoints().get(polyLine.getPoints().size()- 1);
+                lastPoint = polyLine.getPoints().get(polyLine.getPoints().size() - 1);
                 lastPoint = lastPoint.plus(Point3D.random(longueur));
                 polyLine.add(lastPoint);
                 bille = new Bille();
