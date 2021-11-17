@@ -107,28 +107,47 @@ class ChooseEffectsActivity : Activity() {
                     var currentProcessFile: File = file
                     var currentOutputFile = currentProcessFile
                     var index = -1
+                    val name = currentProcessFile.name
                     strEffectsList.split(",").forEach {
                         val trim = it.trim()
                         if (effectListStr.contains(trim)) {
                             val indexOf: Int = effectListStr.indexOf(trim)
                             val processFile: ProcessFile = effectList.get(indexOf)
+                            if(index==-1) {
+                                currentOutputFile = File(
+                                    currentProcessFile.absolutePath.substring(0,
+                                        currentProcessFile.absolutePath.lastIndexOf("/")))
+                                currentOutputFile = File(
+                                    currentProcessFile.absolutePath.substring(0,
+                                        currentProcessFile.absolutePath.lastIndexOf("/")))
+                                currentOutputFile = File(currentOutputFile.absolutePath.
+                                substring(0,currentProcessFile.absolutePath
+                                    .lastIndexOf(File.separator)
+                                ) + File.separator+trim+index+
+                                        File.separator+name)
+                            } else {
+                                currentOutputFile = File(
+                                    currentProcessFile
+                                        .absolutePath.substring(
+                                            0, currentProcessFile
+                                                .absolutePath.lastIndexOf('/')
+                                                    - 1 ))
+                                currentOutputFile = File(currentOutputFile.absolutePath.
+                                    substring(0,currentOutputFile.absolutePath
+                                    .lastIndexOf(File.separator)
+                                    ) + File.separator+trim+index+
+                                        File.separator+name)
 
-                            currentOutputFile = File(
-                                currentProcessFile
-                                    .absolutePath.substring(
-                                        0, currentProcessFile
-                                            .absolutePath.lastIndexOf(File.separator)
-                                    ) + File.separator+trim+
-                                        File.separator+currentOutputFile.name
-                            )
-                            processFile.process(currentProcessFile, currentOutputFile)
-                            currentProcessFile = currentOutputFile
-
+                            }
+                            currentOutputFile.mkdirs()
                             println("Effect class : " + trim)
                             println("In picture   : " + currentProcessFile)
                             println("Out  picture : " + currentOutputFile)
 
+                            processFile.process(currentProcessFile, currentOutputFile)
+                            currentProcessFile = currentOutputFile
                         }
+                        index++
                     }
                     intent.data = Uri.fromFile(currentProcessFile)
                     intent.putExtra("data", currentProcessFile)
