@@ -5,17 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import one.empty3.Main
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
-import android.widget.MultiAutoCompleteTextView.CommaTokenizer
-import one.empty3.feature.app.R
 import java.io.File
 
 class ChooseEffectsActivity : Activity() {
@@ -85,21 +80,44 @@ class ChooseEffectsActivity : Activity() {
         autoCompleteTextView.threshold = 2
         autoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
 
-        val findViewById = findViewById<Button>(R.id.effectsToApply)
-        findViewById.setOnClickListener({
+        val applyEffectAction = findViewById<Button>(R.id.effectsToApply)
+        applyEffectAction.setOnClickListener {
             run {
                 intent = Intent(Intent.ACTION_EDIT)
                 println("Cick on Effect button")
                 intent.setDataAndType(mediaFile, "image/jpg")
                 intent.setClass(
                     autoCompleteTextView.context,
-                    Class.forName("one.empty3.feature.app.MyCameraActivity"))
-                intent.putExtra(
-                    "data", File(mediaFile.toString())
+                    Class.forName("one.empty3.feature.app.MyCameraActivity")
                 )
+                val file = File(mediaFile.toString())
+                intent.putExtra(
+                    "data", file
+                )
+
+                val strEffectsList: String = autoCompleteTextView.text.toString()
+                var currentProcessFile: File = file
+                var currentOutputFile = currentProcessFile
+                var index = -1
+                strEffectsList.split(",").forEach {
+                    val trim = it.trim()
+                    if (effectListStr.contains(trim)) {
+                        val indexOf: Int = effectListStr.indexOf(trim)
+                        val processFile: ProcessFile = effectList.get(indexOf)
+                        file
+                        currentOutputFile = File(currentProcessFile
+                            .absolutePath.substring(
+                                0, currentProcessFile
+                                    .absolutePath.indexOf(File.separator)
+                            ))
+                        processFile.process(currentProcessFile, currentOutputFile)
+                        currentProcessFile = currentOutputFile
+                    }
+                }
+                intent.data = Uri.fromFile(currentProcessFile)
                 startActivity(intent)
             }
-        })
+        }
 
         /*
             Log.i("effects#logging", "init Details Effect Activity")
