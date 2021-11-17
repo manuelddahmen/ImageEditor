@@ -97,32 +97,42 @@ class ChooseEffectsActivity : Activity() {
                 intent.putExtra(
                     "data", file
                 )
-                if (ContextCompat.checkSelfPermission(this,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                val strEffectsList: String = autoCompleteTextView.text.toString()
-                var currentProcessFile: File = file
-                var currentOutputFile = currentProcessFile
-                var index = -1
-                strEffectsList.split(",").forEach {
-                    val trim = it.trim()
-                    if (effectListStr.contains(trim)) {
-                        val indexOf: Int = effectListStr.indexOf(trim)
-                        val processFile: ProcessFile = effectList.get(indexOf)
-                        file
-                        currentOutputFile = File(currentProcessFile
-                            .absolutePath.substring(
-                                0, currentProcessFile
-                                    .absolutePath.indexOf(File.separator)
-                            ))
-                        processFile.process(currentProcessFile, currentOutputFile)
-                        currentProcessFile = currentOutputFile
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
+                    val strEffectsList: String = autoCompleteTextView.text.toString()
+                    var currentProcessFile: File = file
+                    var currentOutputFile = currentProcessFile
+                    var index = -1
+                    strEffectsList.split(",").forEach {
+                        val trim = it.trim()
+                        if (effectListStr.contains(trim)) {
+                            val indexOf: Int = effectListStr.indexOf(trim)
+                            val processFile: ProcessFile = effectList.get(indexOf)
+
+                            currentOutputFile = File(
+                                currentProcessFile
+                                    .absolutePath.substring(
+                                        0, currentProcessFile
+                                            .absolutePath.indexOf(File.separator)
+                                    )
+                            )
+                            processFile.process(currentProcessFile, currentOutputFile)
+                            currentProcessFile = currentOutputFile
+
+                            println("Effect class : " + trim)
+                            println("In picture   : " + currentProcessFile)
+                            println("Out  picture : " + currentOutputFile)
+
+                        }
                     }
+                    intent.data = Uri.fromFile(currentProcessFile)
+                    intent.putExtra("data", currentProcessFile)
+                    startActivity(intent)
                 }
-                intent.data = Uri.fromFile(currentProcessFile)
-                intent.putExtra("data", currentProcessFile)
-                startActivity(intent)
-            }
             }
         }
 
@@ -185,4 +195,4 @@ class ChooseEffectsActivity : Activity() {
         super.onDestroy()
     }
 
-  }
+}
