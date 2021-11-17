@@ -18,10 +18,12 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ChooseEffectsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light"/>
         <activity
             android:name=".MyCameraActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light">
             <!-- Register as a system camera app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

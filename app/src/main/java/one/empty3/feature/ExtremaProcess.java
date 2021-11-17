@@ -1,6 +1,8 @@
 
 package one.empty3.feature;
 
+import android.graphics.Bitmap;
+
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.io.File;
 
@@ -26,7 +28,11 @@ public class ExtremaProcess extends ProcessFile {
             return false;
 
         try {
-            pix = PixM.getPixM(ImageIO.read(in), -10.0);
+            Bitmap read = ImageIO.read(in);
+            if(read!=null)
+                pix = PixM.getPixM(read, -10.0);
+            else
+                System.err.println("Error read bitmap ImageIO.read==null");
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

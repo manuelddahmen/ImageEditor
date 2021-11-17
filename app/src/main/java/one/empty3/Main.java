@@ -16,7 +16,7 @@ public class Main {
         try {
 
             listProcessClasses.add(Classification.class.newInstance());
-            listProcessClasses.add(CornerDetectProcess.class.newInstance());
+            //listProcessClasses.add(CornerDetectProcess.class.newInstance());
             //listProcessClasses.add(CurveFitting.class.newInstance());
             listProcessClasses.add(DBScanProcess.class.newInstance());
             listProcessClasses.add(DericheFilterProcess.class.newInstance());
