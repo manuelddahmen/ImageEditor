@@ -100,7 +100,7 @@ public class MyCameraActivity extends Activity {
         String dirName = "";
         do {
             dirName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
-                    + "/FeatureApp/data/" + name + "_" + n + ".png";
+                    + "/FeatureApp/data/" + name + "_" + n + ".jpg";
             n++;
         } while (new File(dirName).exists());
 

@@ -117,8 +117,9 @@ class ChooseEffectsActivity : Activity() {
                                 currentProcessFile
                                     .absolutePath.substring(
                                         0, currentProcessFile
-                                            .absolutePath.indexOf(File.separator)
-                                    )
+                                            .absolutePath.lastIndexOf(File.separator)
+                                    ) + File.separator+trim+
+                                        File.separator+currentOutputFile.name
                             )
                             processFile.process(currentProcessFile, currentOutputFile)
                             currentProcessFile = currentOutputFile
