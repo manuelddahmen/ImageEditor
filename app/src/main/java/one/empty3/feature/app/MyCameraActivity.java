@@ -25,7 +25,6 @@ public class MyCameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
-    private Button effectsButton;
     private File currentFile = null;
 
     @Override
@@ -48,7 +47,7 @@ public class MyCameraActivity extends Activity {
 
         });
 
-        effectsButton = (Button) this.findViewById(R.id.effectsButton);
+        Button effectsButton = (Button) this.findViewById(R.id.effectsButton);
         effectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

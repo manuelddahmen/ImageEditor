@@ -2,6 +2,7 @@ package one.empty3.feature.app
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +12,9 @@ import androidx.annotation.RequiresApi
 import one.empty3.Main
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
+import androidx.core.content.ContextCompat
 import java.io.File
+import java.util.jar.Manifest
 
 class ChooseEffectsActivity : Activity() {
     private var mediaFile: Uri? = null
@@ -66,12 +69,12 @@ class ChooseEffectsActivity : Activity() {
     fun init(savedInstanceState: Bundle?) {
         autoCompleteTextView =
             findViewById<MultiAutoCompleteTextView>(R.id.effectsAutoCompleteTextView)
-        val initListProcesses = Main.initListProcesses()
-        effectListStr = Array<String>(initListProcesses.size, { "" })
+        val effectList = Main.initListProcesses()
+        effectListStr = Array<String>(effectList.size, { "" })
         var i = 0
         for (i in 0..effectListStr.size - 1) {
             effectListStr[i] =
-                initListProcesses[i].javaClass.canonicalName//.javaClass.simpleName.substring(
+                effectList[i].javaClass.canonicalName//.javaClass.simpleName.substring(
             //"class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.') )
         }
         val arrayAdapter: ArrayAdapter<String> =
@@ -94,7 +97,9 @@ class ChooseEffectsActivity : Activity() {
                 intent.putExtra(
                     "data", file
                 )
-
+                if (ContextCompat.checkSelfPermission(this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
                 val strEffectsList: String = autoCompleteTextView.text.toString()
                 var currentProcessFile: File = file
                 var currentOutputFile = currentProcessFile
@@ -115,7 +120,9 @@ class ChooseEffectsActivity : Activity() {
                     }
                 }
                 intent.data = Uri.fromFile(currentProcessFile)
+                intent.putExtra("data", currentProcessFile)
                 startActivity(intent)
+            }
             }
         }
 
