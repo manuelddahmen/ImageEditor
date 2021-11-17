@@ -6,9 +6,16 @@
         >
         <Button android:id="@+id/takePhotoButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/photo"></Button>
         <ImageView android:id="@+id/currentImageView" android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content"></ImageView>
-        <Gallery android:id="@+id/imageTakenPreviewGallery"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
 
-            />
-    </LinearLayout>
+    <Gallery
+        android:id="@+id/imageTakenPreviewGallery"
+        android:layout_width="match_parent"
+        android:layout_height="343dp"
+        />
+
+    <Button
+        android:id="@+id/effectsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose effects" />
+</LinearLayout>
