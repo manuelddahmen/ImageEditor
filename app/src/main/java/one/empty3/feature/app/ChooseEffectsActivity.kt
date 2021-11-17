@@ -92,10 +92,8 @@ class ChooseEffectsActivity : Activity() {
                 println("Cick on Effect button")
                 intent.setDataAndType(mediaFile, "image/jpg")
                 intent.setClass(
-                    autoCompleteTextView.context,/*EffectsFragment()
-                                .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                    Class.forName("one.empty3.feature.app.fragmentsRenderedView")
-                )
+                    autoCompleteTextView.context,
+                    Class.forName("one.empty3.feature.app.MyCameraActivity"))
                 intent.putExtra(
                     "data", File(mediaFile.toString())
                 )

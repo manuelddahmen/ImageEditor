@@ -30,6 +30,7 @@ public class MyCameraActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
@@ -44,7 +45,9 @@ public class MyCameraActivity extends Activity {
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
             }
+
         });
+
         effectsButton = (Button) this.findViewById(R.id.effectsButton);
         effectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,12 @@ public class MyCameraActivity extends Activity {
                 }
             }
         });
+        if (getIntent() != null && getIntent().getData() != null) {
+            currentFile = new File(String.valueOf(intent.getData()));
+            Bitmap photo = ImageIO.read(currentFile);
+            imageView.setImageBitmap(photo);
+
+        }
     }
 
     public void fillGallery() {
