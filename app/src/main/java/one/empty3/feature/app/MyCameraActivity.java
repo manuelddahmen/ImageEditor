@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -58,7 +57,7 @@ public class MyCameraActivity extends Activity {
                                 "image/jpg");
                         intent.setClass(imageView.getContext(),/*EffectsFragment()
                                     .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                                Class.forName("one.empty3.feature.app.ChooseEffects"));
+                                Class.forName("one.empty3.feature.app.ChooseEffectsActivity"));
                         intent.putExtra("data", currentFile.getAbsolutePath());
                         startActivity(intent);
                     }
@@ -89,16 +88,15 @@ public class MyCameraActivity extends Activity {
         }
     }
 
-    public void writePhoto(Bitmap bitmap, String name) {
+    public File writePhoto(Bitmap bitmap, String name) {
 
         Intent camera = new Intent(
                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
         String dirName = "";
-        boolean mkdirs = new File("./data").mkdirs();
         do {
-            dirName = Environment.getExternalStorageDirectory().getPath()
+            dirName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
                     + "/FeatureApp/data/" + name + "_" + n + ".png";
             n++;
         } while (new File(dirName).exists());
@@ -106,15 +104,18 @@ public class MyCameraActivity extends Activity {
         Uri uriSavedImage = Uri.fromFile(new File(dirName));
         camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
-        startActivityForResult(camera, 1);
-
+        //startActivityForResult(camera, 1);
+        File dir = new File(dirName.substring(0, dirName.lastIndexOf(File.separator)));
+        File file = new File(dirName);
         try {
-            ImageIO.write(bitmap, "jpg", new File(dirName));
+            // Make sure the Pictures directory exists.
+            dir.mkdirs();
+            ImageIO.write(bitmap, "jpg", file);
+            return file;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
-
-
     }
 
     @Override
@@ -123,7 +124,13 @@ public class MyCameraActivity extends Activity {
             if (data != null && data.getExtras() != null && data.getExtras().get("data") != null) {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 imageView.setImageBitmap(photo);
-                writePhoto(photo, "MyImage");
+                File f = writePhoto(photo, "MyImage");
+                if(f==null) {
+                    System.err.println("Can't write file");
+
+                }else {
+                    currentFile = f;
+                }
             }
         }
     }
