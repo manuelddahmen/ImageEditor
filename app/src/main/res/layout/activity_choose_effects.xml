@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChooseEffectsActivity"
-    android:theme="@style/Theme.AppCompat"
+    android:theme="@style/Theme.Design.Light"
     >
 
 
@@ -27,13 +27,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck"
         android:lines="5"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.Design"
         />
     <ListView
         android:id="@+id/simple_dropdown_item_1line_classes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.Design.Light"
 
         />
     <Button
@@ -47,6 +47,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/effectsAutoCompleteTextView"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.Design.Light"
         tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
