@@ -49,20 +49,15 @@ public class MyCameraActivity extends Activity {
         effectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if (currentFile != null) {
-                        Intent intent = new Intent(Intent.ACTION_EDIT);
-                        System.err.println("Cick on Effect button");
-                        intent.setDataAndType(Uri.fromFile(currentFile),
-                                "image/jpg");
-                        intent.setClass(imageView.getContext(),/*EffectsFragment()
-                                    .createPackageContext("com.android.example.cameraxbasic.fragments",*/
-                                Class.forName("one.empty3.feature.app.ChooseEffectsActivity"));
-                        intent.putExtra("data", currentFile.getAbsolutePath());
-                        startActivity(intent);
-                    }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                if (currentFile != null) {
+                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                    System.err.println("Cick on Effect button");
+                    intent.setDataAndType(Uri.fromFile(currentFile),
+                            "image/jpg");
+                    intent.setClass(imageView.getContext(),
+                            one.empty3.feature.app.ChooseEffectsActivity.class);
+                    intent.putExtra("data", currentFile.getAbsolutePath());
+                    startActivity(intent);
                 }
             }
         });
@@ -125,10 +120,10 @@ public class MyCameraActivity extends Activity {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 imageView.setImageBitmap(photo);
                 File f = writePhoto(photo, "MyImage");
-                if(f==null) {
+                if (f == null) {
                     System.err.println("Can't write file");
 
-                }else {
+                } else {
                     currentFile = f;
                 }
             }

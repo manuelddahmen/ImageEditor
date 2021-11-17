@@ -1,5 +1,6 @@
 package one.empty3.feature.app
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -17,7 +18,7 @@ import android.widget.MultiAutoCompleteTextView.CommaTokenizer
 import one.empty3.feature.app.R
 import java.io.File
 
-class ChooseEffectsActivity : AppCompatActivity() {
+class ChooseEffectsActivity : Activity() {
     private var mediaFile: Uri? = null
     lateinit var autoCompleteTextView: MultiAutoCompleteTextView
     lateinit var editText: EditText
