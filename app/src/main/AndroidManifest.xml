@@ -38,18 +38,8 @@
         android:exported="true"
         >
 
-        <activity
-            android:name="com.android.example.app.MainActivity"
-            android:clearTaskOnLaunch="true"
-            android:theme="@style/AppTheme"
-            android:icon="@mipmap/ic_launcher"
-            android:screenOrientation="fullUser"
-            android:rotationAnimation="seamless"
-            android:resizeableActivity="true"
-            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
-            tools:targetApi="S"
+        <activity android:name=".MyCameraActivity"
             android:exported="true">
-
             <!-- Main app intent filter -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,11 +65,7 @@
                 <data android:pathPattern="/camerax" />
             </intent-filter>
 
-            <!-- Declare notch support -->
-            <meta-data android:name="android.notch_support" android:value="true"/>
-
         </activity>
-
         <!-- FileProvider used to share photos with other apps -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -90,23 +76,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-        <activity android:name="one.empty3.feature.app.fragments.EffectFragment"
-            android:clearTaskOnLaunch="true"
-            android:theme="@style/AppTheme"
-            android:icon="@mipmap/ic_launcher"
-            android:screenOrientation="fullUser"
-            android:rotationAnimation="seamless"
-            android:resizeableActivity="true"
-            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
-            tools:targetApi="O"
-            android:exported="false">
-
-        <intent-filter>
-                <action android:name="android.intent.action.EDIT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/jpg" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

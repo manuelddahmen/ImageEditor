@@ -31,4 +31,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="listProcess">Liste des classes de filtres compléter dans le champ en-dessous pour ajouter</string>
     <string name="completeBox">Tapez les premières lettres dans le champ texte puis sélectionner l\'effet</string>
+    <string name="photo">main.imageViewDefaultIcon</string>
+    <string name="effect">Effect</string>
 </resources>

@@ -37,8 +37,7 @@
  */
 package one.empty3.library;
 
-import com.google.android.material.textfield.TextInputEditText;
-
+import android.widget.EditText;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -51,7 +50,7 @@ public class RegisterOutput {
 
     private Logger logger;
     private OutputStream output;
-    private TextInputEditText pane;
+    private EditText pane;
 
     public void addOutput(Logger l) {
         this.logger = l;
@@ -61,7 +60,7 @@ public class RegisterOutput {
         this.output = o;
     }
 
-    public void addOutput(TextInputEditText p) {
+    public void addOutput(EditText p) {
         this.pane = p;
     }
 
@@ -73,7 +72,7 @@ public class RegisterOutput {
         return output;
     }
 
-    public TextInputEditText getPane() {
+    public EditText getPane() {
         return pane;
     }
 

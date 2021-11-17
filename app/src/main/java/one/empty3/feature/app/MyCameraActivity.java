@@ -1,11 +1,22 @@
-import android.app.A
+package one.empty3.feature.app;
+
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class MyCameraActivity extends Activity
 {
@@ -18,8 +29,8 @@ public class MyCameraActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        this.imageView = (ImageView)this.findViewById(R.id.imageView1);
-        Button photoButton = (Button) this.findViewById(R.id.button1);
+        this.imageView = (ImageView)this.findViewById(R.id.currentImageView);
+        Button photoButton = (Button) this.findViewById(R.id.takePhotoButton);
         photoButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -64,23 +75,13 @@ public class MyCameraActivity extends Activity
         {  
             Bitmap photo = (Bitmap) data.getExtras().get("data"); 
             imageView.setImageBitmap(photo);
+            File file = new File("./data" + photo.hashCode());
+            boolean mkdirs = new File("./data").mkdirs();
+            try {
+                ImageIO.write(photo, "jpg", file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }  
     } 
 }
-Note that the camera app itself gives you the ability to review/retake the image, and once an image is accepted, the activity displays it.
-
-Here is the layout that the above activity uses. It is simply a LinearLayout containing a Button with id button1 and an
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/photo"></Button>
-    <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content"></ImageView>
-
-</LinearLayout>
-
-<uses-feature android:name="android.hardware.camera"></uses-feature> 
-<uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
-to your manifest.xml.
