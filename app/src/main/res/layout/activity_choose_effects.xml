@@ -6,4 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ChooseEffectsActivity">
 
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/effectsAutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:accessibilityLiveRegion="none"
+        android:autofillHints="effectsSelection"
+        android:hint="@string/completeBox"
+        android:importantForAccessibility="yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_editor_absoluteY="0dp"
+        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:lines="5"
+        />
+    <ListView
+        android:id="@+id/simple_dropdown_item_1line_classes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <Button
+        android:id="@+id/effectsToApply"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:accessibilityLiveRegion="none"
+        android:autofillHints="Effect's Selection"
+        android:hint="@string/completeBox"
+        android:importantForAccessibility="yes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/effectsAutoCompleteTextView"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

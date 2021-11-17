@@ -29,7 +29,7 @@ class ChooseEffectsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("effects#logging", "create Effect Activity")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.select_effects)
+        setContentView(R.layout.activity_choose_effects)
         init(savedInstanceState)
         mediaFile = intent.data
     }
