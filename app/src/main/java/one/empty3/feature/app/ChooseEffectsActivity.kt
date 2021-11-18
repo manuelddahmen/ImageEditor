@@ -205,11 +205,20 @@ class ChooseEffectsActivity : Activity() {
                             println("Effect class : " + trim)
                             println("In picture   : " + currentProcessFile)
                             println("Out  picture : " + currentOutputFile)
-
-                            processFile.process(currentProcessFile, currentOutputFile)
+                            try {
+                                if (!processFile.process(currentProcessFile, currentOutputFile)) {
+                                    println("Error processing file.")
+                                }
+                            } catch (ex:Exception) {
+                                println("Error processing file.")
+                                ex.printStackTrace()
+                                return@setOnClickListener
+                            }
                             currentProcessFile = currentOutputFile
                         }
                         index++
+
+
                     }
                     intent.data = Uri.fromFile(currentProcessFile)
                     intent.putExtra("data", currentProcessFile)
