@@ -97,14 +97,14 @@ public class MyCameraActivity extends Activity {
                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
-        String dirName1 = "", dirName2="";
+        String dirName1 = "", dirName2 = "";
         do {
             dirName1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
                     + "/FeatureApp/data/" + name + "_" + n + ".jpg";
             dirName2 = getFilesDir()
                     + "/data/" + name + "_" + n + ".jpg";
             n++;
-        } while (new File(dirName1).exists()||new File(dirName2).exists());
+        } while (new File(dirName1).exists() || new File(dirName2).exists());
 
 
         //startActivityForResult(camera, 1);
@@ -120,12 +120,10 @@ public class MyCameraActivity extends Activity {
             // Make sure the Pictures directory exists.
             dir1.mkdirs();
             dir2.mkdirs();
-            if(ImageIO.write(bitmap, "jpg", file1))
-                ;
-            if(ImageIO.write(bitmap, "jpg", file2))
-                ;
-            System.out.println("File (photo) "+file1.getAbsolutePath());
-            System.out.println("File (photo) "+file2.getAbsolutePath());
+            ImageIO.write(bitmap, "jpg", file1);
+            ImageIO.write(bitmap, "jpg", file2);
+            System.out.println("File (photo) " + file1.getAbsolutePath());
+            System.out.println("File (photo) " + file2.getAbsolutePath());
             return file2;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
