@@ -103,6 +103,11 @@ class ChooseEffectsActivity : Activity() {
                         this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
+                    != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
                     != PackageManager.PERMISSION_GRANTED
                 ) {
                     ActivityCompat.requestPermissions(this,
