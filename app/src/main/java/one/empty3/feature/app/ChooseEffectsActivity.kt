@@ -76,7 +76,7 @@ class ChooseEffectsActivity : Activity() {
         var i = 0
         for (i in 0..effectListStr.size - 1) {
             effectListStr[i] =
-                effectList[i].javaClass.canonicalName//.javaClass.simpleName.substring(
+                effectList[i].javaClass.name//.javaClass.simpleName.substring(
             //"class ".length, initListProcesses[i].javaClass.simpleName.lastIndexOf('.') )
         }
         val arrayAdapter: ArrayAdapter<String> =
@@ -99,6 +99,7 @@ class ChooseEffectsActivity : Activity() {
                 intent.putExtra(
                     "data", file
                 )
+                var dirRoot : String  = filesDir.absolutePath+File.separator+"data"
                 if (ContextCompat.checkSelfPermission(
                         this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -106,7 +107,7 @@ class ChooseEffectsActivity : Activity() {
                     != PackageManager.PERMISSION_GRANTED ||
                     ContextCompat.checkSelfPermission(
                         this,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
                     )
                     != PackageManager.PERMISSION_GRANTED
                 ) {
@@ -125,7 +126,12 @@ class ChooseEffectsActivity : Activity() {
                     )
                     == PackageManager.PERMISSION_GRANTED
                 ) {
-                    val strEffectsList: String = autoCompleteTextView.text.toString()
+                    dirRoot = mediaFile.toString().substring(0, mediaFile.toString().lastIndexOf(File.separator))
+                } else {
+                    println("Error : no permission for read/write storage")
+
+                }
+                val strEffectsList: String = autoCompleteTextView.text.toString()
                     var currentProcessFile: File = file
                     var currentOutputFile = currentProcessFile
                     var index = -1
@@ -136,7 +142,9 @@ class ChooseEffectsActivity : Activity() {
                             val indexOf: Int = effectListStr.indexOf(trim)
                             val processFile: ProcessFile = effectList.get(indexOf)
                             if(index==-1) {
-                                currentOutputFile = File(
+                                currentOutputFile = File(nextFile(dirRoot, name.substring(0, name.lastIndexOf(".")),
+                                    "jpg"))
+                            /*    currentOutputFile = File(
                                     currentProcessFile.absolutePath.substring(0,
                                         currentProcessFile.absolutePath.lastIndexOf("/")))
                                 currentOutputFile = File(
@@ -147,8 +155,12 @@ class ChooseEffectsActivity : Activity() {
                                     .lastIndexOf(File.separator)
                                 ) + File.separator+trim+index+
                                         File.separator+name)
+                            */
+
                             } else {
-                                currentOutputFile = File(
+                                currentOutputFile = File(nextFile(dirRoot, name.substring(0, name.lastIndexOf(".")),
+                                    "jpg"))
+                            /*    currentOutputFile = File(
                                     currentProcessFile
                                         .absolutePath.substring(
                                             0, currentProcessFile
@@ -160,7 +172,7 @@ class ChooseEffectsActivity : Activity() {
                                     ) + File.separator+trim+index+
                                         File.separator+name)
 
-                            }
+                            */}
                             currentOutputFile.mkdirs()
                             println("Effect class : " + trim)
                             println("In picture   : " + currentProcessFile)
@@ -174,9 +186,7 @@ class ChooseEffectsActivity : Activity() {
                     intent.data = Uri.fromFile(currentProcessFile)
                     intent.putExtra("data", currentProcessFile)
                     startActivity(intent)
-                } else {
-                    println("Error : no permission for read/write storage")
-                }
+
             }
         }
 
@@ -219,6 +229,10 @@ class ChooseEffectsActivity : Activity() {
       */
 
 
+    }
+
+    private fun nextFile(directory: String, filenameBase: String, extension: String): String {
+        return directory+File.separator+filenameBase+"."+extension
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

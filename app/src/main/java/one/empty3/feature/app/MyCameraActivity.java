@@ -99,8 +99,10 @@ public class MyCameraActivity extends Activity {
         //Folder is already created
         String dirName = "";
         do {
-            dirName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
-                    + "/FeatureApp/data/" + name + "_" + n + ".jpg";
+//            dirName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
+//                    + "/FeatureApp/data/" + name + "_" + n + ".jpg";
+            dirName = getFilesDir()
+                    + "/data/" + name + "_" + n + ".jpg";
             n++;
         } while (new File(dirName).exists());
 
@@ -114,7 +116,8 @@ public class MyCameraActivity extends Activity {
             // Make sure the Pictures directory exists.
             dir.mkdirs();
             if(ImageIO.write(bitmap, "jpg", file))
-                System.out.println("File written. "+file.getAbsolutePath());
+                ;
+            System.out.println("File (photo) "+file.getAbsolutePath());
             return file;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
