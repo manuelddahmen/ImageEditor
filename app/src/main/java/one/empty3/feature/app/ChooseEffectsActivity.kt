@@ -193,6 +193,8 @@ class ChooseEffectsActivity : Activity() {
                 }
             }
       */
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

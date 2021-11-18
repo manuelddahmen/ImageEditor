@@ -113,7 +113,8 @@ public class MyCameraActivity extends Activity {
         try {
             // Make sure the Pictures directory exists.
             dir.mkdirs();
-            ImageIO.write(bitmap, "jpg", file);
+            if(ImageIO.write(bitmap, "jpg", file))
+                System.out.println("File written. "+file.getAbsolutePath());
             return file;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
