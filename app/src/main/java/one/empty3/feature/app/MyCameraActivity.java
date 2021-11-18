@@ -97,28 +97,36 @@ public class MyCameraActivity extends Activity {
                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
-        String dirName = "";
+        String dirName1 = "", dirName2="";
         do {
-//            dirName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
-//                    + "/FeatureApp/data/" + name + "_" + n + ".jpg";
-            dirName = getFilesDir()
+            dirName1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
+                    + "/FeatureApp/data/" + name + "_" + n + ".jpg";
+            dirName2 = getFilesDir()
                     + "/data/" + name + "_" + n + ".jpg";
             n++;
-        } while (new File(dirName).exists());
+        } while (new File(dirName1).exists()||new File(dirName2).exists());
 
-        Uri uriSavedImage = Uri.fromFile(new File(dirName));
-        camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
         //startActivityForResult(camera, 1);
-        File dir = new File(dirName.substring(0, dirName.lastIndexOf(File.separator)));
-        File file = new File(dirName);
+        File dir1 = new File(dirName1.substring(0, dirName1.lastIndexOf(File.separator)));
+        File file1 = new File(dirName1);
+        File dir2 = new File(dirName1.substring(0, dirName1.lastIndexOf(File.separator)));
+        File file2 = new File(dirName1);
+
+        Uri uriSavedImage = Uri.fromFile(file2);
+        camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
         try {
             // Make sure the Pictures directory exists.
-            dir.mkdirs();
-            if(ImageIO.write(bitmap, "jpg", file))
+            dir1.mkdirs();
+            dir2.mkdirs();
+            if(ImageIO.write(bitmap, "jpg", file1))
                 ;
-            System.out.println("File (photo) "+file.getAbsolutePath());
-            return file;
+            if(ImageIO.write(bitmap, "jpg", file2))
+                ;
+            System.out.println("File (photo) "+file1.getAbsolutePath());
+            System.out.println("File (photo) "+file2.getAbsolutePath());
+            return file2;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;

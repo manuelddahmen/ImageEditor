@@ -115,6 +115,7 @@ class ChooseEffectsActivity : Activity() {
                         arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE), PackageManager.PERMISSION_GRANTED)
                 }
+                var dir = ""
                 if (ContextCompat.checkSelfPermission(
                         this,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -126,10 +127,11 @@ class ChooseEffectsActivity : Activity() {
                     )
                     == PackageManager.PERMISSION_GRANTED
                 ) {
+                    dir = "photoDir"
                     dirRoot = mediaFile.toString().substring(0, mediaFile.toString().lastIndexOf(File.separator))
                 } else {
                     println("Error : no permission for read/write storage")
-
+                    dir = "appDir"
                 }
                 val strEffectsList: String = autoCompleteTextView.text.toString()
                     var currentProcessFile: File = file
@@ -142,37 +144,63 @@ class ChooseEffectsActivity : Activity() {
                             val indexOf: Int = effectListStr.indexOf(trim)
                             val processFile: ProcessFile = effectList.get(indexOf)
                             if(index==-1) {
-                                currentOutputFile = File(nextFile(dirRoot, name.substring(0, name.lastIndexOf(".")),
-                                    "jpg"))
-                            /*    currentOutputFile = File(
-                                    currentProcessFile.absolutePath.substring(0,
-                                        currentProcessFile.absolutePath.lastIndexOf("/")))
-                                currentOutputFile = File(
-                                    currentProcessFile.absolutePath.substring(0,
-                                        currentProcessFile.absolutePath.lastIndexOf("/")))
-                                currentOutputFile = File(currentOutputFile.absolutePath.
-                                substring(0,currentProcessFile.absolutePath
-                                    .lastIndexOf(File.separator)
-                                ) + File.separator+trim+index+
-                                        File.separator+name)
-                            */
+                                if(dir.equals("appDir")) {
+                                    currentOutputFile = File(
+                                        nextFile(
+                                            dirRoot+
+                                                    File.separator + trim + index +
+                                                     name, name.substring(0, name.lastIndexOf(".")),
+                                            "jpg"
+                                        )
+                                    )
+                                } else {
+                                    currentOutputFile = File(
+                                        currentProcessFile.absolutePath.substring(
+                                            0,
+                                            currentProcessFile.absolutePath.lastIndexOf("/")
+                                        )
+                                    )
+                                    currentOutputFile = File(
+                                        currentProcessFile.absolutePath.substring(
+                                            0,
+                                            currentProcessFile.absolutePath.lastIndexOf("/")
+                                        )
+                                    )
+                                    currentOutputFile = File(
+                                        currentOutputFile.absolutePath.substring(
+                                            0, currentProcessFile.absolutePath
+                                                .lastIndexOf(File.separator)
+                                        ) + File.separator + trim + index +
+                                                File.separator + name
+                                    )
+                                }
 
                             } else {
-                                currentOutputFile = File(nextFile(dirRoot, name.substring(0, name.lastIndexOf(".")),
-                                    "jpg"))
-                            /*    currentOutputFile = File(
-                                    currentProcessFile
-                                        .absolutePath.substring(
-                                            0, currentProcessFile
-                                                .absolutePath.lastIndexOf('/')
-                                                    - 1 ))
-                                currentOutputFile = File(currentOutputFile.absolutePath.
-                                    substring(0,currentOutputFile.absolutePath
-                                    .lastIndexOf(File.separator)
-                                    ) + File.separator+trim+index+
-                                        File.separator+name)
-
-                            */}
+                                if(dir.equals("appDir")) {
+                                    currentOutputFile = File(
+                                        nextFile(
+                                            dirRoot, name.substring(0, name.lastIndexOf(".")),
+                                            "jpg"
+                                        )
+                                    )
+                                } else {
+                                    currentOutputFile = File(
+                                        currentProcessFile
+                                            .absolutePath.substring(
+                                                0, currentProcessFile
+                                                    .absolutePath.lastIndexOf('/')
+                                                        - 1
+                                            )
+                                    )
+                                    currentOutputFile = File(
+                                        currentOutputFile.absolutePath.substring(
+                                            0, currentOutputFile.absolutePath
+                                                .lastIndexOf(File.separator)
+                                        ) + File.separator + trim + index +
+                                                File.separator + name
+                                    )
+                                }
+                            }
                             currentOutputFile.mkdirs()
                             println("Effect class : " + trim)
                             println("In picture   : " + currentProcessFile)
