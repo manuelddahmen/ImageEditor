@@ -12,6 +12,8 @@ import androidx.annotation.RequiresApi
 import one.empty3.Main
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
+import androidx.annotation.RequiresPermission
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.util.jar.Manifest
@@ -86,7 +88,7 @@ class ChooseEffectsActivity : Activity() {
         val applyEffectAction = findViewById<Button>(R.id.effectsToApply)
         applyEffectAction.setOnClickListener {
             run {
-                intent = Intent(Intent.ACTION_EDIT)
+                val intent = Intent(Intent.ACTION_EDIT)
                 println("Cick on Effect button")
                 intent.setDataAndType(mediaFile, "image/jpg")
                 intent.setClass(
@@ -102,6 +104,21 @@ class ChooseEffectsActivity : Activity() {
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
                     != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(this,
+                        arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE), PackageManager.PERMISSION_GRANTED)
+                }
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                    == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+                    == PackageManager.PERMISSION_GRANTED
                 ) {
                     val strEffectsList: String = autoCompleteTextView.text.toString()
                     var currentProcessFile: File = file
@@ -152,6 +169,8 @@ class ChooseEffectsActivity : Activity() {
                     intent.data = Uri.fromFile(currentProcessFile)
                     intent.putExtra("data", currentProcessFile)
                     startActivity(intent)
+                } else {
+                    println("Error : no permission for read/write storage")
                 }
             }
         }
