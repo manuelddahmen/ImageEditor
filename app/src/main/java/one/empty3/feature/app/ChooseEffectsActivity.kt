@@ -151,15 +151,16 @@ class ChooseEffectsActivity : Activity() {
                         val processFile: ProcessFile = effectList.get(indexOf)
                         if (index == -1) {
                             if (dir.equals("appDir")) {
+                                currentOutputFile =
+                                    File("/storage/emulated/0/Android/media/one.empty3.feature.app/")
                                 currentOutputFile = File(
                                     nextFile(
                                         dirRoot +
-                                                File.separator + trim + index +
-                                                name, name.substring(0, name.lastIndexOf(".")),
-                                        ".jpg"
+                                                File.separator + trim + index,
+                                        name.substring(0, name.lastIndexOf(".")),
+                                        "jpg"
                                     )
                                 )
-                                currentOutputFile = File("/storage/emulated/0/Android/media/one.empty3.feature.app/"+trim+index+name+".jpg")
                             } else {
                                 currentOutputFile = File(
                                     currentProcessFile.absolutePath.substring(
@@ -213,9 +214,14 @@ class ChooseEffectsActivity : Activity() {
                         println("In picture   : " + currentProcessFile)
                         println("Out  picture : " + currentOutputFile)
                         try {
-                            if (!processFile.process(currentProcessFile, currentOutputFile)) {
-                                println("Error processing file.")
-                                println("Error in "+processFile.javaClass.name)
+                            if(currentProcessFile.exists() && !currentProcessFile.exists()) {
+                                if (!processFile.process(currentProcessFile, currentOutputFile)) {
+                                    println("Error processing file.")
+                                    println("Error in " + processFile.javaClass.name)
+                                    return@setOnClickListener
+                                }
+                            } else {
+                                println("Fichier in n'existe pas ou fichier out existe")
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
