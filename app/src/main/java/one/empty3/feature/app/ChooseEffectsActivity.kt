@@ -214,14 +214,14 @@ class ChooseEffectsActivity : Activity() {
                         println("In picture   : " + currentProcessFile)
                         println("Out  picture : " + currentOutputFile)
                         try {
-                            if(currentProcessFile.exists() && !currentProcessFile.exists()) {
+                            if(currentProcessFile.exists() && !currentOutputFile.exists()) {
                                 if (!processFile.process(currentProcessFile, currentOutputFile)) {
                                     println("Error processing file.")
                                     println("Error in " + processFile.javaClass.name)
                                     return@setOnClickListener
                                 }
                             } else {
-                                println("Fichier in n'existe pas ou fichier out existe")
+                                println("File in doesn't exists, or File out doesn't")
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
