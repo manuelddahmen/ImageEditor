@@ -159,8 +159,6 @@ class ChooseEffectsActivity : Activity() {
                         val processFile: ProcessFile = effectList.get(indexOf)
                         if (index == -1) {
                             if (dir.equals("appDir")) {
-                                currentOutputFile =
-                                    File("/storage/emulated/0/Android/media/one.empty3.feature.app/")
                                 currentOutputFile = File(
                                     nextFile(
                                         dirRoot +
@@ -170,9 +168,9 @@ class ChooseEffectsActivity : Activity() {
                                     )
                                 )
                                 currentOutputDir = File(
-                                    file.absolutePath.substring(
+                                    currentOutputFile.absolutePath.substring(
                                         0,
-                                        file.absolutePath.lastIndexOf("/")
+                                        currentOutputFile.absolutePath.lastIndexOf("/")
                                     )
                                 )
                             } else {
@@ -196,9 +194,9 @@ class ChooseEffectsActivity : Activity() {
                                             File.separator + name
                                 )
                                 currentOutputDir = File(
-                                    file.absolutePath.substring(
+                                    currentOutputFile.absolutePath.substring(
                                         0,
-                                        file.absolutePath.lastIndexOf("/")
+                                        currentOutputFile.absolutePath.lastIndexOf("/")
                                     )
                                 )
                             }
@@ -212,9 +210,9 @@ class ChooseEffectsActivity : Activity() {
                                     )
                                 )
                                 currentOutputDir = File(
-                                    file.absolutePath.substring(
+                                    currentOutputFile.absolutePath.substring(
                                         0,
-                                        file.absolutePath.lastIndexOf("/")
+                                        currentOutputFile.absolutePath.lastIndexOf("/")
                                     )
                                 )
 
@@ -235,9 +233,9 @@ class ChooseEffectsActivity : Activity() {
                                             File.separator + name
                                 )
                                 currentOutputDir = File(
-                                    file.absolutePath.substring(
+                                    currentOutputFile.absolutePath.substring(
                                         0,
-                                        file.absolutePath.lastIndexOf("/")
+                                        currentOutputFile.absolutePath.lastIndexOf("/")
                                     )
                                 )
 
@@ -261,11 +259,12 @@ class ChooseEffectsActivity : Activity() {
                                     return@setOnClickListener
                                 }
                             } else {
-                                println("File in doesn't exists, or File out exists\n" +
-                                    "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists()+
-                                    "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists()+
-                                    "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists()+
-                                    "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists()
+                                println(
+                                    "File in doesn't exists, or File out exists\n" +
+                                            "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists() +
+                                            "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists() +
+                                            "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists() +
+                                            "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists()
                                 )
                                 return@setOnClickListener
                             }

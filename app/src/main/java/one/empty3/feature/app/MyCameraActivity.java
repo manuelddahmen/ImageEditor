@@ -65,7 +65,7 @@ public class MyCameraActivity extends Activity {
             }
         });
         if (getIntent() != null && getIntent().getData() != null) {
-            currentFile = new File(String.valueOf(intent.getData()));
+            currentFile = new File(String.valueOf(intent.getExtras().get("data")));
             Bitmap photo = ImageIO.read(currentFile);
             imageView.setImageBitmap(photo);
 
