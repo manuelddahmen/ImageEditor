@@ -19,7 +19,7 @@ import java.io.File
 import java.util.jar.Manifest
 
 class ChooseEffectsActivity : Activity() {
-    private var mediaFile: Uri? = null
+    private var mediaFile: File = File(".")
     lateinit var autoCompleteTextView: MultiAutoCompleteTextView
     lateinit var editText: EditText
     lateinit var effectList: ArrayList<ProcessFile>
@@ -32,7 +32,7 @@ class ChooseEffectsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_effects)
         init(savedInstanceState)
-        mediaFile = intent.data
+        mediaFile = intent.extras?.get("data") as File
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -90,7 +90,8 @@ class ChooseEffectsActivity : Activity() {
             run {
                 val intent = Intent(Intent.ACTION_EDIT)
                 println("Cick on Effect button")
-                intent.setDataAndType(mediaFile, "image/jpg")
+                intent.setDataAndType(Uri.fromFile(mediaFile), "image/jpg")
+                intent.putExtra("data", mediaFile)
                 intent.setClass(
                     autoCompleteTextView.context,
                     Class.forName("one.empty3.feature.app.MyCameraActivity")

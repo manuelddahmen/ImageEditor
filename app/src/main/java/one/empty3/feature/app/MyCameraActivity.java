@@ -58,7 +58,7 @@ public class MyCameraActivity extends Activity {
                             "image/jpg");
                     intent.setClass(imageView.getContext(),
                             one.empty3.feature.app.ChooseEffectsActivity.class);
-                    intent.putExtra("data", currentFile.getAbsolutePath());
+                    intent.putExtra("data", currentFile);
                     startActivity(intent);
                 }
             }
