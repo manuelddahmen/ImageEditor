@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
@@ -134,6 +135,9 @@ public class MyCameraActivity extends Activity {
             System.out.println("File (photo) " + file2.getAbsolutePath());
             return file2;
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

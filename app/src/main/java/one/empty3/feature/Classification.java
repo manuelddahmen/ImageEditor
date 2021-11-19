@@ -27,7 +27,7 @@ public class Classification extends ProcessFile {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public boolean process(final File in, final File out) {
+    public boolean process(final File in, final File out) throws IOException {
         if (!in.getName().endsWith(".jpg"))
             return false;
         PixM selectPointColorMassAglo = null;

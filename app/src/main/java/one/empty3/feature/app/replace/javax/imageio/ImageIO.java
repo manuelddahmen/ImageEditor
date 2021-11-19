@@ -22,8 +22,10 @@ public class ImageIO {
         return null;
     }
 
-    public static boolean write(Bitmap imageOut, String jpg, File out) throws FileNotFoundException {
-        imageOut.compress(Bitmap.CompressFormat.JPEG, 10, new FileOutputStream(out));
+    public static boolean write(Bitmap imageOut, String jpg, File out) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(out);
+        imageOut.compress(Bitmap.CompressFormat.JPEG, 10, fileOutputStream);
+        fileOutputStream.close();
         return false;
     }
 }

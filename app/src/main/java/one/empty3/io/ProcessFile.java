@@ -1,6 +1,7 @@
 package one.empty3.io;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ProcessFile {
 
 
 
-    public boolean process(File in, File out) {return false;}
+    public boolean process(File in, File out) throws IOException {return false;}
 
     public void setMaxRes(int maxRes) {
         this.maxRes = maxRes;

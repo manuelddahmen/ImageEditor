@@ -163,7 +163,7 @@ public class FFMpeg {
     }
 
 
-    public void process(ProcessFile processInstance) {
+    public void process(ProcessFile processInstance) throws IOException {
         File frame = inputFile;
         String s = inputFile.getAbsolutePath();
         File file = new File(s.substring(0, s.lastIndexOf(File.separator)) + File.separator

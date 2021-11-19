@@ -6,6 +6,7 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public abstract class Selection extends ProcessFile {
                                                int x1, int y1, int x2, int y2);
 
     @Override
-    public boolean process(File in, File out) {
+    public boolean process(File in, File out) throws IOException {
         return super.process(in, out);
     }
 }

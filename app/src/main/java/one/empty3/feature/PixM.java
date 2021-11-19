@@ -80,10 +80,8 @@ public class PixM extends M {
 
 
                         , (int) (1.0 * j / lines2 * image.getHeight()));
-                float[] colorComponents = new float[pixM.getCompCount()];
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
-                }
+                float[] colorComponents = new float[4];
+                colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
                 for (int com = 0; com < pixM.getCompCount(); com++) {
                     pixM.setCompNo(com);
                     pixM.set(i, j, colorComponents[com]);
