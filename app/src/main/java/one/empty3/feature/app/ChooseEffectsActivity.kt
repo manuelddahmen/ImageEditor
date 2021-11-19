@@ -140,7 +140,14 @@ class ChooseEffectsActivity : Activity() {
                 }
                 val strEffectsList: String = autoCompleteTextView.text.toString()
                 var currentProcessFile: File = file
+                var currentProcessDir: File = File(
+                    file.absolutePath.substring(
+                        0,
+                        file.absolutePath.lastIndexOf("/")
+                    )
+                )
                 var currentOutputFile: File
+                var currentOutputDir: File
                 var index = -1
                 val name = currentProcessFile.name
                 //dir = "appDir"
@@ -159,6 +166,12 @@ class ChooseEffectsActivity : Activity() {
                                                 File.separator + trim + index,
                                         name.substring(0, name.lastIndexOf(".")),
                                         "jpg"
+                                    )
+                                )
+                                currentOutputDir = File(
+                                    file.absolutePath.substring(
+                                        0,
+                                        file.absolutePath.lastIndexOf("/")
                                     )
                                 )
                             } else {
@@ -181,6 +194,12 @@ class ChooseEffectsActivity : Activity() {
                                     ) + File.separator + trim + index +
                                             File.separator + name
                                 )
+                                currentOutputDir = File(
+                                    file.absolutePath.substring(
+                                        0,
+                                        file.absolutePath.lastIndexOf("/")
+                                    )
+                                )
                             }
 
                         } else {
@@ -191,6 +210,13 @@ class ChooseEffectsActivity : Activity() {
                                         ".jpg"
                                     )
                                 )
+                                currentOutputDir = File(
+                                    file.absolutePath.substring(
+                                        0,
+                                        file.absolutePath.lastIndexOf("/")
+                                    )
+                                )
+
                             } else {
                                 currentOutputFile = File(
                                     currentProcessFile
@@ -207,21 +233,39 @@ class ChooseEffectsActivity : Activity() {
                                     ) + File.separator + trim + index +
                                             File.separator + name
                                 )
+                                currentOutputDir = File(
+                                    file.absolutePath.substring(
+                                        0,
+                                        file.absolutePath.lastIndexOf("/")
+                                    )
+                                )
+
                             }
+
                         }
-                        currentOutputFile.mkdirs()
-                        println("Effect class : " + trim)
-                        println("In picture   : " + currentProcessFile)
-                        println("Out  picture : " + currentOutputFile)
+                        currentOutputDir.mkdirs()
+                        println("Effect class           : " + trim)
+                        println("In picture             : " + currentProcessFile)
+                        println("In picture directory   : " + currentProcessDir)
+                        println("Out  picture           : " + currentOutputFile)
+                        println("Out picture directory  : " + currentOutputDir)
                         try {
-                            if(currentProcessFile.exists() && !currentOutputFile.exists()) {
+                            if (currentProcessDir.exists()
+                                && currentProcessFile.exists()
+                                && !currentOutputFile.exists()
+                            ) {
                                 if (!processFile.process(currentProcessFile, currentOutputFile)) {
                                     println("Error processing file.")
                                     println("Error in " + processFile.javaClass.name)
                                     return@setOnClickListener
                                 }
                             } else {
-                                println("File in doesn't exists, or File out doesn't")
+                                println("File in doesn't exists, or File out exists\n" +
+                                    "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists()+
+                                    "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists()+
+                                    "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists()+
+                                    "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists()
+                                )
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
