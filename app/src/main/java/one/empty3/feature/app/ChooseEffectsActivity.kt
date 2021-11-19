@@ -143,6 +143,7 @@ class ChooseEffectsActivity : Activity() {
                 var currentOutputFile = currentProcessFile
                 var index = -1
                 val name = currentProcessFile.name
+                //dir = "appDir"
                 strEffectsList.split(",").forEach {
                     val trim = it.trim()
                     if (effectListStr.contains(trim)) {
@@ -155,9 +156,10 @@ class ChooseEffectsActivity : Activity() {
                                         dirRoot +
                                                 File.separator + trim + index +
                                                 name, name.substring(0, name.lastIndexOf(".")),
-                                        "jpg"
+                                        ".jpg"
                                     )
                                 )
+                                currentOutputFile = File("/storage/emulated/0/Android/media/one.empty3.feature.app/"+trim+index+name+".jpg")
                             } else {
                                 currentOutputFile = File(
                                     currentProcessFile.absolutePath.substring(
@@ -185,7 +187,7 @@ class ChooseEffectsActivity : Activity() {
                                 currentOutputFile = File(
                                     nextFile(
                                         dirRoot, name.substring(0, name.lastIndexOf(".")),
-                                        "jpg"
+                                        ".jpg"
                                     )
                                 )
                             } else {
@@ -213,6 +215,7 @@ class ChooseEffectsActivity : Activity() {
                         try {
                             if (!processFile.process(currentProcessFile, currentOutputFile)) {
                                 println("Error processing file.")
+                                return@setOnClickListener
                             }
                         } catch (ex: Exception) {
                             println("Error processing file.")

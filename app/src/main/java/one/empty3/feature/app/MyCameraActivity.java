@@ -101,7 +101,7 @@ public class MyCameraActivity extends Activity {
         do {
             dirName1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()
                     + "/FeatureApp/data/" + name + "_" + n + ".jpg";
-            dirName2 = getFilesDir()
+            dirName2 = "/storage/emulated/0/Android/media/one.empty3.feature.app/"//+getFilesDir()
                     + "/data/" + name + "_" + n + ".jpg";
             n++;
         } while (new File(dirName1).exists() || new File(dirName2).exists());
@@ -110,16 +110,24 @@ public class MyCameraActivity extends Activity {
         //startActivityForResult(camera, 1);
         File dir1 = new File(dirName1.substring(0, dirName1.lastIndexOf(File.separator)));
         File file1 = new File(dirName1);
-        File dir2 = new File(dirName1.substring(0, dirName1.lastIndexOf(File.separator)));
-        File file2 = new File(dirName1);
+        File dir2 = new File(dirName2.substring(0, dirName2.lastIndexOf(File.separator)));
+        File file2 = new File(dirName2);
 
         Uri uriSavedImage = Uri.fromFile(file2);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
         try {
             // Make sure the Pictures directory exists.
-            dir1.mkdirs();
-            dir2.mkdirs();
+            if(!dir1.exists())
+                if(!dir1.mkdirs()) {
+                    System.err.println("Error creating dir = " + dir1.getAbsolutePath());
+                    return null;
+                }
+            if(!dir2.exists())
+                if(!dir2.mkdirs()) {
+                    System.err.println("Error creating dir = " + dir2.getAbsolutePath());
+                    return null;
+                }
             ImageIO.write(bitmap, "jpg", file1);
             ImageIO.write(bitmap, "jpg", file2);
             System.out.println("File (photo) " + file1.getAbsolutePath());
