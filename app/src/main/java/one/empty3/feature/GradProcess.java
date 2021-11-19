@@ -4,6 +4,7 @@ package one.empty3.feature;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
+import java.util.Objects;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
@@ -18,10 +19,9 @@ public class GradProcess extends ProcessFile {
 
         if (!in.getName().endsWith(".jpg"))
             return false;
-        File file = in;
         PixM pix;
         try {
-            pix = PixM.getPixM(ImageIO.read(file), maxRes);
+            pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             PixM[][] imagesMatrix = gf.filter(

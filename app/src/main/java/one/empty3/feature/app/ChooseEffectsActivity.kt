@@ -215,6 +215,7 @@ class ChooseEffectsActivity : Activity() {
                         try {
                             if (!processFile.process(currentProcessFile, currentOutputFile)) {
                                 println("Error processing file.")
+                                println("Error in "+processFile.javaClass.name)
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
