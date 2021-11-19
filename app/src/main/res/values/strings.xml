@@ -33,4 +33,5 @@
     <string name="completeBox">Tapez les premières lettres dans le champ texte puis sélectionner l\'effet</string>
     <string name="photo">main.imageViewDefaultIcon</string>
     <string name="effect">Effect</string>
+    <string name="filePath">one.empty3.feature.app</string>
 </resources>

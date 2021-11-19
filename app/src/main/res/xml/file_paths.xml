@@ -15,6 +15,8 @@
   ~ limitations under the License.
   -->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-media-path name="media" android:path="@{string/app_name}/" />
+    <external-media-path name="media" android:path="@{string/app_name}/"
+        path="@{string/app_name}/" >
+    </external-media-path>
     <files-path name="files" path="."/>
 </paths>

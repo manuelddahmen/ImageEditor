@@ -140,7 +140,7 @@ class ChooseEffectsActivity : Activity() {
                 }
                 val strEffectsList: String = autoCompleteTextView.text.toString()
                 var currentProcessFile: File = file
-                var currentOutputFile = currentProcessFile
+                var currentOutputFile: File
                 var index = -1
                 val name = currentProcessFile.name
                 //dir = "appDir"
