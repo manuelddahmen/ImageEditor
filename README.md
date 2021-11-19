@@ -26,3 +26,24 @@ Alternatively, test running configurations can be added to Android Studio for co
 1. For Robolectric select `Android JUnit`, for connected device select `Android Instrumented Tests`.
 1. Select `app` module and `com.android.example.cameraxbasic.MainInstrumentedTest` class.
 1. Optional: Give the run configuration a name, like `test robolectric` or `test device`
+
+Precision about the code.
+
+Code is too long to post here. I read your remarks and I updated my code.
+[https://github.com/manuelddahmen/featureApp/blob/main/app/src/main/java/one/empty3/feature/app/ChooseEffectsActivity.kt][1]
+
+ 
+
+       I/System.out: Cick on Effect button
+    I/System.out: Effect class           : one.empty3.feature.GradProcess
+        In picture             : file:/storage/emulated/0/Android/media/one.empty3.feature.app/data/MyImage_43.jpg
+        In picture directory   : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data
+        Out  picture           : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data/one.empty3.feature.GradProcess-1/MyImage_43.jpg
+        Out picture directory  : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data
+    I/System.out: File in doesn't exists, or File out exists
+        Precision currentProcessDir : false
+        Precision currentProcessFile: false
+        Precision currentOutputDir  : false
+        Precision currentOutputFile : false
+
+  [1]: https://github.com/manuelddahmen/featureApp/blob/main/app/src/main/java/one/empty3/feature/app/ChooseEffectsActivity.kt
