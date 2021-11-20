@@ -36,6 +36,7 @@ public class MyCameraActivity extends Activity {
     private File currentFile = null;
     private Gallery gallery;
     private File currentDir ;
+    private Uri choose_directoryData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,16 +93,17 @@ public class MyCameraActivity extends Activity {
         });
     }
     private void startCreation(){
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-            Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-            i.addCategory(Intent.CATEGORY_DEFAULT);
-            startActivityForResult(Intent.createChooser(i, "Choose directory"), 9999);
-        }
+
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.addCategory(Intent.CATEGORY_OPENABLE);
+        i.setType("file/*");
+        System.out.println(choose_directoryData);
+        startActivityForResult(i, 9999);
     }
 
     public void fillGallery() {
-        File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/aaaa/");
-        File[] allFiles = folder.listFiles();
+        File file = new File(choose_directoryData.getPath());
+        File [] allFiles = new File[] {file};
         ArrayList<View> views = new ArrayList<>();
         for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
             ImageView imageView = new ImageView(this);
@@ -192,6 +194,9 @@ public class MyCameraActivity extends Activity {
                 }
             }
         } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
+            choose_directoryData = data.getData();
+            System.out.println(choose_directoryData);
+
             fillGallery();
         }
     }
