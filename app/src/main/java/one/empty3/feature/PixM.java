@@ -27,7 +27,7 @@ public class PixM extends M {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public PixM(Bitmap image) {
         super(image.getWidth(), image.getHeight());
-        float[] colorComponents = new float[getCompCount()];
+        float[] colorComponents = new float[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);

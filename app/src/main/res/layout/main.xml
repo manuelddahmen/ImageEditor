@@ -4,7 +4,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         >
-        <Button android:id="@+id/takePhotoButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/photo"></Button>
+        <Button android:id="@+id/takePhotoButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/capturePhoto"></Button>
+        <Button android:id="@+id/choosePhotoButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/choosePhoto"></Button>
         <ImageView android:id="@+id/currentImageView" android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content"></ImageView>
 
     <Gallery

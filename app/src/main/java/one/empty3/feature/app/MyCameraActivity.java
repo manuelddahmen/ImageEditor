@@ -3,14 +3,18 @@ package one.empty3.feature.app;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,14 +23,17 @@ import androidx.annotation.NonNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class MyCameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
+    private static final int PICK_REQUEST_CODE = 0;
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private File currentFile = null;
+    private View gallery;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,12 +77,46 @@ public class MyCameraActivity extends Activity {
             imageView.setImageBitmap(photo);
 
         }
+        Gallery gallery = findViewById(R.id.imageTakenPreviewGallery);
+
+        Button fromFiles = findViewById(R.id.choosePhotoButton);
+
+        fromFiles.setOnClickListener(v -> {
+            startCreation();
+        });
+    }
+    private void startCreation(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        Uri startDir = Uri.fromFile(new File("/sdcard"));
+
+        intent.setDataAndType(startDir,
+                "vnd.android.cursor.dir/lysesoft.andexplorer.file");
+        intent.putExtra("browser_filter_extension_whitelist", "*.csv");
+        intent.putExtra("explorer_title", getText(R.string.andex_file_selection_title));
+        intent.putExtra("browser_title_background_color",
+                getText(R.string.browser_title_background_color));
+        intent.putExtra("browser_title_foreground_color",
+                getText(R.string.browser_title_foreground_color));
+        intent.putExtra("browser_list_background_color",
+                getText(R.string.browser_list_background_color));
+        intent.putExtra("browser_list_fontscale", "120%");
+        intent.putExtra("browser_list_layout", "2");
+
+        startActivityForResult(intent, PICK_REQUEST_CODE);
     }
 
     public void fillGallery() {
         File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/aaaa/");
         File[] allFiles = folder.listFiles();
-        //Gallery gallery = findViewById(R.id.imageTakenPreviewGallery);
+        ArrayList<View> views = new ArrayList<>();
+        for (int i = 0; i < allFiles.length; i++) {
+            ImageView imageView = new ImageView(this);
+            views.add(imageView);
+            imageView.setImageBitmap(ImageIO.read(allFiles[i]));
+        }
+        gallery = findViewById(R.id.imageTakenPreviewGallery);
+        gallery.addTouchables(views);
     }
 
     @Override
@@ -157,6 +198,8 @@ public class MyCameraActivity extends Activity {
                     currentFile = f;
                 }
             }
+        } else if (requestCode == PICK_REQUEST_CODE && resultCode==Activity.RESULT_OK) {
+            fillGallery();
         }
     }
 }

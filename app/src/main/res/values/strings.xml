@@ -34,4 +34,10 @@
     <string name="photo">main.imageViewDefaultIcon</string>
     <string name="effect">Effect</string>
     <string name="filePath">one.empty3.feature.app</string>
+    <string name="capturePhoto">Prendre une photo</string>
+    <string name="choosePhoto">Choisir depuis la galerie</string>
+    <string name="andex_file_selection_title">Sélection d\'un fichier photo ou vidéo</string>
+    <string name="browser_title_background_color">#000000</string>
+    <string name="browser_title_foreground_color">#FFFFFF</string>
+    <string name="browser_list_background_color">#AAAAAA</string>
 </resources>
