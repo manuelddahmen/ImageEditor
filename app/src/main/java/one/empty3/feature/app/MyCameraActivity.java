@@ -97,6 +97,7 @@ public class MyCameraActivity extends Activity {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("file/*");
+        i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         System.out.println(choose_directoryData);
         startActivityForResult(i, 9999);
     }
@@ -196,7 +197,25 @@ public class MyCameraActivity extends Activity {
         } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
             choose_directoryData = data.getData();
             System.out.println(choose_directoryData);
+if (data != null) { 
 
+                    // Checking for selection multiple files or single.
+                    if (data.getClipData() != null){    
+
+                        // Getting the length of data and logging up the logs using index
+                        for (int index = 0; index < data.getClipData().getItemCount(); index++) {   
+
+                            // Getting the URIs of the selected files and logging them into logcat at debug level
+                            Uri uri = data.getClipData().getItemAt(index).getUri();
+                            Log.d("filesUri [" + uri + "] : ", String.valueOf(uri) );
+                        }
+                    }else{ 
+
+                        // Getting the URI of the selected file and logging into logcat at debug level
+                        Uri uri = data.getData();
+                        Log.d("fileUri: ", String.valueOf(uri));
+                    }
+} 
             fillGallery();
         }
     }
