@@ -24,12 +24,12 @@ apply plugin: 'kotlin-kapt'
 //apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId "one.empty3.feature.app"
         minSdkVersion 28
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
         vectorDrawables.useSupportLibrary=false
