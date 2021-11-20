@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
-    id: 'android'
+  id 'com.android.application'
 }
-apply plugin: 'com.android.application'
+
+//apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 //apply plugin: "androidx.navigation.safeargs"
@@ -28,8 +28,7 @@ android {
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId "one.empty3.feature.app"
-        minSdkVersion 30
-        //noinspection ExpiredTargetSdkVersion
+        minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
