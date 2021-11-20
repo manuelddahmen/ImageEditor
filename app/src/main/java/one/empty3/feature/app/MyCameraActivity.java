@@ -93,8 +93,8 @@ public class MyCameraActivity extends Activity {
     }
     private void startCreation(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-            Intent i = new Intent(Intent.ACTION_PICK);
-            i.addCategory(Intent.CATEGORY_APP_FILES);
+            Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            i.addCategory(Intent.CATEGORY_DEFAULT);
             startActivityForResult(Intent.createChooser(i, "Choose directory"), 9999);
         }
     }
