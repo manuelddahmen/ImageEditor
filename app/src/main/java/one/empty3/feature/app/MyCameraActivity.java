@@ -84,7 +84,7 @@ public class MyCameraActivity extends Activity {
             imageView.setImageBitmap(photo);
 
         }
-        Gallery gallery = findViewById(R.id.imageTakenPreviewGallery);
+        gallery = findViewById(R.id.imageTakenPreviewGallery);
 
         Button fromFiles = findViewById(R.id.choosePhotoButton);
 
@@ -102,15 +102,15 @@ public class MyCameraActivity extends Activity {
         startActivityForResult(i, 9999);
     }
 
-    public void fillGallery() {
-        File file = new File(choose_directoryData.getPath());
-        File [] allFiles = new File[] {file};
+    public void fillGallery(File file) {
+        
+        //File [] allFiles = new File[] {file};
         ArrayList<View> views = new ArrayList<>();
-        for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
+        
             ImageView imageView = new ImageView(this);
             views.add(imageView);
-            imageView.setImageBitmap(ImageIO.read(allFiles[i]));
-        }
+            imageView.setImageBitmap(ImageIO.read(file));
+        
         gallery = findViewById(R.id.imageTakenPreviewGallery);
         gallery.addTouchables(views);
     }
