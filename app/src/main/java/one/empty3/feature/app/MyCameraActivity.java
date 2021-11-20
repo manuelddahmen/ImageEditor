@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
@@ -33,14 +34,18 @@ public class MyCameraActivity extends Activity {
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private File currentFile = null;
-    private View gallery;
-    private File currentDir = getFilesDir();
+    private Gallery gallery;
+    private File currentDir ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+
+
+        currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
         Button photoButton = (Button) this.findViewById(R.id.takePhotoButton);
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -87,32 +92,18 @@ public class MyCameraActivity extends Activity {
         });
     }
     private void startCreation(){
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_PICK);
-
-        Uri startDir = Uri.fromFile(currentDir==null?new File("/sdcard"):currentDir);
-
-        intent.setDataAndType(startDir,
-                "vnd.android.cursor.dir/lysesoft.andexplorer.file");
-        intent.putExtra("browser_filter_extension_whitelist", "*.csv");
-        intent.putExtra("explorer_title", getText(R.string.andex_file_selection_title));
-        intent.putExtra("browser_title_background_color",
-                getText(R.string.browser_title_background_color));
-        intent.putExtra("browser_title_foreground_color",
-                getText(R.string.browser_title_foreground_color));
-        intent.putExtra("browser_list_background_color",
-                getText(R.string.browser_list_background_color));
-        intent.putExtra("browser_list_fontscale", "120%");
-        intent.putExtra("browser_list_layout", "2");
-
-        startActivityForResult(intent, PICK_REQUEST_CODE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            Intent i = new Intent(Intent.ACTION_PICK);
+            i.addCategory(Intent.CATEGORY_APP_FILES);
+            startActivityForResult(Intent.createChooser(i, "Choose directory"), 9999);
+        }
     }
 
     public void fillGallery() {
         File folder = new File(Environment.getExternalStorageDirectory().getPath() + "/aaaa/");
         File[] allFiles = folder.listFiles();
         ArrayList<View> views = new ArrayList<>();
-        for (int i = 0; i < allFiles.length; i++) {
+        for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
             ImageView imageView = new ImageView(this);
             views.add(imageView);
             imageView.setImageBitmap(ImageIO.read(allFiles[i]));
@@ -200,7 +191,7 @@ public class MyCameraActivity extends Activity {
                     currentFile = f;
                 }
             }
-        } else if (requestCode == PICK_REQUEST_CODE && resultCode==Activity.RESULT_OK) {
+        } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
             fillGallery();
         }
     }
