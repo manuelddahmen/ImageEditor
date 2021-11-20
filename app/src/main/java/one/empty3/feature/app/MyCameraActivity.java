@@ -34,6 +34,7 @@ public class MyCameraActivity extends Activity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private File currentFile = null;
     private View gallery;
+    private File currentDir = getFilesDir();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,8 @@ public class MyCameraActivity extends Activity {
     private void startCreation(){
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_PICK);
-        Uri startDir = Uri.fromFile(new File("/sdcard"));
+
+        Uri startDir = Uri.fromFile(currentDir==null?new File("/sdcard"):currentDir);
 
         intent.setDataAndType(startDir,
                 "vnd.android.cursor.dir/lysesoft.andexplorer.file");
