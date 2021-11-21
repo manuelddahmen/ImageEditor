@@ -94,11 +94,10 @@ public class MyCameraActivity extends Activity {
     }
     private void startCreation(){
 
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("file/*");
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("file/*.*");
         System.out.println(choose_directoryData);
-        startActivityForResult(i, 9999);
+        startActivityForResult(intent, 9999);
     }
 
     public void fillGallery() {
