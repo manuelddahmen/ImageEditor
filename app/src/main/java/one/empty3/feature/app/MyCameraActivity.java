@@ -11,6 +11,7 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -96,6 +97,8 @@ public class MyCameraActivity extends Activity {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("file/*.*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
+
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
         System.out.println(choose_directoryData);
         startActivityForResult(intent2, 9999);
@@ -108,7 +111,9 @@ public class MyCameraActivity extends Activity {
         for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
             ImageView imageView = new ImageView(this);
             views.add(imageView);
-            imageView.setImageBitmap(ImageIO.read(allFiles[i]));
+            Bitmap read = ImageIO.read(allFiles[i]);
+            imageView.setImageBitmap(read);
+            this.imageView.setImageBitmap(read);
         }
         gallery = findViewById(R.id.imageTakenPreviewGallery);
         gallery.addTouchables(views);
