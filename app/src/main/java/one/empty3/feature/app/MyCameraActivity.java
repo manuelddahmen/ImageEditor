@@ -123,6 +123,9 @@ public class MyCameraActivity extends Activity {
 
         File myFilePicture = writePhoto(photo, "MyFilePicture");
 
+        currentFile = myFilePicture;
+        imageView.setImageBitmap(photo);
+
         Toast.makeText(this, "File "+myFilePicture.toString()+" added", Toast.LENGTH_LONG).show();
     }
 
