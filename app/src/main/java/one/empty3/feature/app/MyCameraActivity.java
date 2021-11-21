@@ -96,8 +96,9 @@ public class MyCameraActivity extends Activity {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("file/*.*");
+        Intent intent2 = Intent.createChooser(intent, "Choose a file");
         System.out.println(choose_directoryData);
-        startActivityForResult(intent, 9999);
+        startActivityForResult(intent2, 9999);
     }
 
     public void fillGallery() {
