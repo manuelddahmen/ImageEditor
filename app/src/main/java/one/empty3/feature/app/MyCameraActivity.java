@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,7 +39,6 @@ public class MyCameraActivity extends Activity {
     private File currentFile = null;
     private Gallery gallery;
     private File currentDir ;
-    private Uri choose_directoryData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,23 +101,29 @@ public class MyCameraActivity extends Activity {
         intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
 
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
-        System.out.println(choose_directoryData);
+        System.out.println(intent2);
         startActivityForResult(intent2, 9999);
     }
 
-    public void fillGallery() {
-        File file = new File(choose_directoryData.getPath());
+    public void fillGallery(Bitmap photo, Intent data) {
+        Uri uri = data.getData();
+        String src = uri.getPath();
+        File file = new File(src);
         File [] allFiles = new File[] {file};
         ArrayList<View> views = new ArrayList<>();
+
         for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
-            ImageView imageView = new ImageView(this);
-            views.add(imageView);
+            //views.add(imageView);
             Bitmap read = ImageIO.read(allFiles[i]);
             imageView.setImageBitmap(read);
-            this.imageView.setImageBitmap(read);
+            currentFile = allFiles[i];
         }
         gallery = findViewById(R.id.imageTakenPreviewGallery);
         gallery.addTouchables(views);
+
+        File myFilePicture = writePhoto(photo, "MyFilePicture");
+
+        Toast.makeText(this, "File "+myFilePicture.toString()+" added", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -133,7 +140,7 @@ public class MyCameraActivity extends Activity {
         }
     }
 
-    public File writePhoto(Bitmap bitmap, String name) {
+    public File writePhoto(@NotNull Bitmap bitmap, String name) {
 
         Intent camera = new Intent(
                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -199,10 +206,13 @@ public class MyCameraActivity extends Activity {
                 }
             }
         } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
-            choose_directoryData = data.getData();
+            Uri choose_directoryData = data.getData();
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
             System.out.println(choose_directoryData);
 
-            fillGallery();
+            fillGallery(photo, data);
+        } else {
+            Toast.makeText(this, "Error request "+requestCode, Toast.LENGTH_LONG).show();
         }
     }
 }
