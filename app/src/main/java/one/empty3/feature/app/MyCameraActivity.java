@@ -60,12 +60,14 @@ public class MyCameraActivity extends Activity {
             result = cursor.getString(idx);
             cursor.close();
         }*/
-        String original = file.getDataString();
+        String original = file.getData().getLastPathSegment();
+        file.getData().getFragment();
         System.out.println("Original : "+original);
-        String replace = original.replace("content:/com.android.externalstorage.documents/document/primary",
-                "/Android/0");
+        String replace = original.replaceAll("primary:Pictures/FeatureApp/data/",
+                "/storage/emulated/0/Pictures/FeatureApp/data/");
+        //replace = replace.replace("Pictures/", "/");
         //replace.replace()
-        System.out.println("replace:" + replace);
+        System.out.println("replaced:" + replace);
         return replace;
     }
 
@@ -135,10 +137,8 @@ public class MyCameraActivity extends Activity {
         startActivityForResult(intent2, 9999);
     }
 
-    public void fillGallery(Bitmap photo, Intent data) {
-        String src = getRealPathFromURI(data);
-        System.out.println("Replaced : "+src);
-        File file = new File(src);
+    public void fillGallery(Bitmap photo, File file) {
+        System.out.println("Replaced : "+file.getAbsolutePath());
         File[] allFiles = new File[]{file};
         ArrayList<View> views = new ArrayList<>();
 
@@ -236,13 +236,13 @@ public class MyCameraActivity extends Activity {
                 }
             }
         } else if (requestCode == 9999 && resultCode == Activity.RESULT_OK) {
-            String choose_directoryData = data.getDataString();
+            String choose_directoryData = getRealPathFromURI(data);
             Bitmap photo = null;
             try {
                 System.out.println(choose_directoryData);
                 photo = BitmapFactory.decodeStream(new FileInputStream(choose_directoryData));
                 currentFile = new File(choose_directoryData);
-                fillGallery(photo, data);
+                fillGallery(photo, new File(choose_directoryData));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
