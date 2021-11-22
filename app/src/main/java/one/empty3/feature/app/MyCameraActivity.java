@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -45,26 +46,27 @@ public class MyCameraActivity extends Activity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private File currentFile = null;
     private Gallery gallery;
-    private File currentDir ;
-private String getRealPathFromURI(Uri contentURI) {
-    String result;
-    Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-    if (cursor == null) { // Source is Dropbox or other similar local file path
-        result = contentURI.getPath();
-    } else { 
-        cursor.moveToFirst(); 
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA); 
-        result = cursor.getString(idx);
-        cursor.close();
+    private File currentDir;
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
-    return result;
-}
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
 
 
         currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -113,11 +115,12 @@ private String getRealPathFromURI(Uri contentURI) {
             startCreation();
         });
     }
-    private void startCreation(){
+
+    private void startCreation() {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("file/*.*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
@@ -127,28 +130,26 @@ private String getRealPathFromURI(Uri contentURI) {
 
     public void fillGallery(Bitmap photo, Intent data) {
         Uri uri = data.getData();
-        if(DocumentFile.isDocumentUri(this, uri)){
-            String src = uri.getPath();
-            File file = new File(src);
-            File [] allFiles = new File[] {file};
-            ArrayList<View> views = new ArrayList<>();
+        String src = getRealPathFromURI(uri);
+        File file = new File(src);
+        File[] allFiles = new File[]{file};
+        ArrayList<View> views = new ArrayList<>();
 
-            for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
-                //views.add(imageView);
-                Bitmap read = ImageIO.read(allFiles[i]);
-                imageView.setImageBitmap(read);
-                currentFile = allFiles[i];
-            }
-            gallery = findViewById(R.id.imageTakenPreviewGallery);
-            gallery.addTouchables(views);
-
-            File myFilePicture = writePhoto(photo, "MyFilePicture");
-
-            currentFile = myFilePicture;
-            imageView.setImageBitmap(photo);
-
-            Toast.makeText(this, "File "+myFilePicture.toString()+" added", Toast.LENGTH_LONG).show();
+        for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
+            //views.add(imageView);
+            Bitmap read = ImageIO.read(allFiles[i]);
+            imageView.setImageBitmap(read);
+            currentFile = allFiles[i];
         }
+        gallery = findViewById(R.id.imageTakenPreviewGallery);
+        gallery.addTouchables(views);
+
+        File myFilePicture = writePhoto(photo, "MyFilePicture");
+
+        currentFile = myFilePicture;
+        imageView.setImageBitmap(photo);
+
+        Toast.makeText(this, "File " + myFilePicture.toString() + " added", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -192,13 +193,13 @@ private String getRealPathFromURI(Uri contentURI) {
 
         try {
             // Make sure the Pictures directory exists.
-            if(!dir1.exists())
-                if(!dir1.mkdirs()) {
+            if (!dir1.exists())
+                if (!dir1.mkdirs()) {
                     System.err.println("Error creating dir = " + dir1.getAbsolutePath());
                     return null;
                 }
-            if(!dir2.exists())
-                if(!dir2.mkdirs()) {
+            if (!dir2.exists())
+                if (!dir2.mkdirs()) {
                     System.err.println("Error creating dir = " + dir2.getAbsolutePath());
                     return null;
                 }
@@ -230,7 +231,7 @@ private String getRealPathFromURI(Uri contentURI) {
                     currentFile = f;
                 }
             }
-        } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
+        } else if (requestCode == 9999 && resultCode == Activity.RESULT_OK) {
             String choose_directoryData = data.getDataString();
             Bitmap photo = null;
             try {
@@ -242,7 +243,7 @@ private String getRealPathFromURI(Uri contentURI) {
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(this, "Error request "+requestCode, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error request " + requestCode, Toast.LENGTH_LONG).show();
         }
     }
 }
