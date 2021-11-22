@@ -48,7 +48,8 @@ public class MyCameraActivity extends Activity {
     private Gallery gallery;
     private File currentDir;
 
-    private String getRealPathFromURI(Uri contentURI) {
+    private String getRealPathFromURI(Intent file) {
+        /*
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) { // Source is Dropbox or other similar local file path
@@ -58,8 +59,14 @@ public class MyCameraActivity extends Activity {
             int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             result = cursor.getString(idx);
             cursor.close();
-        }
-        return result;
+        }*/
+        String original = file.getDataString();
+        System.out.println("Original : "+original);
+        String replace = original.replace("content:/com.android.externalstorage.documents/document/primary",
+                "/Android/0");
+        //replace.replace()
+        System.out.println("replace:" + replace);
+        return replace;
     }
 
     @Override
@@ -129,8 +136,8 @@ public class MyCameraActivity extends Activity {
     }
 
     public void fillGallery(Bitmap photo, Intent data) {
-        Uri uri = data.getData();
-        String src = getRealPathFromURI(uri);
+        String src = getRealPathFromURI(data);
+        System.out.println("Replaced : "+src);
         File file = new File(src);
         File[] allFiles = new File[]{file};
         ArrayList<View> views = new ArrayList<>();
@@ -208,9 +215,6 @@ public class MyCameraActivity extends Activity {
             System.out.println("File (photo) " + file1.getAbsolutePath());
             System.out.println("File (photo) " + file2.getAbsolutePath());
             return file2;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
