@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
 import android.util.Log;
@@ -20,14 +23,18 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.documentfile.provider.DocumentFile;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
@@ -99,6 +106,7 @@ public class MyCameraActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("file/*.*");
         intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
         System.out.println(intent2);
@@ -107,26 +115,28 @@ public class MyCameraActivity extends Activity {
 
     public void fillGallery(Bitmap photo, Intent data) {
         Uri uri = data.getData();
-        String src = uri.getPath();
-        File file = new File(src);
-        File [] allFiles = new File[] {file};
-        ArrayList<View> views = new ArrayList<>();
+        if(DocumentFile.isDocumentUri(this, uri)){
+            String src = uri.getPath();
+            File file = new File(src);
+            File [] allFiles = new File[] {file};
+            ArrayList<View> views = new ArrayList<>();
 
-        for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
-            //views.add(imageView);
-            Bitmap read = ImageIO.read(allFiles[i]);
-            imageView.setImageBitmap(read);
-            currentFile = allFiles[i];
+            for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
+                //views.add(imageView);
+                Bitmap read = ImageIO.read(allFiles[i]);
+                imageView.setImageBitmap(read);
+                currentFile = allFiles[i];
+            }
+            gallery = findViewById(R.id.imageTakenPreviewGallery);
+            gallery.addTouchables(views);
+
+            File myFilePicture = writePhoto(photo, "MyFilePicture");
+
+            currentFile = myFilePicture;
+            imageView.setImageBitmap(photo);
+
+            Toast.makeText(this, "File "+myFilePicture.toString()+" added", Toast.LENGTH_LONG).show();
         }
-        gallery = findViewById(R.id.imageTakenPreviewGallery);
-        gallery.addTouchables(views);
-
-        File myFilePicture = writePhoto(photo, "MyFilePicture");
-
-        currentFile = myFilePicture;
-        imageView.setImageBitmap(photo);
-
-        Toast.makeText(this, "File "+myFilePicture.toString()+" added", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -209,11 +219,16 @@ public class MyCameraActivity extends Activity {
                 }
             }
         } else if (requestCode == 9999 && resultCode==Activity.RESULT_OK) {
-            Uri choose_directoryData = data.getData();
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            System.out.println(choose_directoryData);
-
-            fillGallery(photo, data);
+            String choose_directoryData = data.getDataString();
+            Bitmap photo = null;
+            try {
+                System.out.println(choose_directoryData);
+                photo = BitmapFactory.decodeStream(new FileInputStream(choose_directoryData));
+                currentFile = new File(choose_directoryData);
+                fillGallery(photo, data);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         } else {
             Toast.makeText(this, "Error request "+requestCode, Toast.LENGTH_LONG).show();
         }
