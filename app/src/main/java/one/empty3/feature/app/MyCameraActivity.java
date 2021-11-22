@@ -3,6 +3,7 @@ package one.empty3.feature.app;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -51,38 +53,40 @@ public class MyCameraActivity extends Activity {
     private File currentDir;
 
     public static String getPath(final Context context, final Uri uri) {
-    final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
-    // DocumentProvider
-    if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-        System.out.println("getPath() uri: " + uri.toString());
-        System.out.println("getPath() uri authority: " + uri.getAuthority());
-        System.out.println("getPath() uri path: " + uri.getPath());
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            System.out.println("getPath() uri: " + uri.toString());
+            System.out.println("getPath() uri authority: " + uri.getAuthority());
+            System.out.println("getPath() uri path: " + uri.getPath());
 
-        // ExternalStorageProvider
-        if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
-            final String docId = DocumentsContract.getDocumentId(uri);
-            final String[] split = docId.split(":");
-            final String type = split[0];
-            System.out.println("getPath() docId: " + docId + ", split: " + split.length + ", type: " + type);
+            // ExternalStorageProvider
+            if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                System.out.println("getPath() docId: " + docId + ", split: " + split.length + ", type: " + type);
 
-            // This is for checking Main Memory
-            if ("primary".equalsIgnoreCase(type)) {
-                if (split.length > 1) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
+                // This is for checking Main Memory
+                if ("primary".equalsIgnoreCase(type)) {
+                    if (split.length > 1) {
+                        return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
+                    } else {
+                        return Environment.getExternalStorageDirectory() + "/";
+                    }
+                    // This is for checking SD Card
                 } else {
-                    return Environment.getExternalStorageDirectory() + "/";
+                    return "storage" + "/" + docId.replace(":", "/");
                 }
-                // This is for checking SD Card
-            } else {
-                return "storage" + "/" + docId.replace(":", "/");
-            }
 
+            }
         }
+        return null;
     }
-    return null;
-    }
+
     private String getRealPathFromURI(Intent file) {
+        return getPath(this, file.getData());
         /*
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
@@ -94,7 +98,7 @@ public class MyCameraActivity extends Activity {
             result = cursor.getString(idx);
             cursor.close();
         }*/
-        String original = file.getData().getLastPathSegment();
+        /*String original = file.getData().getLastPathSegment();
         file.getData().getFragment();
         System.out.println("Original : "+original);
         String replace = original.replaceAll("primary:Pictures/FeatureApp/data/",
@@ -103,6 +107,7 @@ public class MyCameraActivity extends Activity {
         //replace.replace()
         System.out.println("replaced:" + replace);
         return replace;
+    */
     }
 
     @Override
@@ -172,7 +177,7 @@ public class MyCameraActivity extends Activity {
     }
 
     public void fillGallery(Bitmap photo, File file) {
-        System.out.println("Replaced : "+file.getAbsolutePath());
+        System.out.println("Replaced : " + file.getAbsolutePath());
         File[] allFiles = new File[]{file};
         ArrayList<View> views = new ArrayList<>();
 
