@@ -2,6 +2,7 @@ package one.empty3.feature.app;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContentResolverCompat;
 import androidx.documentfile.provider.DocumentFile;
 
 import org.jetbrains.annotations.NotNull;
