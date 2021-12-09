@@ -32,6 +32,10 @@
 
 package one.empty3.atlasgen;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 
@@ -45,8 +49,9 @@ public class SimpleMap {
                 "One color Map"
         );
 
-        Color color = Color.WHITE;
-        Pixeler pixeler = new Pixeler(new BufferedImage(1800, 1600, BufferedImage.TYPE_INT_RGB));
+        Color color = Color.valueOf(Color.WHITE);
+        Pixeler pixeler = new Pixeler(BufferedImage.BufferedImage(1800, 1600,
+Bitmap.Config.RGB_565));
         CsvReader csvReader = new CsvReader(new File("allCountries/allCountries.txt"),
                 "" + '\t', "" + '\n', false);
         csvReader.setAction(new DrawAction(pixeler, color));

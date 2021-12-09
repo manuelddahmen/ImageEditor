@@ -15,10 +15,10 @@ public class Tubulaire4map extends Tubulaire3 {
 
     public Tubulaire4map() {
         super();
-        mapVolume.setElem(new ECBufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
+        mapVolume.setElem(new ECBufferedImage.BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
     }
     public void updateBitmap(BufferedImage bufferedImage) {
-        this.mapVolume.setElem(new ECBufferedImage(bufferedImage));
+        this.mapVolume.setElem(new ECBufferedImage.BufferedImage(bufferedImage));
     }
 
     @Override

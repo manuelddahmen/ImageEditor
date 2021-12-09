@@ -409,7 +409,7 @@ Point3D p1 = new Point3D(this);
     @Override
     public void drawStructureDrawFast(ZBuffer z) {
 
-        z.testDeep(this, new Color(CFAST.getColorAt(0.5, 0.5)));
+        z.testDeep(this,  one.empty3.feature.app.replace.java.awt.Color.Color(CFAST.getColorAt(0.5, 0.5)));
 
     }
 

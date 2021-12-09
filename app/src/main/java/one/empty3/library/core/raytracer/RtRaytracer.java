@@ -146,8 +146,8 @@ public class RtRaytracer {
         int tmpG;
         int tmpB;
         int tmpA = 0;
-        ECBufferedImage bi2 = new ECBufferedImage(width, height,
-                ECBufferedImage.TYPE_INT_RGB);
+        ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(width, height,
+                Bitmap.Config.RGB565);
 
         // On cree le fichier destination
         mOutputFileRAW = new PrintWriter(new FileOutputStream(new File(outputfilename + ".ppm")));
@@ -195,7 +195,7 @@ public class RtRaytracer {
 
 
                 if (zMin < currentRay.distance) {
-                    tmpColor = new RtColor(new Color(choisi.texture().getColorAt(0.5, 0.5)));
+                    tmpColor = new RtColor( one.empty3.feature.app.replace.java.awt.Color.Color(choisi.texture().getColorAt(0.5, 0.5)));
                 }
 
                 // Affichage de notre "barre de progression" ;)
@@ -218,7 +218,7 @@ public class RtRaytracer {
                 tmpB = (int) (tmpColor.getBlue() * 256);
                 tmpA = (int) (tmpColor.getAlpha() * 256);
                 int elementCouleur = 0xFF000000 | ((tmpA << 24) | (tmpR << 16) | (tmpG << 8) | (tmpB << 0));
-                bi2.setRGB(x, y, elementCouleur);
+                bi2.setPixel(x, y, elementCouleur);
 
                 // Et on ecrit finalement la couleur de ce pixel dans le fichier
                 mOutputFileRAW.println(tmpR + " " + " " + tmpG + " " + tmpB + "\n");

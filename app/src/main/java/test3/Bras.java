@@ -58,7 +58,7 @@ public class Bras extends TestObjetSub {
     public void ginit() {
         getZ().couleurDeFond(new TextureCol(Color.WHITE));
         textureDefault = new TextureImg(
-                new ECBufferedImage(
+                new ECBufferedImage.BufferedImage(
                         ImageIO.read(new File("samples/img/herbe.jpg"))));
         ArrayList<Bille> allPoints = new ArrayList<>();
         for (int i = 0; i < nbrLines; i++) {

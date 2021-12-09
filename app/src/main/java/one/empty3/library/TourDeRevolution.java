@@ -89,7 +89,7 @@ public class TourDeRevolution extends Representable {
         Color[] colors = new Color[256];
         for (int i = 0; i < 255; i++) {
             double a = 1.0 * i / 255 * 2 * Math.PI;
-            colors[i] = new Color(0.0f/*1*((float)Math.sin(a)+1)/2*/, 1 * (float) (Math.sin(a) + 1) / 2, 1 * (float) (Math.cos(a) + 1) / 2);
+            colors[i] =  one.empty3.feature.app.replace.java.awt.Color.Color(0.0f/*1*((float)Math.sin(a)+1)/2*/, 1 * (float) (Math.sin(a) + 1) / 2, 1 * (float) (Math.cos(a) + 1) / 2);
         }
         o = new TRIObject();
         op = new PObjet();

@@ -57,7 +57,7 @@ public class CollineModele3 extends Representable implements TRIGenerable {
         int pMax = 100;
 
         Point3D p0 = position == null ? new Point3D(0d, 0d, 0d) : position.calculer(new Point3D(0d, 0d, 0d));
-        Color c0 = new Color(128, 0, 255);
+        Color c0 =  one.empty3.feature.app.replace.java.awt.Color.Color(128, 0, 255);
 
         Point3D[][] pA = new Point3D[altMax][pMax];
 
@@ -91,7 +91,7 @@ public class CollineModele3 extends Representable implements TRIGenerable {
 
             }
 
-            c0 = new Color(128, 0, 255 - 10 * alt);
+            c0 =  one.empty3.feature.app.replace.java.awt.Color.Color(128, 0, 255 - 10 * alt);
 
             // TRI t = new TRI(pA[alt][0].plus(new Point3D(0,-1,0)),
             // pA[alt][pMax/2].plus(new Point3D(0,-1,0)),

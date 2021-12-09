@@ -33,37 +33,42 @@
 package one.empty3.atlasgen;
 
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 /*__
  * Created by manuel on 19-06-18.
  */
 public class Pixeler {
-    private BufferedImage image;
+    private Bitmap image;
     private int width;
     private int height;
 
 
-    public Pixeler(BufferedImage image) {
+    public Pixeler(Bitmap image) {
         this.image = image;
         width = image.getWidth();
         height = image.getHeight();
     }
 
     public void pixelize(int x, int y, Color color) {
-        image.setRGB(x < 0 ? 0 : (x > width - 1 ? width - 1 : x),
+        image.setPixel(x < 0 ? 0 : (x > width - 1 ? width - 1 : x),
                 y < 0 ? 0 : (y > width - 1 ? width - 1 : y),
-                color.getRGB());
+                color.toArgb());
     }
 
     public Point convert(double ratioX, double ratioY) {
         return new Point((int) (ratioX * width), (int) (ratioY * height));
     }
 
-    public BufferedImage getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(BufferedImage image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 }

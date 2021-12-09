@@ -73,15 +73,16 @@ public class ColoredMaps {
                     "Colored Maps map " + countryCode
             );
             try {
-                BufferedImage image = new BufferedImage(1800,
+                BufferedImage image = BufferedImage.BufferedImage(1800,
                         (int)
                                 Ratio.imageHeight(myDim.latitudeExtend(),
                                         myDim.longitudeExtend(),
                                         0,
-                                        1800), BufferedImage.TYPE_INT_RGB);
+                                        1800),
+Bitmap.Config.RGB565);
                 Pixeler pixeler = new Pixeler(image);
                 Graphics graphics = image.getGraphics();
-                graphics.setColor(new Color(Color.TRANSLUCENT));
+                graphics.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(Color.TRANSLUCENT));
                 graphics.fillRect(0, 0, image.getWidth() - 1, image.getHeight() - 1);
 
                 CsvReader csvReader1 = new CsvReader(new File("allCountries/allCountries.txt"),

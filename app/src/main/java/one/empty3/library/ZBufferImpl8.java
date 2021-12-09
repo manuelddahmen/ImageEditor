@@ -164,7 +164,8 @@ class Data {
     }
 
     public ECBufferedImage getBitmap() {
-        BufferedImage bi = new BufferedImage(la, ha, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bi = BufferedImage.BufferedImage(la, ha,
+Bitmap.Config.RGB565);
 
         int[] c = new int[4];
         for (int j = 0; j < ha; j++)
@@ -172,12 +173,12 @@ class Data {
                 if (dataP[9][j][i] != null && dataP[10][j][i] != null) {
                     c[0] = container[j][i].texture().getColorAt(
                             dataP[9][j][i], dataP[10][j][i]);
-                    bi.setRGB(i, j, i, j, c, 0, la);
+                    bi.setPixel(i, j, i, j, c, 0, la);
                 } else
                     System.out.println("error texture null Data.getBitmap");
 
 
-        return new ECBufferedImage(bi);
+        return new ECBufferedImage.BufferedImage(bi);
 
     }
 
@@ -438,7 +439,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
                              * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), new
                              * Color(n.texture().getColorAt(0.5,0.5))); tracerTriangle(n.calculerPoint3D(u,
                              * v), n.calculerPoint3D(u, v + n.getIncrV()), n.calculerPoint3D(u +
-                             * n.getIncrU(), v + n.getIncrV()), new Color(n.texture().getColorAt(0.5,0.5)));
+                             * n.getIncrU(), v + n.getIncrV()),  one.empty3.feature.app.replace.java.awt.Color.Color(n.texture().getColorAt(0.5,0.5)));
                              *//*
                              * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(),
                              * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture());
@@ -672,11 +673,11 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
     public ECBufferedImage image() {
                /*
-        ECBufferedImage bi2 = new ECBufferedImage(la, ha, ECBufferedImage.TYPE_INT_RGB);
+        ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(la, ha, Bitmap.Config.RGB565);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
-                bi2.setRGB(i, j, elementCouleur);
+                bi2.setPixel(i, j, elementCouleur);
 
             }
         }
@@ -1421,7 +1422,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
         }
 
         public void testDeep(Point3D p, Point3D n, int c) {
-            testDeep(p, n, new Color(c));
+            testDeep(p, n,  one.empty3.feature.app.replace.java.awt.Color.Color(c));
         }
 
         public void testDeep(Point3D p, ITexture texture) {
@@ -1430,7 +1431,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
         }
 
         public void dessine(Point3D p, ITexture texture) {
-            dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+            dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
 
         }
 
@@ -1456,7 +1457,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
     public void dessine(Point3D p, ITexture texture) {
-        ime.dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+        ime.dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
     }
 
     public class ImageMapElement {

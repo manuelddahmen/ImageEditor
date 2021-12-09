@@ -32,6 +32,9 @@
 
 package one.empty3.library.core.script;
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
 import java.util.ArrayList;
@@ -92,7 +95,7 @@ public class InterpretePGM implements Interprete {
 
         pos = text.indexOf("\n", pos) + 1;
 
-        return new ECBufferedImage(x, y, ECBufferedImage.TYPE_INT_RGB);
+        return new BufferedImage().BufferedImage(x, y, Bitmap.Config.RGB_565);
 
     }
 

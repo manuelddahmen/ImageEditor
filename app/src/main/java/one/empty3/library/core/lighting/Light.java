@@ -55,10 +55,10 @@ public class Light {
               colors[0]>>8+colors[3];
       }
       public Color getColor(int c) {
-           return new Color(c);
+           return  one.empty3.feature.app.replace.java.awt.Color.Color(c);
       }
       public Color getColor(int [] c) {
-          return new Color(c[3],c[2],c[1],c[0]);
+          return  one.empty3.feature.app.replace.java.awt.Color.Color(c[3],c[2],c[1],c[0]);
       }
       //public abstract Light();
 

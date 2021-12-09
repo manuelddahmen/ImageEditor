@@ -144,7 +144,8 @@ public class Histogram3 extends ProcessFile {
             final double radiusIncr = 1;
 
 
-            BufferedImage img2 = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage img2 = BufferedImage.BufferedImage(image.getWidth(), image.getHeight(),
+Bitmap.Config.RGB565);
             List<Circle> pointsOfInterest;
             pointsOfInterest = getPointsOfInterest(m, radiusIncr, 0.5);
             // grands;cercles = grandes iles les separer
@@ -182,11 +183,11 @@ public class Histogram3 extends ProcessFile {
             for (int i = 0; i < pointsOfInterest.size(); i++) {
                 Circle circle = pointsOfInterest.get(i);
                 double v = circle.i / circle.r / i_ir[1];
-                Color color = new Color((float) (v), (float) (v), (float) (v));
+                Color color =  one.empty3.feature.app.replace.java.awt.Color.Color((float) (v), (float) (v), (float) (v));
                 graphics.setColor(color);
                 ;
                 //graphics.fillRect((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (2 * circle.r), (int) (2 * circle.r));
-                img2.setRGB((int) (circle.x), (int) (circle.y), color.getRGB());
+                img2.setPixel((int) (circle.x), (int) (circle.y), color.getRGB());
             }
             // grouper les points par similarités et distances
               /*  group(pointsOfInterest);

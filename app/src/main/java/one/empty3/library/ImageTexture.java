@@ -108,9 +108,9 @@ public class ImageTexture extends ITexture {
                         transparent
 
                 )
-            return new Color(transparent);
+            return  one.empty3.feature.app.replace.java.awt.Color.Color(transparent);
         else
-            return new Color(c);
+            return  one.empty3.feature.app.replace.java.awt.Color.Color(c);
     }
 
 
@@ -197,9 +197,9 @@ public class ImageTexture extends ITexture {
         if (yi >= ecBufferedImageStructureMatrix.getHeight()) {
             yi = ecBufferedImageStructureMatrix.getHeight() - 1;
         }
-        Color c = new Color(ecBufferedImageStructureMatrix.getRGB(xi, yi));
+        Color c =  one.empty3.feature.app.replace.java.awt.Color.Color(ecBufferedImageStructureMatrix.getRGB(xi, yi));
         if (c.equals(transparent)) {
-            return new Color(transparent);
+            return  one.empty3.feature.app.replace.java.awt.Color.Color(transparent);
         } else {
             return c;
         }
@@ -237,9 +237,9 @@ public class ImageTexture extends ITexture {
         int x1 = (int) p.x;
         int y1 = (int) p.y;
 
-        Color c = new Color(ecBufferedImageStructureMatrix.getRGB(x1, y1));
+        Color c =  one.empty3.feature.app.replace.java.awt.Color.Color(ecBufferedImageStructureMatrix.getRGB(x1, y1));
         if (c.equals(transparent)) {
-            return new Color(transparent);
+            return  one.empty3.feature.app.replace.java.awt.Color.Color(transparent);
         } else {
             return c;
         }

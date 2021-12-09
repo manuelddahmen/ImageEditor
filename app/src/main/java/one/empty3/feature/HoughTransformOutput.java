@@ -18,20 +18,20 @@ public class HoughTransformOutput {
     static int imgHeight;
 
     public static void writeImage(int[][] imgArray, File outFile) throws Exception {
-        BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage img = BufferedImage.BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
-                img.setRGB(i, j, new Color(255, 255, 255, imgArray[i][j]).getRGB());
+                img.setPixel(i, j,  one.empty3.feature.app.replace.java.awt.Color.Color(255, 255, 255, imgArray[i][j]).getRGB());
             }
         }
         ImageIO.write(img, "png", outFile);
     }
 
     public static void writeImage(double[][] imgArray, File outFile) throws Exception {
-        BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
+        BufferedImage img = BufferedImage.BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
-                img.setRGB(i, j, (int) imgArray[i][j]);
+                img.setPixel(i, j, (int) imgArray[i][j]);
             }
         }
         ImageIO.write(img, "png", outFile);
@@ -42,11 +42,11 @@ public class HoughTransformOutput {
     }
 
     public static void writeImage(double[][] sobelArray, File outFile, int threshold) throws Exception {
-        BufferedImage img = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
+        BufferedImage img = BufferedImage.BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
                 if (sobelArray[i][j] > threshold) {
-                    img.setRGB(i, j, Color.WHITE.getRGB());
+                    img.setPixel(i, j, Color.WHITE.getRGB());
                 }
             }
         }
@@ -77,7 +77,7 @@ public class HoughTransformOutput {
     }
 
     public static void superimposeCircles(List<one.empty3.feature.CircleHit> hits, double[][] sobelTotal, File out) throws Exception {
-        BufferedImage totalCircles = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage totalCircles = BufferedImage.BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 
         BufferedImage total = changeBrightness(0.5f, scaledSobelResult(sobelTotal));
         totalCircles.getGraphics().drawImage(total, 0, 0, null);
@@ -100,7 +100,7 @@ public class HoughTransformOutput {
     }
 
     public static BufferedImage scaledSobelResult(double[][] sobelTotal) {
-        BufferedImage total = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
+        BufferedImage total = BufferedImage.BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
         double max = 0;
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
@@ -112,10 +112,10 @@ public class HoughTransformOutput {
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
                 //maps every pixel to a grayscale value between 0 and 255 from between 0 and the max value in sobelTotal
-                int rgb = new Color((int) map(sobelTotal[i][j], 0, max, 0, 255),
+                int rgb =  one.empty3.feature.app.replace.java.awt.Color.Color((int) map(sobelTotal[i][j], 0, max, 0, 255),
                         (int) map(sobelTotal[i][j], 0, max, 0, 255),
                         (int) map(sobelTotal[i][j], 0, max, 0, 255), 255).getRGB();
-                total.setRGB(i, j, rgb);
+                total.setPixel(i, j, rgb);
             }
         }
         return changeBrightness(20.0f, total);

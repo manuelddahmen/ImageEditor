@@ -180,7 +180,7 @@ public final class ShowTestResult extends JFrame implements Runnable {
 
     public void dessine() {
         if (biic != null && biic.getImage() != null) {
-            image = new ECBufferedImage(biic.getImage());
+            image = new ECBufferedImage.BufferedImage(biic.getImage());
             if (image != null) {
                 if (jPanel1 != null) {
                     Graphics g = jPanel1.getGraphics();
@@ -206,7 +206,7 @@ public final class ShowTestResult extends JFrame implements Runnable {
     public void exceptionReception(Exception t) {
         this.throwable = t;
         try {
-            image = new ECBufferedImage(
+            image = new ECBufferedImage.BufferedImage(
                     ImageIO.read(
                             getClass().getResourceAsStream("one/core/testing/skull-cross-bones-evil.ico")
                     )
@@ -254,7 +254,7 @@ public final class ShowTestResult extends JFrame implements Runnable {
         jButton5 = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setBackground(new Color(204, 204, 255));
+        setBackground( one.empty3.feature.app.replace.java.awt.Color.Color(204, 204, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -263,7 +263,7 @@ public final class ShowTestResult extends JFrame implements Runnable {
 
         jSplitPane1.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-        jPanel1.setBackground(new Color(204, 255, 204));
+        jPanel1.setBackground( one.empty3.feature.app.replace.java.awt.Color.Color(204, 255, 204));
         jPanel1.setMinimumSize(new Dimension(200, 200));
         jPanel1.setLayout(new OverlayLayout(jPanel1));
         jSplitPane1.setLeftComponent(jPanel1);
@@ -587,7 +587,7 @@ public final class ShowTestResult extends JFrame implements Runnable {
     }
 
     public void loadImage(BufferedImage ri) {
-        this.image = new ECBufferedImage(ri);
+        this.image = new ECBufferedImage.BufferedImage(ri);
         if (image != null) {
             setSize(new Dimension(image.getWidth(), image.getHeight()));
         }

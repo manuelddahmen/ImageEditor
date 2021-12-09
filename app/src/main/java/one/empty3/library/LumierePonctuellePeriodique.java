@@ -61,8 +61,8 @@ public final class LumierePonctuellePeriodique extends Lumiere {
     public int getCouleur(int base, Point3D p, Point3D n) {
         double x = (n.norme1().prodScalaire(position.moins(p).norme1()) + 1) / 2;
         double r = x;
-        Color couleurObjet = new Color(base);
-        return new Color((float) ((couleurObjet.getRed() / 256.0) * r + (couleurLumiere.getRed() / 256.0) * (1 - r)), (float) ((couleurObjet.getGreen() / 256.0) * r + (couleurLumiere.getGreen() / 256.0) * (1 - r)), (float) ((couleurObjet.getBlue()
+        Color couleurObjet =  one.empty3.feature.app.replace.java.awt.Color.Color(base);
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) ((couleurObjet.getRed() / 256.0) * r + (couleurLumiere.getRed() / 256.0) * (1 - r)), (float) ((couleurObjet.getGreen() / 256.0) * r + (couleurLumiere.getGreen() / 256.0) * (1 - r)), (float) ((couleurObjet.getBlue()
                 / 256.0) * r + (couleurLumiere.getBlue() / 256.0) * (1 - r))).getRGB();
     }
 

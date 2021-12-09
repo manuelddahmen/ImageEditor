@@ -972,7 +972,8 @@ public class ClassSchemaBuilder extends JFrame implements Serializable {
     }
 
     public void drawAllElements() {
-        BufferedImage bi = new BufferedImage(panel1.getWidth(), panel1.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage bi = BufferedImage.BufferedImage(panel1.getWidth(), panel1.getHeight(),
+Bitmap.Config.RGB565);
         Graphics g = bi.getGraphics();
 
         g.setColor(Color.BLACK);

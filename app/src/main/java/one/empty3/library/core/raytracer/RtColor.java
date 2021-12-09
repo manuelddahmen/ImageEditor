@@ -134,7 +134,7 @@ public class RtColor {
 
     public Color toColor() {
         RtColor c = normalizeColor(this);
-        return new Color((float) c.getRed(), (float) c.getGreen(), (float) c.getBlue(), (float) c.getAlpha());
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) c.getRed(), (float) c.getGreen(), (float) c.getBlue(), (float) c.getAlpha());
     }
 
 

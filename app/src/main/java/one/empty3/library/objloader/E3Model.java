@@ -65,7 +65,7 @@ public class E3Model extends RepresentableConteneur {
     public Double farpoint;
     public Double nearpoint;
     private String mtl_path;
-    Color color = new Color(0, 0, 255);
+    Color color =  one.empty3.feature.app.replace.java.awt.Color.Color(0, 0, 255);
     private int csDim;
     private boolean rat;
     private String cstype;
@@ -477,7 +477,7 @@ public class E3Model extends RepresentableConteneur {
             for (int i = 0; i < faces.size(); i++) {
                 Point3D norm = new Point3D();
                 if (i == nextmat) {
-                    pointCol = new Color((materials.getKd(nextmatname))[0], (materials.getKd(nextmatname))[1], (materials.getKd(nextmatname))[2], (materials.getd(nextmatname)));
+                    pointCol =  one.empty3.feature.app.replace.java.awt.Color.Color((materials.getKd(nextmatname))[0], (materials.getKd(nextmatname))[1], (materials.getKd(nextmatname))[2], (materials.getd(nextmatname)));
                     matcount++;
                     if (matcount < totalmats) {
                         nextmatnamearray = (String[]) (mattimings.get(matcount));

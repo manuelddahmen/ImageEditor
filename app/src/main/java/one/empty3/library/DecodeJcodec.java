@@ -58,7 +58,7 @@ public void run() {
                     e.printStackTrace();
                 }
                 assert frame != null;
-                imgBuf.add(new ECBufferedImage(frame));
+                imgBuf.add(new ECBufferedImage.BufferedImage(frame));
                 i++;
             } else {
                 try {

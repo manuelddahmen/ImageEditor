@@ -62,7 +62,7 @@ public class Lighter implements IBasicLighter {
             }
         }
 
-        return new Color(colorsComp[0], colorsComp[1], colorsComp[2]);
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(colorsComp[0], colorsComp[1], colorsComp[2]);
     }
 
     public void config(Point3D pointLumiere, double intensite, double rayonEnglobant) {

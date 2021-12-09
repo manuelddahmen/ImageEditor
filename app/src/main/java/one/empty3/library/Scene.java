@@ -141,12 +141,12 @@ public class Scene extends Representable implements Serializable {
         int l = cs.length;
         for (int c = 0; c < l; c++) {
             for (int i = 0; i < 3; i++) {
-                compArray3 = new Color(cs[i]).getRGBComponents(compArray);
+                compArray3 =  one.empty3.feature.app.replace.java.awt.Color.Color(cs[i]).getRGBComponents(compArray);
 
                 compArray3[i] += compArray[i] / l;
             }
         }
-        int res = new Color(compArray3[0], compArray3[1], compArray3[2], compArray3[3]).getRGB();
+        int res =  one.empty3.feature.app.replace.java.awt.Color.Color(compArray3[0], compArray3[1], compArray3[2], compArray3[3]).getRGB();
 
         return res;
     }

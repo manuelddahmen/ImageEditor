@@ -44,9 +44,10 @@ public class ColoredMap {
         System.out.println(
                 "Colored Map"
         );
-        BufferedImage image = new BufferedImage(1800, 1600, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = BufferedImage.BufferedImage(1800, 1600,
+Bitmap.Config.RGB565);
         Graphics graphics = image.getGraphics();
-        graphics.setColor(new Color(Color.TRANSLUCENT));
+        graphics.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(Color.TRANSLUCENT));
         graphics.fillRect(0, 0, image.getWidth() - 1, image.getHeight() - 1);
         Pixeler pixeler = new Pixeler(image);
         CsvReader csvReader = new CsvReader(new File("allCountries/allCountries.txt"),

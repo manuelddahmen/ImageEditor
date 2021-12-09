@@ -24,7 +24,7 @@ public class ManualVideoCompile {
 		if (value.getType() == type)
 			return value;
 		
-		BufferedImage result = new BufferedImage(value.getWidth(), value.getHeight(),
+		BufferedImage result = BufferedImage.BufferedImage(value.getWidth(), value.getHeight(),
 				type);
 		
 		result.getGraphics().drawImage(value, 0, 0, null);

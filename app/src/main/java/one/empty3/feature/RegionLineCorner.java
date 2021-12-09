@@ -260,9 +260,12 @@ public class RegionLineCorner extends ProcessFile {
             for (int i = 0; i < levels; i++) {
 
                 BufferedImage img = file;
-                BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-                BufferedImage img3 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-                BufferedImage img4 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+                BufferedImage img2 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
+                BufferedImage img3 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
+                BufferedImage img4 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
 
                 int finalI = i;
                 List<Circle> pointsOfInterest = getPointsOfInterest(levels);
@@ -275,10 +278,10 @@ public class RegionLineCorner extends ProcessFile {
                         graphics.setColor(Color.WHITE);
                         graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
                         graphics = img2.getGraphics();
-                        Color color = new Color((float) circle.i, 0f, (float) (circle.i / circle.r));
+                        Color color =  one.empty3.feature.app.replace.java.awt.Color.Color((float) circle.i, 0f, (float) (circle.i / circle.r));
                         graphics.setColor(color);
                         graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
-                        img3.setRGB((int) (circle.x), (int) (circle.y), color.getRGB());
+                        img3.setPixel((int) (circle.x), (int) (circle.y), color.getRGB());
                     }
                 });*/
                 // grands;cercles = grandes iles les separer
@@ -304,7 +307,7 @@ public class RegionLineCorner extends ProcessFile {
                     Color color = Colors.random();
                     for (Circle c : lc) {
 
-                        img4.setRGB((int) (c.x), (int) (c.y), color.getRGB());
+                        img4.setPixel((int) (c.x), (int) (c.y), color.getRGB());
                     }
                 }
                 File fileToWrite = new File(directory.getAbsolutePath()

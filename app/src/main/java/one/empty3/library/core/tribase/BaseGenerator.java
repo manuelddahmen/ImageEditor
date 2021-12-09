@@ -84,7 +84,8 @@ public abstract class BaseGenerator {
     }
 
     public void renew() {
-        image = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
+        image = BufferedImage.BufferedImage(x, y,
+Bitmap.Config.RGB565);
     }
 
     public void save() {

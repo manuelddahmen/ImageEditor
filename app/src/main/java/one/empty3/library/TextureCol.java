@@ -93,7 +93,7 @@ public class TextureCol extends ITexture {
      */
     public Color getMaillageTexturedColor(int numQuadX, int numQuadY, double x,
                                           double y) {
-        return new Color(color.getElem());
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(color.getElem());
     }
 
     public String toString() {

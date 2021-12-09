@@ -243,7 +243,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
             one.empty3.feature.PixM img3 = new PixM(pixM.getColumns(), pixM.getLines());
 
             list3.forEach(p3s -> {
-                Color r = new Color((float) 1.0, (float) r(), (float) 1.0);
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) 1.0, (float) r(), (float) 1.0);
                 if (p3s.size() >= 2) {
                     for (int j = 0; j < p3s.size() - 1; j++) {
                         Point3D p1 = p3s.get(j);
@@ -284,7 +284,8 @@ public class Lines7luckyLinesOutline extends ProcessFile {
             }
 
 
-            BufferedImage bLines = new BufferedImage(o.getColumns(), o.getLines(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
+Bitmap.Config.RGB565);
             Graphics g = bLines.getGraphics();
             for (LineSegment line : lines) {
                 g.setColor(Colors.random());

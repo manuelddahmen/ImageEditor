@@ -29,7 +29,7 @@ import javax.sound.sampled.AudioFormat;
 	    IVideoFrame videoFrame;
 	    while ((videoFrame = videoStream.nextFrame()) != null) {
 	   	    BufferedImage image = videoFrame.image();
-	   	    imgBuf. add(new ECBufferedImage(image) );
+	   	    imgBuf. add(new ECBufferedImage.BufferedImage(image) );
                     while(imgBuf.size()>4*/
 /*MAX_SIZE*//*
 )

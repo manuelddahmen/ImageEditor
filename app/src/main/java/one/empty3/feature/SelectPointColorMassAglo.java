@@ -69,7 +69,7 @@ public class SelectPointColorMassAglo extends FilterPixM {
     }
 
     public Color getTmpColor() {
-        return new Color((float) (tmpColor[0]), (float) (tmpColor[1]), (float) (tmpColor[2]));
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) (tmpColor[0]), (float) (tmpColor[1]), (float) (tmpColor[2]));
     }
 
     public void setTmpColor(Color tmpColor) {

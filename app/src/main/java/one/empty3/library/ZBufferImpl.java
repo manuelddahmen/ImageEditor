@@ -464,11 +464,11 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     public ECBufferedImage image() {
 
-        ECBufferedImage bi2 = new ECBufferedImage(la, ha, ECBufferedImage.TYPE_INT_RGB);
+        ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(la, ha, Bitmap.Config.RGB565);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
-                bi2.setRGB(i, j, elementCouleur);
+                bi2.setPixel(i, j, elementCouleur);
 
             }
         }
@@ -481,9 +481,10 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public ECBufferedImage image2() {
         //return image2();
 
-//        BufferedImage bi = new BufferedImage(la, ha, BufferedImage.TYPE_INT_RGB);
-//        bi.setRGB(0, 0, la, ha, getData(), 0, la);
-//        return new ECBufferedImage(bi);
+//        BufferedImage bi = BufferedImage.BufferedImage(la, ha,
+Bitmap.Config.RGB565);
+//        bi.setPixel(0, 0, la, ha, getData(), 0, la);
+//        return new ECBufferedImage.BufferedImage(bi);
         return image();
 
     }
@@ -946,7 +947,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     public void dessine(Point3D p, ITexture texture) {
-        ime.dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+        ime.dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
     }
 
     public Point3D clickAt(double x, double y) {
@@ -1409,7 +1410,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         }
 
         public void testDeep(Point3D p, Point3D n, int c) {
-            testDeep(p, n, new Color(c));
+            testDeep(p, n,  one.empty3.feature.app.replace.java.awt.Color.Color(c));
         }
 
         public boolean testDeep(Point3D p, ITexture texture, double u, double v, Representable representable) {
@@ -1432,7 +1433,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         }
 
         public void dessine(Point3D p, ITexture texture) {
-            dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+            dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
 
         }
 

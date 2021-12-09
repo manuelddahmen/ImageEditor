@@ -65,7 +65,7 @@ public class CouleurOutils {
                 res[i] = 255;
             }
         }
-        return new Color(res[0], res[1], res[2]);
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(res[0], res[1], res[2]);
     }
 
     public static String couleurID() {
@@ -74,7 +74,7 @@ public class CouleurOutils {
 
     public static Color couleurRatio(Color c1, Color c2, double r) {
 
-        return new Color(
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(
                 (float) (c1.getRed() * r + c2.getRed() * (1 - r)),
                 (float) (c1.getGreen() * r + c2.getGreen() * (1 - r)),
                 (float) (c1.getBlue() * r + c2.getBlue() * (1 - r))
@@ -91,7 +91,7 @@ public class CouleurOutils {
     }
 
     public Color randomColor() {
-        return new Color((float) Math.random(),
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) Math.random(),
                 (float) Math.random(),
                 (float) Math.random());
     }

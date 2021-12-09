@@ -128,8 +128,10 @@ public class Histogram {
         for (int i = 0; i < levels; i++) {
             try {
                 BufferedImage img = file;
-                BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-                BufferedImage img3 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+                BufferedImage img2 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
+                BufferedImage img3 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
                 Histogram histogram = new Histogram(new PixM(img), levels, min, radiusIncr, 0.1);
                 int finalI = i;
                 List<Circle> pointsOfInterest = histogram.getPointsOfInterest(0.1);
@@ -139,10 +141,10 @@ public class Histogram {
                         graphics.setColor(Color.WHITE);
                         graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
                         graphics = img2.getGraphics();
-                        Color color = new Color((float) circle.i, 0f, (float) (circle.i / circle.r));
+                        Color color =  one.empty3.feature.app.replace.java.awt.Color.Color((float) circle.i, 0f, (float) (circle.i / circle.r));
                         graphics.setColor(color);
                         graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
-                        img3.setRGB((int) (circle.x), (int) (circle.y), color.getRGB());
+                        img3.setPixel((int) (circle.x), (int) (circle.y), color.getRGB());
                     }
                 });
                 pointsOfInterest.sort(new Comparator<Circle>() {

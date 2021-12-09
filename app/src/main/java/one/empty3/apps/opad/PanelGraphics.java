@@ -137,7 +137,7 @@ public class PanelGraphics extends JDialog {
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(bundle.getString("PanelGraphics.title"));
-        setBackground(new Color(51, 0, 255));
+        setBackground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         setName("Form");
         setResizable(false);
         setAutoRequestFocus(false);
@@ -152,50 +152,50 @@ public class PanelGraphics extends JDialog {
 
         //---- jLabel1 ----
         jLabel1.setFont(new Font("Parchment", Font.PLAIN, 48));
-        jLabel1.setForeground(new Color(51, 0, 255));
+        jLabel1.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText(bundle.getString("PanelGraphics.jLabel1.text"));
         jLabel1.setName("jLabel1");
         jLabel1.setBackground(Color.white);
 
         //---- jLabel2 ----
-        jLabel2.setForeground(new Color(51, 0, 255));
+        jLabel2.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jLabel2.setLabelFor(jTextFieldNom);
         jLabel2.setText(bundle.getString("PanelGraphics.jLabel2.text"));
         jLabel2.setName("jLabel2");
 
         //---- jTextFieldNom ----
-        jTextFieldNom.setForeground(new Color(51, 0, 255));
+        jTextFieldNom.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jTextFieldNom.setText(bundle.getString("PanelGraphics.jTextFieldNom.text"));
         jTextFieldNom.setName("jTextFieldNom");
 
         //---- jLabel3 ----
-        jLabel3.setForeground(new Color(51, 0, 255));
+        jLabel3.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jLabel3.setLabelFor(jRadioButtonECGraph);
         jLabel3.setText(bundle.getString("PanelGraphics.jLabel3.text"));
         jLabel3.setName("jLabel3");
 
         //---- jRadioButtonECGraph ----
-        jRadioButtonECGraph.setForeground(new Color(51, 0, 255));
+        jRadioButtonECGraph.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jRadioButtonECGraph.setText(bundle.getString("PanelGraphics.jRadioButtonECGraph.text"));
         jRadioButtonECGraph.setName("jRadioButtonECGraph");
         jRadioButtonECGraph.addActionListener(e -> jRadioButtonECGraphActionPerformed(e));
 
         //---- jRadioButtonOGLGraph ----
-        jRadioButtonOGLGraph.setForeground(new Color(51, 0, 255));
+        jRadioButtonOGLGraph.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jRadioButtonOGLGraph.setSelected(true);
         jRadioButtonOGLGraph.setText(bundle.getString("PanelGraphics.jRadioButtonOGLGraph.text"));
         jRadioButtonOGLGraph.setName("jRadioButtonOGLGraph");
         jRadioButtonOGLGraph.addActionListener(e -> jRadioButtonOGLGraphActionPerformed(e));
 
         //---- jLabel4 ----
-        jLabel4.setForeground(new Color(51, 0, 255));
+        jLabel4.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jLabel4.setLabelFor(jComboBoxTerrain);
         jLabel4.setText(bundle.getString("PanelGraphics.jLabel4.text"));
         jLabel4.setName("jLabel4");
 
         //---- jComboBoxTerrain ----
-        jComboBoxTerrain.setForeground(new Color(51, 0, 255));
+        jComboBoxTerrain.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jComboBoxTerrain.setModel(new DefaultComboBoxModel<>(new String[] {
             "Plan",
             "Sinusoide",
@@ -208,7 +208,7 @@ public class PanelGraphics extends JDialog {
 
         //---- jButtonStart ----
         jButtonStart.setFont(new Font("Tahoma", Font.PLAIN, 48));
-        jButtonStart.setForeground(new Color(51, 0, 255));
+        jButtonStart.setForeground( one.empty3.feature.app.replace.java.awt.Color.Color(51, 0, 255));
         jButtonStart.setText(bundle.getString("PanelGraphics.jButtonStart.text"));
         jButtonStart.setName("jButton1");
         jButtonStart.addActionListener(this::jButton1ActionPerformed);

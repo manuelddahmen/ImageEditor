@@ -99,7 +99,7 @@ public class InterpreteTColor implements Interprete {
                 inf.setRepertoire(repertoire);
                 File f = (File) inf.interprete(text, pos);
 
-                ECBufferedImage bi = new ECBufferedImage(ImageIO.read(f));
+                ECBufferedImage bi = new ECBufferedImage.BufferedImage(ImageIO.read(f));
 
                 tc = new TextureImg(bi);
 

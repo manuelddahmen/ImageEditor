@@ -249,7 +249,7 @@ public class Lines3 extends ProcessFile {
 
 
             lists2.forEach(p3s -> {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 double xA;
                 double yA;
                 p3s.forEach(point3D -> {
@@ -263,7 +263,7 @@ public class Lines3 extends ProcessFile {
 
             one.empty3.feature.PixM img3 = new PixM(pixM.getColumns(), pixM.getLines());
             list3.forEach(p3s -> {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 double xA;
                 double yA;
                 /*p3s.forEach(point3D -> {
@@ -276,7 +276,7 @@ public class Lines3 extends ProcessFile {
             });
 
             list3.forEach(p3s -> {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 if (p3s.size() > 2) {
                     Point3D p1 = p3s.get(0);
                     Point3D p2 = p3s.get(p3s.size() - 1);
@@ -292,7 +292,7 @@ public class Lines3 extends ProcessFile {
 
             int[] i = new int[]{0};
             lists2.forEach(p3s -> {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 final Point3D[][] extremes = {new Point3D[2], new Point3D[2]};
                 final Double[] distMaxMinP1 = {2.5, 1000.0};
                 List<Point3D> pointsCurrent = new ArrayList<>();
@@ -334,7 +334,8 @@ public class Lines3 extends ProcessFile {
 
             });
 
-            BufferedImage bLines = new BufferedImage(o.getColumns(), o.getLines(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
+Bitmap.Config.RGB565);
             Graphics g = bLines.getGraphics();
             for (LineSegment line : lines) {
                 g.setColor(Colors.random());
@@ -345,7 +346,7 @@ public class Lines3 extends ProcessFile {
                         int x = (int) (double) pDraw.getX();
                         int y = (int) (double) pDraw.getY();
                         if (isInBound(pDraw))
-                            bLines.setRGB(x, y, line.texture().getColorAt(0, 0));
+                            bLines.setPixel(x, y, line.texture().getColorAt(0, 0));
                     }*/
 
                     Point3D pDraw1 = line.getOrigine().plus(
@@ -362,7 +363,8 @@ public class Lines3 extends ProcessFile {
                 }
             }
 
-//            BufferedImage linesImg2 = new BufferedImage(o.getColumns(), o.getLines(), BufferedImage.TYPE_INT_RGB);
+//            BufferedImage linesImg2 = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
+Bitmap.Config.RGB565);
 //
 //
 //            coefficients.forEach(doubles -> {

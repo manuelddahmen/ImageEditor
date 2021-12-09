@@ -87,7 +87,7 @@ public class InterpreteTexture implements Interprete {
                 pass = true;
 
                 try {
-                    tc = new TextureImg(new ECBufferedImage(ImageIO.read(f)));
+                    tc = new TextureImg(new ECBufferedImage.BufferedImage(ImageIO.read(f)));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

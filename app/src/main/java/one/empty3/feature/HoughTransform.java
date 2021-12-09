@@ -274,13 +274,14 @@ public class HoughTransform extends ProcessFile {
      */
     public BufferedImage getHoughArrayImage() {
         int max = getHighestValue();
-        BufferedImage image = new BufferedImage(maxTheta, doubleHeight, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = BufferedImage.BufferedImage(maxTheta, doubleHeight,
+Bitmap.Config.RGB565);
         for (int t = 0; t < maxTheta; t++) {
             for (int r = 0; r < doubleHeight; r++) {
                 double value = 255 * ((double) houghArray[t][r]) / max;
                 int v = 255 - (int) value;
-                int c = new Color(v, v, v).getRGB();
-                image.setRGB(t, r, c);
+                int c =  one.empty3.feature.app.replace.java.awt.Color.Color(v, v, v).getRGB();
+                image.setPixel(t, r, c);
             }
         }
         return image;

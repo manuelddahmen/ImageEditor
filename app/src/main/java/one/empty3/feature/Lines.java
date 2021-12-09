@@ -198,13 +198,13 @@ public class Lines extends ProcessFile {
             //lists2 = relierPointsList();
 
             for (List<Point3D> list : lists) {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 list.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.getRed() / 255., r.getGreen() / 255., r.getBlue() / 255.));
 
             }
 
             lists2.forEach(p3s -> {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.getRed() / 255., r.getGreen() / 255., r.getBlue() / 255.));
             });
             ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", out);

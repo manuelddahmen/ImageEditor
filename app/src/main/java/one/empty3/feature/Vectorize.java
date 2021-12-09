@@ -103,7 +103,7 @@ public class Vectorize extends ProcessFile {
 
             System.out.println("Number of blocks = " + lists.size());
             for (ArrayList<Point3D> p3s : lists) {
-                Color r = new Color((float) r(), (float) r(), (float) r());
+                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
                 if (p3s != null && p3s.size() > 0)
                     p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.getRed() / 255., r.getGreen() / 255., r.getBlue() / 255.));
             }

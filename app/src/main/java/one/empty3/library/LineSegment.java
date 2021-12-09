@@ -188,7 +188,7 @@ public class LineSegment extends ParametricCurve implements CurveElem {
 
     @Override
     public String toString() {
-        Color c = new Color(texture.getColorAt(0.5, 0.5));
+        Color c =  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5));
         return "Droite (\n\t" + origine.toString() + "\n\t"
                 + extremite.toString() + "\n\t( " + c.getRed() + " , "
                 + c.getGreen() + " , " + c.getBlue() + " )\n)\n";

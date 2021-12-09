@@ -73,7 +73,7 @@ public class JPanelPPMPreview extends JPanel
         // Read String
         // Complete with white, transparent or black
 
-        ECBufferedImage ecBufferedImage = new ECBufferedImage(ppmFileInputStream);
+        ECBufferedImage ecBufferedImage = new ECBufferedImage.BufferedImage(ppmFileInputStream);
 
     }
 }

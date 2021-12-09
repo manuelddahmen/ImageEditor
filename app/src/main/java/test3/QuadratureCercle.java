@@ -59,7 +59,7 @@ public class QuadratureCercle extends TestObjetSub {
         textures = new ITexture[pointCount];
         textureDefault = null;
       //try {
-            textureDefault = new ColorTexture(Color.valueOf(Color.GREEN)); //new TextureImg(new ECBufferedImage(ImageIO.read(new File("samples/img/herbe.jpg"))));
+            textureDefault = new ColorTexture(Color.valueOf(Color.GREEN)); //new TextureImg(new ECBufferedImage.BufferedImage(ImageIO.read(new File("samples/img/herbe.jpg"))));
         //} catch (IOException e) {
          //   e.printStackTrace();
      //}

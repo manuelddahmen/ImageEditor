@@ -42,11 +42,12 @@ public class ThreadEffectDisplay extends Thread {
         webcam.open();
         webcam.setImageTransformer(bufferedImage -> {
 
-            BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
-                    BufferedImage.TYPE_INT_RGB);
+            BufferedImage bufferedImage1 = BufferedImage.BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+
+Bitmap.Config.RGB565);
             for (int i = 0; i < bufferedImage.getWidth(); i++)
                 for (int j = 0; j < bufferedImage.getHeight(); j++) {
-                    bufferedImage1.setRGB(bufferedImage.getWidth() - i - 1, j,
+                    bufferedImage1.setPixel(bufferedImage.getWidth() - i - 1, j,
                             bufferedImage.getRGB(i, j));
                 }
             return bufferedImage1;
@@ -119,11 +120,12 @@ public class ThreadEffectDisplay extends Thread {
             @Override
             public BufferedImage transform(BufferedImage bufferedImage) {
 
-                BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
-                        BufferedImage.TYPE_INT_RGB);
+                BufferedImage bufferedImage1 = BufferedImage.BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+
+Bitmap.Config.RGB565);
                 for (int i = 0; i < bufferedImage.getWidth(); i++)
                     for (int j = 0; j < bufferedImage.getHeight(); j++) {
-                        bufferedImage1.setRGB(bufferedImage.getWidth() - i - 1, j,
+                        bufferedImage1.setPixel(bufferedImage.getWidth() - i - 1, j,
                                 bufferedImage.getRGB(i, j));
                     }
                 return bufferedImage1;

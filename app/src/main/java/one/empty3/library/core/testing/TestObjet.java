@@ -685,7 +685,7 @@ public abstract class TestObjet implements Test, Runnable {
             RenderedImage i = ImageIO.read(is);
             BufferedImage bi = (BufferedImage) i;
 
-            ECBufferedImage eci = new ECBufferedImage(bi);
+            ECBufferedImage eci = new ECBufferedImage.BufferedImage(bi);
             biic.setImage(eci);
         } catch (IOException e) {
             e.printStackTrace();
@@ -712,7 +712,7 @@ public abstract class TestObjet implements Test, Runnable {
             RenderedImage i = ImageIO.read(is);
             BufferedImage bi = (BufferedImage) i;
 
-            ECBufferedImage eci = new ECBufferedImage(bi);
+            ECBufferedImage eci = new ECBufferedImage.BufferedImage(bi);
             biic.setImage(eci);
         } catch (IOException e) {
             // TODO Auto-generated catch block

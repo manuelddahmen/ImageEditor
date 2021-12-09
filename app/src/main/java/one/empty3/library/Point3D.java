@@ -459,7 +459,7 @@ public class Point3D extends Representable {
     @Override
     public void drawStructureDrawFast(ZBuffer z) {
 
-        z.testDeep(this, new Color(CFAST.getColorAt(0.5, 0.5)));
+        z.testDeep(this,  one.empty3.feature.app.replace.java.awt.Color.Color(CFAST.getColorAt(0.5, 0.5)));
 
     }
 
@@ -611,7 +611,7 @@ public class Point3D extends Representable {
     }*/
 
     public Color toColor() {
-        return new Color((float)(double)(get(0)), (float)(double)(get(1)), (float)(double)(get(2)));
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((float)(double)(get(0)), (float)(double)(get(1)), (float)(double)(get(2)));
     }
     public static Point3D fromColor(Color color) {
         float[] colorComponents = color.getColorComponents(new float[3]);

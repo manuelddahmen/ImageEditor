@@ -1,6 +1,8 @@
 package one.empty3.library.core.lighting;
 import java.util.*;
-import java.awt.Color;
+
+import one.empty3.feature.app.replace.java.awt.Color;
+
 public class ColorDist {
         public Color color;
         public double dist;

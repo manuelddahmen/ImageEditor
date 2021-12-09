@@ -103,7 +103,7 @@ public class M3 {
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 int rgb = image.getRGB((int) (1.0 * i / columns * image.getWidth()), (int) (1.0 * j / lines * image.getHeight()));
-                colorComponents = new Color(rgb).getColorComponents(colorComponents);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int com = 0; com < getCompCount(); com++) {
@@ -124,7 +124,7 @@ public class M3 {
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 int rgb = image.getRGB(i, j);
-                colorComponents = new Color(rgb).getColorComponents(colorComponents);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int com = 0; com < getCompCount(); com++) {

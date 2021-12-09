@@ -171,8 +171,10 @@ public class Histogram2 extends ProcessFile {
 
 
             BufferedImage img = file;
-            BufferedImage img2 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-            BufferedImage img3 = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage img2 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
+            BufferedImage img3 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB565);
 
 
             List<Circle> pointsOfInterest = getPointsOfInterest(4.0);
@@ -184,11 +186,11 @@ public class Histogram2 extends ProcessFile {
                         graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
                         graphics = img2.getGraphics();
                         */
-                    Color color = new Color((float) (circle.i < 1.0 ? (circle.i) : 1f), 0f, (float) (circle.i / circle.r < 1.0
+                    Color color =  one.empty3.feature.app.replace.java.awt.Color.Color((float) (circle.i < 1.0 ? (circle.i) : 1f), 0f, (float) (circle.i / circle.r < 1.0
                             ? circle.i / circle.r : 1.0));
                     //graphics.setColor(color);
                     //graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
-                    img3.setRGB((int) (circle.x), (int) (circle.y), color.getRGB());
+                    img3.setPixel((int) (circle.x), (int) (circle.y), color.getRGB());
                 }
             });
             // grands;cercles = grandes iles les separer

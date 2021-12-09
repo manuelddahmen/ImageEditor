@@ -167,7 +167,8 @@ public class Lines6 extends ProcessFile {
 
             }
             // d'après pcount x, y et curve xy supprimer les courbes en trop.
-            BufferedImage bLines = new BufferedImage(o.getColumns(), o.getLines(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
+Bitmap.Config.RGB565);
             Graphics g = bLines.getGraphics();
 
             g.setColor(Color.RED);
@@ -203,7 +204,7 @@ public class Lines6 extends ProcessFile {
 
             for (List<Point3D> points : list3) {
                 if (size(points) > finalLongueur * 2.0 + 2) {
-                    g.setColor(new Color(0, (int) (((double) (i)) * 255 / list3.size()), 0));
+                    g.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(0, (int) (((double) (i)) * 255 / list3.size()), 0));
                     Point3D p1 = points.get(0);
                     Point3D p2 = points.get(points.size() - 1);
                     if (p1 != p2) {

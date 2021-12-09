@@ -123,13 +123,13 @@ public class LumiereScene {/*
      c[comp] = 0;
 
      }
-     return new Color((int)c[0], (int)c[1], (int)c[2]);
+     return  one.empty3.feature.app.replace.java.awt.Color.Color((int)c[0], (int)c[1], (int)c[2]);
      }
      */
 
 
     public ITexture calculer(ArrayList<Lumiere> ls, Point3D p) {
-        Color synthese = new Color(p.texture().getColorAt(0.5, 0.5));
+        Color synthese =  one.empty3.feature.app.replace.java.awt.Color.Color(p.texture().getColorAt(0.5, 0.5));
 
         /* Calcul */
         if (ls.size() > 0) {
@@ -140,7 +140,7 @@ public class LumiereScene {/*
 
             float[] f = synthese(ratio, colors);
 
-            synthese = new Color(f[0], f[1], f[2]);
+            synthese =  one.empty3.feature.app.replace.java.awt.Color.Color(f[0], f[1], f[2]);
         }
 
         return new TextureCol(synthese);

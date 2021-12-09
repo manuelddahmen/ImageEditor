@@ -63,7 +63,7 @@ public class Ciel {
             URL resource = getClass().getResource("one.empty3.library/apps/darz/marssurface.jpg");
             System.out.println(resource.toExternalForm());
             BufferedImage read = ImageIO.read(resource);
-            ECBufferedImage ecBufferedImage = new ECBufferedImage(read);
+            ECBufferedImage ecBufferedImage = new ECBufferedImage.BufferedImage(read);
             bleu.texture(new ImageTexture(ecBufferedImage));
 
         } catch (Exception  ex) {

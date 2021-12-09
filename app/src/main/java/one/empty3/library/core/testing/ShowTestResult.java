@@ -175,7 +175,7 @@ public final class ShowTestResult extends javax.swing.JFrame implements Runnable
 
     public void dessine() {
         if (biic != null && biic.getImage() != null) {
-            image = new ECBufferedImage(biic.getImage());
+            image = new ECBufferedImage.BufferedImage(biic.getImage());
             if (image != null) {
                 if (jPanel1 != null) {
                     Graphics g = jPanel1.getGraphics();
@@ -201,7 +201,7 @@ public final class ShowTestResult extends javax.swing.JFrame implements Runnable
     public void exceptionReception(Exception t) {
         this.throwable = t;
         try {
-            image = new ECBufferedImage(
+            image = new ECBufferedImage.BufferedImage(
                     ImageIO.read(
                             getClass().getResourceAsStream("one/core/testing/skull-cross-bones-evil.ico")
                     )
@@ -589,7 +589,7 @@ public final class ShowTestResult extends javax.swing.JFrame implements Runnable
     }
 
     public void loadImage(BufferedImage ri) {
-        this.image = new ECBufferedImage(ri);
+        this.image = new ECBufferedImage.BufferedImage(ri);
         if (image != null) {
             setSize(new Dimension(image.getWidth(), image.getHeight()));
         }

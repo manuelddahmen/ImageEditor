@@ -60,11 +60,11 @@ public class CourbeDeImage {
             int y0 = -1;
             int y1 = -1;
             for (int j = 0; j < image.getHeight(); j++) {
-                if (!new Color(image.getRGB(i, j)).equals(Color.white)) {
+                if (! one.empty3.feature.app.replace.java.awt.Color.Color(image.getRGB(i, j)).equals(Color.white)) {
                     y0 = y1;
                     y1 = j;
                     if (y0 == -1 || (y1 > y0 + 1)) {
-                        points.put(new Point2D(i, j), new Color(image.getRGB(i, j)));
+                        points.put(new Point2D(i, j),  one.empty3.feature.app.replace.java.awt.Color.Color(image.getRGB(i, j)));
                         break;
                     }
                 }

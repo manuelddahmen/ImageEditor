@@ -37,8 +37,9 @@
  */
 package one.empty3.library.core.lighting;
 
-import java.awt.*;
 import java.util.Random;
+
+import one.empty3.feature.app.replace.java.awt.Color;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
@@ -58,11 +59,12 @@ public class Colors {
         }
     }
     */
-    public static Color TRANSPARENT = new Color(1f, 0f, 0f, .5f);
+    public static Color TRANSPARENT
+            = (Color) Color.Color(1f, 0f, 0f, .5f);
     private static final Random random = new Random();
 
     public static Color random() {
-        return new Color(
+        return (Color) Color.Color(
                 (float) random.nextDouble(),
                 (float) random.nextDouble(),
                 (float) random.nextDouble()
@@ -92,7 +94,7 @@ public class Colors {
         for (int i = 0; i < c.length; i++) {
             float proximityTerm = ((float) d[i]);
             sum += proximityTerm;
-            c[i].getRGBComponents(f);
+            c[i].getComponents(f);
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proximityTerm * norm);
         }
@@ -124,7 +126,7 @@ public class Colors {
             float proxymityTerm = (float) Math.exp(-((float) d[i]) / (1f + (float) d[i]));
 
             sum += proxymityTerm;
-            c[i].getRGBComponents(f);
+            c[i].getComponents(f);
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proxymityTerm * norm);
         }
@@ -134,12 +136,12 @@ public class Colors {
 
     /***
      * True colors results
-     * @param norm 1.0
      * @param cd dist sorted array
+     * @param norm 1.0
      * @param n number of effective computed values from array index 0
      * @return interpoled color.
      */
-    public static Color proxymity(ColorDist[] cd, double norm, int n) {
+    public static android.graphics.Color proxymity(ColorDist[] cd, double norm, int n) {
         int compNo = 4;
         if (cd == null)
             throw new NullPointerException("index not equals or null");
@@ -158,7 +160,7 @@ public class Colors {
             float proxymityTerm = (float) Math.exp(-(float) (1f * cd[i].dist / cd[cd.length - 1].dist));
 
             sum += proxymityTerm;
-            cd[i].color.getRGBComponents(f);
+            cd[i].color.getComponents(f);
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proxymityTerm * norm / n);
         }
@@ -167,7 +169,7 @@ public class Colors {
             if (Float.isNaN(r[i]) || Float.isInfinite(r[i]))
                 r[i] = 1f;
         }
-        return new Color(r[0], r[1], r[2]);
+        return  one.empty3.feature.app.replace.java.awt.Color.valueOf(r[0], r[1], r[2]);
     }
 
 
@@ -195,7 +197,7 @@ public class Colors {
 
             // besoin de distMin pour faire partiviper les autres?
             float proximityTerm = (float) (cd[i].dist);
-            cd[i].color.getRGBComponents(f);
+            cd[i].color.getComponents(f);
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proximityTerm * norm);
         }
@@ -208,7 +210,7 @@ public class Colors {
             if (Float.isNaN(r[i]) || Float.isInfinite(r[i]))
                 r[i] = 1f;
         }
-        return new Color(r[0], r[1], r[2]);
+        return (Color) Color.valueOf(r[0], r[1], r[2]);
     }
 
 }

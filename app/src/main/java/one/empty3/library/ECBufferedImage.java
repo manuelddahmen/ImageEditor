@@ -51,16 +51,16 @@ public class ECBufferedImage extends BufferedImage {
     private int pixelCountMax = 5;
     private int squarepixelCountMax = 25;
 
-    public ECBufferedImage(BufferedImage read) {
+    public ECBufferedImage.BufferedImage(BufferedImage read) {
         this(read.getWidth(), read.getHeight(), read.getType());
         setData(read.getData());
     }
 
-    public ECBufferedImage(int width, int height, int imageType) {
+    public ECBufferedImage.BufferedImage(int width, int height, int imageType) {
         super(width, height, imageType);
     }
 
-    public ECBufferedImage(PPMFileInputStream ppmFileInputStream) {
+    public ECBufferedImage.BufferedImage(PPMFileInputStream ppmFileInputStream) {
 
         super(0, 0, 0);
 
@@ -71,11 +71,11 @@ public class ECBufferedImage extends BufferedImage {
     }
 
     public static ECBufferedImage getFromFile(File url) throws IOException {
-        return new ECBufferedImage(ImageIO.read(url));
+        return new ECBufferedImage.BufferedImage(ImageIO.read(url));
     }
 
     public static ECBufferedImage getFromPackage(Class c, String resource) throws IOException {
-        return new ECBufferedImage(ImageIO.read(c.getResourceAsStream(resource)));
+        return new ECBufferedImage.BufferedImage(ImageIO.read(c.getResourceAsStream(resource)));
     }
 
     public static ECBufferedImage getFromURL(URL url) {
@@ -85,7 +85,7 @@ public class ECBufferedImage extends BufferedImage {
 
             if (o instanceof BufferedImage) {
                 BufferedImage bi = (BufferedImage) o;
-                ecbi = new ECBufferedImage(bi);
+                ecbi = new ECBufferedImage.BufferedImage(bi);
                 ecbi.setData(bi.getData());
 
             }

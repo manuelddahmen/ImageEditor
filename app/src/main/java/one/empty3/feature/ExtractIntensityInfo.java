@@ -39,7 +39,7 @@ public class ExtractIntensityInfo extends
 
         one.empty3.feature.PixM pixMOriginal = pix;
 
-        final BufferedImage[] img3 = new BufferedImage[]{pix.getImage()};
+        final BufferedImage[] img3 = BufferedImage[]{pix.getImage()};
 
 
         one.empty3.feature.GradientFilter gradientMask = new GradientFilter(pixMOriginal.columns, pixMOriginal.lines);

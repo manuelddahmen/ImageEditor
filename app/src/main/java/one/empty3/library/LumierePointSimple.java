@@ -71,7 +71,7 @@ public class LumierePointSimple extends LumierePoint {
     }
 
     private int mult(float d, int base1) {
-        new Color(base1).getColorComponents(f);
+         one.empty3.feature.app.replace.java.awt.Color.Color(base1).getColorComponents(f);
         for (int i = 0; i < 3; i++) {
             f[i] = (float) (f[i] * comp[i] * intensite);
             if (f[i] > 1f) {
@@ -81,7 +81,7 @@ public class LumierePointSimple extends LumierePoint {
                 f[i] = 0f;
             }
         }
-        return new Color(f[0], f[1], f[2]).getRGB();
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(f[0], f[1], f[2]).getRGB();
     }
 
 }

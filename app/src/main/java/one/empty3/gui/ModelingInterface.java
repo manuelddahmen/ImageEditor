@@ -92,7 +92,8 @@ public class ModelingInterface extends JFrame {
 
     public void init() {
 
-        image = new BufferedImage(RES_X, RES_Y, BufferedImage.TYPE_INT_RGB);
+        image = BufferedImage.BufferedImage(RES_X, RES_Y,
+Bitmap.Config.RGB565);
         tubulaire4 = new Tubulaire4map();
         tubulaire4.declareProperties();
         tubulaire4.getSoulCurve().setElem(new CourbeParametriquePolynomialeBezier());
@@ -114,7 +115,7 @@ public class ModelingInterface extends JFrame {
         camera = new Camera(Point3D.Y.mult(80.), Point3D.O0, Point3D.Z);
 
         Graphics g = image.getGraphics();
-        Color color = new Color(0.5f, 0.0f, 0.0f);
+        Color color =  one.empty3.feature.app.replace.java.awt.Color.Color(0.5f, 0.0f, 0.0f);
         g.setColor(color);
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
 
@@ -227,7 +228,7 @@ public class ModelingInterface extends JFrame {
                             doubles[comp] = doubles[comp]+l*exp;
                         }
                         int anInt = Lumiere.getInt(doubles);
-                        image.setRGB(ix, iy, anInt);
+                        image.setPixel(ix, iy, anInt);
                     }
                 }
                 System.out.printf("Action: Gradient drawn\n");

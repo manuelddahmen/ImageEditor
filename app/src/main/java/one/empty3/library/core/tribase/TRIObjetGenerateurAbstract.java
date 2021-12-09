@@ -190,7 +190,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             Point3D ret = sommet.get(0).plus(
                     sommet.get(1).moins(sommet.get(0)).mult(ratioX)).plus(
                     sommet.get(2).moins(sommet.get(1)).mult(ratioY));
-            if (texture() == null) texture = new TextureCol(new Color(255, 128, 0));
+            if (texture() == null) texture = new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(255, 128, 0));
             ret.texture(new TextureCol(texture.getColorAt(
                     (numX+(numX + ratioX) / maxX.data0d), (numY+(numY + ratioY) / maxY.data0d))));
 
@@ -200,7 +200,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             return ret;
         } else {
             List<Point3D> sommet = tris[1].getSommet().getData1d();
-            if (texture() == null) texture = new TextureCol(new Color(255, 128, 0));
+            if (texture() == null) texture = new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(255, 128, 0));
             Point3D ret = sommet.get(1).plus(
                     sommet.get(0).moins(sommet.get(1)).mult(ratioY)).plus(
                     sommet.get(2).moins(sommet.get(0)).mult(ratioX));

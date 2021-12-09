@@ -109,7 +109,7 @@ public class InterpreteSphere implements Interprete {
         TRISphere sphere = new TRISphere(centre, pos);
         try {
             sphere.texture(
-                    new TextureImg(new ECBufferedImage(ImageIO.read(file))));
+                    new TextureImg(new ECBufferedImage.BufferedImage(ImageIO.read(file))));
 
             return sphere;
         } catch (IOException ex) {

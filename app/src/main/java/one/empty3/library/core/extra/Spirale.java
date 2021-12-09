@@ -59,7 +59,7 @@ public class Spirale implements ISpirale {
          * Tour.IColorFunction() {
          * 
          * @Override public Color getColor(double axeCoordinate, double theta) {
-         * return new Color(255, 0, 0); } }, new Tour.IPoint3DFunction() {
+         * return  one.empty3.feature.app.replace.java.awt.Color.Color(255, 0, 0); } }, new Tour.IPoint3DFunction() {
          * 
          * @Override public double getDiameter(double axeCoordinate, double
          * theta) {

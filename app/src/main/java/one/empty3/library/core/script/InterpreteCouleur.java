@@ -79,7 +79,7 @@ public class InterpreteCouleur implements Interprete {
         ArrayList<Object> os = ib.read(text, pos);
         this.pos = ib.getPosition();
 
-        return new Color((Integer) os.get(3), (Integer) os.get(7),
+        return  one.empty3.feature.app.replace.java.awt.Color.Color((Integer) os.get(3), (Integer) os.get(7),
                 (Integer) os.get(11));
     }
 

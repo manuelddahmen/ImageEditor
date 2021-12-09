@@ -78,7 +78,7 @@ public class Player {
         playerId = Integer.parseInt(propertiesPlayer.getProperty("playerId"));
 
         this.name = name;
-        this.color = new Color(Float.parseFloat(color[0]),
+        this.color =  one.empty3.feature.app.replace.java.awt.Color.Color(Float.parseFloat(color[0]),
                 Float.parseFloat(color[1]),
                 Float.parseFloat(color[2]));
     }

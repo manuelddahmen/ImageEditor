@@ -183,7 +183,7 @@ public class EyeBallRoll extends JPanel {
     private void draw2(Point3D p3_current) {
         Graphics graphics = getGraphics();
         if (p3_current.texture() != null) {
-            graphics.setColor(new Color(p3_current.texture().getColorAt(0.5, 0.5)));
+            graphics.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(p3_current.texture().getColorAt(0.5, 0.5)));
             graphics.setColor(Color.BLACK);
         } else {
             graphics.setColor(Color.BLACK);
@@ -195,7 +195,7 @@ public class EyeBallRoll extends JPanel {
         if (p3_current != null) {
             Graphics graphics = getGraphics();
             if (p3_current.texture() != null) {
-                graphics.setColor(new Color(p3_current.texture().getColorAt(0.5, 0.5)));
+                graphics.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(p3_current.texture().getColorAt(0.5, 0.5)));
             } else {
                 graphics.setColor(Color.BLACK);
             }

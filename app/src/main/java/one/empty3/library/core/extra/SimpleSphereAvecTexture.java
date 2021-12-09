@@ -105,7 +105,7 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
                 pCur[2] = CoordPoint(a, b + incrLong);
                 pCur[3] = CoordPoint(a + incrLat, b + incrLong);
                 try {
-                    Color color = new Color(img.getRGB(
+                    Color color =  one.empty3.feature.app.replace.java.awt.Color.Color(img.getRGB(
                             (int) ((a + Math.PI) / Math.PI * img.getHeight()),
                             (int) ((b) / 2 / Math.PI * img.getWidth())));
                     t.add(new TRI(pCur[0], pCur[1], pCur[3], color));

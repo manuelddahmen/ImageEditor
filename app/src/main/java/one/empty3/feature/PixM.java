@@ -31,7 +31,7 @@ public class PixM extends M {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getRGB(i, j);
-                colorComponents = new Color(rgb).getColorComponents(colorComponents);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -78,7 +78,7 @@ public class PixM extends M {
 
                         , (int) (1.0 * j / lines2 * image.getHeight()));
                 float[] colorComponents = new float[pixM.getCompCount()];
-                colorComponents = new Color(rgb).getColorComponents(colorComponents);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
                 for (int com = 0; com < pixM.getCompCount(); com++) {
                     pixM.setCompNo(com);
                     pixM.set(i, j, colorComponents[com]);
@@ -157,8 +157,9 @@ public class PixM extends M {
 
         float[] f = new float[getCompCount()];
 
-        BufferedImage image = new BufferedImage(columns,
-                lines, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = BufferedImage.BufferedImage(columns,
+                lines,
+Bitmap.Config.RGB565);
 
 
         float[] rgba = new float[getCompCount()];
@@ -172,7 +173,7 @@ public class PixM extends M {
 
                     rgba[comp] = value;
                 }
-                image.setRGB(i, j, new Color(rgba[0], rgba[1], rgba[2]).getRGB());
+                image.setPixel(i, j,  one.empty3.feature.app.replace.java.awt.Color.Color(rgba[0], rgba[1], rgba[2]).getRGB());
             }
         }
         return image;
@@ -185,7 +186,7 @@ public class PixM extends M {
 
         float[] rgba = new float[getCompCount()];
         for (double t = 0; t < 1.0; t += INCR_T) {
-            rgba = new Color(curve.texture().getColorAt(t, 0.)).getColorComponents(rgba);
+            rgba =  one.empty3.feature.app.replace.java.awt.Color.Color(curve.texture().getColorAt(t, 0.)).getColorComponents(rgba);
             Point3D p = curve.calculerPoint3D(t);
             Point3D p1 = curve.calculerPoint3D(t + INCR_T);
             for (double t1 = t; t1 < t + INCR_T; t1 += 1 / Point3D.distance(p, p1)) {

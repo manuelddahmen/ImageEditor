@@ -53,7 +53,7 @@ public class Plasma {
     }
 
     public static Color color(double x, double y, double t) {
-        return new Color(
+        return  one.empty3.feature.app.replace.java.awt.Color.Color(
                 (float)((Math.cos(Math.PI * f(x,y,t) + 0.5 + t*t_factor)+1)/2),
                 (float) ((Math.cos(Math.PI * f(x, y, t) + 1.0 + t * t_factor + Math.PI / 2) + 1) / 2),
                 (float) ((Math.cos(Math.PI * f(x, y, t) + 1.5 + t * t_factor + Math.PI) + 1) / 2)

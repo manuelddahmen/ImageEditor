@@ -9,17 +9,29 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 public class ImageIO {
-    public static one.empty3.feature.app.replace.one.empty3.feature.app.replace.java.awt.image.BufferedImage read(File file) {
+    public static one.empty3.feature.app.replace.java.awt.image.BufferedImage read(File file) {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
-            one.empty3.feature.app.replace.one.empty3.feature.app.replace.java.awt.image.BufferedImage bitmap2 =  one.empty3.feature.app.replace.javax.imageio.ImageIO.read(fileInputStream);
+            one.empty3.feature.app.replace.java.awt.image.BufferedImage bitmap2 =  one.empty3.feature.app.replace.javax.imageio.ImageIO.read(fileInputStream);
             fileInputStream.close();
             return bitmap2;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static BufferedImage read(FileInputStream fileInputStream) {
+        one.empty3.feature.app.replace.java.awt.image.BufferedImage bitmap2 =  one.empty3.feature.app.replace.javax.imageio.ImageIO.read(fileInputStream);
+        try {
+            fileInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap2;
     }
 
     public static boolean write(BufferedImage imageOut, String jpg, File out) throws IOException {
