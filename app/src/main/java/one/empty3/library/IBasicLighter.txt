@@ -1,0 +1,9 @@
+package be.ibiiztera.md.pmatrix.pushmatrix;
+
+import java.awt.Color;
+
+public class IBasicLighter
+{
+	public Color calculerLumierePoint(Point3D point, Color couleur);
+	
+}

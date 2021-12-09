@@ -1,0 +1,43 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE compute [
+
+ <!ELEMENT vec (double | vec | function)*>
+
+ <! ATTLIST vec (length) 
+
+ <!ELEMENT double (#CDATA) >
+
+ <!ELEMENT function (name, args, def)>
+
+ <!ELEMENT name (#CDATA)>
+
+ <!ELEMENT args (arg)*>
+
+ <!ELEMENT arg (name, class) >
+
+ <!ELEMENT def (instructions| return| errorcase) >
+
+<!ELEMENT class (name) >
+
+<! ELEMENT instruction (methodinvoke|construction) >
+<! ELEMENT construction (refobject class) 
+<! ELEMENT methodinvoke(objectinstance|methodname|parameters) >
+<! ELEMENT parameters (parameter) *>
+
+<! ELEMENT objectinstance 
+<! ELEMENT methodname #CDATA
+<! ELEMENT parameter (methodinvoke|scalar|memberdata)*>
+<! ELEMENT scalar #CDATA
+<! ELEMENT memberdata (objectinstance|membername) >
+<! ELEMENT membername #CDATA
+<! ELEMENT instructions (conditions|instructions|instruction)* >
+<! ELEMENT program (application ) *
+<! ELEMENT application (instruction) 
+<! ELEMENT tensor (dimspace lengths tensorelements*)
+<! ELEMENT dimspace parameter >
+<! ELEMENT lengths parameter >
+<! ELEMENT dim parameter >
+<! ELEMENT tensorelements parameters >
+]>

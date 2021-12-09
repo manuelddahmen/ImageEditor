@@ -1,0 +1,11 @@
+package one.empty3.library.shader ;
+
+
+import java.util.*;
+public class VecNvec8 {
+    private List<Vec> vecN;
+    public void add(Vec vec) {
+       if(vec.getDims()==8) 
+           vecN.add(vec);
+    } 
+} 

@@ -1,0 +1,114 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.bundlePackage": "info.emptycanvas.apps.darz"
+	"i18n.bundleName": "Bundle"
+	"i18n.autoExternalize": true
+	"i18n.keyPrefix": "PanelGraphics"
+	contentType: "form/swing"
+	root: new FormRoot {
+		"$setComponentNames": true
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp jLabel1::l:::x, seq {space :::p, par l {par t:l::p {comp jLabel3::::197:x, comp jLabel2:::::x}, comp jLabel4::l:p:197:p}, space u:::p, par l {comp jTextFieldNom:::::x, seq t {par t {seq {comp jRadioButtonECGraph::::275:x, space s:::p, comp jRadioButtonOGLGraph:::p:154:p}, comp jComboBoxTerrain:::::x}, space :::p}}}, seq l {space :p:47:p, comp jButtonStart:::p:600:p, space :0:21:x}}"
+			"$verticalGroup": "par l {seq l {comp jLabel1:::p:76:p, space :::p, par l:::p {comp jLabel2::::51:x, comp jTextFieldNom:::::x}, space s:::p, par l {seq l {comp jLabel3:::p:33:p, space ::25:x}, seq {par l {comp jRadioButtonECGraph:::::x, comp jRadioButtonOGLGraph:::::x}, space :p:4:p}}, par l {comp jComboBoxTerrain::::45:x, comp jLabel4:::::x}, space :::p, comp jButtonStart:::p:107:p, space :::p}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 2
+			"title": new FormMessage( null, "PanelGraphics.title" )
+			"background": new java.awt.Color( 51, 0, 255, 255 )
+			"name": "Form"
+			"resizable": false
+			"$locationPolicy": 1
+			"$sizePolicy": 1
+			"autoRequestFocus": false
+			"foreground": sfield java.awt.Color lightGray
+			auxiliary() {
+				"JavaCodeGenerator.customCreate": true
+			}
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "formWindowClosed", true ) )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel1"
+				"font": new java.awt.Font( "Parchment", 0, 48 )
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"horizontalAlignment": 0
+				"text": new FormMessage( null, "PanelGraphics.jLabel1.text" )
+				"name": "jLabel1"
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel2"
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"labelFor": new FormReference( "jTextFieldNom" )
+				"text": new FormMessage( null, "PanelGraphics.jLabel2.text" )
+				"name": "jLabel2"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "jTextFieldNom"
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"text": new FormMessage( null, "PanelGraphics.jTextFieldNom.text" )
+				"name": "jTextFieldNom"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel3"
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"labelFor": new FormReference( "jRadioButtonECGraph" )
+				"text": new FormMessage( null, "PanelGraphics.jLabel3.text" )
+				"name": "jLabel3"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "jRadioButtonECGraph"
+				"$buttonGroup": new FormReference( "buttonGroupGraphics" )
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"text": new FormMessage( null, "PanelGraphics.jRadioButtonECGraph.text" )
+				"name": "jRadioButtonECGraph"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jRadioButtonECGraphActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "jRadioButtonOGLGraph"
+				"$buttonGroup": new FormReference( "buttonGroupGraphics" )
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"selected": true
+				"text": new FormMessage( null, "PanelGraphics.jRadioButtonOGLGraph.text" )
+				"name": "jRadioButtonOGLGraph"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jRadioButtonOGLGraphActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel4"
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"labelFor": new FormReference( "jComboBoxTerrain" )
+				"text": new FormMessage( null, "PanelGraphics.jLabel4.text" )
+				"name": "jLabel4"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "jComboBoxTerrain"
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Plan"
+					addElement( "Plan" )
+					addElement( "Sinusoide" )
+					addElement( "Sinusoide Mouvante" )
+					addElement( "Sphere" )
+					addElement( "Tube" )
+				}
+				"toolTipText": new FormMessage( null, "PanelGraphics.jComboBoxTerrain.toolTipText" )
+				"name": "jComboBoxTerrain"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButtonStart"
+				"font": new java.awt.Font( "Tahoma", 0, 48 )
+				"foreground": new java.awt.Color( 51, 0, 255, 255 )
+				"text": new FormMessage( null, "PanelGraphics.jButtonStart.text" )
+				"name": "jButton1"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton1ActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 670, 405 )
+			"location": new java.awt.Point( 0, 35 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroupGraphics"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 331 )
+		} )
+	}
+}

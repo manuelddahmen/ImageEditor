@@ -1,0 +1,124 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "insets 0,hidemode 3,gap 5 5"
+			"$columnConstraints": "[fill][fill][fill]"
+			"$rowConstraints": "[fill][fill][fill][]"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"title": "Filter stack constructor"
+			"$sizePolicy": 1
+			"visible": true
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1"
+				"maximumRowCount": 20
+				"autoscrolls": true
+				"lightWeightPopupEnabled": false
+				"doubleBuffered": true
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Add"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddToActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonAddLink"
+				"text": "Add link"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddLinkActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonFiles"
+				"text": "Add input files"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonFilesActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JToggleButton" ) {
+				name: "buttonDeleteClass"
+				"text": "Delete class"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteClassActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JToggleButton" ) {
+				name: "buttonDeleteLink"
+				"text": "Delete link"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteLinkActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonGO"
+				"text": "Process GO"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonThenActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonGOActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonGOActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonLoad"
+				"text": "Load"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonLoadActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonSave"
+				"text": "Save"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSaveActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 0"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill]"
+				"$rowConstraints": "[][][]"
+			} ) {
+				name: "panel1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1 3 2,dock center"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "labelStatus"
+				"text": "text"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 3 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Open movie/recode"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 3"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonPictureRecode"
+				"text": "Open picture/recode"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonPictureRecodeActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 3"
+			} )
+			add( new FormComponent( "javax.swing.JToggleButton" ) {
+				name: "buttonCam"
+				"text": "Open webcam"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCamActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 3"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new one.empty3.java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 955, 355 )
+		} )
+	}
+}
