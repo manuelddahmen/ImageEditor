@@ -45,7 +45,7 @@ import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class MyCameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
-    private static final int PICK_REQUEST_CODE = 0;
+    private static final int PICK_REQUEST_CODE = 9999;
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private File currentFile = null;
@@ -53,34 +53,30 @@ public class MyCameraActivity extends Activity {
     private File currentDir;
 
     public static String getPath(final Context context, final Uri uri) {
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-            System.out.println("getPath() uri: " + uri.toString());
-            System.out.println("getPath() uri authority: " + uri.getAuthority());
-            System.out.println("getPath() uri path: " + uri.getPath());
+        System.out.println("getPath() uri: " + uri.toString());
+        System.out.println("getPath() uri authority: " + uri.getAuthority());
+        System.out.println("getPath() uri path: " + uri.getPath());
 
-            // ExternalStorageProvider
-            if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-                System.out.println("getPath() docId: " + docId + ", split: " + split.length + ", type: " + type);
+        // ExternalStorageProvider
+        if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
+            final String docId = DocumentsContract.getDocumentId(uri);
+            final String[] split = docId.split(":");
+            final String type = split[0];
+            System.out.println("getPath() docId: " + docId + ", split: " + split.length + ", type: " + type);
 
-                // This is for checking Main Memory
-                if ("primary".equalsIgnoreCase(type)) {
-                    if (split.length > 1) {
-                        return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
-                    } else {
-                        return Environment.getExternalStorageDirectory() + "/";
-                    }
-                    // This is for checking SD Card
+            // This is for checking Main Memory
+            if ("primary".equalsIgnoreCase(type)) {
+                if (split.length > 1) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1] + "/";
                 } else {
-                    return "storage" + "/" + docId.replace(":", "/");
+                    return Environment.getExternalStorageDirectory() + "/";
                 }
-
+                // This is for checking SD Card
+            } else {
+                return "storage" + "/" + docId.replace(":", "/");
             }
+
         }
         return null;
     }
@@ -173,7 +169,7 @@ public class MyCameraActivity extends Activity {
 
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
         System.out.println(intent2);
-        startActivityForResult(intent2, 9999);
+        startActivityForResult(intent2, PICK_REQUEST_CODE);
     }
 
     public void fillGallery(Bitmap photo, File file) {
@@ -274,7 +270,7 @@ public class MyCameraActivity extends Activity {
                     currentFile = f;
                 }
             }
-        } else if (requestCode == 9999 && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             String choose_directoryData = getRealPathFromURI(data);
             Bitmap photo = null;
             try {
