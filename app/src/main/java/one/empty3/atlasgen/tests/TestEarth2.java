@@ -1,0 +1,67 @@
+/*
+ *  This file is part of one.empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with one.empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
+
+package one.empty3.atlasgen.tests;
+
+import one.empty3.library.core.testing.TestObjet;
+
+/*__
+ * Created by manue on 11-05-19.
+ */
+public class TestEarth2 extends TestObjet {
+    @Override
+    public void afterRenderFrame() {
+
+    }
+
+    @Override
+    public void finit() throws Exception {
+
+    }
+
+    @Override
+    public void ginit() {
+
+    }
+
+    @Override
+    public void afterRender() {
+
+    }
+
+
+
+    @Override
+    public void testScene() throws Exception {
+
+    }
+}

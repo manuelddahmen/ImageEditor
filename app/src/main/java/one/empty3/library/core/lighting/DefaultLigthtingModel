@@ -1,7 +1,0 @@
-package one.empty3.library.core.lighting;
-public class DefaultLigthtingModel {
-StructureData<Light> ligths;
-     public DefaultLigthtingModel() {
-         lights = new StructureData<>();
-} 
-}

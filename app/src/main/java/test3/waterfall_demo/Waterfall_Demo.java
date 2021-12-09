@@ -1,5 +1,5 @@
 /*
- *  This file is part of Empty3.
+ *  This file is part of one.empty3.
  *
  *     Empty3 is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -12,11 +12,11 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ *     along with one.empty3.  If not, see <https://www.gnu.org/licenses/>. 2
  */
 
 /*
- *  This file is part of Empty3.
+ *  This file is part of one.empty3.
  *
  *     Empty3 is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ *     along with one.empty3.  If not, see <https://www.gnu.org/licenses/>. 2
  */
 
 package test3.waterfall_demo;

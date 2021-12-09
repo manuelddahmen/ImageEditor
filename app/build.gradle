@@ -25,6 +25,20 @@ apply plugin: 'kotlin-kapt'
 //apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\manue\\.keystore')
+            storePassword 'ab44md78'
+            keyAlias 'manuelddahmen'
+            keyPassword 'md44md78'
+        }
+        release {
+            storeFile file('C:\\Users\\manue\\.keystore')
+            storePassword 'ab44md78'
+            keyAlias 'manuelddahmen'
+            keyPassword 'md44md78'
+        }
+    }
     compileSdkVersion 30
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
