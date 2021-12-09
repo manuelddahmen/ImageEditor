@@ -1,7 +1,7 @@
 package one.empty3.feature;
 
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.util.PrimitiveIterator;
 import java.util.Random;
 

@@ -10,7 +10,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.util.Arrays;
 
 public class PixM extends M {

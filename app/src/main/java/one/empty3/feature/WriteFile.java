@@ -1,7 +1,7 @@
 package one.empty3.feature;
 
 import java.awt.image.*;
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.io.File;
 import java.util.logging.*;
 

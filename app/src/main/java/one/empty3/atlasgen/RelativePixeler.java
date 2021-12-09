@@ -32,7 +32,7 @@
 
 package one.empty3.atlasgen;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 /*__
  * Created by manuel on 19-06-18.

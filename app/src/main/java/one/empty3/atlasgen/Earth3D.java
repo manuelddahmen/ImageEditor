@@ -35,9 +35,9 @@ package one.empty3.atlasgen;
 /*import be.manudahmen.empty3.ZBuffer;
 import be.manudahmen.empty3.ZBufferFactory;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 */

@@ -9,7 +9,7 @@ import one.empty3.io.*;
 import one.empty3.feature.kmeans.*;
 import one.empty3.library.core.nurbs.F;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 public class DBScanProcess extends ProcessFile {
     public List<double[]> ns(List<double[]> points, double eps, double[] ps) {

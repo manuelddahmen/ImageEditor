@@ -33,7 +33,7 @@
 package one.empty3.library.core.testing;
 
 
-import java.awt.image.BufferedImage;
+
 
 public class ImageContainer {
 

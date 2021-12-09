@@ -1,8 +1,8 @@
 package one.empty3.feature;
 
 
-import javax.imageio.ImageIO;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.*;
 import java.sql.Time;
 import java.time.Instant;

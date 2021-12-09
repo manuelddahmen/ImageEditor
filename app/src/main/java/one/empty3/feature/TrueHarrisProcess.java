@@ -1,14 +1,14 @@
 package one.empty3.feature;
 
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import one.empty3.feature.PixM;
 import one.empty3.feature.TrueHarris;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 public class TrueHarrisProcess extends ProcessFile {
 

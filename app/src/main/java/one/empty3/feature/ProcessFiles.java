@@ -7,8 +7,8 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-import javax.imageio.ImageIO;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URL;

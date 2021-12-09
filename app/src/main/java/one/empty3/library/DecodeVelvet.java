@@ -1,6 +1,6 @@
 package one.empty3.library;
 
-import java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;

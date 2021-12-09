@@ -18,7 +18,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
+
 
 public class BallePanel extends DataPanel implements Runnable {
     private static final long serialVersionUID = 4876595577262483236L;

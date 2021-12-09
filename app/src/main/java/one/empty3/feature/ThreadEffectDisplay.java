@@ -6,10 +6,10 @@ import one.empty3.feature.gui.DirestEffect;
 import one.empty3.feature.motion.Motion;
 import one.empty3.io.ProcessFile;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 

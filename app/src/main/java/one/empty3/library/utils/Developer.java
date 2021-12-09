@@ -32,11 +32,11 @@
 
 package one.empty3.library.utils;
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 /*__
  *

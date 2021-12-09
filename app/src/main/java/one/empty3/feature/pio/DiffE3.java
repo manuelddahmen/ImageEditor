@@ -14,7 +14,7 @@ import one.empty3.feature.app.replace.java.awt.Color;
 import java.io.File;
 import one.empty3.java.awt.Point;
 import java.util.*;
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 class Circle {
 

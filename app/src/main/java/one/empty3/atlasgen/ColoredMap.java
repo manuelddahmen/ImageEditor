@@ -32,9 +32,9 @@
 
 package one.empty3.atlasgen;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 

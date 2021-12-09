@@ -3,8 +3,8 @@ package one.empty3.feature;
 import one.empty3.feature.PixM;
 import one.empty3.io.ProcessFile;
 
-import javax.imageio.ImageIO;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.*;
 
 public class DiffEnergy extends ProcessFile {

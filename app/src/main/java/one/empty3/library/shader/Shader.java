@@ -1,7 +1,7 @@
 package one.empty3.library.shader;
 import java.io.*;
 import java.nio.file.*;
-import java.awt.image.BufferedImage;
+
 import java.util.*;
 /***
  * vn(int n)

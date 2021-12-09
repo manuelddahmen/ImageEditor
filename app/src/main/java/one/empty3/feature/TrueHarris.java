@@ -1,6 +1,6 @@
 package one.empty3.feature;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 import one.empty3.feature.FilterPixM;
 import one.empty3.feature.PixM;

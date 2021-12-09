@@ -34,12 +34,12 @@ package one.empty3.library;/*
  * 2013 Manuel Dahmen
  */
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 /*__
  *

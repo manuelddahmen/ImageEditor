@@ -3,7 +3,7 @@ package one.empty3.feature.motion;
 import one.empty3.feature.PixM;
 import one.empty3.feature.motion.Motion;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 public class DiffMotion extends Motion {
     @Override

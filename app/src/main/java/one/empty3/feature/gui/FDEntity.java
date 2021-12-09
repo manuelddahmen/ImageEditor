@@ -2,7 +2,7 @@ package one.empty3.feature.gui;
 
 import org.apache.commons.net.ftp.FTPFile;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.File;
 
 public class FDEntity {

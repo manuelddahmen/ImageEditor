@@ -32,7 +32,7 @@
 
 package one.empty3.library;
 
-import java.awt.image.BufferedImage;
+
 
 public class TextureGrad extends TextureMov {
     private BufferedImage currentImg;

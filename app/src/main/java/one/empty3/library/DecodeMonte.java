@@ -3,11 +3,11 @@ import ru.sbtqa.monte.media.*;
 import ru.sbtqa.monte.media.image.Images;
 import ru.sbtqa.monte.media.FormatKeys.*;
 import java.io.*;
-import java.awt.image.BufferedImage;
+
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
+
 import java.awt.image.IndexColorModel;
 import java.io.*;
 import java.util.Random;

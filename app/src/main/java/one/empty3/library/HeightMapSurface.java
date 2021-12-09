@@ -35,7 +35,7 @@ package one.empty3.library;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Plan3D;
 
-import java.awt.image.BufferedImage;
+
 
 /***
  * Created by manue on 17-03-19.

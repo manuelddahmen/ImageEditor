@@ -32,6 +32,8 @@
 
 package one.empty3.atlasgen;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+
 /*__
  * Created by manue on 19-06-18.
  */

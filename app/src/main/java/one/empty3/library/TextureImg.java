@@ -39,7 +39,7 @@ package one.empty3.library;
 
 //import org.monte.media.avi.AVIReader;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

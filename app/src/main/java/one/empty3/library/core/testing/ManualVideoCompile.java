@@ -3,7 +3,7 @@ package one.empty3.library.core.testing;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 
 import org.slf4j.Logger;

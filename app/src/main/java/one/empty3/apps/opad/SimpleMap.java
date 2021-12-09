@@ -46,7 +46,7 @@ import one.empty3.library.*;
 import one.empty3.library.Polygon;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

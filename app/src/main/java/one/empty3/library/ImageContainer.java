@@ -1,7 +1,7 @@
 package one.empty3.library;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

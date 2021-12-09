@@ -19,8 +19,8 @@ import org.jcodec.scale.AWTUtil;
 import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

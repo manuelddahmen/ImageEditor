@@ -40,7 +40,7 @@ package one.empty3.library;
 //import org.monte.media.avi.AVIReader;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 
 

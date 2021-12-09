@@ -34,7 +34,7 @@ package one.empty3.library;
 
 import atlasgen.TextureOpSphere;
 
-import java.awt.image.BufferedImage;
+
 
 /*__
  * Created by manue on 22-06-19.

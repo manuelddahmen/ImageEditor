@@ -7,7 +7,7 @@ import one.empty3.feature.M3;
 import one.empty3.feature.PixM;
 import one.empty3.io.ProcessFile;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.io.File;
 import java.util.logging.Logger;
 

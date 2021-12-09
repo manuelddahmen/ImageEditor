@@ -59,11 +59,11 @@ import org.jcodec.common.io.FileChannelWrapper;
 import org.jcodec.common.io.NIOUtils;
 import org.jcodec.common.model.Rational;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.awt.image.RenderedImage;
 import java.io.*;
 import java.text.DateFormat;

@@ -1,6 +1,6 @@
 package one.empty3.feature;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 /*
  * Represents a linear line as detected by the hough transform.

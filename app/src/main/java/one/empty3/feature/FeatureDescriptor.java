@@ -5,7 +5,7 @@ import one.empty3.feature.HarrisToPointInterest;
 import one.empty3.feature.PixM;
 import one.empty3.library.Point3D;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.util.*;
 import java.io.File;
 

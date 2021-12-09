@@ -28,7 +28,7 @@ import one.empty3.library.core.physics.Bille;
 import one.empty3.library.core.physics.Force;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import one.empty3.feature.app.replace. one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import one.empty3.feature.app.replace.java.awt.*;
 
 import java.io.File;

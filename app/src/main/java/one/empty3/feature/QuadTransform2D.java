@@ -3,7 +3,7 @@ package one.empty3.feature;
 import one.empty3.library.Point3D;
 
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 public class QuadTransform2D {
     private BufferedImage i1, i2;

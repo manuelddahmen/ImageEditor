@@ -38,7 +38,7 @@
 package one.empty3.library;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.util.Hashtable;
 import java.util.Set;
 

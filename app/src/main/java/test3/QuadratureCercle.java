@@ -9,7 +9,7 @@ import one.empty3.library.*;
 import one.empty3.library.core.nurbs.CameraInPath;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace. one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 

@@ -4,7 +4,7 @@ import one.empty3.feature.ClassSchemaBuilder;
 import one.empty3.feature.Linear;
 import one.empty3.feature.PixM;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 
 /*

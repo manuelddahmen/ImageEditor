@@ -5,8 +5,8 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import javax.imageio.ImageIO;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

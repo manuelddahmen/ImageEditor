@@ -5,9 +5,9 @@ import one.empty3.feature.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.awt.*;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

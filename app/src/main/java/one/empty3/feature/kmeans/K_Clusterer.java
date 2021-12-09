@@ -9,7 +9,7 @@ import one.empty3.feature.kmeans.Distance;
 import one.empty3.feature.kmeans.ReadDataset;
 import one.empty3.library.core.lighting.Colors;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;

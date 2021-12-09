@@ -1,33 +1,33 @@
 package one.empty3.feature.app.replace.java.awt;
 
-import one.empty3.feature.app.replace.java.awt.Color.ColorSpace;
+import android.graphics.ColorSpace;
 
-public class Color extends one.empty3.feature.app.replace.java.awt.Color/*android.graphics.Color*/ {
-    public Color(int r, int g, int b) {
-        super(r, g, b);
+public class Color extends android.graphics.Color {//one.empty3.feature.app.replace.java.awt.Color/*
+    public android.graphics.Color Color(int r, int g, int b) {
+        return Color.valueOf(r, g, b);
     }
 
-    public Color(int r, int g, int b, int a) {
-        super(r, g, b, a);
+    public android.graphics.Color Color(int r, int g, int b, int a) {
+        return Color.valueOf(r, g, b, a);
     }
 
-    public Color(int rgb) {
-        super(rgb);
+    public android.graphics.Color Color(int rgb) {
+        return Color.valueOf(rgb);
     }
 
-    public Color(int rgba, boolean hasalpha) {
-        super(rgba, hasalpha);
+    public android.graphics.Color Color(int rgba, boolean hasalpha) {
+        return Color.valueOf(rgba);
     }
 
-    public Color(float r, float g, float b) {
-        super(r, g, b);
+    public android.graphics.Color Color(float r, float g, float b) {
+        return Color.valueOf(r, g, b);
     }
 
-    public Color(float r, float g, float b, float a) {
-        super(r, g, b, a);
+    public android.graphics.Color Color(float r, float g, float b, float a) {
+        return Color.valueOf(r, g, b, a);
     }
 
-    public Color(ColorSpace cspace, float[] components, float alpha) {
-        super(cspace, components, alpha);
+    public android.graphics.Color Color(ColorSpace cspace, float[] components, float alpha) {
+        return Color.valueOf(components[0], components[1], components[2]);
     }
 }

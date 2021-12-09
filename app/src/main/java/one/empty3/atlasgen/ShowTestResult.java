@@ -40,12 +40,12 @@ import one.empty3.library.core.testing.ImageContainer;
 import one.empty3.library.core.testing.TestObjet;
 import one.empty3.library.core.testing.TextAreaOutputStream;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.logging.Level;

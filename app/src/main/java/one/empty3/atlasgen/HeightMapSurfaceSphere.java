@@ -2,7 +2,7 @@ package one.empty3.atlasgen;
 
 import one.empty3.library.*;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 class HeightMapSurfaceSphere extends HeightMapSurface {
     ITexture heightMap;

@@ -7,7 +7,7 @@ import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.FctXY;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.image.BufferedImage;
+
 
 public class Tubulaire4map extends Tubulaire3 {
 

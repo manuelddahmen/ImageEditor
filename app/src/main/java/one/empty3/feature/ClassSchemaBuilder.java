@@ -40,7 +40,7 @@ import one.empty3.feature.selection.HighlightFeatures;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 
-import javax.imageio.ImageIO;
+import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
@@ -48,7 +48,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 import java.io.*;
 import java.util.List;
 import java.util.*;
