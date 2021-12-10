@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
-import one.empty3.Main
+import one.empty3.feature.app.MyCameraActivity
 import one.empty3.io.ProcessFile
 import android.widget.MultiAutoCompleteTextView
 import androidx.annotation.RequiresPermission
