@@ -37,10 +37,13 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Point;
 import one.empty3.library.core.nurbs.*;
 import one.empty3.pointset.PCont;
 
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -73,7 +76,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     protected boolean colorationActive = false;
     protected double angleX = Math.PI / 3;
     protected double angleY = Math.PI / 3;
-    protected ECBufferedImage bi;
+    protected Bitmap bi;
     protected int ha;
     protected int la;
     ZBufferImpl that;
@@ -437,7 +440,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         if (ime.getIME().getElementProf((int) p.getX(), (int) p.getY()) >= INFINITY_DEEP) {
             return ime.getIME().getElementCouleur((int) p.getX(), (int) p.getY());
         } else {
-            return Color.TRANSLUCENT;
+            return Color.BLACK;
         }
     }
 
@@ -462,9 +465,9 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         ha = height;
     }
 
-    public ECBufferedImage image() {
+    public Bitmap image() {
 
-        ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(la, ha, Bitmap.Config.RGB565);
+        Bitmap bi2 = new ECBufferedImage(la, ha, Bitmap.Config.RGB_565).getBitmap();
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
@@ -478,11 +481,10 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     //??
-    public ECBufferedImage image2() {
+    public Bitmap image2() {
         //return image2();
 
-//        BufferedImage bi = BufferedImage.BufferedImage(la, ha,
-Bitmap.Config.RGB565);
+//        BufferedImage bi = BufferedImage.BufferedImage(la, ha,Bitmap.Config.RGB565);
 //        bi.setPixel(0, 0, la, ha, getData(), 0, la);
 //        return new ECBufferedImage.BufferedImage(bi);
         return image();
@@ -665,7 +667,7 @@ Bitmap.Config.RGB565);
 
     public void plotPoint(Color color, Point3D p) {
         if (p != null && color != null) {
-            ime.testDeep(p, color.getRGB());
+            ime.testDeep(p, color.toArgb());
         }
 
     }
@@ -680,10 +682,6 @@ Bitmap.Config.RGB565);
         if (p != null && c != null) {
             ime.dessine(p, c);
         }
-    }
-
-    public Image rendu() {
-        return null;
     }
 
     public int resX() {
@@ -741,8 +739,8 @@ Bitmap.Config.RGB565);
     }
 
     public void testPoint(Point3D p, Color c) {
-        int cc = c.getRGB();
-        cc = scene().lumiereActive().getCouleur(c.getRGB(), p, p.getNormale());
+        int cc = c.toArgb();
+        cc = scene().lumiereActive().getCouleur(c.toArgb(), p, p.getNormale());
         ime.testDeep(p, cc);
         ime.testDeep(p, cc);
     }
@@ -757,9 +755,9 @@ Bitmap.Config.RGB565);
         for (double a = 0; a < 1.0; a += 1 / iteres) {
             Point pp = new Point(p1);
             Point3D p = point3d.mult(a).plus(point3d2.mult(1 - a));
-            pp.setLocation(p1.getX() + (int) (a * (p2.getX() - p1.getX())),
+            pp.set(p1.getX() + (int) (a * (p2.getX() - p1.getX())),
                     p1.getY() + (int) (a * (p2.getY() - p1.getY())));
-            ime.testDeep(p, c.getRGB());
+            ime.testDeep(p, c.toArgb());
 
         }
 
@@ -815,7 +813,6 @@ Bitmap.Config.RGB565);
         }
     }
 
-    @Override
     public boolean checkScreen(Point p1) {
         if (p1 != null && p1.getX() >= 0d && p1.getY() < la
                 && p1.getY() >= 0d && p1.getY() < ha)
@@ -947,7 +944,7 @@ Bitmap.Config.RGB565);
     }
 
     public void dessine(Point3D p, ITexture texture) {
-        ime.dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
+        ime.dessine(p, (Color) Color.Color(texture.getColorAt(0.5, 0.5)));
     }
 
     public Point3D clickAt(double x, double y) {
@@ -1264,9 +1261,6 @@ Bitmap.Config.RGB565);
             this.minz = minz;
         }
 
-        public Rectangle rectangle() {
-            return new Rectangle((int) minx, (int) miny, (int) maxx, (int) maxy);
-        }
 
         private void test(Point3D p) {
             if (p.getX() < minx) {
@@ -1329,10 +1323,10 @@ Bitmap.Config.RGB565);
             double prof = -1000;
             int x = (int) ce.getX();
             int y = (int) ce.getY();
-            if (x >= 0 & x < la & y >= 0 & y < ha && c.getAlpha() == 255) {
+            if (x >= 0 & x < la & y >= 0 & y < ha && c.toArgb() == 255) {
                 ime.setElementID(x, y, idImg);
                 ime.setElementPoint(x, y, x3d);
-                ime.setElementCouleur(x, y, c.getRGB());
+                ime.setElementCouleur(x, y, c.toArgb());
                 ime.setDeep(x, y, prof);
             }else if(checkScreen(ce)) {
                 int elementCouleur = ime.getElementCouleur(x, y);
@@ -1340,7 +1334,7 @@ Bitmap.Config.RGB565);
                 double [] ac = Lumiere.getDoubles(elementCouleur);
                 double[] b = new double[3];
                 for (int i = 0; i < 3; i++) {
-                    b[i] = nc[i]*c.getAlpha()/255.+(1-c.getAlpha()/255.)*ac[i];
+                    b[i] = nc[i]*c.alpha()/255.+(1-c.alpha()/255.)*ac[i];
                 }
                 int anInt = Lumiere.getInt(b);
                 ime.setElementID(x, y, idImg);
@@ -1406,17 +1400,17 @@ Bitmap.Config.RGB565);
         public void testDeep(Point3D p, Point3D n, Color c) {
             // Color cc = c.getCouleur();
             p.setNormale(n);
-            testDeep(p, c.getRGB());
+            testDeep(p, c.toArgb());
         }
 
         public void testDeep(Point3D p, Point3D n, int c) {
-            testDeep(p, n,  one.empty3.feature.app.replace.java.awt.Color.Color(c));
+            testDeep(p, n, (Color) Color.Color(c));
         }
 
         public boolean testDeep(Point3D p, ITexture texture, double u, double v, Representable representable) {
             if (testDeep(p, texture.getColorAt(u, v))) {
                 Point point = camera().coordonneesPoint2D(p, that);
-                int x = point.x, y = point.y;
+                int x = (int) point.x, y = (int) point.y;
                 ime.getuMap()[x][y] = u;
                 ime.getvMap()[x][y] = v;
                 ime.getrMap()[x][y] = representable;
@@ -1433,7 +1427,7 @@ Bitmap.Config.RGB565);
         }
 
         public void dessine(Point3D p, ITexture texture) {
-            dessine(p,  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5)));
+            dessine(p, (Color) Color.Color(texture.getColorAt(0.5, 0.5)));
 
         }
 

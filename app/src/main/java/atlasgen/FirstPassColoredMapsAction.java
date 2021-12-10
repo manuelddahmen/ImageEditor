@@ -30,48 +30,43 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
-package one.empty3.library;
+package atlasgen;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.library.core.lighting.Colors;
+
+import java.awt.*;
+import java.util.HashMap;
 
 /*__
- * @author Atelier
+ * Created by Manuel Dahmen on 30-06-18.
  */
-public abstract class Lumiere  extends Representable{
-  // ambient specular diffuse shinyness
-   protected Color La= (Color) Color.valueOf(0f,0f,0f),
-          Ls= (Color) Color.valueOf(1f,1f,1f),
-          Ld= (Color) Color.valueOf(1f,1f,1f);
-   
-   protected double S=0.5;
+public class FirstPassColoredMapsAction implements Action {
+    private Pixeler pixeler;
+    private HashMap<String, Color> colors = new HashMap<>();
 
-    public abstract int getCouleur(int base, Point3D p, Point3D n);
-    public int getLa() {return La.toArgb();}
-    public int getLs() {return Ls.toArgb();}
-    public int getLd() {return Ld.toArgb();}
+    @Override
+    public void init() {
+        this.pixeler = pixeler;
+    }
 
-    public static double [] getRgb(Color c) {
-       return new double[] {(c.red()/255f),
-          (c.green()/255f),
-          (c.blue()/255f)};
-    }
-  
-  public static int  getInt(double [] d) {
-       int res = 0xFF000000;
-    for(int i=0 ;i<3;i++) {
-        res += ((int)(float)(d[i]*0xff))<<((2-i)*8);
-    }
-    return res;//|0xFF000000;
-  }
-
-   public static double[] getDoubles(int c) {
-       double [] res = new double[3];
-       for(int i=0 ;i<3;i++) {
-        res[i] = (((c&(0xff<<((2-i)*8)) )>>((2-i)*8)))/255.;
-       }
-       return res;  
-    }
-    public static Color getColorD(double[] d) {
-        return (Color) Color.Color((float)(d[0]), (float)(d[1]),(float)(d[2]));
+    @Override
+    public void processLine(CsvLine csvLine) {
+        int lattitudeColumn = 4;
+        int longitudeColumn = 5;
+        int countryCodeColumn = 8;
+        String[] lineArray = csvLine.getValue();
+        String countryCode = lineArray[17];
+        /*for(int i=0; i<lineArray.length; i++)
+            if(lineArray[i]!=null)
+            System.out.println(""+i+"  "+lineArray[i]);
+*/
+        if (colors.get(countryCode) == null) {
+            colors.put(countryCode, Colors.random());
+        }
+        pixeler.pixelize(
+                (int) ((Double.parseDouble(lineArray[longitudeColumn]) / 180 + 1) / 2 * pixeler.getImage().getWidth()),
+                (int) ((-Double.parseDouble(lineArray[lattitudeColumn]) / 90 + 1) / 2 * pixeler.getImage().getHeight()),
+                colors.get(countryCode)
+        );
     }
 }

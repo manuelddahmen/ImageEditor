@@ -5,6 +5,8 @@ import one.empty3.feature.Histogram2;
 import one.empty3.feature.Linear;
 import one.empty3.feature.M3;
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.io.ProcessFile;
 
@@ -39,7 +41,7 @@ public class ExtractIntensityInfo extends
 
         one.empty3.feature.PixM pixMOriginal = pix;
 
-        final BufferedImage[] img3 = BufferedImage[]{pix.getImage()};
+        final BufferedImage[] img3 = new BufferedImage[]{pix.getImage()};
 
 
         one.empty3.feature.GradientFilter gradientMask = new GradientFilter(pixMOriginal.columns, pixMOriginal.lines);

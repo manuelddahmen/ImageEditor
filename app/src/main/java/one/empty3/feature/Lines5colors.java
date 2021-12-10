@@ -1,6 +1,11 @@
 package one.empty3.feature;
 
+import android.graphics.Bitmap;
+
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.LineSegment;
@@ -255,12 +260,12 @@ public class Lines5colors extends ProcessFile {
 
 
             lists2.forEach(p3s -> {
-                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
+                Color r = (Color) Color.Color((float) r(), (float) r(), (float) r());
                 double xA;
                 double yA;
                 p3s.forEach(point3D -> {
                     if (isInBound(point3D)) {
-                        o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.getRed() / 255., r.getGreen() / 255., r.getBlue() / 255.);
+                        o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.);
                     }
 
 
@@ -269,7 +274,7 @@ public class Lines5colors extends ProcessFile {
 
             one.empty3.feature.PixM img3 = new PixM(pixM.getColumns(), pixM.getLines());
             list3.forEach(p3s -> {
-                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
+                Color r = (Color) Color.Color((float) r(), (float) r(), (float) r());
                 double xA;
                 double yA;
                 /*p3s.forEach(point3D -> {
@@ -282,7 +287,7 @@ public class Lines5colors extends ProcessFile {
             });
 
             list3.forEach(p3s -> {
-                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
+                Color r = (Color) Color.Color((float) r(), (float) r(), (float) r());
                 if (p3s.size() > 2) {
                     for (int j = 0; j < p3s.size() - 1; j++) {
                         Point3D p1 = p3s.get(j);
@@ -303,7 +308,7 @@ public class Lines5colors extends ProcessFile {
 
             int[] i = new int[]{0};
             lists2.forEach(p3s -> {
-                Color r =  one.empty3.feature.app.replace.java.awt.Color.Color((float) r(), (float) r(), (float) r());
+                Color r = (Color) Color.Color((float) r(), (float) r(), (float) r());
                 final Point3D[][] extremes = {new Point3D[2], new Point3D[2]};
                 final Double[] distMaxMinP1 = {2.5, 1000.0};
                 List<Point3D> pointsCurrent = new ArrayList<>();
@@ -345,20 +350,11 @@ public class Lines5colors extends ProcessFile {
 
             });
 
-            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
-Bitmap.Config.RGB565);
-            Graphics g = bLines.getGraphics();
+            Bitmap bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
+Bitmap.Config.RGB_565);
             for (LineSegment line : lines) {
-                g.setColor(Colors.random());
+                Color random = Colors.random();
                 if (line.getLength() >= 2) {
-                    /*for (double c = 0.0; c <= 1.0; c += 1 / line.getLength()) {
-                        Point3D pDraw = line.getOrigine().plus(
-                                line.getOrigine().plus(line.getExtremite().moins(line.getOrigine().mult(c))));
-                        int x = (int) (double) pDraw.getX();
-                        int y = (int) (double) pDraw.getY();
-                        if (isInBound(pDraw))
-                            bLines.setPixel(x, y, line.texture().getColorAt(0, 0));
-                    }*/
 
                     Point3D pDraw1 = line.getOrigine().plus(
                             line.getOrigine().plus(line.getExtremite().moins(line.getOrigine().mult(0.0))));
@@ -369,13 +365,19 @@ Bitmap.Config.RGB565);
                     int x2 = (int) (double) pDraw2.getX();
                     int y2 = (int) (double) pDraw2.getY();
                     if (isInBound(pDraw1) && isInBound(pDraw2)) {
-                        g.drawLine(x1, y1, x2, y2);
+                    for (double c = 0.0; c <= 1.0; c += 1 / line.getLength()) {
+                        Point3D pDraw = line.getOrigine().plus(
+                                line.getOrigine().plus(line.getExtremite().moins(line.getOrigine().mult(c))));
+                        int x = (int) (double) pDraw.getX();
+                        int y = (int) (double) pDraw.getY();
+                        if (isInBound(pDraw))
+                            bLines.setPixel(x, y, random.toArgb());
+                    }
                     }
                 }
             }
 
-//            BufferedImage linesImg2 = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
-Bitmap.Config.RGB565);
+//            BufferedImage linesImg2 = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),Bitmap.Config.RGB565);
 //
 //
 //            coefficients.forEach(doubles -> {

@@ -32,11 +32,11 @@
 
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;
-import one.empty3.library.core.nurbs.RPv;
 
-import java.awt.*;
 import java.io.File;
 /*__
  * Created by manue on 15-06-19.
@@ -75,7 +75,7 @@ public class ZBufferGL implements ZBuffer {
     }
 
     @Override
-    public ECBufferedImage image() {
+    public Bitmap image() {
         return null;
     }
 

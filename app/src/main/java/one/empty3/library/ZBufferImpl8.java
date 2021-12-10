@@ -37,10 +37,10 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
 import one.empty3.library.core.nurbs.*;
 import one.empty3.pointset.PCont;
-
-import java.awt.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -671,7 +671,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
         ha = height;
     }
 
-    public ECBufferedImage image() {
+    public Bitmap image() {
                /*
         ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(la, ha, Bitmap.Config.RGB565);
         for (int i = 0; i < la; i++) {
@@ -688,7 +688,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
     }
 
-    public ECBufferedImage image2() {
+    public Bitmap image2() {
         return data1.getBitmap();
 
 
