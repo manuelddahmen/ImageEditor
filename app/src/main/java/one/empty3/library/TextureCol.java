@@ -34,6 +34,8 @@ package one.empty3.library;
 
 import java.awt.*;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+
 /*__
  * @author Manuel Dahmen
  */
@@ -43,26 +45,28 @@ public class TextureCol extends ITexture {
     private StructureMatrix<Integer> color = new StructureMatrix<>(0, Integer.class);
 
     public TextureCol() {
-        color.setElem(Color.BLACK.getRGB());
+        color.setElem(Color.BLACK);
     }
 
     public TextureCol(Color c) {
         if (c != null) {
-            color.setElem(c.getRGB());
+            color.setElem(c.toArgb());
         }
         else
-            color.setElem(Color.TRANSLUCENT);
+            color.setElem(Color.TRANSPARENT);
     }
 
     public TextureCol(int c) {
         color.setElem(c);
     }
+
+
     public int color() {
         return color.getElem();
     }
 
     public void color(Color c) {
-        color.setElem(c.getRGB());
+        color.setElem(c.toArgb());
     }
 
     @Override
@@ -93,7 +97,7 @@ public class TextureCol extends ITexture {
      */
     public Color getMaillageTexturedColor(int numQuadX, int numQuadY, double x,
                                           double y) {
-        return  one.empty3.feature.app.replace.java.awt.Color.Color(color.getElem());
+        return (Color) Color.valueOf(color.getElem());
     }
 
     public String toString() {

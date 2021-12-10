@@ -36,10 +36,10 @@
 package one.empty3.library.core.tribase;
 
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Point;
 import one.empty3.library.*;
 
-import java.awt.*;
-import java.awt.Point;
 import java.util.List;
 
 /*__
@@ -190,7 +190,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             Point3D ret = sommet.get(0).plus(
                     sommet.get(1).moins(sommet.get(0)).mult(ratioX)).plus(
                     sommet.get(2).moins(sommet.get(1)).mult(ratioY));
-            if (texture() == null) texture = new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(255, 128, 0));
+            if (texture() == null) texture = new TextureCol((Color) Color.Color(255, 128, 0));
             ret.texture(new TextureCol(texture.getColorAt(
                     (numX+(numX + ratioX) / maxX.data0d), (numY+(numY + ratioY) / maxY.data0d))));
 
@@ -200,7 +200,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             return ret;
         } else {
             List<Point3D> sommet = tris[1].getSommet().getData1d();
-            if (texture() == null) texture = new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(255, 128, 0));
+            if (texture() == null) texture = new TextureCol((Color) Color.Color(255, 128, 0));
             Point3D ret = sommet.get(1).plus(
                     sommet.get(0).moins(sommet.get(1)).mult(ratioY)).plus(
                     sommet.get(2).moins(sommet.get(0)).mult(ratioX));
@@ -248,7 +248,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
                 double incrMax = 1;
                 for (int t = 0; t < 2; t++) {
                     for (int c = 0; c < 3; c++) {
-                        Point p1 = z.camera().coordonneesPoint2D(tris[t]
+                        one.empty3.feature.app.replace.java.awt.Point p1 = z.camera().coordonneesPoint2D(tris[t]
                                 .getSommet().getElem(c), (ZBufferImpl)z);
                         Point p2 = z.camera().coordonneesPoint2D(tris[t]
                                 .getSommet().getElem((c + 1) % 3), (ZBufferImpl)z);

@@ -31,6 +31,7 @@
  */
 package one.empty3.library.core.extra;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
 import java.awt.*;
 import java.util.Random;
@@ -48,7 +49,7 @@ public class CollineModele1 extends Representable implements TRIGenerable {
     public CollineModele1(int numTRIS) {
 
         Point3D p0 = new Point3D(0d, 0d, 0d);
-        Color c0 =  one.empty3.feature.app.replace.java.awt.Color.Color(128, 0, 255);
+        Color c0 = (Color) Color.Color(128, 0, 255);
 
         for (int i = 0; i < numTRIS; i++) {
             Point3D[] p = new Point3D[3];
@@ -62,7 +63,7 @@ public class CollineModele1 extends Representable implements TRIGenerable {
 
             p0 = p[2];
 
-            TRI t = new TRI(p[0], p[1], p[2], c0);
+            TRI t = new TRI(p[0], p[1], p[2], new ColorTexture(c0));
 
             tris.add(t);
         }

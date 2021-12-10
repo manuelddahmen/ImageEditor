@@ -90,6 +90,7 @@ public class TRI extends Representable {
     }
 
 
+
     public StructureMatrix<Point3D> getSommet() {
         return sommet;
     }

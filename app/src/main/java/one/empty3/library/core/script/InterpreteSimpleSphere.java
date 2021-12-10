@@ -40,6 +40,7 @@
  */
 package one.empty3.library.core.script;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.extra.SimpleSphere;
 
@@ -83,7 +84,7 @@ public class InterpreteSimpleSphere implements Interprete {
     public Object interprete(String text, int pos) throws InterpreteException {
         Point3D c = null;
         double r = 1;
-        Color col = Color.black;
+        int col = Color.BLACK;
 
         InterpretesBase ib;
         InterpretePoint3DBAK ip;
@@ -116,7 +117,7 @@ public class InterpreteSimpleSphere implements Interprete {
         r = (Double) ib.get().get(1);
 
         pc = new InterpreteCouleur();
-        col = (Color) pc.interprete(text, pos);
+        col = ((Color) pc.interprete(text, pos)).toArgb();
         pos = pc.getPosition();
 
         ib = new InterpretesBase();
@@ -130,7 +131,7 @@ public class InterpreteSimpleSphere implements Interprete {
         pos = ib.getPosition();
 
         this.pos = pos;
-        return new SimpleSphere(c, r, col);
+        return new SimpleSphere(c, r, (Color) Color.Color(col));
     }
 
     /* (non-Javadoc)
