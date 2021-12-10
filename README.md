@@ -24,7 +24,7 @@ To run the same tests in an Android device connected via ADB, run:
 Alternatively, test running configurations can be added to Android Studio for convenience (and a nice UI). To do that:
 1. Go to: `Run` > `Edit Configurations` > `Add New Configuration`.
 1. For Robolectric select `Android JUnit`, for connected device select `Android Instrumented Tests`.
-1. Select `app` module and `com.android.example.cameraxbasic.MainInstrumentedTest` class.
+1. Select `app` module and `one.empty3.cameraxbasic.MainInstrumentedTest` class.
 1. Optional: Give the run configuration a name, like `test robolectric` or `test device`
 
 Precision about the code.
