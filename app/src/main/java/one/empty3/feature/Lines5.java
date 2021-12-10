@@ -1,6 +1,10 @@
 package one.empty3.feature;
 
+import android.graphics.Bitmap;
+
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.Point;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Point3D;
@@ -72,105 +76,104 @@ public class Lines5 extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        try {
-            pixM = null;
-            pixM = new one.empty3.feature.PixM(ImageIO.read(in));
-            ArrayList<List<Point3D>> lists = new ArrayList<>();
-            one.empty3.feature.PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+        pixM = null;
+        pixM = new PixM(ImageIO.read(in));
+        ArrayList<List<Point3D>> lists = new ArrayList<>();
+        PixM o = new PixM(pixM.getColumns(), pixM.getLines());
 
-            double valueDiff = 0.2;
+        double valueDiff = 0.2;
 
-            int[][] p = new int[pixM.getColumns()][pixM.getLines()];//!!
-            listTmpCurve = new ArrayList<Point3D>();
+        int[][] p = new int[pixM.getColumns()][pixM.getLines()];//!!
+        listTmpCurve = new ArrayList<Point3D>();
 //[] x, y-> pCount, subListRef.
-            double distMax;
-            for (double levels : Arrays.asList(1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4/*, 0.3 ,x0.2,0.1,0.0*/)) {
+        double distMax;
+        for (double levels : Arrays.asList(1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4/*, 0.3 ,x0.2,0.1,0.0*/)) {
 
-                pz = 0.0;
-                py = 0.0;
-                px = 0.0;
-                distMax = (pixM.getColumns() + pixM.getLines()) >> 1;//???
-                random = new Random();
+            pz = 0.0;
+            py = 0.0;
+            px = 0.0;
+            distMax = (pixM.getColumns() + pixM.getLines()) >> 1;//???
+            random = new Random();
 
-                for (int x = 0; x < pixM.getColumns(); x++)
-                    for (int y = 0; y < pixM.getLines(); y++)
-                        p[x][y] = 0;
+            for (int x = 0; x < pixM.getColumns(); x++)
+                for (int y = 0; y < pixM.getLines(); y++)
+                    p[x][y] = 0;
 
-                for (int i = 0; i < pixM.getColumns(); i++) {
-                    for (int j = 0; j < pixM.getLines(); j++) {
+            for (int i = 0; i < pixM.getColumns(); i++) {
+                for (int j = 0; j < pixM.getLines(); j++) {
 // remove long complicated uncertain loop//
 
-                        int x = i;
-                        int y = j;
-                        if (!isInBound(new Point3D((double) x, (double) y, 0.0)))
-                            continue;
-                        double valueAvg = pixM.norme(x, y);
+                    int x = i;
+                    int y = j;
+                    if (!isInBound(new Point3D((double) x, (double) y, 0.0)))
+                        continue;
+                    double valueAvg = pixM.norme(x, y);
 
-                        if (valueAvg >= levels - valueDiff && valueAvg <= levels + valueDiff && p[x][y] == 0) {//2nd condition
+                    if (valueAvg >= levels - valueDiff && valueAvg <= levels + valueDiff && p[x][y] == 0) {//2nd condition
 
-                            p[x][y] = 1;
-                            listTmpCurve.add(new Point3D((double) x, (double) y, valueAvg));
-
-                        }
-
-
-                    }
-
-                }
-            }
-            lists.add(listTmpCurve);
-            ArrayList<Point3D> list2 = new ArrayList<Point3D>();
-
-
-            for (List<Point3D> point3DS : lists) {
-                list2.addAll(point3DS);
-            }
-
-            List<LineSegment> lines = new ArrayList<>();
-            List<List<Point3D>> list3 = new ArrayList<>();
-
-            for (int i = 0; i < list2.size(); i++) {
-                Point3D point3D = list2.get(i);
-                final double distNormal = 1.1;//0.9??
-                list3.add(new ArrayList<>());
-                list3.get(list3.size() - 1).add(point3D);
-                distMax = 0.5;
-
-                if (isInBound(point3D)) {
-                    for (int j = 0; j < list2.size(); j++) {
-                        Point3D current = list2.get(j);
-                        Point3D prev = list3.get(list3.size() - 1).get(
-                                list3.get(list3.size() - 1).size() - 1);
-
-                        if (prev != current && current != point3D &&
-                                Point3D.distance(prev, current) <= distNormal &&
-                                Point3D.distance(point3D, current) > distMax) {
-                            list3.get(list3.size() - 1).add(current);
-                            distMax = Point3D.distance(point3D, current);
-                            p[(int) (double) current.getX()][(int) (double) current.getY()]++;
-                        }
+                        p[x][y] = 1;
+                        listTmpCurve.add(new Point3D((double) x, (double) y, valueAvg));
 
                     }
 
 
-                    if (list3.get(list3.size() - 1).size() < 2) {
-                        list3.remove(list3.size() - 1);
-
-                    } else {
-                        for (Point3D d : list3.get(list3.size() - 1)) {
-                            list2.remove(d);
-
-                        }
-                        i = 0;
-                    }
-                    // supprimer points en doubles
                 }
 
             }
-            // d'après pcount x, y et curve xy supprimer les courbes en trop.
-            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(),
-Bitmap.Config.RGB565);
-            Graphics g = bLines.getGraphics();
+        }
+        lists.add(listTmpCurve);
+        ArrayList<Point3D> list2 = new ArrayList<Point3D>();
+
+
+        for (List<Point3D> point3DS : lists) {
+            list2.addAll(point3DS);
+        }
+
+        List<LineSegment> lines = new ArrayList<>();
+        List<List<Point3D>> list3 = new ArrayList<>();
+
+        for (int i = 0; i < list2.size(); i++) {
+            Point3D point3D = list2.get(i);
+            final double distNormal = 1.1;//0.9??
+            list3.add(new ArrayList<>());
+            list3.get(list3.size() - 1).add(point3D);
+            distMax = 0.5;
+
+            if (isInBound(point3D)) {
+                for (int j = 0; j < list2.size(); j++) {
+                    Point3D current = list2.get(j);
+                    Point3D prev = list3.get(list3.size() - 1).get(
+                            list3.get(list3.size() - 1).size() - 1);
+
+                    if (prev != current && current != point3D &&
+                            Point3D.distance(prev, current) <= distNormal &&
+                            Point3D.distance(point3D, current) > distMax) {
+                        list3.get(list3.size() - 1).add(current);
+                        distMax = Point3D.distance(point3D, current);
+                        p[(int) (double) current.getX()][(int) (double) current.getY()]++;
+                    }
+
+                }
+
+
+                if (list3.get(list3.size() - 1).size() < 2) {
+                    list3.remove(list3.size() - 1);
+
+                } else {
+                    for (Point3D d : list3.get(list3.size() - 1)) {
+                        list2.remove(d);
+
+                    }
+                    i = 0;
+                }
+                // supprimer points en doubles
+            }
+
+        }
+        // d'après pcount x, y et curve xy supprimer les courbes en trop.
+            /*
+            BufferedImage bLines = BufferedImage.BufferedImage(o.getColumns(), o.getLines(), Bitmap.Config.RGB_565);
+            Graphics2D g = bLines.bitmap.getGraphics2D();
 
             g.setColor(Color.RED);
             list3.forEach(point3DS -> {
@@ -223,7 +226,7 @@ Bitmap.Config.RGB565);
                                     (int) (double) p1.getY(),
                                     (int) (double) p2.getX(),
                                     (int) (double) p2.getY());
-                    }*/
+                    }
                     // Il faut au moins deux contours (les contours du visage) et des yeux.
                     if (temp1.size() == 0) {
                         temp1b = true;
@@ -264,12 +267,8 @@ Bitmap.Config.RGB565);
             temp2.forEach(point3D -> System.out.printf("POINT LIST TEMP2 %s", point3D));
 
             ImageIO.write(bLines, "jpg", out);
-            return true;
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+            */
+        return true;
 
     }
 

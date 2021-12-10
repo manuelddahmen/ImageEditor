@@ -87,7 +87,7 @@ public int pointsSize = 3;
                  //    pointNo[i][j][k] = k;
              cds[k].dist = dist;
                       //    }
-                 cds[k].color = colors[k];
+                 cds[k].color = (one.empty3.feature.app.replace.java.awt.Color) colors[k];
                   /*
                 
                       if(distMin[k]>dist) {

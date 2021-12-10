@@ -32,6 +32,8 @@
 
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.elements.PPMFileInputStream;
 
@@ -51,19 +53,16 @@ public class ECBufferedImage extends BufferedImage {
     private int pixelCountMax = 5;
     private int squarepixelCountMax = 25;
 
-    public ECBufferedImage.BufferedImage(BufferedImage read) {
-        this(read.getWidth(), read.getHeight(), read.getType());
-        setData(read.getData());
+    public ECBufferedImage(BufferedImage read) {
+        this(read.getWidth(), read.getHeight(), Bitmap.Config.RGB_565);
     }
 
-    public ECBufferedImage.BufferedImage(int width, int height, int imageType) {
-        super(width, height, imageType);
+    public ECBufferedImage(int width, int height, int imageType) {
+        this(width, height, Bitmap.Config.RGB_565);
     }
 
-    public ECBufferedImage.BufferedImage(PPMFileInputStream ppmFileInputStream) {
-
-        super(0, 0, 0);
-
+    public ECBufferedImage(int width, int height, Bitmap.Config config) {
+        super(width, height, config);
     }
 
     public static ECBufferedImage ppm(byte[] bytes, String ppm) {
@@ -71,82 +70,10 @@ public class ECBufferedImage extends BufferedImage {
     }
 
     public static ECBufferedImage getFromFile(File url) throws IOException {
-        return new ECBufferedImage.BufferedImage(ImageIO.read(url));
+        return new ECBufferedImage(ImageIO.read(url));
     }
 
-    public static ECBufferedImage getFromPackage(Class c, String resource) throws IOException {
-        return new ECBufferedImage.BufferedImage(ImageIO.read(c.getResourceAsStream(resource)));
-    }
 
-    public static ECBufferedImage getFromURL(URL url) {
-        ECBufferedImage ecbi = null;
-        try {
-            Object o = url.getContent(new Class[]{BufferedImage.class});
-
-            if (o instanceof BufferedImage) {
-                BufferedImage bi = (BufferedImage) o;
-                ecbi = new ECBufferedImage.BufferedImage(bi);
-                ecbi.setData(bi.getData());
-
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ECBufferedImage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ecbi;
-    }
-
-    @Override
-    public String toString() {
-        String s = "P3\n";
-        s += "# image in emptycanvas' mood file\n";
-        s += "# \n";
-        s += "" + getWidth() + " " + getHeight() + "\n";
-        s += "255\n";
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
-                int r, g, b;
-                java.awt.Color c;
-                c = new java.awt.Color(getRGB(i, j));
-                r = c.getRed();
-                g = c.getGreen();
-                b = c.getBlue();
-                s += "" + r + " " + g + " " + b + " ";
-
-                if (j * getWidth() + i % 3 == 0) {
-                    s += "\n";
-                }
-            }
-        }
-        return s;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ECBufferedImage that = (ECBufferedImage) o;
-
-        int diffPixels = -pixelCountMax;
-
-        for (int x = 0; x < getWidth(); x++)
-            for (int y = 0; y < getHeight(); y++) {
-                int thatRGB = that.getRGB(x, y);
-                int thisRGB = this.getRGB(x, y);
-                int[] thatRgba = new int[4];
-                int[] thisRgba = new int[4];
-                getRGBA(thatRGB, thatRgba);
-                getRGBA(thisRGB, thisRgba);
-
-                for (int i = 0; i < 4; i++) {
-                    pixelCountMax += thatRgba[i] - thisRgba[i];
-                }
-            }
-
-        if (pixelCountMax != that.pixelCountMax) return false;
-        return squarepixelCountMax == that.squarepixelCountMax;
-
-    }
 
     private void getRGBA(int rgba, int[] componentsRGBA) {
         int a = (rgba & 0xFF000000) >> 24;

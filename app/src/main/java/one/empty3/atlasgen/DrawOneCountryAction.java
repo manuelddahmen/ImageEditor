@@ -32,9 +32,8 @@
 
 package one.empty3.atlasgen;
 
-import androidx.annotation.Dimension;
-
 import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Dimension;
 import one.empty3.library.ITexture;
 import one.empty3.library.Point2D;
 import one.empty3.library.core.lighting.Colors;
@@ -80,18 +79,19 @@ public class DrawOneCountryAction implements Action {
             Color color = colors.computeIfAbsent(countryCode, k -> Colors.random());
             double latitude = Double.parseDouble(lineArray[longitudeColumn]);
             double longitude = -Double.parseDouble(lineArray[latitudeColumn]);
-            //Dimension dimension = new Dimension(
-            //        pixeler.getImage().getWidth(),
-            //        pixeler.getImage().getHeight());
-            //Point2D p = dim.convert(dimension, longitude, latitude);
+            Dimension dimension = new Dimension(
+                    pixeler.getImage().getWidth(),
+                    pixeler.getImage().getHeight());
+            Point2D p = dim.convert(dimension, longitude, latitude);
 
-            //Point2D pR = dim.getRatios(p);
+            Point2D pR = dim.getRatios(p);
             /*
             System.out.println("p" + Seriald.point2DtoString(p));
             System.out.println("pR" + Seriald.point2DtoString(pR));
             */
-            //pixeler.pixelize((int) p.x, (int) p.y,
-            //         one.empty3.feature.app.replace.java.awt.Color.Color(tex.getColorAt(pR.x, pR.y)));
+            pixeler.pixelize((int) p.x, (int) p.y,
+                    (Color) Color.Color(
+                            tex.getColorAt(pR.x, pR.y)));
 
         }
     }

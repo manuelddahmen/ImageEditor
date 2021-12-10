@@ -1,6 +1,8 @@
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
@@ -37,7 +39,7 @@ public class PasteBlank extends ProcessFile {
             int rgb = col.getColorAt(
                     pi.getX() / img.getColumns(),
                     pi.getY() / img.getLines());
-            rgb = Color.BLACK.getRGB();
+            rgb = Color.BLACK;
             double[] rgbD = lookForColor(img, x, y, Lumiere.getDoubles(rgb));
             for (int comp = 0; comp < 3; comp++) {
                 img.setCompNo(comp);

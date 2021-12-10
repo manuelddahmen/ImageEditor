@@ -3,7 +3,7 @@
  */
 
 package one.empty3.feature;
-
+/*
 import net.miginfocom.swing.MigLayout;
 
 import one.empty3.feature.Classification;
@@ -57,6 +57,7 @@ import java.util.function.Consumer;
 /*
  * @author Manuel Dahmen
  */
+/*
 public class ClassSchemaBuilder extends JFrame implements Serializable {
 
     public boolean processed = false;
@@ -614,7 +615,6 @@ public class ClassSchemaBuilder extends JFrame implements Serializable {
                     maxRes = Integer.parseInt(maxResStr);
                 if (maxRes <= 0)
                     maxRes = 200;
-                /* String*/
                 String classnames = (String) appFile.getProperty("classname");
                 String class0 = (String) appFile.getProperty("class0");
                 String directoryOut = (String) appFile.getProperty("out.directory");
@@ -707,11 +707,6 @@ public class ClassSchemaBuilder extends JFrame implements Serializable {
         }
         direstEffect.setVisible(cam);
         direstEffect.setMainWindow(this);
-        /*if (cam)
-            if (!direstEffect.threadEffectDisplay.busy && direstEffect.threadEffectDisplay.isAlive())
-                direstEffect.threadEffectDisplay.start();
-                +/
-         */
         files = new ArrayList<>();
         files.add(new File[]{new File("webcam")});
     }
@@ -1046,4 +1041,4 @@ Bitmap.Config.RGB565);
     private JToggleButton buttonCam;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-}
+}*/

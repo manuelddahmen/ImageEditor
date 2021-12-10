@@ -54,7 +54,7 @@ public class SimpleMap {
 Bitmap.Config.RGB_565));
         CsvReader csvReader = new CsvReader(new File("allCountries/allCountries.txt"),
                 "" + '\t', "" + '\n', false);
-        csvReader.setAction(new DrawAction(pixeler, color));
+        csvReader.setAction(new DrawAction(pixeler, (one.empty3.feature.app.replace.java.awt.Color) color));
         csvReader.process();
         try {
             File file = Seriald.newOutputFile("SimpleMap");

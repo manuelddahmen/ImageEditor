@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
@@ -40,6 +41,7 @@ public class ImageIO {
         fileOutputStream.close();
         return false;
     }
+
     /*
     public static Bitmap read(File file) {
         try {

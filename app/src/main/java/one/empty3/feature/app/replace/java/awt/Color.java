@@ -4,7 +4,7 @@ import android.graphics.ColorSpace;
 
 public class Color extends android.graphics.Color {
 
-    public android.graphics.Color Color(int r, int g, int b) {
+    public static android.graphics.Color Color(int r, int g, int b) {
         return Color.valueOf(r, g, b);
     }
 
@@ -12,7 +12,7 @@ public class Color extends android.graphics.Color {
         return Color.valueOf(r, g, b, a);
     }
 
-    public android.graphics.Color Color(int rgb) {
+    public static android.graphics.Color Color(int rgb) {
         return Color.valueOf(rgb);
     }
 

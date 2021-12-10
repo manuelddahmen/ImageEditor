@@ -19,6 +19,8 @@ package one.empty3.library;
 
 import java.awt.*;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+
 /*__
  * @author Manuel Dahmen
  */
@@ -27,7 +29,7 @@ public class ColorTexture extends ITexture {
     private StructureMatrix<Color> color = new StructureMatrix<Color>(0, Color.class);
 
     public ColorTexture() {
-        color.setElem(Color.BLACK);
+        color.setElem((Color) Color.Color(0.f,0.f,0.f));
     }
 
     public ColorTexture(Color c) {
@@ -35,6 +37,10 @@ public class ColorTexture extends ITexture {
         if (c != null) {
             color.setElem(c);
         }
+    }
+
+    public ColorTexture(int black) {
+        this((Color) Color.Color(black));
     }
 
     public Color color() {
@@ -51,7 +57,7 @@ public class ColorTexture extends ITexture {
     }
 
     public int getColorAt(double x, double y) {
-        return color.getElem().getRGB();
+        return color.getElem().toArgb();
     }
 
     public void timeNext() {

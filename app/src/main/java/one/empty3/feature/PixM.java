@@ -1,15 +1,13 @@
 package one.empty3.feature;
 
-import one.empty3.feature.FilterPixM;
-import one.empty3.feature.M;
-import one.empty3.feature.V;
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;
-
-import java.awt.*;
 
 import java.util.Arrays;
 
@@ -30,8 +28,8 @@ public class PixM extends M {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
-                int rgb = image.getRGB(i, j);
-                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
+                int rgb = image.bitmap.getPixel(i, j);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getComponents(colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -72,13 +70,13 @@ public class PixM extends M {
             for (int j = 0; j < (int) lines2; j++) {
 
 
-                int rgb = image.getRGB(
+                int rgb = image.bitmap.getPixel(
                         (int) (1.0 * i / columns2 * image.getWidth())
 
 
                         , (int) (1.0 * j / lines2 * image.getHeight()));
                 float[] colorComponents = new float[pixM.getCompCount()];
-                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getComponents(colorComponents);
                 for (int com = 0; com < pixM.getCompCount(); com++) {
                     pixM.setCompNo(com);
                     pixM.set(i, j, colorComponents[com]);
@@ -157,9 +155,8 @@ public class PixM extends M {
 
         float[] f = new float[getCompCount()];
 
-        BufferedImage image = BufferedImage.BufferedImage(columns,
-                lines,
-Bitmap.Config.RGB565);
+        Bitmap image = BufferedImage.BufferedImage(columns,
+                lines, Bitmap.Config.RGB_565);
 
 
         float[] rgba = new float[getCompCount()];
@@ -173,7 +170,7 @@ Bitmap.Config.RGB565);
 
                     rgba[comp] = value;
                 }
-                image.setPixel(i, j,  one.empty3.feature.app.replace.java.awt.Color.Color(rgba[0], rgba[1], rgba[2]).getRGB());
+                image.setPixel(i, j,  one.empty3.feature.app.replace.java.awt.Color.Color(rgba[0], rgba[1], rgba[2]).toArgb());
             }
         }
         return image;
@@ -186,7 +183,7 @@ Bitmap.Config.RGB565);
 
         float[] rgba = new float[getCompCount()];
         for (double t = 0; t < 1.0; t += INCR_T) {
-            rgba =  one.empty3.feature.app.replace.java.awt.Color.Color(curve.texture().getColorAt(t, 0.)).getColorComponents(rgba);
+            rgba =  one.empty3.feature.app.replace.java.awt.Color.Color(curve.texture().getColorAt(t, 0.)).getComponents(rgba);
             Point3D p = curve.calculerPoint3D(t);
             Point3D p1 = curve.calculerPoint3D(t + INCR_T);
             for (double t1 = t; t1 < t + INCR_T; t1 += 1 / Point3D.distance(p, p1)) {

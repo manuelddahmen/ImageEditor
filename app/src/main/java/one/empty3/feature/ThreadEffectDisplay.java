@@ -1,5 +1,5 @@
 package one.empty3.feature;
-
+/*
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamImageTransformer;
 import one.empty3.feature.gui.DirestEffect;
@@ -63,13 +63,7 @@ Bitmap.Config.RGB565);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            /*while (!main.processed) {
-                try {
-                    sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }*/
+
             main.buttonGOActionPerformed(null);
 
             if (motion != null && imageIn != null) {
@@ -90,10 +84,7 @@ Bitmap.Config.RGB565);
             Graphics graphics = jPanel.getGraphics();
             if (imageIn != null) {
                 graphics.drawImage(imageIn, 0, 0, jPanel.getWidth(), jPanel.getHeight(), null);
-            } /*else if (image != null)
-
-                graphics.drawImage(image, 0, 0, jPanel.getWidth(), jPanel.getHeight(), null);
-*/
+            }
         } while (directEffect.threadEffectDisplay.busy);
 
         busy = false;
@@ -185,3 +176,4 @@ Bitmap.Config.RGB565);
         this.busy = b;
     }
 }
+*/

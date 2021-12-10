@@ -48,6 +48,8 @@ import ru.sbtqa.monte.media.avi.AVIWriter;
 import ru.sbtqa.monte.media.math.Rational;
 */
 
+import android.graphics.Bitmap;
+
 import one.empty3.library.*;
 import one.empty3.library.core.export.ObjExport;
 import one.empty3.library.core.export.STLExport;
@@ -62,7 +64,6 @@ import org.jcodec.common.model.Rational;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
-import java.awt.*;
 
 import java.awt.image.RenderedImage;
 import java.io.*;
@@ -225,7 +226,7 @@ public abstract class TestObjet implements Test, Runnable {
         dimension = new Resolution(x, y);
     }
 
-    public BufferedImage img() {
+    public Bitmap img() {
         return ri;
     }
 

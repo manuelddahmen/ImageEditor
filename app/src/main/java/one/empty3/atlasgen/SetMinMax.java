@@ -33,8 +33,7 @@
 package one.empty3.atlasgen;
 
 
-import androidx.annotation.Dimension;
-
+import one.empty3.feature.app.replace.java.awt.Dimension;
 import one.empty3.library.Point2D;
 import one.empty3.library.Representable;
 

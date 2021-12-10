@@ -23,12 +23,12 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import one.empty3.library.*;
 import one.empty3.library.core.physics.Bille;
 import one.empty3.library.core.physics.Force;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import one.empty3.feature.app.replace. one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import one.empty3.feature.app.replace.java.awt.*;
 
 import java.io.File;
@@ -58,7 +58,7 @@ public class Bras extends TestObjetSub {
     public void ginit() {
         getZ().couleurDeFond(new TextureCol(Color.WHITE));
         textureDefault = new TextureImg(
-                new ECBufferedImage.BufferedImage(
+                new ECBufferedImage(
                         ImageIO.read(new File("samples/img/herbe.jpg"))));
         ArrayList<Bille> allPoints = new ArrayList<>();
         for (int i = 0; i < nbrLines; i++) {

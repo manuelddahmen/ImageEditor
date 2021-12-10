@@ -1,6 +1,7 @@
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricCurve;
@@ -73,13 +74,8 @@ public class Paste extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        try {
-            BufferedImage read = ImageIO.read(in);
-            PixM pixM = PixM.getPixM(read, maxRes);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+        BufferedImage read = ImageIO.read(in);
+        PixM pixM = PixM.getPixM(read, maxRes);
+        return true;
     }
 }
