@@ -39,12 +39,15 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 public class TextureMov extends ITexture {
     BufferedImage image;
     VideoDecoder defs;
     private File file = null;
-    private int transparent = Color.WHITE.getRGB();
+    private int transparent = Color.WHITE;
 
     public File getFile() {
         return file;
@@ -78,7 +81,7 @@ public class TextureMov extends ITexture {
         int x = (int) (u * image.getWidth());
         int y = (int) (v * image.getHeight());
         if (x >= 0 && x < image.getWidth() && y >= 0 && y < image.getHeight()) {
-            int rgb = image.getRGB(x, y);
+            int rgb = image.bitmap.getPixel(x, y);
             int a = rgb >> 24 & 0xFF;
             int r = rgb >> 16 & 0xFF;
             int g = rgb >> 8 & 0xFF;
@@ -86,7 +89,7 @@ public class TextureMov extends ITexture {
             return rgb&0x00FFFFFF;
 
         } else
-            return Color.TRANSLUCENT;
+            return Color.WHITE;
     }
 
     protected void current() {
@@ -122,7 +125,7 @@ public class TextureMov extends ITexture {
     }
 
     public void setTransparent(Color black) {
-        this.transparent = black.getRGB();
+        this.transparent = black.toArgb();
     }
 
     public BufferedImage getImage() {

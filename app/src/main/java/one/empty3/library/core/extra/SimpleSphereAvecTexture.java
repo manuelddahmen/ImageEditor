@@ -37,6 +37,8 @@
  */
 package one.empty3.library.core.extra;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
 import java.awt.*;
@@ -105,7 +107,7 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
                 pCur[2] = CoordPoint(a, b + incrLong);
                 pCur[3] = CoordPoint(a + incrLat, b + incrLong);
                 try {
-                    Color color =  one.empty3.feature.app.replace.java.awt.Color.Color(img.getRGB(
+                    Color color = (Color) Color.Color(img.bitmap.getPixel(
                             (int) ((a + Math.PI) / Math.PI * img.getHeight()),
                             (int) ((b) / 2 / Math.PI * img.getWidth())));
                     t.add(new TRI(pCur[0], pCur[1], pCur[3], color));

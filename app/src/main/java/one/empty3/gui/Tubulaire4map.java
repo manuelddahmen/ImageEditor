@@ -1,5 +1,6 @@
 package one.empty3.gui;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
@@ -15,10 +16,10 @@ public class Tubulaire4map extends Tubulaire3 {
 
     public Tubulaire4map() {
         super();
-        mapVolume.setElem(new ECBufferedImage.BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
+        mapVolume.setElem(new ECBufferedImage(100, 100, 0));
     }
     public void updateBitmap(BufferedImage bufferedImage) {
-        this.mapVolume.setElem(new ECBufferedImage.BufferedImage(bufferedImage));
+        this.mapVolume.setElem(new ECBufferedImage(bufferedImage));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class Tubulaire4map extends Tubulaire3 {
     @Override
     public Point3D calculerPoint3D(double v, double u) { // INVERSER u,v => v,u . Ne suffit pas : problème de trous dans l'affichage.
         Point3D[] vectPerp = vectPerp(v, u);
-        double  lum = Lumiere.getDoubles(mapVolume.getElem().getRGB(getX(v), getY(u)))[0];
+        double  lum = Lumiere.getDoubles(mapVolume.getElem().bitmap.getPixel(getX(v), getY(u)))[0];
         Point3D plus = getSoulCurve().getElem().calculerPoint3D(u).plus(
                 vectPerp[1].mult(((FctXY) getDiameterFunction().getElem()).result(u) * lum).mult(Math.cos(2 * Math.PI * v))).plus(
                 vectPerp[2].mult(((FctXY) getDiameterFunction().getElem()).result(u) * lum).mult(Math.sin(2 * Math.PI * v)));

@@ -37,6 +37,7 @@
  */
 package one.empty3.library;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtRay;
 
@@ -54,7 +55,9 @@ public class TRI extends Representable {
     }
 
     public TRI(Point3D coordPoint3D, Point3D coordPoint3D0, Point3D coordPoint3D1) {
-        this(coordPoint3D, coordPoint3D0, coordPoint3D1, Color.black);
+        getSommet().setElem(coordPoint3D, 0);
+        getSommet().setElem(coordPoint3D0, 1);
+        getSommet().setElem(coordPoint3D1, 2);
     }
 
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
@@ -62,7 +65,7 @@ public class TRI extends Representable {
         sommet.setElem(point3d,  0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
-        this.texture(new TextureCol(red));
+        this.texture(new TextureCol(red.toArgb()));
     }
 
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
@@ -81,6 +84,11 @@ public class TRI extends Representable {
         this(s[0], s[1], s[2], c);
     }
 
+    public TRI(Point3D coordPoint3D, Point3D coordPoint3D0, Point3D coordPoint3D1, int black) {
+        this(coordPoint3D, coordPoint3D0, coordPoint3D1);
+        texture(new ColorTexture(black));
+    }
+
 
     public StructureMatrix<Point3D> getSommet() {
         return sommet;
@@ -97,7 +105,7 @@ public class TRI extends Representable {
 
 
     public void setCouleur(Color couleur) {
-        this.texture(new TextureCol(couleur));
+        this.texture(new TextureCol(couleur.toArgb()));
 
     }
 

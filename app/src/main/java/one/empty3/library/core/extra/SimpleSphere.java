@@ -38,6 +38,7 @@
  */
 package one.empty3.library.core.extra;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
 
 import java.awt.*;
@@ -144,7 +145,7 @@ public class SimpleSphere extends Representable implements TRIGenerable {
 
     @Override
     public String toString() {
-        return "\nSimpleSphere(\n\t" + centre.toString() + "\n\t" + radius + " \n\t" + "(" + color.getRed() + ", " + color.getGreen() + ", " + color.getBlue() + ")\n)\n";
+        return "\nSimpleSphere(\n\t" + centre.toString() + "\n\t" + radius + " \n\t" + "(" + color.red() + ", " + color.green() + ", " + color.blue() + ")\n)\n";
     }
 
 }

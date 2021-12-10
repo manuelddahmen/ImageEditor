@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
@@ -44,6 +45,10 @@ public class ImageIO {
          one.empty3.feature.app.replace.javax.imageio.ImageIO.write(imageOut, out.getName().substring(-3), out);
         fileOutputStream.close();
         return false;
+    }
+    public static boolean write(BufferedImage imageOut, String jpg, OutputStream out) throws IOException {
+        imageOut.bitmap.compress(Bitmap.CompressFormat.JPEG, 10, out);
+        return true;
     }
 
     /*

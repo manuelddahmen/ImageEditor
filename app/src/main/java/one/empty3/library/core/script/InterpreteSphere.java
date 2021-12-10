@@ -69,7 +69,7 @@ public class InterpreteSphere implements Interprete {
     }
 
 
-    public Object interprete(String text, int pos) throws InterpreteException {
+    public Object interprete(String text, int pos) throws InterpreteException, IOException {
         InterpretesBase base = new InterpretesBase();
         InterpretePoint3D point3D = new InterpretePoint3D();
         InterpreteNomFichier nomFichier = new InterpreteNomFichier();
@@ -107,15 +107,10 @@ public class InterpreteSphere implements Interprete {
         this.position = pos;
 
         TRISphere sphere = new TRISphere(centre, pos);
-        try {
-            sphere.texture(
-                    new TextureImg(new ECBufferedImage.BufferedImage(ImageIO.read(file))));
+        sphere.texture(
+                new TextureImg(new ECBufferedImage(ImageIO.read(file))));
 
-            return sphere;
-        } catch (IOException ex) {
-            Logger.getLogger(InterpreteSphere.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return sphere;
     }
 
 

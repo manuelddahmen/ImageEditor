@@ -43,6 +43,9 @@ import java.awt.*;
 
 import java.io.File;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
+
 
 /*__
  * @author manu
@@ -75,7 +78,7 @@ public class ImageTexture extends ITexture {
     @Override
     public int getColorAt(double x, double y) {
         Point2D trans = getCoord(x, y);
-        return couleur(trans.x / ecBufferedImageStructureMatrix.getElem().getWidth(), trans.y / ecBufferedImageStructureMatrix.getElem().getHeight()).getRGB();
+        return couleur(trans.x / ecBufferedImageStructureMatrix.getElem().getWidth(), trans.y / ecBufferedImageStructureMatrix.getElem().getHeight()).toArgb();
     }
 
     protected Color couleur(double rx, double ry) {
@@ -96,7 +99,7 @@ public class ImageTexture extends ITexture {
 
 
         int c = ecBufferedImageStructureMatrix != null ? ecBufferedImageStructureMatrix
-                .getElem().getRGB(x, y)
+                .getElem().bitmap.getPixel(x, y)
                 :
                 transparent;
         if (
@@ -108,9 +111,9 @@ public class ImageTexture extends ITexture {
                         transparent
 
                 )
-            return  one.empty3.feature.app.replace.java.awt.Color.Color(transparent);
+            return (Color) Color.Color(transparent);
         else
-            return  one.empty3.feature.app.replace.java.awt.Color.Color(c);
+            return (Color) Color.Color(c);
     }
 
 
@@ -153,7 +156,7 @@ public class ImageTexture extends ITexture {
     }
 
     public void setTransparent(Color tr) {
-        this.transparent = tr.getRGB();
+        this.transparent = tr.toArgb();
     }
 
     public void timeNext() {

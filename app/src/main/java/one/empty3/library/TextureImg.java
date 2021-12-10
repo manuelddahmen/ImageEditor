@@ -39,6 +39,7 @@ package one.empty3.library;
 
 //import org.monte.media.avi.AVIReader;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
@@ -61,7 +62,7 @@ public class TextureImg extends ITexture {
     //private AVIReader reader;
     private int track = 0;
     private File avifile = null;
-    private int transparent = Color.TRANSLUCENT;
+    private int transparent = Color.TRANSPARENT;
 
     public TextureImg() {
 
@@ -99,7 +100,7 @@ public class TextureImg extends ITexture {
 
 
         int c = image != null ? image
-                .getElem().getRGB(x, y)
+                .getElem().bitmap.getPixel(x, y)
                 :
                 transparent;
         if(c==transparent)
@@ -134,7 +135,7 @@ public class TextureImg extends ITexture {
 
 
     public void setTransparent(Color tr) {
-        this.transparent = tr.getRGB();
+        this.transparent = tr.toArgb();
     }
 
     public void timeNext() {

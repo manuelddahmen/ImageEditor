@@ -32,6 +32,7 @@
 
 package one.empty3.library.core.script;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.TextureCol;
@@ -73,7 +74,7 @@ public class InterpreteTexture implements Interprete {
             pos = ic.getPosition();
             pass = true;
 
-            tc = new TextureCol(c);
+            tc = new TextureCol(c.toArgb());
 
         } catch (InterpreteException ex) {
         }
@@ -86,12 +87,7 @@ public class InterpreteTexture implements Interprete {
                 pos = inf.getPosition();
                 pass = true;
 
-                try {
-                    tc = new TextureImg(new ECBufferedImage.BufferedImage(ImageIO.read(f)));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                tc = new TextureImg(new ECBufferedImage(ImageIO.read(f)));
             } catch (InterpreteException ex) {
             }
         }
