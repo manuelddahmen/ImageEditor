@@ -1,5 +1,6 @@
 package one.empty3.library;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import java.io.File;
@@ -28,18 +29,6 @@ public class ImageContainer extends Representable implements ResourceLoader {
         declareProperties();
     }
 
-    public ImageContainer(URL url) {
-        this.isMovie = isMovie;
-        this.url.setElem(url);
-        if (url != null) {
-            try {
-                image.setElem(ImageIO.read(url));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        declareProperties();
-    }
 
     public ImageContainer() {
         this.isMovie = isMovie;
@@ -79,7 +68,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
     @Override
     public void load() {
         if (url!=null && hasChanged(url.getElem()) && url.getElem() != null) {
-            loadImage(url.getElem());
+//            loadImage(url.getElem());
             isMovie = false;
         } else if (path!=null &&hasChanged(path.getElem()) && path.getElem() != null) {
             loadImage(path.getElem());
@@ -110,15 +99,6 @@ public class ImageContainer extends Representable implements ResourceLoader {
 
     }
 
-    private void loadImage(URL url) {
-        if (url != null) {
-            try {
-                image.setElem(ImageIO.read(url));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
     private void loadVideo(File path) {

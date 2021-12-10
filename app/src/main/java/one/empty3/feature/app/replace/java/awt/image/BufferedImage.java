@@ -6,6 +6,11 @@ import android.graphics.Bitmap;
 
 public class BufferedImage {
     public Bitmap bitmap;
+
+    public BufferedImage(Bitmap image) {
+        this.bitmap = image ;
+    }
+
     public static Bitmap BufferedImage(int width, int height, Bitmap.Config config) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
         return bitmap;

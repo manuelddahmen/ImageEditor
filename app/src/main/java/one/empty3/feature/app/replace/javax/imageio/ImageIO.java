@@ -4,11 +4,15 @@ package one.empty3.feature.app.replace.javax.imageio;
 //import android.graphics.BitmapFactory;
 
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
@@ -25,7 +29,7 @@ public class ImageIO {
         return null;
     }
 
-    private static BufferedImage read(FileInputStream fileInputStream) {
+    public static BufferedImage read(FileInputStream fileInputStream) {
         one.empty3.feature.app.replace.java.awt.image.BufferedImage bitmap2 =  one.empty3.feature.app.replace.javax.imageio.ImageIO.read(fileInputStream);
         try {
             fileInputStream.close();

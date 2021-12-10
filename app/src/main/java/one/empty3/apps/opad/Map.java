@@ -42,6 +42,8 @@ Global license :
 
 package one.empty3.apps.opad;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.Point3D;
 
 import java.awt.*;
@@ -72,7 +74,7 @@ public abstract class Map {
 
     public abstract BufferedImage genererImage();
 
-    public abstract void initCard(int width, int height, Color [][] objet);
+    public abstract void initCard(int width, int height, Color[][] objet);
 
     public int getWidth() {
         return width;

@@ -42,6 +42,10 @@ Global license :
 
 package one.empty3.apps.opad;
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 import one.empty3.library.Polygon;
 
@@ -98,7 +102,7 @@ public class SimpleMap extends Map
     @Override
     public BufferedImage genererImage() {
         prepareImage();
-        return z.image();
+        return new BufferedImage(z.image());
     }
 
     @Override

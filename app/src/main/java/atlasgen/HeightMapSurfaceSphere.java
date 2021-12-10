@@ -2,6 +2,7 @@ package atlasgen;
 
 import android.graphics.Bitmap;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
 import java.awt.*;
@@ -20,11 +21,11 @@ class HeightMapSurfaceSphere extends HeightMapSurface {
     }
 
     public HeightMapSurfaceSphere(Axe axe, double radius, Bitmap bi) {
-        super(new Sphere(axe, radius), bi);
+        super(new Sphere(axe, radius), new BufferedImage(bi));
     }
 
     public Point3D height(double u, double v) {
-        int i = (int) (u * (image.getElem().getImage().getElem().getWidth() ));
+        int i = (int) (u * (image.getElem().getImage().getElem().getWidth()));
         int j = (int) (v * (image.getElem().getImage().getElem().getHeight()));
         if(i<0) i = 0;
         if(j<0) j = 0;
@@ -33,7 +34,7 @@ class HeightMapSurfaceSphere extends HeightMapSurface {
 
         Point3D mult = surface.getElem().calculerPoint3D(u, v).moins(((Sphere) surface.getElem()).getCircle().getCenter()).norme1().
                 mult((
-                                image.getElem().getImage().getElem().getRGB(i, j)&0x00FF0000>>16)/256.);
+                                image.getElem().getImage().getElem().bitmap.getPixel(i, j)&0x00FF0000>>16)/256.);
         return mult
 
 
