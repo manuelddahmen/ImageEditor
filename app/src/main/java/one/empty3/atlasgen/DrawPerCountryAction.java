@@ -32,19 +32,21 @@
 
 package one.empty3.atlasgen;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.lighting.Colors;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /*__
  * Created by Manuel Dagmen on 29-06-18.
  */
 public class DrawPerCountryAction implements Action {
-    private boolean firstPass = false;
-    private Map<String, Color> colors = new HashMap<String, Color>();
+    private final boolean firstPass = false;
+    private final Map<String, Color> colors = new HashMap<String, Color>();
 
-    private Pixeler pixeler;
+    private final Pixeler pixeler;
 
     public DrawPerCountryAction(Pixeler pixeler) {
         this.pixeler = pixeler;
@@ -68,7 +70,7 @@ public class DrawPerCountryAction implements Action {
         pixeler.pixelize(
                 (int) ((Double.parseDouble(lineArray[longitudeColumn]) / 180 + 1) / 2 * pixeler.getImage().getWidth()),
                 (int) ((-Double.parseDouble(lineArray[lattitudeColumn]) / 90 + 1) / 2 * pixeler.getImage().getHeight()),
-                colors.get(countryCode)
+                Objects.requireNonNull(colors.get(countryCode))
         );
     }
 }
