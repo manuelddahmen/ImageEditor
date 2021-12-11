@@ -40,7 +40,7 @@ package one.empty3.library.core.script;
 import one.empty3.library.*;
 import one.empty3.library.*;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 public class InterpreteBezier implements Interprete {

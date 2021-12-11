@@ -5,7 +5,7 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 
 import java.io.FileInputStream;
 import java.io.InputStream;

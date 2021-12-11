@@ -43,7 +43,7 @@ import one.empty3.library.TextureCol;
 import one.empty3.library.TextureImg;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

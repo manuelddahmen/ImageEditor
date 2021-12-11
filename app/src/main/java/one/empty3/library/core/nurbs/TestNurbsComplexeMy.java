@@ -46,7 +46,7 @@ import one.empty3.library.TextureCol;
 import one.empty3.library.core.move.Trajectoires;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import java.awt.*;
+
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

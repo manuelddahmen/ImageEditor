@@ -8,7 +8,7 @@ import one.empty3.library.core.nurbs.ExtrusionCurveCurve;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Extrusion;
 
-import java.awt.*;
+
 
 public class TeteBonhomme extends RepresentableConteneur {
     public TeteBonhomme() {

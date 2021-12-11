@@ -39,7 +39,7 @@ import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.SurfaceElem;
 
-import java.awt.*;
+
 
 /*__
  * @author Manuel

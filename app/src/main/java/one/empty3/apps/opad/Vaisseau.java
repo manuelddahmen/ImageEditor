@@ -44,7 +44,7 @@ package one.empty3.apps.opad;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Cube;
 
-import java.awt.*;
+
 import java.util.ResourceBundle;
 
 /*__

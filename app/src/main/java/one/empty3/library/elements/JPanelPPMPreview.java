@@ -37,7 +37,7 @@ import one.empty3.library.Scene;
 import one.empty3.library.core.raytracer.RtScene;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.io.File;
 
 public class JPanelPPMPreview extends JPanel

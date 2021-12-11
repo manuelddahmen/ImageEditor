@@ -48,7 +48,7 @@ import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.gdximports.gdx_BSplineCurve;
 import one.empty3.library.core.nurbs.*;
 
-import java.awt.*;
+
 import java.util.Iterator;
 import java.util.Objects;
 

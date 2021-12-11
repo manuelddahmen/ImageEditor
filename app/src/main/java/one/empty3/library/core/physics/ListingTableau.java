@@ -14,7 +14,7 @@ package one.empty3.library.core.physics;
 
 import one.empty3.library.Point3D;
 
-import java.awt.*;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;

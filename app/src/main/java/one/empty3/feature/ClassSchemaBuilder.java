@@ -43,7 +43,7 @@ import one.empty3.library.Point2D;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

@@ -4,7 +4,7 @@ import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class HumainCourt extends RepresentableConteneur {
     protected double t;

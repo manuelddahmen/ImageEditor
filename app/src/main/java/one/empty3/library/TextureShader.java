@@ -5,7 +5,7 @@ import one.empty3.library.shader.*;
 import one.empty3.library.core.testing.*;
 import one.empty3.library.*;
 import one.empty3.library.core.lighting.*;
-import java.awt.*;
+
 import one.empty3.library.core.nurbs.*;
 import java.awt.image.*;
 import java.util.*;

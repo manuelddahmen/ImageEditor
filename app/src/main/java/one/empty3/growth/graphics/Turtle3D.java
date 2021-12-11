@@ -50,7 +50,7 @@ package one.empty3.growth.graphics;
 
 import one.empty3.library.*;
 
-import java.awt.*;
+
 
 public class Turtle3D {
     private Rotation2 rotation;

@@ -5,7 +5,7 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomiale;
 import one.empty3.library.core.nurbs.ExtrusionB1B1;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import java.awt.*;
+
 
 public class TeteBonhomme extends RepresentableConteneur {
     public TeteBonhomme() {

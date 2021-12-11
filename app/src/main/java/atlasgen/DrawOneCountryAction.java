@@ -36,7 +36,7 @@ import one.empty3.library.ITexture;
 import one.empty3.library.Point2D;
 import one.empty3.library.core.lighting.Colors;
 
-import java.awt.*;
+
 import java.util.HashMap;
 import java.util.Map;
 

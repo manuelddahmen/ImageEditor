@@ -43,7 +43,7 @@ package one.empty3.library;
  * PACKAGE be.ibiiztera.md.pmatrix.pushmatrix OWNER DAHMEN MANUEL
  */
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 public class LumiereScene {/*

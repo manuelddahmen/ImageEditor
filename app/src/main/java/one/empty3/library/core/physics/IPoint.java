@@ -34,7 +34,7 @@ package one.empty3.library.core.physics;
 
 import one.empty3.library.*;
 
-import java.awt.*;
+
 
 public interface IPoint {
     Color getColor();

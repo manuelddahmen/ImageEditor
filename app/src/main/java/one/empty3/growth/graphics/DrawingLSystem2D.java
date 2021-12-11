@@ -162,7 +162,7 @@ package one.empty3.growth.graphics;
 
 import one.empty3.growth.*;
 
-import java.awt.*;
+
 import java.util.HashMap;
 
 public class DrawingLSystem2D {

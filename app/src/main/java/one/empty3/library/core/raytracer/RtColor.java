@@ -32,7 +32,8 @@
 
 package one.empty3.library.core.raytracer;
 
-import java.awt.*;
+
+import android.graphics.Color;
 
 public class RtColor {
     public double red, green, blue, alpha;    // Les trois composantes de la couleur
@@ -63,10 +64,10 @@ public class RtColor {
     }
 
     public RtColor(Color color) {
-        red = color.getRed();
-        green = color.getGreen();
-        blue = color.getBlue();
-        alpha = color.getAlpha();
+        red = color.red();
+        green = color.green();
+        blue = color.blue();
+        alpha = color.alpha();
 
     }
 

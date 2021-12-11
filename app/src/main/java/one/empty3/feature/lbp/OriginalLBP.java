@@ -3,7 +3,7 @@ package one.empty3.feature.lbp;
 import one.empty3.feature.PixM;
 import one.empty3.library.Point3D;
 
-import java.awt.*;
+
 
 public class OriginalLBP {
     private final PixM pixM;

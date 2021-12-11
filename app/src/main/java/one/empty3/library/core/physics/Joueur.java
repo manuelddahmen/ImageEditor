@@ -32,7 +32,7 @@
 
 package one.empty3.library.core.physics;
 
-import java.awt.*;
+
 import java.net.URL;
 
 

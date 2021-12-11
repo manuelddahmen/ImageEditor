@@ -35,7 +35,7 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;

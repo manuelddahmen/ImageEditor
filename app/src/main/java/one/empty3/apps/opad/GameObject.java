@@ -32,7 +32,7 @@
 
 package one.empty3.apps.opad;
 
-import java.awt.*;
+
 
 public class GameObject {
     private Point position = new Point(0,0);

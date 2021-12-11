@@ -6,7 +6,7 @@ import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 /*

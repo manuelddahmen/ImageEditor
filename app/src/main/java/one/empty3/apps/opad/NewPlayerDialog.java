@@ -33,7 +33,7 @@
 package one.empty3.apps.opad;
 
 import javax.swing.*;
-import java.awt.*;
+
 
 /*__
  * Created by Win on 26-10-18.

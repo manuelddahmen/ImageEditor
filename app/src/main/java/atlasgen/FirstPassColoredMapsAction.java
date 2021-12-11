@@ -34,7 +34,7 @@ package atlasgen;
 
 import one.empty3.library.core.lighting.Colors;
 
-import java.awt.*;
+
 import java.util.HashMap;
 
 /*__

@@ -44,7 +44,7 @@ package one.empty3.apps.opad;
 
 import one.empty3.library.Point3D;
 
-import java.awt.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

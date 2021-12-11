@@ -7,7 +7,7 @@ import one.empty3.library.ZBufferImpl;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class TestHumainMarche2 extends TestObjetSub {
     public void tubeAddPoint(Tubulaire3 tube, Point3D p) {

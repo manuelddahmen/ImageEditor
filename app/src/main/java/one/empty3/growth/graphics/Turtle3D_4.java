@@ -67,7 +67,7 @@ package one.empty3.growth.graphics;
 
 import one.empty3.library.*;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

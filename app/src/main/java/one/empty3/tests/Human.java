@@ -6,7 +6,7 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 import one.empty3.library.core.nurbs.ExtrusionCurveCurve;
 import one.empty3.library.core.tribase.TubulaireN2;
 
-import java.awt.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;

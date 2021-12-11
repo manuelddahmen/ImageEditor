@@ -5,7 +5,7 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class HumanSmoke extends RepresentableConteneur {
     protected double t;

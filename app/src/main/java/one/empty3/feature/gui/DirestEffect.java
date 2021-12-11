@@ -14,7 +14,7 @@ import one.empty3.feature.motion.Motion;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;

@@ -36,7 +36,7 @@ package atlasgen;
 import one.empty3.library.Point2D;
 import one.empty3.library.Representable;
 
-import java.awt.*;
+
 import java.util.HashMap;
 import java.util.Map;
 

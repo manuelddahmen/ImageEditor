@@ -38,7 +38,7 @@ import one.empty3.library.Representable;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

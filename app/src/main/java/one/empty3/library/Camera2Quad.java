@@ -4,7 +4,7 @@ import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;
 import one.empty3.library.core.nurbs.Quad2Volume;
 
-import java.awt.*;
+
 
 public class Camera2Quad extends Camera {
     protected final StructureMatrix<Polygon> near = new StructureMatrix(0, Polygon.class);

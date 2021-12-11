@@ -6,7 +6,7 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class TestHumainMarche extends TestObjetSub {
     public void tubeAddPoint(Tubulaire3 tube, Point3D p) {

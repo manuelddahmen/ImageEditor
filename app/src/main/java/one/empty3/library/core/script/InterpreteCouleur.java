@@ -37,7 +37,7 @@
  */
 package one.empty3.library.core.script;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 public class InterpreteCouleur implements Interprete {

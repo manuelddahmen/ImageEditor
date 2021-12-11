@@ -45,7 +45,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import java.awt.*;
+
 //import nurbs.Axes;
 
 /*__

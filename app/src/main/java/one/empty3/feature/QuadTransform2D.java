@@ -2,7 +2,7 @@ package one.empty3.feature;
 
 import one.empty3.library.Point3D;
 
-import java.awt.*;
+
 
 
 public class QuadTransform2D {

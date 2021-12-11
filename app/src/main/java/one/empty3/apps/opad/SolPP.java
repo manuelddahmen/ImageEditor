@@ -49,7 +49,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.RepresentableConteneur;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
-import java.awt.*;
+
 
 /*__
  *

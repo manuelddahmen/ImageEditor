@@ -40,7 +40,7 @@ import one.empty3.library.core.nurbs.PcOnPs;
 import one.empty3.library.core.testing.TestObjetSub;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 
 import java.io.File;
 import java.io.IOException;

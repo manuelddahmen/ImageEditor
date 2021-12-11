@@ -5,7 +5,7 @@ import one.empty3.library.Polygon;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class TestHumainCourt extends TestObjetSub {
     public void tubeAddPoint(Tubulaire3 tube, Point3D p) {

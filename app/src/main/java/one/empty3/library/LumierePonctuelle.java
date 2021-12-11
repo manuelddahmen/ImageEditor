@@ -40,7 +40,7 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

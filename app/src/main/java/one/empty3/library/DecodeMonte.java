@@ -5,7 +5,7 @@ import ru.sbtqa.monte.media.FormatKeys.*;
 import java.io.*;
 
 
-import java.awt.*;
+
 import java.awt.geom.Line2D;
 
 import java.awt.image.IndexColorModel;

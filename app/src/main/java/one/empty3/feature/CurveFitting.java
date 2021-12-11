@@ -8,7 +8,7 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomiale;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

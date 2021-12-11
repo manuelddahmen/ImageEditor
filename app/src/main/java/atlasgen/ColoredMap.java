@@ -38,7 +38,7 @@ import android.graphics.Bitmap;
 import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 
 import java.io.File;
 import java.io.IOException;

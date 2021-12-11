@@ -32,7 +32,7 @@
 
 package one.empty3.apps.opad;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 /*__

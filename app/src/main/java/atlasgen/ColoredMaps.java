@@ -32,11 +32,13 @@
 
 package atlasgen;
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.core.lighting.Colors;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -73,17 +75,14 @@ public class ColoredMaps {
                     "Colored Maps map " + countryCode
             );
             try {
-                BufferedImage image = BufferedImage.BufferedImage(1800,
+                Bitmap image = BufferedImage.BufferedImage(1800,
                         (int)
                                 Ratio.imageHeight(myDim.latitudeExtend(),
                                         myDim.longitudeExtend(),
                                         0,
                                         1800),
-Bitmap.Config.RGB565);
+Bitmap.Config.RGB_565);
                 Pixeler pixeler = new Pixeler(image);
-                Graphics graphics = image.getGraphics();
-                graphics.setColor( one.empty3.feature.app.replace.java.awt.Color.Color(Color.TRANSLUCENT));
-                graphics.fillRect(0, 0, image.getWidth() - 1, image.getHeight() - 1);
 
                 CsvReader csvReader1 = new CsvReader(new File("allCountries/allCountries.txt"),
                         "" + '\t', "" + '\n', false);

@@ -3,7 +3,7 @@ package one.empty3.feature;
 import one.empty3.feature.jviolajones.Detector;
 import one.empty3.io.ProcessFile;
 
-import java.awt.*;
+
 import java.io.*;
 import java.util.List;
 

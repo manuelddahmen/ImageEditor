@@ -115,7 +115,7 @@ package one.empty3.growth.graphics;
 import one.empty3.library.Matrix33;
 import one.empty3.library.Point3D;
 
-import java.awt.*;
+
 
 public class Turtle2D {
     private Color zeColor = Color.GRAY;

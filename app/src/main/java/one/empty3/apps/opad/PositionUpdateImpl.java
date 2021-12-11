@@ -36,7 +36,7 @@ import one.empty3.apps.opad.help.BonusClass;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricLine;
 
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ConcurrentModificationException;

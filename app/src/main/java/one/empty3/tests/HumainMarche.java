@@ -5,7 +5,7 @@ import one.empty3.library.core.nurbs.*;
 import one.empty3.library.core.raytracer.tree.*;
 import one.empty3.library.core.tribase.*;
 
-import java.awt.*;
+
 import java.util.HashMap;
 import java.util.function.Predicate;
 

@@ -7,7 +7,7 @@ import one.empty3.library.ZBufferImpl;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 import one.empty3.library.core.testing.TestObjetSub;
 
-import java.awt.*;
+
 
 public class TestBezierSans0 extends TestObjetSub {
 

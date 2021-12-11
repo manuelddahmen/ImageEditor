@@ -1,6 +1,6 @@
 package one.empty3.feature.gui;/*package one.empty3.feature.gui;
 
-import java.awt.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;

@@ -7,7 +7,7 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.core.lighting.Colors;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 
 import java.io.File;
 import java.io.IOException;

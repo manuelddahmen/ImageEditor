@@ -1,7 +1,7 @@
 package one.empty3.feature;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import java.awt.*;
+
 
 import java.awt.image.RescaleOp;
 import java.io.File;

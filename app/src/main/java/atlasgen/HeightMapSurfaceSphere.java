@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
-import java.awt.*;
+
 
 
 class HeightMapSurfaceSphere extends HeightMapSurface {

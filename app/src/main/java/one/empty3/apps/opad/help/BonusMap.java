@@ -37,7 +37,7 @@
  */
 package one.empty3.apps.opad.help;
 
-import java.awt.*;
+
 import java.util.HashMap;
 
 /*__

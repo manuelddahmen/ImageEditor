@@ -31,10 +31,11 @@
  */
 package one.empty3.library;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
-import java.awt.*;
+
 import java.util.List;
 
 /*__
@@ -459,7 +460,7 @@ public class Point3D extends Representable {
     @Override
     public void drawStructureDrawFast(ZBuffer z) {
 
-        z.testDeep(this,  one.empty3.feature.app.replace.java.awt.Color.Color(CFAST.getColorAt(0.5, 0.5)));
+        z.testDeep(this, (Color) Color.Color(CFAST.getColorAt(0.5, 0.5)));
 
     }
 
@@ -611,10 +612,11 @@ public class Point3D extends Representable {
     }*/
 
     public Color toColor() {
-        return  one.empty3.feature.app.replace.java.awt.Color.Color((float)(double)(get(0)), (float)(double)(get(1)), (float)(double)(get(2)));
+        return (Color) Color.Color((float)(double)(get(0)), (float)(double)(get(1)), (float)(double)(get(2)));
     }
     public static Point3D fromColor(Color color) {
-        float[] colorComponents = color.getColorComponents(new float[3]);
+        float[] colorComponents = new float[3];
+        color.getComponents();
         Point3D point3D = new Point3D(3);
         for(int i=0; i< colorComponents.length; i++)
             point3D.set(i, (double)colorComponents[i]);

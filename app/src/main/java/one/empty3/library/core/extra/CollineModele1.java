@@ -33,7 +33,7 @@ package one.empty3.library.core.extra;
 
 import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
-import java.awt.*;
+
 import java.util.Random;
 
 /*__

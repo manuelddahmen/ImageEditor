@@ -44,7 +44,7 @@ import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.extra.SimpleSphere;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 /*__

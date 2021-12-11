@@ -1,7 +1,7 @@
 package one.empty3.feature.jviolajones;
 
 
-import java.awt.*;
+
 
 import one.empty3.feature.jviolajones.Rect;
 import one.empty3.feature.jviolajones.Tree;

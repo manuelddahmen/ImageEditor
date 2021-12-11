@@ -41,7 +41,7 @@ import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtRay;
 
-import java.awt.*;
+
 
 public class TRI extends Representable {
 

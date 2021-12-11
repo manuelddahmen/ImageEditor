@@ -36,7 +36,7 @@ import one.empty3.library.*;
 import one.empty3.library.Polygon;
 import one.empty3.library.core.nurbs.*;
 
-import java.awt.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

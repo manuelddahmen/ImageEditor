@@ -6,7 +6,7 @@ import one.empty3.library.core.nurbs.FctXY;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class TestChien extends TestObjetSub {
 

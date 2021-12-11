@@ -37,7 +37,7 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+
 
 public class Tetraedre extends Representable implements TRIGenerable {
 

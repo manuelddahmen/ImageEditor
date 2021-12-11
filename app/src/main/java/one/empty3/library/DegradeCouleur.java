@@ -44,7 +44,7 @@ package one.empty3.library;/*
 
 import one.empty3.library.*;
 
-import java.awt.*;
+
 
 public interface DegradeCouleur {
 

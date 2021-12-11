@@ -45,7 +45,7 @@ import one.empty3.library.core.tribase.TRIEllipsoide;
 import one.empty3.library.core.tribase.TRISphere;
 import one.empty3.library.core.tribase.Tubulaire;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

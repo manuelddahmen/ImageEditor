@@ -32,7 +32,8 @@
 
 package atlasgen;
 
-import java.awt.*;
+
+import one.empty3.feature.app.replace.java.awt.Color;
 
 /*__
  * Created by manue on 19-06-18.
@@ -44,7 +45,7 @@ public class DrawAction implements Action {
 
     public DrawAction(Pixeler pixeler, int color) {
         this.pixeler = pixeler;
-        this.color = color;
+        this.color = (Color) Color.valueOf(color);
     }
 
 

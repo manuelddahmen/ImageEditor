@@ -6,7 +6,7 @@ import one.empty3.library.core.lighting.Colors;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 import one.empty3.library.core.nurbs.ExtrusionCurveCurve;
 
-import java.awt.*;
+
 
 public class Chassis extends RepresentableConteneur {
     private final Voiture voiture;

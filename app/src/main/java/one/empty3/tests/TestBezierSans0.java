@@ -7,7 +7,7 @@ import one.empty3.library.core.testing.Resolution;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.Tubulaire3;
 
-import java.awt.*;
+
 
 public class TestBezierSans0 extends TestObjetSub {
 

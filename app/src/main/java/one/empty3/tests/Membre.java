@@ -5,7 +5,7 @@ import one.empty3.library.Matrix33;
 import one.empty3.library.Representable;
 import one.empty3.library.core.lighting.Colors;
 
-import java.awt.*;
+
 
 public class Membre {
     private final Representable representable;

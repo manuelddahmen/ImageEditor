@@ -41,7 +41,7 @@ import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
-import java.awt.*;
+
 
 
 /*__

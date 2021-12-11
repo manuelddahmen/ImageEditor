@@ -49,7 +49,7 @@ import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 import one.empty3.library.Polygon;
 
-import java.awt.*;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;

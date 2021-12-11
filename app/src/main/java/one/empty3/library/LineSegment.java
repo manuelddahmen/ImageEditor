@@ -41,7 +41,7 @@ import one.empty3.library.core.lighting.Infini;
 import one.empty3.library.core.nurbs.CurveElem;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import java.awt.*;
+
 
 /*__
  * @author MANUEL DAHMEN

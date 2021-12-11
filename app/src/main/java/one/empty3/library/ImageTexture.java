@@ -39,7 +39,7 @@ package one.empty3.library;
 
 //import org.monte.media.avi.AVIReader;
 
-import java.awt.*;
+
 
 import java.io.File;
 

@@ -5,7 +5,7 @@ import one.empty3.library.LineSegment;
 import one.empty3.library.Point2D;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 

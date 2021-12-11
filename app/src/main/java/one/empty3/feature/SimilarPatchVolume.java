@@ -4,7 +4,7 @@ package one.empty3.feature;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
-import java.awt.*;
+
 
 import java.io.File;
 import java.io.IOException;

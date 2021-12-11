@@ -34,7 +34,7 @@ package one.empty3.apps.opad;
 
 import one.empty3.library.Point2D;
 
-import java.awt.*;
+
 
 public class Plasma {
     public static double scale;

@@ -51,7 +51,7 @@ import one.empty3.library.Representable;
 import one.empty3.library.Sphere;
 import one.empty3.library.core.tribase.TubulaireN;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

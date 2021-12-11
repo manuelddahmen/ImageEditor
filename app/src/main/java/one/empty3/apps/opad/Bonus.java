@@ -40,7 +40,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Representable;
 import one.empty3.library.RepresentableConteneur;
 
-import java.awt.*;
+
 import java.util.Random;
 import java.util.ResourceBundle;
 

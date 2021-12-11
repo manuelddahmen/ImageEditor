@@ -6,7 +6,7 @@ import one.empty3.library.core.testing.TestObjet;
 import one.empty3.library.core.testing.TestObjetSub;
 import one.empty3.library.core.tribase.TubulaireN2;
 
-import java.awt.*;
+
 
 public class TestHuman extends TestObjetSub {
 
