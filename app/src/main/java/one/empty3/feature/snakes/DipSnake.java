@@ -2,6 +2,7 @@ package one.empty3.feature.snakes;
 
 import one.empty3.feature.M;
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;

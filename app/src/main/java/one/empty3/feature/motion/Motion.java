@@ -3,6 +3,7 @@ package one.empty3.feature.motion;
 import one.empty3.feature.ClassSchemaBuilder;
 import one.empty3.feature.Linear;
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 
 import java.util.ArrayList;
@@ -14,11 +15,7 @@ import java.util.ArrayList;
 public abstract class Motion /*extends ProcessFile */ {
     public static final int BUFFER_MAX_FRAMES = 26;
     public ArrayList<BufferedImage> frames = new ArrayList<>();
-    private ClassSchemaBuilder main;
 
-    public void setMain(ClassSchemaBuilder main) {
-        this.main = main;
-    }
 
 
     public boolean addFrame(BufferedImage bufferedImage) {

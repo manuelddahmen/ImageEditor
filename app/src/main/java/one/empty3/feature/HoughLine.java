@@ -1,6 +1,7 @@
 package one.empty3.feature;
 
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 /*
  * Represents a linear line as detected by the hough transform.
@@ -53,7 +54,7 @@ public class HoughLine implements Comparable {
             for (int y = 0; y < height; y++) {
                 int x = (int) ((((r - houghHeight) - ((y - centerY) * tsin)) / tcos) + centerX);
                 if (x < width && x >= 0) {
-                    image.setPixel(x, y, color);
+                    image.bitmap.setPixel(x, y, color);
                 }
             }
         } else {
@@ -61,7 +62,7 @@ public class HoughLine implements Comparable {
             for (int x = 0; x < width; x++) {
                 int y = (int) ((((r - houghHeight) - ((x - centerX) * tcos)) / tsin) + centerY);
                 if (y < height && y >= 0) {
-                    image.setPixel(x, y, color);
+                    image.bitmap.setPixel(x, y, color);
                 }
             }
         }

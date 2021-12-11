@@ -3,14 +3,18 @@ package one.empty3.feature;
 
 
 
+import android.graphics.Bitmap;
+
 import one.empty3.feature.FilterPixM;
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 public class SelectPointColorMassAglo extends FilterPixM {
     private double[] tmpColor = new double[3];
     private double[] rgb;
 
-    public SelectPointColorMassAglo(BufferedImage image) {
-        super(image);
+    public SelectPointColorMassAglo(Bitmap image) {
+        super(new BufferedImage(image));
     }
 
     public double[] getColor(int x, int y) {
@@ -69,10 +73,10 @@ public class SelectPointColorMassAglo extends FilterPixM {
     }
 
     public Color getTmpColor() {
-        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) (tmpColor[0]), (float) (tmpColor[1]), (float) (tmpColor[2]));
+        return (Color) Color.Color((float) (tmpColor[0]), (float) (tmpColor[1]), (float) (tmpColor[2]));
     }
 
     public void setTmpColor(Color tmpColor) {
-        this.tmpColor = new double[]{tmpColor.getRed(), tmpColor.getGreen(), tmpColor.getBlue()};
+        this.tmpColor = new double[]{tmpColor.red(), tmpColor.green(), tmpColor.blue()};
     }
 }

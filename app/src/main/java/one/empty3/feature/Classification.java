@@ -2,6 +2,8 @@ package one.empty3.feature;
 
 import one.empty3.feature.PixM;
 import one.empty3.feature.SelectPointColorMassAglo;
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
 import one.empty3.library.core.lighting.Colors;
@@ -27,32 +29,24 @@ public class Classification extends ProcessFile {
             return false;
         one.empty3.feature.PixM selectPointColorMassAglo = null;
         BufferedImage read = null;
-        try {
-            read = ImageIO.read(in);
-            selectPointColorMassAglo = PixM.getPixM(read, maxRes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            imageOut = ImageIO.read(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        read = ImageIO.read(in);
+        selectPointColorMassAglo = PixM.getPixM(read, maxRes);
+        imageOut = ImageIO.read(in);
         assert selectPointColorMassAglo != null;
-        SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read);
-        int color = Color.WHITE.getRGB();
+        SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read.bitmap);
+        int color = Color.WHITE;
         for (int i = 0; i < selectPointColorMassAglo1.getColumns(); i += 1)
             for (int j = 0; j < selectPointColorMassAglo1.getLines(); j += 1) {
                 selectPointColorMassAglo1.setTmpColor(Colors.random());
                 double v = selectPointColorMassAglo1.averageCountMeanOf(i, j, SIZE, SIZE, threshold);
                 if (v > ratio) {
-                    imageOut.setPixel(i, j, color);/*selectPointColorMassAglo.getChosenColor().getRGB()*/
+                    imageOut.bitmap.setPixel(i, j, color);/*selectPointColorMassAglo.getChosenColor().getRGB()*/
                 } else {
-                    double[] doubles = Lumiere.getDoubles(read.getRGB(i, j));
+                    double[] doubles = Lumiere.getDoubles(read.bitmap.getPixel(i, j));
                     /*for(int c=0; c<3; c++)
                         doubles[c] = doubles[c]/3;
 */
-                    imageOut.setPixel(i, j, Lumiere.getInt(doubles));
+                    imageOut.bitmap.setPixel(i, j, Lumiere.getInt(doubles));
                 }
             }
 

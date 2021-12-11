@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import one.empty3.feature.M3;
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 public class Linear {
     private int type = 0;

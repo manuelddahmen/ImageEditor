@@ -7,6 +7,7 @@ import java.util.Random;
 
 import one.empty3.feature.FilterPixM;
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 public class M3 {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
@@ -102,8 +103,8 @@ public class M3 {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
-                int rgb = image.getRGB((int) (1.0 * i / columns * image.getWidth()), (int) (1.0 * j / lines * image.getHeight()));
-                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
+                int rgb = image.getBitmap().getPixel((int) (1.0 * i / columns * image.getWidth()), (int) (1.0 * j / lines * image.getHeight()));
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getComponents(colorComponents);
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int com = 0; com < getCompCount(); com++) {
@@ -123,8 +124,8 @@ public class M3 {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
-                int rgb = image.getRGB(i, j);
-                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getColorComponents(colorComponents);
+                int rgb = image.getBitmap().getPixel(i, j);
+                colorComponents =  one.empty3.feature.app.replace.java.awt.Color.Color(rgb).getComponents(colorComponents);
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int com = 0; com < getCompCount(); com++) {

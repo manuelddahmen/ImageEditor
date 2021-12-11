@@ -3,6 +3,7 @@ package one.empty3.feature;
 
 
 import one.empty3.feature.PixM;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 public abstract class FilterPixM extends one.empty3.feature.PixM {
     public final static int NORM_NONE = 0;

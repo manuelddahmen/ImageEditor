@@ -1,5 +1,8 @@
 package one.empty3.feature;
 
+import android.graphics.Bitmap;
+
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 
@@ -128,23 +131,16 @@ public class Histogram {
         for (int i = 0; i < levels; i++) {
             try {
                 BufferedImage img = file;
-                BufferedImage img2 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
-Bitmap.Config.RGB565);
-                BufferedImage img3 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
-Bitmap.Config.RGB565);
+                Bitmap img2 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB_565);
+                Bitmap img3 = BufferedImage.BufferedImage(img.getWidth(), img.getHeight(),
+Bitmap.Config.RGB_565);
                 Histogram histogram = new Histogram(new PixM(img), levels, min, radiusIncr, 0.1);
                 int finalI = i;
                 List<Circle> pointsOfInterest = histogram.getPointsOfInterest(0.1);
                 pointsOfInterest.stream().forEach(circle -> {
                     if (circle.i >= min /*<histogram.diffLevel* finalI*/) {
-                        Graphics graphics = img.getGraphics();
-                        graphics.setColor(Color.WHITE);
-                        graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
-                        graphics = img2.getGraphics();
-                        Color color =  one.empty3.feature.app.replace.java.awt.Color.Color((float) circle.i, 0f, (float) (circle.i / circle.r));
-                        graphics.setColor(color);
-                        graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
-                        img3.setPixel((int) (circle.x), (int) (circle.y), color.getRGB());
+                        Bitmap graphics = img.getBitmap();
                     }
                 });
                 pointsOfInterest.sort(new Comparator<Circle>() {

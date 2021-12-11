@@ -47,7 +47,7 @@ import java.util.logging.Logger;
  * @author manue_001
  */
 public class RegisterOutput {
-
+    /*
     private Logger logger;
     private OutputStream output;
     private JTextPane pane;
@@ -86,4 +86,5 @@ public class RegisterOutput {
 
 
     }
+*/
 }

@@ -1,6 +1,9 @@
 package one.empty3.feature;
 
+import android.graphics.Bitmap;
+
 import one.empty3.feature.HoughLine;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
@@ -170,7 +173,7 @@ public class HoughTransform extends ProcessFile {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 // Find non-black pixels 
-                if ((image.getRGB(x, y) & 0x000000ff) != 0) {
+                if ((image.bitmap.getPixel(x, y) & 0x000000ff) != 0) {
                     addPoint(x, y);
                 }
             }
@@ -274,8 +277,8 @@ public class HoughTransform extends ProcessFile {
      */
     public BufferedImage getHoughArrayImage() {
         int max = getHighestValue();
-        BufferedImage image = BufferedImage.BufferedImage(maxTheta, doubleHeight,
-Bitmap.Config.RGB565);
+        Bitmap image = BufferedImage.BufferedImage(maxTheta, doubleHeight,
+Bitmap.Config.RGB_565);
         for (int t = 0; t < maxTheta; t++) {
             for (int r = 0; r < doubleHeight; r++) {
                 double value = 255 * ((double) houghArray[t][r]) / max;
@@ -284,7 +287,7 @@ Bitmap.Config.RGB565);
                 image.setPixel(t, r, c);
             }
         }
-        return image;
+        return new BufferedImage(image);
     }
 
 } 

@@ -12,7 +12,6 @@ import one.empty3.library.shader.Vec;
 
 import one.empty3.feature.app.replace.java.awt.Color;
 import java.io.File;
-import one.empty3.java.awt.Point;
 import java.util.*;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 

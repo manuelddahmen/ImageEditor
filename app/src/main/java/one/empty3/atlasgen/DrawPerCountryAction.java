@@ -1,35 +1,3 @@
-/*
- *  This file is part of one.empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with one.empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
- */
-
 package one.empty3.atlasgen;
 
 import one.empty3.feature.app.replace.java.awt.Color;
@@ -38,9 +6,8 @@ import one.empty3.library.core.lighting.Colors;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
 /*__
- * Created by Manuel Dagmen on 29-06-18.
+ * Created by Manuel Dahmen on 29-06-18.
  */
 public class DrawPerCountryAction implements Action {
     private final boolean firstPass = false;
@@ -60,7 +27,7 @@ public class DrawPerCountryAction implements Action {
 
     @Override
     public void processLine(CsvLine csvLine) {
-        int lattitudeColumn = 4;
+        int latitudeColumn = 4;
         int longitudeColumn = 5;
         int countryCodeColumn = 8;
         String[] lineArray = csvLine.getValue();
@@ -69,7 +36,7 @@ public class DrawPerCountryAction implements Action {
 
         pixeler.pixelize(
                 (int) ((Double.parseDouble(lineArray[longitudeColumn]) / 180 + 1) / 2 * pixeler.getImage().getWidth()),
-                (int) ((-Double.parseDouble(lineArray[lattitudeColumn]) / 90 + 1) / 2 * pixeler.getImage().getHeight()),
+                (int) ((-Double.parseDouble(lineArray[latitudeColumn]) / 90 + 1) / 2 * pixeler.getImage().getHeight()),
                 Objects.requireNonNull(colors.get(countryCode))
         );
     }

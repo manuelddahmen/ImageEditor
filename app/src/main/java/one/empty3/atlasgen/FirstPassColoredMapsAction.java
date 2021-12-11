@@ -32,6 +32,7 @@
 
 package one.empty3.atlasgen;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.lighting.Colors;
 
 import java.util.HashMap;
