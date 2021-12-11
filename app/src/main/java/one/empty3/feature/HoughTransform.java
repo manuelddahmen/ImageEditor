@@ -3,6 +3,7 @@ package one.empty3.feature;
 import android.graphics.Bitmap;
 
 import one.empty3.feature.HoughLine;
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.io.ProcessFile;
 
@@ -82,7 +83,7 @@ public class HoughTransform extends ProcessFile {
             // draw the lines back onto the image
             for (int j = 0; j < maxDrawn && j < lines.size(); j++) {
                 one.empty3.feature.HoughLine line = lines.elementAt(j);
-                line.draw(image, Color.RED.getRGB());
+                line.draw(image, Color.RED);
             }
 
             ImageIO.write(image, "jpg", out);
@@ -283,7 +284,7 @@ Bitmap.Config.RGB_565);
             for (int r = 0; r < doubleHeight; r++) {
                 double value = 255 * ((double) houghArray[t][r]) / max;
                 int v = 255 - (int) value;
-                int c =  one.empty3.feature.app.replace.java.awt.Color.Color(v, v, v).getRGB();
+                int c =  one.empty3.feature.app.replace.java.awt.Color.Color(v, v, v).toArgb();
                 image.setPixel(t, r, c);
             }
         }
