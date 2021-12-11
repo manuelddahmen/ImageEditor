@@ -33,6 +33,7 @@
 package atlasgen;
 
 
+import one.empty3.feature.app.replace.java.awt.Dimension;
 import one.empty3.library.Point2D;
 import one.empty3.library.Representable;
 

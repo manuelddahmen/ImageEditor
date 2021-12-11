@@ -32,6 +32,8 @@
 
 package atlasgen;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.Dimension;
 import one.empty3.library.ITexture;
 import one.empty3.library.Point2D;
 import one.empty3.library.core.lighting.Colors;
@@ -89,7 +91,7 @@ public class DrawOneCountryAction implements Action {
             System.out.println("pR" + Seriald.point2DtoString(pR));
             */
             pixeler.pixelize((int) p.x, (int) p.y,
-                     one.empty3.feature.app.replace.java.awt.Color.Color(tex.getColorAt(pR.x, pR.y)));
+                    (Color) Color.Color(tex.getColorAt(pR.x, pR.y)));
 
         }
     }
