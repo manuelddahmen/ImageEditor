@@ -33,7 +33,9 @@
 package one.empty3.library.core.testing;
 
 
+import android.graphics.Bitmap;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
 public class ImageContainer {
 
@@ -54,5 +56,9 @@ public class ImageContainer {
 
     public void setStr(String str) {
         this.str = str;
+    }
+
+    public void setImage(Bitmap bitmap) {
+        this.biic = new BufferedImage(bitmap);
     }
 }

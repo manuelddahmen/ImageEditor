@@ -35,6 +35,7 @@
  */
 package one.empty3.library;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.SurfaceElem;

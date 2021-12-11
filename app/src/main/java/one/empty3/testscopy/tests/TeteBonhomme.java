@@ -1,5 +1,6 @@
 package one.empty3.testscopy.tests;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomiale;
 import one.empty3.library.core.nurbs.ExtrusionB1B1;

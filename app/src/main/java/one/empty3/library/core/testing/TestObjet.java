@@ -50,22 +50,16 @@ import ru.sbtqa.monte.media.math.Rational;
 
 import android.graphics.Bitmap;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 import one.empty3.library.core.export.ObjExport;
 import one.empty3.library.core.export.STLExport;
 import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
 import one.empty3.library.core.script.Loader;
 import one.empty3.library.core.script.VersionNonSupporteeException;
-import org.jcodec.api.awt.AWTSequenceEncoder;
-import org.jcodec.common.io.FileChannelWrapper;
-import org.jcodec.common.io.NIOUtils;
-import org.jcodec.common.model.Rational;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-
-import java.awt.image.RenderedImage;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -106,9 +100,8 @@ public abstract class TestObjet implements Test, Runnable {
     protected ArrayList<TestInstance.Parameter> dynParams;
     protected ITexture couleurFond;
     protected ZBufferImpl z;
-    AWTSequenceEncoder encoder;
     Properties properties = new Properties();
-    ShowTestResult str;
+    //ShowTestResult str;
     private File avif;
     //private AVIWriter aw;
     private boolean aviOpen = false;
@@ -127,7 +120,7 @@ public abstract class TestObjet implements Test, Runnable {
     private int resx = 640;
     private int resy = 480;
     private File dir = null;
-    private ECBufferedImage ri;
+    private BufferedImage ri;
     private String filename = "frame";
     private String fileExtension = "JPG";
     private boolean publish = false;
@@ -161,17 +154,15 @@ public abstract class TestObjet implements Test, Runnable {
     private ExportAnimationData dataWriter;
     private File audioTrack;
     private boolean isAudioDone;
-    private AudioInputStream audioIn;
     private int audioTrackNo;
     private int videoTrackNo;
     private int fps = 25;
     //private Buffer buf;
     //private ManualVideoCompile compiler;
     private boolean isVBR;
-    private AudioFormat audioFormat;
     private Resolution dimension = HD1080;
     private String name;
-    private FileChannelWrapper out;
+    private boolean encoder;
 
     public TestObjet() {
 
@@ -227,25 +218,15 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public Bitmap img() {
-        return ri;
+        return ri.bitmap;
     }
 
     public void startNewMovie() {
         idxFilm++;
         avif = new File(this.dir.getAbsolutePath() + File.separator
                 + sousdossier + this.getClass().getName() + "__" + filmName + idxFilm + ".AVI");
-
-        out = null;
-        encoder = null;
-        try {
-            out = NIOUtils.writableFileChannel(avif.getAbsolutePath());
-            // for Android use: AndroidSequenceEncoder
-            encoder = new AWTSequenceEncoder(out, Rational.R(25, 1));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            NIOUtils.closeQuietly(out);
-        }
-        aviOpen = true;
+//Open movie output and close the older one
+        aviOpen = false;
     }
 
     private boolean unterminable() {
@@ -253,7 +234,7 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public boolean isAviOpen() {
-        return (aviOpen && encoder != null);
+        return (aviOpen && encoder);
     }
 
     public void setAviOpen(boolean aviOpen) {
@@ -304,15 +285,11 @@ public abstract class TestObjet implements Test, Runnable {
         return directory;
     }
 
-    protected void ecrireImage(RenderedImage ri, String type, File fichier) {
+    protected void ecrireImage(BufferedImage ri, String type, File fichier) {
         if (fichier == null) {
             o.println("Erreur OBJET FICHIER (java.io.File) est NULL");
             System.exit(1);
         }
-
-        Graphics g = ((BufferedImage) ri).getGraphics();
-        g.setColor(Color.black);
-        g.drawString(description, 0, 1100);
 
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -652,11 +629,7 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void publishResult() {
         if (getPublish()) {
-
-            str = new ShowTestResult(ri);
-            str.setImageContainer(biic);
-            str.setTestObjet(this);
-            new Thread(str).start();
+            // Start GUI feedback
         }
     }
 
@@ -674,24 +647,15 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void reportException(Exception ex) {
         ex.printStackTrace();
-        try {
-            InputStream is = getClass().getResourceAsStream(
-                    "/one/empty3/library/skull-cross-bones-evil.png");
+        InputStream is = getClass().getResourceAsStream(
+                "/one/empty3/library/skull-cross-bones-evil.png");
 
-            if (is == null) {
-                o.println("Erreur d'initialisation: pas correct!");
-                System.exit(-1);
-            }
-
-            RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
-
-            ECBufferedImage eci = new ECBufferedImage.BufferedImage(bi);
-            biic.setImage(eci);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (is == null) {
+            o.println("Erreur d'initialisation: pas correct!");
+            System.exit(-1);
         }
-        str.setMessage("ERROR EXCEPTION");
+
+
     }
 
     public void reportPause(boolean phase) {
@@ -701,30 +665,14 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public void reportSucces(File film) {
-        try {
-            InputStream is = getClass().getResourceAsStream(
-                    "/pouce-leve.jpg");
+        InputStream is = getClass().getResourceAsStream(
+                "/pouce-leve.jpg");
 
-            if (is == null) {
-                o.println("Erreur d'initialisation: pas correct!");
-                System.exit(-1);
-            }
-
-            RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
-
-            ECBufferedImage eci = new ECBufferedImage.BufferedImage(bi);
-            biic.setImage(eci);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (is == null) {
+            o.println("Erreur d'initialisation: pas correct!");
+            System.exit(-1);
         }
-        try {
-            Desktop dt = Desktop.getDesktop();
-            dt.open(file);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
     }
 
     public boolean copyResources() {
@@ -743,7 +691,7 @@ public abstract class TestObjet implements Test, Runnable {
                 , resx, resy, fps, 0);*/
     }
 
-    public void run() {
+    public void run()  {
         if (!initialise)
             init();
 
@@ -807,26 +755,6 @@ public abstract class TestObjet implements Test, Runnable {
             while (audioTrack != null && !isAudioDone /*&& aw.getDuration(audioTrackNo).doubleValue() < 1.0
              *frame() / fps*/) {
                 // => variable bit rate: format can change at any time
-                audioFormat = audioIn.getFormat();
-                if (audioFormat == null) {
-                    break;
-                }
-                int asSize = audioFormat.getFrameSize();
-                int asDuration = (int) (audioFormat.getSampleRate() / audioFormat.getFrameRate());
-                if (audioBuffer == null || audioBuffer.length < asSize) {
-                    audioBuffer = new byte[asSize];
-                }
-                int len = 0;
-                try {
-                    len = audioIn.read(audioBuffer);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (len == -1) {
-                    isAudioDone = true;
-                } else {
-
-                }
             }
 
 
@@ -870,19 +798,16 @@ public abstract class TestObjet implements Test, Runnable {
                 }
 
 
-                ri = z.image2();
+                ri = new BufferedImage(z.image2());
 
                 afterRenderFrame();
 
                 // ri.getGraphics().drawString(description, 0, 0);
 
-                if ((generate & GENERATE_MOVIE) > 0 && encoder != null) {
+                if ((generate & GENERATE_MOVIE) > 0 && encoder) {
 
-                    try {
-                        encoder.encodeImage((BufferedImage) ri);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //encoder.encodeImage((BufferedImage) ri);
+                    // Encode frame
                 } else {
                     o.println(
                             "No file open for avi writing");
@@ -890,7 +815,7 @@ public abstract class TestObjet implements Test, Runnable {
                 }
                 ecrireImage(ri, type, file);
 
-                biic.setImage(ri != null ? ri : (frame % 2 == 0 ? riG : riD));
+                biic.setImage((ri != null) ? ri.bitmap : (((frame % 2) == 0) ? riG.bitmap : riD.bitmap));
                 biic.setStr("" + frame);
             }
             if (isSaveBMood()) {
@@ -930,7 +855,7 @@ public abstract class TestObjet implements Test, Runnable {
                 biic.setImage(ri);
                 imageContainer.setImage(biic.getImage());
 
-                str.setImageContainer(imageContainer);
+//                str.setImageContainer(imageContainer);
             }
 
             z.idzpp();
@@ -949,14 +874,12 @@ public abstract class TestObjet implements Test, Runnable {
                 //reportException(e);
             }
         }
-        if ((generate & GENERATE_MOVIE) > 0 && encoder != null) {
+        if ((generate & GENERATE_MOVIE) > 0 && encoder) {
             try {
-                encoder.finish();
-            } catch (IOException e) {
-                e.printStackTrace();
-
+                //encoder.finish();
+                // Close movie
             } finally {
-                NIOUtils.closeQuietly(out);
+                //NIOUtils.closeQuietly(out);
             }
         }
         String cmd;
@@ -1007,16 +930,6 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void closeView() {
 
-        if (str != null) {
-            try {
-                str.dispose();
-                str.stopThreads();
-                str = null;
-            } catch (NullPointerException ex) {
-                o.println("Can't stop thread");
-
-            }
-        }
     }
 
     public void scene(Scene load) {

@@ -39,14 +39,14 @@ android {
             keyPassword 'md44md78'
         }
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId "one.empty3.feature.app"
         minSdkVersion 28
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
-        versionName "0.0.2-2021"
+        versionName "0.0.1-2021"
         vectorDrawables.useSupportLibrary=false
     }
     dependenciesInfo {
@@ -56,19 +56,19 @@ android {
         includeInBundle = false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility rootProject.ext.java_version
+        targetCompatibility rootProject.ext.java_version
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = rootProject.ext.java_version
     }
 
     buildTypes {
-       release {
-           minifyEnabled false
-           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-       }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
     packagingOptions {
     }
