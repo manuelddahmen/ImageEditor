@@ -1,5 +1,6 @@
 package one.empty3.atlasgen;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
 
@@ -30,7 +31,7 @@ class HeightMapSurfaceSphere extends HeightMapSurface {
 
         Point3D mult = surface.getElem().calculerPoint3D(u, v).moins(((Sphere) surface.getElem()).getCircle().getCenter()).norme1().
                 mult((
-                                image.getElem().getImage().getElem().getRGB(i, j)&0x00FF0000>>16)/256.);
+                                image.getElem().getImage().getElem().getBitmap().getPixel(i, j)&0x00FF0000>>16)/256.);
         return mult
 
 

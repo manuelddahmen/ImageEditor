@@ -34,8 +34,6 @@ package one.empty3.atlasgen;
 
 import java.io.File;
 
-import atlasgen.TestSoS;
-
 /*__
  * Created by manue on 28-04-19.
  */
