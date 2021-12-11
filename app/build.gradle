@@ -46,7 +46,7 @@ android {
         minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
-        versionName "0.0.1-2021"
+        versionName "0.0.2-2021"
         vectorDrawables.useSupportLibrary=false
     }
     dependenciesInfo {
@@ -56,12 +56,12 @@ android {
         includeInBundle = false
     }
     compileOptions {
-        sourceCompatibility rootProject.ext.java_version
-        targetCompatibility rootProject.ext.java_version
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = rootProject.ext.java_version
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     buildTypes {
