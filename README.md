@@ -1,3 +1,10 @@
+# download commit 
+
+@manuelddahmen
+manuelddahmen committed 20 days ago
+1 parent e11b120 commit 134a7b212b2e13753a6c06877eb82b06f1fc743d
+Showing  with 33 additions and 28 deletions.
+
 # feature App (renamed from CameraX sample) 
 
 CameraXbasic aims to demonstrate how to use CameraX APIs written in Kotlin.
