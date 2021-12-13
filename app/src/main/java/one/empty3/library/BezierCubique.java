@@ -41,6 +41,8 @@ package one.empty3.library;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import one.empty3.feature.app.replace.java.awt.Color;
+
 public class BezierCubique extends Representable {
 
     private ArrayList<Point3D> controls = new ArrayList<Point3D>();

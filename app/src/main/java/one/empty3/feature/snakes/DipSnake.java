@@ -23,6 +23,7 @@ X X
 
 s
  */
+
 public class DipSnake extends ParametricCurve {
     private ArrayList<Double> x = new ArrayList<Double>();
     private ArrayList<Double> y = new ArrayList<Double>();

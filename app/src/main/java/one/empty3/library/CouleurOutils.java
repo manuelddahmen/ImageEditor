@@ -38,6 +38,7 @@
 package one.empty3.library;
 
 
+import android.graphics.Color;
 
 /*__
  * @author manuel
@@ -53,8 +54,8 @@ public class CouleurOutils {
         if (!plus) {
             signe = -1;
         }
-        int[] cFondC = new int[]{cFond.getRed(), cFond.getGreen(), cFond.getBlue()};
-        int[] res = new int[]{c1.getRed(), c1.getGreen(), c1.getBlue()};
+        float[] cFondC = new float[]{cFond.red(), cFond.green(), cFond.blue()};
+        float[] res = new float[]{c1.red(), c1.green(), c1.blue()};
 
         for (int i = 0; i < 3; i++) {
             res[i] += signe * (int) (Math.abs(cFondC[i] * cos));
@@ -75,15 +76,15 @@ public class CouleurOutils {
     public static Color couleurRatio(Color c1, Color c2, double r) {
 
         return  one.empty3.feature.app.replace.java.awt.Color.Color(
-                (float) (c1.getRed() * r + c2.getRed() * (1 - r)),
-                (float) (c1.getGreen() * r + c2.getGreen() * (1 - r)),
-                (float) (c1.getBlue() * r + c2.getBlue() * (1 - r))
+                (float) (c1.red() * r + c2.red() * (1 - r)),
+                (float) (c1.green() * r + c2.green() * (1 - r)),
+                (float) (c1.blue() * r + c2.blue() * (1 - r))
         );
     }
 
     public static String toStringColor(Color couleur) {
-        return "(" + couleur.getRed() + ", " + couleur.getGreen() + ", "
-                + couleur.getBlue() + ")";
+        return "(" + couleur.red() + ", " + couleur.green() + ", "
+                + couleur.blue() + ")";
     }
 
     public String couleurLongID() {

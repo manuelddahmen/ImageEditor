@@ -42,6 +42,7 @@
  */
 package one.empty3.library.core.tribase;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
 
 
@@ -52,7 +53,7 @@ import java.util.Iterator;
 public class Tubulaire extends Representable implements TRIGenerable, TRIConteneur {
 
     public float PERCENT = 0.05f;
-    private Color couleur = Color.BLUE;
+    private int couleur = Color.BLUE;
     private String id;
     private ArrayList<Point3D> points;
     //private double ratio;
@@ -113,7 +114,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
     }
 
     public void couleur(Color c) {
-        this.couleur = c;
+        this.couleur = c.toArgb();
 
     }
 
@@ -136,11 +137,11 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
                 for (int i = 3; i < tour1.size() - 1; i++) {
                     TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), couleur);
                     TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), couleur);
-                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
-                    t2.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
-                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
-                    t1.setCouleur(couleur);
-                    t2.setCouleur(couleur);
+                    t1.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t2.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur((Color) Color.valueOf(couleur));
+                    t2.setCouleur((Color) Color.valueOf(couleur));
                     tris.add(t1);
                     tris.add(t2);
                 }
@@ -215,8 +216,9 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
      ratio = r;
      }*/
     protected String toStringColor() {
-        return "(" + couleur.getRed() + ", " + couleur.getGreen() + ", "
-                + couleur.getBlue() + ")";
+        android.graphics.Color color = Color.Color(couleur);
+        return "(" + color.red() + ", " + color.green() + ", "
+                + color.blue() + ")";
     }
 
     private ArrayList<Point3D> vectPerp(double t) {
