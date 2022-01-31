@@ -5,8 +5,6 @@ import one.empty3.library.RepresentableConteneur;
 import one.empty3.library.Scene;
 import one.empty3.library.core.export.STLExport;
 import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
-import one.empty3.library.core.script.Loader;
-import one.empty3.library.core.script.SceneLoader;
 import one.empty3.library.core.script.VersionNonSupporteeException;
 
 import java.io.*;

@@ -816,7 +816,7 @@ public abstract class TestObjet implements Test, Runnable {
                 biic.setStr("" + frame);
             }
             if (isSaveBMood()) {
-                try {
+//                try {
                     File foutm = new File(this.dir.getAbsolutePath()
                             + File.separator + filename + ".bmood");
                     //new Loader().saveBin(foutm, scene);
@@ -827,7 +827,6 @@ public abstract class TestObjet implements Test, Runnable {
                     //} catch (ExtensionFichierIncorrecteException e) {
                     //    e.printStackTrace();
                     //}
-                }
             }
 
             if ((generate & GENERATE_MODEL) > 0) {

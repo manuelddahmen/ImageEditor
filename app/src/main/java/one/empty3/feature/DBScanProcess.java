@@ -2,7 +2,6 @@ package one.empty3.feature;
 
 import java.util.*;
 import java.io.*;
-import java.awt.image.*;
 
 import one.empty3.feature.PixM;
 import one.empty3.io.*;
