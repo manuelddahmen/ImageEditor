@@ -72,7 +72,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     protected ITexture CFAST = DEFAULT_TEXTURE;
     // protected Barycentre bc = new Barycentre();
     protected Representable parent;
-    protected Scene scene;
     protected ITexture texture = DEFAULT_TEXTURE;
     protected Render render; //= Render.getInstance(0, -1);
     protected StructureMatrix<T> T; // = new StructureMatrix<T>(0, one.empty3.library.T.class);
@@ -92,11 +91,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         }
     }
 
-    public static void setPaintingActForClass(ZBuffer z, Scene s, PaintingAct pa) {
-        Painter p = null;
-        classPainters().add(new Painter(z, s, Representable.class));
-        p.addAction(pa);
-    }
 
     private static ArrayList<Painter> classPainters() {
         return classPainters;
@@ -170,22 +164,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         return false;
     }
 
-    /*__
-     * When correctly initialized, PaintingAct action method is called while
-     * the shape is rendered.
-     *
-     * @param z  the actual ZBuffer in which the action should occurs
-     * @param s  the scene in which the actions can access to other objects properties.
-     *           Optional parameter
-     * @param pa The "painting act" (term referring to history of arts).
-     */
-    public void setPaintingAct(ZBuffer z, Scene s, PaintingAct pa) {
-        this.painter = new Painter(z, s, this);
-        pa.setObjet(this);
-        pa.setScene(s);
-        pa.setZBuffer(z);
-        painter.addAction(pa);
-    }
 
     public Painter getPainter() {
         return painter;
