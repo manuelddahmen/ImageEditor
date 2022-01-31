@@ -1,6 +1,8 @@
 package one.empty3.library.core.lighting;
+import android.graphics.Color;
+
 import one.empty3.library.*;
-import java.awt.Color;
+
 import java.util.Arrays;
 
 public class Light {
@@ -17,9 +19,9 @@ public class Light {
 
       public static float[] fromColor(
             Color c) {
-            return new float[] {c.getRed(),
-                c.getGreen(),c.getBlue(),
-                c.getAlpha()};
+            return new float[] {c.red(),
+                c.green(),c.blue(),
+                c.alpha()};
       }
       public Point3D c2p(float [] cs) {
           /*new Point3D((double)c.getRed(),
@@ -58,7 +60,7 @@ public class Light {
            return  one.empty3.feature.app.replace.java.awt.Color.Color(c);
       }
       public Color getColor(int [] c) {
-          return  one.empty3.feature.app.replace.java.awt.Color.Color(c[3],c[2],c[1],c[0]);
+          return  one.empty3.feature.app.replace.java.awt.Color.Color((float) c[3],c[2],c[1],c[0]);
       }
       //public abstract Light();
 

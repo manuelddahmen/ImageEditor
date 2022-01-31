@@ -41,6 +41,7 @@
 package one.empty3.library.colorcomp;
 
 
+import one.empty3.feature.app.replace.java.awt.Color;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

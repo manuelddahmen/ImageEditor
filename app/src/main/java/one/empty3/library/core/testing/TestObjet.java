@@ -56,7 +56,7 @@ import one.empty3.library.*;
 import one.empty3.library.core.export.ObjExport;
 import one.empty3.library.core.export.STLExport;
 import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
-import one.empty3.library.core.script.Loader;
+//import one.empty3.library.core.script.Loader;
 import one.empty3.library.core.script.VersionNonSupporteeException;
 
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
@@ -819,16 +819,16 @@ public abstract class TestObjet implements Test, Runnable {
                 try {
                     File foutm = new File(this.dir.getAbsolutePath()
                             + File.separator + filename + ".bmood");
-                    new Loader().saveBin(foutm, scene);
+                    //new Loader().saveBin(foutm, scene);
                     dataWriter.writeFrameData(frame(), "Save bin: " + foutm.getAbsolutePath());
-                } catch (VersionNonSupporteeException ex) {
-                    o.println(ex.getLocalizedMessage());
-                    reportException(ex);
-                } catch (ExtensionFichierIncorrecteException e) {
-                    e.printStackTrace();
+                    //} catch (VersionNonSupporteeException ex) {
+                    //    o.println(ex.getLocalizedMessage());
+                    //    reportException(ex);
+                    //} catch (ExtensionFichierIncorrecteException e) {
+                    //    e.printStackTrace();
+                    //}
                 }
             }
-
 
             if ((generate & GENERATE_MODEL) > 0) {
                 try {
@@ -999,14 +999,14 @@ public abstract class TestObjet implements Test, Runnable {
                 || f.getAbsolutePath().toLowerCase().endsWith("moo")
                 || f.getAbsolutePath().toLowerCase().endsWith("bmood")
                 || f.getAbsolutePath().toLowerCase().endsWith("bmoo")) {
-            try {
-                new Loader().load(f, scene);
+           //try {
+  //              new Loader().load(f, scene);
 
-            } catch (VersionNonSupporteeException ex) {
-                o.println(ex.getLocalizedMessage());
-            } catch (ExtensionFichierIncorrecteException ex) {
-                o.println(ex.getLocalizedMessage());
-            }
+    //        } catch (VersionNonSupporteeException ex) {
+    //          o.println(ex.getLocalizedMessage());
+      //    } catch (ExtensionFichierIncorrecteException ex) {
+        //      o.println(ex.getLocalizedMessage());
+         // }
         } else {
             o.println("Erreur: extension incorrecte");
             System.exit(1);

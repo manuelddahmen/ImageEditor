@@ -1,8 +1,8 @@
 package one.empty3.io;
 
 import one.empty3.feature.PixM;
-import one.empty3.feature.ProcessBean;
 
+import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 
 import java.io.File;
@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class ProcessFile {
-    public ProcessBean bean;
     protected int maxRes = 400;
     private Properties property;
     private File outputDirectory = null;
@@ -34,7 +33,7 @@ public class ProcessFile {
             BufferedImage read = null;
             read = ImageIO.read(file);
             return (new PixM(read));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

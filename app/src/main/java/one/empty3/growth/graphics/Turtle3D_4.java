@@ -65,6 +65,7 @@
  */
 package one.empty3.growth.graphics;
 
+import one.empty3.feature.app.replace.java.awt.Color;
 import one.empty3.library.*;
 
 

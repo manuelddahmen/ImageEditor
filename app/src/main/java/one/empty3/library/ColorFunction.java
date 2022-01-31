@@ -38,6 +38,7 @@
 package one.empty3.library;
 
 
+import one.empty3.feature.app.replace.java.awt.Color;
 
 public interface ColorFunction {
 
