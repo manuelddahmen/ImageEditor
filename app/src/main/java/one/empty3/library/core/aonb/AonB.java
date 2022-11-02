@@ -67,8 +67,7 @@ public class AonB extends ParametricSurface {
      * @param a Parametric Curve or Surface
      * @param b Parametric Curve or Surface
      */
-    public AonB(Representable a, Representable b)
-    {
+    public AonB(Representable a, Representable b) {
         this.a = a;
         this.b = b;
     }
@@ -136,30 +135,29 @@ public class AonB extends ParametricSurface {
         if (check()) {
             Point3D p = Point3D.O0;
             if (a instanceof ParametricCurve && b instanceof ParametricCurve) {
-                p =  ((ParametricCurve)b).calculerPoint3D(
-                        ((ParametricCurve)a).calculerPoint3D(u).getX()
+                p = ((ParametricCurve) b).calculerPoint3D(
+                        ((ParametricCurve) a).calculerPoint3D(u).getX()
                 );
-                p.texture(a.texture());
+                p.texture(a.getTexture());
             }
             if (a instanceof ParametricCurve && b instanceof ParametricSurface) {
-                p = ((ParametricSurface)b).calculerPoint3D(
-                        ((ParametricCurve)a).calculerPoint3D(u).get2D().getX(),
-                        ((ParametricCurve)a).calculerPoint3D(u).get2D().getY()
+                p = ((ParametricSurface) b).calculerPoint3D(
+                        ((ParametricCurve) a).calculerPoint3D(u).get2D().getX(),
+                        ((ParametricCurve) a).calculerPoint3D(u).get2D().getY()
                 );
-                p.texture(a.texture());
+                p.texture(a.getTexture());
             }
             if (a instanceof ParametricSurface && b instanceof ParametricSurface) {
-                p = ((ParametricSurface)b).calculerPoint3D(
-                        ((ParametricSurface)a).calculerPoint3D(u,v).get2D().getX(),
-                        ((ParametricSurface)a).calculerPoint3D(u,v).get2D().getY()
+                p = ((ParametricSurface) b).calculerPoint3D(
+                        ((ParametricSurface) a).calculerPoint3D(u, v).get2D().getX(),
+                        ((ParametricSurface) a).calculerPoint3D(u, v).get2D().getY()
                 );
-                p.texture(a.texture());//TODO
+                p.texture(a.getTexture());//TODO
             }
-            if(down!=null)
-            {
+            if (down != null) {
                 p = down.calculerPoint3D(
-                        ((ParametricSurface)a).calculerPoint3D(u,v).get2D().getX(),
-                        ((ParametricSurface)a).calculerPoint3D(u,v).get2D().getY()
+                        ((ParametricSurface) a).calculerPoint3D(u, v).get2D().getX(),
+                        ((ParametricSurface) a).calculerPoint3D(u, v).get2D().getY()
                 );
             }
             return p;
@@ -173,11 +171,9 @@ public class AonB extends ParametricSurface {
      * TODO
      * @param down
      */
-    public void addDown(AonB down)
-    {
-        if((down.getA() instanceof ParametricSurface && b instanceof ParametricSurface)||
-                down.getB() instanceof ParametricCurve && b instanceof ParametricCurve)
-        {
+    public void addDown(AonB down) {
+        if ((down.getA() instanceof ParametricSurface && b instanceof ParametricSurface) ||
+                down.getB() instanceof ParametricCurve && b instanceof ParametricCurve) {
             this.down = down;
         }
 

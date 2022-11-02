@@ -35,7 +35,7 @@ package one.empty3.library.core.export;
 
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricSurface;
-import one.empty3.library.exporters.obj.Exporter;
+import one.empty3.library.core.tribase.TRIObjetGenerateur;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +44,10 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
-public class ObjExport extends Exporter {
+public class ObjExport {
+    public class Object {
+        private List<Face> faces;
+    }
 
     public class Vertex {
         private double x, y, z;
@@ -68,11 +71,11 @@ public class ObjExport extends Exporter {
 
     public static void save(File file, Scene scene, boolean override)
             throws IOException {
-        if (!file.exists() || (file.exists() && override)) {
+        if (!file.exists() || file.exists() && override) {
             file.createNewFile();
             PrintWriter pw = new PrintWriter(new FileOutputStream(file));
 
-            pw.println("o scene_" + scene.getDescription()+"");
+            pw.println("o " + scene.description);
 
             Iterator<Representable> it = scene.iterator();
 
@@ -89,13 +92,13 @@ public class ObjExport extends Exporter {
 
     private static void traite(Polygon r, PrintWriter pw) {
         for (int s = 0; s < r.getPoints().getData1d().size(); s++) {
-            print("v ", pw);
-            for (int i = 0; i < 3; i++) {
-                double A = r.getPoints().getData1d().get(s).get(i);
+            write("v ", pw);
+            for (int c = 0; c < 3; c++) {
+                double A = r.getPoints().getData1d().get(s).get(c);
                 if (Double.isNaN(A)) {
                     A = 0;
                 }
-                print(A + " ", pw);
+                write(A + " ", pw);
             }
             traite(r.getIsocentre(), pw);
 
@@ -103,20 +106,16 @@ public class ObjExport extends Exporter {
         }
         int size = r.getPoints().getData1d().size();
         for (int t = 0; t < size; t++) {
-            print("f " + (t % size) + " " +
+            write("f " + (t % size) + " " +
                     ((t + 1) % size) + " " + size + "\n", pw);
         }
     }
 
     private static void traite(Representable r, PrintWriter pw) {
-        print("", pw);
+        write("", pw);
 
         if (r instanceof RepresentableConteneur) {
-            for(Representable representable : ((RepresentableConteneur) r).getListRepresentable())
-                traite(representable, pw);
-        }
-        if(r instanceof Polygon) {
-            traite((Polygon) r, pw);
+            traite((RepresentableConteneur) r, pw);
         }
         if (r instanceof ParametricSurface) {
             traite((ParametricSurface) r, pw);
@@ -133,30 +132,26 @@ public class ObjExport extends Exporter {
         if (r instanceof TRI) {
             traite((TRI) r, pw);
         }
-//        }
+        if (r instanceof TRIObjetGenerateur) {
+            traite((TRIObjetGenerateur) r, pw);
+        }
         if (r instanceof TRIConteneur) {
             traite((TRIConteneur) r, pw);
         }
     }
 
     private static void traite(ParametricSurface r, PrintWriter pw) {
-        print("", pw);
-        int countU = (int) ((r.getStartU() - r.getEndU()) / r.getIncrU());
-        int countV = (int) ((r.getStartV() - r.getEndV()) / r.getIncrV());
-        for (int i = 0; i < countU; i++) {
-            for (int j = 0; j < countV; j++) {
-                double u = 1.0 * (1.0 * i / countU) * (r.getEndU() - r.getStartU()) + r.getStartU();
-                double v = 1.0 * (1.0 * i / countV) * (r.getEndV() - r.getStartV()) + r.getStartV();
+        write("", pw);
+        for (double u = 0; u < r.getEndU(); u += r.incr1())
+            for (double v = 0; v < r.getEndV(); v += r.incr2())
                 traite(r.getElementSurface(u,
-                        r.getIncrU(),
-                        v, r.getIncrV()), pw);
-            }
+                        u + r.getIncrU(),
+                        v, v + r.getIncrV()), pw);
 
-        }
     }
 
     private static void traite(RepresentableConteneur r, PrintWriter pw) {
-        print("", pw);
+        write("", pw);
         Iterator<Representable> it = r.iterator();
         while (it.hasNext()) {
             Representable next = it.next();
@@ -165,7 +160,7 @@ public class ObjExport extends Exporter {
     }
 
     private static void traite(Point3D r, PrintWriter pw) {
-        print("v " + r.get(0) + " " + r.get(1) + " " + r.get(2) + "\n", pw);
+        write("v " + r.get(0) + " " + r.get(1) + " " + r.get(2) + "\n", pw);
     }
 
     private static void traite(TRI r, PrintWriter pw) {
@@ -173,25 +168,25 @@ public class ObjExport extends Exporter {
             traite(r.getSommet().getElem(i), pw);
         }
         for (int s = 0; s < 3; s++) {
-            print("f ", pw);
+            write("f ", pw);
             for (int c = 0; c < 3; c++) {
                 double A = r.getSommet().getElem(s).get(c);
                 if (Double.isNaN(A)) {
                     A = 0;
                 }
-                print(A + " ", pw);
+                write(A + " ", pw);
             }
-            print("\n", pw);
+            write("\n", pw);
         }
 
 
-        print("f 1/1/2", pw);
-        print(" 2/2/2", pw);
-        print(" 3/3/3\n", pw);
+        write("f 1/1/2", pw);
+        write(" 2/2/2", pw);
+        write(" 3/3/3\n", pw);
     }
 
     public static void traite(TRIConteneur TC, PrintWriter pw) {
-        print("", pw);
+        write("", pw);
 
         Iterator<TRI> it = TC.iterable().iterator();
 
@@ -215,22 +210,22 @@ public class ObjExport extends Exporter {
         }
     }
 
-//    private static void traite(TRIObjetGenerateur r, PrintWriter pw) {
-//        String s = "";
-//        int x = r.getMaxX();
-//        int y = r.getMaxY();
-//        TRI[] tris = new TRI[2];
-//        for (int i = 0; i < x; i++) {
-//            for (int j = 0; j < y; j++) {
-//                r.getTris(i, j, tris);
-//                traite(tris[0], pw);
-//                traite(tris[1], pw);
-//
-//            }
-//        }
-//    }
+    private static void traite(TRIObjetGenerateur r, PrintWriter pw) {
+        String s = "";
+        int x = r.getMaxX();
+        int y = r.getMaxY();
+        TRI[] tris = new TRI[2];
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                r.getTris(i, j, tris);
+                traite(tris[0], pw);
+                traite(tris[1], pw);
 
-    public static void print(String flowElement, PrintWriter pw) {
-        pw.print(flowElement);
+            }
+        }
+    }
+
+    public static void write(String flowElement, PrintWriter pw) {
+        pw.write(flowElement);
     }
 }

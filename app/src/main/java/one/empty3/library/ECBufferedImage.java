@@ -32,20 +32,20 @@
 
 package one.empty3.library;
 
-import android.graphics.Bitmap;
-
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.elements.PPMFileInputStream;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ECBufferedImage extends BufferedImage {
+public class ECBufferedImage {
+    Bitmap bitmap;
     /*__
      *
      */
@@ -53,27 +53,25 @@ public class ECBufferedImage extends BufferedImage {
     private int pixelCountMax = 5;
     private int squarepixelCountMax = 25;
 
-    public ECBufferedImage(BufferedImage read) {
-        this(read.getWidth(), read.getHeight(), Bitmap.Config.RGB_565);
+    public ECBufferedImage(Bitmap read) {
+        bitmap = Bitmap.createBitmap(read.getWidth(),
+                read.getHeight(),
+                Bitmap.Config.RGB_565);
     }
 
     public ECBufferedImage(int width, int height, int imageType) {
-        this(width, height, Bitmap.Config.RGB_565);
+        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
     }
 
-    public ECBufferedImage(int width, int height, Bitmap.Config config) {
-        super(width, height, config);
-    }
 
     public static ECBufferedImage ppm(byte[] bytes, String ppm) {
         return null;
     }
 
-    public static ECBufferedImage getFromFile(File url) throws IOException {
-        return new ECBufferedImage(ImageIO.read(url));
+    public static Bitmap getFromFile(File url) throws IOException {
+        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(url));
+        return bitmap;
     }
-
-
 
     private void getRGBA(int rgba, int[] componentsRGBA) {
         int a = (rgba & 0xFF000000) >> 24;

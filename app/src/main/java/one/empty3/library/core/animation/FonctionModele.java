@@ -48,7 +48,7 @@ public abstract class FonctionModele<R> extends Fonction {
 
     public abstract R fonctionModele(double time);
 
-    public final void inject(Representable r, String property,Object value) {
+    public final void inject(Representable r, String property, Object value) {
         try {
             r.setProperty(property, value);
         } catch (InvocationTargetException e) {

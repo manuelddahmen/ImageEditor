@@ -51,9 +51,9 @@ public class Citron extends ParametricSurface {
                 c.vectX.mult(circle.getRadius() *
                         Math.cos(2.0 * Math.PI * u) * Math.cos(2.0 * Math.PI * v)).plus(
                         c.vectY.mult(circle.getRadius() *
-                                Math.sin(2.0 * Math.PI * u) * Math.cos(2.0 * Math.PI * v))
-                                .
-                                        plus(c.vectZ.mult((v - 0.5) / 2 * Math.sin(2 * Math.PI * v)))
+                                        Math.sin(2.0 * Math.PI * u) * Math.cos(2.0 * Math.PI * v))
+                                        .
+                                plus(c.vectZ.mult((v - 0.5) / 2 * Math.sin(2 * Math.PI * v)))
                 ).mult(c.radius.getElem()));
     }
 

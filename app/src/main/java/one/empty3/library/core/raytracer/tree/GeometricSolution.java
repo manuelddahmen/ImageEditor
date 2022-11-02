@@ -64,11 +64,12 @@ public abstract class GeometricSolution {
     public void setScene(Scene scene) {
         this.scene = scene;
     }
+
     public abstract boolean plot();
 
-    class ZBufferGeometricSolution extends GeometricSolution
-    {
+    class ZBufferGeometricSolution extends GeometricSolution {
         private ZBuffer zbuffer;
+
         public ZBufferGeometricSolution(ZBuffer z, Scene scene) {
             super(graph, scene);
             zbuffer = z;
@@ -79,10 +80,11 @@ public abstract class GeometricSolution {
             return false;
         }
     }
-    class RayTracerGeometricSolution extends GeometricSolution
-    {
+
+    class RayTracerGeometricSolution extends GeometricSolution {
 
         private RtRaytracer raytracer;
+
         public RayTracerGeometricSolution(RtRaytracer rt, Scene scene) {
             super(graph, scene);
             raytracer = rt;

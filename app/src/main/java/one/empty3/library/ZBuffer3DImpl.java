@@ -81,9 +81,9 @@ package one.empty3.library;
  }
 
  public Color moyenne(Color c1, Color c2) {
- Color c =  one.empty3.feature.app.replace.java.awt.Color.Color((c1.getRed() + c1.getRed()) / 2,
- (c1.getGreen() + c2.getGreen()) / 2,
- (c1.getBlue() + c2.getBlue()) / 2);
+ Color c = Color.valueOf((c1.red() + c1.red()) / 2,
+ (c1.green() + c2.green()) / 2,
+ (c1.blue() + c2.blue()) / 2);
 
  return c;
  }

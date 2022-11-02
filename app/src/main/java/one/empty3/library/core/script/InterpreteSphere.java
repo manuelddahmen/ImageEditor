@@ -37,15 +37,21 @@
  */
 package one.empty3.library.core.script;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Point3D;
 import one.empty3.library.TextureImg;
 import one.empty3.library.core.tribase.TRISphere;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.imageio.ImageIO;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +75,8 @@ public class InterpreteSphere implements Interprete {
     }
 
 
-    public Object interprete(String text, int pos) throws InterpreteException, IOException {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Object interprete(String text, int pos) throws InterpreteException {
         InterpretesBase base = new InterpretesBase();
         InterpretePoint3D point3D = new InterpretePoint3D();
         InterpreteNomFichier nomFichier = new InterpreteNomFichier();
@@ -108,7 +115,7 @@ public class InterpreteSphere implements Interprete {
 
         TRISphere sphere = new TRISphere(centre, pos);
         sphere.texture(
-                new TextureImg(new ECBufferedImage(ImageIO.read(file))));
+                new TextureImg(new ECBufferedImage(Objects.requireNonNull(ImageIO.read(file)).bitmap)));
 
         return sphere;
     }

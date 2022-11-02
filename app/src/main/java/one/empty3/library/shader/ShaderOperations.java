@@ -1,5 +1,7 @@
 package one.empty3.library.shader;
+
 import one.empty3.library.*;
+
 public class ShaderOperations {
 /*
     class VecValue extends Vec;

@@ -64,8 +64,6 @@ public class Matrix33 extends Representable {
     }
 
     private StructureMatrix<Double> d = new StructureMatrix<>(1, Double.class);
-    private int dim1;
-    private int dim2;
 
     public Matrix33(Matrix33 copy) {
         this();
@@ -75,12 +73,10 @@ public class Matrix33 extends Representable {
     public Matrix33() {
         d = new StructureMatrix<>(1, Double.class);
         d.setAll(new Double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0});
-        dim1 = dim2 = (int) Math.sqrt(d.getData1d().size());
 
     }
 
     public Matrix33(Double[] d) {
-        dim1 = dim2 = (int) Math.sqrt(d.length);
         if (d.length != 9) {
             System.out.println("Erreur dans Matrix33 . 9 éléments requis");
             throw new IndexOutOfBoundsException("Matrix33 9 " + d.length);
@@ -93,7 +89,6 @@ public class Matrix33 extends Representable {
             System.out.println("Erreur dans Matrix33 . 9 éléments requis");
             throw new IndexOutOfBoundsException("Matrix33 9 " + d.length);
         }
-        dim1 = dim2 = (int) Math.sqrt(d.length);
         Double[] D = new Double[9];
         for (int i = 0; i < 9; i++) {
             D[i] = d[i];
@@ -109,13 +104,6 @@ public class Matrix33 extends Representable {
 
                 d.setElem(p[i].get(j), i * 3 + j);
             }
-        }
-        dim1 = dim2 = (int) Math.sqrt(p.length);
-    }
-
-    public Matrix33(int columns, int lines) {
-        for(int i=0; i<columns*lines; i++) {
-            d.setElem(0.0, i);
         }
     }
 
@@ -339,53 +327,5 @@ public class Matrix33 extends Representable {
             rowVectors[l] = p;
         }
         return rowVectors;
-    }
-
-    public double determinant() {
-        double det = 0.0;
-        for(int i=0; i<getDim1(); i++)
-            for(int j=0; j<getDim2(); j++) {
-                det += cofactor(i, j).determinant()*(d.getElem(j*getDim1()+j));
-            }
-        return determinant();
-    }
-
-    private Matrix33 subMatrice(int i, int j) {
-        return null;
-    }
-
-    private Matrix33 cofactor(int i, int j) {
-        if(getDim1()==2&&getDim2()==2)
-            return new Matrix33( new double[] {
-                    get((i-1)%3,((j-1)%3)),
-                    get((i-1)%3,((j+1)%3)),
-                    get((i+1)%3,((j+1)%3)),
-                    get((i-1)%3,((j+1)%3)) });
-        else if(dim1==1&&dim2==1){
-            return new Matrix33(new double[] {get(0, 0)});
-        }
-        Matrix33 matrix33 = new Matrix33(dim1 - 1, dim2 - 1);
-        int row=0, column=0;
-        for(int r=0; r<dim1; r++) {
-            for(int c=0; c<dim2; c++) {
-                if(r!=i && c!=j) {
-                    matrix33.set(column, row, d.getElem(dim1 - 1) * row + column);
-                } else {
-
-                }
-                column++;
-            }
-            column=0;
-            row++;
-        }
-        return matrix33;
-    }
-
-    private int getDim1() {
-        return dim1;
-    }
-
-    private int getDim2() {
-        return dim2;
     }
 }

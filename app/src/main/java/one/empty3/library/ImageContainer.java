@@ -1,20 +1,24 @@
 package one.empty3.library;
 
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.imageio.ImageIO;
+import android.graphics.Bitmap;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class ImageContainer extends Representable implements ResourceLoader {
-    private StructureMatrix<BufferedImage> image = new StructureMatrix<>(0, BufferedImage.class);
+    private StructureMatrix<Bitmap> image = new StructureMatrix<>(0, Bitmap.class);
     private StructureMatrix<URL> url = new StructureMatrix<>(0, URL.class);
     private StructureMatrix<File> path = new StructureMatrix<>(0, File.class);
-    private StructureMatrix<URL> videoUrl= new StructureMatrix<>(0, URL.class);
+    private StructureMatrix<URL> videoUrl = new StructureMatrix<>(0, URL.class);
     private StructureMatrix<File> videoPath = new StructureMatrix<>(0, File.class);
-     ;
+    ;
     private URL oldUrl = null;
     private File oldPath = null;
     private boolean isMovie = false;
@@ -23,30 +27,48 @@ public class ImageContainer extends Representable implements ResourceLoader {
     private double oldNanos;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public ImageContainer(File path, boolean isMovie) {
         this.isMovie = isMovie;
         this.path.setElem(path);
         declareProperties();
     }
 
-
+    /*
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public ImageContainer(URL url) {
+            this.isMovie = isMovie;
+            this.url.setElem(url);
+            if (url != null) {
+                try {
+                    image.setElem(ImageIO.read(url));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            declareProperties();
+        }
+    */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public ImageContainer() {
         this.isMovie = isMovie;
         declareProperties();
     }
 
-    public ImageContainer(BufferedImage image) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public ImageContainer(Bitmap image) {
         this.isMovie = isMovie;
         this.image.setElem(image);
         declareProperties();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void declareProperties() {
         super.declareProperties();
-        getDeclaredDataStructure().put("image/Instance of BufferedImage", image);
-        getDeclaredDataStructure().put("url/URL of BufferedImage", url);
-        getDeclaredDataStructure().put("path/Local path or filesystem path of BufferedImage", path);
+        getDeclaredDataStructure().put("image/Instance of BufferedImageAndroid", image);
+        getDeclaredDataStructure().put("url/URL of BufferedImageAndroid", url);
+        getDeclaredDataStructure().put("path/Local path or filesystem path of BufferedImageAndroid", path);
         getDeclaredDataStructure().put("videoUrl/URL of mp4/avi", videoUrl);
         getDeclaredDataStructure().put("videoPath/Local path or filesystem path of mp4/avi", videoPath);
 
@@ -65,68 +87,72 @@ public class ImageContainer extends Representable implements ResourceLoader {
         return c;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void load() {
-        if (url!=null && hasChanged(url.getElem()) && url.getElem() != null) {
-//            loadImage(url.getElem());
+        if (url != null && hasChanged(url.getElem()) && url.getElem() != null) {
+            //loadImage(url.getElem());
             isMovie = false;
-        } else if (path!=null &&hasChanged(path.getElem()) && path.getElem() != null) {
+        } else if (path != null && hasChanged(path.getElem()) && path.getElem() != null) {
             loadImage(path.getElem());
             isMovie = false;
-        } else if (videoUrl!=null&&hasChanged(videoUrl.getElem())) {
-            loadVideo(videoUrl.getElem());
-        } else if (videoPath!=null&&hasChanged(videoPath.getElem())) {
-            loadVideo(videoPath.getElem());
+        } else if (videoUrl != null && hasChanged(videoUrl.getElem())) {
+            //loadVideo(videoUrl.getElem());
+        } else if (videoPath != null && hasChanged(videoPath.getElem())) {
+            //loadVideo(videoPath.getElem());
         }
-        if(isMovie) {
-        nanos = System.nanoTime();
-        if (oldNanos >= nanos && isMovie) {
-            ECBufferedImage current = vd.getElem().current();
-            image.setElem(current);
-        }
+        if (isMovie) {
+            nanos = System.nanoTime();
+            if (oldNanos >= nanos && isMovie) {
+                Bitmap current = vd.getElem().current();
+                image.setElem(current);
+            }
         }
     }
 
 
     private void loadImage(File path) {
         if (path != null) {
-            try {
-                image.setElem(ImageIO.read(new FileInputStream(path)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            image.setElem(Objects.requireNonNull(ImageIO.read(path)).bitmap);
         }
 
     }
 
+    /*
+        private void loadImage(URL url) {
+            if (url != null) {
+                try {
+                    image.setElem(ImageIO.read(url));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-
+    *//*
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadVideo(File path) {
         if (path != null) {
-/*            vd = new StructureMatrix<>(0, DecodeAndEncodeFrames.class);
+            vd = new StructureMatrix<>(0, DecodeAndEncodeFrames.class);
             DecodeAndEncodeFrames vd2 = new DecodeAndEncodeFrames(path, new TextureMov());
             vd.setElem(vd2);
-  */          isMovie = true;
-            try {
-                image.setElem(ImageIO.read(new FileInputStream(path)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            isMovie = true;
+            image.setElem(ImageIO.read(path));
         }
 
-    }
-
+    }*/
+/*
     private void loadVideo(URL url) {
         if (url != null) {
             try {
                 Object content = url.getContent();
             } catch (IOException e) {
                 e.printStackTrace();
-            }/*
+            }
             vd = new StructureMatrix<>(0, DecodeAndEncodeFrames.class);
             DecodeAndEncodeFrames vd2 = new DecodeAndEncodeFrames(new File(url.getFile()), new TextureMov());
             vd.setElem(vd2);
-           */isMovie = true;
+            isMovie = true;
             try {
                 image.setElem(ImageIO.read(new FileInputStream(new File(url.getFile()))));
             } catch (IOException e) {
@@ -134,12 +160,12 @@ public class ImageContainer extends Representable implements ResourceLoader {
             }
         }
     }
-
-    public StructureMatrix<BufferedImage> getImage() {
+*/
+    public StructureMatrix<Bitmap> getImage() {
         return image;
     }
 
-    public void setImage(StructureMatrix<BufferedImage> image) {
+    public void setImage(StructureMatrix<Bitmap> image) {
         this.image = image;
     }
 

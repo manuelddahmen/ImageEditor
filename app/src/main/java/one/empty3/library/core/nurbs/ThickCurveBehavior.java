@@ -37,9 +37,9 @@ import one.empty3.library.Point3D;
 /*__
  * Created by manue on 31-05-19.
  */
-public class ThickCurveBehavior extends ParametricSurface{
+public class ThickCurveBehavior extends ParametricSurface {
 
-    public  double TAN_FCT_INCR = 0.000001;
+    public double TAN_FCT_INCR = 0.000001;
     public double NORM_FCT_INCR = 0.000001;
 
     private ParametricCurve soulCurve;
@@ -63,14 +63,14 @@ public class ThickCurveBehavior extends ParametricSurface{
     }
 
     public void nbrRotations(int r) {
-        setIncrV(1.0/r);
+        setIncrV(1.0 / r);
     }
 
     @Override
     public String toString() {
         String s = "tubulaireN2cc (\n\t("
                 + soulCurve.toString();
-        s += "\n\n)\n\t" + diameterCurve + "\n\t" + texture().toString() + "\n)\n";
+        s += "\n\n)\n\t" + diameterCurve + "\n\t" + getTexture().toString() + "\n)\n";
         return s;
     }
 
@@ -114,8 +114,8 @@ public class ThickCurveBehavior extends ParametricSurface{
     public Point3D calculerPoint3D(double u, double v) {
         Point3D[] vectPerp = vectPerp(u);
         return soulCurve.calculerPoint3D(u).plus(
-                vectPerp[1].mult(diameterCurve.result(u)*Math.cos(2 * Math.PI * v)).plus(
-                        vectPerp[2].mult(diameterCurve.result(u)*Math.sin(2 * Math.PI * v))));
+                vectPerp[1].mult(diameterCurve.result(u) * Math.cos(2 * Math.PI * v)).plus(
+                        vectPerp[2].mult(diameterCurve.result(u) * Math.sin(2 * Math.PI * v))));
     }
 
     @Override

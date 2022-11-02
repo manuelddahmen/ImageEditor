@@ -30,33 +30,32 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
-body
-{
+body {
     font-family: Verdana;
     padding: 50px;
     background-color: navy;
     color: white;
 }
-h1
-{
+
+h1 {
     font-family: Comics;
     background: blue;
     color: white;
     font-variant: small-caps;
     padding: 30px;
 }
-ul, a
-{
+
+ul, a {
     list-style-type: none;
     color: white;
     background: blue;
 }
-li
-{
+
+li {
     padding: 10px;
 }
-pre
-{
+
+pre {
     margin-left: auto;
     margin-right: auto;
     width: 500px;
@@ -64,8 +63,8 @@ pre
     color: black;
     background: white;
 }
-h2.code
-{
+
+h2.code {
     margin-left: auto;
     margin-right: auto;
     width: 500px;
@@ -73,8 +72,8 @@ h2.code
     background: gray;
     text-align: center;
 }
-h2.menu_link, h2.menu_link a
-{
+
+h2.menu_link, h2.menu_link a {
     background: aqua;
     color: black;
     padding: 5px;

@@ -40,6 +40,7 @@ public abstract class TreeNodeType {
     protected double sign1; // 1=*
     private TreeNodeType d;
     private TreeNodeType tnt;
+
     public TreeNodeType() {
     }
 
@@ -70,7 +71,7 @@ public abstract class TreeNodeType {
         if (values != null) {
             int i = 0;
             for (Object o : values) {
-                s += (o!=null?o.toString():"") + " (+) ";
+                s += (o != null ? o.toString() : "") + " (+) ";
             }
         }
         return s;

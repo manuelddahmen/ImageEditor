@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="?android:attr/buttonBarStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="?android:attr/buttonBarStyle">
+
+        <Button
+            android:id="@+id/buttonTextBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="48dp"
+            android:height="48dp"
+            android:text="@string/back_button_text_activity"
+            style="?android:attr/buttonBarStyle" />
+
+        <ImageView
+            android:id="@+id/imageViewOnImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/image_pour_l_ecriture_du_texte"
+            app:srcCompat="@drawable/ic_outer_circle"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="5dp"
+            style="?android:attr/buttonBarStyle" />
+        <!--
+                <com.google.android.material.slider.Slider
+                    android:valueFrom="48.0"
+                    android:valueTo="200.0"
+                    android:id="@+id/font_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" style="?android:attr/buttonBarStyle">
+                </com.google.android.material.slider.Slider>
+        -->
+        <EditText
+            android:text="@string/textDp"
+            android:id="@+id/font_size"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            style="?android:attr/buttonBarStyle"
+            android:autofillHints="Text size in dp (~pixels*4) "></EditText>
+
+        <EditText
+            android:id="@+id/textViewOnImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text=""
+            android:hint="@string/ecrire_du_texte_ici"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="84dp"
+            android:gravity="top"
+            android:autofillHints="Ajouter un texte"
+            android:inputType="textMultiLine"
+            style="?android:attr/buttonBarStyle" />
+
+        <Button
+            android:id="@+id/textApplyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"
+            style="?android:attr/buttonBarStyle" />
+    </LinearLayout>
+    <!--   <GridLayout android:rowCount="2" android:columnCount="3"
+           android:layout_width="wrap_content" android:layout_margin="1dp" android:layout_marginBottom="1dp"
+           android:layout_marginEnd="1dp" android:layout_marginHorizontal="1dp" android:layout_marginLeft="1dp"
+           android:layout_marginRight="1dp" android:layout_marginStart="0dp" android:layout_marginTop="0dp"
+           android:layout_marginVertical="0dp" android:id="@+id/layoutGridText" android:orientation="horizontal"
+           android:layout_height="wrap_content"
+           tools:ignore="MissingConstraints">
+           <Button android:layout_column="0" android:layout_row="0" android:text="@string/grid_text_00">
+
+           </Button>
+           <Button android:layout_column="1" android:layout_row="0" android:text="@string/grid_text_01">
+
+           </Button>
+           <Button android:layout_column="2" android:layout_row="0" android:text="@string/grid_text_02">
+
+           </Button>
+           <Button android:layout_column="0" android:layout_row="1" android:text="@string/grid_text_10">
+
+           </Button>
+           <Button android:layout_column="1" android:layout_row="1" android:text="@string/grid_text_11">
+
+           </Button>
+           <Button android:layout_column="2" android:layout_row="1" android:text="@string/grid_text_12">
+
+           </Button>
+       </GridLayout>
+   -->
+</androidx.constraintlayout.widget.ConstraintLayout>

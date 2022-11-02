@@ -62,11 +62,18 @@ public class Circle extends ParametricCurve {
 
     }
 
-
+    /*
         public Circle(Point3D center, Point3D vAxis, double radius) {
-            this(new Axe(center.plus(vAxis.norme1()), center.moins(vAxis.norme1())),
-                    radius);
+
+            this.vAxis = vAxis.norme1();
+            this.axis = new Axe(
+                    center.plus(vAxis),
+                    center.moins(vAxis)
+            );
+            this.radius = radius;
+            calculerRepere2();
         }
+    */
 /*
     private void calculerRepere2() {
 
@@ -92,20 +99,16 @@ public class Circle extends ParametricCurve {
         while (!success && i < 3) {
             Point3D pRef = new Point3D(i == 0 ? 1d : 0d, i == 1 ? 1d : 0d, i == 2 ? 1d : 0d);
 
-            Point3D mult = axis.getElem().getVector().norme1()
-                    .prodVect(axis.getElem().getVector().norme1()
-                            .prodVect(pRef).norme1());
+            Point3D mult = axis.getElem().getVector().norme1().prodVect(axis.getElem().getVector().norme1().prodVect(pRef).norme1());
             double d = mult.prodScalaire(pRef);
             vectY = axis.getElem().getVector().norme1();
             vectZ = mult.norme1();
             vectX = vectY.prodVect(vectZ);
-            success = (vectX.norme() > 0.8)
-                    && (vectY.norme() > 0.8)
-                    && (vectZ.norme() > 0.8);
-            if (success)
+            if (mult.norme() > 0.8 || d > 0.8) {
+                success = true;
                 break;
+            }
             i++;
-
         }
         if (!success) {
             isCalculerRepere1 = false;
@@ -125,7 +128,7 @@ public class Circle extends ParametricCurve {
         return getCenter().plus(
                 (
                         vectX.mult(
-                                Math.cos(2.0 * Math.PI * t))
+                                        Math.cos(2.0 * Math.PI * t))
                                 .plus(
                                         vectY.mult(
                                                 Math.sin(2.0 * Math.PI * t)))

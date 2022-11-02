@@ -44,7 +44,7 @@ public class PcOnPs extends ParametricCurve {
     public PcOnPs(ParametricSurface ps, ParametricCurve pc) {
         this.ps = ps;
         this.pc = pc;
-        this.texture(pc.texture());
+        this.texture(pc.getTexture());
     }
 
 

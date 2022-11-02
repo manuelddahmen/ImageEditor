@@ -22,5 +22,5 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 /*__
  * Created by manue on 27-10-19.
  */
-public class CurveSurface extends CourbeParametriquePolynomialeBezier{
+public class CurveSurface extends CourbeParametriquePolynomialeBezier {
 }

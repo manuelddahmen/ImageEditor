@@ -40,6 +40,11 @@
  */
 package one.empty3.library.core.script;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 
@@ -78,6 +83,7 @@ public class InterpreteSegment implements Interprete {
     /* (non-Javadoc)
      * @see be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#interprete(java.lang.String, int)
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Object interprete(String text, int pos) throws InterpreteException {
         InterpretesBase isb;

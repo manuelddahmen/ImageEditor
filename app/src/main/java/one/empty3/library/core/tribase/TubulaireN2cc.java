@@ -49,14 +49,13 @@ import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
 public class TubulaireN2cc extends ParametricSurface {
-    public  double TAN_FCT_INCR = 0.000001;
+    public double TAN_FCT_INCR = 0.000001;
     public double NORM_FCT_INCR = 0.000001;
 
     private ParametricCurve soulCurve;
     private Fct1D_1D diameterFunction;
 
-    public TubulaireN2cc()
-    {
+    public TubulaireN2cc() {
         super();
         soulCurve = new CourbeParametriquePolynomialeBezier();
         diameterFunction = new Fct1D_1D() {
@@ -66,9 +65,11 @@ public class TubulaireN2cc extends ParametricSurface {
             }
         };
     }
+
     public ParametricCurve getSoulCurve() {
         return soulCurve;
-   }
+    }
+
     public TubulaireN2cc(ParametricCurve soulCurve, Fct1D_1D diameterCurve) {
         this();
         this.soulCurve = soulCurve;
@@ -88,14 +89,14 @@ public class TubulaireN2cc extends ParametricSurface {
     }
 
     public void nbrRotations(int r) {
-        setIncrV(1.0/r);
+        setIncrV(1.0 / r);
     }
 
     @Override
     public String toString() {
         String s = "tubulaireN2cc (\n\t("
                 + soulCurve.toString();
-        s += "\n\n)\n\t" + diameterFunction.toString() + "\n\t" + texture().toString() + "\n)\n";
+        s += "\n\n)\n\t" + diameterFunction.toString() + "\n\t" + getTexture().toString() + "\n)\n";
         return s;
     }
 
@@ -139,8 +140,8 @@ public class TubulaireN2cc extends ParametricSurface {
     public Point3D calculerPoint3D(double u, double v) {
         Point3D[] vectPerp = vectPerp(u);
         return soulCurve.calculerPoint3D(u).plus(
-                vectPerp[1].mult(diameterFunction.result(u)*Math.cos(2 * Math.PI * v)).plus(
-                        vectPerp[2].mult(diameterFunction.result(u)*Math.sin(2 * Math.PI * v))));
+                vectPerp[1].mult(diameterFunction.result(u) * Math.cos(2 * Math.PI * v)).plus(
+                        vectPerp[2].mult(diameterFunction.result(u) * Math.sin(2 * Math.PI * v))));
     }
 
     @Override
@@ -151,6 +152,6 @@ public class TubulaireN2cc extends ParametricSurface {
     @Override
     public void declareProperties() {
         super.declareProperties();
-  throw new UnsupportedOperationException("Tubulaire N2 CC unsupported");
+        throw new UnsupportedOperationException("Tubulaire N2 CC unsupported");
     }
 }

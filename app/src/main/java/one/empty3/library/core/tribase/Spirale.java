@@ -37,6 +37,8 @@
  */
 package one.empty3.library.core.tribase;
 
+import android.graphics.Bitmap;
+
 import one.empty3.library.*;
 
 import java.util.ArrayList;
@@ -87,7 +89,7 @@ public class Spirale extends Representable implements TRIGenerable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

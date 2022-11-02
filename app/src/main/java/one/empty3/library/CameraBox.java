@@ -45,14 +45,14 @@ public class CameraBox extends Representable {
 
     public static final int PERSPECTIVE_ISOMETRIQUE = 1;
     public static final int PERSPECTIVE_POINTDEFUITE = 1;
-    protected StructureMatrix<Double> angleX = new StructureMatrix<>(0, Double.class);
-    protected StructureMatrix<Double> angleY = new StructureMatrix<>(0, Double.class);
-    private int type = PERSPECTIVE_ISOMETRIQUE;
+    private StructureMatrix<Double> angleX = new StructureMatrix<>(0, Double.class);
+    private StructureMatrix<Double> angleY = new StructureMatrix<>(0, Double.class);
+    private int type = PERSPECTIVE_POINTDEFUITE;
 
     public CameraBox() {
-        System.err.println("New camera box");
-        angleX.setElem(Math.PI *2/360*60);
-        angleY.setElem(Math.PI *2/360*60);
+
+        angleX.setElem(Math.PI * 2 / 360 * 60);
+        angleY.setElem(Math.PI * 2 / 360 * 60);
     }
 
     public Double getAngleX() {
@@ -70,7 +70,7 @@ public class CameraBox extends Representable {
 
     public void angleXY(double angleX, double angleY) {
         this.angleX.setElem(angleX);
-        this.angleY .setElem(angleY);
+        this.angleY.setElem(angleY);
     }
 
     public Double getAngleY() {
@@ -82,8 +82,8 @@ public class CameraBox extends Representable {
     }
 
     public void setAngleYr(double angleY, double ratioXY) {
-        this.angleY .setElem( angleY);
-        this.angleX .setElem( angleY * ratioXY);
+        this.angleY.setElem(angleY);
+        this.angleX.setElem(angleY * ratioXY);
     }
 
     public void perspectiveIsometrique() {

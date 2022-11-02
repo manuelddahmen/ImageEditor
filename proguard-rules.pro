@@ -1,0 +1,3 @@
+-keepattributes LineNumberTable,SourceFile
+-renamesourcefileattribute SourceFile
+-keep class one.empty3.**

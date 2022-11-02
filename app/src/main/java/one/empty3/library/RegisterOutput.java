@@ -37,15 +37,21 @@
  */
 package one.empty3.library;
 
+import android.widget.EditText;
+
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*__
  * @author manue_001
  */
 public class RegisterOutput {
-    /*
+
     private Logger logger;
     private OutputStream output;
-    private JTextPane pane;
+    private EditText pane;
 
     public void addOutput(Logger l) {
         this.logger = l;
@@ -55,7 +61,7 @@ public class RegisterOutput {
         this.output = o;
     }
 
-    public void addOutput(JTextPane p) {
+    public void addOutput(EditText p) {
         this.pane = p;
     }
 
@@ -67,7 +73,7 @@ public class RegisterOutput {
         return output;
     }
 
-    public JTextPane getPane() {
+    public EditText getPane() {
         return pane;
     }
 
@@ -81,5 +87,4 @@ public class RegisterOutput {
 
 
     }
-*/
 }

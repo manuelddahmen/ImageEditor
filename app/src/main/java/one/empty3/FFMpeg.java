@@ -1,4 +1,4 @@
-package empty3;
+package one.empty3;
 
 import one.empty3.io.ProcessFile;
 
@@ -55,7 +55,7 @@ public class FFMpeg {
         return s;
     }
 
-    /*
+    /**
      * @return temp out dir (decoded frames)
      */
     public File[] extraireImagesJpg() {
@@ -134,7 +134,7 @@ public class FFMpeg {
         return null;
     }
 
-    /*
+    /***
      *
      * extracted farmes
      * @return File out
@@ -163,7 +163,7 @@ public class FFMpeg {
     }
 
 
-    public void process(ProcessFile processInstance) {
+    public void process(ProcessFile processInstance) throws IOException {
         File frame = inputFile;
         String s = inputFile.getAbsolutePath();
         File file = new File(s.substring(0, s.lastIndexOf(File.separator)) + File.separator

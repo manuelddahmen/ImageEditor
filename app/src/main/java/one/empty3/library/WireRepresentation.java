@@ -52,7 +52,8 @@ public class WireRepresentation extends RepresentableConteneur {
         this.surface = parametricSurface;
         getRP();
     }
-    public WireRepresentation(Point3D [][] point3DS) {
+
+    public WireRepresentation(Point3D[][] point3DS) {
 
         this.surface = new SurfaceParametricPolygonalBezier(point3DS);
         getRP();
@@ -61,21 +62,21 @@ public class WireRepresentation extends RepresentableConteneur {
     public void getRP() {
         this.clear();
         for (double i = surface.getStartU(); i < surface.getEndU()
-                ; i+=surface.getIncrU()) {
+                ; i += surface.getIncrU()) {
             for (double j = surface.getStartV();
                  j < surface.getEndV()
-                    ; j+=surface.getIncrV()) {
-                    this.add(
-                            new LineSegment(
-                                    surface.calculerPoint3D(i,j),
-                                    surface.calculerPoint3D(i,j +
-                                    surface.getIncrV()),
-                                    surface.calculerPoint3D(i,j).texture()));
-                    this.add(
-                            new LineSegment(
-                                    surface.calculerPoint3D(i,j),
-                                    surface.calculerPoint3D(i+surface.getIncrU(),j + 1),
-                                    surface.calculerPoint3D(i,j).texture()));
+                    ; j += surface.getIncrV()) {
+                this.add(
+                        new LineSegment(
+                                surface.calculerPoint3D(i, j),
+                                surface.calculerPoint3D(i, j +
+                                        surface.getIncrV()),
+                                surface.calculerPoint3D(i, j).getTexture()));
+                this.add(
+                        new LineSegment(
+                                surface.calculerPoint3D(i, j),
+                                surface.calculerPoint3D(i + surface.getIncrU(), j + 1),
+                                surface.calculerPoint3D(i, j).getTexture()));
 
             }
         }

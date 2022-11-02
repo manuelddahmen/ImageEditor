@@ -68,8 +68,6 @@ public class FunctionCurve extends ParametricCurve {
         this.z.setElem(zEqFuv);
 
 
-
-
         treeX = new AlgebricTree(xEqFuv);
         treeX.getParametersValues().putAll(hashMap);
         treeX.construct();

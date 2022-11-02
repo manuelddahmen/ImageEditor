@@ -40,21 +40,24 @@
  */
 package one.empty3.library.core.nurbs;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import android.graphics.Color;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
-import one.empty3.library.Representable;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.tribase.TRIObjetGenerateurAbstract;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
-public abstract class ParametricSurface extends Representable {
+public class ParametricSurface extends TRIObjetGenerateurAbstract {
 
 
-    private static final double MIN_NORMGT0 = 0.000000001;
-    private static final double TANGENT_INCR = 0.00000001;
-//    private static Globals globals;
+    private static Globals globals;
 
 
     private StructureMatrix<Double> incrU = new StructureMatrix<>(0, Double.class);
@@ -65,20 +68,18 @@ public abstract class ParametricSurface extends Representable {
     private StructureMatrix<Double> endU = new StructureMatrix<>(0, Double.class);
     private StructureMatrix<Double> startV = new StructureMatrix<>(0, Double.class);
     private StructureMatrix<Double> endV = new StructureMatrix<>(0, Double.class);
-//    private ParametricSurface.Parameters parameters = new ParametricSurface.Parameters(true);
+    private ParametricSurface.Parameters parameters = new ParametricSurface.Parameters(true);
 
-  /*  static {
-        if(globals==null)
-
-        {
+    static {
+        if (globals == null) {
             Globals globals1 = new Globals();
             ParametricSurface.setGlobals(globals1);
             globals1.setIncrU(0.1);
             globals1.setIncrV(0.1);
         }
 
-    }
 
+    }
 
 
     public static Globals getGlobals() {
@@ -88,28 +89,27 @@ public abstract class ParametricSurface extends Representable {
     public static void setGlobals(Globals globals) {
         ParametricSurface.globals = globals;
     }
-*/
-
 
     public Double getIncrU() {
-       return incrU.getElem();
+        return incrU.getElem();
     }
 
     public void setIncrU(Double incr1) {
-//        if (parameters.isGlobal()) {
-//            parameters.setIncrU(incr1);
-//        } else {
-//            globals.setIncrU(incr1);
-//        }
+        if (parameters.isGlobal()) {
+            parameters.setIncrU(incr1);
+        } else {
+            globals.setIncrU(incr1);
+        }
         this.incrU.setElem(incr1);
     }
+
     public void setIncrV(Double incr2) {
-//        if (parameters.isGlobal()) {
-//            parameters.setIncrV(incr2);
-//        } else {
-//            globals.setIncrV(incr2);
-//        }
-        this.incrV .setElem(incr2);
+        if (parameters.isGlobal()) {
+            parameters.setIncrV(incr2);
+        } else {
+            globals.setIncrV(incr2);
+        }
+        this.incrV.setElem(incr2);
     }
 
     public Double getIncrV() {
@@ -117,7 +117,9 @@ public abstract class ParametricSurface extends Representable {
     }
 
 
-    public abstract Point3D calculerPoint3D(double u, double v);
+    public Point3D calculerPoint3D(double u, double v) {
+        return new Point3D(0d, 0d, 0d);
+    }
 
     public Point3D calculerVitesse3D(double u, double v) {
         Point3D moins = calculerPoint3D(u + incrVitesse.getElem(), v).moins(calculerPoint3D(u, v));
@@ -141,15 +143,6 @@ public abstract class ParametricSurface extends Representable {
         return moins1.mult(1.0 / incrVitesse.getElem()).norme1();
     }
 
-    public Point3D calculerNormalePerp(double u, double v) {
-
-        Point3D mult = calculerTangenteU(u+TANGENT_INCR, v).prodVect(calculerTangenteV(u, v+TANGENT_INCR)).mult(1.0);
-        if(mult.norme()<=MIN_NORMGT0) {
-            return mult;
-        } else {
-            return mult;
-        }
-    }
     public Double incr1() {
         return incrU.getElem();
     }
@@ -163,7 +156,7 @@ public abstract class ParametricSurface extends Representable {
     }
 
     public void setStartU(Double s1) {
-        this.startU.setElem(  s1);
+        this.startU.setElem(s1);
     }
 
     public Double getStartV() {
@@ -171,7 +164,7 @@ public abstract class ParametricSurface extends Representable {
     }
 
     public void setStartV(Double s2) {
-        this.startV .setElem(  s2);
+        this.startV.setElem(s2);
     }
 
     public Double getEndU() {
@@ -179,7 +172,7 @@ public abstract class ParametricSurface extends Representable {
     }
 
     public void setEndU(Double e1) {
-        this.endU .setElem(  e1);
+        this.endU.setElem(e1);
     }
 
     public Double getEndV() {
@@ -187,26 +180,31 @@ public abstract class ParametricSurface extends Representable {
     }
 
     public void setEndV(Double e2) {
-        this.endV.setElem( e2);
+        this.endV.setElem(e2);
     }
 
     public Point3D velocity(Double u1, Double v1, Double u2, Double v2) {
         return calculerPoint3D(u2, v2).moins(calculerPoint3D(u1, v1));
     }
 
+    public Point3D coordPoint3D(int x, int y) {
+        return calculerPoint3D(1.0 * x / getMaxX(), 1.0 * y / getMaxY());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Polygon getElementSurface(Double u, Double incrU, Double v, Double incrV) {
-        Double[][] uvIncr = new Double[][]{
+        Double[][] uvincr = new Double[][]{
                 {u, v},
                 {u + incrU, v},
                 {u + incrU, v + incrV},
                 {u, v + incrV}
         };
         Polygon polygon = new Polygon(new Point3D[]{
-                calculerPoint3D(uvIncr[0][0], uvIncr[0][1]),
-                calculerPoint3D(uvIncr[1][0], uvIncr[1][1]),
-                calculerPoint3D(uvIncr[2][0], uvIncr[2][1]),
-                calculerPoint3D(uvIncr[3][0], uvIncr[3][1])},
-                texture());
+                calculerPoint3D(uvincr[0][0], uvincr[0][1]),
+                calculerPoint3D(uvincr[1][0], uvincr[1][1]),
+                calculerPoint3D(uvincr[2][0], uvincr[2][1]),
+                calculerPoint3D(uvincr[3][0], uvincr[3][1])},
+                (Color) Color.valueOf(0, 0, 0));
         return polygon;
     }
 
@@ -274,8 +272,8 @@ public abstract class ParametricSurface extends Representable {
             this.isGlobal = global;
         }
     }
-    public ParametricSurface ()
-    {
+
+    public ParametricSurface() {
         startU.setElem(0.0);
         startV.setElem(0.0);
         incrU.setElem(0.1);
@@ -298,13 +296,13 @@ public abstract class ParametricSurface extends Representable {
         getDeclaredDataStructure().put("endV/endV", endV);
     }
 
-//    public Parameters getParameters() {
-//        return parameters;
-//    }
-//
-//    public void setParameters(Parameters parameters) {
-//        this.parameters = parameters;
-//    }
+    public Parameters getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameters parameters) {
+        this.parameters = parameters;
+    }
 
     @Override
     public String toString() {

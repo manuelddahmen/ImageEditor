@@ -48,7 +48,7 @@ import one.empty3.library.StructureMatrix;
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
-public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePolynomiale implements SurfaceElem{
+public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePolynomiale implements SurfaceElem {
 
 
     public double B(int i, int n, double t) {
@@ -59,9 +59,9 @@ public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePol
     @Override
     public Point3D calculerPoint3D(double u, double v) {
         Point3D sum = Point3D.O0;
-        for (int i = 0; i <getPower1(); i++) {
+        for (int i = 0; i < getPower1(); i++) {
             for (int j = 0; j < getPower2(); j++) {
-                sum = sum.plus(coefficients.getElem(i,j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
+                sum = sum.plus(coefficients.getElem(i, j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
             }
         }
         return sum;
@@ -105,11 +105,11 @@ public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePol
     public String toString() {
         String s = "bezier2(";
 
-        s += "controls : "+coefficients.toString();
-        s += "power1 : "+power1.toString();
-        s += "power2 : "+power2.toString();
+        s += "controls : " + coefficients.toString();
+        s += "power1 : " + power1.toString();
+        s += "power2 : " + power2.toString();
 
-        s+=")";
+        s += ")";
         return s;
     }
 }

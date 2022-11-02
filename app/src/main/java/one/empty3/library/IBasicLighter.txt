@@ -1,6 +1,6 @@
 package be.ibiiztera.md.pmatrix.pushmatrix;
 
-import java.awt.Color;
+import android.graphics.Color;
 
 public class IBasicLighter
 {

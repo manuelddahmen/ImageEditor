@@ -1,8 +1,10 @@
 package one.empty3.library;
+
 public class RFactory {
     String configName = "stable";
+
     public static void loadConfig() {
-        
+
     }
     // get interfaces
     /*

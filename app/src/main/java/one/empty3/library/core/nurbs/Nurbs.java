@@ -99,7 +99,7 @@ public class Nurbs {
             }
         }
 
-        if (t == (double) x[nplusc]) {		/*    pick up last point	*/
+        if (t == (double) x[nplusc]) {        /*    pick up last point	*/
 
             temp[npts] = 1;
         }

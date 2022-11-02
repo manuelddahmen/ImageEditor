@@ -51,38 +51,35 @@ package one.empty3.library;/*
  * *
  */
 
-import one.empty3.library.Point3D;
-import one.empty3.library.Polygon;
-import one.empty3.library.RepresentableConteneur;
-import one.empty3.library.TextureCol;
-
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
 public class Parallelepiped extends RepresentableConteneur {
-Point3D [] p0 ;
+    Point3D[] p0;
     private double a = 1, b = 1, c = 1;
+
     public Parallelepiped(Point3D base, Point3D a, Point3D b, Point3D c, ITexture texture) {
-         p0 = new Point3D[] {base, a, b, c};
-         Point3D [] p1 = new Point3D[]{base};
-         
-         for(int face = 0; face<6; face++) {
-             int dim0 = face/2;
-             int dim1 = (dim0+1)%3;
-             int dim2 = (dim1+1)%3;
-double [] cof = new double[] {(dim0==0)?1:-1,
-(dim1==1)?1:-1,(dim2==2)?1:-1};
-              
-             add( new Polygon( new Point3D[] {
-            p1[0], p(p1[0], cof[dim0], p0[1]),
-            p(p1[0], cof[dim1], p0[2]),
-            p(p1[0], cof[dim2], p0[2])}, texture()
-                )); 
+        p0 = new Point3D[]{base, a, b, c};
+        Point3D[] p1 = new Point3D[]{base};
+
+        for (int face = 0; face < 6; face++) {
+            int dim0 = face / 2;
+            int dim1 = (dim0 + 1) % 3;
+            int dim2 = (dim1 + 1) % 3;
+            double[] cof = new double[]{(dim0 == 0) ? 1 : -1,
+                    (dim1 == 1) ? 1 : -1, (dim2 == 2) ? 1 : -1};
+
+            add(new Polygon(new Point3D[]{
+                    p1[0], p(p1[0], cof[dim0], p0[1]),
+                    p(p1[0], cof[dim1], p0[2]),
+                    p(p1[0], cof[dim2], p0[2])}, getTexture()
+            ));
             p1[0] = p(p1[0], cof[dim1], p0[2]);
-         }
+        }
         // add( new Quad(p0[0], p0[1], p0[2], p0[3]));
 
     }
+
     public Parallelepiped(double a, double b, double c, TextureCol texture) {
         this.a = a;
         this.b = b;
@@ -96,7 +93,7 @@ double [] cof = new double[] {(dim0==0)?1:-1,
             p[2] = new Point3D(x * a, 1 * b, 1 * c);
             p[3] = new Point3D(x * a, -1 * b, 1 * c);
 
-            add(new Polygon(p, texture()));
+            add(new Polygon(p, getTexture()));
         }
         for (int y = -1; y <= 1; y++) {
             p[0] = new Point3D(1 * a, y * b, 1 * c);
@@ -104,7 +101,7 @@ double [] cof = new double[] {(dim0==0)?1:-1,
             p[2] = new Point3D(-1 * a, y * b, -1 * c);
             p[3] = new Point3D(-1 * a, y * b, 1 * c);
 
-            add(new Polygon(p, texture()));
+            add(new Polygon(p, getTexture()));
         }
         for (int z = -1; z <= 1; z++) {
             p[0] = new Point3D(-1 * a, -1 * b, z * c);
@@ -112,7 +109,7 @@ double [] cof = new double[] {(dim0==0)?1:-1,
             p[2] = new Point3D(1 * a, 1 * b, z * c);
             p[3] = new Point3D(1 * a, -1 * b, z * c);
 
-            add(new Polygon(p, texture()));
+            add(new Polygon(p, getTexture()));
         }
     }
 
@@ -139,6 +136,7 @@ double [] cof = new double[] {(dim0==0)?1:-1,
     public void setC(double c) {
         this.c = c;
     }
+
     Point3D p(Point3D p0, double a, Point3D p1) {
         return p0.plus(p1.moins(p0).mult(a));
     }

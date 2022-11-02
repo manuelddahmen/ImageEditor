@@ -47,12 +47,12 @@ public class TRIGeneratorUtil {
 
                 TRI t1 = new TRI(points[dimx * j + i], points[dimx * (j + 1)
                         + i], points[dimx * (j + 1) + (i + 1)], points[dimx * j
-                        + i].texture());
+                        + i].getTexture());
                 tri.add(t1);
 
                 TRI t2 = new TRI(points[dimx * j + i], points[dimx * j
                         + (i + 1)], points[dimx * (j + 1) + (i + 1)],
-                        points[dimx * j + i].texture());
+                        points[dimx * j + i].getTexture());
                 tri.add(t2);
 
             }

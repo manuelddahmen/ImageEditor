@@ -24,61 +24,8 @@ import one.empty3.library.StructureMatrix;
  * Created by manue on 23-11-19.
  */
 public class ExtrusionCurveCurve extends ParametricSurface {
-    /***
-     * base: chemin d'extrusion
-     */
-    protected StructureMatrix<ParametricCurve> base = new StructureMatrix<>(0, ParametricCurve.class);
-    /***
-     * base: courbe à extruder le long de base
-     */
-    protected StructureMatrix<ParametricCurve> path = new StructureMatrix<>(0, ParametricCurve.class);
-
-
-    public ExtrusionCurveCurve() {
-        base.setElem(new CourbeParametriquePolynomialeBezier());
-        path.setElem(new CourbeParametriquePolynomialeBezier());
-    }
-
-/***
- * Problème : path à partir de P(0,0,0)
- * *//*
-    public Point3D calculerPoint3D(double u, double v) {
-
-        Point3D Op, T, NX, NY, pO;
-
-        Op = path.getElem().calculerPoint3D(u);
-
-        T = path.getElem().tangente(u);
-
-
-        // Plan normal pour le chemin
-        Point3D normale = path.getElem().calculerNormale(u);
-        T = T.norme1();
-        NX = normale.norme1();
-        NY = NX.prodVect(T).norme1();
-        pO = Op.plus(NX.mult(base.getElem().calculerPoint3D(v))).plus(NY.mult(base.getElem().calculerPoint3D(v)));
-        return pO;
-
-    }*/
-    public Point3D calculerPoint3D(double u, double v) {
-        Point3D T, NX, NY;
-        T = path.getElem().tangente(v);
-        // Plan normal pour le chemin
-        Point3D normale = path.getElem().calculerNormale(v);
-        T = T.norme1();
-        NX = normale.norme1();
-        NY = NX.prodVect(T).norme1();
-/*
-        return base.getElem().calculerPoint3D(u).plus(
-                path.getElem().calculerPoint3D(v).mult(NX)).
-            plus(
-                path.getElem().calculerPoint3D(v).mult(NY));
-*/
-        // CORRECTION ERREUR INATTENDUE.
-        return base.getElem().calculerPoint3D(u).plus(
-            path.getElem().calculerPoint3D(v));
-    }
-
+    private StructureMatrix<ParametricCurve> base = new StructureMatrix<>(0, ParametricCurve.class);
+    private StructureMatrix<ParametricCurve> path = new StructureMatrix<>(0, ParametricCurve.class);
 
     @Override
     public void declareProperties() {
@@ -87,19 +34,10 @@ public class ExtrusionCurveCurve extends ParametricSurface {
         getDeclaredDataStructure().put("path/Chemin d'extrusion", path);
     }
 
-    public StructureMatrix<ParametricCurve> getBase() {
-        return base;
+    public Point3D calculerPoint3D(double u, double v) {
+        return base.getElem().calculerPoint3D(u).plus(path.getElem().calculerPoint3D(v));
+
     }
 
-    public void setBase(StructureMatrix<ParametricCurve> base) {
-        this.base = base;
-    }
 
-    public StructureMatrix<ParametricCurve> getPath() {
-        return path;
-    }
-
-    public void setPath(StructureMatrix<ParametricCurve> path) {
-        this.path = path;
-    }
 }

@@ -74,20 +74,19 @@ public class InterpretesBase {
     }
 
     private Object read(Integer integer2, String substring) {
-        int pos = 0;
         size = 0;
         elementParsed = false;
-        if (substring.length() == 0 && integer2 != BLANK) {
+        if (substring.length() == 0 & integer2 != BLANK) {
             return null;
-        } else if (substring.length() == 0 && integer2 == BLANK) {
+        } else if (substring.length() == 0 & integer2 == BLANK) {
             elementParsed = true;
             return " ";
         }
         switch (integer2) {
             case BLANK:
-
+                int pos = 0;
                 char c = substring.charAt(0);
-                while (c == ' ' | c == '\n' | c == '\t' | c == '\r') {
+                while (pos < substring.length() && (c == ' ' | c == '\n' | c == '\t' | c == '\r')) {
                     pos++;
                     if (pos < substring.length()) {
                         c = substring.charAt(pos);
@@ -102,32 +101,35 @@ public class InterpretesBase {
             case DECIMAL:
                 pos = 0;
                 c = substring.charAt(0);
-                while (pos < substring.length() && (c >= '1' & c <= '9' | c == '0' | c == '.' | c == '-')) {
+                while (pos < substring.length() && ((c >= '1' & c <= '9') | c == '0' | c == '.' | c == '-')) {
                     pos++;
                     size = pos;
                     if (pos < substring.length()) {
                         c = substring.charAt(pos);
+                    } else {
+                        break;
                     }
+                    elementParsed = true;
                 }
-                if (pos <= substring.length() - 1) {
+                if (pos < substring.length() - 2) {
                     c = substring.charAt(pos);
-                    if (c == 'E' || c == 'e') {
+                    if (pos < substring.length() && (c == 'E' || c == 'e')) {
                         pos++;
-                        size = pos;
                         c = substring.charAt(pos);
-                        while (c >= '1' & c <= '9' | c == '0' | c == '-') {
+                        while (pos < substring.length() && ((c >= '1' & c <= '9') | c == '0') | c == '-') {
                             pos++;
                             size = pos;
                             if (pos < substring.length()) {
                                 c = substring.charAt(pos);
+                            } else {
+                                break;
                             }
                             elementParsed = true;
                         }
 
                     }
                 }
-                if (pos > 0) {
-                    elementParsed = true;
+                if (elementParsed) {
                     return Double.parseDouble(substring.substring(0, pos));
                 } else {
                     return null;
@@ -153,18 +155,19 @@ public class InterpretesBase {
                 }
             case COMA:
                 pos = 0;
-                if (substring.charAt(0) == ',') {
+                if (pos < substring.length() & substring.charAt(0) == ',') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(COMA);
-                } else {
+                } else if (pos < substring.length()) {
                     size = 0;
-                    elementParsed = false;
+                    elementParsed = true;
                     return new CODE(COMA);
                 }
+                return null;
             case LEFTPARENTHESIS:
                 pos = 0;
-                if (substring.charAt(0) == '(') {
+                if (pos < substring.length() & substring.charAt(0) == '(') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(LEFTPARENTHESIS);
@@ -172,7 +175,7 @@ public class InterpretesBase {
                 return null;
             case RIGHTPARENTHESIS:
                 pos = 0;
-                if (substring.charAt(0) == ')') {
+                if (pos < substring.length() & substring.charAt(0) == ')') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(RIGHTPARENTHESIS);
@@ -180,7 +183,7 @@ public class InterpretesBase {
                 return null;
             case DIESE:
                 pos = 0;
-                if (substring.charAt(0) == '#') {
+                if (pos < substring.length() & substring.charAt(0) == '#') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(DIESE);
@@ -188,7 +191,7 @@ public class InterpretesBase {
                 return null;
             case AROBASE:
                 pos = 0;
-                if (substring.charAt(0) == '@') {
+                if (pos < substring.length() & substring.charAt(0) == '@') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(AROBASE);
@@ -196,7 +199,7 @@ public class InterpretesBase {
                 return null;
             case MULTIPLICATION:
                 pos = 0;
-                if (substring.charAt(0) == '*') {
+                if (pos < substring.length() & substring.charAt(0) == '*') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(MULTIPLICATION);
@@ -204,7 +207,7 @@ public class InterpretesBase {
                 return null;
             case PERCENT:
                 pos = 0;
-                if (substring.charAt(0) == '%') {
+                if (pos < substring.length() & substring.charAt(0) == '%') {
                     size = 1;
                     elementParsed = true;
                     return new CODE(PERCENT);
@@ -212,8 +215,10 @@ public class InterpretesBase {
                 return null;
             case CARACTERE:
                 pos = 0;
-                elementParsed = true;
-                return substring.charAt(0);
+                if (pos < substring.length()) {
+                    return substring.charAt(0);
+                }
+                return null;
         }
         return substring;
 
@@ -227,17 +232,16 @@ public class InterpretesBase {
                 objects.add(o);
                 ppos++;
                 pos += size;
+                this.pos = pos;
             } else {
                 if (o != null) {
                     throw new InterpreteException("Parser Error : " + o.toString());
                 } else {
-                    throw new InterpreteException("Parser Error : code char" + pattern.get(ppos) + " code pos: " + pos + "string" +
-                            "parser: " + chaine + " charAt pos='" + chaine.charAt(pos) + "'");
+                    throw new InterpreteException("Parser Error : ");
                 }
             }
 
         }
-        this.pos = pos;
         return objects;
     }
 

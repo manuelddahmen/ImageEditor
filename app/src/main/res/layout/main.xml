@@ -1,40 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
-
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?android:attr/buttonBarStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<LinearLayout
+    android:id="@+id/linearChooseButtons"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
     <Button
         android:id="@+id/takePhotoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/capturePhoto" />
+        style="?android:attr/buttonBarStyle"
+        android:layout_height="48dp"
+        android:autofillHints="@string/capturePhoto"
+        android:contentDescription="@string/capturePhoto"
+        android:height="48dp"
+        android:src="@drawable/apn"
+        android:text="@string/capturePhoto"
+        android:background="@color/light_blue_A200"
+        android:layout_width="wrap_content" />
 
     <Button
         android:id="@+id/choosePhotoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choosePhoto" />
+        android:background="@color/light_blue_A200"
+        style="?android:attr/buttonBarStyle"
+        android:layout_height="48dp"
+        android:autofillHints="@string/choosePhoto"
+        android:contentDescription="@string/choosePhoto"
+        android:height="48dp"
+        android:src="@drawable/folder"
+        android:text="@string/choosePhoto"
+        android:layout_width="wrap_content" />
 
-    <ImageView
+    <Button
+        android:id="@+id/chooseMovie"
+        android:background="@color/light_blue_A200"
+        style="?android:attr/buttonBarStyle"
+        android:layout_height="48dp"
+        android:autofillHints="@string/choose_movie"
+        android:contentDescription="@string/choose_movie"
+        android:height="48dp"
+        android:src="@drawable/film"
+        android:text="@string/choose_movie"
+        android:layout_width="wrap_content" />
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/selectButtonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/currentImageView"
+        app:layout_constraintStart_toStartOf="@id/currentImageView"
+        app:layout_constraintTop_toBottomOf="@id/linearChooseButtons">
+
+        <Button
+            android:id="@+id/draw_activity"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:text="@string/draw_activity" />
+
+        <Button
+            android:id="@+id/selectRectangle"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:text="@string/select_rectangle"
+             />
+
+        <Button
+            android:id="@+id/unselect_rect"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:onClick="unselectA"
+            android:text="@string/unselect" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/currentImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearChooseButtons">
+
+        <Button
+            android:id="@+id/save"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="72dp"
+            android:height="48dp"
+            android:text="@string/save"
+            app:layout_constraintEnd_toStartOf="@id/share"
+            app:layout_constraintTop_toBottomOf="@+id/chooseMovie" />
+
+        <Button
+            android:id="@+id/share"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="72dp"
+            android:height="48dp"
+            android:text="@string/share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chooseMovie"
+            app:layout_constraintTop_toTopOf="@id/currentImageView" />
+    </LinearLayout>
+
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
         android:id="@+id/currentImageView"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
         android:src="@drawable/icon"
-        android:layout_width="wrap_content"
-        android:minHeight="200dp"
-        android:minWidth="200dp"
-        android:contentDescription="@string/image_traiter" />
-
+        app:layout_constraintBottom_toTopOf="@id/effectsButtonNew"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearChooseButtons"
+        android:background="@color/black"/>
+    <!--
     <Gallery
         android:id="@+id/imageTakenPreviewGallery"
         android:layout_width="match_parent"
-        android:layout_height="343dp"
-        />
+        android:layout_height="400dp"
+
+        />-->
 
     <Button
-        android:id="@+id/effectsButton"
+        android:id="@+id/buttonAddText"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:height="48dp"
+        android:onClick="addText"
+        android:text="@string/add_text"
+        android:background="@color/light_blue_A400"
+        app:layout_constraintEnd_toStartOf="@id/buttonDraw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+
+    <Button
+        android:id="@+id/buttonDraw"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:background="@color/light_blue_A400"
+        android:layout_height="48dp"
+        android:height="48dp"
+        android:text="@string/draw_button_text"
+        app:layout_constraintStart_toEndOf="@id/buttonAddText"
+        app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+
+
+    <Button
+        android:id="@+id/effectsButtonNew"
+        style="?android:attr/buttonBarStyle"
+        android:layout_height="48dp"
+        android:background="@color/light_blue_A400"
+        android:height="48dp"
+        android:text="@string/choose_effects"
+        app:layout_constraintStart_toEndOf="@id/buttonDraw"
+        app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+        android:layout_width="wrap_content" />
+
+    <Button
+        android:id="@+id/About"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:height="48dp"
+        android:background="@color/gray_400"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/about"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/effectsButtonNew" />
+
+    <EditText
+        android:id="@+id/editMaximiumResolution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choose_effects" />
-</LinearLayout>
+        android:height="48dp"
+        android:autofillHints="@string/maximum_resolution"
+        android:ems="10"
+        android:hint="@string/maximum_resolution"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:text="@string/maxRes_1200"
+        android:tooltipText="Maximum resolution"
+        app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"
+        tools:layout_editor_absoluteX="48dp" />
+    <!--
+        <CheckBox
+                android:id="@+id/betaVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:minHeight="48dp"
+                android:text="@string/beta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"/>
+
+    -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

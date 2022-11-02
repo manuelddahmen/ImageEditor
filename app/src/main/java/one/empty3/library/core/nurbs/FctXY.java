@@ -44,16 +44,14 @@ public class FctXY extends Fct1D_1D {
     private StructureMatrix<String> formulaX = new StructureMatrix<>(0, String.class);
     private AlgebricTree treeX;
 
-    public FctXY()
-    {
+    public FctXY() {
 
         formulaX.setElem("10.0");
         setFormulaX(formulaX.getElem());
 
     }
 
-    public void setFormulaX(String formulaX)
-    {
+    public void setFormulaX(String formulaX) {
         this.formulaX.setElem(formulaX);
 
         try {
@@ -69,8 +67,7 @@ public class FctXY extends Fct1D_1D {
         return formulaX.getElem();
     }
 
-    public double result(double input)
-    {
+    public double result(double input) {
         treeX.getParametersValues().put("x", input);
         try {
             return treeX.eval();
@@ -83,11 +80,11 @@ public class FctXY extends Fct1D_1D {
     @Override
     public void declareProperties() {
         super.declareProperties();
-        getDeclaredDataStructure().put("formulaX/fonction f(x)", formulaX);
+        getDeclaredDataStructure().put("formulaX/fonction Y=f(x)", formulaX);
     }
 
     @Override
     public String toString() {
-        return "fctXY( \""+formulaX+"\" )\n";
+        return "fctXY( \"" + formulaX + "\" )\n";
     }
 }

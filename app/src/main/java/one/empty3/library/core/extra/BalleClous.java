@@ -45,7 +45,7 @@ import java.util.ArrayList;
 /*__
  * @author Se7en
  */
-public class BalleClous extends HeightMapSurface{
+public class BalleClous extends HeightMapSurface {
 
     private ArrayList<Point2D> points = new ArrayList<Point2D>();
     private double d;
@@ -87,10 +87,8 @@ public class BalleClous extends HeightMapSurface{
     }
 
 
-    public Point3D calculerPoint3D(double u, double v)
-    {
-        throw new UnsupportedOperationException("Calculer point de la sphere + bitmap ou fonction");
-//        return super.calculerPoint3D(u, v);
+    public Point3D calculerPoint3D(double u, double v) {
+        return super.calculerPoint3D(u, v);
     }
 
     public Point3D height(double u, double v) {

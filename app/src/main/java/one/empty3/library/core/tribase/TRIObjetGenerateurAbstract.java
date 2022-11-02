@@ -36,8 +36,12 @@
 package one.empty3.library.core.tribase;
 
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.feature.app.replace.java.awt.Point;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 import java.util.List;
@@ -61,8 +65,8 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
     protected StructureMatrix<Integer> maxY = new StructureMatrix<>(0, Integer.class);
     protected StructureMatrix<Boolean> cx = new StructureMatrix<>(0, Boolean.class);
     protected StructureMatrix<Boolean> cy = new StructureMatrix<>(0, Boolean.class);
-    public TRIObjetGenerateurAbstract()
-    {
+
+    public TRIObjetGenerateurAbstract() {
         maxX.setElem(30);
         maxY.setElem(30);
         cx.setElem(false);
@@ -79,6 +83,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
         getDeclaredDataStructure().put("cy/ Circulaire X last iterations for drawing - disable", cy);
     */
     }
+
     @Override
     public int getMaxX() {
         return maxX.data0d;
@@ -86,7 +91,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
 
     @Override
     public void setMaxX(int maxX) {
-        this.maxX.setElem( maxX);
+        this.maxX.setElem(maxX);
     }
 
     @Override
@@ -96,7 +101,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
 
     @Override
     public void setMaxY(int maxY) {
-        this.maxY.setElem( maxY);
+        this.maxY.setElem(maxY);
     }
 
     @Override
@@ -106,7 +111,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
 
     @Override
     public void setCirculaireX(boolean cx) {
-        this.cx.setElem( cx);
+        this.cx.setElem(cx);
     }
 
     @Override
@@ -120,8 +125,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
     }
 
     @Override
-    public Point3D coordPoint3D(int x, int y)
-    {
+    public Point3D coordPoint3D(int x, int y) {
         return null;
     }
 
@@ -163,7 +167,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
 
             Point3D normale = tris[t].getSommet().getElem(1).moins(
                     tris[t].getSommet().getElem(0).prodVect(
-                    (tris[t].getSommet().getElem(2).moins(tris[t].getSommet().getElem(0)))));
+                            (tris[t].getSommet().getElem(2).moins(tris[t].getSommet().getElem(0)))));
             for (int i = 0; i < 3; i++) {
                 tris[t].getSommet().getElem(i).setNormale(normale);
             }
@@ -182,6 +186,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
      * @param ratioY
      * @return
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Point3D getPoint3D(TRI[] tris, int numX, int numY, double ratioX,
                               double ratioY) {
@@ -190,9 +195,8 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             Point3D ret = sommet.get(0).plus(
                     sommet.get(1).moins(sommet.get(0)).mult(ratioX)).plus(
                     sommet.get(2).moins(sommet.get(1)).mult(ratioY));
-            if (texture() == null) texture = new TextureCol((Color) Color.Color(255, 128, 0));
             ret.texture(new TextureCol(texture.getColorAt(
-                    (numX+(numX + ratioX) / maxX.data0d), (numY+(numY + ratioY) / maxY.data0d))));
+                    (numX + (numX + ratioX) / maxX.data0d), (numY + (numY + ratioY) / maxY.data0d))));
 
             ret.setNormale((tris[0].getSommet().getElem(1).moins(tris[0].getSommet().getElem(0))).prodVect((tris[0]
                     .getSommet().getElem(2).moins(tris[0].getSommet().getElem(0)))));
@@ -200,12 +204,11 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
             return ret;
         } else {
             List<Point3D> sommet = tris[1].getSommet().getData1d();
-            if (texture() == null) texture = new TextureCol((Color) Color.Color(255, 128, 0));
             Point3D ret = sommet.get(1).plus(
                     sommet.get(0).moins(sommet.get(1)).mult(ratioY)).plus(
                     sommet.get(2).moins(sommet.get(0)).mult(ratioX));
             ret.texture(new TextureCol(texture.getColorAt(
-                    (numX+(numX + ratioX) / maxX.data0d), (numY+(numY + ratioY) / maxY.data0d))));
+                    (numX + (numX + ratioX) / maxX.data0d), (numY + (numY + ratioY) / maxY.data0d))));
 
             ret.setNormale((tris[1].getSommet().getElem(1).moins(tris[1].getSommet().getElem(0)).prodVect((tris[1]
                     .getSommet().getElem(2).moins(tris[1].getSommet().getElem(0))))));
@@ -222,6 +225,7 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
      *
      * @param z
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void draw(ZBuffer z) {
         Point3D INFINI = new Point3D(0d, 0d, 10000d, new TextureCol(Color.BLUE));
         TRI[] tris = new TRI[2];
@@ -248,14 +252,14 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
                 double incrMax = 1;
                 for (int t = 0; t < 2; t++) {
                     for (int c = 0; c < 3; c++) {
-                        one.empty3.feature.app.replace.java.awt.Point p1 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem(c), (ZBufferImpl)z);
+                        android.graphics.Point p1 = z.camera().coordonneesPoint2D(tris[t]
+                                .getSommet().getElem(c), (ZBufferImpl) z);
                         Point p2 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem((c + 1) % 3), (ZBufferImpl)z);
+                                .getSommet().getElem((c + 1) % 3), (ZBufferImpl) z);
                         if (p1 != null & p2 != null) {
                             double incr = 1.0 / (Math
-                                    .abs(p1.getX() - p2.getX()) + Math.abs(p1
-                                    .getY() - p2.getY()));
+                                    .abs(p1.x - p2.x) + Math.abs(p1
+                                    .y - p2.y));
                             if (incr < incrMax) {
                                 incrMax = incr;
                             }

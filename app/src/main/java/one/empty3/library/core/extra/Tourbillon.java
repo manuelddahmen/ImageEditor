@@ -37,8 +37,9 @@
  */
 package one.empty3.library.core.extra;
 
-import one.empty3.library.*;
+import android.graphics.Color;
 
+import one.empty3.library.*;
 
 
 public class Tourbillon extends Representable implements
@@ -58,10 +59,10 @@ public class Tourbillon extends Representable implements
         // this.axe = new Axe(new Point3D(0, 0, 0), new Point3D(0, 1, 0));
         this.obj = new PObjet();
         this.tours = 4.0;
-        Color[] colors = new Color[]{Color.red, Color.green, Color.blue,
-                Color.orange, Color.cyan, Color.darkGray, Color.black,
-                Color.gray, Color.lightGray, Color.magenta, Color.pink,
-                Color.yellow};
+        int[] colors = new int[]{Color.RED, Color.GREEN, Color.BLUE,
+                Color.RED/*ORANGE*/, Color.CYAN, Color.DKGRAY, Color.BLACK,
+                Color.GRAY, Color.LTGRAY, Color.MAGENTA, Color.RED/*PINK,ROSE*/,
+                Color.YELLOW};
 
         double angle = 0.0;
 
@@ -72,7 +73,7 @@ public class Tourbillon extends Representable implements
 
         for (int j = 0; j < dimy; j++) {
 
-            Color c = colors[j];
+            int c = colors[j];
 
             angle += 2.0 * Math.PI / (dimy - 1);
 

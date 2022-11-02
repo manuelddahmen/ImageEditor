@@ -42,7 +42,11 @@
  */
 package one.empty3.library.core.tribase;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 
@@ -53,7 +57,7 @@ import java.util.Iterator;
 public class Tubulaire extends Representable implements TRIGenerable, TRIConteneur {
 
     public float PERCENT = 0.05f;
-    private int couleur = Color.BLUE;
+    private Color couleur = Color.valueOf(Color.BLUE);
     private String id;
     private ArrayList<Point3D> points;
     //private double ratio;
@@ -114,7 +118,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
     }
 
     public void couleur(Color c) {
-        this.couleur = c.toArgb();
+        this.couleur = c;
 
     }
 
@@ -122,6 +126,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
         this.diam = diam;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
         if (tris == null) {
@@ -137,11 +142,11 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
                 for (int i = 3; i < tour1.size() - 1; i++) {
                     TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), couleur);
                     TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), couleur);
-                    t1.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
-                    t2.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
-                    t1.setCouleur((Color) CouleurOutils.couleurFactio(Color.Color(couleur), Color.Color(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
-                    t1.setCouleur((Color) Color.valueOf(couleur));
-                    t2.setCouleur((Color) Color.valueOf(couleur));
+                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t2.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur(couleur);
+                    t2.setCouleur(couleur);
                     tris.add(t1);
                     tris.add(t2);
                 }
@@ -173,12 +178,14 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
         System.out.println("Beziers = " + beziers.size());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Representable getObj() {
         generate();
         return tris;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Iterable<TRI> iterable() {
         generate();
@@ -201,6 +208,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
         return (double) beziers.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public String toString() {
         String s = "tubulaire (\n\t(";
@@ -215,10 +223,10 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
     /*public void ratio(double r) {
      ratio = r;
      }*/
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected String toStringColor() {
-        android.graphics.Color color = Color.Color(couleur);
-        return "(" + color.red() + ", " + color.green() + ", "
-                + color.blue() + ")";
+        return "(" + couleur.red() + ", " + couleur.green() + ", "
+                + couleur.blue() + ")";
     }
 
     private ArrayList<Point3D> vectPerp(double t) {

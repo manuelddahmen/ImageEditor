@@ -56,4 +56,9 @@ public class TestObjetStub extends TestObjet {
     public void afterRender() {
 
     }
+
+    @Override
+    public void publishResult() {
+
+    }
 }

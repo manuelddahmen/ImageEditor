@@ -37,17 +37,23 @@
  */
 package one.empty3.library.core.script;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.TextureCol;
 import one.empty3.library.TextureImg;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,11 +72,12 @@ public class InterpreteTColor implements Interprete {
         return pos;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Object interprete(String text, int pos) throws InterpreteException {
 
         success = false;
 
-       ITexture tc = null;
+        ITexture tc = null;
 
         InterpretesBase ib;
         ib = new InterpretesBase();
@@ -99,7 +106,7 @@ public class InterpreteTColor implements Interprete {
                 inf.setRepertoire(repertoire);
                 File f = (File) inf.interprete(text, pos);
 
-                ECBufferedImage bi = new ECBufferedImage.BufferedImage(ImageIO.read(f));
+                ECBufferedImage bi = new ECBufferedImage(Objects.requireNonNull(ImageIO.read(f)).bitmap);
 
                 tc = new TextureImg(bi);
 
@@ -114,13 +121,6 @@ public class InterpreteTColor implements Interprete {
                  this.pos = inf.getPosition();
                  */
                 success = true;
-            } catch (FileNotFoundException ex2) {
-                Logger.getLogger(InterpreteTColor.class.getName()).log(Level.SEVERE, null, ex);
-                System.err.println("File not found");
-
-            } catch (IOException ex1) {
-                Logger.getLogger(InterpreteTColor.class.getName()).log(Level.SEVERE, null, ex);
-                System.err.println("IO error");
             } catch (InterpreteException ex3) {
                 Logger.getLogger(InterpreteTColor.class.getName()).log(Level.SEVERE, null, ex);
                 System.err.println("Interprete Error");

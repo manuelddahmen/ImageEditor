@@ -37,6 +37,8 @@
  */
 package one.empty3.library.core.extra;
 
+import android.graphics.Bitmap;
+
 import one.empty3.library.*;
 
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public class Vis extends Representable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

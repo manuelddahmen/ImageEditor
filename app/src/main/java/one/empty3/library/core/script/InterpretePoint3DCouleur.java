@@ -37,6 +37,11 @@
  */
 package one.empty3.library.core.script;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 
@@ -62,6 +67,7 @@ public class InterpretePoint3DCouleur implements Interprete {
         return pos;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Object interprete(String text, int pos) throws InterpreteException {
         InterpretesBase ib = new InterpretesBase();
         InterpretePoint3D pp;

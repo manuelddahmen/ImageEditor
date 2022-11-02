@@ -39,10 +39,9 @@ import java.util.HashMap;
  */
 public class TreeType {
     public final HashMap<String, Class>
-    types = new HashMap<String, Class>();
+            types = new HashMap<String, Class>();
 
-    public TreeType()
-    {
+    public TreeType() {
         types.put("reel", DoubleTreeType.class);
         types.put("vector", VectorTreeType.class);
         types.put("matrix", MatrixTreeType.class);

@@ -37,6 +37,8 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,7 +101,7 @@ public class TRIObject extends Representable {
     }
 
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

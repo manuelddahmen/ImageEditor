@@ -35,11 +35,12 @@
  */
 package one.empty3.library;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.library.core.nurbs.ParametricCurve;
-import one.empty3.library.core.nurbs.ParametricSurface;
-import one.empty3.library.core.nurbs.SurfaceElem;
+import android.graphics.Color;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
+
+import one.empty3.library.core.nurbs.SurfaceElem;
 
 
 /*__
@@ -54,9 +55,13 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     public Polygon() {
         super();
+        for (int i = 0; i < 4; i++) {
+            points.add(1, Point3D.random(10.0));
+        }
         declareProperties();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Polygon(Color c) {
         this();
         texture(new TextureCol(c));
@@ -67,6 +72,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         texture(c);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Polygon(Point3D[] list, Color c) {
         this(list, new TextureCol(c));
     }
@@ -81,13 +87,11 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         int newLength;
         if (points == null) {
             points = new StructureMatrix<>(1, Point3D.class);
-        }
-        else {
+        } else {
             newLength = points.getData1d().size() + 1;
             java.util.List<Point3D> tmp = points.getData1d();
             points = new StructureMatrix<>(1, Point3D.class);
-            for (int i = 0; i < tmp.size(); i++)
-            {
+            for (int i = 0; i < tmp.size(); i++) {
                 points.setElem(tmp.get(i), i);
             }
             points.setElem(point3D, newLength - 1);
@@ -110,7 +114,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     public String toString() {
         String t = "poly (\n\t(";
         for (Point3D p : points.getData1d()) {
-            t += "\n\t\t" + (p==null?"null":p.toString());
+            t += "\n\t\t" + (p == null ? "null" : p.toString());
         }
         t += "\n\t)\n\t" + (texture == null ? "" : texture.toString()) + "\n)\n\n";
         return t;
@@ -147,18 +151,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         getDeclaredDataStructure().put("points/point 0 à N du Polygone", points);
 
     }
-/*
-    @Override
-    public Point3D calculerPoint3D(double t) {
-        int size = points.getData1d().size();
-        int i = (int) t * size;
-        if (i >= size)
-            i = size - 1;
-        int j = (i + 1) >= size? i : i + 1;
-        Point3D p1 = points.getData1d().get(i);
-        Point3D p2 = points.getData1d().get(j);
-        double d = t - 1.0 * i / size;
-        return p1.plus(p2.moins(p1).mult(1 - d));
-    }
-*/
+
+
 }

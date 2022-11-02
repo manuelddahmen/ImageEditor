@@ -57,26 +57,26 @@ public class Spirale implements ISpirale {
         /*
          * Tour tour = new Tour(axe.getP1(), axe.getP2(), new
          * Tour.IColorFunction() {
-         * 
+         *
          * @Override public Color getColor(double axeCoordinate, double theta) {
-         * return  one.empty3.feature.app.replace.java.awt.Color.Color(255, 0, 0); } }, new Tour.IPoint3DFunction() {
-         * 
+         * return Color.valueOf(255, 0, 0); } }, new Tour.IPoint3DFunction() {
+         *
          * @Override public double getDiameter(double axeCoordinate, double
          * theta) {
-         * 
+         *
          * return 100; }
-         * 
+         *
          * @Override public int getNbrPoints() { return 20; }
-         * 
+         *
          * @Override public void setNbrPoints() {
-         * 
-         * 
+         *
+         *
          * }
-         * 
+         *
          * @Override public int getNbrRotations() { return 360; }
-         * 
+         *
          * @Override public void setNbrRotation() { } });
-         * 
+         *
          * FObjet o = tour.generate(); this.obj = o;
          */
     }

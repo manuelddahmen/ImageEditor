@@ -35,19 +35,22 @@ package one.empty3.library;
 //import com.xuggle.mediatool.IMediaReader;
 
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 
-
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class TextureMov extends ITexture {
-    BufferedImage image;
+    Bitmap image;
     VideoDecoder defs;
     private File file = null;
-    private int transparent = Color.WHITE;
+    private int transparent = Color.valueOf(1, 1, 1).toArgb();
 
     public File getFile() {
         return file;
@@ -64,38 +67,39 @@ public class TextureMov extends ITexture {
     public TextureMov(String filename) {
         init(filename);
     }
-    public void init(String filename)
-    {
+
+    public void init(String filename) {
         this.file = new File(filename);
         defs = VideoDecoderFactory.createInstance(file, this);
         //defs.start();
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public int getColorAt(double u, double v) {
-        
-     
-        if(image==null)
+
+
+        if (image == null)
             return 0;
 
         int x = (int) (u * image.getWidth());
         int y = (int) (v * image.getHeight());
         if (x >= 0 && x < image.getWidth() && y >= 0 && y < image.getHeight()) {
-            int rgb = image.bitmap.getPixel(x, y);
+            int rgb = image.getPixel(x, y);
             int a = rgb >> 24 & 0xFF;
             int r = rgb >> 16 & 0xFF;
             int g = rgb >> 8 & 0xFF;
             int b = rgb >> 0 & 0xFF;
-            return rgb&0x00FFFFFF;
+            return rgb & 0x00FFFFFF;
 
         } else
-            return Color.WHITE;
+            return Color.valueOf(0, 0, 0, 0).toArgb();
     }
 
     protected void current() {
-       
-     if(defs.size()>0)
-        image=defs.current();
+
+        if (defs.size() > 0)
+            image = defs.current();
     }
 
 
@@ -109,11 +113,11 @@ public class TextureMov extends ITexture {
 
     }
 
-    
+
     public String toString() {
-        return " texture ( \""+file.getAbsolutePath()+"\")";
+        return " texture ( \"" + file.getAbsolutePath() + "\")";
     }
-    
+
     public MatrixPropertiesObject copy() throws CopyRepresentableError, IllegalAccessException, InstantiationException {
         return null;
     }
@@ -121,14 +125,15 @@ public class TextureMov extends ITexture {
 
     public boolean nextFrame() {
         current();
-        return image!=null;
+        return image != null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setTransparent(Color black) {
         this.transparent = black.toArgb();
     }
 
-    public BufferedImage getImage() {
+    public Bitmap getImage() {
         return image;
     }
 }

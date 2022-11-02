@@ -44,8 +44,7 @@ public class Gravity extends Point3D {
     double dv = 1.0;
     public double dfs;
 
-    public Gravity(Point3D random, double m, Point3D v)
-    {
+    public Gravity(Point3D random, double m, Point3D v) {
         super(random);
         this.m = m;
         this.v = v;

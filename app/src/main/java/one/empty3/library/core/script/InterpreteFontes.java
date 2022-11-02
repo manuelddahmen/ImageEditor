@@ -61,7 +61,7 @@ public class InterpreteFontes implements Interprete {
     private int pos;
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#constant()
      */
 
@@ -73,7 +73,7 @@ public class InterpreteFontes implements Interprete {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#getPosition()
      */
     @Override
@@ -84,7 +84,7 @@ public class InterpreteFontes implements Interprete {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#interprete(java
      * .lang.String, int)
@@ -179,7 +179,7 @@ public class InterpreteFontes implements Interprete {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#setConstant(be.
      * ibiiztera.md.pmatrix.pushmatrix.scripts.InterpreteConstants)

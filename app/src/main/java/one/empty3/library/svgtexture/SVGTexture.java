@@ -60,7 +60,6 @@ public class SVGTexture extends ITexture {
     }
 
 
-
     @Override
     public void timeNext() {
         // NOTHING TO DO HERE

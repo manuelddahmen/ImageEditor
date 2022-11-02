@@ -2,25 +2,81 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="one.empty3.feature.app">
+    package="one.empty3.feature.app.maxSdk29.pro">
     <!-- Enable instant app support -->
     <dist:module dist:instant="true" /> <!-- Declare features -->
-    <uses-feature android:name="android.hardware.camera" /> <!-- Declare permissions -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" /> <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:exported="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         tools:ignore="AllowBackup">
+        <activity
+            android:name=".ColorChooser"
+            android:exported="false"
+            android:label="@string/title_activity_color_chooser"
+            android:theme="@style/Theme.FeatureAppmain">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".TextActivity"
+            android:exported="false"
+            android:label="@string/title_activity_text"
+            android:theme="@style/Theme.Design.Light">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChooseEffectsCompose"
+            android:exported="false"
+            android:label="@string/title_activity_choose_effects_compose"
+            android:theme="@style/Theme.Design.Light" />
+        <activity
+            android:name=".ChooseEffectList"
+            android:exported="false"
+            android:label="@string/title_activity_choose_effect_list"
+            android:theme="@style/Theme.Design.Light" />
+        <activity
+            android:name=".ChooseEffectsActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_choose_effect_list"
+            android:theme="@style/Theme.Design.Light" />
+        <!--
+        <activity
+            android:name=".FullscreenActivityCameraLiveEffect"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_fullscreen_camera_live_effect"
+            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.Fullscreen" />
+        -->
+        <!--
+        <activity
+            android:name=".one.empty3.feature.app.maxSdk29.pro.CameraPreview"
+            android:exported="false"
+            android:label="@string/title_activity_camera_preview"
+            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+        -->
         <activity
             android:name=".ChooseEffectsActivity"
             android:exported="false"
@@ -30,44 +86,61 @@
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
                 <action android:name="android.media.action.VIDEO_CAMERA" />
                 <action android:name="android.intent.action.EDIT" />
-                <action android:name="android.intent.action.CREATE_DOCUMENT"/>
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.CREATE_DOCUMENT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MyCameraActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light">
-            <!-- Register as a system camera app -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.CREATE_DOCUMENT"/>
 
+            <!-- Register as a system camera app -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.CREATE_DOCUMENT" />
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
                 <action android:name="android.media.action.VIDEO_CAMERA" />
                 <action android:name="android.intent.action.EDIT" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <!-- App links for http/s -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
+            <!-- filter for sending text or images; accepts SEND action and text or image data -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <!-- App links for http/s -->
+            <!--
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
                 <data android:host="empty3.one" />
-                <data android:pathPattern="/camerax" />
+                <data android:host="www.empty3.one" />
+                <data android:mimeType="image/jpg" />
+                <data android:mimeType="image/png" />
             </intent-filter>
+            -->
         </activity> <!-- FileProvider used to share photos with other apps -->
+        <activity
+            android:name=".LicenceUserData"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

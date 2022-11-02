@@ -69,9 +69,9 @@ public class StructureMatrix<T> {
     public void init(int dim, Class classType) {
         this.dim = dim;
         if (dim == 1)
-            data1d = Collections.synchronizedList(new ArrayList<>());
+            data1d = new ArrayList<>();
         if (dim == 2)
-            data2d = Collections.synchronizedList(new ArrayList<>());
+            data2d = new ArrayList<>();
         this.classType = classType;
     }
 
@@ -392,18 +392,16 @@ public class StructureMatrix<T> {
     }
 
     private T cloneElement(T t) throws IllegalAccessException, CopyRepresentableError, InstantiationException {
-        T t1 = null;
-        if (t instanceof StructureMatrix) {
+        T t1 = t;
+        if (t instanceof StructureMatrix)
             t1 = (T) ((StructureMatrix) t).copy();
-        }
-        if (t instanceof MatrixPropertiesObject) {
-            t1 = (T) ((MatrixPropertiesObject) t).copy();
-        }
+        if (t instanceof MatrixPropertiesObject)
+            t1 = (T) ((Representable) t).copy();
         return t1;
     }
 
     public StructureMatrix<T> copy() throws IllegalAccessException, CopyRepresentableError, InstantiationException {
-        StructureMatrix<T> tStructureMatrix = new StructureMatrix<T>();
+        StructureMatrix<T> tStructureMatrix = new StructureMatrix<>();
         tStructureMatrix.setDim(getDim());
         switch (getDim()) {
             case 0:
@@ -434,7 +432,8 @@ public class StructureMatrix<T> {
                                 public void accept(T t) {
                                     try {
                                         tStructureMatrix.setElem(cloneElement(t), i[0], i[1]);
-                                    } catch (IllegalAccessException | CopyRepresentableError | InstantiationException e) {
+                                    } catch (IllegalAccessException | CopyRepresentableError |
+                                             InstantiationException e) {
                                         e.printStackTrace();
                                     }
                                     i[1]++;

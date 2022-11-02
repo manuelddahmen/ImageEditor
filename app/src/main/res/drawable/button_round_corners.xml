@@ -14,28 +14,28 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_pressed="true" >
-        <shape android:shape="rectangle"  >
-            <corners android:radius="16dp" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp"/>
             <solid android:color="#FFFFFFFF"/>
         </shape>
     </item>
     <item android:state_focused="true">
-        <shape android:shape="rectangle"  >
-            <corners android:radius="16dp" />
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp"/>
             <solid android:color="#FFFFFFFF"/>
         </shape>
     </item>
     <item android:state_enabled="false">
-        <shape android:shape="rectangle"  >
-            <corners android:radius="16dp" />
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp"/>
             <solid android:color="#FFFFFFFF"/>
         </shape>
     </item>
     <item>
-        <shape android:shape="rectangle"  >
-            <corners android:radius="16dp" />
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp"/>
             <solid android:color="#00FFFFFF"/>
         </shape>
     </item>

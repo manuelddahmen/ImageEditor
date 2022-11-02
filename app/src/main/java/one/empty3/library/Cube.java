@@ -97,7 +97,7 @@ public class Cube extends Representable implements TRIGenerable {
 
         this();
         this.cote.setElem(cote);
-        this.position .setElem(position);
+        this.position.setElem(position);
     }
 
     public Cube(double cote, Point3D position, ITexture t) {
@@ -112,10 +112,10 @@ public class Cube extends Representable implements TRIGenerable {
 
         for (int i = 0; i < 12; i++) {
             TRI t = new TRI(
-                    new Point3D(coordCube[i][0], texture()).mult(cote.getElem()/2).plus(position.getElem()),
-                    new Point3D(coordCube[i][1], texture()).mult(cote.getElem()/2).plus(position.getElem()),
-                    new Point3D(coordCube[i][2], texture()).mult(cote.getElem()/2).plus(position.getElem()),
-                    texture());
+                    new Point3D(coordCube[i][0], getTexture()),
+                    new Point3D(coordCube[i][1], getTexture()),
+                    new Point3D(coordCube[i][2], getTexture()),
+                    getTexture());
 
             ts.add(t);
 

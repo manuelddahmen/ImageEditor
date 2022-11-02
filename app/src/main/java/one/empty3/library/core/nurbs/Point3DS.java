@@ -39,6 +39,7 @@ import one.empty3.library.*;
  */
 public class Point3DS extends ParametricCurve {
     private final Point3D point;
+
     {
         getParameters().setIncrU(1.0);
 
@@ -46,10 +47,10 @@ public class Point3DS extends ParametricCurve {
 
         setConnected(false);
     }
-    public Point3DS(Point3D s)
-    {
+
+    public Point3DS(Point3D s) {
         this.point = s;
-        this.texture(s.texture());
+        this.texture(s.getTexture());
 
     }
 

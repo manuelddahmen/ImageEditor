@@ -37,10 +37,14 @@
  */
 package one.empty3.library;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.core.lighting.Infini;
 import one.empty3.library.core.nurbs.CurveElem;
 import one.empty3.library.core.nurbs.ParametricCurve;
-
 
 
 /*__
@@ -57,12 +61,11 @@ public class LineSegment extends ParametricCurve implements CurveElem {
     private StructureMatrix<Point3D> extremite = new StructureMatrix<>(0, Point3D.class);
     // overflow
 
-    public LineSegment()
-    {
+    public LineSegment() {
         super();
         this.setOrigine(new Point3D());
         this.setExtremite(new Point3D());
-     }
+    }
 
     // prodScalaire product (3D) which allows vector operations in arguments
     public LineSegment(Point3D p1, Point3D p2) {
@@ -185,13 +188,45 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         return intersect3D_RayTriangle(this, tri);
     }
 
+    public Representable place(MODObjet aThis) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Barycentre position() {
+        throw new UnsupportedOperationException("Not supported yet."); // To
+        // change
+        // body
+        // of
+        // generated
+        // methods,
+        // choose
+        // Tools
+        // |
+        // Templates.
+    }
+
 
     @Override
+    public boolean supporteTexture() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
     public String toString() {
-        Color c =  one.empty3.feature.app.replace.java.awt.Color.Color(texture.getColorAt(0.5, 0.5));
+        Color c = Color.valueOf(texture.getColorAt(0.5, 0.5));
         return "Droite (\n\t" + origine.toString() + "\n\t"
-                + extremite.toString() + "\n\t( " + c.getRed() + " , "
-                + c.getGreen() + " , " + c.getBlue() + " )\n)\n";
+                + extremite.toString() + "\n\t( " + c.red() + " , "
+                + c.green() + " , " + c.blue() + " )\n)\n";
+    }
+
+    public int mesure() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Point3D calculerVitesse3D(double t) {
+        return getExtremite().moins(getOrigine()).norme1();
     }
 
     @Override
@@ -201,8 +236,8 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         getDeclaredDataStructure().put("extremite/point extremite", extremite);
 
     }
-    public Double getLength()
-    {
+
+    public Double getLength() {
         return getOrigine().moins(getExtremite()).norme();
     }
 }

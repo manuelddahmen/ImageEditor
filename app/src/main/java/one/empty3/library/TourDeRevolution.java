@@ -37,12 +37,18 @@
  */
 package one.empty3.library;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Objects;
+
+import javaAnd.awt.image.imageio.ImageIO;
 
 public class TourDeRevolution extends Representable {
 
@@ -51,16 +57,14 @@ public class TourDeRevolution extends Representable {
     private TRIObject o;
     private PObjet op;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TourDeRevolution(File image, Axe axe) {
-        try {
-            this.courbe = new CourbeDeImage(ImageIO.read(image));
-            courbe.anayliserImage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.courbe = new CourbeDeImage(Objects.requireNonNull(ImageIO.read(image)).bitmap);
+        courbe.anayliserImage();
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void main(String[] argss) {
         try {
             System.out.print(new File(".").getCanonicalPath());
@@ -75,21 +79,19 @@ public class TourDeRevolution extends Representable {
         s.add(tr);
         z.scene(s);
         z.draw();
-        try {
-            ImageIO.write(z.image(), "png",
-                    ImageIO.createImageOutputStream(new File("result2TR.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageIO.write(z.image(), "jpg",
+                (new File("result2TR.jpg")));
     }
 
     // @Override
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void generateB() {
 
         Color[] colors = new Color[256];
         for (int i = 0; i < 255; i++) {
             double a = 1.0 * i / 255 * 2 * Math.PI;
-            colors[i] =  one.empty3.feature.app.replace.java.awt.Color.Color(0.0f/*1*((float)Math.sin(a)+1)/2*/, 1 * (float) (Math.sin(a) + 1) / 2, 1 * (float) (Math.cos(a) + 1) / 2);
+            colors[i] = Color.valueOf(0, (int) ((float) (Math.sin(a) + 1) / 2),
+                    (int) (1 * (float) (Math.cos(a) + 1) / 2));
         }
         o = new TRIObject();
         op = new PObjet();
@@ -122,13 +124,13 @@ public class TourDeRevolution extends Representable {
 
         }
 
-         for (int i = 0; i < max; i++)
-             for (int j = 0; j < points[0].size(); j++) {
-         if (i > 0 && j > 0) {
-         o.add(new TRI(points[j].get(i), points[j-1].get(i), points[j-1].get(i-1), Color.red));
-         o.add(new TRI(points[j].get(i), points[j].get(i-1), points[j-1].get(i-1), Color.red));
-         }
-         }
+        for (int i = 0; i < max; i++)
+            for (int j = 0; j < points[0].size(); j++) {
+                if (i > 0 && j > 0) {
+                    o.add(new TRI(points[j].get(i), points[j - 1].get(i), points[j - 1].get(i - 1), Color.valueOf(Color.RED)));
+                    o.add(new TRI(points[j].get(i), points[j].get(i - 1), points[j - 1].get(i - 1), Color.valueOf(Color.RED)));
+                }
+            }
 
     }
 

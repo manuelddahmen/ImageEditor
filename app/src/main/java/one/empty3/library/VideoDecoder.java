@@ -55,6 +55,7 @@ package one.empty3.library;
  ***************************************************/
 
 
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -65,7 +66,7 @@ public abstract class VideoDecoder extends Thread {
     protected File file;
     protected boolean stop = false;
     protected static final long MAXSIZE = 4;
-    protected ArrayList<ECBufferedImage> imgBuf = new ArrayList();
+    protected ArrayList<Bitmap> imgBuf = new ArrayList();
 
 
     /***
@@ -88,9 +89,9 @@ public abstract class VideoDecoder extends Thread {
         return eof;
     }
 
-    public ECBufferedImage current() {
+    public Bitmap current() {
 
-        ECBufferedImage c = imgBuf.get(0);
+        Bitmap c = imgBuf.get(0);
         imgBuf.remove(0);
         return c;
 

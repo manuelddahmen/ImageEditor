@@ -49,7 +49,7 @@ public class TreeNode {
 
     public TreeNode(String expStr) {
         this.parent = null;
-        if("".equals(expStr.trim()))
+        if ("".equals(expStr.trim()))
             expressionString = "0.0";
         this.expressionString = expStr;
     }
@@ -87,12 +87,9 @@ public class TreeNode {
         }
         if (cType instanceof IdentTreeNodeType) {
             return getChildren().get(0).eval();
-        }else
-        if (cType instanceof DoubleTreeNodeType) {
+        } else if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
-        }  else
-        if(cType instanceof VariableTreeNodeType)
-        {
+        } else if (cType instanceof VariableTreeNodeType) {
             return cType.eval();//cType.eval();
         } else if (cType instanceof ExponentTreeNodeType) {
             return Math.pow((Double) getChildren().get(0).eval(), (Double) getChildren().get(1).eval());
@@ -144,8 +141,7 @@ public class TreeNode {
 
 
             return sum;
-        } else
-        if (cType instanceof SignTreeNodeType) {
+        } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             return s1 * (Double) getChildren().get(0).eval();
         }

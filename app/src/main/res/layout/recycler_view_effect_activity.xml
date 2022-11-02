@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_effect"
+            listitem="@layout/recycler_view_effect_item"
+            android:layout_width="match_parent"
+            android:layout_height="655dp"
+            app:layoutManager="LinearLayoutManager"/>
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/applyEffects"/>
+</LinearLayout>

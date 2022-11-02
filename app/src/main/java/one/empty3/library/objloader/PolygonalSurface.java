@@ -21,11 +21,6 @@ public class PolygonalSurface extends ParametricSurface {
     }
 
     @Override
-    public Point3D calculerPoint3D(double u, double v) {
-        return null;
-    }
-
-    @Override
     public void declareProperties() {
         super.declareProperties();
         getDeclaredDataStructure().put("controls/Points de contrôles (délimatiation des polygônes)", controls);

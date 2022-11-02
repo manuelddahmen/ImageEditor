@@ -1,21 +1,29 @@
 package one.empty3.io;
 
-import one.empty3.feature.PixM;
-
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.feature20220726.PixM;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
-public class ProcessFile {
-    protected int maxRes = 400;
+public abstract class ProcessFile {
+    //    public InterfaceMatrix matrix(Bitmap bitmap) {
+//        return MFactory.getInstance(bitmap);
+//    }
+//    public InterfaceMatrix matrix(File in, boolean isBitmap) {
+//        return MFactory.getInstance(in, isBitmap);
+//    }
+//    public InterfaceMatrix matrix(Bitmap bitmap, int maxRes) {
+//        return MFactory.getInstance(bitmap, maxRes);
+//    }
+//    public InterfaceMatrix matrix(int columns, int lines, boolean isBitmap) {
+//        return MFactory.getInstance(lines, columns, isBitmap);
+//    }
+    protected int maxRes = 0;
     private Properties property;
     private File outputDirectory = null;
-    private List<File> imagesStack = new ArrayList<>();
+    protected List<File> imagesStack = new ArrayList<>();
 
     public File getOutputDirectory() {
         return outputDirectory;
@@ -26,17 +34,12 @@ public class ProcessFile {
     }
 
     public PixM getSource(String s) {
-        try {
-            Properties p = getProperty();
-            String property = p.getProperty(s);
-            File file = new File(property);
-            BufferedImage read = null;
-            read = ImageIO.read(file);
-            return (new PixM(read));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        Properties p = getProperty();
+        String property = p.getProperty(s);
+        File file = new File(property);
+        BufferedImage read = null;
+        read = ImageIO.read(file);
+        return (new PixM(read.bitmap));
     }
 
     private Properties getProperty() {
@@ -50,6 +53,7 @@ public class ProcessFile {
     public boolean process(File in, File out) {
         return false;
     }
+
 
     public void setMaxRes(int maxRes) {
         this.maxRes = maxRes;
@@ -67,4 +71,11 @@ public class ProcessFile {
     public void addSource(File fo) {
         imagesStack.add(fo);
     }
+
+
+    protected static boolean isImage(File in) {
+        return in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
+                || in.getAbsolutePath().toLowerCase().endsWith(".png"));
+    }
+
 }

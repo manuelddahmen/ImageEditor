@@ -49,16 +49,16 @@ import one.empty3.library.core.tribase.TRIEllipsoide;
  */
 public class Mesh extends ParametricSurface {
 
-    public static final int MESH_SHAPE_CUBE       = 0;
-    public static final int MESH_SHAPE_ELLIPSOID  = 1;
-    public static final int MESH_SHAPE_PLANE      = 2;
-    public static final int MESH_SHAPE_BEZIER     = 4;
+    public static final int MESH_SHAPE_CUBE = 0;
+    public static final int MESH_SHAPE_ELLIPSOID = 1;
+    public static final int MESH_SHAPE_PLANE = 2;
+    public static final int MESH_SHAPE_BEZIER = 4;
     StructureMatrix<Integer> meshType = new StructureMatrix(0, Integer.class);
-    public static final int MESH_ADD_TYPE_SUBDIVID      = 8;
-    public static final int MESH_ADD_TYPE_EXPAND        = 16;
-    public static final int MESH_POINT_ADD_STYLE_HEIGHT      = 32;
-    public static final int MESH_POINT_ADD_STYlE_SMOOTHED    = 64;
-    public static final int MESH_POINT_ADD_STYlE_ANGULAR     = 128;
+    public static final int MESH_ADD_TYPE_SUBDIVID = 8;
+    public static final int MESH_ADD_TYPE_EXPAND = 16;
+    public static final int MESH_POINT_ADD_STYLE_HEIGHT = 32;
+    public static final int MESH_POINT_ADD_STYlE_SMOOTHED = 64;
+    public static final int MESH_POINT_ADD_STYlE_ANGULAR = 128;
     private StructureMatrix<SurfaceParametriquePolynomialeBezier> baseBezier = new StructureMatrix<>(0, SurfaceParametriquePolynomialeBezier.class);
     private StructureMatrix<Sphere> baseSphere = new StructureMatrix<>(0, Sphere.class);
     private StructureMatrix<Cube> baseCube = new StructureMatrix<>(0, Cube.class);
@@ -66,12 +66,8 @@ public class Mesh extends ParametricSurface {
 
     private StructureMatrix<Point3D> pAdd = new StructureMatrix<>(1, Point3D.class);
 
-    @Override
-    public Point3D calculerPoint3D(double u, double v) {
-        throw new UnsupportedOperationException("Calculer point du polygone");
+    public Mesh() {
     }
-
-    public Mesh() {}
 
     @Override
     public void declareProperties() {

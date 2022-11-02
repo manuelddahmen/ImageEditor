@@ -49,6 +49,8 @@ public class Plan3D extends ParametricSurface {
         p0.setElem(new Point3D(0.0, 0.0, 0.0));
         vX.setElem(new Point3D(1.0, 0.0, 0.0));
         vY.setElem(new Point3D(0.0, 1.0, 0.0));
+        setCirculaireX(false);
+        setCirculaireY(false);
         //setMaxX(1);
         //setMaxY(1);
     }
@@ -58,13 +60,18 @@ public class Plan3D extends ParametricSurface {
         return p0.getElem().plus(vX.getElem().moins(p0.getElem()).mult(u)
                 .plus(vY.getElem().moins(p0.getElem()).mult(v)));
     }
-@Override
+
+    @Override
     public Point3D calculerNormale3D(double u, double v) {
-        Point3D o,x,y;
+        Point3D o, x, y;
         o = p0.getElem();
         x = vX.getElem();
         y = p0.getElem();
         return x.moins(o).prodVect(y.moins(o));
+    }
+
+    public Point3D coordPoint3D(int x, int y) {
+        return calculerPoint3D(1. * x / getMaxX(), 1. * y / getMaxY());
     }
 
     public String id() {

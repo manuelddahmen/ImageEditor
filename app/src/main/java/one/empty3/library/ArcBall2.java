@@ -17,6 +17,7 @@
 
 package one.empty3.library;
 
+import android.graphics.Point;
 
 
 /*__
@@ -36,8 +37,7 @@ public class ArcBall2 {
      * @param ray origin: camera.eye ; extrem : vector dir
      * @return t :: orig+t*v
      */
-    public Point3D  intersect(Axe ray)
-    {
+    public Point3D intersect(Axe ray) {
         double t0, t1; // solutions for t if the ray intersects
         // geometric solution
         Point3D L = pointCenter.moins(ray.getP1().getElem());
@@ -45,7 +45,7 @@ public class ArcBall2 {
         // if (tca < 0) return false;
         double d2 = L.prodScalaire(L) - tca * tca;
         if (d2 > radius) throw new NullPointerException();
-        double thc = Math.sqrt(radius*radius - d2);
+        double thc = Math.sqrt(radius * radius - d2);
         t0 = tca - thc;
         t1 = tca + thc;
         if (t0 > t1) {
@@ -63,9 +63,9 @@ public class ArcBall2 {
 
         return ray.getP1().getElem().plus(ray.getVector().mult(t));
     }
-    public ArcBall2(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer)
-    {
-       currentCamera = camera;
+
+    public ArcBall2(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer) {
+        currentCamera = camera;
         pointCenter = point;
         this.radius = radius;
         this.zBuffer = zBuffer;
@@ -74,12 +74,13 @@ public class ArcBall2 {
     public void init(Representable representable) {
         this.representable = representable;
         Point p = currentCamera.coordonneesPoint2D(pointCenter, zBuffer);
-        lastX = p.getX();
-        lastY = p.getY();
+        lastX = p.x;
+        lastY = p.y;
 
     }
+
     public void moveTo(int x, int y) {
-        Point3D mult = zBuffer.invert(new Point3D((double) x, (double) y, 0.0), currentCamera, 1.);//??
+        Point3D mult = zBuffer.invert(new Point3D((double) x, (double) y, 0.0), currentCamera);
         Point3D intersect = intersect(new Axe(currentCamera.eye(), mult));
         computeMatrix(pointCenter, currentPosition, intersect);
         currentPosition = intersect;
@@ -87,12 +88,10 @@ public class ArcBall2 {
 
     Matrix33 rot;
 
-    public void computeMatrix(Point3D p0, Point3D intersect1, Point3D intersect2)
-    {
-        if(p0!=null && intersect1!=null && intersect2!=null)
-        {
+    public void computeMatrix(Point3D p0, Point3D intersect1, Point3D intersect2) {
+        if (p0 != null && intersect1 != null && intersect2 != null) {
             Matrix33 matrix33 = representable.getRotation().getElem().getRot().getElem();
-            if(!currentPosition.equals(pointCenter) && !intersect1.equals(intersect2)) {
+            if (!currentPosition.equals(pointCenter) && !intersect1.equals(intersect2)) {
                 Point3D vY = intersect1.moins(p0).prodVect(intersect2.moins(p0)).norme1();
                 Point3D mvZ = currentPosition.moins(pointCenter).norme1();
                 Point3D vX = vY.prodVect(mvZ).norme1();
@@ -103,18 +102,16 @@ public class ArcBall2 {
 
         }
     }
-    public Matrix33 matrix()
-    {
+
+    public Matrix33 matrix() {
         return rot;
     }
 
-    public double getRadius()
-    {
+    public double getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius)
-    {
+    public void setRadius(double radius) {
         this.radius = radius;
     }
 }

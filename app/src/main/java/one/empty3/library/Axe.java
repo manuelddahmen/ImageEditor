@@ -37,15 +37,14 @@
  */
 package one.empty3.library;
 
-public class Axe extends Representable{
+public class Axe extends Representable {
 
-    private StructureMatrix<Point3D> p1 =  new StructureMatrix<>(0, Point3D.class);
-    private StructureMatrix<Point3D> p2 =  new StructureMatrix<>(0, Point3D.class);
+    private StructureMatrix<Point3D> p1 = new StructureMatrix<>(0, Point3D.class);
+    private StructureMatrix<Point3D> p2 = new StructureMatrix<>(0, Point3D.class);
     private Point3D center;
 
 
-    public Axe()
-    {
+    public Axe() {
         super();
         p1.setElem(Point3D.Y);
         p2.setElem(Point3D.Y.mult(-1d));
@@ -98,13 +97,13 @@ public class Axe extends Representable{
 
     @Override
     public String toString() {
-        return "axis (\np1"+getP1()+"\np2"+getP2()+"\n)\n";
+        return "axis (\np1" + getP1() + "\np2" + getP2() + "\n)\n";
     }
 
     public Axe setCenter(Point3D center) {
         Point3D currentCenter = p2.getElem().moins(p1.getElem()).mult(0.5);
-        Point3D p12 = center.plus(p1.getElem().moins(p2.getElem()).mult(0.5));
-        Point3D p22 = center.plus(p2.getElem().moins(p1.getElem()).mult(0.5));
+        Point3D p12 = center.plus(p1.getElem());
+        Point3D p22 = center.plus(p2.getElem());
 
         getP1().setElem(p12);
         getP2().setElem(p22);

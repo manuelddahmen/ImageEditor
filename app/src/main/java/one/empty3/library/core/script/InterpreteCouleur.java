@@ -38,6 +38,11 @@
 package one.empty3.library.core.script;
 
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 
 public class InterpreteCouleur implements Interprete {
@@ -56,6 +61,7 @@ public class InterpreteCouleur implements Interprete {
         return pos;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Object interprete(String text, int pos) throws InterpreteException {
         InterpretesBase ib = new InterpretesBase();
         ArrayList<Integer> pattern = new ArrayList<Integer>();
@@ -79,7 +85,7 @@ public class InterpreteCouleur implements Interprete {
         ArrayList<Object> os = ib.read(text, pos);
         this.pos = ib.getPosition();
 
-        return  one.empty3.feature.app.replace.java.awt.Color.Color((Integer) os.get(3), (Integer) os.get(7),
+        return Color.valueOf((Integer) os.get(3), (Integer) os.get(7),
                 (Integer) os.get(11));
     }
 

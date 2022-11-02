@@ -42,10 +42,7 @@ import one.empty3.library.core.nurbs.ParametricCurve;
 public class Point3DC extends ParametricCurve {
     private StructureMatrix<Point3D> o;
 
-    public Point3DC()
-
-
-    {
+    public Point3DC() {
         super();
         this.o.setElem(new Point3D(Point3D.O0));
         getDeclaredDataStructure().put("o/Point::Curve", o);

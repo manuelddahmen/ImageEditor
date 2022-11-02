@@ -1,6 +1,6 @@
 package one.empty3.library;
 
-import java.awt.Color;
+import android.graphics.Color;
 import java.util.*;
 
 public class Vec extends Representable {

@@ -38,10 +38,10 @@
 package one.empty3.library;
 
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import one.empty3.feature.app.replace.java.awt.Color;
 
 public class BezierCubique extends Representable {
 

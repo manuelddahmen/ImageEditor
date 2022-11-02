@@ -30,7 +30,7 @@ package one.empty3.library;
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
-import java.awt.Color;
+import android.graphics.Color;
 import java.util.*;
 
 
@@ -78,8 +78,8 @@ public class Point3D extends Representable {
          super();
          n = 0;
          int i;
-         int m = v.length;
-         for(i=0; i<m; i++) 
+         int GMatrix = v.length;
+         for(i=0; i<GMatrix; i++)
              n+= v[i].length();
          start = da.addDoubles(n);
          i=0;
@@ -92,7 +92,7 @@ public class Point3D extends Representable {
                  k=0;
                  j++;
              }
-             if(j>=m)
+             if(j>=GMatrix)
                    break;
          }
      }

@@ -36,9 +36,6 @@
 package one.empty3.library;
 
 
-
-import one.empty3.feature.app.replace.java.awt.Point;
-
 public class Point2D {
 
     public double x;
@@ -59,11 +56,10 @@ public class Point2D {
         y = p1.getY();
     }
 
-    public Point2D(Point coordonneesPoint2D) {
+    public Point2D(javaAnd.awt.Point coordonneesPoint2D) {
         x = coordonneesPoint2D.getX();
         y = coordonneesPoint2D.getY();
     }
-
 
     public static double dist(Point2D p0, Point2D plus) {
         double xx = p0.x - plus.x;
@@ -95,14 +91,6 @@ public class Point2D {
         double distance = Math.sqrt((x - p2a.getX()) * (x - p2a.getX()) + (y - p2a.getY()) * (y - p2a.getY()));
         return distance > d && distance < e;
     }
-    public double prodScalaire(Point2D v2) {
-        return getX()*v2.getX()+getY()*v2.getY();
-    }
-
-    public Point2D prodVect(Point2D v2) {
-        return new Point2D(v2.getY() - getX(),   getY() - v2.getX());
-
-    }
 
     public double getX() {
         return x;
@@ -133,7 +121,7 @@ public class Point2D {
     }
 
     public Point2D norme1() {
-        return mult(1 / norme());
+        return this.mult(1 / norme());
     }
 
     public Point2D plus(Point2D p) {

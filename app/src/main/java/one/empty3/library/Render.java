@@ -33,7 +33,6 @@
 package one.empty3.library;
 
 
-
 /*__
  * Created by manue on 07-03-19.
  */
@@ -54,7 +53,7 @@ public class Render {
 
 
     public static Render getInstance(int objectType, int renderingType) {
-        return new Render (objectType, renderingType);
+        return new Render(objectType, renderingType);
     }
 
     public int getObjectType() {

@@ -37,6 +37,8 @@
  */
 package one.empty3.library.core.script;
 
+import android.graphics.Color;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.core.tribase.Tubulaire;
 

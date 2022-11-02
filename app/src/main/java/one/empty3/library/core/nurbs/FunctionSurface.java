@@ -68,8 +68,6 @@ public class FunctionSurface extends ParametricSurface {
         this.z.setElem(zEqFuv);
 
 
-
-
         treeX = new AlgebricTree(xEqFuv);
         treeX.getParametersValues().putAll(hashMap);
         treeX.construct();
@@ -87,7 +85,7 @@ public class FunctionSurface extends ParametricSurface {
     }
 
     public void setX(String x) {
-        this.x .setElem(x);
+        this.x.setElem(x);
         recomputeTrees();
     }
 

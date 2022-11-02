@@ -55,9 +55,7 @@ public class Move {
     private ComposanteForceAttraction composanteForceAttraction;
     private HashMap<String, Double> map;
 
-    public Move(PCont<Gravity> cont)
-
-    {
+    public Move(PCont<Gravity> cont) {
         container = cont;
         composanteForceAttraction = new ComposanteForceAttraction();
         composanteForceSurface = new HashMap<>();
@@ -100,8 +98,8 @@ public class Move {
             if (!composanteForceSurface.containsKey(t1))
                 composanteForceSurface.put(t1, new ComposanteForceSurface(x, t1.dv));
 
-            int i=0;
-            while(i<itereFrame) {
+            int i = 0;
+            while (i < itereFrame) {
                 composanteForceSurface.get(t1).diff();
                 i++;
             }

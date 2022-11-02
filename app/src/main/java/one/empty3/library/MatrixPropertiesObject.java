@@ -24,8 +24,11 @@ import java.util.Map;
  */
 public interface MatrixPropertiesObject {
     public StructureMatrix getDeclaredProperty(String name);
+
     public void declareProperties();
+
     public Map<String, StructureMatrix> declarations();
+
     public MatrixPropertiesObject copy() throws CopyRepresentableError, IllegalAccessException, InstantiationException;
 
 }

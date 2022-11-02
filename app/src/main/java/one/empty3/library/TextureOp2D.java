@@ -38,7 +38,6 @@ package one.empty3.library;
 public abstract class TextureOp2D extends ITexture implements MatrixPropertiesObject {
     protected StructureMatrix<ITexture> upText = new StructureMatrix<>(0, ITexture.class);
 
-    
 
     public abstract int getColorAt(double u, double v);
 

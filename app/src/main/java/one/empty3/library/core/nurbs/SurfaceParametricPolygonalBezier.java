@@ -48,7 +48,7 @@ import one.empty3.library.StructureMatrix;
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
-public class SurfaceParametricPolygonalBezier extends ParametricSurface implements SurfaceElem{
+public class SurfaceParametricPolygonalBezier extends ParametricSurface implements SurfaceElem {
 
     protected final StructureMatrix<Point3D> coefficients;
     protected StructureMatrix<Integer> power1 = new StructureMatrix<>(0, Integer.class), power2 = new StructureMatrix<>(0, Integer.class);
@@ -70,7 +70,7 @@ public class SurfaceParametricPolygonalBezier extends ParametricSurface implemen
         Point3D sum = Point3D.O0;
         for (int i = 0; i < power1.getElem(); i++) {
             for (int j = 0; j < power2.getElem(); j++) {
-                sum = sum.plus(coefficients.getElem(i,j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
+                sum = sum.plus(coefficients.getElem(i, j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
             }
         }
         return sum;
@@ -98,7 +98,7 @@ public class SurfaceParametricPolygonalBezier extends ParametricSurface implemen
     }
 
     public void setPower1(Integer power1) {
-        this.power1 .setElem( power1);
+        this.power1.setElem(power1);
     }
 
     public Integer getPower2() {
@@ -106,7 +106,7 @@ public class SurfaceParametricPolygonalBezier extends ParametricSurface implemen
     }
 
     public void setPower2(Integer power2) {
-        this.power2.setElem( power2);
+        this.power2.setElem(power2);
     }
 
     @Override

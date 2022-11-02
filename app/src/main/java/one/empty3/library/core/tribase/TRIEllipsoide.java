@@ -52,12 +52,13 @@ public class TRIEllipsoide extends ParametricSurface {
         radius.add(1, 10.0);
         radius.add(1, 10.0);
         radius.add(1, 10.0);
-
+        setCirculaireY(true);
+        setCirculaireX(false);
     }
 
     public TRIEllipsoide(Point3D c, Double rx, Double ry, Double rz) {
         this();
-        this.centre.setElem( c);
+        this.centre.setElem(c);
         this.radius.setElem(rx, 0);
         this.radius.setElem(ry, 1);
         this.radius.setElem(rz, 2);
@@ -72,11 +73,10 @@ public class TRIEllipsoide extends ParametricSurface {
 
         Point3D p
                 =
-                new Point3D(centre.getX() + radius.getElem(0) * Math.sin(a) * Math.sin(b), centre.getY() + radius.getElem(1)* Math.sin(a) * Math.cos(b),
+                new Point3D(centre.getX() + radius.getElem(0) * Math.sin(a) * Math.sin(b), centre.getY() + radius.getElem(1) * Math.sin(a) * Math.cos(b),
                         centre.getZ() + radius.getElem(2) * Math.cos(a));
         return p;
     }
-
 
 
     public Point3D getCentre() {

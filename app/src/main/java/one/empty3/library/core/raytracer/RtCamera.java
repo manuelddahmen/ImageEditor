@@ -39,9 +39,7 @@ public class RtCamera extends RtNode {
     protected double mViewplaneWidth, mViewplaneHeight;                            // Largeur/Hauteur du viewplane.
     protected Point3D mCamPos, mVecDir, mUpVec, mRightVec, mViewPlaneUpLeft;
 
-    public RtCamera(Point3D vCamPos, Point3D directionVec, Point3D vRightVec, Point3D vUpVector, int type)
-
-    {
+    public RtCamera(Point3D vCamPos, Point3D directionVec, Point3D vRightVec, Point3D vUpVector, int type) {
         super(type, "CAMERA");
         mCamPos = vCamPos;
         mVecDir = directionVec.norme1();

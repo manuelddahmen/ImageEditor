@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">My FeaturesAPP (MD)</string>
+    <string name="app_name">Image Featuring</string>
     <string name="capture_button_alt">Capture</string>
     <string name="switch_camera_button_alt">Switch camera</string>
     <string name="gallery_button_alt">Gallery</string>
@@ -40,6 +40,79 @@
     <string name="browser_title_background_color">#000000</string>
     <string name="browser_title_foreground_color">#FFFFFF</string>
     <string name="browser_list_background_color">#AAAAAA</string>
-    <string name="image_traiter">Image à traiter</string>
-    <string name="choose_effects">Choose effects</string>
+    <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
+    </string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_choose_effect_list">ChooseEffectList</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="camera_video_effect">Caméra</string>
+    <string name="file_view_effect">Fichier ouvert</string>
+    <string name="choose_effects">Effects</string>
+    <string name="choose_movie">Choose movie</string>
+    <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
+    </string>
+    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
+    </string>
+    <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy
+    </string>
+    <string name="about_and_policies">About privacy</string>
+    <string name="back">Back</string>
+    <string name="about">About</string>
+    <string name="maxRes_1200">0.0</string>
+    <string name="maximum_resolution">Maximum resolution</string>
+    <string name="share">Share</string>
+    <string name="beta">Beta?</string>
+    <string name="donn_es_utilisateur_personnelles_et_sensibles">Données utilisateur personnelles et sensibles Dans
+        l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia
+        ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et
+        éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur
+        le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec
+        d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme
+        privées et ne sont pas collectées, ni traitées par nos services.
+    </string>
+    <string name="privacy_policy_and_families_policy">
+        <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
+    <string name="save">Save</string>
+    <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
+    <string name="edit_text_to_put_on_the_image">Edit text to put on the image</string>
+    <string name="todo">TODO</string>
+    <string name="ok">OK</string>
+    <string name="back_without_saving">Back without saving</string>
+    <string name="tools">Tools</string>
+    <string name="draw">Draw</string>
+    <string name="draw_color" />
+    <string name="select_rectangle">Select</string>
+    <string name="draw_activity">Draw</string>
+    <string name="unselect">Unselect</string>
+    <string name="effect_name">Effect name</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add</string>
+    <string name="apply_effects">Apply effects</string>
+    <string name="effect_image_to_image">Effect image to image</string>
+    <string name="title_activity_text">TextActivity</string>
+    <string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
+    <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
+    <string name="apply">Apply</string>
+    <string name="add_text">Add Text</string>
+    <string name="draw_button_text">Draw</string>
+    <string name="back_button_text_activity">Back</string>
+    <string name="grid_text_00">00</string>
+    <string name="grid_text_01">01</string>
+    <string name="grid_text_02">02</string>
+    <string name="grid_text_10">10</string>
+    <string name="grid_text_11">11</string>
+    <string name="grid_text_12">12</string>
+    <string name="preview_of_shapes">Preview of shapes</string>
+    <string name="textDp">48</string>
+    <string name="title_activity_image_files">ImageFiles</string>
+    <string name="title_activity_color_chooser">ColorChooser</string>
 </resources>

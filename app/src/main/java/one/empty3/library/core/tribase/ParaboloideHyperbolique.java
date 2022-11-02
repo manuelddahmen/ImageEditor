@@ -55,8 +55,8 @@ public class ParaboloideHyperbolique extends ParametricSurface {
     {
         setStartU(-1.0);
         setStartV(-1.0);
-        setEndU (1.0);
-        setEndV (1.0);
+        setEndU(1.0);
+        setEndV(1.0);
     }
 
     public ParaboloideHyperbolique(double a, double b, double h) {

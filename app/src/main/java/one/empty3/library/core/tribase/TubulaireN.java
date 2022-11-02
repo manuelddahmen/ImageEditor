@@ -42,6 +42,11 @@
  */
 package one.empty3.library.core.tribase;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
@@ -111,9 +116,10 @@ public class TubulaireN extends Representable implements TRIGenerable, TRIConten
         this.diam = diam;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
-        Color color =  one.empty3.feature.app.replace.java.awt.Color.Color(texture().getColorAt(0.5, 0.5));
+        Color color = Color.valueOf(getTexture().getColorAt(0.5, 0.5));
         if (tris == null) {
             tris = new TRIObject();
 
@@ -126,10 +132,10 @@ public class TubulaireN extends Representable implements TRIGenerable, TRIConten
                 ArrayList<Point3D> tour1 = vectPerp(t);
                 for (int i = 3; i < tour1.size() - 1; i++) {
                     double s = 1.0 * (i - 3) / tour1.size();
-                    TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), texture());
-                    t1.texture(new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(texture().getColorAt(t, s))));
-                    TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), texture());
-                    t2.texture(new TextureCol( one.empty3.feature.app.replace.java.awt.Color.Color(texture().getColorAt(t, s))));
+                    TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), getTexture());
+                    t1.texture(new TextureCol(Color.valueOf(getTexture().getColorAt(t, s))));
+                    TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), getTexture());
+                    t2.texture(new TextureCol(Color.valueOf(getTexture().getColorAt(t, s))));
 
                     tris.add(t1);
                     tris.add(t2);
@@ -194,7 +200,7 @@ public class TubulaireN extends Representable implements TRIGenerable, TRIConten
         while (it.hasNext()) {
             s += "\n\t" + it.next().toString();
         }
-        s += "\n\n)\n\t" + diam + "\n\t" + texture().toString() + "\n)\n";
+        s += "\n\n)\n\t" + diam + "\n\t" + getTexture().toString() + "\n)\n";
         return s;
     }
 

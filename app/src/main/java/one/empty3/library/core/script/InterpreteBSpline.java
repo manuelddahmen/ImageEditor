@@ -79,8 +79,8 @@ public class InterpreteBSpline implements Interprete {
                 Point3D p = (Point3D) ifa.interprete(text, pos);
                 pos = ifa.getPosition();
 
-               b.add(p);
-                if(ifa.getPosition() > pos) {
+                b.add(p);
+                if (ifa.getPosition() > pos) {
                     pos = ifa.getPosition();
                     numPoints++;
                 }
@@ -102,13 +102,13 @@ public class InterpreteBSpline implements Interprete {
         ok = true;
         while (ok) {
             try {
-            InterpreteDouble ida = new InterpreteDouble();
-            Double d = (Double) ida.interprete(text, pos);
-            pos = ida.getPosition();
-            b.getT().add(1, d);
-        } catch (Exception ex) {
-            ok = false;
-        }
+                InterpreteDouble ida = new InterpreteDouble();
+                Double d = (Double) ida.interprete(text, pos);
+                pos = ida.getPosition();
+                b.getT().add(1, d);
+            } catch (Exception ex) {
+                ok = false;
+            }
         }
 
 

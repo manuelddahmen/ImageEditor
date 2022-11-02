@@ -37,15 +37,13 @@
  */
 package one.empty3.library.core.script;
 
-import java.io.IOException;
-
 public interface Interprete {
 
     InterpreteConstants constant();
 
     int getPosition();
 
-    Object interprete(String text, int pos) throws InterpreteException, IOException;
+    Object interprete(String text, int pos) throws InterpreteException;
 
     void setConstant(InterpreteConstants c);
 

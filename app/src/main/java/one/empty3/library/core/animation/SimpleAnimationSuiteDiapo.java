@@ -40,14 +40,7 @@
  */
 package one.empty3.library.core.animation;
 
-import one.empty3.library.Representable;
-import one.empty3.tests.Animation;
-import one.empty3.tests.MoveCollection;
-
 public class SimpleAnimationSuiteDiapo extends Animation {
-    public SimpleAnimationSuiteDiapo(Class<? extends Representable> anime, MoveCollection moveCollection) {
-        super(anime, moveCollection);
-    }
 /*
     public SimpleAnimationSuiteDiapo(Scene s, ECDim dim) {
         super(s, dim);
@@ -62,7 +55,7 @@ public class SimpleAnimationSuiteDiapo extends Animation {
 
         private URL loadMediaFromUrl;
         private File loadMediaFromFIle;
-        private BufferedImage image;
+        private BufferedImageAndroid image;
         private Movie movie;
     }
 -**/

@@ -45,9 +45,11 @@ package one.empty3.library;
  */
 public class P {
     public static Class<Representable> p;
+
     public static final Point3D n(double a, double b, double c) {
         return new Point3D(a, b, c);
     }
+
     public static final Point3D n(int a, int b, int c) {
         return Point3D.n(a, b, c);
     }

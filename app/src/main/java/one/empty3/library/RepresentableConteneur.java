@@ -142,19 +142,11 @@ public class RepresentableConteneur extends Representable implements IMovable, I
     @Override
     public void declareProperties() {
         super.declareProperties();
-        getDeclaredDataStructure().put("listRepresentable/representables list", re);
-        getDeclaredDataStructure().put("re/representables list", re);
+        getDeclaredDataStructure().put("listRepresentable", re);
     }
 
     public List<Representable> getListRepresentable() {
         return re.getData1d();
     }
 
-    public StructureMatrix<Representable> getRe() {
-        return re;
-    }
-
-    public void setRe(StructureMatrix<Representable> re) {
-        this.re = re;
-    }
 }

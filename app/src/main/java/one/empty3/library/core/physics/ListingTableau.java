@@ -85,7 +85,7 @@ public class ListingTableau {
                     billes.get(k * Y * X + j * X + i).vitesse = new Point3D(
                             (i - X / 2) / 1f, (j - Y / 2) / 1f,
                             (k - Z / 2) / 1f);
-                    billes.get(k * Y * X + j * X + i).color =  one.empty3.feature.app.replace.java.awt.Color.Color(1.0f * i
+                    billes.get(k * Y * X + j * X + i).color = Color.valueOf(1.0f * i
                             / X, 1.0f * j / Y, 1.0f * k / Z);
                     billes.get(k * Y * X + j * X + i).masse = 1;
                     billes.get(k * Y * X + j * X + i).attraction = 1;

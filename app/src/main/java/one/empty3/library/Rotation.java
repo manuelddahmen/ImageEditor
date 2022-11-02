@@ -37,22 +37,24 @@ import java.util.HashMap;
 /*__
  * Created by Win on 26-01-16.
  */
-public class Rotation implements MatrixPropertiesObject  {
+public class Rotation implements MatrixPropertiesObject {
     protected StructureMatrix<Matrix33> rot;
     protected StructureMatrix<Point3D> centreRot;
     protected boolean unmodified = true;
+
     public Rotation() {
-            rot  = new StructureMatrix<>(0, Matrix33.class);
-            centreRot = new StructureMatrix<>(0, Point3D.class);
-            this.rot.setElem(Matrix33.I);
-            this.centreRot.setElem(Point3D.O0);
+        rot = new StructureMatrix<>(0, Matrix33.class);
+        centreRot = new StructureMatrix<>(0, Point3D.class);
+        this.rot.setElem(Matrix33.I);
+        this.centreRot.setElem(Point3D.O0);
     }
+
     public Rotation(Matrix33 rot, Point3D centreRot) {
         this();
-        if(rot==null)
-           rot = Matrix33.I;
-         if(centreRot==null)
-             centreRot = Point3D.O0;    
+        if (rot == null)
+            rot = Matrix33.I;
+        if (centreRot == null)
+            centreRot = Point3D.O0;
        /* if(this.rot==null||this.rot.getElem()==null)
             this.rot = rot1;
         if(this.centreRot==null||this.centreRot.getElem()==null)
@@ -70,13 +72,13 @@ public class Rotation implements MatrixPropertiesObject  {
         this.unmodified = unmodified;
     }
 
-    public Point3D rotation(Point3D p ) {
-        if(p!=null&&centreRot!=null&&rot!=null) {
-           try {
+    public Point3D rotation(Point3D p) {
+        if (p != null && centreRot != null && rot != null) {
+            try {
                 return centreRot.getElem().plus(rot.getElem().mult(p.moins(centreRot.getElem())));
-           } catch(NullPointerException ex) {
+            } catch (NullPointerException ex) {
                 ex.printStackTrace();
-           }
+            }
         }
         return p;
     }
@@ -101,7 +103,9 @@ public class Rotation implements MatrixPropertiesObject  {
     public void setCentreRot(StructureMatrix<Point3D> centreRot) {
         this.centreRot = centreRot;
     }
-    private HashMap<String , StructureMatrix> declaredDataStructures = new HashMap<>();
+
+    private HashMap<String, StructureMatrix> declaredDataStructures = new HashMap<>();
+
     @Override
     public StructureMatrix getDeclaredProperty(String name) {
         return declaredDataStructures.get(name);
@@ -121,6 +125,6 @@ public class Rotation implements MatrixPropertiesObject  {
 
     @Override
     public MatrixPropertiesObject copy() throws CopyRepresentableError, IllegalAccessException, InstantiationException {
-        return new Rotation((Matrix33)getRot().copy().getElem(), (Point3D) (getCentreRot().copy().getElem()));
+        return new Rotation((Matrix33) getRot().copy().getElem(), (Point3D) (getCentreRot().copy().getElem()));
     }
 }

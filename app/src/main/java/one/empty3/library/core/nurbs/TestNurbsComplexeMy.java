@@ -40,12 +40,13 @@
  */
 package one.empty3.library.core.nurbs;
 
+import android.graphics.Color;
+
 import one.empty3.library.Camera;
 import one.empty3.library.Point3D;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.move.Trajectoires;
 import one.empty3.library.core.testing.TestObjetSub;
-
 
 
 /*__
@@ -129,6 +130,9 @@ public class TestNurbsComplexeMy extends TestObjetSub {
         });
 
         n.texture(new TextureCol(Color.WHITE));
+
+        n.setMaxX(30);
+        n.setMaxY(30);
 
         n.creerNurbs();
 

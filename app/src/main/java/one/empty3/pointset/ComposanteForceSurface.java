@@ -72,6 +72,7 @@ public class ComposanteForceSurface {
     public void declareVar(String var, Double value) {
         x.getParametersValues().put(var, value);
     }
+
     public double diff() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
         double max = Double.MAX_VALUE;
         double curr = -1;
@@ -79,10 +80,10 @@ public class ComposanteForceSurface {
         double eval = -1;
         boolean trouve = false;
         for (int i = 0; i < itereAxes; i++) {
-            declareVar("coordArr", getVar("coordArr") + (Math.random()-0.5)*getVar("dv"));
-            declareVar("y", getVar("y") + (Math.random()-0.5)*getVar("dv"));
-            declareVar("z", getVar("z") + (Math.random()-0.5)*getVar("dv"));
-            declareVar("R", getVar("R") + (Math.random()-0.5)*getVar("dv"));
+            declareVar("coordArr", getVar("coordArr") + (Math.random() - 0.5) * getVar("dv"));
+            declareVar("y", getVar("y") + (Math.random() - 0.5) * getVar("dv"));
+            declareVar("z", getVar("z") + (Math.random() - 0.5) * getVar("dv"));
+            declareVar("R", getVar("R") + (Math.random() - 0.5) * getVar("dv"));
 
             curr = Math.abs(evSurface());
             if (curr < aCurr) {
@@ -92,20 +93,19 @@ public class ComposanteForceSurface {
                 map2.put("z", getVar("z"));
                 map2.put("R", getVar("R"));
                 map2.put("dv", getVar("dv"));
-                 trouve = true;
+                trouve = true;
             }
         }
-        if(trouve) {
+        if (trouve) {
             // TODO Itérer selon un axe linéaire, exponotielle, puissance, log, etc.
             // TODO Itérer selon l'axe p0+(p1-p0)*dv Réduire l'écart
             declareVar("coordArr", map2.get("coordArr"));
             declareVar("y", map2.get("y"));
             declareVar("z", map2.get("z"));
             declareVar("R", map2.get("R"));
-            declareVar("dv", map2.get("dv")/2);
+            declareVar("dv", map2.get("dv") / 2);
             map2.put("dv", getVar("dv"));
-        }
-        else {
+        } else {
             // TODO Itérer selon un axe linéaire, exponotielle, puissance, log, etc.
             // TODO Itérer selon tous les axes (random) et itérer aussi selon trouvé
             // TODO si l'écart est déjà réduit.

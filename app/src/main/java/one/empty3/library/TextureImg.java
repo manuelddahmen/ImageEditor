@@ -39,8 +39,12 @@ package one.empty3.library;
 
 //import org.monte.media.avi.AVIReader;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,9 +55,10 @@ import java.util.Base64;
 /*__
  * @author manu
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class TextureImg extends ITexture {
 
-    private StructureMatrix<ECBufferedImage> image = new StructureMatrix<>(0, ECBufferedImage.class);
+    private StructureMatrix<Bitmap> image = new StructureMatrix<>(0, ECBufferedImage.class);
 
     private String nom = "texture";
 
@@ -62,13 +67,18 @@ public class TextureImg extends ITexture {
     //private AVIReader reader;
     private int track = 0;
     private File avifile = null;
-    private int transparent = Color.TRANSPARENT;
+    private int transparent = Color.valueOf(1, 1, 1, 1).toArgb();
 
     public TextureImg() {
 
     }
-    public TextureImg(ECBufferedImage bi) {
+
+    public TextureImg(Bitmap bi) {
         this.image.setElem(bi);
+    }
+
+    public TextureImg(ECBufferedImage ecBufferedImage) {
+        this(ecBufferedImage.bitmap);
     }
 
     @Override
@@ -100,20 +110,19 @@ public class TextureImg extends ITexture {
 
 
         int c = image != null ? image
-                .getElem().bitmap.getPixel(x, y)
+                .getElem().getPixel(x, y)
                 :
                 transparent;
-        if(c==transparent)
-            System.out.println("Transparent");
+
         return c;
     }
 
 
-    public ECBufferedImage getImage() {
+    public Bitmap getImage() {
         return image.getElem();
     }
 
-    public void setImage(ECBufferedImage image) {
+    public void setImage(Bitmap image) {
         this.image.setElem(image);
     }
 
@@ -134,6 +143,7 @@ public class TextureImg extends ITexture {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setTransparent(Color tr) {
         this.transparent = tr.toArgb();
     }
@@ -155,23 +165,23 @@ public class TextureImg extends ITexture {
     }
 
 
-    public String toString() {
-        String imageString = null;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-        try {
-            ImageIO.write(image.getElem(), "jpg", bos);
-            byte[] imageBytes = bos.toByteArray();
-    
-            Base64.Encoder encoder =Base64.getEncoder();
-            imageString = encoder.encodeToString(imageBytes);
-
-            bos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String t  = "textureImg( filename:"+getFile()+"\n\tdata : { "+imageString+" } \n)";
-        return t;
-    }
-
+//    public String toString() {
+//        String imageString = null;
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//
+//        try {
+//            ImageIO.write(image.getElem(), "jpg", bos);
+//            byte[] imageBytes = bos.toByteArray();
+//
+//            Base64.Encoder encoder =Base64.getEncoder();
+//            imageString = encoder.encodeToString(imageBytes);
+//
+//            bos.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String t  = "textureImg( filename:"+getFile()+"\n\tdata : { "+imageString+" } \n)";
+//        return t;
+//    }
+//
 }

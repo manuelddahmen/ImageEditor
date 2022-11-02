@@ -32,56 +32,49 @@
 
 package one.empty3.library;
 
-import android.graphics.Bitmap;
-
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Plan3D;
 
-
+import android.graphics.Bitmap;
 
 /***
  * Created by manue on 17-03-19.
  * Update 2021.
  */
-public abstract class HeightMapSurface extends ParametricSurface {
-    protected StructureMatrix<ImageContainer> image = new StructureMatrix<ImageContainer>(0, ImageContainer.class);
+public class HeightMapSurface extends ParametricSurface {
+    protected StructureMatrix<ImageContainer> image = new StructureMatrix<>(0, ImageContainer.class);
     protected StructureMatrix<ParametricSurface> surface = new StructureMatrix<>(0, ParametricSurface.class);
 
     public HeightMapSurface() {
         ImageContainer imageContainer = new ImageContainer();
-        imageContainer.getImage().setElem(new BufferedImage(1000, 1000, Bitmap.Config.RGB_565));
+        imageContainer.getImage().setElem(Bitmap.createBitmap(1000, 1000, Bitmap.Config.RGB_565));
         image.setElem(imageContainer);
 
         surface.setElem(new Plan3D());
     }
 
-    public HeightMapSurface(ParametricSurface ps, BufferedImage image) {
+    public HeightMapSurface(ParametricSurface ps, Bitmap image) {
         this.image.setElem(new ImageContainer(image));
         this.surface.setElem(ps);
     }
 
-    public HeightMapSurface(Sphere ps, BufferedImage bufferedImage) {
-        this.surface.setElem(ps);
-        this.image.setElem(new ImageContainer(bufferedImage));
-
-    }
-
     public Point3D height(double u, double v) {
 
-        BufferedImage elem = image.getElem().getImage().getElem();
+        Bitmap elem = image.getElem().getImage().getElem();
 
-        int i = (int) (u * (image.getElem().getImage().getElem().getWidth() ));
+        int i = (int) (u * (image.getElem().getImage().getElem().getWidth()));
         int j = (int) (v * (image.getElem().getImage().getElem().getHeight()));
-        if(i<0) i = 0;
-        if(j<0) j = 0;
-        if(i>=image.getElem().getImage().getElem().getWidth()) i = image.getElem().getImage().getElem().getWidth()-1;
-        if(j>=image.getElem().getImage().getElem().getHeight()) j = image.getElem().getImage().getElem().getHeight()-1;
+        if (i < 0) i = 0;
+        if (j < 0) j = 0;
+        if (i >= image.getElem().getImage().getElem().getWidth())
+            i = image.getElem().getImage().getElem().getWidth() - 1;
+        if (j >= image.getElem().getImage().getElem().getHeight())
+            j = image.getElem().getImage().getElem().getHeight() - 1;
 
 
         return surface.getElem().calculerPoint3D(u, v).plus(
-                surface.getElem().calculerTangenteU(u,v).prodVect(surface.getElem().calculerTangenteV(u,v)
-                ).norme1().mult(elem.bitmap.getPixel(i, j)));
+                surface.getElem().calculerTangenteU(u, v).prodVect(surface.getElem().calculerTangenteV(u, v)
+                ).norme1().mult(elem.getPixel(i, j)));
     }
 
     @Override

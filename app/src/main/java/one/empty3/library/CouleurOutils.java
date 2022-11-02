@@ -39,12 +39,16 @@ package one.empty3.library;
 
 
 import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 /*__
  * @author manuel
  */
 public class CouleurOutils {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color couleurFactio(Color c1, Color cFond, TRI t, Point3D lumiere, boolean plus) {
         Point3D v1 = t.normale().norme1();
         Point3D v2 = lumiere.norme1();
@@ -66,22 +70,24 @@ public class CouleurOutils {
                 res[i] = 255;
             }
         }
-        return  one.empty3.feature.app.replace.java.awt.Color.Color(res[0], res[1], res[2]);
+        return Color.valueOf(res[0], res[1], res[2]);
     }
 
     public static String couleurID() {
         return "c";
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color couleurRatio(Color c1, Color c2, double r) {
 
-        return  one.empty3.feature.app.replace.java.awt.Color.Color(
+        return Color.valueOf(
                 (float) (c1.red() * r + c2.red() * (1 - r)),
                 (float) (c1.green() * r + c2.green() * (1 - r)),
                 (float) (c1.blue() * r + c2.blue() * (1 - r))
         );
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String toStringColor(Color couleur) {
         return "(" + couleur.red() + ", " + couleur.green() + ", "
                 + couleur.blue() + ")";
@@ -91,8 +97,9 @@ public class CouleurOutils {
         return "Couleur";
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Color randomColor() {
-        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) Math.random(),
+        return Color.valueOf((float) Math.random(),
                 (float) Math.random(),
                 (float) Math.random());
     }

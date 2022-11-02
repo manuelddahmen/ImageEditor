@@ -37,40 +37,43 @@
  */
 package one.empty3.library;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import android.graphics.Color;
+
 import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtRay;
 
-
-
 public class TRI extends Representable {
 
-    private StructureMatrix<Point3D> sommet= new StructureMatrix<>(1, Point3D.class);
+    private StructureMatrix<Point3D> sommet = new StructureMatrix<>(1, Point3D.class);
 
     public TRI() {
         super();
-        sommet.setElem(Point3D.X,  0);
-        sommet.setElem(Point3D.Y,  1);
+        sommet.setElem(Point3D.X, 0);
+        sommet.setElem(Point3D.Y, 1);
         sommet.setElem(Point3D.O0, 2);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TRI(Point3D coordPoint3D, Point3D coordPoint3D0, Point3D coordPoint3D1) {
-        getSommet().setElem(coordPoint3D, 0);
-        getSommet().setElem(coordPoint3D0, 1);
-        getSommet().setElem(coordPoint3D1, 2);
+        this(coordPoint3D, coordPoint3D0, coordPoint3D1, Color.valueOf(0, 0, 1));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
-               Color red) {
-        sommet.setElem(point3d,  0);
+               android.graphics.Color red) {
+        sommet.setElem(point3d, 0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
-        this.texture(new TextureCol(red.toArgb()));
+        this.texture(new TextureCol(red));
     }
 
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
                ITexture red) {
-        sommet.setElem(point3d,  0);
+        sommet.setElem(point3d, 0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
         this.texture = red;
@@ -83,12 +86,6 @@ public class TRI extends Representable {
     public TRI(Point3D[] s, ITexture c) {
         this(s[0], s[1], s[2], c);
     }
-
-    public TRI(Point3D coordPoint3D, Point3D coordPoint3D0, Point3D coordPoint3D1, int black) {
-        this(coordPoint3D, coordPoint3D0, coordPoint3D1);
-        texture(new ColorTexture(black));
-    }
-
 
 
     public StructureMatrix<Point3D> getSommet() {
@@ -106,7 +103,7 @@ public class TRI extends Representable {
 
 
     public void setCouleur(Color couleur) {
-        this.texture(new TextureCol(couleur.toArgb()));
+        this.texture(new TextureCol(couleur));
 
     }
 
@@ -139,7 +136,7 @@ public class TRI extends Representable {
     @Override
     public void declareProperties() {
         super.declareProperties();
-        getDeclaredDataStructure().put("sommet/points sommets du triangle",sommet);
+        getDeclaredDataStructure().put("sommet/points sommets du triangle", sommet);
 
     }
 }

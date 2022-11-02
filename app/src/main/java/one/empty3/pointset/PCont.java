@@ -41,7 +41,7 @@ import java.util.Iterator;
 /*__
  * Created by manue on 16-07-19.
  */
-public class PCont<T extends Point3D> extends Representable{
+public class PCont<T extends Point3D> extends Representable {
 
     protected ArrayList<T> points;
 

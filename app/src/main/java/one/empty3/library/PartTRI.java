@@ -38,8 +38,8 @@ package one.empty3.library;
  */
 public class PartTRI extends TRI {
     public PartTRI(Point3D point3D, Point3D point3D1, Point3D point3D2, ITexture texture,
-        double u, double v
-                   ) {
+                   double u, double v
+    ) {
         super(point3D, point3D1, point3D2, texture);
     }
 }

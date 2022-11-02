@@ -47,7 +47,7 @@ import java.util.HashMap;
 /*__
  * @author manu
  */
-public abstract class ITexture implements MatrixPropertiesObject{
+public abstract class ITexture implements MatrixPropertiesObject {
     public static final int COLOR_IDENT = 0;
     public static final int COLOR_MIROR_X = 1;
     public static final int COLOR_MIROR_Y = 2;
@@ -56,13 +56,13 @@ public abstract class ITexture implements MatrixPropertiesObject{
     public static final int COLOR_ROT_180 = 16;
     public static final int COLOR_ROT_270 = 32;
     public int onTextureEnds = 0;
-    protected int colorMask = 32*32;
+    protected int colorMask = 0;
     DeformMap dm;
 
     public int getColorMask() {
         return colorMask;
     }
-    
+
     public void setColorMask(int colorMask) {
         this.colorMask = colorMask;
     }
@@ -110,13 +110,16 @@ public abstract class ITexture implements MatrixPropertiesObject{
     public abstract int getColorAt(double x, double y);
 
 
-    public void timeNext(){} 
+    public void timeNext() {
+    }
 
-    public void timeNext(long milli){} 
+    public void timeNext(long milli) {
+    }
 
     public void iterate() throws EOFVideoException {
 
     }
+
     @Override
     public StructureMatrix getDeclaredProperty(String name) {
         return null;

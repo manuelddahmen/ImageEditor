@@ -31,6 +31,7 @@
  */
 
 package one.empty3.library;
+
 /*__
  * *
  * Global license : * CC Attribution

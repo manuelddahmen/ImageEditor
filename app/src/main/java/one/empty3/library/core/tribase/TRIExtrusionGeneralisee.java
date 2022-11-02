@@ -47,6 +47,8 @@ public class TRIExtrusionGeneralisee extends ParametricSurface {
     private Point3D normaleFixe;
 
     public TRIExtrusionGeneralisee() {
+        setCirculaireY(true);
+        setCirculaireX(false);
 
     }
 
@@ -65,7 +67,7 @@ public class TRIExtrusionGeneralisee extends ParametricSurface {
     }
 
     public void setSectionA(boolean sectionA) {
-        this.sectionA.setElem( sectionA);
+        this.sectionA.setElem(sectionA);
     }
 
     public boolean isSectionB() {
@@ -73,9 +75,8 @@ public class TRIExtrusionGeneralisee extends ParametricSurface {
     }
 
     public void setSectionB(boolean sectionB) {
-        this.sectionB .setElem(sectionB);
+        this.sectionB.setElem(sectionB);
     }
-
 
 
     public Point3D calculerPoint3D(double u, double v) {

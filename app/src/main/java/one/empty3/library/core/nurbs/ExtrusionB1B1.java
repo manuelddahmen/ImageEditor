@@ -24,10 +24,8 @@ import one.empty3.library.StructureMatrix;
  * Created by manue on 29-12-19.
  */
 public class ExtrusionB1B1 extends ExtrusionCurveCurve {
-    {
-        base = new StructureMatrix<>(0, CourbeParametriquePolynomialeBezier.class);
-        path = new StructureMatrix<>(0, CourbeParametriquePolynomialeBezier.class);
-    }
+    private StructureMatrix<CourbeParametriquePolynomialeBezier> base = new StructureMatrix<>(0, CourbeParametriquePolynomialeBezier.class);
+    private StructureMatrix<CourbeParametriquePolynomialeBezier> path = new StructureMatrix<>(0, CourbeParametriquePolynomialeBezier.class);
     private StructureMatrix<Point3D> path0ref = new StructureMatrix<>();
 
     public ExtrusionB1B1() {
@@ -38,18 +36,20 @@ public class ExtrusionB1B1 extends ExtrusionCurveCurve {
 
     @Override
     public Point3D calculerPoint3D(double u, double v) {
-        return super.calculerPoint3D(u, v);
+        path0ref.setElem(path.getElem().calculerPoint3D((double) path.getElem().start()));
+        return base.getElem().calculerPoint3D(u).plus(path.getElem().calculerPoint3D(v).moins(path0ref.getElem()));
     }
-    public void declareProperties()
-    {
-        super.declareProperties();
+
+    public void declareProperties() {
+        getDeclaredDataStructure().put("base/courbe a extruder", base);
+        getDeclaredDataStructure().put("path/courbe normale d'extrusion", path);
     }
 
     @Override
     public String toString() {
         String s = "extrudeB1b1 (\n\t(\n\tbase :"
                 + base.toString();
-        s += "\n\n" + base.toString() + "\n\tpath : " + path+"\n)\ntexture : "+ texture().toString() + "\n)\n";
+        s += "\n\n" + base.toString() + "\n\tpath : " + path + "\n)\ntexture : " + getTexture().toString() + "\n)\n";
         return s;
     }
 }

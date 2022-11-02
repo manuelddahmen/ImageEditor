@@ -39,10 +39,11 @@ import one.empty3.library.Point3D;
  */
 public class CourbeParametriquePolynomialeBezier extends CourbeParametriquePolynomiale {
 
-    public CourbeParametriquePolynomialeBezier()
-    {
+    public CourbeParametriquePolynomialeBezier() {
+
         super();
     }
+
     public CourbeParametriquePolynomialeBezier(Point3D[] coefficients) {
         super(coefficients);
     }
@@ -55,9 +56,11 @@ public class CourbeParametriquePolynomialeBezier extends CourbeParametriquePolyn
 
     @Override
     public Point3D calculerPoint3D(double t) {
-        Point3D sum = new Point3D();
+        Point3D sum = Point3D.O0;
         int N = coefficients.getData1d().size();
+        //double bSum = 0.0;
         for (int i = 0; i < N; i++) {
+            //bSum += B(i, N, t);
             sum = sum.plus(coefficients.getElem(i).mult(B(i, N - 1, t)));
         }
         return sum;
@@ -65,28 +68,27 @@ public class CourbeParametriquePolynomialeBezier extends CourbeParametriquePolyn
 
     @Override
     public Point3D calculerVitesse3D(double t) {
-        return super.calculerVitesse3D(t);
+        throw new UnsupportedOperationException("pas encore implanté");
     }
 
     protected double factorielle(int n) {
         double sum = 1;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             sum *= i;
         }
         return sum;
     }
 
-    public void declareProperties()
-    {
+    public void declareProperties() {
         super.declareProperties();
     }
 
     @Override
     public String toString() {
         String s = "bezier(";
-        for(int i=0; i<coefficients.getData1d().size(); i++)
-            s+="\n"+coefficients.getElem(i).toString()+"\n";
-        return s+")\n";
+        for (int i = 0; i < coefficients.getData1d().size(); i++)
+            s += "\n" + coefficients.getElem(i).toString() + "\n";
+        return s + ")\n";
     }
 
 }

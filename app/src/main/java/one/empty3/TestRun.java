@@ -50,17 +50,17 @@ public class TestRun {
                             ex.printStackTrace();
                         }
                         break;
-}
-p.setProperty(key, value);
+                }
+                p.setProperty(key, value);
             }
         }
 
-         Pojo.setProperties((Object)t, p);
+        Pojo.setProperties((Object) t, p);
         // if(cl instanceof TestObjet) {
         if (t != null)
             runTest((TestObjet) t, p);
 //    }
 
-        
+
     }
 } 

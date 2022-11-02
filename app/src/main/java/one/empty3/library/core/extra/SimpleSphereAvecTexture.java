@@ -37,12 +37,13 @@
  */
 package one.empty3.library.core.extra;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 
-
+import androidx.annotation.RequiresApi;
 
 /*__
  * @author MANUEL DAHMEN
@@ -53,7 +54,7 @@ import one.empty3.library.*;
  */
 public class SimpleSphereAvecTexture extends SimpleSphere {
 
-    private BufferedImage img;
+    private Bitmap img;
     private Axe axe;
     private double angle;
     private String fichier;
@@ -63,28 +64,29 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
      * @param r
      * @param col
      */
-    public SimpleSphereAvecTexture(Point3D c, double r, Color col) {
+    public SimpleSphereAvecTexture(Point3D c, double r, int col) {
         super(c, r, col);
     }
 
-    public SimpleSphereAvecTexture(Point3D c, double r, Color col,
-                                   BufferedImage bufferedImage) {
+    public SimpleSphereAvecTexture(Point3D c, double r, int col,
+                                   Bitmap bufferedImage) {
         super(c, r, col);
         texture(bufferedImage);
     }
 
     public SimpleSphereAvecTexture(Point3D c, Matrix33 m3d, double angle, double r,
-                                   Color col, ECBufferedImage img) {
+                                   int col, Bitmap img) {
         super(c, r, col);
         this.axe = axe;
         this.angle = angle;
-        texture(img);
+        getTexture();
     }
 
     public void fichier(String f) {
         fichier = f;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
         TRIObject t = new TRIObject();
@@ -107,7 +109,7 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
                 pCur[2] = CoordPoint(a, b + incrLong);
                 pCur[3] = CoordPoint(a + incrLat, b + incrLong);
                 try {
-                    Color color = (Color) Color.Color(img.bitmap.getPixel(
+                    Color color = Color.valueOf(img.getPixel(
                             (int) ((a + Math.PI) / Math.PI * img.getHeight()),
                             (int) ((b) / 2 / Math.PI * img.getWidth())));
                     t.add(new TRI(pCur[0], pCur[1], pCur[3], color));
@@ -121,9 +123,6 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
         return t;
     }
 
-    public void texture(BufferedImage bufferedImage) {
-        this.img = bufferedImage;
-    }
 
     @Override
     public String toString() {

@@ -37,29 +37,18 @@
  * 2013-2020 Manuel Dahmen
  */
 package one.empty3.library.core.testing;
-/*
-import one.empty3.library.objloader.ModelLoaderOBJ;
-import ru.sbtqa.monte.media.avi.AVIWriter;
-import ru.sbtqa.monte.media.Format;
-import ru.sbtqa.monte.media.FormatKeys;
-import ru.sbtqa.monte.media.FormatKeys.MediaType;
-import ru.sbtqa.monte.media.VideoFormatKeys;
-import ru.sbtqa.monte.media.avi.AVIWriter;
-import ru.sbtqa.monte.media.math.Rational;
-*/
 
 import android.graphics.Bitmap;
+import android.media.AudioFormat;
+import android.media.MediaRecorder;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.feature.app.replace.java.awt.image.BufferedImage;
 import one.empty3.library.*;
 import one.empty3.library.core.export.ObjExport;
 import one.empty3.library.core.export.STLExport;
 import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
-//import one.empty3.library.core.script.Loader;
+import one.empty3.library.core.script.Loader;
 import one.empty3.library.core.script.VersionNonSupporteeException;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,6 +62,12 @@ import java.util.logging.Logger;
  * @author Manuel DAHMEN
  */
 public abstract class TestObjet implements Test, Runnable {
+    public static Resolution PAL = new Resolution(1280, 720);
+    public static Resolution HD720 = new Resolution(1280, 720);
+    public static Resolution HD1080 = new Resolution(1920, 1080);
+    public static Resolution UHD = new Resolution(1920 * 2, 1080 * 2);
+    public static Resolution VGAZIZI = new Resolution(640, 480);
+
     public static final int GENERATE_NOTHING = 0;
     public static final int GENERATE_IMAGE = 1;
     public static final int GENERATE_MODEL = 2;
@@ -87,23 +82,15 @@ public abstract class TestObjet implements Test, Runnable {
     public static final int ON_MAX_FRAMES_CONTINUE = 1;
     public static final int ENCODER_MONTE = 0;
     public static final int ENCODER_HUMBLE = 1;
-    public static Resolution PAL = new Resolution(1280, 720);
-    public static Resolution HD720 = new Resolution(1280, 720);
-    public static Resolution HD1080 = new Resolution(1920, 1080);
-    public static Resolution UHD = new Resolution(1920 * 2, 1080 * 2);
-    public static Resolution VGA = new Resolution(640, 480);
-    public static Resolution VGAZIZI = new Resolution(320, 200);
+    protected int encoder = 0;
     protected Scene scene = new Scene();
     protected String description = "@ Manuel Dahmen \u2610";
     protected Camera c;
     protected int frame = 0;
     protected ArrayList<TestInstance.Parameter> dynParams;
-    protected ITexture couleurFond;
-    protected ZBufferImpl z;
     Properties properties = new Properties();
-    //ShowTestResult str;
     private File avif;
-    //private AVIWriter aw;
+    private MediaRecorder aw;
     private boolean aviOpen = false;
     private String filmName;
     private int idxFilm;
@@ -120,7 +107,7 @@ public abstract class TestObjet implements Test, Runnable {
     private int resx = 640;
     private int resy = 480;
     private File dir = null;
-    private BufferedImage ri;
+    private Bitmap ri;
     private String filename = "frame";
     private String fileExtension = "JPG";
     private boolean publish = false;
@@ -139,30 +126,36 @@ public abstract class TestObjet implements Test, Runnable {
     private String sousdossier;
     private boolean D3 = false;
     private ImageContainer biic;
-    private ECBufferedImage riG;
-    private ECBufferedImage riD;
+    private Bitmap riG;
+    private Bitmap riD;
     private File fileG;
     private File fileD;
     private boolean pause = false;
     private boolean pauseActive = false;
+    protected ITexture couleurFond;
     private File directory;
     private ZipWriter zip;
     private boolean stop = false;
-    private PrintWriter o ;
+    protected ZBufferImpl z;
+    private RegisterOutput o = new RegisterOutput();
     private int onTextureEnds = ON_TEXTURE_ENDS_STOP;
     private int onMaxFrameEvent = ON_MAX_FRAMES_STOP;
     private ExportAnimationData dataWriter;
     private File audioTrack;
     private boolean isAudioDone;
+    //private AudioInputStream audioIn;
     private int audioTrackNo;
     private int videoTrackNo;
     private int fps = 25;
     //private Buffer buf;
-    //private ManualVideoCompile compiler;
     private boolean isVBR;
+    private AudioFormat audioFormat;
     private Resolution dimension = HD1080;
     private String name;
-    private boolean encoder;
+
+    protected ZBufferImpl z() {
+        return z;
+    }
 
     public TestObjet() {
 
@@ -172,6 +165,7 @@ public abstract class TestObjet implements Test, Runnable {
     public TestObjet(ArrayList<TestInstance.Parameter> params) {
         init();
     }
+
 
     public TestObjet(boolean binit) {
         if (binit) {
@@ -184,19 +178,15 @@ public abstract class TestObjet implements Test, Runnable {
         }
     }
 
+    public void setProperties(Properties p) {
+        this.getClass();
+    }
+
     public static void main(String[] args) {
         TestObjet gui = new TestObjetSub();
         gui.loop(true);
         gui.setMaxFrames(2000);
         new Thread(gui).start();
-    }
-
-    protected ZBufferImpl z() {
-        return z;
-    }
-
-    public void setProperties(Properties p) {
-        this.getClass();
     }
 
     public ExportAnimationData getDataWriter() {
@@ -218,15 +208,28 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public Bitmap img() {
-        return ri.bitmap;
+        return ri;
     }
 
     public void startNewMovie() {
         idxFilm++;
         avif = new File(this.dir.getAbsolutePath() + File.separator
                 + sousdossier + this.getClass().getName() + "__" + filmName + idxFilm + ".AVI");
-//Open movie output and close the older one
-        aviOpen = false;
+
+        if ((generate & GENERATE_MOVIE) > 0) {
+
+            if (encoder == 1) {
+
+                initCompiler();
+            } else {
+                if (isAviOpen()) {
+                    aw.stop();
+                    aw = null;
+                    aviOpen = false;
+
+                }
+            }
+        }
     }
 
     private boolean unterminable() {
@@ -234,7 +237,7 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public boolean isAviOpen() {
-        return (aviOpen && encoder);
+        return aviOpen;
     }
 
     public void setAviOpen(boolean aviOpen) {
@@ -254,7 +257,7 @@ public abstract class TestObjet implements Test, Runnable {
         return "Dernier intervalle de temps : " + (displayLastIntervalTimeInterval * 1E-9) + "\nTemps total partiel : " + (displayPartialTimeInterval * 1E-9);
     }
 
-    public PrintWriter getO() {
+    public RegisterOutput getO() {
         return o;
     }
 
@@ -285,7 +288,7 @@ public abstract class TestObjet implements Test, Runnable {
         return directory;
     }
 
-    protected void ecrireImage(BufferedImage ri, String type, File fichier) {
+    protected void ecrireImage(Bitmap ri, String type, File fichier) {
         if (fichier == null) {
             o.println("Erreur OBJET FICHIER (java.io.File) est NULL");
             System.exit(1);
@@ -293,7 +296,7 @@ public abstract class TestObjet implements Test, Runnable {
 
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(ri, type, baos);
+            ri.compress(Bitmap.CompressFormat.JPEG, 10, baos);
 
             baos.flush(); // Is this necessary??
             byte[] resultImageAsRawBytes = baos.toByteArray();
@@ -314,11 +317,11 @@ public abstract class TestObjet implements Test, Runnable {
     public void exportFrame(String format, String filename) throws IOException {
 
         STLExport.save(
-                new File(directory.getAbsolutePath() + File.separator + "stlExportFormatTXT" + filename + ".stl"),
+                new File(directory.getAbsolutePath() + File.separator + filename + ".stl"),
                 scene(),
                 false);
         ObjExport.save(
-                new File(directory.getAbsolutePath() + File.separator + "objExportFormatTXT" + filename + ".obj"),
+                new File(directory.getAbsolutePath() + File.separator + filename + ".obj"),
                 scene(),
                 false);
     }
@@ -327,6 +330,23 @@ public abstract class TestObjet implements Test, Runnable {
 
     public int frame() {
         return frame;
+    }
+
+    public TestInstance.Parameter getDynParameter(String name) {
+        Iterator<TestInstance.Parameter> prms = dynParams.iterator();
+
+        while (prms.hasNext()) {
+            TestInstance.Parameter prm = prms.next();
+
+            if (name.equals(prm.name)) {
+                return prm;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<TestInstance.Parameter> getDynParameters() {
+        return dynParams;
     }
 
     ArrayList<TestInstance.Parameter> getDynParams() {
@@ -351,6 +371,11 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void setGenerate(int generate) {
         this.generate = generate;
+    }
+
+    public ArrayList<TestInstance.Parameter> getInitParameters() {
+        return initParams;
+
     }
 
     public ArrayList<TestInstance.Parameter> getInitParams() {
@@ -391,6 +416,9 @@ public abstract class TestObjet implements Test, Runnable {
     public abstract void ginit();
 
     private void init() {
+        o.addOutput(System.out);
+
+        o.addOutput(Logger.getLogger(getClass().getCanonicalName()));
 
         if (initialise) {
             return;
@@ -447,7 +475,8 @@ public abstract class TestObjet implements Test, Runnable {
         ///setMaxFrames(100);
         loop(true);
 
-        //compiler = new ManualVideoCompile();
+
+        aw = new MediaRecorder();
     }
 
     private String dateForFilename(Date date) {
@@ -624,36 +653,11 @@ public abstract class TestObjet implements Test, Runnable {
 
     }
 
-    public void publishResult() {
-        if (getPublish()) {
-            // Start GUI feedback
-        }
-    }
-
-    private boolean getPublish() {
-        return publish;
-    }
-
-    public void setPublish(boolean publish) {
-        this.publish = publish;
-    }
 
     public void publishResult(boolean publish) {
         this.publish = publish;
     }
 
-    public void reportException(Exception ex) {
-        ex.printStackTrace();
-        InputStream is = getClass().getResourceAsStream(
-                "/one/empty3/library/skull-cross-bones-evil.png");
-
-        if (is == null) {
-            o.println("Erreur d'initialisation: pas correct!");
-            System.exit(-1);
-        }
-
-
-    }
 
     public void reportPause(boolean phase) {
     }
@@ -661,16 +665,6 @@ public abstract class TestObjet implements Test, Runnable {
     public void reportStop() {
     }
 
-    public void reportSucces(File film) {
-        InputStream is = getClass().getResourceAsStream(
-                "/pouce-leve.jpg");
-
-        if (is == null) {
-            o.println("Erreur d'initialisation: pas correct!");
-            System.exit(-1);
-        }
-
-    }
 
     public boolean copyResources() {
         // TODO Parcourir les textures de la scène
@@ -683,12 +677,9 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public void initCompiler() {
-
-       /* compiler.init(avif.getAbsolutePath()
-                , resx, resy, fps, 0);*/
     }
 
-    public void run()  {
+    public void run() {
         if (!initialise)
             init();
 
@@ -729,11 +720,17 @@ public abstract class TestObjet implements Test, Runnable {
         try {
             zip.init(zipf);
         } catch (FileNotFoundException e1) {
-            reportException(e1);
             e1.printStackTrace();
             return;
         }
 
+
+        ginit();
+
+
+        /*if (scene().texture() != null) {
+            z.backgroundTexture(scene().texture());
+        }*/
 
         o.println("");
         o.println(directory().getAbsolutePath());
@@ -741,18 +738,8 @@ public abstract class TestObjet implements Test, Runnable {
 
         o.println("Starting movie  {0}" + runtimeInfoSucc());
 
-        ginit();
-
 
         while ((nextFrame() || unterminable()) && !stop) {
-
-
-            byte[] audioBuffer = null;
-            // Advance audio to movie time + 1 second (audio must be ahead of video by 1 second)
-            while (audioTrack != null && !isAudioDone /*&& aw.getDuration(audioTrackNo).doubleValue() < 1.0
-             *frame() / fps*/) {
-                // => variable bit rate: format can change at any time
-            }
 
 
             pauseActive = true;
@@ -771,7 +758,6 @@ public abstract class TestObjet implements Test, Runnable {
                 finit();
             } catch (Exception ex) {
                 ex.printStackTrace();
-                reportException(ex);
             }
             if ((generate & GENERATE_OPENGL) > 0) {
                 o.println("No OpenGL");
@@ -780,7 +766,6 @@ public abstract class TestObjet implements Test, Runnable {
                     testScene();
 
                 } catch (Exception e1) {
-                    reportException(e1);
                     return;
                 }
             }
@@ -795,16 +780,17 @@ public abstract class TestObjet implements Test, Runnable {
                 }
 
 
-                ri = new BufferedImage(z.image2());
+                ri = z.image2();
 
                 afterRenderFrame();
 
                 // ri.getGraphics().drawString(description, 0, 0);
 
-                if ((generate & GENERATE_MOVIE) > 0 && encoder) {
-
-                    //encoder.encodeImage((BufferedImage) ri);
-                    // Encode frame
+                if ((generate & GENERATE_MOVIE) > 0 && isAviOpen()) {
+                    if (encoder == ENCODER_MONTE) {
+                        dataWriter.writeFrameData(frame(), "Writing movie frame");
+                    } else if (encoder == ENCODER_HUMBLE) {
+                    }
                 } else {
                     o.println(
                             "No file open for avi writing");
@@ -812,27 +798,26 @@ public abstract class TestObjet implements Test, Runnable {
                 }
                 ecrireImage(ri, type, file);
 
-                biic.setImage((ri != null) ? ri.bitmap : (((frame % 2) == 0) ? riG.bitmap : riD.bitmap));
                 biic.setStr("" + frame);
             }
             if (isSaveBMood()) {
-//                try {
+                try {
                     File foutm = new File(this.dir.getAbsolutePath()
                             + File.separator + filename + ".bmood");
-                    //new Loader().saveBin(foutm, scene);
+                    new Loader().saveBin(foutm, scene);
                     dataWriter.writeFrameData(frame(), "Save bin: " + foutm.getAbsolutePath());
-                    //} catch (VersionNonSupporteeException ex) {
-                    //    o.println(ex.getLocalizedMessage());
-                    //    reportException(ex);
-                    //} catch (ExtensionFichierIncorrecteException e) {
-                    //    e.printStackTrace();
-                    //}
+                } catch (VersionNonSupporteeException ex) {
+                    o.println(ex.getLocalizedMessage());
+                } catch (ExtensionFichierIncorrecteException e) {
+                    e.printStackTrace();
+                }
             }
+
 
             if ((generate & GENERATE_MODEL) > 0) {
                 try {
                     o.println("Start generating model");
-                    String filename = "export-" + frame;
+                    String filename = "export-" + frame + ".STL";
                     exportFrame("export", filename);
                     dataWriter.writeFrameData(frame(), "Export model: " + filename);
                     o.println("End generating model");
@@ -845,15 +830,15 @@ public abstract class TestObjet implements Test, Runnable {
 
             }
 
-
-            if (publish) {
+/*
+            if(publish) {
                 ImageContainer imageContainer = new ImageContainer();
                 biic.setImage(ri);
                 imageContainer.setImage(biic.getImage());
 
-//                str.setImageContainer(imageContainer);
+                str.setImageContainer(imageContainer);
             }
-
+  */
             z.idzpp();
 
         }
@@ -870,14 +855,13 @@ public abstract class TestObjet implements Test, Runnable {
                 //reportException(e);
             }
         }
-        if ((generate & GENERATE_MOVIE) > 0 && encoder) {
-            try {
-                //encoder.finish();
-                // Close movie
-            } finally {
-                //NIOUtils.closeQuietly(out);
+        if ((generate & GENERATE_MOVIE) > 0 && true) {
+            if (encoder == ENCODER_MONTE) {
+            } else {
+
             }
         }
+
         String cmd;
 
         if (loop() && avif != null) {
@@ -912,6 +896,7 @@ public abstract class TestObjet implements Test, Runnable {
 
     }
 
+
     public void saveBMood(boolean b) {
         saveTxt = b;
     }
@@ -924,9 +909,6 @@ public abstract class TestObjet implements Test, Runnable {
         representable.setPaintingAct(getZ(), scene(), pa);
     }
 
-    public void closeView() {
-
-    }
 
     public void scene(Scene load) {
         scene = load;
@@ -998,14 +980,14 @@ public abstract class TestObjet implements Test, Runnable {
                 || f.getAbsolutePath().toLowerCase().endsWith("moo")
                 || f.getAbsolutePath().toLowerCase().endsWith("bmood")
                 || f.getAbsolutePath().toLowerCase().endsWith("bmoo")) {
-           //try {
-  //              new Loader().load(f, scene);
+            try {
+                new Loader().load(f, scene);
 
-    //        } catch (VersionNonSupporteeException ex) {
-    //          o.println(ex.getLocalizedMessage());
-      //    } catch (ExtensionFichierIncorrecteException ex) {
-        //      o.println(ex.getLocalizedMessage());
-         // }
+            } catch (VersionNonSupporteeException ex) {
+                o.println(ex.getLocalizedMessage());
+            } catch (ExtensionFichierIncorrecteException ex) {
+                o.println(ex.getLocalizedMessage());
+            }
         } else {
             o.println("Erreur: extension incorrecte");
             System.exit(1);
@@ -1013,11 +995,6 @@ public abstract class TestObjet implements Test, Runnable {
         }
     }
 
-    public void writeOnPictureAfterZ(BufferedImage bi) {
-    }
-
-    public void writeOnPictureBeforeZ(BufferedImage bi) {
-    }
 
     public String getFolder() {
         return dir.getAbsolutePath();
@@ -1050,21 +1027,25 @@ public abstract class TestObjet implements Test, Runnable {
         throw new ClassNotFoundException("Impossible to initialize class");
     }
 
-    public Resolution getDimension() {
-        return dimension;
-    }
-
     public void setDimension(Resolution dimension) {
         this.resx = dimension.x();
         this.resy = dimension.y();
         this.dimension = dimension;
     }
 
+    public Resolution getDimension() {
+        return dimension;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public Color v2main() {
-        return null;
+    public Boolean getPublish() {
+        return publish;
+    }
+
+    public void setPublish(boolean publish) {
+        this.publish = publish;
     }
 }

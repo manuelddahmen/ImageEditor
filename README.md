@@ -1,56 +1,40 @@
-# download commit 
-
-@manuelddahmen
-manuelddahmen committed 20 days ago
-1 parent e11b120 commit 134a7b212b2e13753a6c06877eb82b06f1fc743d
-Showing  with 33 additions and 28 deletions.
-
-# feature App (renamed from CameraX sample) 
-
-CameraXbasic aims to demonstrate how to use CameraX APIs written in Kotlin.
-
-## Build
-
-To build the app directly from the command line, run:
-```sh
-./gradlew assembleDebug
-```
-
-## Test
-
-Unit testing and instrumented device testing share the same code. To test the app using Robolectric, no device required, run:
-```sh
-./gradlew test
-```
-
-To run the same tests in an Android device connected via ADB, run:
-```sh
-./gradlew connectedAndroidTest
-```
-
-Alternatively, test running configurations can be added to Android Studio for convenience (and a nice UI). To do that:
-1. Go to: `Run` > `Edit Configurations` > `Add New Configuration`.
-1. For Robolectric select `Android JUnit`, for connected device select `Android Instrumented Tests`.
-1. Select `app` module and `one.empty3.cameraxbasic.MainInstrumentedTest` class.
-1. Optional: Give the run configuration a name, like `test robolectric` or `test device`
-
-Precision about the code.
-
-Code is too long to post here. I read your remarks and I updated my code.
-[https://github.com/manuelddahmen/featureApp/blob/main/app/src/main/java/one/empty3/feature/app/ChooseEffectsActivity.kt][1]
-
- 
-
-       I/System.out: Cick on Effect button
-    I/System.out: Effect class           : one.empty3.feature.GradProcess
-        In picture             : file:/storage/emulated/0/Android/media/one.empty3.feature.app/data/MyImage_43.jpg
-        In picture directory   : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data
-        Out  picture           : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data/one.empty3.feature.GradProcess-1/MyImage_43.jpg
-        Out picture directory  : /file:/storage/emulated/0/Android/media/one.empty3.feature.app/data
-    I/System.out: File in doesn't exists, or File out exists
-        Precision currentProcessDir : false
-        Precision currentProcessFile: false
-        Precision currentOutputDir  : false
-        Precision currentOutputFile : false
-
-  [1]: https://github.com/manuelddahmen/featureApp/blob/main/app/src/main/java/one/empty3/feature/app/ChooseEffectsActivity.kt
+<en-US>
+Some artistic effects.
+FIX: Résolution d'une gros bug: bloquage après choix d'effets
+FIX: Ecran noir après application des effets.
+BUG: fixer des problèmes et préparer la version avec peinture et sélection de régions (IN PROGRESS)
+FIX: Image se recharge dès l'ouverture et s'enregistre à la fin (copie de travail courante)
+FIX: Bouton 2 : sélection des effets dans une liste.
+FIX BUG: Bouton save et share déplacés
+FIX BUG: Error in RecyclerView chooseEffects : multiple choices instead of one make application fail. Try to fix: should work. (2nd try)
+FIX BUG: null pointer exception (crah) at startup
+Nouvelle fonctionalité: ajouter du texte.
+BUG: l'image dans l'ImageView principale n'est plus à jour
+Add feature: click on image to put text 
+Error in Manifest file
+Essayer d'optimiser plus et de mettre un fichier de désobscurcissement
+Try to solve problems:
+BUG app doesn't start
+BUG: app starts too slowly.
+BUG: app classnames obfuscated
+Filters work
+</en-US>
+<fr-FR>
+Quelques effets artistiques
+BUG: fixer des problèmes et préparer la version avec peinture et sélection de régions (IN PROGRESS)
+FIX: Image se recharge dès l'ouverture et s'enregistre à la fin (copie de travail courante)
+FIX: Bouton 2 : sélection des effets dans une liste.
+FIX BUG: Bouton save et share déplacés
+FIX BUG: Error in RecyclerView chooseEffects : multiple choices instead of one make application fail. Try to fix: should work. (2nd try)
+FIX BUG: null pointer exception (crah) at startup
+Nouvelle fonctionalité: ajouter du texte.
+BUG: l'image dans l'ImageView principale n'est plus à jour
+Add feature: click on image to put text 
+Erreur dans le fichier Manifest
+Essayer d'optimiser plus et de mettre un fichier de désobscurcissement
+J'essaie de résoudre le problème :
+BUG l'application ne démarre pas.
+BUG: l'application démarre lentement
+BUG: app classnames obfuscated
+Filters work
+</fr-FR>

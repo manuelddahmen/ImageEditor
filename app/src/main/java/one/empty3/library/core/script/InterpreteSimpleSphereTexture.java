@@ -40,14 +40,17 @@
  */
 package one.empty3.library.core.script;
 
+import android.graphics.Color;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.core.extra.SimpleSphereAvecTexture;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -145,12 +148,8 @@ public class InterpreteSimpleSphereTexture implements Interprete {
 
             this.pos = pos;
             SimpleSphereAvecTexture s = null;
-            try {
-                s = new SimpleSphereAvecTexture(c, r, Color.white, ImageIO.read(f));
-                s.fichier(f.getName());
-            } catch (IOException ex) {
-                Logger.getLogger(InterpreteSimpleSphereTexture.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            s = new SimpleSphereAvecTexture(c, r, Color.WHITE, Objects.requireNonNull(ImageIO.read(f)).bitmap);
+            s.fichier(f.getName());
             return s;
         } catch (InterpreteException ex) {
             Logger.getLogger(InterpreteSimpleSphereTexture.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,9 +14,9 @@ public class Quad2Volume extends ParametricVolume {
      */
     @Override
     public Point3D calculerPoint3D(Point3D p0) {
-        double u=p0.get(0);
-        double v=p0.get(1);
-        double w=p0.get(2);
+        double u = p0.get(0);
+        double v = p0.get(1);
+        double w = p0.get(2);
 
         Polygon polygon1 = polygons.getData1d().get(0);
         Polygon polygon2 = polygons.getData1d().get(1);

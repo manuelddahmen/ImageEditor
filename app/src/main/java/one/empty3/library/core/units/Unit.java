@@ -37,7 +37,7 @@ package one.empty3.library.core.units;
  */
 public class Unit {
     protected String unit_type;
-    protected String TYPE_TIME="T";
-    protected String TYPE_LONG="L";
-    protected String TYPE_MASS="M";
+    protected String TYPE_TIME = "T";
+    protected String TYPE_LONG = "L";
+    protected String TYPE_MASS = "GMatrix";
 }

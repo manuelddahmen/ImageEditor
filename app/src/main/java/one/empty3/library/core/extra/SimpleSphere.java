@@ -38,9 +38,13 @@
  */
 package one.empty3.library.core.extra;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.library.*;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
+
+import one.empty3.library.*;
 
 
 /*__
@@ -57,7 +61,7 @@ public class SimpleSphere extends Representable implements TRIGenerable {
     protected PObjet po;
     protected double radius;
     protected Point3D centre;
-    protected Color color;
+    protected int color;
     protected int numLatQuad = 150;
     protected int numLongQuad = 150;
     Color map[][];
@@ -67,7 +71,7 @@ public class SimpleSphere extends Representable implements TRIGenerable {
     private double incrLat;
     private double incrLong;
 
-    public SimpleSphere(Point3D c, double r, Color col) {
+    public SimpleSphere(Point3D c, double r, int col) {
         this.radius = r;
         this.centre = c;
         this.color = col;
@@ -84,6 +88,7 @@ public class SimpleSphere extends Representable implements TRIGenerable {
                 centre.getZ() + Math.sin(a) * radius);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
         TRIObject t = new TRIObject();
@@ -103,8 +108,8 @@ public class SimpleSphere extends Representable implements TRIGenerable {
                 pCur[1] = CoordPoint(a + incrLat, b);
                 pCur[2] = CoordPoint(a, b + incrLong);
                 pCur[3] = CoordPoint(a + incrLat, b + incrLong);
-                t.add(new TRI(pCur[0], pCur[1], pCur[3], color));
-                t.add(new TRI(pCur[0], pCur[2], pCur[3], color));
+                t.add(new TRI(pCur[0], pCur[1], pCur[3], android.graphics.Color.valueOf(color)));
+                t.add(new TRI(pCur[0], pCur[2], pCur[3], android.graphics.Color.valueOf(color)));
 
                 b += incrLong;
             }
@@ -139,13 +144,13 @@ public class SimpleSphere extends Representable implements TRIGenerable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String toString() {
-        return "\nSimpleSphere(\n\t" + centre.toString() + "\n\t" + radius + " \n\t" + "(" + color.red() + ", " + color.green() + ", " + color.blue() + ")\n)\n";
+        return "\nSimpleSphere(\n\t" + centre.toString() + "\n\t" + radius + " \n\t" + "(" + color + ")\n)\n";
     }
 
 }

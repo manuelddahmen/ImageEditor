@@ -35,7 +35,7 @@ package one.empty3.library.core.script;
 /*__
  * Created by manue on 30-05-19.
  */
-public class InterpreteTRIEllipsoide implements Interprete{
+public class InterpreteTRIEllipsoide implements Interprete {
     @Override
     public InterpreteConstants constant() {
         return null;

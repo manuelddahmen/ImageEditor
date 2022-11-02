@@ -35,8 +35,7 @@ package one.empty3.library.core.raytracer.tree;
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public abstract  class TreeNodeValue  extends TreeNode
-{
+public abstract class TreeNodeValue extends TreeNode {
 
     public TreeNodeValue(TreeNode parent, Object[] values) {
         super(parent, values, new VariableTreeNodeType());

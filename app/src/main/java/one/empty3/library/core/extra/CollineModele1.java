@@ -31,7 +31,12 @@
  */
 package one.empty3.library.core.extra;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 import java.util.Random;
@@ -46,10 +51,11 @@ public class CollineModele1 extends Representable implements TRIGenerable {
     private String id;
     private double deltaInterne = 100;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public CollineModele1(int numTRIS) {
 
         Point3D p0 = new Point3D(0d, 0d, 0d);
-        Color c0 = (Color) Color.Color(128, 0, 255);
+        Color c0 = Color.valueOf(128, 0, 255);
 
         for (int i = 0; i < numTRIS; i++) {
             Point3D[] p = new Point3D[3];
@@ -63,7 +69,7 @@ public class CollineModele1 extends Representable implements TRIGenerable {
 
             p0 = p[2];
 
-            TRI t = new TRI(p[0], p[1], p[2], new ColorTexture(c0));
+            TRI t = new TRI(p[0], p[1], p[2], c0);
 
             tris.add(t);
         }
@@ -94,7 +100,7 @@ public class CollineModele1 extends Representable implements TRIGenerable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

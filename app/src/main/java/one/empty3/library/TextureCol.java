@@ -32,9 +32,11 @@
 
 package one.empty3.library;
 
+import android.graphics.Color;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 
-import one.empty3.feature.app.replace.java.awt.Color;
 
 /*__
  * @author Manuel Dahmen
@@ -44,27 +46,28 @@ public class TextureCol extends ITexture {
 
     private StructureMatrix<Integer> color = new StructureMatrix<>(0, Integer.class);
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TextureCol() {
-        color.setElem(Color.BLACK);
+        color.setElem(Color.valueOf(0f, 0f, 0f).toArgb());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TextureCol(Color c) {
         if (c != null) {
             color.setElem(c.toArgb());
-        }
-        else
-            color.setElem(Color.TRANSPARENT);
+        } else
+            color.setElem(Color.valueOf(0, 0, 0, 1).toArgb());
     }
 
     public TextureCol(int c) {
         color.setElem(c);
     }
 
-
     public int color() {
         return color.getElem();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void color(Color c) {
         color.setElem(c.toArgb());
     }
@@ -97,14 +100,14 @@ public class TextureCol extends ITexture {
      */
     public Color getMaillageTexturedColor(int numQuadX, int numQuadY, double x,
                                           double y) {
-        return (Color) Color.valueOf(color.getElem());
+        return Color.valueOf(color.getElem());
     }
 
     public String toString() {
         long c = this.color.getElem();
-        return "texture ( red:" + ((c&0x000000FF)>>0)+ "; green:" +
-                ((c&0x0000FF00)>>8)+ "; blue:" + ((c&0x00FF0000)>>16) +
-                "; alpha:" + ((c&0xFF000000)>>24) + ")\n";
+        return "texture ( red:" + ((c & 0x000000FF) >> 0) + "; green:" +
+                ((c & 0x0000FF00) >> 8) + "; blue:" + ((c & 0x00FF0000) >> 16) +
+                "; alpha:" + ((c & 0xFF000000) >> 24) + ")\n";
     }
 
     @Override

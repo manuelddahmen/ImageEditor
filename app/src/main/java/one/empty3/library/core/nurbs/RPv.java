@@ -9,8 +9,7 @@ public class RPv extends ParametricVolume {
     private final ZBuffer zBuffer;
     private Representable representable;
 
-    public RPv(ZBuffer zBuffer)
-    {
+    public RPv(ZBuffer zBuffer) {
         this.zBuffer = zBuffer;
     }
 

@@ -38,6 +38,11 @@
 package one.empty3.library.core.script;
 
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 
 public class InterpreteLumiere implements Interprete {
@@ -56,6 +61,7 @@ public class InterpreteLumiere implements Interprete {
         return pos;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Object interprete(String text, int pos) throws InterpreteException {
         InterpretesBase ib = new InterpretesBase();
         ArrayList<Integer> pattern = new ArrayList<Integer>();

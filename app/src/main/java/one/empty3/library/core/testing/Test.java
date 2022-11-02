@@ -38,7 +38,6 @@ import one.empty3.library.Scene;
 import one.empty3.library.ZBuffer;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /*__
@@ -103,7 +102,7 @@ public interface Test extends Runnable {
     /*__
      * Main run test method. Don't call it directly. Called when test starts
      */
-    void run() throws IOException;
+    void run();
 
     /*__
      * Scene to render. Instance Read only

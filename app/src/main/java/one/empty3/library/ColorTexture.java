@@ -17,9 +17,11 @@
 
 package one.empty3.library;
 
+import android.graphics.Color;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 
-import one.empty3.feature.app.replace.java.awt.Color;
 
 /*__
  * @author Manuel Dahmen
@@ -28,10 +30,12 @@ public class ColorTexture extends ITexture {
 
     private StructureMatrix<Color> color = new StructureMatrix<Color>(0, Color.class);
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public ColorTexture() {
-        color.setElem((Color) Color.Color(0.f,0.f,0.f));
+        color.setElem(Color.valueOf(0, 0, 0));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public ColorTexture(Color c) {
         this();
         if (c != null) {
@@ -39,8 +43,8 @@ public class ColorTexture extends ITexture {
         }
     }
 
-    public ColorTexture(int black) {
-        this((Color) Color.Color(black));
+    public ColorTexture(int white) {
+        this(Color.valueOf(white));
     }
 
     public Color color() {
@@ -56,6 +60,7 @@ public class ColorTexture extends ITexture {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public int getColorAt(double x, double y) {
         return color.getElem().toArgb();
     }

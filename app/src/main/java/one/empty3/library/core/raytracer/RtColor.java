@@ -32,8 +32,11 @@
 
 package one.empty3.library.core.raytracer;
 
-
 import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 
 public class RtColor {
     public double red, green, blue, alpha;    // Les trois composantes de la couleur
@@ -63,6 +66,7 @@ public class RtColor {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public RtColor(Color color) {
         red = color.red();
         green = color.green();
@@ -73,59 +77,59 @@ public class RtColor {
 
     // operateurs
     public static RtColor mult(RtColor c1, RtColor c2) {
-        return new RtColor(c1.getRed() * c2.getRed(), c1.getGreen() * c2.getGreen(), c1.getBlue() * c2.getBlue());
+        return new RtColor(c1.red() * c2.red(), c1.green() * c2.green(), c1.blue() * c2.blue());
     }
 
     public static RtColor mult(RtColor c1, double multiple) {
-        return new RtColor(c1.getRed() * multiple, c1.getGreen() * multiple, c1.getBlue() * multiple);
+        return new RtColor(c1.red() * multiple, c1.green() * multiple, c1.blue() * multiple);
     }
 
     public static RtColor add(RtColor c1, RtColor c2) {
-        return new RtColor(c1.getRed() + c2.getRed(),
-                c1.getGreen() + c2.getGreen(),
-                c1.getBlue() + c2.getBlue()
+        return new RtColor(c1.red() + c2.red(),
+                c1.green() + c2.green(),
+                c1.blue() + c2.blue()
         );
     }
 
     public static RtColor plus(RtColor c1, RtColor c2) {
-        return new RtColor(c1.getRed() + c2.getRed(), c1.getGreen() + c2.getGreen(), c1.getBlue() + c2.getBlue());
+        return new RtColor(c1.red() + c2.red(), c1.green() + c2.green(), c1.blue() + c2.blue());
     }
 
     public static RtColor div(RtColor c1, float multiple) {
-        return new RtColor(c1.getRed() / multiple, c1.getGreen() / multiple, c1.getBlue() / multiple);
+        return new RtColor(c1.red() / multiple, c1.green() / multiple, c1.blue() / multiple);
     }
 
 
     public static RtColor normalizeColor(RtColor finalColor) {
-        double max = Math.max(finalColor.getRed(), Math.max(finalColor.getGreen(), Math.max(finalColor.getBlue(), finalColor.getAlpha())));
+        double max = Math.max(finalColor.red(), Math.max(finalColor.green(), Math.max(finalColor.blue(), finalColor.getAlpha())));
         if (max > 1.0f || max < 0.0f) {
             finalColor = RtColor.mult(finalColor, 1 / max);
         }/*
-        if (finalColor.getRed() > 1.0f)
+        if (finalColor.red() > 1.0f)
             finalColor.red = 1.0f;
-        if (finalColor.getGreen() > 1.0f)
+        if (finalColor.green() > 1.0f)
             finalColor.green = 1.0f;
-        if (finalColor.getBlue() > 1.0f)
+        if (finalColor.blue() > 1.0f)
             finalColor.blue = 1.0f;
-        if (finalColor.getRed() < .0f)
+        if (finalColor.red() < .0f)
             finalColor.red = .0f;
-        if (finalColor.getGreen() < .0f)
+        if (finalColor.green() < .0f)
             finalColor.green = .0f;
-        if (finalColor.getBlue() < .0f)
+        if (finalColor.blue() < .0f)
             finalColor.blue = .0f;
         */
         return finalColor;
     }
 
-    public double getRed() {
+    public double red() {
         return red;
     }
 
-    public double getGreen() {
+    public double green() {
         return green;
     }
 
-    public double getBlue() {
+    public double blue() {
         return blue;
     }
 
@@ -135,7 +139,7 @@ public class RtColor {
 
     public Color toColor() {
         RtColor c = normalizeColor(this);
-        return  one.empty3.feature.app.replace.java.awt.Color.Color((float) c.getRed(), (float) c.getGreen(), (float) c.getBlue(), (float) c.getAlpha());
+        return Color.valueOf((float) c.red(), (float) c.green(), (float) c.blue(), (float) c.getAlpha());
     }
 
 

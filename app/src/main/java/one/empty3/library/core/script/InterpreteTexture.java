@@ -32,16 +32,21 @@
 
 package one.empty3.library.core.script;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.TextureCol;
 import one.empty3.library.TextureImg;
 
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class InterpreteTexture implements Interprete {
 
@@ -64,6 +69,7 @@ public class InterpreteTexture implements Interprete {
         this.rep = rep;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Object interprete(String text, int pos) throws InterpreteException {
         ITexture tc = null;
 
@@ -74,7 +80,7 @@ public class InterpreteTexture implements Interprete {
             pos = ic.getPosition();
             pass = true;
 
-            tc = new TextureCol(c.toArgb());
+            tc = new TextureCol(c);
 
         } catch (InterpreteException ex) {
         }
@@ -87,7 +93,7 @@ public class InterpreteTexture implements Interprete {
                 pos = inf.getPosition();
                 pass = true;
 
-                tc = new TextureImg(new ECBufferedImage(ImageIO.read(f)));
+                tc = new TextureImg(new ECBufferedImage(Objects.requireNonNull(ImageIO.read(f)).bitmap));
             } catch (InterpreteException ex) {
             }
         }

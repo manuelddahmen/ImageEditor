@@ -32,19 +32,8 @@
 
 package one.empty3.library.exporters.obj;
 
-import one.empty3.library.*;
-import one.empty3.library.core.nurbs.ParametricSurface;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
-
 /*__
  * Created by manue on 08-06-19.
  */
 public class Exporter {
-
-
 }

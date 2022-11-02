@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+
+    <color name="purple_700">#CD89E9</color>
+
+    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.Fullscreen" parent="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d">
+        <item name="android:actionBarStyle">
+            @style/Widget.Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
+    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.FeatureAppmain" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+
+    <style name="Theme.FeatureAppmain.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FeatureAppmain.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FeatureAppmain.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

@@ -40,8 +40,9 @@ import java.util.Map;
 public class VariableTreeNodeType extends TreeNodeType {
     public VariableTreeNodeType() {
     }
+
     @Override
     public Double eval() {
-        return (Double) ((Map)values[1]).get(values[0]);
+        return (Double) ((Map) values[1]).get(values[0]);
     }
 }

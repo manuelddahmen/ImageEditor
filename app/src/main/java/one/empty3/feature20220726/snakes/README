@@ -1,0 +1,88 @@
+Snakes in DIPimage
+==================
+
+This set of functions shows how to:
+ - Create a new MATLAB class using a single file.
+ - Make DIPimage understand the new class.
+ - Write a function that uses GETPARAMS to parse input arguments
+   containing an object of the new class.
+ - Implement snakes to find borders in an image.
+
+
+Usage:
+------
+
+To use these files you need MATLAB v7.6 or newer and DIPimage v2.0 or
+newer. Copy the two M-files SNAKEMINIMIZE and DIP_SNAKE to the
+"dip/common/dipimage/" directory and the M-file PRIVATE/PARAMTYPE_SNAKE
+to "dip/common/dipimage/private/". You might need to CLEAR FUNCTIONS
+before you can use these functions. To avoid the error generated when
+starting up the DIPimage GUI, you can edit the file
+"dip/common/dipimage/dipmenus.GMatrix", adding the string 'dip_snake' to the
+EXCLUDELIST cell array.
+
+   NOTE: If you have a version of DIPimage newer than v2.1, you will be
+   overwriting an existing SNAKEMINIMIZE function (it is in the
+   development tree at the moment of this writing). This existing
+   function does the same thing, but without the DIP_SNAKE class. The
+   functions SNAKEDRAW, SNAKE2IM and IM2SNAKE will be superseded by
+   functionality in the DIP_SNAKE class. The functions VFC and GVF will
+   still be useful with this version of SNAKEMINIMIZE. We chose to use
+   an implementation in DIPimage that doesn't depend on the new-style
+   class definitions in MATLAB, for backwards compatability.
+
+DIP_SNAKE creates an object of that class. This object automatically
+draws to the current figure if there is no semicolon at the end of the
+statement. Several class methods are available, see HELP DIP_SNAKE.
+
+Once the object is created, it can be deformed with the function
+SNAKEMINIMIZE. See the function's help for a description of the
+parameters.
+
+
+Example:
+--------
+
+a = noise(50+100*gaussf(rr>85,2),'gaussian',20)
+f = gradient(gradmag(a,5));
+f = f./max(norm(f));
+x = 100+30*cos(0:0.1:2*pi); y = 150+40*sin(0:0.1:2*pi);
+s = dip_snake([x',y'])
+s = snakeminimize(s,f,0.01,100,3,0.3,20)
+s = snakeminimize(s,f,0.01,100,3,0.3,20)
+s = snakeminimize(s,f,0.01,100,3,0.3,20)
+s = snakeminimize(s,f,0.01,100,3,0.3,20)
+s = snakeminimize(s,f,0.01,100,3,0.3,20)
+
+
+License:
+--------
+
+Copyright (c) 2009-2010, Cris Luengo
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in
+      the documentation and/or other materials provided with the
+      distribution.
+    * Neither the name of the author nor the names of his employers
+      may be used to endorse or promote products derived from this
+      software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

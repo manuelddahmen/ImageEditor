@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+            android:id="@+id/chooseText"
+            android:layout_width="match_parent"
+            android:lines="5"
+            android:layout_height="180dp"
+            android:height="180dp"
+            android:autofillHints=""
+            android:hint="@string/edit_text_to_put_on_the_image"
+            android:inputType="text"
+            android:textColorHint="#546E7A"
+            app:layout_constraintBottom_toTopOf="@+id/chooseImage"
+            app:layout_constraintStart_toStartOf="parent">
+
+    </EditText>
+
+    <Button
+            android:id="@+id/chooseImage"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:autofillHints="Select an image to paste on the 1rst image"
+            android:contentDescription="@string/todo"
+            app:layout_constraintTop_toBottomOf="@id/chooseText"
+            tools:ignore="ImageContrastCheck">
+
+    </Button>
+
+    <Button
+            android:id="@+id/ok_button_add_element"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"/>
+
+    <Button
+            android:id="@+id/back_without_saving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_without_saving"/>
+    <ImageView
+            android:id="@+id/inImageImageView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+    </ImageView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+        <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="@string/tools">
+
+        </TextView>
+        <Button
+                android:id="@+id/draw_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="@string/draw">
+
+        </Button>
+        <Button
+                android:id="@+id/draw_color"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="@string/draw_color">
+
+        </Button>
+        <Button
+                android:id="@+id/size_brush"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="@string/draw">
+
+        </Button>
+
+        <Button
+                android:id="@+id/undo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

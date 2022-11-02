@@ -40,7 +40,11 @@
  */
 package one.empty3.library.core.script;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.core.extra.SimpleSphere;
 
@@ -80,11 +84,12 @@ public class InterpreteSimpleSphere implements Interprete {
     /* (non-Javadoc)
      * @see be.ibiiztera.md.pmatrix.pushmatrix.scripts.Interprete#interprete(java.lang.String, int)
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Object interprete(String text, int pos) throws InterpreteException {
         Point3D c = null;
         double r = 1;
-        int col = Color.BLACK;
+        Color col = Color.valueOf(Color.BLACK);
 
         InterpretesBase ib;
         InterpretePoint3DBAK ip;
@@ -117,7 +122,7 @@ public class InterpreteSimpleSphere implements Interprete {
         r = (Double) ib.get().get(1);
 
         pc = new InterpreteCouleur();
-        col = ((Color) pc.interprete(text, pos)).toArgb();
+        col = (Color) pc.interprete(text, pos);
         pos = pc.getPosition();
 
         ib = new InterpretesBase();
@@ -131,7 +136,7 @@ public class InterpreteSimpleSphere implements Interprete {
         pos = ib.getPosition();
 
         this.pos = pos;
-        return new SimpleSphere(c, r, (Color) Color.Color(col));
+        return new SimpleSphere(c, r, col.toArgb());
     }
 
     /* (non-Javadoc)

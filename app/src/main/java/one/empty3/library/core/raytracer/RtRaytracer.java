@@ -32,24 +32,31 @@
 
 package one.empty3.library.core.raytracer;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Point3D;
 import one.empty3.library.Representable;
 import one.empty3.library.core.nurbs.ParametricSurface;
-
-import  one.empty3.feature.app.replace.javax.imageio.ImageIO;
+import one.empty3.library.core.script.ImageIO2;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javaAnd.awt.image.imageio.ImageIO;
+
 public class RtRaytracer {
     public static double maxDistance = 999999.9f;            // La distance parcourue par le rayon avant de toucher la node
 
 
     /* [ Coeur du raytracer. L'algo du raytracing se trouve dans cette fonction, dont le r?le est de calculer ] */
-/* [ la couleur finale du pixel courant, en lui passant le rayon primaire ?mis.                           ] */
+    /* [ la couleur finale du pixel courant, en lui passant le rayon primaire ?mis.                           ] */
     public static RtColor rayTrace(RtScene scene, RtRay ray, int depth) {
         RtColor finalColor = new RtColor(0.0f, 0.0f, 0.0f, 0.0f);    // La couleur finale (noire au debut ... couleur de fond)
         double tmpDistance = maxDistance + 1;                    // Une distance temporaire
@@ -136,7 +143,8 @@ public class RtRaytracer {
 
 
     /* [ Fonction de rendu. Parcoure tous les pixels de l'image, cr?e le rayon correpondant et lance le raytracing ] */
-/* [ avec ce rayon. Enregistre le rendu final dans un fichier image.                                           ] */
+    /* [ avec ce rayon. Enregistre le rendu final dans un fichier image.                                           ] */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static boolean Render(RtScene scene, int width, int height, String outputfilename) throws IOException {
         RtRay currentRay = new RtRay();            // Le rayon primaire ?mis courant (de l'oeil, ? travers un pixel, vers la sc?ne).
         Point3D vDir;                // Le vecteur directeur (unitaire) du rayon.
@@ -146,8 +154,7 @@ public class RtRaytracer {
         int tmpG;
         int tmpB;
         int tmpA = 0;
-        ECBufferedImage bi2 = new ECBufferedImage.BufferedImage(width, height,
-                Bitmap.Config.RGB565);
+        Bitmap bi2 = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
 
         // On cree le fichier destination
         mOutputFileRAW = new PrintWriter(new FileOutputStream(new File(outputfilename + ".ppm")));
@@ -195,7 +202,7 @@ public class RtRaytracer {
 
 
                 if (zMin < currentRay.distance) {
-                    tmpColor = new RtColor( one.empty3.feature.app.replace.java.awt.Color.Color(choisi.texture().getColorAt(0.5, 0.5)));
+                    tmpColor = new RtColor(Color.valueOf(choisi.getTexture().getColorAt(0.5, 0.5)));
                 }
 
                 // Affichage de notre "barre de progression" ;)
@@ -213,9 +220,9 @@ public class RtRaytracer {
 
                 // On decompose la couleur dans les trois couleurs de base (Rouge Vert Bleu).
                 //RtColor fc = RtColor.normalizeColor(tmpColor);
-                tmpR = (int) (tmpColor.getRed() * 256);
-                tmpG = (int) (tmpColor.getGreen() * 256);
-                tmpB = (int) (tmpColor.getBlue() * 256);
+                tmpR = (int) (tmpColor.red() * 256);
+                tmpG = (int) (tmpColor.green() * 256);
+                tmpB = (int) (tmpColor.blue() * 256);
                 tmpA = (int) (tmpColor.getAlpha() * 256);
                 int elementCouleur = 0xFF000000 | ((tmpA << 24) | (tmpR << 16) | (tmpG << 8) | (tmpB << 0));
                 bi2.setPixel(x, y, elementCouleur);

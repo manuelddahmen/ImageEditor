@@ -1,4 +1,4 @@
-package one.empty3.library.shader ;
+package one.empty3.library.shader;
 
 /*
 import java.io.*;
@@ -163,7 +163,7 @@ class WindowC extends JFrame implements GLEventListener {
         
         Vector<String> lines = new Vector<String>();
         
-        try (Stream<String> stream = Files.lines(Paths.get(filename))) {
+        try (Stream<String> stream = Files.getLines()(Paths.get(filename))) {
             stream.forEach(x -> lines.add(x  + "\n"));
         } catch (IOException e) {
             e.printStackTrace();

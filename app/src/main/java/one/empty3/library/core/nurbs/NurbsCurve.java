@@ -80,7 +80,7 @@ public class NurbsCurve extends ParametricCurve {
 
 
     protected double fOOO(double a, double b) {
-        if (Double.isInfinite(a/b) || Double.isNaN(a/b)) {
+        if (Double.isInfinite(a / b) || Double.isNaN(a / b)) {
             return 1;
         } else {
             return a / b;
@@ -100,6 +100,7 @@ public class NurbsCurve extends ParametricCurve {
         }
 
     }
+
     public ArrayList<Entry<Point3D, Double>> getPointsAndWeights() {
         return pointsAndWeights;
     }
@@ -114,7 +115,7 @@ public class NurbsCurve extends ParametricCurve {
         for (int i = 0; i < pointsAndWeights.size(); i++) {
             rep += "\n\t\t" + pointsAndWeights.get(i).getKey() + " " + pointsAndWeights.get(i).getValue();
         }
-        rep += "\n\t)\n\t" + texture().toString() + "\n\n)";
+        rep += "\n\t)\n\t" + getTexture().toString() + "\n\n)";
         return rep;
     }
 
@@ -122,8 +123,8 @@ public class NurbsCurve extends ParametricCurve {
         pointsAndWeights.add(new AbstractMap.SimpleImmutableEntry<Point3D, Double>(point, v));
     }
 
-    public void setKnots(double [] knots) {
-        for(int i=0; i<knots.length; i++)
+    public void setKnots(double[] knots) {
+        for (int i = 0; i < knots.length; i++)
             this.knots.add(knots[i]);
     }
 }

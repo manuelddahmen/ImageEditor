@@ -44,7 +44,7 @@ public class CheminDroite extends Chemin {
 
     @Override
     public double getLength() {
-        return sd.getLength();
+        return sd.mesure();
     }
 
     public Point3D calculerPoint3D(double t) {

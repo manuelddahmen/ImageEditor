@@ -37,8 +37,8 @@ public class Extrude extends ExtrusionCurveCurve {
     public Point3D calculerPoint3D(double u, double v) {
         return base.getElem().calculerPoint3D(u).plus(path.getElem().calculerPoint3D(v).moins(path.getElem().calculerPoint3D(0.0)));
     }
-    public void declareProperties()
-    {
+
+    public void declareProperties() {
         getDeclaredDataStructure().put("base/courbe a extruder", base);
         getDeclaredDataStructure().put("path/courbe normale d'extrusion", path);
     }

@@ -45,16 +45,17 @@ public class Trajectoires {
         ).mult(radius);
 
     }
+
     public static Point3D sphere(Point3D center, Point3D oo00, Point3D axe, double longpc, double latpc, double radius) {
         Point3D base = new Point3D(
                 Math.cos(longpc * Math.PI) * Math.cos(Math.PI * (latpc)),
                 Math.sin(longpc * Math.PI) * Math.cos(Math.PI * (latpc)),
                 Math.sin(Math.PI * (latpc))
         ).mult(radius);
-        Point3D x =axe.prodVect(oo00).norme1().prodVect(axe).norme1();
+        Point3D x = axe.prodVect(oo00).norme1().prodVect(axe).norme1();
         Matrix33 matrix = new Matrix33(new Point3D[]{
-          x, axe.prodVect(x), axe}
-           
+                x, axe.prodVect(x), axe}
+
         );
 
         return matrix.mult(base).plus(center);

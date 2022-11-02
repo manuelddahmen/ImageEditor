@@ -64,7 +64,7 @@ import one.empty3.library.Point3D;
 
  Maintenant pour la rotation je crois, et si on veut faire tourner beaucoup de points il faut calculer la matrice de rotation en fonction de XP (droite perpendiculaire à l'axe AB.
 
- Puis faire M.X => X' (point "rotationné")
+ Puis faire GMatrix.X => X' (point "rotationné")
 
  Voilà pour calculer la matrice comment faire?
 
@@ -74,7 +74,7 @@ import one.empty3.library.Point3D;
 
  Mais là comment les mettre sous forme matricielle, en lignes, en colonnes?
 
- A l fin M*X = X'
+ A l fin GMatrix*X = X'
  Puis finalement repositionner le point dans l'espace réel: P+X'
 
  Non je crois que la fin du raisonnement est fausse. mais à partir de P, U2, et U3, on peut faire une matrice de rotation non? Rotation d'un angle quelconque autour d'un axe
@@ -89,7 +89,7 @@ import one.empty3.library.Point3D;
 
  Maintenant pour la rotation je crois, et si on veut faire tourner beaucoup de points il faut calculer la matrice de rotation en fonction de XP (droite perpendiculaire à l'axe AB.
 
- Puis faire M.X => X' (point "rotationné")
+ Puis faire GMatrix.X => X' (point "rotationné")
 
  Voilà pour calculer la matrice comment faire?
 
@@ -99,7 +99,7 @@ import one.empty3.library.Point3D;
 
  Mais là comment les mettre sous forme matricielle, en lignes, en colonnes?
 
- A l fin M*X = X'
+ A l fin GMatrix*X = X'
  Puis finalement repositionner le point dans l'espace réel: P+X'
 
  Non je crois que la fin du raisonnement est fausse. mais à partir de P, U2, et U3, on peut faire une matrice de rotation non?
@@ -127,15 +127,15 @@ public class Rotation2 {
 
         if (Math.abs(den) < Epsilon)
             throw new ArithmeticException("Denominator equal to zero => Vector V is a vector null.");
-        Point3D projete = X.plus(V.mult(num / den));
+        Point3D projeté = X.plus(V.mult(num / den));
 
         for (int i = 0; i < 3; i++) {
-            if (projete.get(i) == Double.NaN) {
-                projete = P;
+            if (projeté.get(i) == Double.NaN) {
+                projeté = P;
             }
         }
 
-        return projete;
+        return projeté;
     }
 
 

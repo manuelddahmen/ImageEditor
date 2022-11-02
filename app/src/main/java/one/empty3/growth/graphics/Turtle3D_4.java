@@ -65,7 +65,11 @@
  */
 package one.empty3.growth.graphics;
 
-import one.empty3.feature.app.replace.java.awt.Color;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
 
@@ -133,11 +137,12 @@ public class Turtle3D_4 {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void line(double dist) {
         Double[][] doubleArray = R.getDoubleArray();
         Point3D d = new Point3D(R.get(0, 0), R.get(0, 1), R.get(0, 2));
         Point3D newPosition = getPosition().plus(d);
-        LineSegment  seg = new LineSegment(getPosition(), newPosition);
+        LineSegment seg = new LineSegment(getPosition(), newPosition);
         seg.texture(new ColorTexture(this.color));
         scene().add(seg);
         setPosition(newPosition);

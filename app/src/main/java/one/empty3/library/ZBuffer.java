@@ -41,10 +41,9 @@
 package one.empty3.library;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Point;
 
-import one.empty3.feature.app.replace.java.awt.Color;
-import one.empty3.feature.app.replace.java.awt.Point;
-import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;
 
 import java.io.File;
@@ -223,13 +222,4 @@ public interface ZBuffer {
     public void drawElementVolume(Representable representable, ParametricVolume volume);
 
 
-    int getDisplayType();
-
-    double maxDistance(Point p1, Point p2, Point p3, Point p4);
-
-    void testDeep(Point3D pFinal, ITexture texture, double u, double v, ParametricSurface n);
-
-    int la();
-
-    int ha();
 }

@@ -32,17 +32,14 @@ public class TubeExtrusion extends ParametricSurface {
         getDeclaredDataStructure().put("curves/Courbes d'extrusion", curves);
     }
 
-    public Point3D calculerPoint3D(double u, double v)
-    {
+    public Point3D calculerPoint3D(double u, double v) {
         CourbeParametriquePolynomialeBezier bezier = new CourbeParametriquePolynomialeBezier();
         bezier.coefficients.data1d.clear();
 
-        for(int i = 0; i<curves.data1d.size(); i++)
+        for (int i = 0; i < curves.data1d.size(); i++)
             bezier.coefficients.setElem(curves.getElem(i).calculerPoint3D(u), i);
 
         return bezier.calculerPoint3D(v);
-
-
 
 
     }

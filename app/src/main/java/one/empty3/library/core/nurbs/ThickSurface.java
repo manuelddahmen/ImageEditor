@@ -48,11 +48,11 @@ public abstract class ThickSurface extends ParametricSurface {
     public Point3D computeExt(double u, double v) {
         return
                 calculerPoint3D(u + getIncrU(), v)
-                        .moins(calculerPoint3D(u-getIncrU(),v))
+                        .moins(calculerPoint3D(u - getIncrU(), v))
                         .prodVect(
-                                calculerPoint3D(u, v+getIncrV()).
-                        moins(calculerPoint3D(u, v-getIncrV())))
-                                        .norme1().mult(outerWidth).
+                                calculerPoint3D(u, v + getIncrV()).
+                                        moins(calculerPoint3D(u, v - getIncrV())))
+                        .norme1().mult(outerWidth).
                         plus(calculerPoint3D(
                                 u, v
                         ));
@@ -62,10 +62,10 @@ public abstract class ThickSurface extends ParametricSurface {
     public Point3D computeInt(double u, double v) {
         return
                 calculerPoint3D(u + getIncrU(), v)
-                        .moins(calculerPoint3D(u-getIncrU(),v))
+                        .moins(calculerPoint3D(u - getIncrU(), v))
                         .prodVect(
-                                calculerPoint3D(u, v+getIncrV()).
-                                        moins(calculerPoint3D(u, v-getIncrV())))
+                                calculerPoint3D(u, v + getIncrV()).
+                                        moins(calculerPoint3D(u, v - getIncrV())))
                         .norme1().mult(-innerWidth).
                         plus(calculerPoint3D(
                                 u, v

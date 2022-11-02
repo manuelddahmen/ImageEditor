@@ -43,43 +43,36 @@ import java.util.logging.Logger;
  */
 public class WriteManifest {
 
-    public static void main(String [] args)
-    {
+    public static void main(String[] args) {
         String dir;
         String mainClass;
         try {
-            if(args.length>0)
-            {
+            if (args.length > 0) {
                 dir = args[0];
-            }
-            else {
+            } else {
                 dir = "./lib";
             }
-            if(args.length>1)
-            {
+            if (args.length > 1) {
                 mainClass = args[1];
-            }
-            else {
-                mainClass=null;
+            } else {
+                mainClass = null;
             }
             File manifest = new File("META-INF/MANIFEST.MF");
-            if(manifest.exists())
-            {
-                manifest.renameTo(new File(manifest.getAbsolutePath()+".tmp"+System.nanoTime()));
-            }
-            else {
+            if (manifest.exists()) {
+                manifest.renameTo(new File(manifest.getAbsolutePath() + ".tmp" + System.nanoTime()));
+            } else {
                 new File("META-INF").mkdir();
             }
             //File launch = new File("LAUNCH.BAT");
             FileOutputStream fileOutputStream = new FileOutputStream(manifest);
             PrintWriter pw = new PrintWriter(fileOutputStream);
             pw.println("Manifest-Version: 1.0");
-            if(mainClass!=null)
-                pw.println("Main-Class: "+mainClass);
+            if (mainClass != null)
+                pw.println("Main-Class: " + mainClass);
             StringBuilder stringBuilder = new StringBuilder("Class-Path: ");
             recurse(dir, stringBuilder);
             pw.println(stringBuilder.toString());
-            //Main-Class: be.manudahmen.empty3.app.opad.PanelGraphics
+            //Main-Class: be.manudahmen.empty3.apps.pad.PanelGraphics
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -90,24 +83,18 @@ public class WriteManifest {
 
     private static void recurse(String s, StringBuilder stringBuilder) {
         File file = new File(s);
-        if(file.exists())
-        {
-            if(file.isDirectory())
-            {
+        if (file.exists()) {
+            if (file.isDirectory()) {
                 String[] list = file.list();
-                for(String fn : list) {
+                for (String fn : list) {
                     recurse(s + "/" + fn, stringBuilder);
                 }
-            } else
-            {
-                if(file.getName().endsWith(".jar"))
-                {
+            } else {
+                if (file.getName().endsWith(".jar")) {
                     stringBuilder.append(s + " ");
                 }
             }
-        }
-        else
-        {
+        } else {
             Logger.getAnonymousLogger().info("Error file not exists = " + s);
         }
 

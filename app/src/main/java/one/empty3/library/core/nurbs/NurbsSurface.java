@@ -68,12 +68,10 @@ public class NurbsSurface extends ParametricSurface {
     public NurbsSurface() {
     }
 
-/*
     @Override
     public Point3D coordPoint3D(int x, int y) {
         return calculerNurbs(1.0 * x / getMaxX(), 1.0 * y / getMaxY());
     }
-*/
 
     @Override
     public Point3D calculerPoint3D(double u, double v) {

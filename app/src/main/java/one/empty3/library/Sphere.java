@@ -38,16 +38,16 @@ import one.empty3.library.core.nurbs.ParametricSurface;
 public class Sphere extends ParametricSurface {
     protected StructureMatrix<Circle> circle = new StructureMatrix<>(0, Circle.class);
 
-    public Sphere()
-    {
+    public Sphere() {
         super();
         circle.setElem(new Circle());
 
 
     }
+
     public Sphere(Axe axis, double radius) {
         this();
-        circle .setElem(new Circle(axis, radius));
+        circle.setElem(new Circle(axis, radius));
     }
 
     public Sphere(Point3D center, double radius) {
@@ -58,15 +58,14 @@ public class Sphere extends ParametricSurface {
 
     public Point3D calculerPoint3D(double u, double v) {
         Circle c = circle.getData0d();
-        if (!c.isCalculerRepere1())
-        {
+        if (!c.isCalculerRepere1()) {
             c.calculerRepere1();
         }
         return c.getCenter().plus(
                 c.vectX.mult(
                         Math.cos(2.0 * Math.PI * u) * Math.cos(-Math.PI / 2 + Math.PI * v)).plus(
                         c.vectY.mult(
-                                Math.sin(2.0 * Math.PI * u) * Math.cos(-Math.PI / 2 + Math.PI * v))
+                                        Math.sin(2.0 * Math.PI * u) * Math.cos(-Math.PI / 2 + Math.PI * v))
                                 .plus(c.vectZ.mult(Math.sin(-Math.PI / 2 + Math.PI * v)))
                 ).mult(c.radius.getElem()));
     }
@@ -88,6 +87,6 @@ public class Sphere extends ParametricSurface {
 
     @Override
     public String toString() {
-        return "sphere (\n\t"+circle.toString()+"\n\t"+texture.toString()+"\n)\t";
+        return "sphere (\n\t" + circle.toString() + "\n\t" + texture.toString() + "\n)\t";
     }
 }

@@ -7,78 +7,84 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public class Pojo {
-    public static boolean parseBoolean(String s) throws NumberFormatException{
-        Boolean b =  ((s != null) && s.equalsIgnoreCase("true"));
-        if(b)
+    public static boolean parseBoolean(String s) throws NumberFormatException {
+        Boolean b = ((s != null) && s.equalsIgnoreCase("true"));
+        if (b)
             return true;
-        if(!b && ((s!=null) && s.equalsIgnoreCase("false")))
+        if (!b && ((s != null) && s.equalsIgnoreCase("false")))
             return false;
         throw new NumberFormatException("Boolean illegal string");
     }
+
     public static void setO(Object o, String propName, String value) {
 
         Double d;
         Integer i = 0;
         Boolean b = false;
         System.out.println("Pojo.before.setO. "
-            +"\t"+o
-            +"\t"+propName+"\t"+value);
+                + "\t" + o
+                + "\t" + propName + "\t" + value);
         try {
             i = new Integer(value);
-System.out.println("int value: "+i);
+            System.out.println("int value: " + i);
             setProperty(o, propName, i, int.class);
-System.out.println("property "+propName+" is set to "+i);
+            System.out.println("property " + propName + " is set to " + i);
             System.out.println(": " + i.getClass());
-            
-        } catch (NumberFormatException|InvocationTargetException | IllegalAccessException | NoSuchMethodException ex) {
-           System.out.println("integer not set/nreason "+ex.getClass());
-           try {
+
+        } catch (NumberFormatException | InvocationTargetException | IllegalAccessException |
+                 NoSuchMethodException ex) {
+            System.out.println("integer not set/nreason " + ex.getClass());
+            try {
                 d = (double) Double.parseDouble(value);
                 setProperty(o, propName, d, double.class);
-  System.out.println(": " + d.getClass());
-          
-            } catch (NumberFormatException|InvocationTargetException | IllegalAccessException | NoSuchMethodException ex1) {
+                System.out.println(": " + d.getClass());
+
+            } catch (NumberFormatException | InvocationTargetException | IllegalAccessException |
+                     NoSuchMethodException ex1) {
                 System.out.println("double not set");
 
                 try {
                     b = (boolean) parseBoolean(value);
                     setProperty(o, propName, b, boolean.class);
                     System.out.println(": " + b.getClass());
-          
-                } catch (NumberFormatException|InvocationTargetException | IllegalAccessException | NoSuchMethodException ex2) {
+
+                } catch (NumberFormatException | InvocationTargetException | IllegalAccessException |
+                         NoSuchMethodException ex2) {
                     System.out.println("boolean not set");
 
                     try {
-                        if(value!=null && !"".equals(value)) {
+                        if (value != null && !"".equals(value)) {
                             setProperty(o, propName, value, String.class);
                             System.out.println(": " + value.getClass());
-                          }
-                    } catch (NumberFormatException|InvocationTargetException | IllegalAccessException | NoSuchMethodException e1) {
-                      System.out.println("string not set");
-                      //e1.printStackTrace();
+                        }
+                    } catch (NumberFormatException | InvocationTargetException | IllegalAccessException |
+                             NoSuchMethodException e1) {
+                        System.out.println("string not set");
+                        //e1.printStackTrace();
                     }
                     //ex2.printStackTrace();
                 }
             }
             System.out.println("Pojo.after.setO. "
-            +"\t"+o
-            +"\t"+propName+"\t"+value);
+                    + "\t" + o
+                    + "\t" + propName + "\t" + value);
         }
-        
+
     }
-    public static void setP(Object p, String propName, 
+
+    public static void setP(Object p, String propName,
                             String vType, String value) {
         try {
-        Object o = null;
-        Class c = Class.forName(vType);
-        switch(vType) {
+            Object o = null;
+            Class c = Class.forName(vType);
+            switch (vType) {
                 case "double":
                 case "Double":
-                o = Double.parseDouble(value);
+                    o = Double.parseDouble(value);
                     break;
                 case "int":
                 case "Integer":
-                o = Integer.parseInt(value);
+                    o = Integer.parseInt(value);
                     break;
                 case "boolean":
                 case "Boolean":
@@ -86,16 +92,16 @@ System.out.println("property "+propName+" is set to "+i);
                     break;
                 default:
                     break;
-         }
-         if(o!=null) {
-                    
-              setProperty(p, propName, o,
-                               c);
-         }
-        } catch(Exception ex) {
+            }
+            if (o != null) {
+
+                setProperty(p, propName, o,
+                        c);
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-   }
+    }
 
 
     public static boolean setProperties(Object o, Properties p) {
@@ -105,7 +111,7 @@ System.out.println("property "+propName+" is set to "+i);
             while (it.hasNext()) {
                 String pr = it.next().toString();
                 String value = p.getProperty(pr);
-                if(!value.equals(""))
+                if (!value.equals(""))
                     setO(o, pr, value);
             }
             return true;
@@ -132,36 +138,37 @@ System.out.println("property "+propName+" is set to "+i);
     }
 
     public static void setProperty(Object o, String propertyName, Object value
-       , Class cl) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+            , Class cl) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method propertySetter = null;
         try {
             propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), cl);
-        } catch(Exception ex) {}
-            
-            if(propertySetter==null) {
-           String vType = cl.getName();
+        } catch (Exception ex) {
+        }
 
-switch(vType) {
+        if (propertySetter == null) {
+            String vType = cl.getName();
+
+            switch (vType) {
                 case "double":
                 case "Double":
-                propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), double.class);
-      
+                    propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), double.class);
+
                     break;
                 case "int":
                 case "Integer":
-                propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), int.class);
-      
+                    propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), int.class);
+
                     break;
                 case "boolean":
                 case "Boolean":
                     propertySetter = o.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), boolean.class);
-      
+
                     break;
                 default:
                     break;
-         }
-} 
-       propertySetter.invoke(o, value);
+            }
+        }
+        propertySetter.invoke(o, value);
         System.out.println("type : " + o.getClass().getName() + " Property: " + propertyName + " New Value set " + getProperty(o, propertyName));
     }
 

@@ -63,7 +63,7 @@ public class InterpretePoint3D implements Interprete {
     public Object interprete(String point, int pos) throws InterpreteException {
         try {
             InterpretesBase ib = new InterpretesBase();
-            ArrayList<Integer> pattern = new ArrayList<>();
+            ArrayList<Integer> pattern = new ArrayList<Integer>();
             pattern.add(ib.BLANK);
             pattern.add(ib.LEFTPARENTHESIS);
             pattern.add(ib.BLANK);
@@ -87,8 +87,10 @@ public class InterpretePoint3D implements Interprete {
 
             return new Point3D((Double) os.get(3), (Double) os.get(7),
                     (Double) os.get(11));
-        } catch (Exception ex1) {
+        } catch (NullPointerException ex1) {
             throw new InterpreteException(ex1);
+        } catch (Exception ex) {
+            throw new InterpreteException(ex);
         }
 
     }

@@ -1,14 +1,8 @@
 package one.empty3.library.lang;
 
-import java.io.File;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class ParseCode {
-    int i = 0;
-    String brut;
-    String uncomm;
-    int start, end;
     List<Token> tokens = new ArrayList();
     List<Node> nodes = new ArrayList();
     String special = "!%*&()+\\|/[]{}<>=.:,;?'\"";
@@ -25,15 +19,16 @@ public class ParseCode {
         //removeComments();
         // separer en tokens typés
     }
+
     /* public boolean addToken() {
         Token t = new Token();
         return true;
     }
     */
-
-    public void setBrut(String brut) {
-        this.brut = brut;
-    }
+    int i = 0;
+    String brut;
+    String uncomm;
+    int start, end;
 
     public void removeComments() {
         StringBuilder sb = new StringBuilder();
@@ -124,17 +119,12 @@ public class ParseCode {
                 // String forbidden = "\"\'\n\r/";
                 uncomm = brut.substring
                         (start, end);
-                boolean passed = false;
-                try {
-                    passed = parseSpace() ||
-                            parseSpecialChar() ||
-                            parseKeyword() ||
-                            parseName() ||
-                            parseLiteral();
+                boolean passed = parseSpace() ||
+                        parseSpecialChar() ||
+                        parseKeyword() ||
+                        parseName() ||
+                        parseLiteral();
 
-                }catch (Exception ex) {
-                    ex.printStackTrace();
-                }
 
                 //sb.append(brut.charAt(i));
 
@@ -150,16 +140,16 @@ public class ParseCode {
     public boolean parseSpace() {
         int pos = i;
         boolean b = false;
-        while (!b && i < uncomm.length()) {
+        do {
             char a = uncomm.charAt(pos);
             if (a == ' ' || a == '\n' || a == '\t' || a == '\r') {
                 pos++;
                 b = true;
             }
-        }
+        } while (!b && i < uncomm.length());
         if (b) {
             tokens.add(new Token("space",
-                    uncomm.substring(i, pos), Token.TokenTypeTxt.Space));
+                    uncomm.substring(i, pos)));
             pos = i;
             return true;
         }
@@ -168,7 +158,7 @@ public class ParseCode {
 
     public boolean parseSpecialChar() {
         boolean b = false;
-        while (i<uncomm.length() &&isSpecialChar(uncomm, i)) {
+        while (isSpecialChar(uncomm, i)) {
             char special = uncomm.charAt(i);
             i++;
             b = true;
@@ -192,7 +182,7 @@ public class ParseCode {
             String k = uncomm.substring(i, i + j);
             if (k.length() > 0 && list.contains(k))
                 tokens.add(new Token("keyword",
-                        k, Token.TokenTypeTxt.Keyword));
+                        k));
             return true;
         }
         return false;
@@ -212,7 +202,7 @@ public class ParseCode {
         String k = uncomm.substring(i, i + j);
         if (k.length() > 0 && !list.contains(k)) {
             tokens.add(new Token("name",
-                    k, Token.TokenTypeTxt.Name));
+                    k));
             i = i + j;
             return true;
         }
@@ -221,7 +211,6 @@ public class ParseCode {
 
     public boolean isSpecialChar(String uncomm,
                                  int pos) {
-
         return special.indexOf(uncomm.charAt(pos)) >= 0;
 
     }
@@ -263,29 +252,23 @@ public class ParseCode {
     }
 
     public boolean parseLiteral() {
+        int pos = i;
         // bool
         if (uncomm.substring(i, i + "false".length()).equals("false")) {
             tokens.add(new Token("boolean:false",
-                    uncomm.substring(i, i + "false".length()), Token.TokenTypeTxt.Literal));
+                    uncomm.substring(i, i + "false".length())));
 
             return true;
         }
         if (uncomm.substring(i, i + "true".length()).equals("true")) {
             tokens.add(new Token("boolean:true",
-                    uncomm.substring(i, i + "true".length()), Token.TokenTypeTxt.Literal));
+                    uncomm.substring(i, i + "true".length())));
             return true;
         }
 
         //tokens.add(new Token("float|double|string|int|char|boolean|long",
         // k));
         return false;
-    }
-    public void parseTokensToTree() {
-        List<Token> tokens = this.tokens;
-
-        tokens.forEach(token -> {
-            System.out.printf("Token : %s\n", token);
-        });
     }
 
     public void block() {
@@ -304,13 +287,5 @@ public class ParseCode {
     }
 
     public static void main(String[] args) {
-        ParseCode parseCode = new ParseCode();
-        parseCode.setBrut("/* */ ");
-        parseCode.removeComments();
-        parseCode.parseTokensToTree();
-    }
-
-    public List<Token> parseFile(File txt) {
-        return tokens;
     }
 }
