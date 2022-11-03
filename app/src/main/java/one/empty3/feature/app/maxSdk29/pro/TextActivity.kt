@@ -16,6 +16,7 @@ import androidx.core.net.toFile
 import com.google.android.material.slider.Slider
 import javaAnd.awt.Point
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.util.*
 
@@ -76,8 +77,11 @@ class TextActivity() : Activity(), Parcelable {
                 currentImage = bmp
                 currentFile = Utils().writePhoto(this, bmp, currentFile?.name ?: "textPhoto")
                 Toast.makeText(applicationContext, "Text written", Toast.LENGTH_SHORT).show()
+                currentImage = BitmapFactory.decodeStream(
+                    FileInputStream(currentFile)
+                )
+                imageView.setImageBitmap(currentImage)
             }
-            imageView.setImageBitmap(currentImage)
         }
 
         imageView.setOnTouchListener(object : View.OnTouchListener {

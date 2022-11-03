@@ -123,23 +123,23 @@ public class MyCameraActivity extends Activity {
 
                 currentBitmap = currentFile;
 
-                try {
-                    Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
-                    System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
-                    imageView.setImageBitmap(photo);
-                    //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
-                    System.err.println("Image main intent loaded");
+                loaded = true;
+                new Thread(() -> {
+                    try {
+                        Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
+                        System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
+                        imageView.setImageBitmap(photo);
+                        //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
+                        System.err.println("Image main intent loaded");
 
-                    saveImageState();
-
-                    loaded = true;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                        saveImageState();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
             } else {
                 System.err.println("Error NULL intent data Main");
             }
-
 
 
         }
@@ -517,7 +517,6 @@ public class MyCameraActivity extends Activity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
 
 
         } else {
