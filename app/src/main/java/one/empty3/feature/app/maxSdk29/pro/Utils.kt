@@ -17,43 +17,6 @@ import java.io.FileOutputStream
 import java.util.*
 
 public class Utils {
-    public val TEMPORARY: Int = 1
-
-    fun writeBitmap(imageView: ImageView): File? {
-
-        val drawable = imageView.drawable
-
-        val bitmap: Bitmap
-        if (drawable is BitmapDrawable) bitmap =
-            drawable.bitmap else if (drawable!!.current is BitmapDrawable) {
-            bitmap = (drawable!!.current as BitmapDrawable).bitmap
-        } else {
-            bitmap =
-                if (drawable!!.intrinsicWidth <= 0 || drawable!!.intrinsicHeight <= 0) {
-                    Bitmap.createBitmap(
-                        1,
-                        1,
-                        Bitmap.Config.ARGB_8888
-                    ) // Single color bitmap will be created of 1x1 pixel
-                } else {
-                    Bitmap.createBitmap(
-                        drawable.intrinsicWidth,
-                        drawable.intrinsicHeight,
-                        Bitmap.Config.ARGB_8888
-                    )
-                }
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
-        }
-
-
-        val file: File = File("" + UUID.randomUUID() + ".jpg")
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
-
-        return file
-    }
 
     /***
      * Write copy of original file in data folder
@@ -71,8 +34,8 @@ public class Utils {
         var dirName1 = ""
         var dirName2 = ""
         dirName1 = Environment.getDataDirectory().path
-        dirName2 = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.getAbsolutePath()
-            .toString()
+        dirName2 =
+            activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
 
         n++
 
@@ -99,7 +62,7 @@ public class Utils {
             }
         } catch (ex: Exception) {
         //    ex.printStackTrace()
-            Log.e("SAVE FILE", "writePhoto: erreur file 1/2")
+            Log.e("SAVE FILE", "writePhoto: error file 1/2")
         }
         try {
             if (!file2.exists()) {
@@ -110,7 +73,7 @@ public class Utils {
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
-            Log.e("SAVE FILE", "writePhoto: erreur file 2/2")
+            Log.e("SAVE FILE", "writePhoto: error file 2/2")
         }
         return file1
     }
