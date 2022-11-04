@@ -19,6 +19,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
@@ -62,6 +63,7 @@ import wseemann.media.BuildConfig;
 
 public class MyCameraActivity extends Activity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
+    private static final Integer MAX_TARDINESS = 3000;
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     private Activity thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
@@ -124,19 +126,41 @@ public class MyCameraActivity extends Activity {
                 currentBitmap = currentFile;
 
                 loaded = true;
-                new Thread(() -> {
-                    try {
-                        Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
-                        System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
-                        imageView.setImageBitmap(photo);
-                        //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
-                        System.err.println("Image main intent loaded");
 
-                        saveImageState();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                new CountDownTimer(30000, 1000) {
+
+                    private boolean started = false;
+
+                    public void onTick(long millisUntilFinished) {
+                        if (!started())
+                            runTask();
                     }
-                }).start();
+
+                    private boolean started() {
+                        boolean s = started;
+                        started = true;
+                        return s;
+                    }
+
+                    public void onFinish() {
+                    }
+
+                    private void runTask() {
+                        try {
+                            Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
+                            System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
+                            imageView.setImageBitmap(photo);
+                            //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
+                            System.err.println("Image main intent loaded");
+
+                            saveImageState();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }.start();
+
             } else {
                 System.err.println("Error NULL intent data Main");
             }

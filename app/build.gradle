@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 830000
+def code = 850000
 
 android {
     bundle {
@@ -97,7 +97,7 @@ android {
                 //noinspection ExpiredTargetSdkVersion
                 targetSdkVersion 32
                 minSdkVersion 29
-                versionCode 129+code
+                versionCode 129 + code
             }
             signingConfig signingConfigs.release
         }

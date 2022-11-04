@@ -6,48 +6,61 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-<LinearLayout
-    android:id="@+id/linearChooseButtons"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <Button
-        android:id="@+id/takePhotoButton"
-        style="?android:attr/buttonBarStyle"
-        android:layout_height="48dp"
-        android:autofillHints="@string/capturePhoto"
-        android:contentDescription="@string/capturePhoto"
-        android:height="48dp"
-        android:src="@drawable/apn"
-        android:text="@string/capturePhoto"
-        android:background="@color/light_blue_A200"
-        android:layout_width="wrap_content" />
 
-    <Button
-        android:id="@+id/choosePhotoButton"
-        android:background="@color/light_blue_A200"
-        style="?android:attr/buttonBarStyle"
-        android:layout_height="48dp"
-        android:autofillHints="@string/choosePhoto"
-        android:contentDescription="@string/choosePhoto"
-        android:height="48dp"
-        android:src="@drawable/folder"
-        android:text="@string/choosePhoto"
-        android:layout_width="wrap_content" />
+    <LinearLayout
+        android:id="@+id/linearChooseButtons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/chooseMovie"
-        android:background="@color/light_blue_A200"
-        style="?android:attr/buttonBarStyle"
-        android:layout_height="48dp"
-        android:autofillHints="@string/choose_movie"
-        android:contentDescription="@string/choose_movie"
-        android:height="48dp"
-        android:src="@drawable/film"
-        android:text="@string/choose_movie"
-        android:layout_width="wrap_content" />
+        <Button
+            android:id="@+id/takePhotoButton"
+            style="?android:attr/buttonBarStyle"
+            android:layout_height="48dp"
+            android:autofillHints="@string/capturePhoto"
+            android:contentDescription="@string/capturePhoto"
+            android:height="48dp"
+            android:src="@drawable/apn"
+            android:text="@string/capturePhoto"
+            android:background="@color/light_blue_A200"
+            android:layout_width="wrap_content" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/choosePhotoButton"
+            android:background="@color/light_blue_A200"
+            style="?android:attr/buttonBarStyle"
+            android:layout_height="48dp"
+            android:autofillHints="@string/choosePhoto"
+            android:contentDescription="@string/choosePhoto"
+            android:height="48dp"
+            android:src="@drawable/folder"
+            android:text="@string/choosePhoto"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/chooseMovie"
+            android:background="@color/light_blue_A200"
+            style="?android:attr/buttonBarStyle"
+            android:layout_height="48dp"
+            android:autofillHints="@string/choose_movie"
+            android:contentDescription="@string/choose_movie"
+            android:height="48dp"
+            android:src="@drawable/film"
+            android:text="@string/choose_movie"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/loadLastSaved"
+            style="?android:attr/buttonBarStyle"
+            android:layout_height="48dp"
+            android:autofillHints="@string/last_saved"
+            android:contentDescription="@string/last_saved"
+            android:height="48dp"
+            android:src="@drawable/film"
+            android:text="@string/last_saved"
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -73,8 +86,7 @@
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
-            android:text="@string/select_rectangle"
-             />
+            android:text="@string/select_rectangle" />
 
         <Button
             android:id="@+id/unselect_rect"
@@ -129,7 +141,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearChooseButtons"
-        android:background="@color/black"/>
+        android:background="@color/black" />
     <!--
     <Gallery
         android:id="@+id/imageTakenPreviewGallery"

@@ -61,7 +61,7 @@ public class Utils {
                 return file1
             }
         } catch (ex: Exception) {
-        //    ex.printStackTrace()
+            //    ex.printStackTrace()
             Log.e("SAVE FILE", "writePhoto: error file 1/2")
         }
         try {
