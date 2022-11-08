@@ -1,13 +1,13 @@
 package one.empty3.feature20220726.histograms;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
+
+import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
-
-import javaAnd.awt.image.imageio.ImageIO;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Hist4Contour extends ProcessFile {
 
@@ -92,7 +92,8 @@ public class Hist4Contour extends ProcessFile {
             return false;
         }
         PixM inP;
-        inP = PixM.getPixM(ImageIO.read(in), maxRes);
+
+        inP = loadIn(in);
 
 
         double max = 0.0;
@@ -143,6 +144,16 @@ public class Hist4Contour extends ProcessFile {
 
         return false;
 
+    }
+
+    private PixM loadIn(File in) {
+        PixM inP = null;
+        if (maxRes == 0) {
+            inP = new PixM(Objects.requireNonNull(ImageIO.read(in)));
+        } else {
+            inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+        }
+        return inP;
     }
 
 

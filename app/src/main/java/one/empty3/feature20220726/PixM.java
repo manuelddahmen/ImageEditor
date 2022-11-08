@@ -100,7 +100,7 @@ public class PixM extends MBitmap {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static PixM getPixM(Bitmap image, int maxRes) {
         double f = 1.0;
-        if (maxRes <= 0.0) {
+        if (maxRes <= 0) {
             f = 1.0;
         } else if (maxRes < image.getWidth() && maxRes < image.getHeight()) {
             f = 1.0 / Math.max(image.getWidth(), image.getHeight()) * maxRes;

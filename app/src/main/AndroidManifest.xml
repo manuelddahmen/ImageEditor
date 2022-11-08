@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:exported="true"
@@ -103,11 +104,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
                 <action android:name="android.media.action.VIDEO_CAMERA" />
                 <action android:name="android.intent.action.EDIT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- filter for sending text or images; accepts SEND action and text or image data -->

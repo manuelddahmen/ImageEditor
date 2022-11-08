@@ -1,15 +1,12 @@
 package one.empty3.feature20220726;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
+import java.util.PrimitiveIterator;
+import java.util.Random;
 
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
-
-import java.util.Arrays;
-import java.util.PrimitiveIterator;
-import java.util.Random;
-import java.util.function.LongUnaryOperator;
 
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
@@ -122,8 +119,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         if (bitmap != null) {
             int pixel = bitmap.getPixel(j, i);
             double[] p = Lumiere.getDoubles(pixel);
-            Point3D p3 = new Point3D(p[0], p[1], p[2]);
-            return p3;
+            return new Point3D(p[0], p[1], p[2]);
         }
 
         Point3D p = new Point3D();

@@ -31,14 +31,12 @@ class TextActivity() : Activity(), Parcelable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
 
-        val imageView = findViewById<ImageView>(R.id.imageViewOnImage)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
         if (intent != null) run {
             val currentImageUri: Uri = intent.data!!
             currentImage = BitmapFactory.decodeFile(currentImageUri.toFile().toString())
             currentFile = currentImageUri.toFile()
-            //rect = intent.getData().getExtra("rect")
-//
-//            currentImage = BitmapFactory.decodeFile((intent.data as Uri).toFile().absolutePath)
+
             imageView.setImageBitmap(currentImage)
         }
 
@@ -53,7 +51,6 @@ class TextActivity() : Activity(), Parcelable {
                 val name: String = ("" + UUID.randomUUID())
 
                 val file = Utils().writePhoto(this, currentImage, name)
-                //Utils().writeBitmap(imageView)
 
                 textIntent.setDataAndType(Uri.fromFile(file), "image/jpg")
                 textIntent.data = Uri.fromFile(file)
@@ -76,11 +73,11 @@ class TextActivity() : Activity(), Parcelable {
             if (bmp != null) {
                 currentImage = bmp
                 currentFile = Utils().writePhoto(this, bmp, currentFile?.name ?: "textPhoto")
-                Toast.makeText(applicationContext, "Text written", Toast.LENGTH_SHORT).show()
                 currentImage = BitmapFactory.decodeStream(
                     FileInputStream(currentFile)
                 )
                 imageView.setImageBitmap(currentImage)
+                Toast.makeText(applicationContext, "Text written", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -166,6 +163,8 @@ class TextActivity() : Activity(), Parcelable {
             if (drawTextPointA != null) {
                 x = drawTextPointA!!.x.toInt()
                 y = drawTextPointA!!.y.toInt()
+            } else {
+                Toast.makeText(applicationContext, "Error : no point clicked", 3).show()
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
             currentImage2

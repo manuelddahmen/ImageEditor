@@ -300,8 +300,10 @@ class ChooseEffectsActivity2 : Activity() {
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
-                            println("Error processing file.")
+                            val errMessage = "Error processing file. Exception :$ex"
+                            println(errMessage)
                             ex.printStackTrace()
+                            Toast.makeText(applicationContext, errMessage, 10)
                             return@setOnClickListener
                         }
                         currentProcessFile = currentOutputFile
