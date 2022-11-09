@@ -141,9 +141,13 @@ public class MyCameraActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                savedInstanceState.getInt("maxRes") : 0;
 
+        if ((savedInstanceState == null)) {
+            maxRes = MAX_RES_DEFAULT;
+        } else {
+            maxRes = savedInstanceState.getInt("maxRes") > -1 ?
+                    savedInstanceState.getInt("maxRes") : 0;
+        }
         setContentView(R.layout.main);
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
 
@@ -162,9 +166,9 @@ public class MyCameraActivity extends Activity {
 
                 loaded = true;
 
-                LoadImage loadImageSmall = new LoadImage(currentFile, 0);
-                LoadImage loadImageNormal = new LoadImage(currentFile,
-                        maxRes <= 0 ? MAX_RES_DEFAULT : maxRes);
+                AsyncTask loadImageSmall = new LoadImage(currentFile, 0).execute();
+                AsyncTask loadImageNormal = new LoadImage(currentFile,
+                        maxRes <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
             }
         } else {
             System.err.println("intent data Main==null");
@@ -1006,26 +1010,28 @@ public class MyCameraActivity extends Activity {
         loadImageState();
 
         try {
-            maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                    savedInstanceState.getInt("maxRes") : 0;
-            currentFile = new File((String) savedInstanceState.getString("currentFile"));
-            currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
-            currentDir = new File((String) savedInstanceState.getString("currentDir"));
-            if (currentBitmap != null) {
-                File bitmap = new File(currentFile.getAbsolutePath());
-                try {
-                    Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
+            if (savedInstanceState != null) {
+                maxRes = savedInstanceState.getInt("maxRes") > -1 ?
+                        savedInstanceState.getInt("maxRes") : 0;
+                currentFile = new File((String) savedInstanceState.getString("currentFile"));
+                currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
+                currentDir = new File((String) savedInstanceState.getString("currentDir"));
+                if (currentBitmap != null) {
+                    File bitmap = new File(currentFile.getAbsolutePath());
+                    try {
+                        Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
 //                try {
 //                    imageView.setBackground(Drawable.createFromStream(new FileInputStream(bitmap), "chosenFile"));
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }
-                    imageView.setImageBitmap(bitmap1);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                        imageView.setImageBitmap(bitmap1);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
+                imageView = findViewById(R.id.currentImageView);
             }
-            imageView = findViewById(R.id.currentImageView);
         } catch (Exception e) {
             Log.i("MyCameraActivity", "Error in OnRestoreState");
         }
@@ -1041,12 +1047,14 @@ public class MyCameraActivity extends Activity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         saveImageState();
-        outState.putString("currentFile", currentFile.getAbsolutePath());
-        outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
-        outState.putString("currentDir", currentDir.getAbsolutePath());
-        outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
-        outState.putInt("maxRes", maxRes);
-        this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
+        if (outState != null) {
+            outState.putString("currentFile", currentFile.getAbsolutePath());
+            outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
+            outState.putString("currentDir", currentDir.getAbsolutePath());
+            outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
+            outState.putInt("maxRes", maxRes);
+            this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
+        }
         super.onSaveInstanceState(outState, outPersistentState);
 
     }
