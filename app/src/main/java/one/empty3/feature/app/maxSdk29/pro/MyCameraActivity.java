@@ -18,8 +18,8 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
@@ -64,6 +64,7 @@ import wseemann.media.BuildConfig;
 public class MyCameraActivity extends Activity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
+    private static final int MAX_RES_DEFAULT = 200;
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     private Activity thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
@@ -86,6 +87,36 @@ public class MyCameraActivity extends Activity {
     private Bitmap currentFileZoomedBitmap;
     private PixM currentPixM = null;
     private boolean loaded;
+    private int maxRes = 200;
+
+    class LoadImage extends AsyncTask {
+
+        private final File file;
+        private final int resolution;
+
+        public LoadImage(File file, int resolution) {
+            super();
+            this.file = file;
+            this.resolution = resolution;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
+                System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
+                imageView.setImageBitmap(photo);
+                //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
+                System.err.println("Image main intent loaded");
+                saveImageState();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
         InputStream input = getContentResolver().openInputStream(uri);
@@ -109,6 +140,10 @@ public class MyCameraActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        maxRes = savedInstanceState.getInt("maxRes") > -1 ?
+                savedInstanceState.getInt("maxRes") : 0;
+
         setContentView(R.layout.main);
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
 
@@ -127,46 +162,15 @@ public class MyCameraActivity extends Activity {
 
                 loaded = true;
 
-                new CountDownTimer(30000, 1000) {
-
-                    private boolean started = false;
-
-                    public void onTick(long millisUntilFinished) {
-                        if (!started())
-                            runTask();
-                    }
-
-                    private boolean started() {
-                        boolean s = started;
-                        started = true;
-                        return s;
-                    }
-
-                    public void onFinish() {
-                    }
-
-                    private void runTask() {
-                        try {
-                            Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
-                            System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
-                            imageView.setImageBitmap(photo);
-                            //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
-                            System.err.println("Image main intent loaded");
-
-                            saveImageState();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }.start();
-
-            } else {
-                System.err.println("Error NULL intent data Main");
+                LoadImage loadImageSmall = new LoadImage(currentFile, 0);
+                LoadImage loadImageNormal = new LoadImage(currentFile,
+                        maxRes <= 0 ? MAX_RES_DEFAULT : maxRes);
             }
-
-
+        } else {
+            System.err.println("intent data Main==null");
         }
+
+
         thisActivity = this;
 
 
@@ -223,12 +227,9 @@ public class MyCameraActivity extends Activity {
                 Intent intent = new Intent(Intent.ACTION_EDIT);
                 System.err.println("Click on Effect button");
                 if (currentFile != null || currentBitmap != null) {
-                    if (currentFile == null)
-                        currentFile = currentBitmap.getAbsoluteFile();
-                    intent.setDataAndType(Uri.fromFile(currentFile),
-                            "image/jpg");
-                    intent.setClass(imageView.getContext(),
-                            ChooseEffectsActivity2.class);
+                    if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
+                    intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+                    intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
                     intent.putExtra("data", currentFile);
                     View viewById = findViewById(R.id.editMaximiumResolution);
                     intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
@@ -267,9 +268,7 @@ public class MyCameraActivity extends Activity {
                     Uri uri = Uri.fromFile(currentFile);
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                            Intent.FLAG_GRANT_READ_URI_PERMISSION |
-                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
                     shareIntent.setDataAndType(photoURI, "image/jpeg");
                     shareIntent.putExtra("data", photoURI);
@@ -287,8 +286,7 @@ public class MyCameraActivity extends Activity {
 
                     saveImageState();
 
-                    String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                    String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     int requestExternalStorage = 1;
                     int permission1 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
                     int permission2 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -303,9 +301,7 @@ public class MyCameraActivity extends Activity {
                     Path target = null;
 
                     try {
-                        target = copy((currentFile).toPath(), new File(
-                                picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg")
-                                .toPath());
+                        target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg").toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Erreur ne peut copier les fichiers.", Toast.LENGTH_LONG).show();
@@ -313,8 +309,7 @@ public class MyCameraActivity extends Activity {
                     }
 
 
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider",
-                            target == null ? currentFile : target.toFile());
+                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", target == null ? currentFile : target.toFile());
 
 
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -377,8 +372,7 @@ public class MyCameraActivity extends Activity {
                     if (checkPointCordinates(p)) {
                         drawPointA = p;
                         System.err.println("Draw point A = (" + drawPointA.getX() + ", " + drawPointA.getY() + ") ");
-                    } else
-                        System.err.println("Error cordinates A");
+                    } else System.err.println("Error cordinates A");
                     // Sélectionner A
                 } else {
                     System.err.println("Sélection du point B: ");
@@ -386,20 +380,15 @@ public class MyCameraActivity extends Activity {
                     if (checkPointCordinates(p)) {
                         drawPointB = p;
                         System.err.println("Draw point B = (" + drawPointB.getX() + ", " + drawPointB.getY() + ") ");
-                    } else
-                        System.err.println("Error cordinates B");
+                    } else System.err.println("Error cordinates B");
                     //drawPointA = new Point(, Touch.getY());
                 }
-                if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX()
-                        && drawPointA.getY() != drawPointB.getY()) {
+                if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
                     ImageViewSelection viewById = findViewById(R.id.currentImageView);
-                    viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (
-                            float) drawPointA.getY(),
-                            (float) drawPointB.getX(), (float) drawPointB.getY()));
+                    viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (float) drawPointA.getY(), (float) drawPointB.getX(), (float) drawPointB.getY()));
                     viewById.setDrawingRectState(true);
-                    System.err.println(
-                            viewById.getDrawingRect().toString());
+                    System.err.println(viewById.getDrawingRect().toString());
                     //viewById.draw(new Canvas());
                     // Désélectionner A&B
                     //drawPointA = null;
@@ -468,14 +457,12 @@ public class MyCameraActivity extends Activity {
         boolean file = true;
 
         imageView = findViewById(R.id.currentImageView);
-        if (imageView == null)
-            return;
+        if (imageView == null) return;
 
         Drawable drawable = imageView.getDrawable();
 
         Bitmap bitmap;
-        if (drawable instanceof BitmapDrawable)
-            bitmap = ((BitmapDrawable) drawable).getBitmap();
+        if (drawable instanceof BitmapDrawable) bitmap = ((BitmapDrawable) drawable).getBitmap();
         else if (drawable.getCurrent() instanceof BitmapDrawable) {
             bitmap = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
         } else {
@@ -524,8 +511,7 @@ public class MyCameraActivity extends Activity {
 
         if (file && imageFile.exists()) {
             try {
-                Bitmap imageViewBitmap = BitmapFactory.decodeStream(
-                        new FileInputStream(imageFile));
+                Bitmap imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
                 if (imageViewBitmap != null) {
                     imageView = (ImageView) this.findViewById(R.id.currentImageView);
                     if (imageView != null) {
@@ -603,8 +589,7 @@ public class MyCameraActivity extends Activity {
             int y2 = (int) Math.max(drawPointA.getY() * yr, drawPointB.getY() * yr);
             PixM copy = pixM.copySubImage(x1, y1, x2 - x1, y2 - y1);
 
-            System.err.printf("Copied rect = (%d, %d, %d, %d)\n",
-                    x1, y1, x2 - x1, y2 - y1);
+            System.err.printf("Copied rect = (%d, %d, %d, %d)\n", x1, y1, x2 - x1, y2 - y1);
 
             if (copy != null) {
                 // currentFileZoomedBitmap = copy.getImage().getBitmap();
@@ -617,9 +602,7 @@ public class MyCameraActivity extends Activity {
 
             if (localRectIn != null) {
 
-                System.err.printf("Local rect = (%f, %f, %f, %f)\n",
-                        localRectIn.left, localRectIn.top,
-                        localRectIn.right, localRectIn.bottom);
+                System.err.printf("Local rect = (%f, %f, %f, %f)\n", localRectIn.left, localRectIn.top, localRectIn.right, localRectIn.bottom);
                 drawPointB = null;
                 drawPointA = null;
                 return copy;
@@ -635,8 +618,7 @@ public class MyCameraActivity extends Activity {
         RectF originalComponentView = new RectF(0, 0, imageView.getWidth(), imageView.getHeight());
         //RectF destinationComponentView = originalComponentView;
         BufferedImage read = ImageIO.read(currentFile);
-        if (rectfs.size() == 0)
-            return current;
+        if (rectfs.size() == 0) return current;
         int i = 0;
 
         current = originalComponentView;
@@ -645,13 +627,7 @@ public class MyCameraActivity extends Activity {
             //RectF originalImageRect = new RectF(0, 0, read.getWidth(), read.getHeight());
             //RectF newImageRect = rectfs.get(rectfs.size() - 1);
             RectF currentSubImage = rectfs.get(i);
-            current =
-                    new RectF(
-                            current.left + currentSubImage.left / currentSubImage.width() * (current.width()),
-                            current.top + currentSubImage.top / currentSubImage.height() * (current.height()),
-                            current.right + currentSubImage.right / currentSubImage.width() * (current.width()),
-                            current.bottom + currentSubImage.bottom / currentSubImage.height() * (current.height())
-                    );
+            current = new RectF(current.left + currentSubImage.left / currentSubImage.width() * (current.width()), current.top + currentSubImage.top / currentSubImage.height() * (current.height()), current.right + currentSubImage.right / currentSubImage.width() * (current.width()), current.bottom + currentSubImage.bottom / currentSubImage.height() * (current.height()));
             i++;
         }
         return current;
@@ -742,8 +718,7 @@ public class MyCameraActivity extends Activity {
      */
     public File writePhoto(@NotNull Bitmap bitmap, String name) {
 
-        Intent camera = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
 
@@ -764,14 +739,12 @@ public class MyCameraActivity extends Activity {
         Uri uriSavedImage = Uri.fromFile(file2);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
-        if (!dir1.exists())
-            if (!dir1.mkdirs()) {
-                System.err.print("Dir not created $dir1");
-            }
-        if (!dir2.exists())
-            if (!dir2.mkdirs()) {
-                System.err.println("Dir not created $dir2");
-            }
+        if (!dir1.exists()) if (!dir1.mkdirs()) {
+            System.err.print("Dir not created $dir1");
+        }
+        if (!dir2.exists()) if (!dir2.mkdirs()) {
+            System.err.println("Dir not created $dir2");
+        }
         try {
             if (!file1.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file1);
@@ -835,15 +808,13 @@ public class MyCameraActivity extends Activity {
                 File myDir = new File(root + "/saved_images");
                 myDir.mkdirs();
 
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
-                        + UUID.randomUUID();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + UUID.randomUUID();
                 String fname = "Shutta_" + timeStamp + ".jpg";
 
 
                 final Bitmap finalBitmap;
                 try {
-                    finalBitmap = BitmapFactory.decodeStream(
-                            new FileInputStream(currentFile));
+                    finalBitmap = BitmapFactory.decodeStream(new FileInputStream(currentFile));
                     File file = new File(myDir, fname);
                     if (file.exists()) file.delete();
                     FileOutputStream out = new FileOutputStream(file);
@@ -882,8 +853,7 @@ public class MyCameraActivity extends Activity {
             for (int i = 0; i < 10000000; i += 1) {
                 bitmap = retriever.getFrameAtIndex(i);
 
-                if (bitmap == null)
-                    break;
+                if (bitmap == null) break;
                 rev.add(bitmap);
                 try {
                     fillGallery(bitmap, choose_directoryData);
@@ -932,8 +902,7 @@ public class MyCameraActivity extends Activity {
 
                 int byteRead = -1;
 
-                OutputStream output = getApplicationContext()
-                        .getContentResolver().openOutputStream(uri);
+                OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
 
                 while ((byteRead = inputStream.read()) != -1) {
                     output.write(byteRead);
@@ -955,27 +924,21 @@ public class MyCameraActivity extends Activity {
         if (requestCode == FILESYSTEM_WRITE_PICTURE && resultCode == Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(), "WRITE FILE", Toast.LENGTH_LONG).show();
             if (currentFile != null) {
-                String path = Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-                        BuildConfig.LIBRARY_PACKAGE_NAME + ".provider", currentFile);
+                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.LIBRARY_PACKAGE_NAME + ".provider", currentFile);
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getName());
                 String fileStr = currentFile.getName();
                 if (myPath.toFile().exists()) {
                     Toast.makeText(getApplicationContext(), "Error file exists : " + myPath.toString(), Toast.LENGTH_LONG).show();
                     // manage
                 } else {
-                    File dir = new File(currentDir + File.separator + "FeatureApp" +
-                            File.separator);
-                    File file = new File(currentDir + File.separator + "FeatureApp" +
-                            File.separator + fileStr);
+                    File dir = new File(currentDir + File.separator + "FeatureApp" + File.separator);
+                    File file = new File(currentDir + File.separator + "FeatureApp" + File.separator + fileStr);
 
                     if (myPath.toFile().exists() && myPath.toFile().isDirectory()) {
                         Toast.makeText(getApplicationContext(), "Erreur : répertoire choisi", Toast.LENGTH_LONG).show();
                     }
-                    if (new File(myPath.toFile().getParent())
-                            .isDirectory() && !new File(myPath.toFile().getParent())
-                            .exists()) {
+                    if (new File(myPath.toFile().getParent()).isDirectory() && !new File(myPath.toFile().getParent()).exists()) {
                         new File(Objects.requireNonNull(myPath.toFile().getParent())).mkdirs();
                     }
                     MimeTypeMap mime = MimeTypeMap.getSingleton();
@@ -1043,6 +1006,8 @@ public class MyCameraActivity extends Activity {
         loadImageState();
 
         try {
+            maxRes = savedInstanceState.getInt("maxRes") > -1 ?
+                    savedInstanceState.getInt("maxRes") : 0;
             currentFile = new File((String) savedInstanceState.getString("currentFile"));
             currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
             currentDir = new File((String) savedInstanceState.getString("currentDir"));
@@ -1080,6 +1045,7 @@ public class MyCameraActivity extends Activity {
         outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
         outState.putString("currentDir", currentDir.getAbsolutePath());
         outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
+        outState.putInt("maxRes", maxRes);
         this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
         super.onSaveInstanceState(outState, outPersistentState);
 
@@ -1089,16 +1055,14 @@ public class MyCameraActivity extends Activity {
         drawPointA = null;
         drawPointB = null;
         ImageViewSelection imageView = findViewById(R.id.currentImageView);
-        if (rectfs.size() >= 1)
-            rectfs.remove(rectfs.size() - 1);
+        if (rectfs.size() >= 1) rectfs.remove(rectfs.size() - 1);
         imageView.setDrawingRectState(false);
     }
 
     public void drawActivity(View view) {
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), TextAndImages.class);
-        Intent selection = intent.putExtra("selection", new Rect((int) drawPointA.getX(), (int) drawPointA.getY(),
-                (int) drawPointB.getX(), (int) drawPointB.getY()));
+        Intent selection = intent.putExtra("selection", new Rect((int) drawPointA.getX(), (int) drawPointA.getY(), (int) drawPointB.getX(), (int) drawPointB.getY()));
     }
 
     @Override
@@ -1115,8 +1079,7 @@ public class MyCameraActivity extends Activity {
             textIntent.setClass(getApplicationContext(), TextActivity.class);
             if (rectfs.size() > 0)
                 textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
-            else
-                textIntent.putExtra("rect", new Rect());
+            else textIntent.putExtra("rect", new Rect());
             startActivity(textIntent);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
