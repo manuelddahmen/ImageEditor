@@ -54,7 +54,7 @@ class TextActivity() : Activity(), Parcelable {
 
                 textIntent.setDataAndType(Uri.fromFile(file), "image/jpg")
                 textIntent.data = Uri.fromFile(file)
-                textIntent.putExtra("data", file.absolutePath)
+                textIntent.putExtra("data", file?.absolutePath)
                 textIntent.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
@@ -164,7 +164,8 @@ class TextActivity() : Activity(), Parcelable {
                 x = drawTextPointA!!.x.toInt()
                 y = drawTextPointA!!.y.toInt()
             } else {
-                Toast.makeText(applicationContext, "Error : no point clicked", 3).show()
+                Toast.makeText(applicationContext, "Error : no point clicked", Toast.LENGTH_SHORT)
+                    .show()
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
             currentImage2

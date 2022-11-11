@@ -35,7 +35,7 @@ public class ImageIO {
         FileOutputStream fileOutputStream = new FileOutputStream(out);
         imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
         fileOutputStream.close();
-        return false;
+        return true;
     }
 
 

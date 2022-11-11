@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,7 +109,8 @@ public class MyCameraActivity extends Activity {
                 imageView.setImageBitmap(photo);
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded");
-                saveImageState();
+                //saveImageState();
+                maxRes = resolution;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -137,6 +139,27 @@ public class MyCameraActivity extends Activity {
         return null;
     }
 
+    Bitmap loadImageFromPreferences() {
+        Bitmap bitmap = null;
+
+        SharedPreferences gm = getSharedPreferences("image", MODE_PRIVATE);
+        if (gm != null) {
+            String ot = gm.getString("workingImage", "");
+            if (ot.length() > 0) {
+                byte[] imageAsBytes = Base64.decode(ot.getBytes(), Base64.DEFAULT);
+                ImageView image = (ImageView) this.findViewById(R.id.currentImageView);
+
+
+                image.setImageBitmap(bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+
+                maxRes = Math.max(image.getWidth(), image.getHeight());
+            }
+        }
+
+
+        return bitmap;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,17 +184,19 @@ public class MyCameraActivity extends Activity {
                 Uri data = intent.getData();
                 currentFile = new File(data.getPath());
                 System.err.println("File returned from effects' list = " + data);
-
                 currentBitmap = currentFile;
-
+                var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
+                var loadImageNormal = new LoadImage(currentFile,
+                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
                 loaded = true;
 
-                AsyncTask loadImageSmall = new LoadImage(currentFile, 0).execute();
-                AsyncTask loadImageNormal = new LoadImage(currentFile,
-                        maxRes <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
             }
         } else {
             System.err.println("intent data Main==null");
+            Bitmap bitmap = loadImageFromPreferences();
+            if (bitmap != null) {
+                currentBitmap = currentFile = new Utils().writePhoto(this, bitmap, "prefs");
+            }
         }
 
 
@@ -343,7 +368,7 @@ public class MyCameraActivity extends Activity {
             public void onClick(View v) {
                 if (drawPointA != null && drawPointB != null) {
                     Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
-                    intentDraw.setClass(getApplicationContext(), one.empty3.feature.app.maxSdk29.pro.TextAndImages.class);
+                    intentDraw.setClass(getApplicationContext(), TextAndImages.class);
                     intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
                     intentDraw.putExtra("currentFile", currentFile);
                     intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
@@ -473,7 +498,16 @@ public class MyCameraActivity extends Activity {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
                 bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
             } else {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                if (getMaxRes() > 0) {
+                    bitmap = Bitmap.createBitmap(
+                            Math.min(drawable.getIntrinsicWidth(), getMaxRes()),
+                            Math.min(drawable.getIntrinsicHeight(), getMaxRes()),
+                            Bitmap.Config.ARGB_8888);
+                } else {
+                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
+                            Bitmap.Config.ARGB_8888);
+
+                }
             }
 
             Canvas canvas = new Canvas(bitmap);
@@ -506,6 +540,23 @@ public class MyCameraActivity extends Activity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    int getImageRatio(Bitmap bitmap) {
+        return bitmap.getWidth() / bitmap.getHeight();
+    }
+
+    Point setMaxResImage(Bitmap bitmap) {
+        int imageRatio = getImageRatio(bitmap);
+        Point point = new Point(getMaxRes() / imageRatio,
+                getMaxRes() * imageRatio);
+        return point;
+    }
+
+    private int getMaxRes() {
+        EditText maxResText = findViewById(R.id.editMaximiumResolution);
+        maxRes = (int) Double.parseDouble(maxResText.getText().toString());
+        return maxRes;
     }
 
     public void loadImageState() {
@@ -578,7 +629,7 @@ public class MyCameraActivity extends Activity {
 
     private PixM getSelectedZone() {
         if (currentFile != null) {
-            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
+            PixM pixM = PixM.getPixM(ImageIO.read(currentFile), maxRes);
 
             if (drawPointA == null || drawPointB == null) {
                 return null;
@@ -684,19 +735,20 @@ public class MyCameraActivity extends Activity {
         InputStream[] allFiles = new InputStream[]{fileInputStream};
         ArrayList<View> views = new ArrayList<>();
         Bitmap read = null;
-        for (int i = 0; i < Objects.requireNonNull(allFiles).length; i++) {
-            //views.add(imageView);
-            read = BitmapFactory.decodeStream(allFiles[i]);
-            if (read != null) {
-                imageView = findViewById(R.id.currentImageView);
+        if (allFiles != null && allFiles.length > 0) {
+            for (int i = 0; i < allFiles.length; i++) {
+                //views.add(imageView);
+                read = BitmapFactory.decodeStream(allFiles[i]);
+                if (read != null) {
+                    imageView = findViewById(R.id.currentImageView);
 
-                imageView.setImageBitmap(read);
-                //Drawable.createFromStream(allFiles[i], "chosenImage");
-                System.err.println("Image set 3/4");
+                    imageView.setImageBitmap(read);
+                    //Drawable.createFromStream(allFiles[i], "chosenImage");
+                    System.err.println("Image set 3/4");
+                }
+
             }
-
         }
-
         Toast.makeText(this, "File or Bitmap added successfully", Toast.LENGTH_LONG).show();
     }
 
@@ -943,7 +995,8 @@ public class MyCameraActivity extends Activity {
                         Toast.makeText(getApplicationContext(), "Erreur : répertoire choisi", Toast.LENGTH_LONG).show();
                     }
                     if (new File(myPath.toFile().getParent()).isDirectory() && !new File(myPath.toFile().getParent()).exists()) {
-                        new File(Objects.requireNonNull(myPath.toFile().getParent())).mkdirs();
+                        File file1 = new File(myPath.toFile().getParent());
+                        file1.mkdirs();
                     }
                     MimeTypeMap mime = MimeTypeMap.getSingleton();
                     String ext = currentFile.getName().substring(currentFile.getName().lastIndexOf(".") + 1);

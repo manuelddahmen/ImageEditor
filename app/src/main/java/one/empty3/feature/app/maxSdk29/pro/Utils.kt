@@ -24,7 +24,9 @@ public class Utils {
      * @param name
      * @return
      */
-    fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File {
+    fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
+        var written = false;
+        var fileWritten: File? = null;
         val camera = Intent(
             MediaStore.ACTION_IMAGE_CAPTURE
         )
@@ -55,7 +57,10 @@ public class Utils {
         }
         try {
             if (!file1.exists()) {
-                ImageIO.write(BufferedImage(bitmap), "jpg", file1)
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
+                    written = true;
+                    fileWritten = file1;
+                }
                 System.err.print("Image written 1/2 $file1 return")
                 //System.err.println("File (photo) " + file1.getAbsolutePath());
                 return file1
@@ -66,7 +71,11 @@ public class Utils {
         }
         try {
             if (!file2.exists()) {
-                ImageIO.write(BufferedImage(bitmap), "jpg", file2)
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
+                    written = true;
+                    fileWritten = file2;
+                }
+
                 //        System.err.print("Image written 2/2 $file2 return")
                 //System.err.println("File (photo) " + file2.getAbsolutePath());
                 return file2
@@ -75,7 +84,11 @@ public class Utils {
             ex.printStackTrace()
             Log.e("SAVE FILE", "writePhoto: error file 2/2")
         }
-        return file1
+        if (written) {
+            return fileWritten;
+        } else {
+            throw NullPointerException("No file written, Utils.writePhoto");
+        }
     }
 
 }
