@@ -1,7 +1,10 @@
 buildscript {
-    ext.kotlin_version = '1.7.0'
     ext {
-        compose_version = '1.0.1'
+        compose_version31 = '1.0.5'
+        kotlin_version31 = '1.5.31'
+        compose_version32 = '1.1.1'
+        kotlin_version32 = '1.6.10'
+
     }
 
     ext.java_version = JavaVersion.VERSION_18
@@ -13,9 +16,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
         //classpath "androidx.databinding:databinding-ktx:7.2.2"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20'
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2'
         // NOTE: Do not place your application dependencies here; they belong
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version32"
         // in the individual module build.gradle files
         classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
         //classpath('com.google.ar:core:1.33.0')

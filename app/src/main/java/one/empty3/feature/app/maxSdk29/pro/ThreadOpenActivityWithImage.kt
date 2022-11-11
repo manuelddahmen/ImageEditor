@@ -5,12 +5,14 @@ import java.io.File
 
 class ThreadOpenActivityWithImage : Runnable {
 
-    private lateinit var activity: Class<Activity>
-    private lateinit var file: File
+    protected lateinit var activityToLaunch: Class<Activity>
+    protected lateinit var inputFile: File
+    protected lateinit var outputFile: File
 
-    fun params(f: File, activity: Class<Activity>) {
-        this.file = f
-        this.activity = activity
+    fun params(inputFile: File, outputFile: File, activityToLaunch: Class<Activity>) {
+        this.inputFile = inputFile
+        this.outputFile = outputFile
+        this.activityToLaunch = activityToLaunch
     }
 
     override fun run() {
