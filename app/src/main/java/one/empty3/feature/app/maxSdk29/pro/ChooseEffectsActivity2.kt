@@ -303,7 +303,7 @@ class ChooseEffectsActivity2 : Activity() {
                             val errMessage = "Error processing file. Exception :$ex"
                             println(errMessage)
                             ex.printStackTrace()
-                            Toast.makeText(applicationContext, errMessage, 10)
+                            Toast.makeText(applicationContext, errMessage, Toast.LENGTH_SHORT)
                             return@setOnClickListener
                         }
                         currentProcessFile = currentOutputFile
