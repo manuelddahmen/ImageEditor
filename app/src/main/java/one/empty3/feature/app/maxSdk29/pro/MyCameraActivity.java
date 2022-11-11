@@ -186,9 +186,9 @@ public class MyCameraActivity extends Activity {
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
                 var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
-                var loadImageNormal = new LoadImage(currentFile,
-                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
-                loaded = true;
+//                var loadImageNormal = new LoadImage(currentFile,
+//                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
+//                loaded = true;
 
             }
         } else {
