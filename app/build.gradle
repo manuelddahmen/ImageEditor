@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 91000
+def code = 940000
 
 android {
     bundle {
@@ -50,10 +50,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.0.5"
     }
+    /*
     kotlin {
 
         version "$kotlin_version31"
-    }
+    }*/
+
     kotlinOptions {
         jvmTarget = '11'
     }
@@ -89,14 +91,14 @@ android {
     flavorDimensions "featureVersion"
     productFlavors {
 
-        sdk31 {
+        sdk29 {
             dimension "featureVersion"
-            compileSdkVersion 31
+            compileSdkVersion 29
             defaultConfig {
-                targetSdkVersion 31
-                minSdkVersion 31
+                targetSdkVersion 32
+                minSdkVersion 29
                 JavaVersion.VERSION_11
-                versionCode 131 + code
+                versionCode 129 + code
                 dependencies {
                     implementation "androidx.compose.ui:ui:$compose_version31"
                     implementation "androidx.compose.material:material:$compose_version31"
