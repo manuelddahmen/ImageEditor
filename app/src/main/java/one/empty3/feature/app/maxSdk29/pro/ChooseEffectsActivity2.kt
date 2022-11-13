@@ -133,42 +133,50 @@ class ChooseEffectsActivity2 : Activity() {
                     )
                     != PackageManager.PERMISSION_GRANTED
                 ) {
-                    ActivityCompat.requestPermissions(
-                        this,
+                    requestPermissions(
                         arrayOf(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), PackageManager.PERMISSION_GRANTED
-                    )
-                }
-                var dir = ""
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_GRANTED
-                ) {
-                    dir = "photoDir"
-                    dirRoot = mediaFile.toString()
-                        .substring(0, mediaFile.toString().lastIndexOf(File.separator))
-                } else {
-                    println("Error : no permission for read/write storage")
-                    dir = "appDir"
-                    this.requestPermissions(
-                        arrayOf<String>(
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
                         ), INT_WRITE_STORAGE
                     )
-                    this.requestPermissions(
-                        arrayOf<String>(
+                    requestPermissions(
+                        arrayOf(
                             Manifest.permission.READ_EXTERNAL_STORAGE
                         ), INT_READ_STORAGE
                     )
+                }
+                var dir = ""
+
+                var allPermissions = 0;
+                while (!(allPermissions == 2)) {
+                    if (ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        )
+                        == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        dir = "photoDir"
+                        dirRoot = mediaFile.toString()
+                            .substring(0, mediaFile.toString().lastIndexOf(File.separator))
+                        allPermissions = 2
+                    } else {
+                        allPermissions = 0
+                        println("Error : no permission for read/write storage")
+                        dir = "appDir"
+                        this.requestPermissions(
+                            arrayOf<String>(
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            ), INT_WRITE_STORAGE
+                        )
+                        this.requestPermissions(
+                            arrayOf<String>(
+                                Manifest.permission.READ_EXTERNAL_STORAGE
+                            ), INT_READ_STORAGE
+                        )
+                    }
 
                 }
                 var currentProcessFile: File = fileIn
