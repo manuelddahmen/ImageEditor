@@ -53,8 +53,6 @@ class TextActivity() : Activity(), Parcelable {
                 //val file = Utils().writePhoto(this, currentImage, name)
 
                 textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-                textIntent.data = Uri.fromFile(currentFile)
-                textIntent.putExtra("data", currentFile?.absolutePath)
                 textIntent.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")

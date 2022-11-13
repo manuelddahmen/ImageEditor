@@ -48,18 +48,19 @@
             android:src="@drawable/film"
             android:text="@string/choose_movie"
             android:layout_width="wrap_content" />
+        <!--
 
-        <Button
-            android:id="@+id/loadLastSaved"
-            style="?android:attr/buttonBarStyle"
-            android:layout_height="48dp"
-            android:autofillHints="@string/last_saved"
-            android:contentDescription="@string/last_saved"
-            android:height="48dp"
-            android:src="@drawable/film"
-            android:text="@string/last_saved"
-            android:layout_width="wrap_content" />
-
+            <Button
+                android:id="@+id/loadLastSaved"
+                style="?android:attr/buttonBarStyle"
+                android:layout_height="48dp"
+                android:autofillHints="@string/last_saved"
+                android:contentDescription="@string/last_saved"
+                android:height="48dp"
+                android:src="@drawable/film"
+                android:text="@string/last_saved"
+                android:layout_width="wrap_content" />
+    -->
     </LinearLayout>
 
 

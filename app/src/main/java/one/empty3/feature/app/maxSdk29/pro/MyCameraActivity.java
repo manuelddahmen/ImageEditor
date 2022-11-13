@@ -169,7 +169,7 @@ public class MyCameraActivity extends Activity {
             maxRes = MAX_RES_DEFAULT;
         } else {
             maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                    savedInstanceState.getInt("maxRes") : 0;
+                    savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
         }
         setContentView(R.layout.main);
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
@@ -183,13 +183,15 @@ public class MyCameraActivity extends Activity {
             if (intent.getData() != null) {
                 Uri data = intent.getData();
                 currentFile = new File(data.getPath());
-                System.err.println("File returned from effects' list = " + data);
-                currentBitmap = currentFile;
-                //var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
+                if (currentFile != null) {
+                    System.err.println("File returned from effects' list = " + data);
+                    currentBitmap = currentFile;
+                    //var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
 //                var loadImageNormal = new LoadImage(currentFile,
 //                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
-//                loaded = true;
-
+                    loaded = true;
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(currentFile.toString()));
+                }
             }
         } else {
             System.err.println("intent data Main==null");
