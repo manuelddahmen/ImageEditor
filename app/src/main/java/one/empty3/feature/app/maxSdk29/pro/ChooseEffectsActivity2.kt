@@ -138,11 +138,6 @@ class ChooseEffectsActivity2 : Activity() {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
                         ), INT_WRITE_STORAGE
                     )
-                    requestPermissions(
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), INT_READ_STORAGE
-                    )
                 }
                 var dir = ""
 
@@ -170,11 +165,6 @@ class ChooseEffectsActivity2 : Activity() {
                             arrayOf<String>(
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE
                             ), INT_WRITE_STORAGE
-                        )
-                        this.requestPermissions(
-                            arrayOf<String>(
-                                Manifest.permission.READ_EXTERNAL_STORAGE
-                            ), INT_READ_STORAGE
                         )
                     }
 
@@ -428,21 +418,8 @@ class ChooseEffectsActivity2 : Activity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (permissions.contains(READ_EXTERNAL_STORAGE)) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(
-                    this@ChooseEffectsActivity2,
-                    "Read storage perm accepted",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    this@ChooseEffectsActivity2,
-                    "Read storage perm declined",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else if (permissions.contains(WRITE_EXTERNAL_STORAGE)) {
+
+        if (requestCode == INT_WRITE_STORAGE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(
                     this@ChooseEffectsActivity2,
