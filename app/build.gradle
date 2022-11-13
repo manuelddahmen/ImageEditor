@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 960000
+def code = 980000
 
 android {
     bundle {
@@ -93,54 +93,29 @@ android {
 
         sdk29 {
             dimension "featureVersion"
-            compileSdkVersion 31
-            defaultConfig {
-                targetSdkVersion 31
-                minSdkVersion 31
-                JavaVersion.VERSION_11
-                versionCode 129 + code
-                dependencies {
-                    implementation "androidx.compose.ui:ui:$compose_version31"
-                    implementation "androidx.compose.material:material:$compose_version31"
-                    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version31"
-
-                }
-
-                kotlin {
-                    version "$kotlin_version31"
-                }
-                composeOptions {
-                    kotlinCompilerExtensionVersion = "$compose_version31"
-                }
-                signingConfig signingConfigs.release
-            }
-        }
-
-        sdk32 {
-            dimension "featureVersion"
             compileSdkVersion 32
             defaultConfig {
-                targetSdkVersion 32
-                minSdkVersion 32
+                targetSdkVersion 31
+                minSdkVersion 29
                 JavaVersion.VERSION_18
-                versionCode 132 + code
+                versionCode 129 + code
                 dependencies {
                     implementation "androidx.compose.ui:ui:$compose_version32"
                     implementation "androidx.compose.material:material:$compose_version32"
                     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version32"
+
                 }
 
                 kotlin {
-
                     version "$kotlin_version32"
                 }
                 composeOptions {
                     kotlinCompilerExtensionVersion = "$compose_version32"
                 }
-
                 signingConfig signingConfigs.release
             }
         }
+
     }
 }
 
