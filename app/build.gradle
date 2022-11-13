@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 940000
+def code = 960000
 
 android {
     bundle {
@@ -93,10 +93,10 @@ android {
 
         sdk29 {
             dimension "featureVersion"
-            compileSdkVersion 29
+            compileSdkVersion 31
             defaultConfig {
-                targetSdkVersion 32
-                minSdkVersion 29
+                targetSdkVersion 31
+                minSdkVersion 31
                 JavaVersion.VERSION_11
                 versionCode 129 + code
                 dependencies {
@@ -115,6 +115,7 @@ android {
                 signingConfig signingConfigs.release
             }
         }
+
         sdk32 {
             dimension "featureVersion"
             compileSdkVersion 32
@@ -144,6 +145,11 @@ android {
 }
 
 dependencies {
+    // When using a MDC theme
+    implementation "com.google.android.material:compose-theme-adapter:1.1.16"
+
+    // When using a AppCompat theme
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.4.0'

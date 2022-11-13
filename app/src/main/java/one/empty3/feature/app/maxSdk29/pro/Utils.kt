@@ -27,28 +27,19 @@ public class Utils {
     fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
         var written = false;
         var fileWritten: File? = null;
-        val camera = Intent(
-            MediaStore.ACTION_IMAGE_CAPTURE
-        )
-        var n = 1
+
         //Folder is already created
-        var name2 = name + "-photo-" + UUID.randomUUID().toString()
+        var name2 = name + "photo-" + UUID.randomUUID().toString()
         var dirName1 = ""
         var dirName2 = ""
         dirName1 = Environment.getDataDirectory().path
         dirName2 =
             activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
-
-        n++
-
-
-        //startActivityForResult(camera, 1);
         val dir1 = File(dirName1)
         val file1 = File(dirName1 + File.separator + name2 + ".jpg")
         val dir2 = File(dirName2)
         val file2 = File(dirName2 + File.separator + name2 + ".jpg")
         val uriSavedImage = Uri.fromFile(file2)
-        camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage)
         if (!dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created \$dir1")
         }
@@ -61,13 +52,10 @@ public class Utils {
                     written = true;
                     fileWritten = file1;
                 }
-                System.err.print("Image written 1/2 $file1 return")
-                //System.err.println("File (photo) " + file1.getAbsolutePath());
                 return file1
             }
         } catch (ex: Exception) {
-            //    ex.printStackTrace()
-            Log.e("SAVE FILE", "writePhoto: error file 1/2")
+            ex.printStackTrace()
         }
         try {
             if (!file2.exists()) {
@@ -75,18 +63,15 @@ public class Utils {
                     written = true;
                     fileWritten = file2;
                 }
-
-                //        System.err.print("Image written 2/2 $file2 return")
-                //System.err.println("File (photo) " + file2.getAbsolutePath());
                 return file2
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
-            Log.e("SAVE FILE", "writePhoto: error file 2/2")
         }
         if (written) {
             return fileWritten;
         } else {
+            Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
             throw NullPointerException("No file written, Utils.writePhoto");
         }
     }

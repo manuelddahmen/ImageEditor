@@ -50,11 +50,11 @@ class TextActivity() : Activity(), Parcelable {
                 val textIntent = Intent(Intent.ACTION_VIEW)
                 val name: String = ("" + UUID.randomUUID())
 
-                val file = Utils().writePhoto(this, currentImage, name)
+                //val file = Utils().writePhoto(this, currentImage, name)
 
-                textIntent.setDataAndType(Uri.fromFile(file), "image/jpg")
-                textIntent.data = Uri.fromFile(file)
-                textIntent.putExtra("data", file?.absolutePath)
+                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+                textIntent.data = Uri.fromFile(currentFile)
+                textIntent.putExtra("data", currentFile?.absolutePath)
                 textIntent.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
@@ -69,15 +69,17 @@ class TextActivity() : Activity(), Parcelable {
         textApply.setOnClickListener {
             val textEdit = findViewById<TextView>(R.id.textViewOnImage)
             text = (textEdit as TextView).text.toString()
-            val bmp = drawTextToBitmap(this, R.id.imageViewOnImage, text)
-            if (bmp != null) {
-                currentImage = bmp
-                currentFile = Utils().writePhoto(this, bmp, currentFile?.name ?: "textPhoto")
+            val bmpFile = drawTextToBitmap(this, R.id.imageViewOnImage, text)
+            if (bmpFile != null) {
+                currentFile = bmpFile
                 currentImage = BitmapFactory.decodeStream(
                     FileInputStream(currentFile)
                 )
                 imageView.setImageBitmap(currentImage)
                 Toast.makeText(applicationContext, "Text written", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "ERROR: Text written", Toast.LENGTH_LONG).show()
+
             }
         }
 
@@ -126,7 +128,7 @@ class TextActivity() : Activity(), Parcelable {
     }
 
 
-    private fun drawTextToBitmap(mContext: Context, resourceId: Int, mText: String): Bitmap? {
+    private fun drawTextToBitmap(mContext: Context, resourceId: Int, mText: String): File? {
         return try {
             val resources: Resources = mContext.resources
             val scale: Float = resources.displayMetrics.density
@@ -168,7 +170,8 @@ class TextActivity() : Activity(), Parcelable {
                     .show()
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
-            currentImage2
+
+            return Utils().writePhoto(this, currentImage2, "draw-text")
         } catch (e: Exception) {
             e.printStackTrace()
             null
