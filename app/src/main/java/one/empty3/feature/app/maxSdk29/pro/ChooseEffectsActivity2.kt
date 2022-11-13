@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
@@ -102,12 +103,6 @@ class ChooseEffectsActivity2 : Activity() {
             run {
                 val intent = Intent(Intent.ACTION_EDIT)
                 println("Click on Effect button")
-                intent.setDataAndType(Uri.fromFile(mediaFile), "image/jpg")
-                intent.putExtra("data", mediaFile)
-                intent.setClass(
-                    applicationContext,
-                    Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
-                )
                 val fileIn: File = File(mediaFile.toString())
 
                 Log.d("Initial input file", fileIn.toString())
@@ -116,9 +111,7 @@ class ChooseEffectsActivity2 : Activity() {
                             + ((fileIn.exists()).toString())
                 )
 
-                intent.putExtra(
-                    "data", fileIn
-                )
+
                 var dirRoot: String = filesDir.absolutePath// + File.separator + "data/files"//!!!?
                 /*uri = FileProvider.getUriForFile(
                     this@MyCameraActivity,
@@ -128,6 +121,7 @@ class ChooseEffectsActivity2 : Activity() {
                 dirRoot =
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
 */
+
                 if (ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -330,9 +324,13 @@ class ChooseEffectsActivity2 : Activity() {
 
 
                 }
-                intent.data = Uri.fromFile(currentProcessFile)
-                intent.putExtra("data", currentProcessFile.absolutePath)
-                startActivity(intent)
+                val intent2 = Intent()
+                intent2.setDataAndType(Uri.fromFile(currentProcessFile), "image/jpg")
+                intent2.setClass(
+                    applicationContext,
+                    Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
+                )
+                startActivity(intent2)
 
             }
         }

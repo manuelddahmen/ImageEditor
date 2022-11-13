@@ -747,7 +747,7 @@ public class MyCameraActivity extends Activity {
         imageView = findViewById(R.id.currentImageView);
 
         imageView.setImageBitmap(photo);
-        
+
         System.out.println("Image set in ImageView 4/4");
 
     }
