@@ -190,7 +190,13 @@ public class MyCameraActivity extends Activity {
 //                var loadImageNormal = new LoadImage(currentFile,
 //                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
                     loaded = true;
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(currentFile.toString()));
+
+                    try {
+                        imageView.setImageBitmap(BitmapFactory.decodeStream(
+                                new FileInputStream(currentFile)));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else {
@@ -578,7 +584,7 @@ public class MyCameraActivity extends Activity {
                         //Toast.makeText(getApplicationContext(), "Image reloaded", Toast.LENGTH_SHORT).show();
                         System.err.println("Image reloaded");
 
-                        createCurrentUniqueFile();
+                        //createCurrentUniqueFile();
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -734,25 +740,18 @@ public class MyCameraActivity extends Activity {
     }
 
     public void fillGallery(Bitmap photo, InputStream fileInputStream) throws FileNotFoundException {
-        InputStream[] allFiles = new InputStream[]{fileInputStream};
-        ArrayList<View> views = new ArrayList<>();
-        Bitmap read = null;
-        if (allFiles != null && allFiles.length > 0) {
-            for (int i = 0; i < allFiles.length; i++) {
-                //views.add(imageView);
-                read = BitmapFactory.decodeStream(allFiles[i]);
-                if (read != null) {
-                    imageView = findViewById(R.id.currentImageView);
-
-                    imageView.setImageBitmap(read);
-                    //Drawable.createFromStream(allFiles[i], "chosenImage");
-                    System.err.println("Image set 3/4");
-                }
-
-            }
+        if (photo == null) {
+            photo = BitmapFactory.decodeStream(fileInputStream);
         }
-        Toast.makeText(this, "File or Bitmap added successfully", Toast.LENGTH_LONG).show();
+
+        imageView = findViewById(R.id.currentImageView);
+
+        imageView.setImageBitmap(photo);
+        
+        System.out.println("Image set in ImageView 4/4");
+
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -943,7 +942,7 @@ public class MyCameraActivity extends Activity {
                 saveImageState();
                 System.err.println("SaveImageState");
 
-                createCurrentUniqueFile();
+                //createCurrentUniqueFile();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

@@ -17,6 +17,8 @@ import java.io.File
 import java.util.*
 
 class ChooseEffectsActivity2 : Activity() {
+    private val INT_READ_STORAGE: Int = 5152112
+    private val INT_WRITE_STORAGE: Int = 5152113
     private var listEffects: HashMap<String, ProcessFile>? = null
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
@@ -37,7 +39,7 @@ class ChooseEffectsActivity2 : Activity() {
         setContentView(R.layout.recycler_view_effect_activity)
 
         if (savedInstanceState != null) {
-            classnames = savedInstanceState.getStringArrayList("classnames")!!
+            //   classnames = savedInstanceState.getStringArrayList("classnames")!!
         }
 
         recyclerView = findViewById(R.id.recycler_view_effect)
@@ -161,6 +163,16 @@ class ChooseEffectsActivity2 : Activity() {
                 } else {
                     println("Error : no permission for read/write storage")
                     dir = "appDir"
+                    this.requestPermissions(
+                        arrayOf<String>(
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ), INT_WRITE_STORAGE
+                    )
+                    this.requestPermissions(
+                        arrayOf<String>(
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        ), INT_READ_STORAGE
+                    )
                 }
                 var currentProcessFile: File = fileIn
                 val currentProcessDir = File(
@@ -184,6 +196,9 @@ class ChooseEffectsActivity2 : Activity() {
                 classnames.forEach {
                     val effectListStr: String = it
                     val trim = it.trim()
+                    if (it.isNullOrBlank()) {
+                        return@setOnClickListener
+                    }
                     if (effectListStr.contains(trim)) {
                         val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
@@ -398,4 +413,40 @@ class ChooseEffectsActivity2 : Activity() {
         super.onDestroy()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == INT_READ_STORAGE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(
+                    this@ChooseEffectsActivity2,
+                    "Read storage perm accepted",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this@ChooseEffectsActivity2,
+                    "Read storage perm declined",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else if (requestCode == INT_WRITE_STORAGE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(
+                    this@ChooseEffectsActivity2,
+                    "Write storage perm accepted",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this@ChooseEffectsActivity2,
+                    "Write storage perm declined",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 }
