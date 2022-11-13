@@ -1,6 +1,8 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -173,6 +175,7 @@ class ChooseEffectsActivity2 : Activity() {
                             Manifest.permission.READ_EXTERNAL_STORAGE
                         ), INT_READ_STORAGE
                     )
+
                 }
                 var currentProcessFile: File = fileIn
                 val currentProcessDir = File(
@@ -419,7 +422,7 @@ class ChooseEffectsActivity2 : Activity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == INT_READ_STORAGE) {
+        if (permissions.contains(READ_EXTERNAL_STORAGE)) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(
                     this@ChooseEffectsActivity2,
@@ -433,7 +436,7 @@ class ChooseEffectsActivity2 : Activity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        } else if (requestCode == INT_WRITE_STORAGE) {
+        } else if (permissions.contains(WRITE_EXTERNAL_STORAGE)) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(
                     this@ChooseEffectsActivity2,
