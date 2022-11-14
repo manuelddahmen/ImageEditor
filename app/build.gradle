@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 1040000
+def code = 1060000
 
 android {
     bundle {

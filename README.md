@@ -15,9 +15,18 @@ Error in Manifest file
 Essayer d'optimiser plus et de mettre un fichier de désobscurcissement
 Try to solve problems:
 BUG app doesn't start
-BUG: app starts too slowly.
-BUG: app classnames obfuscated
-Filters work
+BUG: app starts too slowly. (Intents fix #3)
+FIX BUG: app classnames obfuscated #1 
+Filters work now
+81 Halloween Version
+ImageView -> Button
+FIX Text Button
+BUG Add text
+95 Try to reduce load time #8
+97 (update version >=29 <32)
+Try to load reduce image load time.
+SOME FIX: Try to display images from Effects and Text
+FIX: requestpermissions android studio waituntil
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -36,5 +45,14 @@ J'essaie de résoudre le problème :
 BUG l'application ne démarre pas.
 BUG: l'application démarre lentement
 BUG: app classnames obfuscated
-Filters work
+Filters work now
+81 Halloween Version
+ImageView -> Button
+FIX Text Button
+BUG Add text
+95 Try to reduce load time #7
+97 (update version >=29 <32)
+Try to load reduce image load time.
+SOME FIX: Try to display images from Effects and Text
+FIX: requestpermissions android studio waituntil
 </fr-FR>

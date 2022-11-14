@@ -183,23 +183,18 @@ public class MyCameraActivity extends Activity {
             if (intent.getData() != null) {
                 Uri data = intent.getData();
                 currentFile = new File(data.getPath());
-                if (currentFile != null) {
-                    System.err.println("File returned from effects' list = " + data);
-                    currentBitmap = currentFile;
-                    //var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
+                System.err.println("File returned from effects' list = " + data);
+                currentBitmap = currentFile;
+                //var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
 //                var loadImageNormal = new LoadImage(currentFile,
 //                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
-                    loaded = true;
+                loaded = true;
 
-                    try {
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(
-                                new FileInputStream(currentFile)));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
 
+                if (bitmap != null) {
+                    imageView.setImageBitmap(bitmap);
                     saveImageState();
-
                     loaded = true;
                 }
             }
@@ -208,8 +203,8 @@ public class MyCameraActivity extends Activity {
             Bitmap bitmap = loadImageFromPreferences();
             if (bitmap != null) {
                 currentBitmap = currentFile = new Utils().writePhoto(this, bitmap, "prefs");
+                loaded = true;
             }
-            loaded = false;
         }
 
 
@@ -544,7 +539,7 @@ public class MyCameraActivity extends Activity {
         Bitmap bm = bitmap;
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        bm.compress(Bitmap.CompressFormat.JPEG, 90, baos); //bm is the bitmap object
         byte[] b = baos.toByteArray();
 
         String encoded = Base64.encodeToString(b, Base64.DEFAULT);
@@ -554,7 +549,7 @@ public class MyCameraActivity extends Activity {
         OutputStream fos = null;
         try {
             fos = new FileOutputStream(getFilesFile("imageView.jpg"));
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
             //Toast.makeText(getApplicationContext(), "current image updated", Toast.LENGTH_SHORT).show();
             System.err.println("Image updated");
         } catch (FileNotFoundException e) {
@@ -887,7 +882,7 @@ public class MyCameraActivity extends Activity {
                     File file = new File(myDir, fname);
                     if (file.exists()) file.delete();
                     FileOutputStream out = new FileOutputStream(file);
-                    finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                    finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                     out.flush();
                     out.close();
                 } catch (FileNotFoundException e) {
