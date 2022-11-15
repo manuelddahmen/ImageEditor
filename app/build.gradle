@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 1070000
+def code = 1090000
 
 android {
     bundle {
@@ -95,8 +95,8 @@ android {
             dimension "featureVersion"
             compileSdkVersion 32
             defaultConfig {
-                targetSdkVersion 32
-                minSdkVersion 28
+                targetSdkVersion 31
+                minSdkVersion 31
                 JavaVersion.VERSION_17
                 versionCode 129 + code
                 kotlin {

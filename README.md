@@ -27,6 +27,8 @@ BUG Add text
 Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
+FIX: Java version 17
+
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -45,6 +47,15 @@ J'essaie de résoudre le problème :
 BUG l'application ne démarre pas.
 BUG: l'application démarre lentement
 BUG: app classnames obfuscated
+Filters work now
+81 Halloween Version
+ImageView -> Button
+FIX Text Button
+BUG Add text
+95 Try to reduce load time #7
+97 (update version >=29 <32)
+Try to load reduce image load time.
+SOME FIX: Try to display images from Effects and Text
 Filters work now
 81 Halloween Version
 ImageView -> Button

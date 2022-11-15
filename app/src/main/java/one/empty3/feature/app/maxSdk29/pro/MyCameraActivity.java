@@ -18,7 +18,6 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
@@ -89,7 +88,7 @@ public class MyCameraActivity extends Activity {
     private PixM currentPixM = null;
     private boolean loaded;
     private int maxRes = 200;
-
+/*
     class LoadImage extends AsyncTask {
 
         private final File file;
@@ -118,7 +117,7 @@ public class MyCameraActivity extends Activity {
             return null;
         }
     }
-
+    */
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
         InputStream input = getContentResolver().openInputStream(uri);
