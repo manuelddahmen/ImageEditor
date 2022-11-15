@@ -7,7 +7,7 @@ buildscript {
 
     }
 
-    ext.java_version = JavaVersion.VERSION_18
+    ext.java_version = JavaVersion.VERSION_17
 
     repositories {
         google()
