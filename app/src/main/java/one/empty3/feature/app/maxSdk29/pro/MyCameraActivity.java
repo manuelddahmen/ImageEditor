@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -175,7 +174,7 @@ public class MyCameraActivity extends Activity {
 
         rectfs = new ArrayList<RectF>();
 
-        loaded = false;
+        loaded = true;
 
         Intent intent = getIntent();
         if (getIntent() != null && getIntent().getData() != null) {
@@ -184,16 +183,12 @@ public class MyCameraActivity extends Activity {
                 currentFile = new File(data.getPath());
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
-                //var loadImageSmall = new LoadImage(currentFile, MAX_RES_DEFAULT).execute();
-//                var loadImageNormal = new LoadImage(currentFile,
-//                        getMaxRes() <= 0 ? MAX_RES_DEFAULT : maxRes).execute();
                 loaded = true;
 
                 Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
 
                 if (bitmap != null) {
                     imageView.setImageBitmap(bitmap);
-                    saveImageState();
                     loaded = true;
                 }
             }
