@@ -33,7 +33,7 @@ class ProcessFileArrayAdapter() :
         arrayClasses = Main2022.initListProcesses()
     }
 
-    fun setMainAnd(main2022 : Main2022, rv: RecyclerView, activity2: ChooseEffectsActivity2) {
+    fun setMainAnd(main2022: Main2022, rv: RecyclerView, activity2: ChooseEffectsActivity2) {
         this.main2022 = main2022
         this.rv = rv
         this.activity = activity2
@@ -89,12 +89,7 @@ class ProcessFileArrayAdapter() :
         buttonAddToEffect.setOnClickListener {
             val effectClass = holder.getEffectClass()
             val b1 = Main2022.effects.add(effectClass)
-            Toast.makeText(
-                activity.applicationContext,
-                "ADD Class added : $b1, $effectClass",
-                Toast.LENGTH_LONG
-            )
-                .show()
+
             it.setBackgroundColor(0xaaaa0000.toInt())
             /*
                 val textView: Unit =
@@ -115,12 +110,8 @@ class ProcessFileArrayAdapter() :
         buttonRemoveList.setOnClickListener {
             val effectClass = holder.getEffectClass()
             val b1 = Main2022.effects.remove(effectClass)
-            Toast.makeText(
-                activity.applicationContext,
-                "REMOVE Class removed : $b1, $effectClass",
-                Toast.LENGTH_LONG
-            )
-                .show()
+
+
             if (!b1) {
                 buttonAddToEffect.setBackgroundColor(0xaa000000.toInt())
             }
@@ -143,7 +134,6 @@ class ProcessFileArrayAdapter() :
     override fun getItemCount(): Int {
         return arrayClasses.size
     }
-
 
 
     class ViewHolder(itemView: RecyclerViewEffectItemBinding) :

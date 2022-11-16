@@ -347,7 +347,7 @@ public class MyCameraActivity extends Activity {
                         target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg").toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Erreur ne peut copier les fichiers.", Toast.LENGTH_LONG).show();
+
                         return;
                     }
 
@@ -452,7 +452,6 @@ public class MyCameraActivity extends Activity {
 
 
             } else {
-                Toast.makeText(getApplicationContext(), "No image displayed", Toast.LENGTH_SHORT).show();
             }
             return true;
         });
@@ -549,7 +548,7 @@ public class MyCameraActivity extends Activity {
         try {
             fos = new FileOutputStream(getFilesFile("imageView.jpg"));
             bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
-            //Toast.makeText(getApplicationContext(), "current image updated", Toast.LENGTH_SHORT).show();
+
             System.err.println("Image updated");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -587,7 +586,7 @@ public class MyCameraActivity extends Activity {
                         imageView.setImageBitmap(imageViewBitmap);
                         currentFile = imageFile;
                         currentBitmap = imageFile;
-                        //Toast.makeText(getApplicationContext(), "Image reloaded", Toast.LENGTH_SHORT).show();
+
                         System.err.println("Image reloaded");
 
                         //createCurrentUniqueFile();
@@ -764,11 +763,11 @@ public class MyCameraActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
             }
         }
     }
@@ -977,29 +976,28 @@ public class MyCameraActivity extends Activity {
                 inputStream.close();
 
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+
                 e.printStackTrace();
             }
 
 
-            Toast.makeText(getApplicationContext(), "-> Save Docuemnt", Toast.LENGTH_LONG).show();
         }
         if (requestCode == FILESYSTEM_WRITE_PICTURE && resultCode == Activity.RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "WRITE FILE", Toast.LENGTH_LONG).show();
+
             if (currentFile != null) {
                 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
                 FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.LIBRARY_PACKAGE_NAME + ".provider", currentFile);
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getName());
                 String fileStr = currentFile.getName();
                 if (myPath.toFile().exists()) {
-                    Toast.makeText(getApplicationContext(), "Error file exists : " + myPath.toString(), Toast.LENGTH_LONG).show();
-                    // manage
+
+
                 } else {
                     File dir = new File(currentDir + File.separator + "FeatureApp" + File.separator);
                     File file = new File(currentDir + File.separator + "FeatureApp" + File.separator + fileStr);
 
                     if (myPath.toFile().exists() && myPath.toFile().isDirectory()) {
-                        Toast.makeText(getApplicationContext(), "Erreur : répertoire choisi", Toast.LENGTH_LONG).show();
+
                     }
                     if (new File(myPath.toFile().getParent()).isDirectory() && !new File(myPath.toFile().getParent()).exists()) {
                         File file1 = new File(myPath.toFile().getParent());

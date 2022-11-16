@@ -177,10 +177,7 @@ class ChooseEffectsActivity2 : Activity() {
                 val name = currentProcessFile.name
                 //dir = "appDir"
                 if (classnames.size == 0) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Pas d'item choisi (erreur de programmation", Toast.LENGTH_LONG
-                    ).show()
+
                     return@setOnClickListener;
                 }
                 classnames.forEach {
@@ -308,7 +305,7 @@ class ChooseEffectsActivity2 : Activity() {
                             val errMessage = "Error processing file. Exception :$ex"
                             println(errMessage)
                             ex.printStackTrace()
-                            Toast.makeText(applicationContext, errMessage, Toast.LENGTH_SHORT)
+
                             return@setOnClickListener
                         }
                         currentProcessFile = currentOutputFile
@@ -416,17 +413,7 @@ class ChooseEffectsActivity2 : Activity() {
 
         if (requestCode == INT_WRITE_STORAGE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(
-                    this@ChooseEffectsActivity2,
-                    "Write storage perm accepted",
-                    Toast.LENGTH_SHORT
-                ).show()
             } else {
-                Toast.makeText(
-                    this@ChooseEffectsActivity2,
-                    "Write storage perm declined",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         }
     }

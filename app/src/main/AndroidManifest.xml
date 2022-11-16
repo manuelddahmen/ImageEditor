@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     package="one.empty3.feature.app.maxSdk29.pro">
-    <!-- Enable instant app support -->
-    <dist:module dist:instant="true" /> <!-- Declare features -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" /> <!-- Declare permissions -->
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:supportsRtl="true"
@@ -101,10 +91,13 @@
 
             <!-- Register as a system camera app -->
             <intent-filter android:autoVerify="true">
+                <data android:scheme="file" />
+                <data android:host="empty3.one" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -112,6 +105,8 @@
                 <action android:name="android.intent.action.EDIT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- filter for sending text or images; accepts SEND action and text or image data -->
             <intent-filter>

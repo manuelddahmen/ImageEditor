@@ -74,9 +74,9 @@ class TextActivity() : Activity(), Parcelable {
                     FileInputStream(currentFile)
                 )
                 imageView.setImageBitmap(currentImage)
-                Toast.makeText(applicationContext, "Text written", Toast.LENGTH_SHORT).show()
+
             } else {
-                Toast.makeText(applicationContext, "ERROR: Text written", Toast.LENGTH_LONG).show()
+
 
             }
         }
@@ -164,8 +164,7 @@ class TextActivity() : Activity(), Parcelable {
                 x = drawTextPointA!!.x.toInt()
                 y = drawTextPointA!!.y.toInt()
             } else {
-                Toast.makeText(applicationContext, "Error : no point clicked", Toast.LENGTH_SHORT)
-                    .show()
+
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
 
