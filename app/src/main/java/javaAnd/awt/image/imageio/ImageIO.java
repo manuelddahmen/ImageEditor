@@ -63,8 +63,10 @@ public class ImageIO {
         }
         return null;
     }
-
     public static boolean write(Bitmap imageOut, String jpg, File out) throws IOException {
+
+Picasso.get().load(imgFile).placeholder(R.drawable.ic_launcher_background).into(holder.imageIV)
+   } public static boolean write(Bitmap imageOut, String jpg, File out) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(out);
         imageOut.compress(Bitmap.CompressFormat.JPEG, 10, fileOutputStream);
         fileOutputStream.close();
