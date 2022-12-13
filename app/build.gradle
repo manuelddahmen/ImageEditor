@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 1182000
+def code = 1183000
 
 android {
     bundle {
@@ -16,14 +16,14 @@ android {
         debug {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'manuel2'
-            keyPassword 'fafz7'
+            keyAlias 'manuel3'
+            keyPassword 'faf486f4azfz7'
         }
         release {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'manuel2'
-            keyPassword 'fafz7'
+            keyAlias 'manuel3'
+            keyPassword 'faf486f4azfz7'
         }
     }
     defaultConfig {
@@ -48,7 +48,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.5"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     kotlinOptions {
