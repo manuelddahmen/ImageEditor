@@ -33,7 +33,7 @@
     "project_id": "99536292102829291",
     "app_id": "107475763",
     "api_key": "DAEDACGXHZTB5DFRX3/4iGw3lSoe4btv6Q8W6V7ffbqJ76kLbRuIQM6uT7K+tuI07ilZCOIx7I1pCx+nOyv80iSYxeOLALfWlunABg==",
-    "package_name": "one.empty3.feature.app.maxSdk29.pro"
+    "package_name": "one.empty3.feature.app"
   },
   "oauth_client": {
     "client_id": "107475763",
@@ -41,7 +41,7 @@
   },
   "app_info": {
     "app_id": "107475763",
-    "package_name": "one.empty3.feature.app.maxSdk29.pro"
+    "package_name": "one.empty3.feature.app"
   },
   "service": {
     "analytics": {
@@ -75,12 +75,12 @@
   "configuration_version": "3.0",
   "appInfos": [
     {
-      "package_name": "one.empty3.feature.app.maxSdk29.pro",
+      "package_name": "one.empty3.feature.app",
       "client": {
         "app_id": "107475763"
       },
       "app_info": {
-        "package_name": "one.empty3.feature.app.maxSdk29.pro",
+        "package_name": "one.empty3.feature.app",
         "app_id": "107475763"
       },
       "oauth_client": {

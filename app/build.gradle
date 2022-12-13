@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 1183000
+def code = 1184000
 
 android {
     bundle {
@@ -28,7 +28,7 @@ android {
     }
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationId "one.empty3.feature.app.maxSdk29.pro"
+        applicationId "one.empty3.feature.app"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -52,7 +52,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildTypes {
         release {

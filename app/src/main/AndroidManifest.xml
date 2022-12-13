@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="one.empty3.feature.app.maxSdk29.pro">
+    package="one.empty3.feature.app">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:supportsRtl="true"
@@ -20,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"><!-->tools:ignore="AllowBackup"-->
 
         <activity
-            android:name=".ColorChooser"
+            android:name="one.empty3.feature.app.ColorChooser"
             android:exported="false"
             android:label="@string/title_activity_color_chooser"
             android:theme="@style/Theme.Design.Light">
@@ -30,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".TextActivity"
+            android:name="one.empty3.feature.app.TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
             android:theme="@style/Theme.Design.Light">
@@ -39,17 +40,17 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ChooseEffectsCompose"
+            android:name="one.empty3.feature.app.ChooseEffectsCompose"
             android:exported="false"
             android:label="@string/title_activity_choose_effects_compose"
             android:theme="@style/Theme.Design.Light" />
         <activity
-            android:name=".ChooseEffectList"
+            android:name="one.empty3.feature.app.ChooseEffectList"
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
             android:theme="@style/Theme.Design.Light" />
         <activity
-            android:name=".ChooseEffectsActivity2"
+            android:name="one.empty3.feature.app.ChooseEffectsActivity2"
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
             android:theme="@style/Theme.Design.Light" />
@@ -63,13 +64,13 @@
         -->
         <!--
         <activity
-            android:name=".one.empty3.feature.app.maxSdk29.pro.CameraPreview"
+            android:name=".one.empty3.feature.app.CameraPreview"
             android:exported="false"
             android:label="@string/title_activity_camera_preview"
             android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
         -->
         <activity
-            android:name=".ChooseEffectsActivity"
+            android:name="one.empty3.feature.app.ChooseEffectsActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.Light">
             <intent-filter>
@@ -86,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyCameraActivity"
+            android:name="one.empty3.feature.app.MyCameraActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light">
 
@@ -107,7 +108,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- filter for sending text or images; accepts SEND action and text or image data -->
             <intent-filter>
@@ -137,7 +137,7 @@
             -->
         </activity> <!-- FileProvider used to share photos with other apps -->
         <activity
-            android:name=".LicenceUserData"
+            android:name="one.empty3.feature.app.LicenceUserData"
             android:exported="false"
             android:theme="@style/Theme.Design.Light" />
 
