@@ -12,6 +12,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        // Add the Maven address.
+        maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
@@ -22,6 +24,8 @@ buildscript {
         // in the individual module build.gradle files
         //classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
         //classpath('com.google.ar:core:1.33.0')
+        // Add dependencies.
+        classpath 'com.huawei.agconnect:agcp:1.5.2.300'
     }
 }
 
@@ -29,6 +33,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // Add the Maven address.
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 

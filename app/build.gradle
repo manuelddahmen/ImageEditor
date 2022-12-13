@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 
 
-def code = 1150000
+def code = 1151000
 
 android {
     bundle {
@@ -88,12 +88,13 @@ android {
 
         sdk29 {
             dimension "featureVersion"
-            compileSdkVersion 33
+            compileSdkVersion 32
             defaultConfig {
-                targetSdkVersion 31
-                minSdkVersion 30
+                targetSdkVersion 32
+                minSdkVersion 31
                 JavaVersion.VERSION_17
-                versionCode 129 + code
+                versionCode 10000000
+                versionName "1.0"
                 kotlin {
                     version "$kotlin_version32"
                 }
@@ -130,6 +131,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     //implementation 'com.google.ar:core:1.32.0'
     implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation 'junit:junit:4.12'
     // Unit testing
     testImplementation 'androidx.test.ext:junit:1.1.3'
     testImplementation 'androidx.test:rules:1.4.0'
@@ -149,6 +151,8 @@ dependencies {
     //implementation "androidx.core:core-ktx:+"
     //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version31"
     implementation("com.jgoodies:jgoodies-common:1.8.1")
+    // Add dependencies.
+    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 }
 
 publishing {
@@ -172,3 +176,6 @@ publishing {
 repositories {
     mavenCentral()
 }
+
+// Add the information to the bottom of the file.
+apply plugin: 'com.huawei.agconnect'

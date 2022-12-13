@@ -24,7 +24,7 @@
             android:name=".ColorChooser"
             android:exported="false"
             android:label="@string/title_activity_color_chooser"
-            android:theme="@style/Theme.FeatureAppmain">
+            android:theme="@style/Theme.Design.Light">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -79,8 +79,9 @@
                 <action android:name="android.media.action.VIDEO_CAMERA" />
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
-                <action android:name="android.intent.action.MAIN" />
+                <!--                <action android:name="android.intent.action.MAIN" />-->
 
+                <!-- Default for launch requests -->
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
