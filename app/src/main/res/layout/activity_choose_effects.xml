@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="one.empty3.feature.app.ChooseEffectsActivity"
+    tools:context=".ChooseEffectsActivity"
     android:theme="@style/Theme.Design.Light">
 
 
