@@ -131,7 +131,7 @@
             app:layout_constraintTop_toTopOf="@id/currentImageView" />
     </LinearLayout>
 
-    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+    <one.empty3.feature.app.ImageViewSelection
         android:id="@+id/currentImageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"

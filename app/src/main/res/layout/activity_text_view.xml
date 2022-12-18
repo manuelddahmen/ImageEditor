@@ -21,7 +21,7 @@
             android:text="@string/back_button_text_activity"
             style="?android:attr/buttonBarStyle" />
 
-        <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+        <one.empty3.feature.app.ImageViewSelection
             android:id="@+id/imageViewOnImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
