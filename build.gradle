@@ -1,7 +1,7 @@
+def compose_version = '1.3.2'
+def kotlin_version = '1.7.20'
 buildscript {
     ext {
-        compose_version32 = '1.3.2'
-        kotlin_version32 = '1.7.20'
 
     }
 
@@ -11,22 +11,20 @@ buildscript {
         google()
         mavenCentral()
         // Add the Maven address.
-        maven { url 'https://developer.huawei.com/repo/' }
+        //maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
-        //classpath "androidx.databinding:databinding-ktx:7.2.2"
-        //classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2'
-        // NOTE: Do not place your application dependencies here; they belong
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version32"
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20"
         // in the individual module build.gradle files
-        //classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
+        classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
         //classpath('com.google.ar:core:1.33.0')
         // Add dependencies.
-        classpath 'com.huawei.agconnect:agcp:1.5.2.300'
+        //classpath 'com.huawei.agconnect:agcp:1.5.2.300'
     }
 }
-
+/*
 allprojects {
     repositories {
         google()
@@ -35,7 +33,7 @@ allprojects {
         maven { url 'https://developer.huawei.com/repo/' }
     }
 }
-
+*/
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
