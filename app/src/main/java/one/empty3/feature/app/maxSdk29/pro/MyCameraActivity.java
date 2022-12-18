@@ -87,6 +87,7 @@ public class MyCameraActivity extends Activity {
     private PixM currentPixM = null;
     private boolean loaded;
     private int maxRes = 200;
+    private boolean workingResolutionOriginal = false;
 /*
     class LoadImage extends AsyncTask {
 
@@ -322,7 +323,7 @@ public class MyCameraActivity extends Activity {
             public void onClick(View v) {
                 if (currentFile != null) {
 
-                    saveImageState();
+                    saveImageState(isWorkingResolutionOriginal());
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     int requestExternalStorage = 1;
@@ -481,7 +482,7 @@ public class MyCameraActivity extends Activity {
         });
 
         if (!isLoaded()) {
-            loadImageState();
+            loadImageState(isWorkingResolutionOriginal());
         }
     }
 
@@ -490,7 +491,7 @@ public class MyCameraActivity extends Activity {
         return loaded;
     }
 
-    public void saveImageState() {
+    public void saveImageState(boolean imageViewOriginal) {
         boolean file = true;
 
         imageView = findViewById(R.id.currentImageView);
@@ -506,20 +507,17 @@ public class MyCameraActivity extends Activity {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
                 bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
             } else {
-                if (getMaxRes() > 0) {
-                    bitmap = Bitmap.createBitmap(
-                            Math.min(drawable.getIntrinsicWidth(), getMaxRes()),
-                            Math.min(drawable.getIntrinsicHeight(), getMaxRes()),
-                            Bitmap.Config.ARGB_8888);
-                } else {
-                    bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
-                            Bitmap.Config.ARGB_8888);
-
-                }
+                bitmap = Bitmap.createBitmap(
+                        Math.min(drawable.getIntrinsicWidth(), getMaxRes() > 0 ?
+                                imageView.getWidth() : (getMaxRes() > 0 ? getMaxRes() : imageView.getWidth())),
+                        Math.min(drawable.getIntrinsicHeight(), getMaxRes() > 0 ?
+                                imageView.getHeight() : (getMaxRes() > 0 ? getMaxRes() : imageView.getHeight())),
+                        Bitmap.Config.ARGB_8888);
             }
 
             Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.setBounds(0, 0, getMaxRes() == 0 ? canvas.getWidth() : getMaxRes(),
+                    getMaxRes() == 0 ? canvas.getHeight() : getMaxRes());
             drawable.draw(canvas);
         }
 
@@ -540,14 +538,27 @@ public class MyCameraActivity extends Activity {
         ed1.putString("workingImage", encoded);
         ed1.apply();
         OutputStream fos = null;
+        if (imageViewOriginal) {
+            File filesFile = getFilesFile("imageViewOriginal.jpg");
+            try {
+                fos = new FileOutputStream(filesFile);
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+
+                System.err.println("Image updated");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         try {
-            fos = new FileOutputStream(getFilesFile("imageView.jpg"));
+            File filesFile = getFilesFile("imageView.jpg");
+            fos = new FileOutputStream(filesFile);
             bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 
             System.err.println("Image updated");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
     int getImageRatio(Bitmap bitmap) {
@@ -567,14 +578,21 @@ public class MyCameraActivity extends Activity {
         return maxRes;
     }
 
-    public void loadImageState() {
+    public void loadImageState(boolean originalImage) {
         boolean file = true;
         String ot = "";
-        File imageFile = getFilesFile("imageView.jpg");
+        File imageFile = getFilesFile("imageViewOriginal.jpg");
+        File imageFileLow = getFilesFile("imageView.jpg");
 
         if (file && imageFile.exists()) {
             try {
-                Bitmap imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
+                Bitmap imageViewBitmap = null;
+                if (originalImage) {
+                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
+                } else {
+                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFileLow));
+                }
+
                 if (imageViewBitmap != null) {
                     imageView = (ImageView) this.findViewById(R.id.currentImageView);
                     if (imageView != null) {
@@ -710,7 +728,7 @@ public class MyCameraActivity extends Activity {
     }
 
     private void openUserData(View view) {
-        saveImageState();
+        saveImageState(isWorkingResolutionOriginal());
         Intent intent = new Intent(view.getContext(), LicenceUserData.class);
         startActivity(intent);
     }
@@ -806,7 +824,7 @@ public class MyCameraActivity extends Activity {
             if (!file1.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file1);
                 System.err.print("Image written 1/2 " + file1 + " return");
-                saveImageState();
+                saveImageState(isWorkingResolutionOriginal());
                 //System.err.println("File (photo) " + file1.getAbsolutePath());
                 return file1;
             }
@@ -818,7 +836,7 @@ public class MyCameraActivity extends Activity {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file2);
                 System.err.print("Image written 2/2 " + file2 + " return");
                 //System.err.println("File (photo) " + file2.getAbsolutePath());
-                saveImageState();
+                saveImageState(isWorkingResolutionOriginal());
                 return file2;
             }
         } catch (Exception ex) {
@@ -858,7 +876,7 @@ public class MyCameraActivity extends Activity {
                 }
 
 
-                saveImageState();
+                saveImageState(isWorkingResolutionOriginal());
 
 
                 String root = Environment.getExternalStorageDirectory().toString();
@@ -939,14 +957,14 @@ public class MyCameraActivity extends Activity {
 
                 currentFile = myPhotoV2022;
                 System.err.println("Set as class member");
-                saveImageState();
+                saveImageState(isWorkingResolutionOriginal());
                 System.err.println("SaveImageState");
 
                 //createCurrentUniqueFile();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            saveImageState();
+            saveImageState(isWorkingResolutionOriginal());
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
         }
@@ -1013,7 +1031,7 @@ public class MyCameraActivity extends Activity {
                         ex.printStackTrace();
                     }
                 }
-                saveImageState();
+                saveImageState(isWorkingResolutionOriginal());
             }
         }
     }
@@ -1021,13 +1039,13 @@ public class MyCameraActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadImageState();
+        loadImageState(isWorkingResolutionOriginal());
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        loadImageState();
+        loadImageState(isWorkingResolutionOriginal());
     }
 
     public void fillFromStorageState(File data) {
@@ -1049,7 +1067,7 @@ public class MyCameraActivity extends Activity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            saveImageState();
+            saveImageState(isWorkingResolutionOriginal());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1060,7 +1078,7 @@ public class MyCameraActivity extends Activity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
 
 
-        loadImageState();
+        loadImageState(isWorkingResolutionOriginal());
 
         try {
             if (savedInstanceState != null) {
@@ -1099,7 +1117,7 @@ public class MyCameraActivity extends Activity {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        saveImageState();
+        saveImageState(isWorkingResolutionOriginal());
         if (outState != null) {
             outState.putString("currentFile", currentFile.getAbsolutePath());
             outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
@@ -1128,7 +1146,7 @@ public class MyCameraActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        saveImageState();
+        saveImageState(isWorkingResolutionOriginal());
         super.onDestroy();
     }
 
@@ -1148,6 +1166,14 @@ public class MyCameraActivity extends Activity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isWorkingResolutionOriginal() {
+        return workingResolutionOriginal;
+    }
+
+    public void setWorkingResolutionOriginal(boolean workingResolutionOriginal) {
+        this.workingResolutionOriginal = workingResolutionOriginal;
     }
 }
 
