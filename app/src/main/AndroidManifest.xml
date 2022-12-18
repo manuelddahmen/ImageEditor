@@ -20,16 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"><!-->tools:ignore="AllowBackup"-->
 
         <activity
-            android:name=".ColorChooser"
-            android:exported="false"
-            android:label="@string/title_activity_color_chooser"
-            android:theme="@style/Theme.Design.Light">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
             android:name=".TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
