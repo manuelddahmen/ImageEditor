@@ -58,7 +58,6 @@ import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
-import wseemann.media.BuildConfig;
 
 public class MyCameraActivity extends Activity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
@@ -138,27 +137,28 @@ public class MyCameraActivity extends Activity {
         return null;
     }
 
-    Bitmap loadImageFromPreferences() {
-        Bitmap bitmap = null;
+    /*
+        Bitmap loadImageFromPreferences() {
+            Bitmap bitmap = null;
 
-        SharedPreferences gm = getSharedPreferences("image", MODE_PRIVATE);
-        if (gm != null) {
-            String ot = gm.getString("workingImage", "");
-            if (ot.length() > 0) {
-                byte[] imageAsBytes = Base64.decode(ot.getBytes(), Base64.DEFAULT);
-                ImageView image = (ImageView) this.findViewById(R.id.currentImageView);
+            SharedPreferences gm = getSharedPreferences("image", MODE_PRIVATE);
+            if (gm != null) {
+                String ot = gm.getString("workingImage", "");
+                if (ot.length() > 0) {
+                    byte[] imageAsBytes = Base64.decode(ot.getBytes(), Base64.DEFAULT);
+                    ImageView image = (ImageView) this.findViewById(R.id.currentImageView);
 
 
-                image.setImageBitmap(bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+                    image.setImageBitmap(bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
 
-                maxRes = Math.max(image.getWidth(), image.getHeight());
+                    maxRes = Math.max(image.getWidth(), image.getHeight());
+                }
             }
+
+
+            return bitmap;
         }
-
-
-        return bitmap;
-    }
-
+    */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,11 +195,6 @@ public class MyCameraActivity extends Activity {
             }
         } else {
             System.err.println("intent data Main==null");
-            Bitmap bitmap = loadImageFromPreferences();
-            if (bitmap != null) {
-                currentBitmap = currentFile = new Utils().writePhoto(this, bitmap, "prefs");
-                loaded = true;
-            }
         }
 
 
@@ -999,7 +994,7 @@ public class MyCameraActivity extends Activity {
 
             if (currentFile != null) {
                 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.LIBRARY_PACKAGE_NAME + ".provider", currentFile);
+                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.APPLICATION_ID + ".provider", currentFile);
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getName());
                 String fileStr = currentFile.getName();
                 if (myPath.toFile().exists()) {
@@ -1023,7 +1018,7 @@ public class MyCameraActivity extends Activity {
                     try {
                         copy(currentFile.toPath(), myPath);
                         Uri uri = Uri.fromFile(file);
-                        uri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.LIBRARY_PACKAGE_NAME + ".provider", file);
+                        uri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", file);
                         Intent intent1 = new Intent(Intent.ACTION_SEND, uri);
                         startActivity(intent1);
                         //MediaStore.EXTRA_OUTPUT

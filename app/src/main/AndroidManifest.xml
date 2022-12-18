@@ -138,6 +138,13 @@
             android:theme="@style/Theme.Design.Light" />
 
         <provider
+            android:name=".MyFileProvider"
+            android:authorities="one.empty3.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            ...
+        </provider>
+        <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
