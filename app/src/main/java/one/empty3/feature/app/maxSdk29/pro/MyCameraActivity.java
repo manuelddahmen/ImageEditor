@@ -17,12 +17,14 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -88,7 +90,7 @@ public class MyCameraActivity extends Activity {
     private boolean loaded;
     private int maxRes = 200;
     private boolean workingResolutionOriginal = false;
-/*
+
     class LoadImage extends AsyncTask {
 
         private final File file;
@@ -103,8 +105,8 @@ public class MyCameraActivity extends Activity {
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentBitmap));
-                System.err.println("Photo bitmap : " + currentBitmap.toURI() + "\nFile exists?" + currentBitmap.exists());
+                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
+                System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
                 imageView.setImageBitmap(photo);
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded");
@@ -117,7 +119,7 @@ public class MyCameraActivity extends Activity {
             return null;
         }
     }
-    */
+
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
         InputStream input = getContentResolver().openInputStream(uri);
@@ -138,38 +140,15 @@ public class MyCameraActivity extends Activity {
         return null;
     }
 
-    /*
-        Bitmap loadImageFromPreferences() {
-            Bitmap bitmap = null;
-
-            SharedPreferences gm = getSharedPreferences("image", MODE_PRIVATE);
-            if (gm != null) {
-                String ot = gm.getString("workingImage", "");
-                if (ot.length() > 0) {
-                    byte[] imageAsBytes = Base64.decode(ot.getBytes(), Base64.DEFAULT);
-                    ImageView image = (ImageView) this.findViewById(R.id.currentImageView);
-
-
-                    image.setImageBitmap(bitmap = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-
-                    maxRes = Math.max(image.getWidth(), image.getHeight());
-                }
-            }
-
-
-            return bitmap;
-        }
-    */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        if ((savedInstanceState == null)) {
+        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
             maxRes = MAX_RES_DEFAULT;
         } else {
-            maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                    savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
+            maxRes = savedInstanceState.getInt("maxRes");
         }
         setContentView(R.layout.main);
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
@@ -185,8 +164,6 @@ public class MyCameraActivity extends Activity {
                 currentFile = new File(data.getPath());
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
-                loaded = true;
-
                 Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
 
                 if (bitmap != null) {
@@ -389,7 +366,7 @@ public class MyCameraActivity extends Activity {
 
             }
         });
-        imageView.setOnTouchListener((v, event) -> {
+        imageView.setOnTouchListener((View v, MotionEvent event) -> {
             imageView = findViewById(R.id.currentImageView);
             if (currentFile != null) {
                 int[] location = new int[2];
