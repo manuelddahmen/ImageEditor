@@ -472,20 +472,24 @@ public class MyCameraActivity extends Activity {
 
         Drawable drawable = imageView.getDrawable();
 
-        Bitmap bitmap;
-        if (drawable instanceof BitmapDrawable) bitmap = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap bitmapOriginal = null;
+        Bitmap bitmap = null;
+        if (drawable instanceof BitmapDrawable)
+            bitmapOriginal = ((BitmapDrawable) drawable).getBitmap();
         else if (drawable.getCurrent() instanceof BitmapDrawable) {
-            bitmap = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
+            if (isWorkingResolutionOriginal()) {
+                bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
+            }
+            bitmap = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
                 bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
             } else {
-                bitmap = Bitmap.createBitmap(
-                        Math.min(drawable.getIntrinsicWidth(), getMaxRes() > 0 ?
-                                imageView.getWidth() : (getMaxRes() > 0 ? getMaxRes() : imageView.getWidth())),
-                        Math.min(drawable.getIntrinsicHeight(), getMaxRes() > 0 ?
-                                imageView.getHeight() : (getMaxRes() > 0 ? getMaxRes() : imageView.getHeight())),
-                        Bitmap.Config.ARGB_8888);
+                // ???
+                if (isWorkingResolutionOriginal()) {
+                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
+                }
+                bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
             }
 
             Canvas canvas = new Canvas(bitmap);
@@ -494,21 +498,34 @@ public class MyCameraActivity extends Activity {
             drawable.draw(canvas);
         }
 
+        Bitmap bm = null;
+        if (bitmap != null) {
+            bm = bitmap;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, baos); //bm is the bitmap object
+            byte[] b = baos.toByteArray();
 
-        if (drawable == null) {
+            String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+            OutputStream fos = null;
+            try {
+                File filesFile = getFilesFile(IMAGE_VIEW_JPG);
+                fos = new FileOutputStream(filesFile);
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 
-            return;
+                System.err.println("Image updated");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
 
-        Bitmap bm = bitmap;
+        if (imageViewOriginal && bitmapOriginal != null) {
+            bm = bitmapOriginal;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, baos); //bm is the bitmap object
+            byte[] b = baos.toByteArray();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 90, baos); //bm is the bitmap object
-        byte[] b = baos.toByteArray();
-
-        String encoded = Base64.encodeToString(b, Base64.DEFAULT);
-        OutputStream fos = null;
-        if (imageViewOriginal) {
+            String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+            OutputStream fos = null;
             File filesFile = getFilesFile(IMAGE_VIEW_ORIGINAL_JPG);
             try {
                 fos = new FileOutputStream(filesFile);
@@ -519,15 +536,7 @@ public class MyCameraActivity extends Activity {
                 e.printStackTrace();
             }
         }
-        try {
-            File filesFile = getFilesFile(IMAGE_VIEW_JPG);
-            fos = new FileOutputStream(filesFile);
-            bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 
-            System.err.println("Image updated");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -557,7 +566,7 @@ public class MyCameraActivity extends Activity {
         if (file && imageFile.exists()) {
             try {
                 Bitmap imageViewBitmap = null;
-                if (originalImage) {
+                if (isWorkingResolutionOriginal()) {
                     imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
                 } else {
                     imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFileLow));
