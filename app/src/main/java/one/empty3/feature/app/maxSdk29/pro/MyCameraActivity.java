@@ -61,6 +61,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 public class MyCameraActivity extends Activity {
+    private static Undo dataWithUndo;
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     private static final int MAX_RES_DEFAULT = 200;
@@ -463,6 +464,11 @@ public class MyCameraActivity extends Activity {
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());
         }
+
+        dataWithUndo = new Undo(null, null);
+        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile,
+                isWorkingResolutionOriginal()));
+
     }
 
 
