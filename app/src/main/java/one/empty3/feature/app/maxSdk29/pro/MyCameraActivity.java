@@ -5,7 +5,6 @@ import static java.nio.file.Files.copy;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,6 +62,8 @@ public class MyCameraActivity extends Activity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     private static final int MAX_RES_DEFAULT = 200;
+    public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
+    public static final String IMAGE_VIEW_JPG = "imageView.jpg";
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     private Activity thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
@@ -529,12 +530,9 @@ public class MyCameraActivity extends Activity {
         byte[] b = baos.toByteArray();
 
         String encoded = Base64.encodeToString(b, Base64.DEFAULT);
-        SharedPreferences.Editor ed1 = getSharedPreferences("image", MODE_PRIVATE).edit();
-        ed1.putString("workingImage", encoded);
-        ed1.apply();
         OutputStream fos = null;
         if (imageViewOriginal) {
-            File filesFile = getFilesFile("imageViewOriginal.jpg");
+            File filesFile = getFilesFile(IMAGE_VIEW_ORIGINAL_JPG);
             try {
                 fos = new FileOutputStream(filesFile);
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
@@ -545,7 +543,7 @@ public class MyCameraActivity extends Activity {
             }
         }
         try {
-            File filesFile = getFilesFile("imageView.jpg");
+            File filesFile = getFilesFile(IMAGE_VIEW_JPG);
             fos = new FileOutputStream(filesFile);
             bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 
@@ -577,7 +575,7 @@ public class MyCameraActivity extends Activity {
         boolean file = true;
         String ot = "";
         File imageFile = getFilesFile("imageViewOriginal.jpg");
-        File imageFileLow = getFilesFile("imageView.jpg");
+        File imageFileLow = getFilesFile(IMAGE_VIEW_JPG);
 
         if (file && imageFile.exists()) {
             try {
@@ -605,22 +603,7 @@ public class MyCameraActivity extends Activity {
             }
 
 
-        } else {
-
-            SharedPreferences gm = getSharedPreferences("image", MODE_PRIVATE);
-            ot = gm.getString("workingImage", "");
-            if (ot.length() > 0) {
-                byte[] imageAsBytes = Base64.decode(ot.getBytes(), Base64.DEFAULT);
-                ImageView image = (ImageView) this.findViewById(R.id.currentImageView);
-
-
-                image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-
-
-            }
         }
-
-
     }
 
     private void createCurrentUniqueFile() {
@@ -1078,10 +1061,10 @@ public class MyCameraActivity extends Activity {
         try {
             if (savedInstanceState != null) {
                 maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                        savedInstanceState.getInt("maxRes") : 0;
-                currentFile = new File((String) savedInstanceState.getString("currentFile"));
-                currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
-                currentDir = new File((String) savedInstanceState.getString("currentDir"));
+                        savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
+                //currentFile = new File((String) savedInstanceState.getString("currentFile"));
+                //currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
+                //currentDir = new File((String) savedInstanceState.getString("currentDir"));
                 if (currentBitmap != null) {
                     File bitmap = new File(currentFile.getAbsolutePath());
                     try {
@@ -1114,10 +1097,10 @@ public class MyCameraActivity extends Activity {
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         saveImageState(isWorkingResolutionOriginal());
         if (outState != null) {
-            outState.putString("currentFile", currentFile.getAbsolutePath());
-            outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
-            outState.putString("currentDir", currentDir.getAbsolutePath());
-            outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
+            //outState.putString("currentFile", currentFile.getAbsolutePath());
+            //outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
+            //outState.putString("currentDir", currentDir.getAbsolutePath());
+            //outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
             outState.putInt("maxRes", maxRes);
             this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
         }
