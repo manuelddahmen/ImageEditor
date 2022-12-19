@@ -453,7 +453,13 @@ public class MyCameraActivity extends Activity {
                 }
             }
         });
-
+        View addText = findViewById(R.id.buttonAddText);
+        addText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addText(view);
+            }
+        });
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());
         }
@@ -1045,7 +1051,7 @@ public class MyCameraActivity extends Activity {
         loadImageState(isWorkingResolutionOriginal());
 
         try {
-            if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("maxRes")) {
                 maxRes = savedInstanceState.getInt("maxRes") > -1 ?
                         savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
                 //currentFile = new File((String) savedInstanceState.getString("currentFile"));
@@ -1116,17 +1122,19 @@ public class MyCameraActivity extends Activity {
 
     public void addText(View view) {
         try {
-            Intent textIntent = new Intent(Intent.ACTION_VIEW);
-            currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
-                    BitmapFactory.decodeStream(new FileInputStream(currentFile)),
-                    "TextOn");
+            if (currentFile != null) {
+                Intent textIntent = new Intent(Intent.ACTION_VIEW);
+                currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
+                        BitmapFactory.decodeStream(new FileInputStream(currentFile)),
+                        "TextOn");
 
-            textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-            textIntent.setClass(getApplicationContext(), TextActivity.class);
-            if (rectfs.size() > 0)
-                textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
-            else textIntent.putExtra("rect", new Rect());
-            startActivity(textIntent);
+                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+                textIntent.setClass(getApplicationContext(), TextActivity.class);
+                if (rectfs.size() > 0)
+                    textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
+                else textIntent.putExtra("rect", new Rect());
+                startActivity(textIntent);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

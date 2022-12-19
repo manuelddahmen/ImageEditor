@@ -28,7 +28,14 @@ Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
 FIX: Java version 17
-
+FIX: Delete ASyncTask
+FIX: Sdk API level min 31
+110 (problème : ne démarre pas)
+-> 29 -permissions: network
+112 Restrict unwanted permissions
+114: add main, delete auto-load
+Try to make it compatible with Android 10
+FIX: try to solve white screen problem (not solved yet)
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -66,4 +73,11 @@ BUG Add text
 Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
+FIX: Delete ASyncTask
+FIX: Sdk API level min 31
+110 (problème : ne démarre pas)
+112 Restrict unwanted permissions
+114: add main, delete auto-load
+Essayer de rendre à nouveau compatible avec Android 10
+FIX: try to solve white screen problem (not solved yet)
 </fr-FR>
