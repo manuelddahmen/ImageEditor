@@ -12,6 +12,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
 import javaAnd.awt.image.BufferedImage
@@ -21,6 +22,8 @@ import java.io.FileOutputStream
 import java.util.*
 
 public class Utils {
+    private lateinit var file1: File
+    private lateinit var file2: File
     val appDir = "/storage/emulated/0/Android/data/" + BuildConfig.APPLICATION_ID + "/"
 
     public val INT_WRITE_STORAGE: Int = 8728932
@@ -42,9 +45,9 @@ public class Utils {
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
-        val file1 = File(dirName1 + File.separator + name2 + ".jpg")
+        file1 = File(dirName1 + File.separator + name2 + ".jpg")
         val dir2 = File(dirName2)
-        val file2 = File(dirName2 + File.separator + name2 + ".jpg")
+        file2 = File(dirName2 + File.separator + name2 + ".jpg")
         val uriSavedImage = Uri.fromFile(file2)
         if (!dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created \$dir1")
@@ -82,40 +85,52 @@ public class Utils {
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-            try {
-                if (!file1.exists()) {
-                    if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
-                        written = true;
-                        fileWritten = file1;
-                        return file1
-                    }
-                }
-            } catch (ex: NullPointerException) {
-
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-            try {
-                if (!file2.exists()) {
-                    if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
-                        written = true;
-                        fileWritten = file2;
-                        return file2
-                    }
-                }
-            } catch (ex: NullPointerException) {
-
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
         }
+        return writeFile(file1, file2, bitmap)
+    }
+
+    public fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: Array<Int>
+    ) {
+        System.err.println("Ok: files permission Utils")
+    }
+
+    public fun writeFile(file1: File, file2: File, bitmap: Bitmap): File {
+        var written = true;
+        var fileWritten = file1
+        try {
+            if (!file1.exists()) {
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
+                    fileWritten = file1;
+                    return file1
+                }
+            }
+        } catch (ex: NullPointerException) {
+
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        try {
+            if (!file2.exists()) {
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
+                    written = true;
+                    fileWritten = file2;
+                    return file2
+                }
+            }
+        } catch (ex: NullPointerException) {
+
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
         if (written) {
             return fileWritten;
         } else {
             Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
             throw NullPointerException("No file written, Utils.writePhoto");
         }
-
     }
-
 }

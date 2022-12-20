@@ -1,5 +1,6 @@
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -27,6 +28,8 @@ class TextActivity() : Activity(), Parcelable {
     private lateinit var currentImage: Bitmap
     private lateinit var rect: RectF
     private var drawTextPointA: Point? = null
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
@@ -91,7 +94,7 @@ class TextActivity() : Activity(), Parcelable {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 if (v != null && event != null) {
                     var location = IntArray(2)
-                    v?.getLocationOnScreen(location)
+                    v.getLocationOnScreen(location)
                     val viewX = location[0]
                     val viewY = location[1]
                     location = intArrayOf(0, 0)
@@ -137,7 +140,7 @@ class TextActivity() : Activity(), Parcelable {
             val scale: Float = resources.displayMetrics.density
 
             val file = Utils().writePhoto(this, currentImage, "text")
-            // resource bitmaps are imutable,
+            // resource bitmaps are immutable,
             // so we need to convert it to mutable one
             val currentImage2 = currentImage.copy(currentImage.config, true)
             val canvas = Canvas(currentImage2)
@@ -153,7 +156,7 @@ class TextActivity() : Activity(), Parcelable {
             // text size in pixels
             paint.textSize = (fontSize * scale).toInt().toFloat()
             // text shadow
-            paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+            //paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
 
             // draw text to the Canvas center
             val bounds = Rect()
@@ -169,7 +172,7 @@ class TextActivity() : Activity(), Parcelable {
                 x = drawTextPointA!!.x.toInt()
                 y = drawTextPointA!!.y.toInt()
             } else {
-
+                return null
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
 
