@@ -1,9 +1,11 @@
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
@@ -13,8 +15,9 @@ import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
-import com.google.android.material.slider.Slider
 import javaAnd.awt.Point
 import java.io.File
 import java.io.FileInputStream
@@ -23,7 +26,8 @@ import java.util.*
 
 
 class TextActivity() : Activity(), Parcelable {
-    private var currentFile: File? = null
+    private val INT_WRITE_STORAGE: Int = 9247492
+    private lateinit var currentFile: File
     private var text: String = ""
     private lateinit var currentImage: Bitmap
     private lateinit var rect: RectF
@@ -35,10 +39,10 @@ class TextActivity() : Activity(), Parcelable {
         setContentView(R.layout.activity_text_view)
 
         val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
-        if (intent != null) run {
+        if (intent != null && intent.data != null) run {
             val currentImageUri: Uri = intent.data!!
-            currentImage = BitmapFactory.decodeFile(currentImageUri.toFile().toString())
-            currentFile = currentImageUri.toFile()
+            this.currentImage = BitmapFactory.decodeFile(currentImageUri.toFile().toString())
+            this.currentFile = currentImageUri.toFile()
 
             imageView.setImageBitmap(currentImage)
         }
@@ -55,7 +59,7 @@ class TextActivity() : Activity(), Parcelable {
 
                 //val file = Utils().writePhoto(this, currentImage, name)
 
-                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+                textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
                 textIntent.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
@@ -68,24 +72,57 @@ class TextActivity() : Activity(), Parcelable {
 
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
-            val textEdit = findViewById<TextView>(R.id.textViewOnImage)
-            text = (textEdit as TextView).text.toString()
-            val bmpFile = drawTextToBitmap(this, R.id.imageViewOnImage, text)
-            if (bmpFile != null) {
-                currentFile = bmpFile
-                currentImage = BitmapFactory.decodeStream(
-                    FileInputStream(currentFile)
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
-                imageView.setImageBitmap(currentImage)
-
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "Error while writing text: method returned null",
-                    Toast.LENGTH_SHORT
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
                 )
-                    .show()
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), INT_WRITE_STORAGE
+                )
+            }
 
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+
+
+                val textEdit = findViewById<TextView>(R.id.textViewOnImage)
+                this.text = (textEdit as TextView).text.toString()
+                val bmpFile = drawTextToBitmap(applicationContext, R.id.imageViewOnImage, text)
+                if (bmpFile != null && bmpFile.exists()) {
+                    this.currentFile = bmpFile
+                    this.currentImage = BitmapFactory.decodeStream(
+                        FileInputStream(currentFile)
+                    )
+                    imageView.setImageBitmap(currentImage)
+
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Error while writing text: method returned null",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+
+                }
             }
         }
 
@@ -134,54 +171,86 @@ class TextActivity() : Activity(), Parcelable {
     }
 
 
-    private fun drawTextToBitmap(mContext: Context, resourceId: Int, mText: String): File? {
+    private fun drawTextToBitmap(context: Context, resourceId: Int, mText: String): File? {
         try {
-            val resources: Resources = mContext.resources
-            var scale: Float = resources.displayMetrics.density
-
-            val file = Utils().writePhoto(this, currentImage, "text")
-            // resource bitmaps are immutable,
-            // so we need to convert it to mutable one
-            val currentImage2 = currentImage.copy(currentImage.config, true)
-            val canvas = Canvas(currentImage2)
-            // new antialised Paint
-            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-            // text color - #3D3D3D
-            paint.setColor(Color.rgb(110, 110, 110))
-
-
-            val dpText: EditText = findViewById(R.id.font_size)
-
-            val fontSize: Float = java.lang.Float.parseFloat(dpText.text.toString()) / 4
-            // text size in pixels
-            paint.textSize = (fontSize * scale).toInt().toFloat()
-            // text shadow
-            //paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
-
-            // draw text to the Canvas center
-            val bounds = Rect()
-            paint.getTextBounds(mText, 0, mText.length, bounds)
-
-            var x = 0
-            var y = 0
-
-            x = (currentImage2.width - bounds.width()) / 6
-            y = (currentImage2.height + bounds.height()) / 5
-
-            if (drawTextPointA != null) {
-                x = drawTextPointA!!.x.toInt()
-                y = drawTextPointA!!.y.toInt()
-            } else {
-                scale = 1f
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), INT_WRITE_STORAGE
+                )
             }
-            canvas.drawText(mText, x * scale, y * scale, paint)
 
-            return Utils().writePhoto(this, currentImage2, "draw-text")
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                val resources: Resources = context.resources
+                var scale: Float = resources.displayMetrics.density
+
+                val file = Utils().writePhoto(this, currentImage, "text")
+                // resource bitmaps are immutable,
+                // so we need to convert it to mutable one
+                val currentImage2 = currentImage.copy(currentImage.config, true)
+                val canvas = Canvas(currentImage2)
+                // new antialised Paint
+                val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+                // text color - #3D3D3D
+                paint.setColor(Color.rgb(110, 110, 110))
+
+
+                val dpText: EditText = findViewById(R.id.font_size)
+
+                val fontSize: Float = java.lang.Float.parseFloat(dpText.text.toString()) / 4
+                // text size in pixels
+                paint.textSize = (fontSize * scale).toInt().toFloat()
+                // text shadow
+                //paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+
+                // draw text to the Canvas center
+                val bounds = Rect()
+                paint.getTextBounds(mText, 0, mText.length, bounds)
+
+                var x = 0
+                var y = 0
+
+                x = (currentImage2.width - bounds.width()) / 6
+                y = (currentImage2.height + bounds.height()) / 5
+
+                if (drawTextPointA != null) {
+                    x = drawTextPointA!!.x.toInt()
+                    y = drawTextPointA!!.y.toInt()
+                } else {
+                    scale = 1f
+                }
+                canvas.drawText(mText, x * scale, y * scale, paint)
+
+                return Utils().writePhoto(this, currentImage2, "drawtext-")
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
             return null
         }
+        return null
     }
 
 }

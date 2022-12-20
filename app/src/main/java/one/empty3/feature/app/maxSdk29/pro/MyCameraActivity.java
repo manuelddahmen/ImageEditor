@@ -18,6 +18,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
@@ -229,30 +230,33 @@ public class MyCameraActivity extends Activity {
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView = findViewById(R.id.currentImageView);
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                System.err.println("Click on Effect button");
-                if (currentFile != null || currentBitmap != null) {
-                    if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
-                    try {
-                        currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
-                                BitmapFactory.decodeStream(new FileInputStream(currentFile)),
-                                "EffectOn");
-                        intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-                        intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
-                        intent.putExtra("data", currentFile);
-                        View viewById = findViewById(R.id.editMaximiumResolution);
-                        intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
-                        System.err.println("Start activity : EffectChoose");
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                if (currentFile != null) {
+                    imageView = findViewById(R.id.currentImageView);
+                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                    System.err.println("Click on Effect button");
+                    if (currentFile != null || currentBitmap != null) {
+                        if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
+                        try {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
+                                        BitmapFactory.decodeStream(new FileInputStream(currentFile)),
+                                        "EffectOn");
+                            }
+                            intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+                            intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
+                            intent.putExtra("data", currentFile);
+                            View viewById = findViewById(R.id.editMaximiumResolution);
+                            intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
+                            System.err.println("Start activity : EffectChoose");
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        startActivity(intent);
+                    } else {
+                        System.err.println("No file assigned");
+                        System.err.println("Can't Start activity : EffectChoose");
                     }
-                    startActivity(intent);
-                } else {
-                    System.err.println("No file assigned");
-                    System.err.println("Can't Start activity : EffectChoose");
                 }
-
             }
         });
         View fromFiles = findViewById(R.id.choosePhotoButton);
@@ -1127,22 +1131,15 @@ public class MyCameraActivity extends Activity {
     }
 
     public void addText(View view) {
-        try {
-            if (currentFile != null) {
-                Intent textIntent = new Intent(Intent.ACTION_VIEW);
-                currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
-                        BitmapFactory.decodeStream(new FileInputStream(currentFile)),
-                        "TextOn");
-
-                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-                textIntent.setClass(getApplicationContext(), TextActivity.class);
-                if (rectfs.size() > 0)
-                    textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
-                else textIntent.putExtra("rect", new Rect());
-                startActivity(textIntent);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (currentFile != null) {
+            Intent textIntent = new Intent(Intent.ACTION_VIEW);
+            textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+            textIntent.setClass(getApplicationContext(), TextActivity.class);
+            if (rectfs.size() > 0)
+                textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
+            else
+                textIntent.putExtra("rect", new Rect());
+            startActivity(textIntent);
         }
     }
 

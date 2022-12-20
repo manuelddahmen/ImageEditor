@@ -181,6 +181,10 @@ class ChooseEffectsActivity2 : Activity() {
                     return@setOnClickListener;
                 }
                 classnames.forEach {
+                    if (it == null) {
+                        Toast.makeText(this, "Effect===null ... ??", Toast.LENGTH_SHORT).show()
+                        return@forEach
+                    }
                     val effectListStr: String = it
                     val trim = it.trim()
                     if (it.isNullOrBlank()) {
