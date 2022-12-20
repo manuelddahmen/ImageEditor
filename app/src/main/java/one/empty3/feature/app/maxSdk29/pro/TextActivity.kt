@@ -137,7 +137,7 @@ class TextActivity() : Activity(), Parcelable {
     private fun drawTextToBitmap(mContext: Context, resourceId: Int, mText: String): File? {
         try {
             val resources: Resources = mContext.resources
-            val scale: Float = resources.displayMetrics.density
+            var scale: Float = resources.displayMetrics.density
 
             val file = Utils().writePhoto(this, currentImage, "text")
             // resource bitmaps are immutable,
@@ -172,7 +172,7 @@ class TextActivity() : Activity(), Parcelable {
                 x = drawTextPointA!!.x.toInt()
                 y = drawTextPointA!!.y.toInt()
             } else {
-                return null
+                scale = 1f
             }
             canvas.drawText(mText, x * scale, y * scale, paint)
 
