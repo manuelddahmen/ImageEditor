@@ -76,7 +76,12 @@ class TextActivity() : Activity(), Parcelable {
                 imageView.setImageBitmap(currentImage)
 
             } else {
-
+                Toast.makeText(
+                    applicationContext,
+                    "Error while writing text: method returned null",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
 
             }
         }
@@ -127,7 +132,7 @@ class TextActivity() : Activity(), Parcelable {
 
 
     private fun drawTextToBitmap(mContext: Context, resourceId: Int, mText: String): File? {
-        return try {
+        try {
             val resources: Resources = mContext.resources
             val scale: Float = resources.displayMetrics.density
 
@@ -171,7 +176,8 @@ class TextActivity() : Activity(), Parcelable {
             return Utils().writePhoto(this, currentImage2, "draw-text")
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
+            return null
         }
     }
 
