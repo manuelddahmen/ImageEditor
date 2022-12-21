@@ -9,12 +9,14 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
@@ -171,6 +173,7 @@ class TextActivity() : Activity(), Parcelable {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun drawTextToBitmap(context: Context, resourceId: Int, mText: String): File? {
         try {
             if (ContextCompat.checkSelfPermission(
