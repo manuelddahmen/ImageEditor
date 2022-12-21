@@ -166,11 +166,14 @@ public class MyCameraActivity extends Activity {
                 currentFile = new File(data.getPath());
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
-                Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
+                if (currentFile == null) {
+                    Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
 
-                if (bitmap != null) {
-                    imageView.setImageBitmap(bitmap);
-                    loaded = true;
+                    if (bitmap != null) {
+                        imageView.setImageBitmap(bitmap);
+                        currentFileOriginalResolution = currentFile;
+                        loaded = true;
+                    }
                 }
             }
         } else {

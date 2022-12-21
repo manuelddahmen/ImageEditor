@@ -173,7 +173,7 @@ class TextActivity() : Activity(), Parcelable {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.S)
+    @SuppressLint("NewApi")
     private fun drawTextToBitmap(context: Context, resourceId: Int, mText: String): File? {
         try {
             if (ContextCompat.checkSelfPermission(
