@@ -71,43 +71,11 @@ class TextActivity() : Activity(), Parcelable {
 
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ), INT_WRITE_STORAGE
-                )
-            }
-
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                var textString: String =
-                    ((findViewById<TextView>(R.id.textViewOnImage).text.toString())
-                        ?: ("")) as String
-                drawTextToBitmap(R.id.imageViewOnImage, textString)
-                //writeText()
-            }
+            applyText()
         }
+        textApply.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
+            applyText()
+        })
 
         imageView.setOnClickListener {
             var location = IntArray(2)
@@ -130,8 +98,8 @@ class TextActivity() : Activity(), Parcelable {
                     val viewX = location[0]
                     val viewY = location[1]
                     location = intArrayOf(0, 0)
-                    val x: Float = event.getRawX() - viewX
-                    val y: Float = event.getRawY() - viewY
+                    val x: Float = event.rawX - viewX
+                    val y: Float = event.rawY - viewY
 
                     drawTextPointA = Point(x.toInt(), y.toInt())
                     return true
@@ -140,6 +108,51 @@ class TextActivity() : Activity(), Parcelable {
             }
 
         })
+    }
+
+    private fun applyText(): Boolean {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), INT_WRITE_STORAGE
+            )
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            var textString: String =
+                (findViewById<TextView>(R.id.textViewOnImage).text.toString())
+            val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewOnImage, textString)
+            if (drawTextToBitmap != null) {
+                currentFile = drawTextToBitmap
+                currentImage = BitmapFactory.decodeFile(currentFile.toString())
+                val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
+                imageView.setImageBitmap(this.currentImage)
+            }
+            return true
+        }
+        return false
     }
 
 
@@ -179,7 +192,7 @@ class TextActivity() : Activity(), Parcelable {
             // new antialised Paint
             val paint = Paint(Paint.ANTI_ALIAS_FLAG)
             // text color - #3D3D3D
-            paint.setColor(Color.rgb(110, 110, 110))
+            paint.color = Color.rgb(110, 110, 110)
 
 
             val dpText: EditText = findViewById(R.id.font_size)
@@ -214,7 +227,6 @@ class TextActivity() : Activity(), Parcelable {
             Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
             return null
         }
-        return null
     }
 
 
