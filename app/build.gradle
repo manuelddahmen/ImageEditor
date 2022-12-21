@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 
 
-def code = 1262000
+def code = 1282000
 
 android {
     bundle {

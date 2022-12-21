@@ -9,16 +9,16 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.net.toFile
 import javaAnd.awt.Point
 import java.io.File
@@ -108,7 +108,7 @@ class TextActivity() : Activity(), Parcelable {
 
                 val textEdit = findViewById<TextView>(R.id.textViewOnImage)
                 this.text = (textEdit as TextView).text.toString()
-                val bmpFile = drawTextToBitmap(applicationContext, R.id.imageViewOnImage, text)
+                val bmpFile = drawTextToBitmap(R.id.imageViewOnImage, text)
                 if (bmpFile != null && bmpFile.exists()) {
                     this.currentFile = bmpFile
                     this.currentImage = BitmapFactory.decodeStream(
@@ -174,39 +174,34 @@ class TextActivity() : Activity(), Parcelable {
 
 
     @SuppressLint("NewApi")
-    private fun drawTextToBitmap(context: Context, resourceId: Int, mText: String): File? {
-        try {
-            if (ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                != PackageManager.PERMISSION_GRANTED
-            ) {
+    private fun drawTextToBitmap(resourceId: Int, mText: String): File? {
+        run {
+            val permissionsStorage = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                Manifest.permission.MANAGE_MEDIA
+            )
+            var permission4: Boolean = true;
+            for (permissionName in permissionsStorage) {
+                permission4 == (permission4 && (applicationContext.checkSelfPermission(
+                    permissionName
+                ) == PackageManager.PERMISSION_GRANTED));
+            }
+            if (permission4 != true) {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(
+                        Manifest.permission.MANAGE_MEDIA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
                     ), INT_WRITE_STORAGE
                 )
             }
+            try {
 
-            if (ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                val resources: Resources = context.resources
+                val resources: Resources = applicationContext.resources
                 var scale: Float = resources.displayMetrics.density
 
                 val file = Utils().writePhoto(this, currentImage, "text")
@@ -247,13 +242,13 @@ class TextActivity() : Activity(), Parcelable {
                 canvas.drawText(mText, x * scale, y * scale, paint)
 
                 return Utils().writePhoto(this, currentImage2, "drawtext-")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
+                return null
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
             return null
         }
-        return null
     }
 
 }

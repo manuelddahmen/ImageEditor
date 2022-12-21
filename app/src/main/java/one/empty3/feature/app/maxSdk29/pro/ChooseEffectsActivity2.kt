@@ -181,15 +181,11 @@ class ChooseEffectsActivity2 : Activity() {
                     return@setOnClickListener;
                 }
                 classnames.forEach {
-                    if (it == null) {
-                        Toast.makeText(this, "Effect===null ... ??", Toast.LENGTH_SHORT).show()
-                        return@forEach
-                    }
-                    val effectListStr: String = it
-                    val trim = it.trim()
                     if (it.isNullOrBlank()) {
                         return@setOnClickListener
                     }
+                    val effectListStr: String = it
+                    val trim = it.trim()
                     if (effectListStr.contains(trim)) {
                         val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
