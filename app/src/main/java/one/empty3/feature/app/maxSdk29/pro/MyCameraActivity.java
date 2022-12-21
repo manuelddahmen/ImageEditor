@@ -166,7 +166,7 @@ public class MyCameraActivity extends Activity {
                 currentFile = new File(data.getPath());
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
-                if (currentFile == null) {
+                if (currentFile != null) {
                     Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
 
                     if (bitmap != null) {
