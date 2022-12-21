@@ -149,6 +149,7 @@ class TextActivity() : Activity(), Parcelable {
                 currentImage = BitmapFactory.decodeFile(currentFile.toString())
                 val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
                 imageView.setImageBitmap(this.currentImage)
+                System.out.println("ImageView Text UPDATED")
             }
             return true
         }
