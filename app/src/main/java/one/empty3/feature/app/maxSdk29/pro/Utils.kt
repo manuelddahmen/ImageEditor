@@ -36,7 +36,7 @@ public class Utils() {
         //Folder is already created
         var name2 = "photo-" + UUID.randomUUID().toString()
         var dirName1 = this.appDir
-        var dirName2 = this.appDir
+        var dirName2 = activity.applicationContext.getFilesDir().absolutePath
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
