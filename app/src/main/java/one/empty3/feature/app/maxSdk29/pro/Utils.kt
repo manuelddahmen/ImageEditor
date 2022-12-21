@@ -27,7 +27,6 @@ public class Utils() {
      * @param name
      * @return file
      */
-    @RequiresApi(Build.VERSION_CODES.S)
     fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
 
         var written = false;
@@ -35,8 +34,8 @@ public class Utils() {
 
         //Folder is already created
         var name2 = "photo-" + UUID.randomUUID().toString()
-        var dirName1 = this.appDir
-        var dirName2 = activity.applicationContext.getFilesDir().absolutePath
+        var dirName1 = activity.applicationContext.getFilesDir().absolutePath
+        var dirName2 = this.appDir
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
@@ -45,93 +44,57 @@ public class Utils() {
         var file2 = File(dirName2 + File.separator + name2 + ".jpg")
         val uriSavedImage = Uri.fromFile(file2)
         if (!dir1.exists()) if (!dir1.mkdirs()) {
-            System.err.print("Dir not created \$dir1")
+            System.err.print("Dir not created \$dir1" + file1.absolutePath)
         }
         if (!dir2.exists()) if (!dir2.mkdirs()) {
-            System.err.println("Dir not created \$dir2")
+            System.err.println("Dir not created \$dir2" + file2.absolutePath)
         }
         return writeFile(activity, bitmap, file1, file2)
     }
 
-    public fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: Array<Int>
-    ) {
-        System.err.println("Ok: files permission Utils")
-        return
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
     public fun writeFile(activity: Activity, bitmap: Bitmap, file1: File, file2: File): File? {
-        if (ContextCompat.checkSelfPermission(
-                activity.applicationContext,
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE
-            )
-            != PackageManager.PERMISSION_GRANTED ||
-            ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.MANAGE_MEDIA
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                requestPermissions(
-                    activity,
-                    arrayOf(
-                        Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                        Manifest.permission.MANAGE_MEDIA
-                    ), INT_WRITE_STORAGE
-                )
-            }
-        }
-
-        if (ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.MANAGE_MEDIA
-            )
-            == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                activity,
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            var written = false;
-            var fileWritten: File? = null;
-            try {
-                if (!file1.exists()) {
-                    if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
-                        fileWritten = file1;
-                        written = true
-                        return file1
-                    }
+        var written = false;
+        var fileWritten: File? = null;
+        try {
+            if (!file1.exists()) {
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
+                    fileWritten = file1;
+                    written = true
+                    System.out.println("File written: $file1")
+                    return file1
                 }
-            } catch (ex: NullPointerException) {
-                ex.printStackTrace()
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-            try {
-                if (!file2.exists()) {
-                    if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
-                        written = true;
-                        fileWritten = file2;
-                        return file2
-                    }
-                }
-            } catch (ex: NullPointerException) {
-                ex.printStackTrace()
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-
-            if (written) {
-                return fileWritten
             } else {
-                Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
-                throw NullPointerException("No file written, Utils.writePhoto");
+                System.err.println("File exists: $file1")
             }
+        } catch (ex: android.system.ErrnoException) {
+            ex.printStackTrace()
+        } catch (ex: NullPointerException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
         }
-        return file1
+        try {
+            if (!file2.exists()) {
+                if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
+                    written = true;
+                    fileWritten = file2;
+                    System.out.println("File written: $file2")
+                    return file2
+                }
+            }
+        } catch (ex: android.system.ErrnoException) {
+            ex.printStackTrace()
+        } catch (ex: NullPointerException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        if (written) {
+            return fileWritten
+        } else {
+            Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
+            throw NullPointerException("No file written, Utils.writePhoto");
+        }
     }
 }

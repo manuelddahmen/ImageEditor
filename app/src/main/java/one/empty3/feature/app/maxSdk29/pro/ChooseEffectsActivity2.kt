@@ -394,7 +394,7 @@ class ChooseEffectsActivity2 : Activity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         Log.i("effects#logging", "restore Effect Activity")
-        val string = savedInstanceState?.getStringArray("classnames")
+        val string = savedInstanceState.getStringArray("classnames")
         classnames = ArrayList()
         super.onRestoreInstanceState(savedInstanceState)
     }
