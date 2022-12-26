@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -61,7 +62,7 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-public class MyCameraActivity extends Activity {
+public class MyCameraActivity extends AppCompatActivity {
     private static Undo dataWithUndo;
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
@@ -959,6 +960,7 @@ public class MyCameraActivity extends Activity {
 
 
                 int byteRead = -1;
+
 
                 OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
 

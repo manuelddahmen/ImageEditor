@@ -10,21 +10,31 @@
         android:layout_height="match_parent"
         android:theme="@style/Theme.Design.Light">
 
-        <ImageView
+        <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/preview_of_shapes"
             android:theme="@style/Theme.Design.Light">
 
-        </ImageView>
+        </one.empty3.feature.app.maxSdk29.pro.ImageViewSelection>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_choose_shape"
-            android:theme="@style/Theme.Design.Light">
+        <Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        </androidx.fragment.app.FragmentContainerView>
+            <androidx.appcompat.widget.ActionMenuView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:src="@color/material_dynamic_primary70"
+                    android:contentDescription="@string/primary_pencil_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </ImageButton>
+            </androidx.appcompat.widget.ActionMenuView>
+        </Toolbar>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

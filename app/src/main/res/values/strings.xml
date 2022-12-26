@@ -117,4 +117,5 @@
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
     <string name="commentEffect">!!</string>
+    <string name="primary_pencil_color">Primary pencil color</string>
 </resources>

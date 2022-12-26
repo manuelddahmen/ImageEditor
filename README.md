@@ -36,7 +36,12 @@ FIX: Sdk API level min 31
 114: add main, delete auto-load
 Try to make it compatible with Android 10
 FIX: try to solve white screen problem (not solved yet)
-</en-US>
+?? TextActivity
+128 Cette version et les prochaines : fixer mes problèmes actuels avant de faire une 2.0
+129 (Remove all files permission)
+DEL MaxSdk 28 for WRITE_EXTERNAL_STORAGE.
+Emoji support
+TextActivity works!!!</en-US>
 <fr-FR>
 Quelques effets artistiques
 BUG: fixer des problèmes et préparer la version avec peinture et sélection de régions (IN PROGRESS)
@@ -80,4 +85,10 @@ FIX: Sdk API level min 31
 114: add main, delete auto-load
 Essayer de rendre à nouveau compatible avec Android 10
 FIX: try to solve white screen problem (not solved yet)
+?? TextActivity
+128 Cette version et les prochaines : fixer mes problèmes actuels avant de faire une 2.0
+129 (Remove all files permission)
+DEL MaxSdk 28 for WRITE_EXTERNAL_STORAGE.
+TextActivity works!!!)
+Emoji support
 </fr-FR>

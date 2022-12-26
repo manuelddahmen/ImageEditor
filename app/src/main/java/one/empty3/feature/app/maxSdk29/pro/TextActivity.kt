@@ -1,7 +1,6 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,18 +13,20 @@ import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
+import androidx.core.provider.FontRequest
+import androidx.emoji2.text.FontRequestEmojiCompatConfig
 import javaAnd.awt.Point
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.util.*
-import android.graphics.Bitmap as Bitmap
 
 
-class TextActivity() : Activity(), Parcelable {
+class TextActivity() : AppCompatActivity(), Parcelable {
     private val INT_WRITE_STORAGE: Int = 9247492
     private lateinit var currentFile: File
     private var text: String = ""
@@ -37,6 +38,7 @@ class TextActivity() : Activity(), Parcelable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
 
+
         val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
         if (intent != null && intent.data != null) run {
             val currentImageUri: Uri = intent.data!!
@@ -46,8 +48,6 @@ class TextActivity() : Activity(), Parcelable {
             imageView.setImageBitmap(currentImage)
         }
 
-        imageView.setOnClickListener {
-        }
 
         val backButton = findViewById<Button>(R.id.buttonTextBack)
 
@@ -77,18 +77,13 @@ class TextActivity() : Activity(), Parcelable {
             applyText()
         })
 
+        initImageView()
+    }
+
+    fun initImageView() {
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
         imageView.setOnClickListener {
-            var location = IntArray(2)
-            it.getLocationOnScreen(location)
-            val viewX = location[0]
-            val viewY = location[1]
-            location = intArrayOf(0, 0)
-            val x: Int = imageView.width - viewX
-            val y: Int = imageView.height - viewY
-
-            drawTextPointA = Point(x.toInt(), y.toInt())
         }
-
         imageView.setOnTouchListener(object : View.OnTouchListener {
 
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -97,10 +92,13 @@ class TextActivity() : Activity(), Parcelable {
                     v.getLocationOnScreen(location)
                     val viewX = location[0]
                     val viewY = location[1]
-                    location = intArrayOf(0, 0)
-                    val x: Float = event.rawX - viewX
-                    val y: Float = event.rawY - viewY
-
+                    val outRect = Rect()
+                    imageView.getDrawable().copyBounds(outRect)
+                    //location = intArrayOf(0, 0)
+                    val x =
+                        (event.rawX - viewX - outRect.left) / imageView.width * currentImage.width
+                    val y =
+                        (event.rawY - viewY - outRect.top) / imageView.height * currentImage.height
                     drawTextPointA = Point(x.toInt(), y.toInt())
                     return true
                 }
@@ -108,6 +106,7 @@ class TextActivity() : Activity(), Parcelable {
             }
 
         })
+
     }
 
     private fun applyText(): Boolean {
@@ -183,7 +182,7 @@ class TextActivity() : Activity(), Parcelable {
         try {
 
             val resources: Resources = applicationContext.resources
-            var scale: Float = resources.displayMetrics.density
+            val scale: Float = resources.displayMetrics.density
 
             val file = Utils().writePhoto(this, currentImage, "text-")
             // resource bitmaps are immutable,
@@ -202,7 +201,7 @@ class TextActivity() : Activity(), Parcelable {
             // text size in pixels
             paint.textSize = (fontSize * scale).toInt().toFloat()
             // text shadow
-            //paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+            paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
 
             // draw text to the Canvas center
             val bounds = Rect()
@@ -211,17 +210,18 @@ class TextActivity() : Activity(), Parcelable {
             var x = 0
             var y = 0
 
-            x = (currentImage2.width - bounds.width()) / 6
-            y = (currentImage2.height + bounds.height()) / 5
 
             if (drawTextPointA != null) {
-                x = drawTextPointA!!.x.toInt()
-                y = drawTextPointA!!.y.toInt()
-            } else {
-                scale = 0f
-            }
-            canvas.drawText(textToPrint, x * scale, y * scale, paint)
+                x = drawTextPointA!!.x.toInt() - bounds.width() / 2
+                y = drawTextPointA!!.y.toInt() + bounds.height() / 2
 
+            } else {
+                // Default : center
+                x = (-bounds.width()) / 2
+                y = (+bounds.height()) / 2
+            }
+            //canvas.drawText(textToPrint, x * scale, y * scale, paint)
+            canvas.drawText(textToPrint, x.toFloat(), y.toFloat(), paint)
             return Utils().writePhoto(this, currentImage2, "drawtext-")
         } catch (e: Exception) {
             e.printStackTrace()
@@ -241,8 +241,12 @@ class TextActivity() : Activity(), Parcelable {
             currentImage = BitmapFactory.decodeStream(
                 FileInputStream(currentFile)
             )
-            imageView.setImageBitmap(currentImage)
 
+
+            imageView.setImageBitmap(currentImage)
+            initImageView()
+
+            imageView.invalidate()
 
         } else {
             Toast.makeText(
