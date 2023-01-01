@@ -41,7 +41,8 @@ FIX: try to solve white screen problem (not solved yet)
 129 (Remove all files permission)
 DEL MaxSdk 28 for WRITE_EXTERNAL_STORAGE.
 Emoji support
-TextActivity works!!!</en-US>
+TextActivity works!!!
+</en-US>
 <fr-FR>
 Quelques effets artistiques
 BUG: fixer des problèmes et préparer la version avec peinture et sélection de régions (IN PROGRESS)

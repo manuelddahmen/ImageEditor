@@ -103,8 +103,8 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public void setP(int i, int j, Point3D p) {
-        if (bitmap != null) {
-            bitmap.setPixel(j, i, Lumiere.getInt(new double[]
+        if (bitmap != null && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
+            bitmap.setPixel(i, j, Lumiere.getInt(new double[]
                     {p.get(0), p.get(1), p.get(2)}));
             return;
         }
@@ -116,8 +116,8 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public Point3D getP(int i, int j) {
-        if (bitmap != null) {
-            int pixel = bitmap.getPixel(j, i);
+        if (bitmap != null && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
+            int pixel = bitmap.getPixel(i, j);
             double[] p = Lumiere.getDoubles(pixel);
             return new Point3D(p[0], p[1], p[2]);
         }
