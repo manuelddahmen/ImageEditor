@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.feature20220726.tryocr;
 
 import one.empty3.feature20220726.shape.Rectangle;

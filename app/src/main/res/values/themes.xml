@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  -->
+
 <resources>
 
     <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" parent="android:Theme.Material.Light.NoActionBar">

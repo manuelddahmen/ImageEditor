@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package javaAnd.awt.image;
 
 //import android.graphics.Bitmap;

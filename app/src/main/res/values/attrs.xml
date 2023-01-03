@@ -1,3 +1,9 @@
+<!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  -->
+
 <resources>
     <declare-styleable name="FullscreenAttrs">
         <attr name="fullscreenBackgroundColor" format="color"/>

@@ -1,3 +1,9 @@
+<!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  -->
+
 <resources>
     <declare-styleable name="MyEffectListRecyclerView">
         <attr name="exampleString" format="string" />

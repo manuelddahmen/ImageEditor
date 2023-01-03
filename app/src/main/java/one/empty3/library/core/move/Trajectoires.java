@@ -1,6 +1,12 @@
 
 
 /*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
+/*
  *  This file is part of Empty3.
  *
  *     Empty3 is free software: you can redistribute it and/or modify

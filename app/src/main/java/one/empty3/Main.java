@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3;
 
 import android.os.Build;
@@ -19,8 +25,8 @@ public class Main {
             listProcessClasses.add(Classification.class.newInstance());
             //listProcessClasses.add(CornerDetectProcess.class.newInstance());
             //listProcessClasses.add(CurveFitting.class.newInstance());
-            listProcessClasses.add(DBScanProcess.class.newInstance());
-            listProcessClasses.add(DericheFilterProcess.class.newInstance());
+            //listProcessClasses.add(DBScanProcess.class.newInstance());
+            //listProcessClasses.add(DericheFilterProcess.class.newInstance());
             listProcessClasses.add(DiffEnergy.class.newInstance());
             listProcessClasses.add(Draw.class.newInstance());
             listProcessClasses.add(ExtremaProcess.class.newInstance());

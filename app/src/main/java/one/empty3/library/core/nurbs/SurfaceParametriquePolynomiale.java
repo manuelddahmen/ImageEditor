@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;

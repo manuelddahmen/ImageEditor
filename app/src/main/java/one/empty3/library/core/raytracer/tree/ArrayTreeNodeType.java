@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.library.core.raytracer.tree;
 
 import one.empty3.library.*;

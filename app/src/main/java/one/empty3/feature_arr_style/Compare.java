@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.feature_arr_style;
 /*
 import one.one.one.empty3.io.ProcessFile ;

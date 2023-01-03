@@ -1,4 +1,10 @@
 /*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
+/*
  *
  *  *  This file is part of Empty3.
  *  *

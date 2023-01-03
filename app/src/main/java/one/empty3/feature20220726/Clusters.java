@@ -1,4 +1,10 @@
 /*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
+/*
 DBSCAN(D, eps, MinPts)
    C = 0
    pour chaque point P non visité des données D

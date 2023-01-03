@@ -1,4 +1,10 @@
 /*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
+/*
 comparaipar cerlcle d intensite et
 de lumierrs filtrers.
 */

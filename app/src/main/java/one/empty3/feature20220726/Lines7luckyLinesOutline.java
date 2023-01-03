@@ -1,15 +1,10 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.feature20220726;
-
-import one.empty3.io.ProcessFile;
-import one.empty3.library.ColorTexture;
-import one.empty3.library.LineSegment;
-import one.empty3.library.Lumiere;
-import one.empty3.library.Point3D;
-import one.empty3.library.core.lighting.Colors;
-
-import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.*;
-import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import javaAnd.awt.Point;
+import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.io.ProcessFile;
+import one.empty3.library.LineSegment;
+import one.empty3.library.Point3D;
 
 public class Lines7luckyLinesOutline extends ProcessFile {
 
@@ -86,7 +87,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
 
 
             int[][] p = new int[pixM.getColumns()][pixM.getLines()];//!!
-            for (double levels : Arrays.asList(1.0/*, 0.8, 0.6, 0.4, 0.3, 0.2/*, 0.1/*,0.0*/)) {
+            for (double levels : Arrays.asList(1.0, 0.8, 0.6, 0.4, 0.3, 0.2, 0.1/*,0.0*/)) {
 
                 pz = 0.0;
                 py = 0.0;
@@ -242,18 +243,22 @@ public class Lines7luckyLinesOutline extends ProcessFile {
 
             PixM img3 = new PixM(pixM.getColumns(), pixM.getLines());
 
+            Point3D p2 = new Point3D();
+
             list3.forEach(p3s -> {
-                android.graphics.Color r = Color.color((float) 1.0, (float) r(), (float) 1.0);
+                //android.graphics.Color r = Color.color((float) 1.0, (float) r(), (float) 1.0);
+                p2.set(0, 1.0);
+                p2.set(1, r());
+                p2.set(2, 1.0);
                 if (p3s.size() >= 2) {
                     for (int j = 0; j < p3s.size() - 1; j++) {
                         Point3D p1 = p3s.get(j);
 
-                        img3.setValues((int) (double) p1.getX(), (int) (double) p1.getY(),
-                                Lumiere.getDoubles(r.toArgb()));
+                        img3.setP((int) (double) p1.getX(), (int) (double) p1.getY(), p2);
                     }
                 }
             });
-
+/*
             System.out.println("Lines : " + lines.size());
 
 
@@ -308,7 +313,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
                     }
                 }
             }
-
+*/
             ImageIO.write(img3.normalize(0, 1).getImage(), "jpg", out);
 
             return true;

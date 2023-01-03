@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023.
+ *
+ *
+ */
+
 package one.empty3.feature20220726.selection;
 
 import one.empty3.library.Point3D;
