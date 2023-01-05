@@ -20,19 +20,19 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.feature20220726.kmeans.K_Clusterer;
-import one.empty3.feature20220726.kmeans.MakeDataset;
-import one.empty3.feature20220726.kmeans.ReadDataset;
-import one.empty3.io.ProcessFile;
-
-import javaAnd.awt.image.imageio.ImageIO;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.io.ProcessFile;
+import one.empty3.library.Point3D;
+
 public class DBScanProcess extends ProcessFile {
+    private double[] size;
+    private int countCentroids;
+
     public List<double[]> ns(List<double[]> points, double eps, double[] ps) {
         List<double[]> n = new ArrayList<>();
         for (double[] p : points) {
@@ -45,20 +45,22 @@ public class DBScanProcess extends ProcessFile {
 
 
     List<double[]> points;
-    double[] size;
-    HashMap<Integer, List<double[]>> clusters = new HashMap<>();
-    HashMap<double[], Integer> centroids = new HashMap<>();
-    int pointsMax = 10000;
-    double eps = 2.0;
-    int minPts = 10;
-    int c = 0;
+    HashMap<Integer, List<double[]>> clusters;
+    HashMap<double[], Integer> centroids;
+    int pointsMax;
+    double eps;
+    int minPts;
+    int c;
 
 
     PixM pix;
 
     public void dbscan() {
-
-
+        countCentroids = 9;
+        for (int i = 0; i < countCentroids; i++) {
+            centroids.put(new double[]{Math.random() * pix.getColumns(),
+                    Math.random() * pix.getLines()}, i);
+        }
         size = new double[]{
                 pix.getColumns(), pix.getLines(), 1.0, 1.0, 1.0
         };
@@ -110,44 +112,48 @@ public class DBScanProcess extends ProcessFile {
 
     //main method
     public boolean process(File in, File out) {
-
-        // points.
-        try {
-            new MakeDataset(in,
-                    new File(out.getAbsolutePath() + ".csv"), -1);
-
-            new K_Clusterer().process(in, new File(out.getAbsolutePath() + ".csv"), out, maxRes);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        points = new ArrayList();
+        clusters = new HashMap<>();
+        centroids = new HashMap<>();
+        pointsMax = 10000;
+        eps = 2.0;
+        minPts = 10;
+        c = 0;
 
 
         try {
             pix = PixM
-                    .getPixM(ImageIO.read(in), 100);
+                    .getPixM(ImageIO.read(in), maxRes);
         } catch (Exception ex1) {
             ex1.printStackTrace();
             return false;
         }
+
+
         PixM pix2 = new PixM(
                 pix.getColumns(),
                 pix.getLines()
         );
 
 
-        ReadDataset r1 = new ReadDataset();
-        r1.features.clear();
-        //Scanner sc = new Scanner(System.in);
-        //System.out.println("Enter the filename with path");
-        String file = out.getAbsolutePath() + ".csv";
-        try {
-            r1.read(new File(file)); //load data
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        points = r1.features;
+        clusters.put(0, new ArrayList<double[]>());
 
+        for (int i = 0; i < pix.getColumns(); i++) {
+            for (int j = 0; j < pix.getLines(); j++) {
+                double[] values = new double[5];
+                Point3D values1 = pix.getP(i, j);
+                values[0] = i;
+                values[1] = j;
+                values[2] = values1.get(0);
+                values[3] = values1.get(1);
+                values[4] = values1.get(2);
+
+
+                clusters.get(0).add(values);
+            }
+
+        }
+        points = clusters.get(0);
 
         dbscan();
 
@@ -157,8 +163,7 @@ public class DBScanProcess extends ProcessFile {
                 for (int j = 0; j < 3; j++) {
                     pix2.setCompNo(j);
                     pix2.set((int) (float) (p[0]),
-                            (int) (float) (p[1]),
-                            1.0 * p[j]);
+                            (int) (float) (p[1]), p[j + 2]);
                 }
         });
         try {
