@@ -188,7 +188,8 @@ public class MyCameraActivity extends AppCompatActivity {
                 System.err.println("File returned from effects' list = " + data);
                 currentBitmap = currentFile;
                 if (currentFile != null) {
-                    Bitmap bitmap = ImageIO.read(currentFile).getBitmap();
+
+                    Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile)).getBitmap();
 
                     if (bitmap != null) {
                         imageView.setImageBitmap(bitmap);

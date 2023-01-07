@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javaAnd.awt.Color;
 import javaAnd.awt.image.imageio.ImageIO;
@@ -106,9 +107,9 @@ public class K_Clusterer /*extends ReadDataset*/ {
         final PixM pix;
         try {
             if (res > 0)
-                pix = PixM.getPixM(ImageIO.read(in), res);
+                pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
             else
-                pix = new PixM(ImageIO.read(in));
+                pix = new PixM(Objects.requireNonNull(ImageIO.read(in)));
             PixM pix2 = new PixM(
                     pix.getColumns(),
                     pix.getLines()
