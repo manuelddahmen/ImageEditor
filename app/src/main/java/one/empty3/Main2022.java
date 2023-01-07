@@ -38,21 +38,11 @@ import one.empty3.feature20220726.Histogram3;
 import one.empty3.feature20220726.HoughTransform;
 import one.empty3.feature20220726.IdentNullProcess;
 import one.empty3.feature20220726.KMeans;
-import one.empty3.feature20220726.Lines;
-import one.empty3.feature20220726.Lines3;
-import one.empty3.feature20220726.Lines4;
-import one.empty3.feature20220726.Lines5;
-import one.empty3.feature20220726.Lines5colors;
-import one.empty3.feature20220726.Lines6;
 import one.empty3.feature20220726.Lines7luckyLinesOutline;
 import one.empty3.feature20220726.LocalExtremaProcess;
-import one.empty3.feature20220726.MagnitudeProcess;
 import one.empty3.feature20220726.ProxyValue;
 import one.empty3.feature20220726.ProxyValue2;
-import one.empty3.feature20220726.RegionLineCorner;
-import one.empty3.feature20220726.Transform1;
 import one.empty3.feature20220726.TrueHarrisProcess;
-import one.empty3.feature20220726.Voronoi;
 import one.empty3.feature20220726.histograms.Hist4Contour;
 import one.empty3.feature20220726.histograms.Hist4Contour2;
 import one.empty3.feature20220726.histograms.Histogram1;
@@ -90,21 +80,19 @@ public class Main2022 {
             listProcessClasses.put("IdentNullProcess", IdentNullProcess.class.newInstance());
             //listProcessClasses.put("", IsleProcess.class.newInstance());
             listProcessClasses.put("KMeans", KMeans.class.newInstance());
-            listProcessClasses.put("Lines", Lines.class.newInstance());
-            listProcessClasses.put("Lines3", Lines3.class.newInstance());
-            listProcessClasses.put("Lines4", Lines4.class.newInstance());
-            listProcessClasses.put("Lines5", Lines5.class.newInstance());
-            listProcessClasses.put("Lines5colors", Lines5colors.class.newInstance());
-            listProcessClasses.put("Lines6", Lines6.class.newInstance());
+            //listProcessClasses.put("Lines", Lines.class.newInstance());
+            //listProcessClasses.put("Lines3", Lines3.class.newInstance());
+            //listProcessClasses.put("Lines4", Lines4.class.newInstance());
+            //listProcessClasses.put("Lines5", Lines5.class.newInstance());
+            //listProcessClasses.put("Lines5colors", Lines5colors.class.newInstance());
+            //listProcessClasses.put("Lines6", Lines6.class.newInstance());
             listProcessClasses.put("Lines7luckyLinesOutline", Lines7luckyLinesOutline.class.newInstance());
-            listProcessClasses.put("LocalExtremaProcess", LocalExtremaProcess.class.newInstance());
-            listProcessClasses.put("MagnitudeProcess", MagnitudeProcess.class.newInstance());
             listProcessClasses.put("ProxyValue", ProxyValue.class.newInstance());
             listProcessClasses.put("ProxyValue2", ProxyValue2.class.newInstance());
-            listProcessClasses.put("RegionLineCorner", RegionLineCorner.class.newInstance());
-            listProcessClasses.put("Transform1", Transform1.class.newInstance());
+            //listProcessClasses.put("Transform1", Transform1.class.newInstance());
+            //listProcessClasses.put("MagnitudeProcess", MagnitudeProcess.class.newInstance());
             listProcessClasses.put("TrueHarrisProcess", TrueHarrisProcess.class.newInstance());
-            listProcessClasses.put("Voronoi", Voronoi.class.newInstance());
+            listProcessClasses.put("LocalExtremaProcess", LocalExtremaProcess.class.newInstance());
 
 
             indices.clear();
@@ -121,7 +109,7 @@ public class Main2022 {
     }
 
     public ArrayList<String> listOfEffects() {
-        if(effects==null)
+        if (effects == null)
             effects = new ArrayList<String>();
         return effects;
     }

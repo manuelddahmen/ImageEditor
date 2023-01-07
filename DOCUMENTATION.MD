@@ -44,7 +44,7 @@ Ok
 
 # Lines3: does nothing, doesn't return
 
-# KMeans: does nothing, doesn't return
+# KMeans: works
 
 # GradProcess: review algo
 
