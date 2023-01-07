@@ -217,7 +217,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
             for (int j1 = 0; j1 < list3.size(); j1++) {
                 //System.out.println("List3(i).size : " + list3.get(j1).size());
             }
-
+/*
             while (modified) {
                 modified = false;
                 for (int j1 = 0; j1 < list3.size(); j1++) {
@@ -249,7 +249,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
                         }
                     }
                 }
-            }
+            }*/
             System.out.println("List3.size : " + list3.size());
             for (int j1 = 0; j1 < list3.size(); j1++) {
                 //System.out.println("List3(i).size : " + list3.get(j1).size());

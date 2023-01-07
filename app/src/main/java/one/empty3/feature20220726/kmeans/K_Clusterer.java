@@ -38,8 +38,6 @@ import java.util.Map;
 import javaAnd.awt.Color;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.kmeans.ReadDataset;
-import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {
 
@@ -103,7 +101,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     //main method
     public void process(File in, File inCsv, File out, int res) throws IOException {
-
+        features = new ArrayList<>();
 
         final PixM pix;
         try {
@@ -122,12 +120,14 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
 
             ReadDataset r1 = new ReadDataset();
-            r1.features.clear();
             System.out.println("Enter the filename with path");
             r1.read(inCsv); //load data
             int ex = 1;
             clusters = new HashMap<>();
             centroids = new HashMap<>();
+
+            features = r1.features;
+
             do {
                 int k = K;
                 //Scanner sc = new Scanner(System.in);
@@ -203,15 +203,10 @@ public class K_Clusterer /*extends ReadDataset*/ {
                     dis = "Euclidean";
                 else
                     dis = "Manhattan";
-                System.out.println("\n*********Programmed by Shephalika Shekhar************\n*********Results************\nDistance Metric: " + dis);
-                System.out.println("Iterations: " + max_iterations);
-                System.out.println("Number of Clusters: " + k);
-                System.out.println("WCSS: " + wcss);
-                System.out.println("Press 1 if you want to continue else press 0 to exit..");
-                ex = 0;//sc.nextInt();
+                ex = 0;
             } while (ex == 1);
 
-            android.graphics.Color[] colors = new Color[k];
+            android.graphics.Color[] colors = new android.graphics.Color[k];
             for (int i = 0; i < k; i++)
                 colors[i] = Color.random();
             clustersPrint = clusters;
