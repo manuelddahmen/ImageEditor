@@ -6,9 +6,7 @@
 
 # Hist4Contours2: Works, but all in red component Transform1: makes images with only one or more points. Not good.
 
-# DBScanProcess: slow, never returns
-
-            //listProcessClasses.add(DBScanProcess.class.newInstance());
+# DBScanProcess: works
 
 # LocalExtrema: works
 
@@ -19,6 +17,8 @@
 Empty code.
 
 # Lines7luckyLinesOutline: immediately returns
+
+Ok
 
 # DiffEnergy: immediately returns
 
