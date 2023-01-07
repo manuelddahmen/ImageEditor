@@ -153,7 +153,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void setValues(int i, int j, double... v) {
         if (bitmap != null) {
-            bitmap.setPixel(j, i, Lumiere.getInt(new double[]
+            bitmap.setPixel(i, j, Lumiere.getInt(new double[]
                     {v[0], v[1], v[2]}));
             return;
         }
