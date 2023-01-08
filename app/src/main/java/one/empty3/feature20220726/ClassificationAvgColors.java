@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 import javaAnd.awt.image.BufferedImage;
@@ -43,9 +44,9 @@ public class ClassificationAvgColors extends ProcessFile {
         // Processed by "classification
         // Non filtered image
         BufferedImage original = ImageIO.read(in);
-        PixM pixMoriginal = new PixM(original);
+        PixM pixMOriginal = new PixM(Objects.requireNonNull(original));
         PixM toProcess = new PixM(original);
-        Map<Integer, double[]> c = classification.k_clusterer.centroids;
+        Map<Integer, double[]> c = classification.kClusterer.centroids;
         Map<Integer, Point3D> sum = new HashMap<>();
         Map<Integer, Integer> count = new HashMap<>();
         // Faire les moyennes des points de même groupe
@@ -54,7 +55,7 @@ public class ClassificationAvgColors extends ProcessFile {
             public void accept(Integer integer, double[] doubles) {
                 sum.putIfAbsent(integer, Point3D.O0);
                 count.putIfAbsent(integer, 0);
-                sum.put(integer, sum.get(integer).plus(pixMoriginal.getP((int) doubles[0], (int) doubles[1])));
+                sum.put(integer, sum.get(integer).plus(pixMOriginal.getP((int) doubles[0], (int) doubles[1])));
                 count.put(integer, count.get(integer) + 1);
             }
         });
@@ -82,6 +83,12 @@ public class ClassificationAvgColors extends ProcessFile {
             }
         });
 
-        return super.process(in, out);
+
+        try {
+            return ImageIO.write(toProcess.getImage(), "jpg", out);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

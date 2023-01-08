@@ -20,16 +20,17 @@
 
 package one.empty3.feature20220726;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Random;
+
 import javaAnd.awt.Color;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Random;
 
 public class Classification extends ProcessFile {
     Random random = new Random();
@@ -40,7 +41,24 @@ public class Classification extends ProcessFile {
 
 
     @Override
-    public boolean process(final File in, final File out) {
+    public boolean process(File in, final File out) {
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("effectClassification-", ".jpg");
+            Lines7luckyLinesOutline lines7luckyLinesOutline = new Lines7luckyLinesOutline();
+            lines7luckyLinesOutline.process(in, tempFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //!!! Border effect
+        in = tempFile;
+        if (in == null) {
+            try {
+                throw new FileNotFoundException("Temporary file in $tempFile");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         if (!in.getName().endsWith(".jpg"))
             return false;
         PixM selectPointColorMassAglo = null;
@@ -48,11 +66,10 @@ public class Classification extends ProcessFile {
         read = new BufferedImage(Objects.requireNonNull(ImageIO.read(in)).bitmap);
         selectPointColorMassAglo = PixM.getPixM(read, maxRes);
         imageOut = ImageIO.read(in);
-        assert selectPointColorMassAglo != null;
         SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read);
         int color = Color.WHITE;
-        for (int i = 0; i < selectPointColorMassAglo1.getColumns(); i += 1)
-            for (int j = 0; j < selectPointColorMassAglo1.getLines(); j += 1) {
+        for (int i = 0; i < imageOut.getWidth(); i += 1)
+            for (int j = 0; j < imageOut.getHeight(); j += 1) {
                 selectPointColorMassAglo1.setTmpColor(Color.random());
                 double v = selectPointColorMassAglo1.averageCountMeanOf(i, j, SIZE, SIZE, threshold);
                 if (v > ratio) {
