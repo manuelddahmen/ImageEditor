@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -22,7 +21,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?android:attr/buttonBarStyle"
+    style="@style/Theme.Material4.DayNight"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -35,7 +34,7 @@
 
         <Button
             android:id="@+id/takePhotoButton"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_height="48dp"
             android:autofillHints="@string/capturePhoto"
             android:contentDescription="@string/capturePhoto"
@@ -48,7 +47,7 @@
         <Button
             android:id="@+id/choosePhotoButton"
             android:background="@color/light_blue_A200"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_height="48dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
@@ -60,7 +59,7 @@
         <Button
             android:id="@+id/chooseMovie"
             android:background="@color/light_blue_A200"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_height="48dp"
             android:autofillHints="@string/choose_movie"
             android:contentDescription="@string/choose_movie"
@@ -72,7 +71,7 @@
 
             <Button
                 android:id="@+id/loadLastSaved"
-                style="?android:attr/buttonBarStyle"
+                style="@style/Theme.Material3.DayNight"
                 android:layout_height="48dp"
                 android:autofillHints="@string/last_saved"
                 android:contentDescription="@string/last_saved"
@@ -95,7 +94,7 @@
 
         <Button
             android:id="@+id/draw_activity"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -103,7 +102,7 @@
 
         <Button
             android:id="@+id/selectRectangle"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -111,7 +110,7 @@
 
         <Button
             android:id="@+id/unselect_rect"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -129,7 +128,7 @@
 
         <Button
             android:id="@+id/save"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="72dp"
@@ -140,7 +139,7 @@
 
         <Button
             android:id="@+id/share"
-            style="?android:attr/buttonBarStyle"
+            style="@style/Theme.Material3.DayNight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="72dp"
@@ -173,7 +172,7 @@
 
     <Button
         android:id="@+id/buttonAddText"
-        style="?android:attr/buttonBarStyle"
+        style="@style/Theme.Material3.DayNight"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:height="48dp"
@@ -185,7 +184,7 @@
 
     <Button
         android:id="@+id/buttonDraw"
-        style="?android:attr/buttonBarStyle"
+        style="@style/Theme.Material3.DayNight"
         android:layout_width="wrap_content"
         android:background="@color/light_blue_A400"
         android:layout_height="48dp"
@@ -197,7 +196,7 @@
 
     <Button
         android:id="@+id/effectsButtonNew"
-        style="?android:attr/buttonBarStyle"
+        style="@style/Theme.Material3.DayNight"
         android:layout_height="48dp"
         android:background="@color/light_blue_A400"
         android:height="48dp"
@@ -208,7 +207,7 @@
 
     <Button
         android:id="@+id/About"
-        style="?android:attr/buttonBarStyle"
+        style="@style/Theme.Material3.DayNight"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:height="48dp"

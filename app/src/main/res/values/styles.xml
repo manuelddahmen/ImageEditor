@@ -33,7 +33,7 @@
 
     <style name="Widget.Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="android:buttonBarStyle">@style/Theme.Material3.DayNight</item>
     </style>
 
     <style name="Widget.Theme.FeatureAppmain.MyView" parent="">

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -21,60 +20,59 @@
 
 <!--suppress ALL -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context=".ChooseEffectsActivity"
-                                                   android:theme="@style/Theme.Design.Light"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChooseEffectsActivity"
+    android:theme="@style/Theme.Material3.DayNight">
 
 
     <MultiAutoCompleteTextView
-            android:id="@+id/effectsAutoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:accessibilityLiveRegion="none"
-            android:autofillHints="effectsSelection"
-            android:background="@color/whiteBackground"
-            android:hint="@string/completeBox"
-            android:importantForAccessibility="yes"
-            android:lines="5"
-            android:theme="@style/Theme.Design.Light"
-            app:layout_constraintBottom_toTopOf="@id/effectsToApply"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
-            app:layout_constraintHeight_min="200dp"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_editor_absoluteY="0dp"
-            tools:ignore="SpeakableTextPresentCheck"/>
+        android:id="@+id/effectsAutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:accessibilityLiveRegion="none"
+        android:autofillHints="effectsSelection"
+        android:background="@color/whiteBackground"
+        android:hint="@string/completeBox"
+        android:importantForAccessibility="yes"
+        android:lines="5"
+        android:theme="@style/Theme.Material3.DayNight"
+        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
+        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_editor_absoluteY="0dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ListView
-            android:id="@+id/simple_dropdown_item_1line_classes"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:theme="@style/Theme.Design.Light"
-            app:layout_constraintBottom_toTopOf="@id/effectsToApply"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/effectsAutoCompleteTextView"
-            tools:ignore="SpeakableTextPresentCheck"/>
+        android:id="@+id/simple_dropdown_item_1line_classes"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:theme="@style/Theme.Material3.DayNight"
+        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/effectsAutoCompleteTextView"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-            android:id="@+id/effectsToApply"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:accessibilityLiveRegion="none"
-            android:autofillHints="Effect's Selection"
-            android:background="@color/whiteBackground"
-            android:hint="@string/completeBox"
-            android:importantForAccessibility="yes"
-            android:textColor="@color/blackText"
-            android:theme="@style/Theme.Design.Light"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/simple_dropdown_item_1line_classes"
-            tools:ignore="SpeakableTextPresentCheck"/>
+        android:id="@+id/effectsToApply"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:accessibilityLiveRegion="none"
+        android:autofillHints="Effect's Selection"
+        android:background="@color/whiteBackground"
+        android:hint="@string/completeBox"
+        android:importantForAccessibility="yes"
+        android:textColor="@color/blackText"
+        android:theme="@style/Theme.Material3.DayNight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/simple_dropdown_item_1line_classes"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

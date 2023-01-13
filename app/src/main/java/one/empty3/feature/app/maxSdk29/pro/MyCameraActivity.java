@@ -359,7 +359,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                     //send an ACTION_CREATE_DOCUMENT intent to the system. It will open a dialog where the user can choose a location and a filename
                     intentSave.addCategory(Intent.CATEGORY_OPENABLE);
-                    intentSave.putExtra(Intent.EXTRA_TITLE, "YOUR FILENAME.jpg");
+                    intentSave.putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".jpg");
                     //not needed, but maybe usefull
                     intentSave.setDataAndType(photoURI, "image/jpeg");
                     startActivityForResult(intentSave, REQUEST_CREATE_DOCUMENT_SAVE_IMAGE);
@@ -976,7 +976,7 @@ public class MyCameraActivity extends AppCompatActivity {
         }
         if (requestCode == REQUEST_CREATE_DOCUMENT_SAVE_IMAGE && resultCode == Activity.RESULT_OK) {
             try {
-                Uri uri = data.getData(); //just as an example, I am writing a String to the Uri I received from the user: try {
+                Uri uri = data.getData();
 
                 FileInputStream inputStream = new FileInputStream(currentFile);
 

@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 
 
-def code = 1433000
+def code = 1443000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
@@ -91,7 +91,7 @@ android {
 
         sdk29 {
             dimension "featureVersion"
-            compileSdkVersion 32
+            compileSdkVersion 33
             defaultConfig {
                 targetSdkVersion 33
                 minSdkVersion 29
@@ -111,8 +111,9 @@ android {
 }
 
 dependencies {
+    api 'com.google.android.material:material:1.7.0'
     // When using a MDC theme
-    implementation "com.google.android.material:compose-theme-adapter:1.1.16"
+    implementation "com.google.android.material:compose-theme-adapter:1.2.1"
 
     implementation "androidx.compose.ui:ui:$compose_version32"
     implementation "androidx.compose.material:material:$compose_version32"
