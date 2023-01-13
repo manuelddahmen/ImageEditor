@@ -20,19 +20,18 @@
 
 package one.empty3.feature.app.process
 
+import android.app.Activity
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import one.empty3.io.ProcessFile
 
-class ProcessDetailsActivity : AppCompatActivity() {
+class ProcessDetailsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        setContent { HelloWorld() }
     }
 
     @Composable

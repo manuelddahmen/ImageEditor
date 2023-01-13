@@ -33,7 +33,6 @@ import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
@@ -46,7 +45,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 
-class TextActivity() : AppCompatActivity(), Parcelable {
+class TextActivity() : Activity(), Parcelable {
     private val INT_WRITE_STORAGE: Int = 9247492
     private lateinit var currentFile: File
     private var text: String = ""

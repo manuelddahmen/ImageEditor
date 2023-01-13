@@ -20,7 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro//package one.empty3.feature.app
 //
-//import androidx.appcompat.app.AppCompatActivity
+//import androidx.appcompat.app.Activity
 //import android.annotation.SuppressLint
 //import android.os.Build
 //import android.os.Bundle
@@ -36,7 +36,7 @@ package one.empty3.feature.app.maxSdk29.pro//package one.empty3.feature.app
 // * An example full-screen activity that shows and hides the system UI (i.e.
 // * status bar and navigation/system bar) with user interaction.
 // */
-//class FullscreenActivityCameraLiveEffect : AppCompatActivity() {
+//class FullscreenActivityCameraLiveEffect : Activity() {
 //
 //    private lateinit var binding: ActivityFullscreenCameraLiveEffectBinding
 //    private lateinit var fullscreenContent: TextView
