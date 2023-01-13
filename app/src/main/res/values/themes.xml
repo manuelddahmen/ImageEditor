@@ -24,7 +24,8 @@
         <item name="android:statusBarColor">@color/blue_700</item>
     </style>
 
-    <color name="blue_700">@color/light_blue_600</color>
+    <color name="blue_700">@color/light_blue_100</color>
+
 
     <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.Fullscreen" parent="Theme.AppCompat.DayNight">
         <item name="android:actionBarStyle">
@@ -36,7 +37,7 @@
 
     <style name="ThemeOverlay.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.FullscreenContainer" parent="Theme.AppCompat.DayNight">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+        <item name="fullscreenTextColor">@color/white_text</item>
     </style>
 
     <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.NoActionBar">
