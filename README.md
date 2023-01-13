@@ -43,6 +43,7 @@ DEL MaxSdk 28 for WRITE_EXTERNAL_STORAGE.
 Emoji support
 TextActivity works!!!
 FIX: Effect list doesn't work
+compile version33 compose-version++ material version++
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -94,4 +95,5 @@ DEL MaxSdk 28 for WRITE_EXTERNAL_STORAGE.
 TextActivity works!!!)
 Emoji support
 FIX: Effect list doesn't work
+compile version33 compose-version++ material version++
 </fr-FR>
