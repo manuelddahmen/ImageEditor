@@ -40,7 +40,7 @@
             android:name=".TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
-            android:theme="@style/Theme.Material3.DayNight" />
+            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
         <activity
             android:name=".ChooseEffectsCompose"
             android:exported="false"

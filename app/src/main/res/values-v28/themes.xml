@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -20,5 +19,5 @@
   -->
 
 <resources>
-    <color name="purple_700">#CD89E9</color>
+    <color name="blue_700">#0000AA</color>
 </resources>

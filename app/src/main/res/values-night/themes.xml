@@ -21,7 +21,7 @@
 <resources>
 
     <style name="ThemeOverlay.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
-        <item name="fullscreenTextColor">@color/light_blue_A400</item>
+        <item name="fullscreenBackgroundColor">#FF0000AA</item>
+        <item name="fullscreenTextColor">#FF8888FF</item>
     </style>
 </resources>
