@@ -702,14 +702,39 @@ public class PixM extends MBitmap {
 
 
     public PixM pasteSubImage(PixM copy, int x, int y, int w, int h) {
-        ;
-        for (int i = x; i < x + w; i++)
-            for (int j = y; j < y + h; j++)
+        for (int i = 0; i < copy.getColumns(); i++) {
+            for (int j = 0; j < copy.getLines(); j++) {
+                double xx = (int) (x + 1.0 * i / copy.getColumns() * w);
+                double yy = (int) (y + 1.0 * j / copy.getLines() * h);
+
+                double dx = (int) (x + 1.0 * 1 / copy.getColumns() * w) + 1;
+                double dy = (int) (y + 1.0 * 1 / copy.getLines() * h) + 1;
+
+                for (int i2 = 0; i2 < dx; i2++) {
+                    for (int j2 = 0; j2 < dy; j2++) {
+
+                        for (int c = 0; c < getCompCount(); c++) {
+                            copy.setCompNo(c);
+                            setCompNo(c);
+
+                            double v = copy.get(i, j);
+
+
+                            setValues(i2, j2, v);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        for (int i = x; i < x + copy.getColumns(); i++)
+            for (int j = y; j < y + copy.getLines(); j++)
                 for (int c = 0; c < getCompCount(); c++) {
                     copy.setCompNo(c);
                     setCompNo(c);
                     double v = copy.get(i, j);
-                    set(i - x, j - y, v);
+                    set((i - x) * w / getColumns(), (j - y) * h / getLines(), v);
                 }
         return this;
     }

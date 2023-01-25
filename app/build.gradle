@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 
 
-def code = 1493000
+def code = 1503000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
