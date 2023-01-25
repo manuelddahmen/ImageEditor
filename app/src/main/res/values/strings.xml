@@ -96,7 +96,7 @@
     <string name="draw_color" />
     <string name="select_rectangle">Select</string>
     <string name="draw_activity">Draw</string>
-    <string name="unselect">Unselect</string>
+    <string name="unselect">Unsel</string>
     <string name="effect_name">Effect name</string>
     <string name="remove">Remove</string>
     <string name="add">Add</string>

@@ -343,7 +343,8 @@ public class MyCameraActivity extends Activity {
 
         View paste = findViewById(R.id.paste);
         paste.setOnClickListener(v -> {
-            if ((clipboard != null && copied)) {
+            if (clipboard != null && copied && clipboard.destination != null
+                    && clipboard.source != null) {
                 PixM dest = PixM.getPixM(ImageIO.read(currentBitmap).bitmap);
                 dest.pasteSubImage(clipboard.source,
                         (int) clipboard.destination.left, (int) clipboard.destination.top,
