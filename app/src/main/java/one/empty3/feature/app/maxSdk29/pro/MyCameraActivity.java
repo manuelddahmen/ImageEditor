@@ -112,6 +112,51 @@ public class MyCameraActivity extends Activity {
     private boolean loaded;
     private int maxRes = 200;
     private boolean workingResolutionOriginal = false;
+    private Clipboard clipboard;
+    private boolean copied;
+
+    public void copyRegion(View view) {
+    }
+
+    public void pasteRegion(View view) {
+    }
+
+    class Clipboard {
+        public boolean copied = false;
+        private Bitmap content;
+        private PixM source;
+        private RectF destination;
+
+        public Clipboard(Bitmap content, PixM source) {
+            this.content = content;
+            this.source = source;
+            this.destination = destination;
+        }
+
+        public Bitmap getContent() {
+            return content;
+        }
+
+        public void setContent(Bitmap content) {
+            this.content = content;
+        }
+
+        public PixM getSource() {
+            return source;
+        }
+
+        public void setSource(PixM source) {
+            this.source = source;
+        }
+
+        public RectF getDestination() {
+            return destination;
+        }
+
+        public void setDestination(RectF destination) {
+            this.destination = destination;
+        }
+    }
 
     class LoadImage extends AsyncTask {
 
@@ -289,11 +334,27 @@ public class MyCameraActivity extends Activity {
         fromFiles.setOnClickListener(v -> {
             startCreation();
         });
-        View chooseMovie = findViewById(R.id.chooseMovie);
-        chooseMovie.setOnClickListener(v -> {
-            startCreationMovie();
+        View copy = findViewById(R.id.copy);
+        copy.setOnClickListener(v -> {
+            if (clipboard != null) {
+                clipboard.copied = true;
+            }
         });
 
+        View paste = findViewById(R.id.paste);
+        paste.setOnClickListener(v -> {
+            if ((clipboard != null && copied)) {
+                PixM dest = PixM.getPixM(ImageIO.read(currentBitmap).bitmap);
+                dest.pasteSubImage(clipboard.source,
+                        (int) clipboard.destination.left, (int) clipboard.destination.top,
+                        (int) clipboard.destination.bottom - (int) clipboard.destination.top
+                        , (int) clipboard.destination.right - (int) clipboard.destination.left);
+                Bitmap bitmap = dest.getBitmap();
+                imageView.setImageBitmap(bitmap);
+                currentBitmap = currentFile
+                        = new Utils().writePhoto(this, bitmap, "copy_paste");
+            }
+        });
         View about = findViewById(R.id.About);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -442,6 +503,12 @@ public class MyCameraActivity extends Activity {
                     if (currentPixM != null) {
                         System.err.println("Draw Selection");
                         imageView.setImageBitmap(currentPixM.getImage().bitmap);
+                        if (clipboard == null) {
+                            clipboard = new Clipboard(null, currentPixM);
+                        } else {
+                            BufferedImage read = ImageIO.read(currentFile);
+                            clipboard.destination = rectfs.get(rectfs.size() - 1);
+                        }
                         System.err.println("Selection drawn");
                     } else {
                         System.err.println("current PixM == null");
@@ -660,7 +727,7 @@ public class MyCameraActivity extends Activity {
 
     private PixM getSelectedZone() {
         if (currentFile != null) {
-            PixM pixM = PixM.getPixM(ImageIO.read(currentFile), maxRes);
+            PixM pixM = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)), maxRes);
 
             if (drawPointA == null || drawPointB == null) {
                 return null;

@@ -55,18 +55,18 @@
             android:src="@drawable/folder"
             android:text="@string/choosePhoto"
             android:layout_width="wrap_content" />
-
-        <Button
-            android:id="@+id/chooseMovie"
-            android:background="@color/light_blue_A200"
-            style="@style/Theme.Material3.DayNight"
-            android:layout_height="48dp"
-            android:autofillHints="@string/choose_movie"
-            android:contentDescription="@string/choose_movie"
-            android:height="48dp"
-            android:src="@drawable/film"
-            android:text="@string/choose_movie"
-            android:layout_width="wrap_content" />
+        <!--
+                <Button
+                    android:id="@+id/chooseMovie"
+                    android:background="@color/light_blue_A200"
+                    style="@style/Theme.Material3.DayNight"
+                    android:layout_height="48dp"
+                    android:autofillHints="@string/choose_movie"
+                    android:contentDescription="@string/choose_movie"
+                    android:height="48dp"
+                    android:src="@drawable/film"
+                    android:text="@string/choose_movie"
+                    android:layout_width="wrap_content" />-->
         <!--
 
             <Button
@@ -80,6 +80,25 @@
                 android:text="@string/last_saved"
                 android:layout_width="wrap_content" />
     -->
+        <Button
+            android:id="@+id/save"
+            style="@style/Theme.Material3.DayNight"
+            android:background="@color/light_blue_A200"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="72dp"
+            android:height="48dp"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/share"
+            style="@style/Theme.Material3.DayNight"
+            android:background="@color/light_blue_A200"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="72dp"
+            android:height="48dp"
+            android:text="@string/share" />
     </LinearLayout>
 
 
@@ -116,6 +135,24 @@
             android:height="48dp"
             android:onClick="unselectA"
             android:text="@string/unselect" />
+
+        <Button
+            android:id="@+id/copy"
+            style="@style/Theme.Material3.DayNight"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:onClick="copyRegion"
+            android:text="@string/copy" />
+
+        <Button
+            android:id="@+id/paste"
+            style="@style/Theme.Material3.DayNight"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:onClick="pasteRegion"
+            android:text="@string/paste" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,28 +163,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearChooseButtons">
 
-        <Button
-            android:id="@+id/save"
-            style="@style/Theme.Material3.DayNight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="72dp"
-            android:height="48dp"
-            android:text="@string/save"
-            app:layout_constraintEnd_toStartOf="@id/share"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMovie" />
-
-        <Button
-            android:id="@+id/share"
-            style="@style/Theme.Material3.DayNight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="72dp"
-            android:height="48dp"
-            android:text="@string/share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chooseMovie"
-            app:layout_constraintTop_toTopOf="@id/currentImageView" />
     </LinearLayout>
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection

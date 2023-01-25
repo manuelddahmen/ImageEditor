@@ -77,19 +77,19 @@ public class GradientFilter extends FilterMatPixM {
         double d = 1.0;
         double v = source.get(i, j, ii, ij);
         if (ii == 0 && ij == 0) {
-            d = (-source.get(i - 1, j, ii, ij) + v) * columns;
+            d = (-source.get(i - 1, j, ii, ij) + v);
         }
         if (ii == 0 && ij == 1) {
             d = Math.atan(((-source.get(i, j - 1, ii, ij) + v) /
-                    (-source.get(i - 1, j, ii, ij) + v)) * columns);
+                    (-source.get(i - 1, j, ii, ij) + v)));
         }
         if (ii == 1 && ij == 0) {
-            d = (-source.get(i, j - 1, ii, ij) + v) * lines;
+            d = (-source.get(i, j - 1, ii, ij) + v);
         }
         if (ii == 1 && ij == 1) {
             d = Math.atan(1 / (
                     (source.get(i, j + 1, ii, ij) - v) /
-                            (source.get(i + 1, j, ii, ij) - v)) * lines);
+                            (source.get(i + 1, j, ii, ij) - v)));
         }
         if (ii >= 0 && ii < 2 && ij >= 0 && ij < 2)
             copy.set(i, j, ii, ij, d);

@@ -36,5 +36,4 @@ class ChooseEffectList : Activity() {
         findViewById.setOnClickListener(View.OnClickListener {})
     }
 
-
 }

@@ -33,9 +33,6 @@ public class GradProcess extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
-
-        //if (!in.getName().endsWith(".jpg"))
-        //    return false;
         File file = in;
         PixM pix;
         try {

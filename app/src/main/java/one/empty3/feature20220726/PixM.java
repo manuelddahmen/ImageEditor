@@ -701,6 +701,19 @@ public class PixM extends MBitmap {
     }
 
 
+    public PixM pasteSubImage(PixM copy, int x, int y, int w, int h) {
+        ;
+        for (int i = x; i < x + w; i++)
+            for (int j = y; j < y + h; j++)
+                for (int c = 0; c < getCompCount(); c++) {
+                    copy.setCompNo(c);
+                    setCompNo(c);
+                    double v = copy.get(i, j);
+                    set(i - x, j - y, v);
+                }
+        return this;
+    }
+
     public PixM pasteSubImage(int x, int y, int w, int h) {
         PixM p2 = new PixM(w, h);
         for (int i = x; i < x + w; i++)
