@@ -318,10 +318,11 @@ public class MyCameraActivity extends Activity {
                     else {
                         return;
                     }
-                    dest.pasteSubImage(clipboard.getSource(),
-                            (int) clipboard.getDestination().left, (int) clipboard.getDestination().top,
-                            (int) clipboard.getDestination().right - (int) clipboard.getDestination().left,
-                            (int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
+                    int x = Math.min((int) clipboard.getDestination().left, (int) clipboard.getDestination().right);
+                    int y = Math.min((int) clipboard.getDestination().bottom, (int) clipboard.getDestination().top);
+                    int w = Math.abs((int) clipboard.getDestination().right - (int) clipboard.getDestination().left);
+                    int h = Math.abs((int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
+                    dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     System.err.println("Destionation coord = " + clipboard.getDestination());
                     System.err.println("Theory Copied pixels = " + clipboard.getSource().getColumns() * clipboard.getSource().getLines());
                     Bitmap bitmap = dest.getBitmap();
