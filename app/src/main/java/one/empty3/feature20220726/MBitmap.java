@@ -99,7 +99,9 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
         for (int d = 0; d < getCompCount(); d++) {
             setCompNo(d);
-            v[d] = get(i, j);
+            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
+                v[d] = get(i, j);
+            }
         }
         return v;
     }
@@ -137,33 +139,37 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public Point3D getP(int i, int j) {
         if (bitmap != null && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-            int pixel = bitmap.getPixel(i, j);
-            double[] p = Lumiere.getDoubles(pixel);
-            return new Point3D(p[0], p[1], p[2]);
+            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
+                int pixel = bitmap.getPixel(i, j);
+                double[] p = Lumiere.getDoubles(pixel);
+                return new Point3D(p[0], p[1], p[2]);
+            }
         }
-
         Point3D p = new Point3D();
 
         for (int d = 0; d < 3; d++) {
             setCompNo(d);
-            p.set(d, get(i, j));
+            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
+                p.set(d, get(i, j));
+            }
         }
         return p;
     }
 
     public void setValues(int i, int j, double... v) {
         if (bitmap != null) {
-            bitmap.setPixel(i, j, Lumiere.getInt(new double[]
-                    {v[0], v[1], v[2]}));
-            return;
+            if (i >= 0 && i < bitmap.getWidth() && j >= 0 && j < bitmap.getHeight()) {
+                bitmap.setPixel(i, j, Lumiere.getInt(new double[]
+                        {v[0], v[1], v[2]}));
+            }
         }
-
 
         for (int d = 0; d < v.length; d++) {
             setCompNo(d);
-            set(i, j, v[d]);
+            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
+                set(i, j, v[d]);
+            }
         }
-        return;
     }
 
     public MBitmap(PixM pix) {

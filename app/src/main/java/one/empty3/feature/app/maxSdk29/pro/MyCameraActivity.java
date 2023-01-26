@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.AnimatedImageDrawable;
@@ -52,6 +53,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -82,7 +84,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 public class MyCameraActivity extends Activity {
-    private static Undo dataWithUndo;
+    private Undo dataWithUndo;
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     private static final int MAX_RES_DEFAULT = 200;
@@ -115,48 +117,6 @@ public class MyCameraActivity extends Activity {
     private Clipboard clipboard;
     private boolean copied;
 
-    public void copyRegion(View view) {
-    }
-
-    public void pasteRegion(View view) {
-    }
-
-    class Clipboard {
-        public boolean copied = false;
-        private Bitmap content;
-        private PixM source;
-        private RectF destination;
-
-        public Clipboard(Bitmap content, PixM source) {
-            this.content = content;
-            this.source = source;
-            this.destination = destination;
-        }
-
-        public Bitmap getContent() {
-            return content;
-        }
-
-        public void setContent(Bitmap content) {
-            this.content = content;
-        }
-
-        public PixM getSource() {
-            return source;
-        }
-
-        public void setSource(PixM source) {
-            this.source = source;
-        }
-
-        public RectF getDestination() {
-            return destination;
-        }
-
-        public void setDestination(RectF destination) {
-            this.destination = destination;
-        }
-    }
 
     class LoadImage extends AsyncTask {
 
@@ -334,26 +294,45 @@ public class MyCameraActivity extends Activity {
         fromFiles.setOnClickListener(v -> {
             startCreation();
         });
+
         View copy = findViewById(R.id.copy);
         copy.setOnClickListener(v -> {
             if (clipboard != null) {
                 clipboard.copied = true;
+                copy.setBackgroundColor(Color.rgb(40, 255, 40));
+                Toast.makeText(getApplicationContext(), "Subimage copied", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
         View paste = findViewById(R.id.paste);
         paste.setOnClickListener(v -> {
-            if (clipboard != null && copied && clipboard.destination != null
-                    && clipboard.source != null) {
-                PixM dest = PixM.getPixM(ImageIO.read(currentBitmap).bitmap);
-                dest.pasteSubImage(clipboard.source,
-                        (int) clipboard.destination.left, (int) clipboard.destination.top,
-                        (int) clipboard.destination.bottom - (int) clipboard.destination.top
-                        , (int) clipboard.destination.right - (int) clipboard.destination.left);
-                Bitmap bitmap = dest.getBitmap();
-                imageView.setImageBitmap(bitmap);
-                currentBitmap = currentFile
-                        = new Utils().writePhoto(this, bitmap, "copy_paste");
+            if (currentFile != null) {
+                if (clipboard == null && Clipboard.defaultClipboard != null)
+                    clipboard = Clipboard.defaultClipboard;
+                if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
+                        && clipboard.getSource() != null) {
+                    PixM dest = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+                    if (rectfs.size() > 0)
+                        clipboard.setDestination(rectfs.get(rectfs.size() - 1));
+                    else {
+                        return;
+                    }
+                    dest.pasteSubImage(clipboard.getSource(),
+                            (int) clipboard.getDestination().left, (int) clipboard.getDestination().top,
+                            (int) clipboard.getDestination().right - (int) clipboard.getDestination().left,
+                            (int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
+                    System.err.println("Destionation coord = " + clipboard.getDestination());
+                    System.err.println("Theory Copied pixels = " + clipboard.getSource().getColumns() * clipboard.getSource().getLines());
+                    Bitmap bitmap = dest.getBitmap();
+                    currentBitmap = currentFile
+                            = new Utils().writePhoto(this, bitmap, "copy_paste");
+                    imageView.setImageBitmap(bitmap);
+                    paste.setBackgroundColor(Color.rgb(40, 255, 40));
+                    copy.setBackgroundColor(Color.rgb(40, 255, 40));
+                    Toast.makeText(getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
         });
         View about = findViewById(R.id.About);
@@ -504,11 +483,14 @@ public class MyCameraActivity extends Activity {
                     if (currentPixM != null) {
                         System.err.println("Draw Selection");
                         imageView.setImageBitmap(currentPixM.getImage().bitmap);
-                        if (clipboard == null) {
-                            clipboard = new Clipboard(null, currentPixM);
-                        } else {
+                        if (clipboard == null && Clipboard.defaultClipboard == null) {
+                            clipboard = Clipboard.defaultClipboard
+                                    = new Clipboard(currentFileZoomedBitmap, currentPixM);
+                        } else if (Clipboard.defaultClipboard != null && clipboard != null) {
+                            if (clipboard == null)
+                                clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
-                            clipboard.destination = rectfs.get(rectfs.size() - 1);
+                            clipboard.setDestination(rectfs.get(rectfs.size() - 1));
                         }
                         System.err.println("Selection drawn");
                     } else {

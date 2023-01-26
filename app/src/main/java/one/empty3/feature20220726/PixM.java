@@ -707,11 +707,11 @@ public class PixM extends MBitmap {
                 double xx = (int) (x + 1.0 * i / copy.getColumns() * w);
                 double yy = (int) (y + 1.0 * j / copy.getLines() * h);
 
-                double dx = (int) (x + 1.0 * 1 / copy.getColumns() * w) + 1;
-                double dy = (int) (y + 1.0 * 1 / copy.getLines() * h) + 1;
+                double dx = xx <= 0 ? 1 : xx;
+                double dy = yy <= 0 ? 1 : yy;
 
-                for (int i2 = 0; i2 < dx; i2++) {
-                    for (int j2 = 0; j2 < dy; j2++) {
+                for (int i2 = x; i2 < x + dx; i2++) {
+                    for (int j2 = y; j2 < y + dy; j2++) {
 
                         for (int c = 0; c < getCompCount(); c++) {
                             copy.setCompNo(c);
@@ -720,7 +720,7 @@ public class PixM extends MBitmap {
                             double v = copy.get(i, j);
 
 
-                            setValues(i2, j2, v);
+                            set(i2, j2, v);
                         }
                     }
                 }

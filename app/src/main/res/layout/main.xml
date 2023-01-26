@@ -142,7 +142,6 @@
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
-            android:onClick="copyRegion"
             android:text="@string/copy" />
 
         <Button
@@ -151,7 +150,6 @@
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
-            android:onClick="pasteRegion"
             android:text="@string/paste" />
     </LinearLayout>
 
