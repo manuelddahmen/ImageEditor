@@ -486,7 +486,7 @@ public class MyCameraActivity extends Activity {
                         imageView.setImageBitmap(currentPixM.getImage().bitmap);
                         if (clipboard == null && Clipboard.defaultClipboard == null) {
                             clipboard = Clipboard.defaultClipboard
-                                    = new Clipboard(currentFileZoomedBitmap, currentPixM);
+                                    = new Clipboard(currentPixM);
                         } else if (Clipboard.defaultClipboard != null && clipboard != null) {
                             if (clipboard == null)
                                 clipboard = Clipboard.defaultClipboard;

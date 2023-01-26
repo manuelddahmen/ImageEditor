@@ -21,7 +21,6 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 
-import android.graphics.Bitmap;
 import android.graphics.RectF;
 
 import one.empty3.feature20220726.PixM;
@@ -29,22 +28,11 @@ import one.empty3.feature20220726.PixM;
 class Clipboard {
     public static Clipboard defaultClipboard;
     public boolean copied = false;
-    private Bitmap content;
     private PixM source;
     private RectF destination;
 
-    public Clipboard(Bitmap content, PixM source) {
-        this.content = content;
+    public Clipboard(PixM source) {
         this.source = source;
-        this.destination = destination;
-    }
-
-    public Bitmap getContent() {
-        return content;
-    }
-
-    public void setContent(Bitmap content) {
-        this.content = content;
     }
 
     public PixM getSource() {
