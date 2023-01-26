@@ -491,7 +491,8 @@ public class MyCameraActivity extends Activity {
                             if (clipboard == null)
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
-                            clipboard.setDestination(rectfs.get(rectfs.size() - 1));
+                            clipboard.setDestination(viewById.getDrawingRect());
+                            //rectfs.get(rectfs.size() - 1));
                         }
                         System.err.println("Selection drawn");
                     } else {

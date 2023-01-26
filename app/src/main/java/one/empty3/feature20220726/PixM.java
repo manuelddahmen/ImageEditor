@@ -702,39 +702,31 @@ public class PixM extends MBitmap {
 
 
     public void pasteSubImage(PixM copy, int x, int y, int w, int h) {
+        double[] vc = new double[3];
         for (int i = 0; i < copy.getColumns(); i++) {
             for (int j = 0; j < copy.getLines(); j++) {
                 int xx = (int) (x + 1.0 * i / copy.getColumns() * w);
                 int yy = (int) (y + 1.0 * j / copy.getLines() * h);
 
-                double dx = (int) (1.0 / copy.getColumns() * w);
-                double dy = (int) (1.0 / copy.getLines() * h);
-
-                dx = dx == 0 ? 1 : dx;
-                dy = dy == 0 ? 1 : dy;
+                double dx = (int) (1.0 / copy.getColumns() * w) + 1;
+                double dy = (int) (1.0 / copy.getLines() * h) + 1;
 
                 for (int i2 = xx; i2 < xx + dx; i2++) {
                     for (int j2 = yy; j2 < yy + dy; j2++) {
+
                         for (int c = 0; c < getCompCount(); c++) {
                             copy.setCompNo(c);
                             setCompNo(c);
-                            double v = copy.get(i, j);
-                            set(i2, j2, v);
+                            vc[c] = copy.get(i, j);
+                            set(i2, j2, vc[c]);
+                        }
+                        if (bitmap != null) {
+                            bitmap.setPixel(i2, j2, Lumiere.getInt(vc));
                         }
                     }
                 }
             }
         }
-
-
-        for (int i = x; i < x + copy.getColumns(); i++)
-            for (int j = y; j < y + copy.getLines(); j++)
-                for (int c = 0; c < getCompCount(); c++) {
-                    copy.setCompNo(c);
-                    setCompNo(c);
-                    double v = copy.get(i, j);
-                    set((i - x) * w / getColumns(), (j - y) * h / getLines(), v);
-                }
     }
 
     public PixM pasteSubImage(int x, int y, int w, int h) {

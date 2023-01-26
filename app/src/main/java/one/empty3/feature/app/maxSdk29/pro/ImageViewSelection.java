@@ -110,6 +110,4 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         super.setImageBitmap(bm);
         this.pixels = new PixM(bm);
     }
-
-
 }
