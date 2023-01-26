@@ -307,6 +307,7 @@ public class MyCameraActivity extends Activity {
 
         View paste = findViewById(R.id.paste);
         paste.setOnClickListener(v -> {
+            clipboard = Clipboard.defaultClipboard;
             if (currentFile != null) {
                 if (clipboard == null && Clipboard.defaultClipboard != null)
                     clipboard = Clipboard.defaultClipboard;
