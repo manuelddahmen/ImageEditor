@@ -41,9 +41,9 @@
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
     <string name="andex_file_selection_title">Movie</string>
-    <string name="browser_title_background_color">#000000</string>
-    <string name="browser_title_foreground_color">#FFFFFF</string>
-    <string name="browser_list_background_color">#AAAAAA</string>
+    <string name="browser_title_background_color" translatable="false">#000000</string>
+    <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
+    <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
     </string>
@@ -64,7 +64,7 @@
     <string name="choose_movie">Choose movie</string>
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
-    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
+    <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
     </string>
     <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy
     </string>
@@ -120,7 +120,7 @@
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
-    <string name="commentEffect">!!</string>
+    <string name="commentEffect" translatable="false">!!</string>
     <string name="primary_pencil_color">Primary pencil color</string>
     <string name="copy">Copy</string>
     <string name="paste">Paste</string>

@@ -3,9 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
+apply plugin: 'com.google.gms.google-services'
 
-
-def code = 1563000
+def code = 1583000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
@@ -162,13 +162,15 @@ dependencies {
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 
 // Ensure version is 1.4.0-alpha01 or higher.
-    implementation "androidx.appcompat:appcompat:1.5.1"
+    implementation "androidx.appcompat:appcompat:1.6.0"
 
     def emoji2_version = "1.2.0"
 
     implementation("androidx.emoji2:emoji2:$emoji2_version")
     implementation("androidx.emoji2:emoji2-views:$emoji2_version")
     implementation("androidx.emoji2:emoji2-views-helper:$emoji2_version")
+
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
 }
 
 publishing {
