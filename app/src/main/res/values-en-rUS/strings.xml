@@ -38,7 +38,7 @@
     <string name="completeBox">Tapez les premières lettres dans le champ texte puis sélectionner l\'effet</string>
     <string name="photo">main.imageViewDefaultIcon</string>
     <string name="effect">Effect</string>
-    <string name="filePath">one.empty3.feature.app</string>
+    <string name="filePath">one.empty3.feature.app.maxSdk29.pro</string>
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
     <string name="andex_file_selection_title">Movie</string>

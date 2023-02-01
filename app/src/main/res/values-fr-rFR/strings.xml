@@ -21,61 +21,60 @@
 <resources>
     <string name="app_name">Image Featuring</string>
     <string name="capture_button_alt">Capture</string>
-    <string name="switch_camera_button_alt">Switch camera</string>
-    <string name="gallery_button_alt">Gallery</string>
-    <string name="back_button_alt">Back</string>
-    <string name="share_button_alt">Share</string>
-    <string name="share_hint">Share using</string>
-    <string name="capture_mode_camera">Camera</string>
+    <string name="switch_camera_button_alt">Changer APN</string>
+    <string name="gallery_button_alt">Retour</string>
+    <string name="back_button_alt">Retour</string>
+    <string name="share_button_alt">Partager</string>
+    <string name="share_hint">Partager avec</string>
+    <string name="capture_mode_camera">Caméra</string>
     <string name="capture_mode_hdr">HDR</string>
-    <string name="capture_mode_night">Night</string>
-    <string name="delete_button_alt">Delete</string>
-    <string name="delete_dialog">Delete current photo?</string>
-    <string name="delete_title">Confirm</string>
+    <string name="capture_mode_night">Nuit</string>
+    <string name="delete_button_alt">Supprimer</string>
+    <string name="delete_dialog">Effacer la photo actuelle?</string>
+    <string name="delete_title">Confirmer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="listProcess">Liste des classes de filtres compléter dans le champ en-dessous pour ajouter</string>
     <string name="completeBox">Tapez les premières lettres dans le champ texte puis sélectionner l\'effet</string>
     <string name="photo">main.imageViewDefaultIcon</string>
-    <string name="effect">Effect</string>
-    <string name="filePath">one.empty3.feature.app</string>
-    <string name="capturePhoto">Camera</string>
-    <string name="choosePhoto">Gallery</string>
-    <string name="andex_file_selection_title">Movie</string>
+    <string name="effect">Effet</string>
+    <string name="filePath">one.empty3.feature.app.maxSdk29.pro</string>
+    <string name="capturePhoto">Caméra</string>
+    <string name="choosePhoto">Galerie</string>
+    <string name="andex_file_selection_title">Vidéo</string>
     <string name="browser_title_background_color" translatable="false">#000000</string>
     <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
     <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
-    <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
-    </string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect</string>
+    <string name="dummy_button">Bouton bête</string>
+    <string name="dummy_content">Bête\nContenu</string>
     <string name="title_activity_choose_effect_list">ChooseEffectList</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Précédent</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="camera_video_effect">Caméra</string>
     <string name="file_view_effect">Fichier ouvert</string>
     <string name="choose_effects">Effects</string>
-    <string name="choose_movie">Choose movie</string>
+    <string name="choose_movie">Choisir un fichier</string>
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
     <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
     </string>
-    <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy
+    <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion de données d\'utilisateur et de vie privée
     </string>
-    <string name="about_and_policies">About privacy</string>
-    <string name="back">Back</string>
-    <string name="about">About</string>
+    <string name="about_and_policies">A propos de la vie privée</string>
+    <string name="back">Retour</string>
+    <string name="about">A propos</string>
     <string name="maxRes_1200">200.0</string>
-    <string name="maximum_resolution">Maximum resolution</string>
-    <string name="share">Share</string>
-    <string name="beta">Beta?</string>
+    <string name="maximum_resolution">Résolution maximale</string>
+    <string name="share">Partager</string>
+    <string name="beta">Bêta?</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles">Données utilisateur personnelles et sensibles Dans
         l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia
         ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et
@@ -88,41 +87,41 @@
         <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
     <string name="save">Save</string>
     <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
-    <string name="edit_text_to_put_on_the_image">Edit text to put on the image</string>
+    <string name="edit_text_to_put_on_the_image">Editer le texte à afficher</string>
     <string name="todo">TODO</string>
     <string name="ok">OK</string>
-    <string name="back_without_saving">Back without saving</string>
-    <string name="tools">Tools</string>
-    <string name="draw">Draw</string>
+    <string name="back_without_saving">Retour sans sauvegarger</string>
+    <string name="tools">Outils</string>
+    <string name="draw">Dessiner</string>
     <string name="draw_color" />
-    <string name="select_rectangle">Select</string>
-    <string name="draw_activity">Draw</string>
-    <string name="unselect">Unsel</string>
-    <string name="effect_name">Effect name</string>
-    <string name="remove">Remove</string>
-    <string name="add">Add</string>
-    <string name="apply_effects">Apply effects</string>
-    <string name="effect_image_to_image">Effect image to image</string>
+    <string name="select_rectangle">Selectionner</string>
+    <string name="draw_activity">Dessiner</string>
+    <string name="unselect">Déselectionner</string>
+    <string name="effect_name">Nom du filtre</string>
+    <string name="remove">Retirer</string>
+    <string name="add">Ajouter</string>
+    <string name="apply_effects">Appliquer les filtres</string>
+    <string name="effect_image_to_image">Filtre image vers image</string>
     <string name="title_activity_text">TextActivity</string>
     <string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
     <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
-    <string name="apply">Apply</string>
-    <string name="add_text">Add Text</string>
-    <string name="draw_button_text">Draw</string>
-    <string name="back_button_text_activity">Back</string>
+    <string name="apply">Appliquer</string>
+    <string name="add_text">Ajouter du texte</string>
+    <string name="draw_button_text">Dessiner</string>
+    <string name="back_button_text_activity">Retour</string>
     <string name="grid_text_00">00</string>
     <string name="grid_text_01">01</string>
     <string name="grid_text_02">02</string>
     <string name="grid_text_10">10</string>
     <string name="grid_text_11">11</string>
     <string name="grid_text_12">12</string>
-    <string name="preview_of_shapes">Preview of shapes</string>
+    <string name="preview_of_shapes">Prévisualiser les formes</string>
     <string name="textDp">48</string>
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
     <string name="commentEffect" translatable="false">!!</string>
-    <string name="primary_pencil_color">Primary pencil color</string>
-    <string name="copy">Copy</string>
-    <string name="paste">Paste</string>
+    <string name="primary_pencil_color">Couleur de pinceau</string>
+    <string name="copy">Copier</string>
+    <string name="paste">Coller</string>
 </resources>
