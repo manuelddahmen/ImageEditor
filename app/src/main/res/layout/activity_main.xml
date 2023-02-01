@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -77,7 +76,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="152dp"
-        android:text= "@string/_3"
+        android:text="@string/_3"
         android:textAlignment="viewStart"
         android:textColorHint="#FBD3D3"
         app:iconTint="#F3EBEB"
@@ -92,7 +91,7 @@
         android:text="@string/_4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
-        app:layout_constraintEnd_toStartOf="@id/button5"/>
+        app:layout_constraintEnd_toStartOf="@id/button5" />
 
     <Button
         android:id="@+id/button5"
@@ -108,8 +107,7 @@
         android:layout_height="68dp"
         android:text="@string/_6"
         app:layout_constraintStart_toEndOf="@id/button5"
-        app:layout_constraintTop_toBottomOf="@id/button3"
-         />
+        app:layout_constraintTop_toBottomOf="@id/button3" />
 
     <Button
         android:id="@+id/button7"
@@ -152,7 +150,7 @@
         android:id="@+id/button0"
         android:layout_width="136dp"
         android:layout_height="68dp"
-         android:text="@string/_0"
+        android:text="@string/_0"
         app:layout_constraintStart_toEndOf="@id/dotButton"
         app:layout_constraintTop_toBottomOf="@id/button8" />
 
@@ -179,17 +177,16 @@
         android:text="@string/MUL"
 
         app:layout_constraintStart_toEndOf="@+id/addButton"
-        app:layout_constraintTop_toBottomOf="@id/button0"
-        />
-<!--
-    <Button
-        android:id="@+id/sqrtButton"
-        android:layout_width="136dp"
-        android:layout_height="68dp"
-        android:text="@string/sqrt"
-        app:layout_constraintStart_toEndOf="@id/multButton"
-        app:layout_constraintTop_toBottomOf="@id/equalButton" />
--->
+        app:layout_constraintTop_toBottomOf="@id/button0" />
+    <!--
+        <Button
+            android:id="@+id/sqrtButton"
+            android:layout_width="136dp"
+            android:layout_height="68dp"
+            android:text="@string/sqrt"
+            app:layout_constraintStart_toEndOf="@id/multButton"
+            app:layout_constraintTop_toBottomOf="@id/equalButton" />
+    -->
     <Button
         android:id="@+id/delButton"
         android:layout_width="136dp"
@@ -197,6 +194,7 @@
         android:text="@string/DEL"
         app:layout_constraintStart_toEndOf="@id/multButton"
         app:layout_constraintTop_toBottomOf="@id/equalButton" />
+
     <Button
         android:id="@+id/substractButton"
         android:layout_width="135dp"
@@ -254,26 +252,26 @@
         android:text="@string/about_and_policies"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-<!--
-    <Button
-        android:id="@+id/buttonStoreFormula"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:text="@string/store_formula"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--
+        <Button
+            android:id="@+id/buttonStoreFormula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/store_formula"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
--->_
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    -->_
 
 </androidx.constraintlayout.widget.ConstraintLayout>
