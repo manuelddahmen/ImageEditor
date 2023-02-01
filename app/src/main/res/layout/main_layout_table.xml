@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E6E6"
+    android:backgroundTintMode="add"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextCalculus"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+
+            android:autofillHints="@string/edit_text_here_or_by_push_numbers"
+            android:ems="10"
+            android:fontFamily="sans-serif-condensed"
+            android:hint="@string/edit_text_here_or_by_push_numbers"
+            android:inputType="textPersonName"
+            android:labelFor="@id/answerText"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            tools:ignore="DuplicateSpeakableTextCheck"
+            android:theme="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/button1"
+
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+
+                android:layout_height="match_parent"
+                android:text="@string/_1" />
+
+            <Button
+                android:id="@+id/button2"
+
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_2" />
+
+            <Button
+                android:id="@+id/button3"
+
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_3"
+                android:textAlignment="viewStart"
+                android:textColorHint="#FBD3D3" />
+
+            <Button
+                android:id="@+id/buttonParenthesisA"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/open_brace"
+                android:textColorHighlight="#7E66A8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_4" />
+
+            <Button
+                android:id="@+id/button5"
+
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_5" />
+
+            <Button
+                android:id="@+id/button6"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_6" />
+
+            <Button
+                android:id="@+id/buttonFunction"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="128dp"
+                android:text="function(" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button7"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_7" />
+
+            <Button
+                android:id="@+id/button8"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_8" />
+
+            <Button
+                android:id="@+id/button9"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_9" />
+
+            <Button
+                android:id="@+id/buttonParenthesis"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="48dp"
+                android:text="@string/close_brace" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dotButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/DOT" />
+
+            <Button
+                android:id="@+id/button0"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_0" />
+
+            <Button
+                android:id="@+id/equalButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/EQUALS" />
+
+            <Button
+                android:id="@+id/buttonComa"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/coma" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/ADD" />
+
+            <Button
+                android:id="@+id/multButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/MUL" />
+            <!--
+    <Button
+        android:id="@+id/sqrtButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/sqrt"
+        app:layout_constraintStart_toEndOf="@id/multButton"
+        app:layout_constraintTop_toBottomOf="@id/equalButton" />
+-->
+            <Button
+                android:id="@+id/delButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/DEL" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/substractButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/SUB" />
+
+            <Button
+                android:id="@+id/divideButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/DIV" />
+
+            <Button
+                android:id="@+id/expButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/EXP" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/AboutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/about_and_policies" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/answerText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:fontFamily="monospace"
+            android:text="@string/result"
+            android:textFontWeight="30"
+            android:textSize="34sp"
+            android:typeface="monospace"
+            android:theme="?android:attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+</LinearLayout>
