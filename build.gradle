@@ -6,7 +6,6 @@ buildscript {
         kotlin_version32 = '1.6.10'
 
     }
-
     ext.java_version = JavaVersion.VERSION_17
 
     repositories {
@@ -16,6 +15,7 @@ buildscript {
         maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
+        classpath 'com.google.gms:google-services:4.3.15'
         classpath 'com.android.tools.build:gradle:7.3.1'
         //classpath "androidx.databinding:databinding-ktx:7.2.2"
         //classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2'
