@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?><!--
+<!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -19,7 +19,5 @@
   -->
 
 <resources>
-    <declare-styleable name="MyEffectListRecyclerView">
-
-    </declare-styleable>
+    <string name="hello_world">Hello Round World!</string>
 </resources>

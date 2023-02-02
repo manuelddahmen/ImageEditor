@@ -21,7 +21,6 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
-import android.widget.Button;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,11 +30,17 @@ import java.util.Objects;
 import javaAnd.awt.image.imageio.ImageIO;
 
 public class Undo {
-    private final Button redoButton;
-    private final Button undoButton;
-    private int current = -1;
+    private static int current = -1;
+    private static Undo currentUndo = null;
 
     private List<DataApp> data = new ArrayList<DataApp>();
+
+    public static Undo getUndo() {
+        if (currentUndo == null) {
+            currentUndo = new Undo();
+        }
+        return currentUndo;
+    }
 
     private List<DataApp> getData() {
         return data;
@@ -95,8 +100,6 @@ public class Undo {
         return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).bitmap;
     }
 
-    public Undo(Button undoButton, Button redoButton, Undo last) {
-        this.undoButton = undoButton;
-        this.redoButton = redoButton;
+    private Undo() {
     }
 }

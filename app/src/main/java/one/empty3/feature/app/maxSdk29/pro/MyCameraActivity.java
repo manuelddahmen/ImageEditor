@@ -24,6 +24,7 @@ import static java.nio.file.Files.copy;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -559,9 +560,15 @@ public class MyCameraActivity extends Activity {
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());
         }
-        //Undo dataWithUndo = new Undo(new Button("Undo"), new Button("Redo"));
-        //dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile,isWorkingResolutionOriginal()));
 
+
+        View viewById = findViewById(R.id.toolbar);
+        Undo dataWithUndo = Undo.getUndo();
+        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
+
+
+        Fragment fragmentById = getFragmentManager().findFragmentById(R.layout.activity_toolbar);
+        getFragmentManager().getFragments().set(0, fragmentById);
     }
 
 

@@ -26,6 +26,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:accessibilityHeading="true"
+        android:id="@+id/toolbar" />
+
     <LinearLayout
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"

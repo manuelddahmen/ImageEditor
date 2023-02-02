@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -21,20 +22,43 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:exported="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"><!-->tools:ignore="AllowBackup"-->
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
 
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".toolbar"
+            android:exported="true"
+            android:label="@string/title_activity_toolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- >tools:ignore="AllowBackup" -->
         <activity
             android:name=".TextActivity"
             android:exported="false"
@@ -80,7 +104,8 @@
                 <action android:name="android.media.action.VIDEO_CAMERA" />
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
-                <!--                <action android:name="android.intent.action.MAIN" />-->
+                <!-- <action android:name="android.intent.action.MAIN" /> -->
+
 
                 <!-- Default for launch requests -->
                 <category android:name="android.intent.category.DEFAULT" />
@@ -115,7 +140,8 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
             <!-- App links for http/s -->
             <!--
             <intent-filter android:autoVerify="true">
@@ -174,8 +200,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
     </application>
 
 </manifest>
