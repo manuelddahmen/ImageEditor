@@ -18,13 +18,12 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -32,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
-import one.empty3.feature.app.maxSdk29.pro.R
 import one.empty3.feature.app.maxSdk29.pro.databinding.FragmentItemBinding
 
 

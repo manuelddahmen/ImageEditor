@@ -18,18 +18,16 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock
 import android.view.View
 import android.widget.Button
-import one.empty3.feature.app.maxSdk29.pro.R
 
-class LicenceUserData : AppCompatActivity() {
+class LicenceUserData2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)

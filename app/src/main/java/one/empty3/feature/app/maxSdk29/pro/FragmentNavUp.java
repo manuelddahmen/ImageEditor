@@ -18,22 +18,21 @@
  *
  */
 
-package one.empty3.apps.simplecalculator;
+package one.empty3.feature.app.maxSdk29.pro;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import one.empty3.feature.app.maxSdk29.pro.R;
-
-public class GraphicsActivity extends AppCompatActivity {
+public class FragmentNavUp extends Fragment {
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.graphics);
-        getIntent().getExtras().get("formula");
-        getIntent().getExtras().get("xMin");
-        getIntent().getExtras().get("xMax");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

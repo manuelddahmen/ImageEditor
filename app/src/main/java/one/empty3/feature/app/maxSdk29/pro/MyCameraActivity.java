@@ -84,7 +84,6 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 public class MyCameraActivity extends Activity {
-    private Undo dataWithUndo;
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     private static final int MAX_RES_DEFAULT = 200;
@@ -432,6 +431,20 @@ public class MyCameraActivity extends Activity {
                 }
             }
         });
+        Button computePixels = findViewById(R.id.activity_compute_pixels);
+        computePixels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawPointA != null && drawPointB != null) {
+                    Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
+                    intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
+                    intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
+                    intentDraw.putExtra("currentFile", currentFile);
+                    intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
+                    startActivity(intentDraw);
+                }
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -546,10 +559,8 @@ public class MyCameraActivity extends Activity {
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());
         }
-
-        dataWithUndo = new Undo(null, null);
-        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile,
-                isWorkingResolutionOriginal()));
+        //Undo dataWithUndo = new Undo(new Button("Undo"), new Button("Redo"));
+        //dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile,isWorkingResolutionOriginal()));
 
     }
 

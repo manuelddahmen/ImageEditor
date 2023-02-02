@@ -18,7 +18,7 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -30,7 +30,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
-import one.empty3.feature.app.maxSdk29.pro.R
 
 class ChooseFunctionDialogFragment : DialogFragment() {
     public var isExited: Boolean = false
@@ -97,7 +96,7 @@ class ChooseFunctionDialogFragment : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+        const val TAG = "one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment"
     }
 }
 

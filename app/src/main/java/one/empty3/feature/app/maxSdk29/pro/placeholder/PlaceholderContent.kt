@@ -18,7 +18,7 @@
  *
  */
 
-package one.empty3.apps.simplecalculator.placeholder
+package one.empty3.feature.app.maxSdk29.pro.placeholder
 
 import java.util.ArrayList
 import java.util.HashMap

@@ -18,16 +18,13 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
-import android.graphics.drawable.Icon
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
@@ -65,7 +62,7 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
         TODO("Not yet implemented")
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
+    override fun writeToParcel(dest: Parcel, flags: Int) {
         TODO("Not yet implemented")
     }
 

@@ -21,13 +21,56 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_rowWeight="0.4">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="0.9"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/backToMain"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:hint="@string/go_to_previous_activity" />
+
+        <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/p_x_y_color" />
+
+        <EditText
+            android:id="@+id/x"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:autofillHints="X line">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/y"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:autofillHints="Y column">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/z"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:autofillHints="Z deep">
+
+        </EditText>
 
         <TextView
             android:id="@+id/textViewVarDoubleName"
@@ -66,11 +109,7 @@
             android:layout_height="wrap_content"
             android:text="@string/buttonCodeAfter"
             tools:layout_editor_absoluteX="237dp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/buttonBackToGraphics"

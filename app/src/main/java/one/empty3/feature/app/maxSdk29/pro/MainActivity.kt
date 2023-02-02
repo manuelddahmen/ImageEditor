@@ -18,22 +18,18 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
 import one.empty3.apps.tree.altree.AlgebricTree
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
-import one.empty3.feature.app.maxSdk29.pro.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
                 supportFragmentManager,
-                "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+                "one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment"
             )
             Thread {
                 run {
@@ -125,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         //val dialog = ChooseFunctionDialogFragment()
         //dialog.show(
         //    getSupportFragmentManager(),
-        //    "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+        //    "one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment"
         //)
         //       this.setContentView(R.layout.fragment_item_list)
 //            editText.text = editText.text.append(dialog.function)
@@ -136,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun openUserData(view: View) {
-        val intent: Intent = Intent(view.context, LicenceUserData::class.java).apply {
+        val intent: Intent = Intent(view.context, LicenceUserData2::class.java).apply {
             putExtra("class", "")
         }
         startActivity(intent)

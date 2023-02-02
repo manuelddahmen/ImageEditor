@@ -18,7 +18,7 @@
  *
  */
 
-package one.empty3.apps.simplecalculator
+package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
