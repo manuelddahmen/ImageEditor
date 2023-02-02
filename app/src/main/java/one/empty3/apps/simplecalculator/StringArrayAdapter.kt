@@ -35,11 +35,11 @@ import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
 class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>(), Parcelable {
     private var mathList: Array<String> = ListMathDoubleFunction.getList()
 
-    class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         //val item = itemView.findViewById(R.id.icon) as Icon
         val textView = itemView.findViewById(R.id.text_view_recyclerview_function) as TextView
-        var name:String = textView.text.toString()
+        var name: String = textView.text.toString()
     }
 
     constructor(parcel: Parcel) : this() {
@@ -54,7 +54,7 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val function = mathList[position]
-        holder.name =  function
+        holder.name = function
     }
 
     override fun getItemCount(): Int {
