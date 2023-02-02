@@ -111,7 +111,8 @@ android {
 }
 
 dependencies {
-    api 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.compose.material3:material3:1.0.1'
+    implementation 'com.google.android.material:material:1.8.0'
     // When using a MDC theme
     implementation "com.google.android.material:compose-theme-adapter:1.2.1"
 

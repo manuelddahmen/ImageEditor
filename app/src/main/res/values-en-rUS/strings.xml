@@ -160,4 +160,10 @@
     <string name="fragment_function_ok">OK</string>
     <string name="fragment_function_cancel">Cancel</string>
     <string name="function_string">Function String</string>
+    <string name="back2">Back</string>
+    <string name="button">Button</string>
+    <string name="buttonCodeBfore">Button</string>
+    <string name="buttonCodeAfter">Add code after</string>
+
+    <string name="backToGraphics">Back to Graphics view</string>
 </resources>
