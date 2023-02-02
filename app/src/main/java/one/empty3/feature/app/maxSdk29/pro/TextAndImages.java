@@ -32,13 +32,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class TextAndImages extends Activity {
+public class TextAndImages extends AppCompatActivity {
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 897987;
     private Bitmap photo = null;
     private File currentFile;

@@ -24,7 +24,6 @@ import static java.nio.file.Files.copy;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -57,6 +56,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -84,14 +84,14 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-public class MyCameraActivity extends Activity {
+public class MyCameraActivity extends AppCompatActivity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     private static final int MAX_RES_DEFAULT = 200;
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
-    private Activity thisActivity;
+    private AppCompatActivity thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -561,13 +561,13 @@ public class MyCameraActivity extends Activity {
         }
 
 
-        View viewById = findViewById(R.id.toolbar);
+        View viewById = findViewById(R.id.toolbar2frag);
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
 
-
-        Fragment fragmentById = getFragmentManager().findFragmentById(R.layout.activity_toolbar);
-        getFragmentManager().getFragments().set(0, fragmentById);
+        FragmentNavigation fragmentToolbar = new FragmentNavigation();
+        fragmentToolbar.setArguments(savedInstanceState);
+        getSupportFragmentManager().getFragments().set(0, fragmentToolbar);
     }
 
 

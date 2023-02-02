@@ -20,17 +20,11 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.Manifest
-import android.app.Activity
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import java.io.File
@@ -47,7 +41,7 @@ public class Utils() {
      * @param name
      * @return file
      */
-    fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
+    fun writePhoto(activity: AppCompatActivity, bitmap: Bitmap, name: String): File? {
 
         var written = false;
         var fileWritten: File? = null;
@@ -72,7 +66,12 @@ public class Utils() {
         return writeFile(activity, bitmap, file1, file2)
     }
 
-    public fun writeFile(activity: Activity, bitmap: Bitmap, file1: File, file2: File): File? {
+    public fun writeFile(
+        activity: AppCompatActivity,
+        bitmap: Bitmap,
+        file1: File,
+        file2: File
+    ): File? {
         var written = false;
         var fileWritten: File? = null;
         try {

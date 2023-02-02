@@ -21,7 +21,6 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -33,11 +32,10 @@ import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
-import androidx.core.provider.FontRequest
-import androidx.emoji2.text.FontRequestEmojiCompatConfig
 import javaAnd.awt.Point
 import java.io.File
 import java.io.FileInputStream
@@ -45,7 +43,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 
-class TextActivity() : Activity(), Parcelable {
+class TextActivity() : AppCompatActivity(), Parcelable {
     private val INT_WRITE_STORAGE: Int = 9247492
     private lateinit var currentFile: File
     private var text: String = ""

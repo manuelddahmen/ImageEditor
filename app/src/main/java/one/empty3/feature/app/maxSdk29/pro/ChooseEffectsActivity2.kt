@@ -30,6 +30,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -39,7 +40,7 @@ import one.empty3.io.ProcessFile
 import java.io.File
 import java.util.*
 
-class ChooseEffectsActivity2 : Activity() {
+class ChooseEffectsActivity2 : AppCompatActivity() {
     private val INT_READ_STORAGE: Int = 5152112
     private val INT_WRITE_STORAGE: Int = 5152113
     private var listEffects: HashMap<String, ProcessFile>? = null

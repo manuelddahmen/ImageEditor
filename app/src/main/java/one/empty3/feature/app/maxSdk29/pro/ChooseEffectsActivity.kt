@@ -20,24 +20,22 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
 
-class ChooseEffectsActivity : Activity() {
+class ChooseEffectsActivity : AppCompatActivity() {
     private val appDataPath = "/one.empty3.feature.app.maxSdk29.pro/"
     lateinit var mediaFile: File
     lateinit var autoCompleteTextView: MultiAutoCompleteTextView
