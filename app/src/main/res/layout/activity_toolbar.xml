@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -18,23 +17,28 @@
   ~
   ~
   -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/TollBarr">
+    android:name="one.empty3.feature.app.maxSdk29.pro.FragmentNavUp">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:layout_height="match_parent"
+        android:textAlignment="center">
 
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/undo"
+            android:text="@string/undo"
+            android:layout_width="50dp"
+            android:layout_height="40dp" />
 
+        <Button
+            android:id="@+id/redo"
+            android:text="@string/redo"
+            android:layout_width="50dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
 </LinearLayout>

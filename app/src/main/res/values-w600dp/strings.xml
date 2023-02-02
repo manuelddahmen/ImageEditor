@@ -27,4 +27,6 @@
     <string name="choose_shader_like">GLShader-like</string>
     <string name="p_x_y_color">Type for points p(x,y) = Color(r, g, b)</string>
     <string name="go_to_previous_activity">Go to previous activity</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
 </resources>

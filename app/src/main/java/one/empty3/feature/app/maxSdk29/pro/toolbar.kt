@@ -21,18 +21,25 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.app.Activity
+import android.content.res.Configuration
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.FragmentContainerView
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityToolbarBinding
 
-class toolbar : Activity() {
+class ToolBar : FragmentActivity() {
 
-    private lateinit var binding: ActivityToolbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val toolbar = R.layout.activity_toolbar
+        setContentView(toolbar)
 
-        binding = ActivityToolbarBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        val undo = Undo.getUndo()
+        //Undo.getUndo().setButtonUndo()
+        //Undo.getRedo().setButtonUndo()
     }
 }

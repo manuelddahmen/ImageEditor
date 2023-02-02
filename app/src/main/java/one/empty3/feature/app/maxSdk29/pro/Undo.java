@@ -22,6 +22,8 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,5 +103,12 @@ public class Undo {
     }
 
     private Undo() {
+    }
+
+    @NotNull
+    public static Object isUndoInitialized() {
+        if (currentUndo == null)
+            return false;
+        return true;
     }
 }

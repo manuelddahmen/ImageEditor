@@ -171,7 +171,6 @@ public class MyCameraActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
             maxRes = MAX_RES_DEFAULT;
         } else {
