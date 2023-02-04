@@ -176,7 +176,20 @@ public class MyCameraActivity extends AppCompatActivity {
         } else {
             maxRes = savedInstanceState.getInt("maxRes");
         }
+
+
         setContentView(R.layout.main);
+
+        FragmentNavigation fragmentNavigation = new FragmentNavigation();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.stubNavigation,
+                        fragmentNavigation)
+                .commit();
+
+        Undo dataWithUndo = Undo.getUndo();
+        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
+
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
 
         rectfs = new ArrayList<RectF>();
@@ -560,14 +573,6 @@ public class MyCameraActivity extends AppCompatActivity {
             loadImageState(isWorkingResolutionOriginal());
         }
 
-
-        View viewById = findViewById(R.id.toolbar2frag);
-        Undo dataWithUndo = Undo.getUndo();
-        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
-
-        FragmentNavigation fragmentToolbar = new FragmentNavigation();
-        fragmentToolbar.setArguments(savedInstanceState);
-        getSupportFragmentManager().getFragments().set(0, fragmentToolbar);
     }
 
 

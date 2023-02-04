@@ -17,53 +17,38 @@
   ~
   ~
   -->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/fragment_navigation"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    style="@style/Theme.FeatureAppmain"
+    android:orientation="horizontal"
     tools:context=".FragmentNavigation">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragNav1"
-        android:name="one.empty3.feature.app.maxSdk29.pro.FragmentNavUp"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        tools:layout="@layout/main"
-        tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:id="@+id/buttonBarFirstLine"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-
-            <Button
-                android:id="@id/undo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"></Button>
+    <Button
+        style="@style/Theme.FeatureAppmain"
+        android:hint="@string/undo"
+        android:id="@id/undo"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
 
-            <ImageButton
-                android:id="@+id/preview"
-                android:layout_width="40dp"
-                android:layout_height="40dp"></ImageButton>
+    <ImageButton
+        style="@style/Theme.FeatureAppmain"
+        android:autofillHints="Preview of image"
+        android:id="@+id/preview"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/preview_of_image" />
 
-            <Button
-                android:id="@+id/redo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="@string/redo"></Button>
+    <Button
+        style="@style/Theme.FeatureAppmain"
+        android:hint="@string/redo"
+        android:id="@+id/redo"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="@string/redo" />
 
-        </LinearLayout>
+</LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/buttonBarSecondLine"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"></LinearLayout>
-    </androidx.fragment.app.FragmentContainerView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>

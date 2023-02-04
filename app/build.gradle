@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
-def code = 1593000
+def code = 1603000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
@@ -182,7 +182,6 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
     // Testing Fragments in Isolation
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
-}
 }
 
 publishing {

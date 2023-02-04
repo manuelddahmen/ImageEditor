@@ -22,7 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Blue200 = Color(0xFF0099FF)
-val Blue500 = Color(0xFF00AAFF)
+val Blue200 = Color(0x0040C4FF)
+val Blue500 = Color(0x0040C4FF)
 val Blue700 = Color(0xFF0000FF)
-val Teal200 = Color(0xFF03DAC5)
+val Teal200 = Color(0xFFF31AC5)

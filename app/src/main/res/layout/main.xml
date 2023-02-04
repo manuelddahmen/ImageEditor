@@ -21,14 +21,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.Material3.DayNight"
+    style="@style/Theme.FeatureAppmain"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/fragment_navigation"
-        android:id="@+id/toolbar2frag" />
+    <LinearLayout
+        android:id="@+id/stub_wrap"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/stubNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:inflatedId="@+id/navigationBar"
+            android:layout="@layout/fragment_navigation" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearChooseButtons"
@@ -38,7 +49,7 @@
 
         <Button
             android:id="@+id/takePhotoButton"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
             android:layout_height="48dp"
             android:autofillHints="@string/capturePhoto"
             android:contentDescription="@string/capturePhoto"
@@ -51,7 +62,7 @@
         <Button
             android:id="@+id/choosePhotoButton"
             android:background="@color/light_blue_A200"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
             android:layout_height="48dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
@@ -63,7 +74,7 @@
                 <Button
                     android:id="@+id/chooseMovie"
                     android:background="@color/light_blue_A200"
-                    style="@style/Theme.Material3.DayNight"
+                    style="@style/Theme.FeatureAppmain"
                     android:layout_height="48dp"
                     android:autofillHints="@string/choose_movie"
                     android:contentDescription="@string/choose_movie"
@@ -75,7 +86,7 @@
 
             <Button
                 android:id="@+id/loadLastSaved"
-                style="@style/Theme.Material3.DayNight"
+                style="@style/Theme.FeatureAppmain"
                 android:layout_height="48dp"
                 android:autofillHints="@string/last_saved"
                 android:contentDescription="@string/last_saved"
@@ -86,7 +97,7 @@
     -->
         <Button
             android:id="@+id/save"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +107,7 @@
 
         <Button
             android:id="@+id/share"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,7 +128,8 @@
 
         <Button
             android:id="@+id/draw_activity"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
+            android:background="@color/light_blue_400"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -125,7 +137,8 @@
 
         <Button
             android:id="@+id/selectRectangle"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
+            android:background="@color/light_blue_400"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -133,16 +146,18 @@
 
         <Button
             android:id="@+id/unselect_rect"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
             android:layout_width="64dp"
             android:layout_height="48dp"
+            android:background="@color/light_blue_400"
             android:height="48dp"
             android:onClick="unselectA"
             android:text="@string/unselect" />
 
         <Button
             android:id="@+id/copy"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
+            android:background="@color/light_blue_400"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -150,7 +165,8 @@
 
         <Button
             android:id="@+id/paste"
-            style="@style/Theme.Material3.DayNight"
+            style="@style/Theme.FeatureAppmain"
+            android:background="@color/light_blue_400"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:height="48dp"
@@ -189,7 +205,7 @@
 
     <Button
         android:id="@+id/buttonAddText"
-        style="@style/Theme.Material3.DayNight"
+        style="@style/Theme.FeatureAppmain"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:height="48dp"
@@ -201,7 +217,7 @@
 
     <Button
         android:id="@+id/buttonDraw"
-        style="@style/Theme.Material3.DayNight"
+        style="@style/Theme.FeatureAppmain"
         android:layout_width="wrap_content"
         android:background="@color/light_blue_A400"
         android:layout_height="48dp"
@@ -213,7 +229,7 @@
 
     <Button
         android:id="@+id/effectsButtonNew"
-        style="@style/Theme.Material3.DayNight"
+        style="@style/Theme.FeatureAppmain"
         android:layout_height="48dp"
         android:background="@color/light_blue_A400"
         android:height="48dp"
@@ -223,7 +239,7 @@
         android:layout_width="wrap_content" />
 
     <Button
-        style="@style/Theme.Material3.DayNight"
+        style="@style/Theme.FeatureAppmain"
         android:layout_height="48dp"
         android:background="@color/light_blue_A400"
         android:height="48dp"
@@ -235,7 +251,7 @@
 
     <Button
         android:id="@+id/About"
-        style="@style/Theme.Material3.DayNight"
+        style="@style/Theme.FeatureAppmain"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:height="48dp"

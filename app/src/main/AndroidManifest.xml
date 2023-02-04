@@ -35,64 +35,50 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
 
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
+
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
         <activity
-            android:name=".toolbar"
-            android:exported="true"
-            android:label="@string/title_activity_toolbar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!-- >tools:ignore="AllowBackup" -->
-        <activity
             android:name=".TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".ChooseEffectsCompose"
             android:exported="false"
             android:label="@string/title_activity_choose_effects_compose"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".ChooseEffectList"
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".ChooseEffectsActivity2"
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <!--
         <activity
             android:name=".FullscreenActivityCameraLiveEffect"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_fullscreen_camera_live_effect"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.Fullscreen" />
+            android:theme="@style/Theme.FeatureAppmain.Fullscreen" />
         -->
         <!--
         <activity
             android:name=".one.empty3.feature.app.maxSdk29.pro.CameraPreview"
             android:exported="false"
             android:label="@string/title_activity_camera_preview"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         -->
         <activity
             android:name=".ChooseEffectsActivity"
             android:exported="false"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d">
+            android:theme="@style/Theme.FeatureAppmain">
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -110,7 +96,7 @@
         <activity
             android:name=".MyCameraActivity"
             android:exported="true"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d">
+            android:theme="@style/Theme.FeatureAppmain">
 
             <!-- Register as a system camera app -->
             <intent-filter>
@@ -158,7 +144,7 @@
         <activity
             android:name=".LicenceUserData"
             android:exported="false"
-            android:theme="@style/Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".FormulaStore"
             android:exported="false"

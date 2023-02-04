@@ -27,7 +27,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 private const val TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
-private const val directory_file_history = "/Android/data/" + TAG + "/fileDataHistory.txt"
+private const val directory_file_history = "/Android/data/$TAG/fileDataHistory.txt"
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,7 +65,7 @@ class FragmentNavigation : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
+         * @param fileHistoryImages Parameter 1.
          * @param param2 Parameter 2.
          * @return A new instance of fragment fragment_navigation.
          */

@@ -20,42 +20,9 @@
 
 <resources>
 
-    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.FeatureAppmain" parent="Theme.Material3.Dark">
         <item name="android:statusBarColor">@color/blue_700</item>
-    </style>
-
-    <color name="blue_700">@color/light_blue_100</color>
-
-
-    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.Fullscreen" parent="Theme.AppCompat.DayNight">
-        <item name="android:actionBarStyle">
-            @style/Widget.Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.ActionBar.Fullscreen
-        </item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-    </style>
-
-    <style name="ThemeOverlay.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.FullscreenContainer" parent="Theme.AppCompat.DayNight">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/white_text</item>
-    </style>
-
-    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="Theme.FeatureAppmain" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:statusBarColor">@color/blue_700</item>
-    </style>
-
-    <style name="Theme.FeatureAppmain.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:colorBackground">@color/light_blue_400</item>
     </style>
 
     <style name="Theme.FeatureAppmain.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
