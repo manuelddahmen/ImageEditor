@@ -31,8 +31,32 @@ import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
 import one.empty3.apps.tree.altree.AlgebricTree
 
-class MainActivity : AppCompatActivity() {
+class Calculator : AppCompatActivity() {
+    private var index: Int = 0
+    private var variable: String = ""
+    private var text: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val x: String? = this.intent.extras?.getString("x")
+        val y: String? = this.intent.extras?.getString("y")
+        val z: String? = this.intent.extras?.getString("z")
+
+
+        if (x != null) {
+            variable = "x"
+            index = 0
+            text = x
+        } else if (y != null) {
+            variable = "y"
+            index = 1
+            text = y
+        } else if (z != null) {
+            variable = "z"
+            index = 2
+            text = z
+        }
+        title = variable
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
         val buttonsNumbers = arrayListOf(
@@ -128,6 +152,22 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openUserData(it)
         }
+
+        editText.setText(text)
+
+        val back = findViewById<Button>(R.id.buttonBak);
+        back.setOnClickListener {
+            val intentBack = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intentBack.setClass(applicationContext, GraphicsActivity::class.java)
+            startActivity(intentBack)
+        };
+        val ok = findViewById<Button>(R.id.buttonOk);
+        ok.setOnClickListener {
+            val intentFormula = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intentFormula.extras!!.putString("", editText.text.toString())
+            intentFormula.setClass(applicationContext, GraphicsActivity::class.java)
+            startActivity(intentFormula)
+        };
     }
 
 

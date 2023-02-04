@@ -445,17 +445,11 @@ public class MyCameraActivity extends AppCompatActivity {
             }
         });
         Button computePixels = findViewById(R.id.activity_compute_pixels);
-        computePixels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawPointA != null && drawPointB != null) {
-                    Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
-                    intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
-                    intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
-                    intentDraw.putExtra("currentFile", currentFile);
-                    intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
-                    startActivity(intentDraw);
-                }
+        computePixels.setOnClickListener(v -> {
+            if (currentFile != null) {
+                Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
+                intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
+                startActivity(intentDraw);
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -569,6 +563,8 @@ public class MyCameraActivity extends AppCompatActivity {
                 addText(view);
             }
         });
+
+
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());
         }

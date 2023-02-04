@@ -20,7 +20,10 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +33,35 @@ public class GraphicsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
-        getIntent().getExtras().get("formula");
-        getIntent().getExtras().get("xMin");
-        getIntent().getExtras().get("xMax");
+
+        Button x = findViewById(R.id.buttonX);
+        Button y = findViewById(R.id.buttonY);
+        Button z = findViewById(R.id.buttonZ);
+
+        TextView textViewX = findViewById(R.id.textViewX);
+        TextView textViewY = findViewById(R.id.textViewY);
+        TextView textViewZ = findViewById(R.id.textViewZ);
+
+        Button[] buttons = new Button[]{x, y, z};
+        TextView[] textViews = new TextView[]{textViewX, textViewY, textViewZ};
+        String[] cords = new String[]{"x", "y", "z"};
+        for (int i = 0; i < 3; i++) {
+            TextView textView = textViews[i];
+            Button button = buttons[i];
+
+            if (getIntent().getExtras() != null) {
+                textView.setText(((String) getIntent().getExtras().get(cords[i])) != null ?
+                        ((String) getIntent().getExtras().get(cords[i])) : "");
+            }
+            button.setOnClickListener(view -> {
+                String cord = button.getText().toString().toLowerCase();
+
+                Intent calculatorIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                calculatorIntent.setClass(getApplicationContext(), Calculator.class);
+                calculatorIntent.getExtras().putString(cord, textView.getText().toString());
+
+                startActivity(calculatorIntent);
+            });
+        }
     }
 }

@@ -20,12 +20,17 @@
 
 <resources>
 
-    <style name="Theme.FeatureAppmain" parent="Theme.Material3.Dark">
-        <item name="android:statusBarColor">@color/blue_700</item>
+    <style name="Theme.FeatureAppmain" parent="Theme.Material3.DayNight">
         <item name="android:colorBackground">@color/light_blue_400</item>
+        <item name="android:color">@color/light_blue_400</item>
+        <item name="android:fontWeight">10</item>
     </style>
 
-    <style name="Theme.FeatureAppmain.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.FeatureAppmain.AppBarOverlay" parent="Theme.Material3.DayNight">
 
-    <style name="Theme.FeatureAppmain.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    </style>
+
+    <style name="Theme.FeatureAppmain.PopupOverlay" parent="Theme.Material3.DayNight">
+
+    </style>
 </resources>

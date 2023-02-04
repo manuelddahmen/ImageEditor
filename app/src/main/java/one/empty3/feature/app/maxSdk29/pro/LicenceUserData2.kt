@@ -41,7 +41,7 @@ class LicenceUserData2 : AppCompatActivity() {
 
     private fun backToMain(view: View) {
 
-        val intent: Intent = Intent(view.context, MainActivity::class.java).apply {
+        val intent: Intent = Intent(view.context, Calculator::class.java).apply {
         }
         startActivity(intent)
     }

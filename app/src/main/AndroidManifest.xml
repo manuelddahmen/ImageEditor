@@ -149,15 +149,15 @@
             android:name=".FormulaStore"
             android:exported="false"
             android:label="@string/title_activity_formula_store"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".LicenceUserData2"
             android:exported="false" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Calculator"
             android:exported="true"
             android:label="Simple Calculator"
-            android:theme="@style/AppTheme">
+            android:theme="@style/Theme.FeatureAppmain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

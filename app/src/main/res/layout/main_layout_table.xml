@@ -280,7 +280,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="93dp"
         android:orientation="horizontal">
 
         <TextView
@@ -291,8 +291,8 @@
             android:text="@string/result"
             android:textFontWeight="30"
             android:textSize="34sp"
-            android:typeface="monospace"
-            android:theme="?android:attr/buttonBarButtonStyle" />
+            android:theme="?android:attr/buttonBarButtonStyle"
+            android:typeface="monospace" />
     </LinearLayout>
 
     <Button
@@ -300,5 +300,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back2" />
+
+    <Button
+        android:id="@+id/buttonOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ok" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
 
 </LinearLayout>
