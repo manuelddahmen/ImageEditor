@@ -86,6 +86,16 @@ public class GraphicsActivity extends AppCompatActivity {
 
         View buttonView = findViewById(R.id.buttonView);
         buttonView.setOnClickListener(view -> {
+            for (int i = 0; i < cords.length; i++) {
+                TextView textView = textViews[i];
+                Button button = buttons[i];
+                Intent graphicsIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
+                for (String s : cords) {
+                    graphicsIntent.getExtras().putString(s, textView.getText().toString());
+                }
+                startActivity(graphicsIntent);
+            }
         });
     }
 

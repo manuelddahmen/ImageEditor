@@ -18,17 +18,16 @@
   ~
   -->
 
-<resources>
-    <string name="back2">Back</string>
-    <string name="button">Button</string>
-    <string name="buttonCodeBfore">Before</string>
-    <string name="buttonCodeAfter">After</string>
-    <string name="backToGraphics">Back to Graphics view</string>
-    <string name="choose_shader_like">GLShader-like</string>
-    <string name="p_x_y_color">Type for points p(x,y) = Color(r, g, b)</string>
-    <string name="go_to_previous_activity">Go to previous activity</string>
-    <string name="undo">Undo</string>
-    <string name="redo">Redo</string>
-    <string name="preview_of_image">Preview of image</string>
-    <string name="application_of_formulas">Application of formulas</string>
-</resources>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/application_of_formulas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/ic_photo"
+        android:contentDescription="@string/application_of_formulas" />
+</androidx.constraintlayout.widget.ConstraintLayout>
