@@ -67,17 +67,19 @@ public class GraphicsActivity extends AppCompatActivity {
             String cord = button.getText().toString().toLowerCase();
             if (textView != null && button != null) {
                 if (getIntent().getExtras() != null) {
-                    textView.setText(((String) getIntent().getExtras().get(cords[i])) != null ?
+                    textView.setText((getIntent().getExtras().get(cords[i])) != null ?
                             ((String) getIntent().getExtras().get(cords[i])) : "");
                 }
                 button.setOnClickListener(view -> {
 
-                    Intent calculatorIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    Intent calculatorIntent = new Intent(Intent.ACTION_EDIT);
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
                     for (String s : cords) {
-                        calculatorIntent.getExtras().putString(cord, textView.getText().toString());
-                        if (s.equals(cord)) {
-                            calculatorIntent.getExtras().putString("variable", cord);
+                        if (calculatorIntent.getExtras() != null) {
+                            calculatorIntent.getExtras().putString(cord, textView.getText().toString());
+                            if (s.equals(cord)) {
+                                calculatorIntent.getExtras().putString("variable", cord);
+                            }
                         }
                     }
                     startActivity(calculatorIntent);
