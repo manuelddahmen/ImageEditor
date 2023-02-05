@@ -30,4 +30,12 @@
         android:layout_height="match_parent"
         app:srcCompat="@drawable/ic_photo"
         android:contentDescription="@string/application_of_formulas" />
+
+    <Button
+        android:id="@+id/buttonDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Draw"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

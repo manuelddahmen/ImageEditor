@@ -59,29 +59,32 @@ public class GraphicsActivity extends AppCompatActivity {
 
         buttons = new Button[]{x, y, z, r, g, b, a, t};
         textViews = new TextView[]{textViewX, textViewY, textViewZ,
-                textViewR, textViewG, textViewB, textViewT};
+                textViewR, textViewG, textViewB, textViewA, textViewT};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
-
-            if (getIntent().getExtras() != null) {
-                textView.setText(((String) getIntent().getExtras().get(cords[i])) != null ?
-                        ((String) getIntent().getExtras().get(cords[i])) : "");
-            }
-            button.setOnClickListener(view -> {
-                String cord = button.getText().toString().toLowerCase();
-
-                Intent calculatorIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                for (String s : cords) {
-                    calculatorIntent.getExtras().putString(cord, textView.getText().toString());
-                    if (s.equals(cord)) {
-                        calculatorIntent.getExtras().putString("variable", cord);
-                    }
+            String cord = button.getText().toString().toLowerCase();
+            if (textView != null && button != null) {
+                if (getIntent().getExtras() != null) {
+                    textView.setText(((String) getIntent().getExtras().get(cords[i])) != null ?
+                            ((String) getIntent().getExtras().get(cords[i])) : "");
                 }
-                startActivity(calculatorIntent);
-            });
+                button.setOnClickListener(view -> {
+
+                    Intent calculatorIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    calculatorIntent.setClass(getApplicationContext(), Calculator.class);
+                    for (String s : cords) {
+                        calculatorIntent.getExtras().putString(cord, textView.getText().toString());
+                        if (s.equals(cord)) {
+                            calculatorIntent.getExtras().putString("variable", cord);
+                        }
+                    }
+                    startActivity(calculatorIntent);
+                });
+            } else {
+                textView.setText(cord);
+            }
         }
 
         View buttonView = findViewById(R.id.buttonView);

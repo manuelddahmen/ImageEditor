@@ -157,13 +157,13 @@
             android:name=".Calculator"
             android:exported="true"
             android:label="Simple Calculator"
-            android:theme="@style/Theme.FeatureAppmain">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.FeatureAppmain"></activity>
+        <activity
+            android:name=".GraphicsActivity"
+            android:exported="true"
+            android:label="Draw graphics"
+            android:theme="@style/Theme.FeatureAppmain" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <provider
             android:name=".MyFileProvider"

@@ -22,6 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -53,6 +54,13 @@ public class GraphicsActivityView extends AppCompatActivity {
         for (int i = 0; i < values.length; i++) {
             stringDoubleHashMap.put(s[i], values[i]);
         }
+
+        Button buttonDraw = findViewById(R.id.buttonDraw);
+        buttonDraw.setOnClickListener(view -> {
+            {
+                draw();
+            }
+        });
     }
 
     private void draw() {
