@@ -22,7 +22,6 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -30,6 +29,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
 import one.empty3.apps.tree.altree.AlgebricTree
+import java.util.*
 
 class Calculator : AppCompatActivity() {
     private var index: Int = 0
@@ -38,6 +38,15 @@ class Calculator : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val variable = this.intent.extras?.getString("variable")
         val variableValue: String? = this.intent.extras?.getString(variable)
+        val cords = arrayOf<String>("x", "y", "z", "r", "g", "b", "a", "t")
+        val formula = arrayOfNulls<String>(8)
+
+        var i = 0
+        for (s in cords) {
+            formula[i] = intent.extras?.getString("s")
+            i += 1
+        }
+
 
         title = variable
 
@@ -67,22 +76,22 @@ class Calculator : AppCompatActivity() {
         )
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
-        val editText = findViewById<EditText>(R.id.editTextCalculus)
+        val editTextId = findViewById<EditText>(R.id.editTextCalculus)
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
             findViewById.setOnClickListener {
                 if (findViewById == findViewById<Button>(R.id.delButton)) {
-                    val toString: String = editText.text.toString()
+                    val toString: String = editTextId.text.toString()
                     if (toString.length > 1) {
-                        editText.setText(editText.text.substring(0, toString.length - 1))
+                        editTextId.setText(editTextId.text.substring(0, toString.length - 1))
                     } else if (toString.length == 1) {
-                        editText.setText("")
+                        editTextId.setText("")
                     }
                     return@setOnClickListener
                 }
-                editText.text = editText.text.append(findViewById.text)
-                val tree = AlgebricTree(editText.text.toString())
+                editTextId.text = editTextId.text.append(findViewById.text)
+                val tree = AlgebricTree(editTextId.text.toString())
 
                 try {
                     tree.construct()
@@ -121,13 +130,13 @@ class Calculator : AppCompatActivity() {
 
                     val result: String = dialog.function_name
                     if (result.isNotEmpty())
-                        editText.text = editText.text.append(result)
+                        editTextId.text = editTextId.text.append(result)
                 }
             }.start()
         }
 
 
-        editText.setText(variableValue)
+        editTextId.setText(variableValue)
 
         val back = findViewById<Button>(R.id.buttonBak);
         back.setOnClickListener {
@@ -137,11 +146,25 @@ class Calculator : AppCompatActivity() {
         };
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
-            // Renvoyer l'intention avec toutes les valeurs?
-            intent.extras!!.putString(variable, editText.text.toString())
-            intent.extras!!.putString("variable", variable)
-            intent.setClass(applicationContext, GraphicsActivity::class.java)
-            startActivity(intent)
-        };
+            val intentGraphics = Intent(Intent.ACTION_EDIT)
+            var i = 0
+
+            for (s in cords) {
+                if (intentGraphics.extras != null) {
+                    intentGraphics.extras?.putString(s, formula[i])
+                    if (cords[i] == variable) {
+                        intentGraphics.extras!!.putString(
+                            "variable", cords[i]
+                        )
+                        intentGraphics.extras!!.putString(
+                            "variableValue", formula[i]
+                        )
+                    }
+                }
+                i += 1
+            }
+            startActivity(intentGraphics)
+        }
+
     }
 }
