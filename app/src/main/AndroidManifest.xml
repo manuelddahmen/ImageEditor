@@ -152,12 +152,13 @@
             android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".LicenceUserData2"
+            android:theme="@style/Theme.FeatureAppmain"
             android:exported="false" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
             android:name=".Calculator"
             android:exported="true"
             android:label="Simple Calculator"
-            android:theme="@style/Theme.FeatureAppmain"></activity>
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".GraphicsActivity"
             android:exported="true"

@@ -173,4 +173,5 @@
     <string name="redo">Redo</string>
     <string name="preview_of_image">Preview of image</string>
     <string name="application_of_formulas">Application of formulas</string>
+    <string name="view">View</string>
 </resources>

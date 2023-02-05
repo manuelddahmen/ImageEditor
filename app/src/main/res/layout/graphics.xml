@@ -29,7 +29,8 @@
         android:layout_height="match_parent"
         android:id="@+id/tableLayout1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons">
+        app:layout_constraintBottom_toTopOf="@id/buttons"
+        android:theme="@style/Theme.FeatureAppmain">
 
         <TableRow>
 
@@ -37,7 +38,8 @@
                 android:id="@+id/textViewX"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonX"
@@ -45,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:text="X"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -54,7 +57,8 @@
                 android:id="@+id/textViewY"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonY"
@@ -62,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:text="y"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -71,7 +76,8 @@
                 android:id="@+id/textViewZ"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonZ"
@@ -79,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:text="z"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -88,7 +95,8 @@
                 android:id="@+id/textViewR"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonR"
@@ -96,7 +104,8 @@
                 android:layout_height="wrap_content"
                 android:text="r"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -105,7 +114,8 @@
                 android:id="@+id/textViewG"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonG"
@@ -113,7 +123,8 @@
                 android:layout_height="wrap_content"
                 android:text="g"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -122,7 +133,8 @@
                 android:id="@+id/textViewB"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonB"
@@ -130,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:text="b"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -139,7 +152,8 @@
                 android:id="@+id/textViewA"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonA"
@@ -147,7 +161,8 @@
                 android:layout_height="wrap_content"
                 android:text="a"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -156,7 +171,8 @@
                 android:id="@+id/textViewT"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonT"
@@ -164,7 +180,8 @@
                 android:layout_height="wrap_content"
                 android:text="t"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -173,7 +190,8 @@
                 android:id="@+id/textViewU"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonU"
@@ -181,7 +199,8 @@
                 android:layout_height="wrap_content"
                 android:text="u"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
 
         <TableRow>
@@ -190,7 +209,8 @@
                 android:id="@+id/textViewV"
                 android:layout_width="315dp"
                 android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonV"
@@ -198,7 +218,8 @@
                 android:layout_height="wrap_content"
                 android:text="v"
                 tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp" />
+                tools:layout_editor_absoluteY="58dp"
+                android:theme="@style/Theme.FeatureAppmain" />
         </TableRow>
     </TableLayout>
 
@@ -207,32 +228,36 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:id="@+id/buttons"
-        app:layout_constraintTop_toBottomOf="@id/tableLayout1">
+        app:layout_constraintTop_toBottomOf="@id/tableLayout1"
+        android:theme="@style/Theme.FeatureAppmain">
 
 
         <Button
-            android:id="@+id/buttonBack2"
+            android:id="@+id/buttonBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@+string/back"
+            android:text="@string/back"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="667dp" />
+            tools:layout_editor_absoluteY="667dp"
+            android:theme="@style/Theme.FeatureAppmain" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@+string/save"
+            android:text="@string/save"
             tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="667dp" />
+            tools:layout_editor_absoluteY="667dp"
+            android:theme="@style/Theme.FeatureAppmain" />
 
         <Button
             android:id="@+id/buttonView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@+string/view"
+            android:text="@string/view"
             tools:layout_editor_absoluteX="302dp"
-            tools:layout_editor_absoluteY="666dp" />
+            tools:layout_editor_absoluteY="666dp"
+            android:theme="@style/Theme.FeatureAppmain" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
