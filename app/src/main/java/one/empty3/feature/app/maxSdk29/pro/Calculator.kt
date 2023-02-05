@@ -36,25 +36,9 @@ class Calculator : AppCompatActivity() {
     private var variable: String = ""
     private var text: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
+        val variable = this.intent.extras?.getString("variable")
+        val variableValue: String? = this.intent.extras?.getString(variable)
 
-        val x: String? = this.intent.extras?.getString("x")
-        val y: String? = this.intent.extras?.getString("y")
-        val z: String? = this.intent.extras?.getString("z")
-
-
-        if (x != null) {
-            variable = "x"
-            index = 0
-            text = x
-        } else if (y != null) {
-            variable = "y"
-            index = 1
-            text = y
-        } else if (z != null) {
-            variable = "z"
-            index = 2
-            text = z
-        }
         title = variable
 
         super.onCreate(savedInstanceState)
@@ -141,19 +125,9 @@ class Calculator : AppCompatActivity() {
                 }
             }.start()
         }
-        // Create an instance of the dialog fragment and show it
-        //val dialog = ChooseFunctionDialogFragment()
-        //dialog.show(
-        //    getSupportFragmentManager(),
-        //    "one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment"
-        //)
-        //       this.setContentView(R.layout.fragment_item_list)
-//            editText.text = editText.text.append(dialog.function)
-        findViewById<Button>(R.id.AboutButton).setOnClickListener {
-            openUserData(it)
-        }
 
-        editText.setText(text)
+
+        editText.setText(variableValue)
 
         val back = findViewById<Button>(R.id.buttonBak);
         back.setOnClickListener {
@@ -163,18 +137,11 @@ class Calculator : AppCompatActivity() {
         };
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
-            val intentFormula = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intentFormula.extras!!.putString(variable, editText.text.toString())
-            intentFormula.setClass(applicationContext, GraphicsActivity::class.java)
-            startActivity(intentFormula)
+            // Renvoyer l'intention avec toutes les valeurs?
+            intent.extras!!.putString(variable, editText.text.toString())
+            intent.extras!!.putString("variable", variable)
+            intent.setClass(applicationContext, GraphicsActivity::class.java)
+            startActivity(intent)
         };
-    }
-
-
-    private fun openUserData(view: View) {
-        val intent: Intent = Intent(view.context, LicenceUserData2::class.java).apply {
-            putExtra("class", "")
-        }
-        //startActivity(intent)
     }
 }

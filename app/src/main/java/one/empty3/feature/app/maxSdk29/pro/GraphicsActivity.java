@@ -22,6 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,6 +30,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GraphicsActivity extends AppCompatActivity {
+    private String[] cords;
+    private TextView[] textViews;
+    private Button[] buttons;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +57,10 @@ public class GraphicsActivity extends AppCompatActivity {
         TextView textViewA = findViewById(R.id.textViewA);
         TextView textViewT = findViewById(R.id.textViewT);
 
-        Button[] buttons = new Button[]{x, y, z, r, g, b, a, t};
-        TextView[] textViews = new TextView[]{textViewX, textViewY, textViewZ,
+        buttons = new Button[]{x, y, z, r, g, b, a, t};
+        textViews = new TextView[]{textViewX, textViewY, textViewZ,
                 textViewR, textViewG, textViewB, textViewT};
-        String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
+        cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
@@ -69,10 +74,20 @@ public class GraphicsActivity extends AppCompatActivity {
 
                 Intent calculatorIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                calculatorIntent.getExtras().putString(cord, textView.getText().toString());
-
+                for (String s : cords) {
+                    calculatorIntent.getExtras().putString(cord, textView.getText().toString());
+                    if (s.equals(cord)) {
+                        calculatorIntent.getExtras().putString("variable", cord);
+                    }
+                }
                 startActivity(calculatorIntent);
             });
         }
+
+        View buttonView = findViewById(R.id.buttonView);
+        buttonView.setOnClickListener(view -> {
+        });
     }
+
+
 }
