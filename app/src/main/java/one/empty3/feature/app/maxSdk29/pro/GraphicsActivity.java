@@ -37,15 +37,26 @@ public class GraphicsActivity extends AppCompatActivity {
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
         Button z = findViewById(R.id.buttonZ);
+        Button r = findViewById(R.id.buttonR);
+        Button g = findViewById(R.id.buttonG);
+        Button b = findViewById(R.id.buttonB);
+        Button a = findViewById(R.id.buttonA);
+        Button t = findViewById(R.id.buttonT);
 
         TextView textViewX = findViewById(R.id.textViewX);
         TextView textViewY = findViewById(R.id.textViewY);
         TextView textViewZ = findViewById(R.id.textViewZ);
+        TextView textViewR = findViewById(R.id.textViewR);
+        TextView textViewG = findViewById(R.id.textViewG);
+        TextView textViewB = findViewById(R.id.textViewB);
+        TextView textViewA = findViewById(R.id.textViewA);
+        TextView textViewT = findViewById(R.id.textViewT);
 
-        Button[] buttons = new Button[]{x, y, z};
-        TextView[] textViews = new TextView[]{textViewX, textViewY, textViewZ};
-        String[] cords = new String[]{"x", "y", "z"};
-        for (int i = 0; i < 3; i++) {
+        Button[] buttons = new Button[]{x, y, z, r, g, b, a, t};
+        TextView[] textViews = new TextView[]{textViewX, textViewY, textViewZ,
+                textViewR, textViewG, textViewB, textViewT};
+        String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
+        for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
 

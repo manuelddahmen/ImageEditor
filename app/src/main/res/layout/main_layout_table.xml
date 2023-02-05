@@ -268,15 +268,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/AboutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/about_and_policies" />
-
-    </LinearLayout>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"

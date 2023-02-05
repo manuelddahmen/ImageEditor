@@ -164,7 +164,7 @@ class Calculator : AppCompatActivity() {
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentFormula = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intentFormula.extras!!.putString("", editText.text.toString())
+            intentFormula.extras!!.putString(variable, editText.text.toString())
             intentFormula.setClass(applicationContext, GraphicsActivity::class.java)
             startActivity(intentFormula)
         };
@@ -175,6 +175,6 @@ class Calculator : AppCompatActivity() {
         val intent: Intent = Intent(view.context, LicenceUserData2::class.java).apply {
             putExtra("class", "")
         }
-        startActivity(intent)
+        //startActivity(intent)
     }
 }

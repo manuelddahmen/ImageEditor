@@ -92,9 +92,89 @@
         tools:layout_editor_absoluteY="666dp" />
 
     <ListView
-        android:layout_width="393dp"
-        android:layout_height="445dp"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="221dp" />
+        android:layout_width="402dp"
+        android:layout_height="213dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="453dp" />
+
+    <Button
+        android:id="@+id/buttonR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="205dp" />
+
+    <Button
+        android:id="@+id/buttonG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="G"
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Button
+        android:id="@+id/buttonB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="B"
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="308dp" />
+
+    <Button
+        android:id="@+id/buttonT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T"
+        tools:layout_editor_absoluteX="323dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <TextView
+        android:id="@+id/textViewR"
+        android:layout_width="299dp"
+        android:layout_height="47dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="205dp" />
+
+    <TextView
+        android:id="@+id/textViewG"
+        android:layout_width="307dp"
+        android:layout_height="41dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <TextView
+        android:id="@+id/textViewB"
+        android:layout_width="297dp"
+        android:layout_height="53dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="301dp" />
+
+    <TextView
+        android:id="@+id/textViewT"
+        android:layout_width="297dp"
+        android:layout_height="47dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <Button
+        android:id="@+id/buttonA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="359dp" />
+
+    <TextView
+        android:id="@+id/textViewA"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="355dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
