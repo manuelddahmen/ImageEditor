@@ -66,8 +66,8 @@ public class GraphicsActivityView extends AppCompatActivity {
     private void draw() {
         ImageView image = findViewById(R.id.application_of_formulas);
 
-        int w = image.getWidth();
-        int h = image.getHeight();
+        int w = image.getMaxWidth();
+        int h = image.getMaxHeight();
 
 
         for (int i = 0; i < values.length; i++) {

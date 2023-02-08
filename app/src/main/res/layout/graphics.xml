@@ -212,7 +212,7 @@
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:tooltipText="complete"
-                android:text="v"
+                android:text="u"
                 android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
 
