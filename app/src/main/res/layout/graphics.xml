@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2023.
+  ~ Copyright (c) 2023. 
   ~
   ~
   ~  Copyright 2012-2023 Manuel Daniel Dahmen
@@ -25,239 +25,261 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TableLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tableLayout1"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttons"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:theme="@style/Theme.FeatureAppmain">
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewX"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:text="x"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonX"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="X"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="X" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewY"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:text="y"
+                android:layout_height="60dp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="y"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="y" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewZ"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:text="z"
+                android:layout_height="60dp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonZ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="z"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="z" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewR"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:text="r"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="r"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="r" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewG"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:text="g"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="g"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="g" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewB"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:layout_height="60dp"
+                android:text="b"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="b"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="b" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewA"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:text="a"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="a"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="a" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewT"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:text="t"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="t"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="t" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewU"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:text="v"
+                android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="u"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="u" />
         </TableRow>
 
         <TableRow>
 
-            <TextView
+            <EditText
+                android:textSize="40sp"
                 android:id="@+id/textViewV"
-                android:layout_width="315dp"
-                android:layout_height="43dp"
-                tools:layout_editor_absoluteY="58dp"
+                android:text="v"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:tooltipText="complete"
+                android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
                 android:id="@+id/buttonV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="v"
-                tools:layout_editor_absoluteX="321dp"
-                tools:layout_editor_absoluteY="58dp"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                android:text="v" />
+        </TableRow>
+
+        <TableRow>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/buttons"
+
+                android:theme="@style/Theme.FeatureAppmain">
+
+
+                <Button
+                    android:id="@+id/buttonBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.AppCompat.Light"
+                    android:text="@string/back" />
+
+                <Button
+                    android:id="@+id/buttonSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+                    android:text="@string/save" />
+
+                <Button
+                    android:id="@+id/buttonView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+                    android:text="@string/view" />
+
+            </LinearLayout>
+
         </TableRow>
     </TableLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/buttons"
-        app:layout_constraintTop_toBottomOf="@id/tableLayout1"
-        android:theme="@style/Theme.FeatureAppmain">
-
-
-        <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="667dp"
-            android:theme="@style/Theme.FeatureAppmain" />
-
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            tools:layout_editor_absoluteX="200dp"
-            tools:layout_editor_absoluteY="667dp"
-            android:theme="@style/Theme.FeatureAppmain" />
-
-        <Button
-            android:id="@+id/buttonView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/view"
-            tools:layout_editor_absoluteX="302dp"
-            tools:layout_editor_absoluteY="666dp"
-            android:theme="@style/Theme.FeatureAppmain" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

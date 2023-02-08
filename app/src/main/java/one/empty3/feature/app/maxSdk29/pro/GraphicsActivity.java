@@ -68,7 +68,7 @@ public class GraphicsActivity extends AppCompatActivity {
             if (textView != null && button != null) {
                 if (getIntent().getExtras() != null) {
                     textView.setText((getIntent().getExtras().get(cords[i])) != null ?
-                            ((String) getIntent().getExtras().get(cords[i])) : "");
+                            ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 }
                 button.setOnClickListener(view -> {
 
@@ -94,10 +94,10 @@ public class GraphicsActivity extends AppCompatActivity {
             for (int i = 0; i < cords.length; i++) {
                 TextView textView = textViews[i];
                 Button button = buttons[i];
-                Intent graphicsIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                Intent graphicsIntent = new Intent(Intent.ACTION_VIEW);
                 graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
                 for (String s : cords) {
-                    graphicsIntent.getExtras().putString(s, textView.getText().toString());
+                    graphicsIntent.putExtra(s, textView.getText().toString());
                 }
                 startActivity(graphicsIntent);
             }
