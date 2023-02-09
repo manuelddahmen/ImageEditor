@@ -36,6 +36,7 @@ import one.empty3.io.ProcessFile
 import java.io.File
 
 class ChooseEffectsActivity : AppCompatActivity() {
+    private val MAX_RES: Int = 200
     private val appDataPath = "/one.empty3.feature.app.maxSdk29.pro/"
     lateinit var mediaFile: File
     lateinit var autoCompleteTextView: MultiAutoCompleteTextView
@@ -51,8 +52,8 @@ class ChooseEffectsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_effects)
         init(savedInstanceState)
-        mediaFile = intent.extras?.get("data") as File
-        maxRes = intent.extras?.get("maxRes") as Int
+        mediaFile = intent.getStringExtra("data")?.let { File(it) }!!
+        maxRes = intent.getIntExtra("maxRes", MAX_RES)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

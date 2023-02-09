@@ -78,7 +78,7 @@ public class GraphicsActivity extends AppCompatActivity {
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
                     for (String s : cords) {
                         if (calculatorIntent.getExtras() != null) {
-                            calculatorIntent.getExtras().putString(cord, textView.getText().toString());
+                            calculatorIntent.getExtras().putString(s, textView.getText().toString());
                             if (s.equals(cord)) {
                                 calculatorIntent.getExtras().putString("variable", cord);
                             }

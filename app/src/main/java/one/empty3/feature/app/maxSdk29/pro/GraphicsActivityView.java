@@ -22,7 +22,6 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -37,10 +36,10 @@ import one.empty3.library.core.raytracer.tree.AlgebricTree;
 import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 
 public class GraphicsActivityView extends AppCompatActivity {
-    final String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    final String[] cord = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     final String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    final AlgebricTree[] algebricTree = new AlgebricTree[s.length];
+    final AlgebricTree[] algebricTree = new AlgebricTree[cord.length];
     HashMap<String, Double> stringDoubleHashMap;
     private int maxRes = 400;
 
@@ -49,15 +48,15 @@ public class GraphicsActivityView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics_view);
         int i = 0;
-        for (String cord : s) {
-            String o = (String) getIntent().getExtras().get(cord);
-            formulas[i++] = o;
+        for (String s : cord) {
+            formulas[i] = getIntent().getStringExtra(cord[i]);
+            i++;
         }
 
         stringDoubleHashMap = new HashMap<>();
 
-        for (i = 0; i < values.length; i++) {
-            stringDoubleHashMap.put(s[i], values[i]);
+        for (i = 0; i < cord.length; i++) {
+            stringDoubleHashMap.put(cord[i], values[i]);
         }
 
 
@@ -69,21 +68,16 @@ public class GraphicsActivityView extends AppCompatActivity {
         });
 
         Button ok = findViewById(R.id.buttonBack2);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
-
-                int j = 0;
-                for (String s1 : formulas) {
-                    if (intentGraphics.getExtras() != null) {
-                        intentGraphics.putExtra(s[j], s1);
-                    }
-                    j += 1;
+        ok.setOnClickListener(view -> {
+            Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
+            int j = 0;
+            for (j = 0; j < cord.length; j++) {
+                if (intentGraphics.getExtras() != null) {
+                    intentGraphics.putExtra(cord[j], formulas[j]);
                 }
-                startActivity(intentGraphics);
-
             }
+            startActivity(intentGraphics);
+
         });
         printValues();
     }
@@ -92,7 +86,7 @@ public class GraphicsActivityView extends AppCompatActivity {
 
         stringDoubleHashMap.forEach((s, aDouble) -> System.out.println(s + ":=" + aDouble));
         for (int i = 0; i < formulas.length; i++) {
-            System.out.println(s[i] + ":=" + formulas[i]);
+            System.out.println(cord[i] + ":=" + formulas[i]);
         }
 
     }
@@ -131,7 +125,7 @@ public class GraphicsActivityView extends AppCompatActivity {
 
 
                     for (int c = 0; c < 4; c++) {
-                        algebricTree[c + 2].setParameter(s[c + 2], algebricTree[c + 2].eval());
+                        algebricTree[c + 2].setParameter(cord[c + 2], algebricTree[c + 2].eval());
                     }
                     for (int c = 0; c < 4; c++) {
                         rgba[c] = algebricTree[c + 2].eval();
