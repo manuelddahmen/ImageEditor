@@ -37,10 +37,10 @@ import one.empty3.library.core.raytracer.tree.AlgebricTree;
 import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 
 public class GraphicsActivityView extends AppCompatActivity {
-    String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
-    String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
-    double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    AlgebricTree[] algebricTree = new AlgebricTree[s.length];
+    final String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    final String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    final AlgebricTree[] algebricTree = new AlgebricTree[s.length];
     HashMap<String, Double> stringDoubleHashMap;
     private int maxRes = 400;
 

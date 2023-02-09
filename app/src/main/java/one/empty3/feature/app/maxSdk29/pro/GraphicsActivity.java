@@ -62,8 +62,7 @@ public class GraphicsActivity extends AppCompatActivity {
         TextView textViewV = findViewById(R.id.textViewV);
 
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
-        textViews = new TextView[]{textViewX, textViewY, textViewZ,
-                textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
+        textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
@@ -71,8 +70,7 @@ public class GraphicsActivity extends AppCompatActivity {
             String cord = button.getText().toString().toLowerCase();
             if (textView != null && button != null) {
                 if (getIntent().getExtras() != null) {
-                    textView.setText((getIntent().getExtras().get(cords[i])) != null ?
-                            ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
+                    textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 }
                 button.setOnClickListener(view -> {
 
@@ -99,10 +97,7 @@ public class GraphicsActivity extends AppCompatActivity {
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             for (int i = 0; i < cords.length; i++) {
                 TextView textView = textViews[i];
-                Button button = buttons[i];
-                for (String s : cords) {
-                    graphicsIntent.putExtra(s, textView.getText().toString());
-                }
+                graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
             startActivity(graphicsIntent);
         });
