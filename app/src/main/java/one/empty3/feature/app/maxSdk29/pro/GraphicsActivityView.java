@@ -47,15 +47,11 @@ public class GraphicsActivityView extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics_view);
-        int i = 0;
-        for (String s : cord) {
-            formulas[i] = getIntent().getStringExtra(cord[i]);
-            i++;
-        }
 
         stringDoubleHashMap = new HashMap<>();
 
-        for (i = 0; i < cord.length; i++) {
+        for (int i = 0; i < cord.length; i++) {
+            formulas[i] = getIntent().getStringExtra(cord[i]);
             stringDoubleHashMap.put(cord[i], values[i]);
         }
 
