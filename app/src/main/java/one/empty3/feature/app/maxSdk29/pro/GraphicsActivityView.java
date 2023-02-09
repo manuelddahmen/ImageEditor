@@ -41,7 +41,7 @@ public class GraphicsActivityView extends AppCompatActivity {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cord.length];
     HashMap<String, Double> stringDoubleHashMap;
-    private int maxRes = 400;
+    private int maxRes = 300;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,9 +63,10 @@ public class GraphicsActivityView extends AppCompatActivity {
             }
         });
 
-        Button ok = findViewById(R.id.buttonBack2);
-        ok.setOnClickListener(view -> {
+        Button back = findViewById(R.id.buttonBack2);
+        back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
+            intentGraphics.setClass(getApplicationContext(), GraphicsActivity.class);
             int j = 0;
             for (j = 0; j < cord.length; j++) {
                 if (intentGraphics.getExtras() != null) {
@@ -129,8 +130,8 @@ public class GraphicsActivityView extends AppCompatActivity {
                     current.setValues((int) x2, (int) y2, rgba[0], rgba[1], rgba[2]);
 
                 } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
-                    printValues();
-                    throw new RuntimeException(e);
+                    //printValues();
+                    //throw new RuntimeException(e);
                 }
             }
         image.setImageBitmap(current.normalize(0, 1).getBitmap());

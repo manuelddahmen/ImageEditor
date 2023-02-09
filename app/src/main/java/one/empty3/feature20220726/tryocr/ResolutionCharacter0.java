@@ -20,6 +20,18 @@
 
 package one.empty3.feature20220726.tryocr;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
+
+import javaAnd.awt.Color;
+import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.Linear;
 import one.empty3.feature20220726.PixM;
@@ -29,14 +41,6 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
-
-import javaAnd.awt.*;
-import javaAnd.awt.image.BufferedImage;
-
-import java.io.File;
-import java.util.List;
-import java.util.*;
-import java.util.function.Consumer;
 
 public class ResolutionCharacter0 implements Runnable {
 
@@ -311,7 +315,8 @@ public class ResolutionCharacter0 implements Runnable {
     private void shakeCurves(State state, int choice) {
         switch (choice) {
             case ADD_POINT_TO_RANDOM_CURVE:
-                if (state.currentCurves.size() == 0) state.currentCurves.add(new CourbeParametriquePolynomialeBezier());
+                if (state.currentCurves.size() == 0)
+                    state.currentCurves.add(new CourbeParametriquePolynomialeBezier());
                 int i = (int) (Math.random() * state.currentCurves.size());
 
                 int j = 0;
@@ -325,7 +330,8 @@ public class ResolutionCharacter0 implements Runnable {
                 }
                 break;
             case MOVE_POINTS:
-                if (state.currentCurves.size() == 0) state.currentCurves.add(new CourbeParametriquePolynomialeBezier());
+                if (state.currentCurves.size() == 0)
+                    state.currentCurves.add(new CourbeParametriquePolynomialeBezier());
                 i = (int) (Math.random() * state.currentCurves.size());
 
                 j = 0;
@@ -492,9 +498,10 @@ public class ResolutionCharacter0 implements Runnable {
         int idx = 0;
         int count0 = 0;
         for (int j = x; j <= x + w; j++) {
-            var ref = new Object() {
+            class ObjectI {
                 int countOnColumnI = 0;
-            };
+            }
+            ObjectI ref = new ObjectI();
             int current = BLANK;
             for (int i = y; i <= y + h; i++) {
                 if (mat.luminance(i, j) < 0.3) {
@@ -544,8 +551,11 @@ public class ResolutionCharacter0 implements Runnable {
         int idx = 0;
         int count0 = 0;
         for (int j = y; j <= y + h; j++) {
-            var ref = new Object() {
+            class ObjectI {
                 int countOnLineI = 0;
+
+            }
+            ObjectI ref = new ObjectI() {
             };
             int current = BLANK;
             for (int i = x; i <= x + w; i++) {
