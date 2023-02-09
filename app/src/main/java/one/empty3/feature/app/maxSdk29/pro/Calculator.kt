@@ -150,11 +150,9 @@ class Calculator : AppCompatActivity() {
             val intentGraphics = Intent(Intent.ACTION_EDIT)
 
             for (s in cords) {
-                if (intentGraphics.extras != null) {
+                intentGraphics.putExtra(s, formula[i])
+                if (s.equals(variable)) {
                     intentGraphics.putExtra(s, formula[i])
-                    if (s.equals(variable)) {
-                        intentGraphics.putExtra(s, formula[i])
-                    }
                 }
             }
             startActivity(intentGraphics)
