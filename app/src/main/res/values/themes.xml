@@ -23,7 +23,30 @@
     <style name="Theme.FeatureAppmain" parent="Theme.Material3.DayNight">
         <item name="android:colorBackground">@color/light_blue_600</item>
         <item name="android:color">#170629</item>
-        <item name="android:fontWeight">10</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Widget.Button" parent="Theme.Material3.DayNight">
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
+    <style name="TextAppearance.AppCompat.Widget.TextView" parent="Theme.Material3.DayNight">
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
+    <style name="TextAppearance.AppCompat.Widget.EditText" parent="Theme.Material3.DayNight">
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
+    <style name="TextAppearance.AppCompat.Body1" parent="Theme.Material3.DayNight">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Body2" parent="Theme.Material3.DayNight">
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="Theme.FeatureAppmain.AppBarOverlay" parent="Theme.Material3.DayNight">
@@ -33,4 +56,5 @@
     <style name="Theme.FeatureAppmain.PopupOverlay" parent="Theme.Material3.DayNight">
 
     </style>
+
 </resources>

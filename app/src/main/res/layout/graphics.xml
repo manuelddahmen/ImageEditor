@@ -38,7 +38,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewX"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -59,7 +59,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewY"
                 android:layout_width="match_parent"
                 android:text="y"
@@ -80,7 +80,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewZ"
                 android:layout_width="match_parent"
                 android:text="z"
@@ -101,7 +101,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewR"
                 android:text="r"
                 android:layout_width="match_parent"
@@ -122,7 +122,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewG"
                 android:layout_width="match_parent"
                 android:text="g"
@@ -143,7 +143,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewB"
                 android:layout_width="match_parent"
                 android:inputType="text"
@@ -164,7 +164,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewA"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -185,7 +185,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewT"
                 android:text="t"
                 android:layout_width="match_parent"
@@ -206,7 +206,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewU"
                 android:layout_width="match_parent"
                 android:inputType="text"
@@ -227,7 +227,7 @@
         <TableRow>
 
             <EditText
-                android:textSize="40sp"
+
                 android:id="@+id/textViewV"
                 android:text="v"
                 android:layout_width="match_parent"

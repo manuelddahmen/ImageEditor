@@ -20,7 +20,6 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,13 +32,15 @@ import java.util.HashMap;
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
 import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.feature20220726.PixM;
 
 public class GraphicsActivityView extends AppCompatActivity {
-    String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
-    String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
-    double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0};
-    AlgebricTree[] algebricTree = new AlgebricTree[8];
+    String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    AlgebricTree[] algebricTree = new AlgebricTree[s.length];
     HashMap<String, Double> stringDoubleHashMap;
+    private int maxRes = 400;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class GraphicsActivityView extends AppCompatActivity {
         for (String cord : s) {
             String o = (String) getIntent().getExtras().get(cord);
         }
-        draw();
+
         stringDoubleHashMap = new HashMap<>();
 
         for (int i = 0; i < values.length; i++) {
@@ -66,21 +67,23 @@ public class GraphicsActivityView extends AppCompatActivity {
     private void draw() {
         ImageView image = findViewById(R.id.application_of_formulas);
 
-        int w = image.getMaxWidth();
-        int h = image.getMaxHeight();
+        int w = getMaxRes();
+        int h = getMaxRes();
 
 
         for (int i = 0; i < values.length; i++) {
-            AlgebricTree tree = new AlgebricTree(formulas[i], stringDoubleHashMap);
+            algebricTree[i] = new AlgebricTree(formulas[i], stringDoubleHashMap);
             try {
-                tree.construct();
+                algebricTree[i].construct();
             } catch (AlgebraicFormulaSyntaxException e) {
                 throw new RuntimeException(e);
             }
         }
-        Bitmap current = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565);
+        double[] rgba = new double[4];
+
+        PixM current = new PixM(w, h);
         for (int x = 0; x < w; x++)
-            for (int y = 0; y < w; y++) {
+            for (int y = 0; y < h; y++) {
                 try {
                     algebricTree[0].setParameter("x", (double) x);
                     algebricTree[0].setParameter("y", (double) y);
@@ -90,15 +93,22 @@ public class GraphicsActivityView extends AppCompatActivity {
                     double y2 = algebricTree[1].eval();
 
 
-                    for (int c = 0; c < 4; c++) {
+                    /*for (int c = 0; c < 4; c++) {
                         algebricTree[c + 2].setParameter(s[c + 2], algebricTree[c + 2].eval());
+                    }*/
+                    for (int c = 0; c < 4; c++) {
+                        rgba[c] = algebricTree[c + 2].eval();
                     }
-
-                    image.setImageBitmap(current);
+                    current.setValues((int) x2, (int) y2, rgba[0], rgba[1], rgba[2]);
 
                 } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
                     throw new RuntimeException(e);
                 }
+                image.setImageBitmap(current.getBitmap());
             }
+    }
+
+    private int getMaxRes() {
+        return maxRes;
     }
 }
