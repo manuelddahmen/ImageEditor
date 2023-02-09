@@ -31,10 +31,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.altree.AlgebricTree;
-import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
+import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library.core.raytracer.tree.AlgebricTree;
+import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 
 public class GraphicsActivityView extends AppCompatActivity {
     String[] s = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};

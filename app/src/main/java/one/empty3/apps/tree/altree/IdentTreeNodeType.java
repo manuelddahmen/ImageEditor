@@ -52,6 +52,8 @@
 
 package one.empty3.apps.tree.altree;
 
+import one.empty3.apps.tree.altree.TreeNodeType;
+
 /*__
  * Created by manuel on 19-12-16.
  */

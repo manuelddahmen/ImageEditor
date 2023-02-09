@@ -54,6 +54,8 @@ package one.empty3.apps.tree.altree;
 
 import java.util.ArrayList;
 
+import one.empty3.apps.tree.altree.Constraint;
+
 /*__
  * Created by manuel on 25-12-16.
  */

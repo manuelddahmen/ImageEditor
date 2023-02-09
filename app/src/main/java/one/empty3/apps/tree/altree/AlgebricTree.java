@@ -56,6 +56,22 @@ package one.empty3.apps.tree.altree;
 import java.util.HashMap;
 import java.util.Map;
 
+import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
+import one.empty3.apps.tree.altree.DoubleTreeNodeType;
+import one.empty3.apps.tree.altree.EquationTreeNode;
+import one.empty3.apps.tree.altree.FactorTreeNodeType;
+import one.empty3.apps.tree.altree.PowerTreeNodeType;
+import one.empty3.apps.tree.altree.SignTreeNodeType;
+import one.empty3.apps.tree.altree.TermTreeNodeType;
+import one.empty3.apps.tree.altree.Tree;
+import one.empty3.apps.tree.altree.TreeNode;
+import one.empty3.apps.tree.altree.TreeNodeDouble;
+import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.apps.tree.altree.TreeNodeVariable;
+import one.empty3.apps.tree.altree.TreeTreeNode;
+import one.empty3.apps.tree.altree.TreeTreeNodeType;
+import one.empty3.apps.tree.altree.VariableTreeNodeType;
+
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -64,7 +80,7 @@ public class AlgebricTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
-    private TreeNode root;
+    private one.empty3.apps.tree.altree.TreeNode root;
     private int stackSize = 0;
 
     public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
@@ -81,7 +97,7 @@ public class AlgebricTree extends Tree {
     }
 
     public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
-        root = new TreeNode(formula);
+        root = new one.empty3.apps.tree.altree.TreeNode(formula);
         stackSize = 0; // Restine sommaire//
         add(root, formula);
         return this;
@@ -91,21 +107,21 @@ public class AlgebricTree extends Tree {
      * Particularité
      * @param src
      */
-    private void checkForSignTreeNode(TreeNode src) {
+    private void checkForSignTreeNode(one.empty3.apps.tree.altree.TreeNode src) {
         //System.out.println("DEBUG TREE: current tree" +src);
         if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
                 .equals(SignTreeNodeType.class)) {
-            TreeNode sign = src.getChildren().remove(1);
-            TreeNode son0 = src.getChildren().remove(0);
+            one.empty3.apps.tree.altree.TreeNode sign = src.getChildren().remove(1);
+            one.empty3.apps.tree.altree.TreeNode son0 = src.getChildren().remove(0);
             double sign1 = ((SignTreeNodeType) sign.type).getSign();
-            src.getChildren().add(new TreeNode(src, new Object[]{"" + sign1},
+            src.getChildren().add(new one.empty3.apps.tree.altree.TreeNode(src, new Object[]{"" + sign1},
                     new SignTreeNodeType(sign1)));
-            TreeNode son1 = src.getChildren().get(0);
+            one.empty3.apps.tree.altree.TreeNode son1 = src.getChildren().get(0);
             son1.getChildren().add(son0);
         }
     }
 
-    public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
+    public boolean add(one.empty3.apps.tree.altree.TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         stackSize++;
         if (stackSize > 30) {
@@ -179,7 +195,7 @@ public class AlgebricTree extends Tree {
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
-    private boolean addFormulaSeparator(TreeNode src, String subformula) {
+    private boolean addFormulaSeparator(one.empty3.apps.tree.altree.TreeNode src, String subformula) {
         String[] s;
         s = subformula.split("=");
         if (s.length > 1) {
@@ -191,7 +207,7 @@ public class AlgebricTree extends Tree {
         return true;
     }
 
-    private boolean addVariable(TreeNode src, String subformula)
+    private boolean addVariable(one.empty3.apps.tree.altree.TreeNode src, String subformula)
             throws AlgebraicFormulaSyntaxException {
         if (Character.isLetter(subformula.charAt(0))) {
             int i = 1;
@@ -214,7 +230,7 @@ public class AlgebricTree extends Tree {
     }
 
 
-    private boolean addDouble(TreeNode src, String subformula) {
+    private boolean addDouble(one.empty3.apps.tree.altree.TreeNode src, String subformula) {
         try {
             Double d = Double.parseDouble(subformula);
             DoubleTreeNodeType doubleTreeNodeType = new DoubleTreeNodeType();
@@ -227,11 +243,11 @@ public class AlgebricTree extends Tree {
         }
     }
 
-    private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
+    private boolean addSingleSign(one.empty3.apps.tree.altree.TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
 
             if (add(src, subformula.substring(1))) {
-                src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
+                src.getChildren().add(new one.empty3.apps.tree.altree.TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
                 return true;
             }
         }
@@ -239,10 +255,10 @@ public class AlgebricTree extends Tree {
 
     }
 
-    public boolean addPower(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addPower(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        TreeNode t2;
+        one.empty3.apps.tree.altree.TreeNode t2;
         int i = 0;
         boolean firstExpFound = false;
         boolean isNewExp = false;
@@ -285,13 +301,13 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
+                    t2 = new one.empty3.apps.tree.altree.TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
                     if (subsubstring.charAt(0) == '-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
                         signTreeNodeType.instantiate(new Object[]{subsubstring});
 
-                        t2 = new TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new one.empty3.apps.tree.altree.TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
                     }
                     if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
                         return false;
@@ -316,10 +332,10 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0 && countTerms > 0;
     }
 
-    public boolean addFactors(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addFactors(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        TreeNode t2;
+        one.empty3.apps.tree.altree.TreeNode t2;
         int i = 0;
         boolean firstTermFound = false;
         boolean isNewFactor = false;
@@ -362,13 +378,13 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
+                    t2 = new one.empty3.apps.tree.altree.TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
                     if (subsubstring.charAt(0) == '-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
                         signTreeNodeType.instantiate(new Object[]{subsubstring});
 
-                        t2 = new TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new one.empty3.apps.tree.altree.TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
                     }
                     if (!add(t2, subsubstring)) {
                         return false;
@@ -390,10 +406,10 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0 && countTerms > 0;
     }
 
-    public boolean addTerms(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addTerms(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        TreeNode t2;
+        one.empty3.apps.tree.altree.TreeNode t2;
         int i = 0;
         boolean firstTermFound = false;
         boolean isNewFactor = false;
@@ -444,7 +460,7 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
+                    t2 = new one.empty3.apps.tree.altree.TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                     if (!add(t2, subsubstring)) {
                         return false;
                     } else {
@@ -471,7 +487,7 @@ public class AlgebricTree extends Tree {
     }
 
 
-    public boolean addFunction(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addFunction(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         try {
             int i = 1;
             int count = 0;
@@ -511,7 +527,7 @@ public class AlgebricTree extends Tree {
                         fParamString, parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
+                one.empty3.apps.tree.altree.TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -534,7 +550,7 @@ public class AlgebricTree extends Tree {
      * ajouter {; , .}
      */
 
-    public boolean addMethodCall(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addMethodCall(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int i = 1;
         boolean isNewFactor = false;
         int count = 0;
@@ -568,7 +584,7 @@ public class AlgebricTree extends Tree {
                         "", parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                one.empty3.apps.tree.altree.TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -584,8 +600,8 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0;
     }
 
-    public boolean addBracedExpression(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
-        TreeNode tBraced;
+    public boolean addBracedExpression(one.empty3.apps.tree.altree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+        one.empty3.apps.tree.altree.TreeNode tBraced;
         int i = 0;
         int count = 0;
         while (i < values.length()) {

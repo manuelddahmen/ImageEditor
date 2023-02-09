@@ -29,7 +29,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.apps.tree.altree.functions.*
 
 class ChooseFunctionDialogFragment : DialogFragment() {
     public var isExited: Boolean = false

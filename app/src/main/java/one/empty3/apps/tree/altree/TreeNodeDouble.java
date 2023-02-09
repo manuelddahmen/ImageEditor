@@ -52,10 +52,13 @@
 
 package one.empty3.apps.tree.altree;
 
+import one.empty3.apps.tree.altree.DoubleTreeNodeType;
+import one.empty3.apps.tree.altree.TreeNode;
+
 /*__
  * Created by manue on 01-07-19.
  */
-public class TreeNodeDouble extends TreeNode {
+public class TreeNodeDouble extends one.empty3.apps.tree.altree.TreeNode {
     public TreeNodeDouble(TreeNode src, Object[] objects, DoubleTreeNodeType doubleTreeNodeType) {
         super(src, objects, doubleTreeNodeType);
     }

@@ -52,10 +52,14 @@
 
 package one.empty3.apps.tree.altree;
 
+import one.empty3.apps.tree.altree.TreeNode;
+import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.apps.tree.altree.VariableTreeNodeType;
+
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public abstract class TreeNodeValue extends TreeNode {
+public abstract class TreeNodeValue extends one.empty3.apps.tree.altree.TreeNode {
 
     public TreeNodeValue(TreeNode parent, Object[] values) {
         super(parent, values, new VariableTreeNodeType());

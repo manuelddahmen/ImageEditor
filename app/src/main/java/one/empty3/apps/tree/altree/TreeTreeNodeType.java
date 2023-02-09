@@ -22,6 +22,8 @@ package one.empty3.apps.tree.altree;
 
 import java.util.Map;
 
+import one.empty3.apps.tree.altree.TreeNodeType;
+
 
 public class TreeTreeNodeType extends TreeNodeType {
     public TreeTreeNodeType(String fParamString, Map<String, Double> parametersValues) {

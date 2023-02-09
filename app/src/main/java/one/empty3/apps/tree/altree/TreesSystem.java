@@ -54,6 +54,9 @@ package one.empty3.apps.tree.altree;
 
 import java.util.ArrayList;
 
+import one.empty3.apps.tree.altree.AlgebricTree;
+import one.empty3.apps.tree.altree.TreeType;
+
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */

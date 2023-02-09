@@ -52,6 +52,9 @@
 
 package one.empty3.apps.tree.altree;
 
+import one.empty3.apps.tree.altree.AlgebricTree;
+import one.empty3.apps.tree.altree.Tree;
+
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */

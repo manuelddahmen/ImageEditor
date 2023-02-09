@@ -54,6 +54,8 @@ package one.empty3.apps.tree.altree;
 
 import java.util.HashMap;
 
+import one.empty3.apps.tree.altree.TreeNode;
+
 /*__
  * Created by manuel on 25-12-16.
  */

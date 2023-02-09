@@ -52,8 +52,7 @@
 
 package one.empty3.apps.tree.altree;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import one.empty3.apps.tree.altree.TreeNodeType;
 
 /*__
  * Created by manuel on 16-12-16.
