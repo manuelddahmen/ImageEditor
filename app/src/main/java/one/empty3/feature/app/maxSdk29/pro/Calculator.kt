@@ -44,7 +44,7 @@ class Calculator : AppCompatActivity() {
 
         var i = 0
         for (s in cords) {
-            formula[i] = intent.extras?.getString("s")
+            formula[i] = intent.extras?.getString(s)
             i += 1
         }
 
@@ -148,21 +148,14 @@ class Calculator : AppCompatActivity() {
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentGraphics = Intent(Intent.ACTION_EDIT)
-            var i = 0
 
             for (s in cords) {
                 if (intentGraphics.extras != null) {
-                    intentGraphics.extras?.putString(s, formula[i])
-                    if (cords[i] == variable) {
-                        intentGraphics.extras!!.putString(
-                            "variable", cords[i]
-                        )
-                        intentGraphics.extras!!.putString(
-                            "variableValue", formula[i]
-                        )
+                    intentGraphics.putExtra(s, formula[i])
+                    if (s.equals(variable)) {
+                        intentGraphics.putExtra(s, formula[i])
                     }
                 }
-                i += 1
             }
             startActivity(intentGraphics)
         }
