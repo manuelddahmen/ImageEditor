@@ -143,6 +143,9 @@ class Calculator : AppCompatActivity() {
         back.setOnClickListener {
             val intentBack = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intentBack.setClass(applicationContext, GraphicsActivity::class.java)
+            for (s in cords) {
+                intentBack.putExtra(s, formula[i])
+            }
             startActivity(intentBack)
         };
         val ok = findViewById<Button>(R.id.buttonOk);
