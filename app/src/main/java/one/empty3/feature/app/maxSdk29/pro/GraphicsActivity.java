@@ -47,6 +47,8 @@ public class GraphicsActivity extends AppCompatActivity {
         Button b = findViewById(R.id.buttonB);
         Button a = findViewById(R.id.buttonA);
         Button t = findViewById(R.id.buttonT);
+        Button u = findViewById(R.id.buttonU);
+        Button v = findViewById(R.id.buttonV);
 
         TextView textViewX = findViewById(R.id.textViewX);
         TextView textViewY = findViewById(R.id.textViewY);
@@ -56,11 +58,13 @@ public class GraphicsActivity extends AppCompatActivity {
         TextView textViewB = findViewById(R.id.textViewB);
         TextView textViewA = findViewById(R.id.textViewA);
         TextView textViewT = findViewById(R.id.textViewT);
+        TextView textViewU = findViewById(R.id.textViewU);
+        TextView textViewV = findViewById(R.id.textViewV);
 
-        buttons = new Button[]{x, y, z, r, g, b, a, t};
+        buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ,
-                textViewR, textViewG, textViewB, textViewA, textViewT};
-        cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t"};
+                textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
+        cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
@@ -91,16 +95,16 @@ public class GraphicsActivity extends AppCompatActivity {
 
         View buttonView = findViewById(R.id.buttonView);
         buttonView.setOnClickListener(view -> {
+            Intent graphicsIntent = new Intent(Intent.ACTION_VIEW);
+            graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             for (int i = 0; i < cords.length; i++) {
                 TextView textView = textViews[i];
                 Button button = buttons[i];
-                Intent graphicsIntent = new Intent(Intent.ACTION_VIEW);
-                graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
                 for (String s : cords) {
                     graphicsIntent.putExtra(s, textView.getText().toString());
                 }
-                startActivity(graphicsIntent);
             }
+            startActivity(graphicsIntent);
         });
     }
 
