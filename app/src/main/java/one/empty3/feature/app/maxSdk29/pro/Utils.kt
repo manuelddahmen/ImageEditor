@@ -33,6 +33,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.gestures.rememberTransformableState
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import java.io.File
@@ -169,28 +170,36 @@ public class Utils() {
 
     fun addCurrentFileToIntent(
         activity: Activity,
-        imageView: ImageView,
+        imageView: ImageView?,
         intent: Intent,
         currentFile: File
     ): File {
         val intent = Intent(Intent.ACTION_EDIT)
         try {
-            var currentBitmap = Utils().writePhoto(
-                activity,
-                BitmapFactory.decodeStream(FileInputStream(currentFile)),
-                "EffectOn"
-            ) // ???
+            val decodeStream = BitmapFactory.decodeStream(FileInputStream(currentFile))
+            var currentBitmap = Utils().writePhoto(activity, decodeStream, "EffectOn") // ???
 
             intent.setDataAndType(Uri.fromFile(currentBitmap), "image/jpg")
-            intent.setClass(imageView.getContext(), ChooseEffectsActivity2::class.java)
+            intent.setClass(activity.applicationContext, ChooseEffectsActivity2::class.java)
             intent.putExtra("currentFile", currentFile)
             intent.putExtra("data", currentFile)
+            if (imageView != null)
+                imageView.setImageBitmap(decodeStream);
             System.err.println("Add currentFile to parameter")
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
 
         return currentFile
+    }
+
+    fun getCurrentFile(intent: Intent): File? {
+        if (intent.hasExtra("currentFile"))
+            return File(intent.getStringExtra("currentFile"))
+        if (intent.hasExtra("data"))
+            return File(intent.getStringExtra("data"))
+
+        return null
     }
 }
 

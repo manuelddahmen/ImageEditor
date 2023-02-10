@@ -45,7 +45,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
         maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
-        currentFile = new Utils().setImageView(this, null);
+        currentFile = new Utils().getCurrentFile(getIntent());
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
@@ -113,6 +113,7 @@ public class GraphicsActivity extends AppCompatActivity {
                 TextView textView = textViews[i];
                 graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
+            graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(this, null, graphicsIntent, currentFile);
             startActivity(graphicsIntent);
         });
@@ -121,8 +122,10 @@ public class GraphicsActivity extends AppCompatActivity {
         back.setOnClickListener(view -> {
             Intent mainActivity = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
+            mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
+            new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
 
-
+            startActivity(mainActivity);
         });
 
     }
