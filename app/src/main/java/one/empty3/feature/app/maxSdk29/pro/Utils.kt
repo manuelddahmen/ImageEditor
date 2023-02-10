@@ -128,7 +128,7 @@ public class Utils() {
     }
 
 
-    public fun getMaxRes(activity: Activity, savedInstanceState: Bundle): Int {
+    public fun getMaxRes(activity: Activity, savedInstanceState: Bundle?): Int {
         var maxRes: Int = -1;
         maxRes = activity.intent.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT);
         if (savedInstanceState == null ||

@@ -44,6 +44,7 @@ import java.util.*
 
 
 class TextActivity() : AppCompatActivity(), Parcelable {
+    private var maxRes: Int = 0
     private val INT_WRITE_STORAGE: Int = 9247492
     private lateinit var currentFile: File
     private var text: String = ""
@@ -54,6 +55,18 @@ class TextActivity() : AppCompatActivity(), Parcelable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
+
+
+        /*
+        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
+            maxRes = MAX_RES_DEFAULT;
+        } else {
+            maxRes = savedInstanceState.getInt("maxRes");
+        }
+        */maxRes = Utils().getMaxRes(
+            this,
+            savedInstanceState!!
+        )
 
 
         val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
@@ -80,6 +93,9 @@ class TextActivity() : AppCompatActivity(), Parcelable {
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
                 )
+
+                maxRes = Utils().getMaxRes(this, savedInstanceState)
+
                 startActivity(textIntent)
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
