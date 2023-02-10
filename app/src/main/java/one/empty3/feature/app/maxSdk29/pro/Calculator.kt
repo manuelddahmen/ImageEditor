@@ -29,8 +29,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.unit.max
 import one.empty3.apps.tree.altree.*
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException
-import one.empty3.library.core.raytracer.tree.AlgebricTree
 import java.io.File
 import java.util.*
 
