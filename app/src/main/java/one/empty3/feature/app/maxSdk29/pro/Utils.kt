@@ -23,15 +23,21 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.util.*
 
 public class Utils() {
@@ -45,7 +51,7 @@ public class Utils() {
      * @param name
      * @return file
      */
-    fun writePhoto(activity: AppCompatActivity, bitmap: Bitmap, name: String): File? {
+    fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
 
         var written = false;
         var fileWritten: File? = null;
@@ -71,7 +77,7 @@ public class Utils() {
     }
 
     public fun writeFile(
-        activity: AppCompatActivity,
+        activity: Activity,
         bitmap: Bitmap,
         file1: File,
         file2: File
@@ -123,14 +129,16 @@ public class Utils() {
 
 
     public fun getMaxRes(activity: Activity, savedInstanceState: Bundle): Int {
-        val maxRes: Int;
+        var maxRes: Int = -1;
+        maxRes = activity.intent.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT);
         if (savedInstanceState == null ||
-            savedInstanceState.containsKey("maxRes") ||
+            !savedInstanceState.containsKey("maxRes") ||
             savedInstanceState.getInt("maxRes") <= 0
         ) {
-            maxRes = MyCameraActivity.MAX_RES_DEFAULT
+
         } else {
             maxRes = savedInstanceState.getInt("maxRes")
+
         }
         return maxRes
     }
@@ -158,4 +166,31 @@ public class Utils() {
         }
         return currentFile
     }
+
+    fun addCurrentFileToIntent(
+        activity: Activity,
+        imageView: ImageView,
+        intent: Intent,
+        currentFile: File
+    ): File {
+        val intent = Intent(Intent.ACTION_EDIT)
+        try {
+            var currentBitmap = Utils().writePhoto(
+                activity,
+                BitmapFactory.decodeStream(FileInputStream(currentFile)),
+                "EffectOn"
+            ) // ???
+
+            intent.setDataAndType(Uri.fromFile(currentBitmap), "image/jpg")
+            intent.setClass(imageView.getContext(), ChooseEffectsActivity2::class.java)
+            intent.putExtra("currentFile", currentFile)
+            intent.putExtra("data", currentFile)
+            System.err.println("Add currentFile to parameter")
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+
+        return currentFile
+    }
 }
+

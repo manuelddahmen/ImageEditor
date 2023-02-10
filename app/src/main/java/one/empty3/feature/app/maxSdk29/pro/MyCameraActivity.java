@@ -171,12 +171,14 @@ public class MyCameraActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
             maxRes = MAX_RES_DEFAULT;
         } else {
             maxRes = savedInstanceState.getInt("maxRes");
         }
-
+        */
+        maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
         setContentView(R.layout.main);
 /*
@@ -452,6 +454,8 @@ public class MyCameraActivity extends AppCompatActivity {
                 Intent intentDraw = new Intent(Intent.ACTION_EDIT);
                 intentDraw.putExtra(Intent.EXTRA_STREAM, photoURI);
                 intentDraw.setDataAndType(photoURI, "image/jpeg");
+                intent.putExtra("currentFile", currentFile);
+                intent.putExtra("maxRes", maxRes);
                 intentDraw.putExtra("data", photoURI);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 startActivity(intentDraw);

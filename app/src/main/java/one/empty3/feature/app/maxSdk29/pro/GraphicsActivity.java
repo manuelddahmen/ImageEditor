@@ -21,7 +21,6 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -98,6 +97,7 @@ public class GraphicsActivity extends AppCompatActivity {
                         }
                         j++;
                     }
+                    new Utils().addCurrentFileToIntent(this, null, calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
             } else {
@@ -113,16 +113,16 @@ public class GraphicsActivity extends AppCompatActivity {
                 TextView textView = textViews[i];
                 graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
-            if (currentFile != null)
-                graphicsIntent.putExtra("currentFile", currentFile);
+            new Utils().addCurrentFileToIntent(this, null, graphicsIntent, currentFile);
             startActivity(graphicsIntent);
         });
 
         Button back = findViewById(R.id.buttonBack);
         back.setOnClickListener(view -> {
             Intent mainActivity = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            if (currentFile != null)
-                mainActivity.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+            new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
+
+
         });
 
     }
