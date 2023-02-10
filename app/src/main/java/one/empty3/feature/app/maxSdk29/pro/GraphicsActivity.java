@@ -120,11 +120,11 @@ public class GraphicsActivity extends AppCompatActivity {
 
         Button back = findViewById(R.id.buttonBack);
         back.setOnClickListener(view -> {
-            Intent mainActivity = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            Intent mainActivity = new Intent(Intent.ACTION_EDIT);
+            mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
             new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
-
             startActivity(mainActivity);
         });
 

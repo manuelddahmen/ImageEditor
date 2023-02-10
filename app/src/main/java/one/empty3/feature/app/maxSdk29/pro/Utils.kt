@@ -25,15 +25,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.gestures.rememberTransformableState
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import java.io.File
@@ -179,7 +174,7 @@ public class Utils() {
             val decodeStream = BitmapFactory.decodeStream(FileInputStream(currentFile))
             var currentBitmap = Utils().writePhoto(activity, decodeStream, "EffectOn") // ???
 
-            intent.setDataAndType(Uri.fromFile(currentBitmap), "image/jpg")
+            intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
             intent.setClass(activity.applicationContext, ChooseEffectsActivity2::class.java)
             intent.putExtra("currentFile", currentFile)
             intent.putExtra("data", currentFile)
@@ -194,10 +189,21 @@ public class Utils() {
     }
 
     fun getCurrentFile(intent: Intent): File? {
-        if (intent.hasExtra("currentFile"))
-            return File(intent.getStringExtra("currentFile"))
-        if (intent.hasExtra("data"))
-            return File(intent.getStringExtra("data"))
+        if (intent.data != null && intent.data is Uri)
+            return intent.data!!.getPath()?.let { File(it) }
+        if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is File))
+            return (intent.extras?.get("currentFile") as File)
+        if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is String))
+            return File(intent.extras?.get("currentFile") as String)
+        if (intent.data != null && intent.data is File)
+            return intent.data as File
+        if (intent.hasExtra("data") && intent.extras!!.get("data")!!.javaClass.equals(
+                File.listRoots().get(0).javaClass
+            )
+        )
+            return intent.data as File
+        if (intent.hasExtra("data") && intent.extras!!.get("data")!!.javaClass.equals(String.javaClass))
+            return File(intent.data as String)
 
         return null
     }

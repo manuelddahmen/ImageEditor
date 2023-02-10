@@ -198,6 +198,12 @@ public class MyCameraActivity extends AppCompatActivity {
 
         loaded = true;
 
+
+        currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
+        if (currentFile != null) {
+            loaded = true;
+        }
+        /*
         Intent intent = getIntent();
         if (getIntent() != null && getIntent().getData() != null) {
             if (intent.getData() != null) {
@@ -220,7 +226,7 @@ public class MyCameraActivity extends AppCompatActivity {
         } else {
             System.err.println("intent data Main==null");
         }
-
+*/
 
         thisActivity = this;
 
@@ -454,8 +460,8 @@ public class MyCameraActivity extends AppCompatActivity {
                 Intent intentDraw = new Intent(Intent.ACTION_EDIT);
                 intentDraw.putExtra(Intent.EXTRA_STREAM, photoURI);
                 intentDraw.setDataAndType(photoURI, "image/jpeg");
-                intent.putExtra("currentFile", currentFile);
-                intent.putExtra("maxRes", maxRes);
+                intentDraw.putExtra("currentFile", currentFile);
+                intentDraw.putExtra("maxRes", maxRes);
                 intentDraw.putExtra("data", photoURI);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 startActivity(intentDraw);
