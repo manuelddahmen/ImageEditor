@@ -21,24 +21,20 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
-import java.util.*
 
 class ChooseEffectsActivity2 : AppCompatActivity() {
     private val INT_READ_STORAGE: Int = 5152112
@@ -62,9 +58,10 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
 
         setContentView(R.layout.recycler_view_effect_activity)
 
-        if (savedInstanceState != null) {
-            //   classnames = savedInstanceState.getStringArrayList("classnames")!!
-        }
+
+
+        maxRes = Utils().getMaxRes(this, savedInstanceState!!)
+
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
