@@ -39,8 +39,8 @@ class Calculator : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val variable = this.intent.extras?.getString("variable")
         val variableValue: String? = this.intent.extras?.getString(variable)
-        val cords = arrayOf<String>("x", "y", "z", "r", "g", "b", "a", "t")
-        val formula = arrayOfNulls<String>(8)
+        val cords = arrayOf<String>("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
+        val formula = arrayOfNulls<String>(10)
 
         var i = 0
         for (s in cords) {
