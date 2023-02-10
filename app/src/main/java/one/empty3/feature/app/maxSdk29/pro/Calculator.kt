@@ -149,7 +149,7 @@ class Calculator : AppCompatActivity() {
 
         val back = findViewById<Button>(R.id.buttonBak);
         back.setOnClickListener {
-            val intentBack = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            val intentBack = Intent()
             intentBack.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
                 Utils().addCurrentFileToIntent(intentBack, currentFile!!)
@@ -160,14 +160,13 @@ class Calculator : AppCompatActivity() {
         };
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
-            val intentGraphics = Intent(Intent.ACTION_EDIT)
+            val intentGraphics = Intent()
             if (currentFile != null)
                 Utils().addCurrentFileToIntent(intentGraphics, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
             for (s in cords) {
                 if (s.equals(variable)) {
-                    val text = findViewById<EditText>(R.id.editTextCalculus)
-                    intentGraphics.putExtra(s, text.text)
+                    intentGraphics.putExtra(s, editTextId.text.toString())
                 } else {
                     intentGraphics.putExtra(s, formula[i])
                 }
