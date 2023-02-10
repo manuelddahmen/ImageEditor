@@ -20,7 +20,7 @@
 
 package one.empty3.library.shader;
 
-import one.empty3.library.core.raytracer.tree.*;
+import one.empty3.apps.tree.altree.*;
 
 public class VecAlTree extends Vec {
     protected String formula;
