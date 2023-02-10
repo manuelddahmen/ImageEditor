@@ -56,22 +56,6 @@ package one.empty3.apps.tree.altree;
 import java.util.HashMap;
 import java.util.Map;
 
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.altree.DoubleTreeNodeType;
-import one.empty3.apps.tree.altree.EquationTreeNode;
-import one.empty3.apps.tree.altree.FactorTreeNodeType;
-import one.empty3.apps.tree.altree.PowerTreeNodeType;
-import one.empty3.apps.tree.altree.SignTreeNodeType;
-import one.empty3.apps.tree.altree.TermTreeNodeType;
-import one.empty3.apps.tree.altree.Tree;
-import one.empty3.apps.tree.altree.TreeNode;
-import one.empty3.apps.tree.altree.TreeNodeDouble;
-import one.empty3.apps.tree.altree.TreeNodeEvalException;
-import one.empty3.apps.tree.altree.TreeNodeVariable;
-import one.empty3.apps.tree.altree.TreeTreeNode;
-import one.empty3.apps.tree.altree.TreeTreeNodeType;
-import one.empty3.apps.tree.altree.VariableTreeNodeType;
-
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
