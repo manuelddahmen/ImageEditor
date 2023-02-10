@@ -90,11 +90,13 @@ public class GraphicsActivity extends AppCompatActivity {
 
                     Intent calculatorIntent = new Intent(Intent.ACTION_EDIT);
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
+                    int j = 0;
                     for (String s : cords) {
-                        calculatorIntent.putExtra(s, textView.getText().toString());
+                        calculatorIntent.putExtra(s, textViews[j].getText().toString());
                         if (s.equals(cord)) {
                             calculatorIntent.putExtra("variable", cord);
                         }
+                        j++;
                     }
                     startActivity(calculatorIntent);
                 });
