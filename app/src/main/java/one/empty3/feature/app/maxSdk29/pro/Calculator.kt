@@ -30,13 +30,20 @@ import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.tree.altree.*
 import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library.core.raytracer.tree.AlgebricTree
+import java.io.File
 import java.util.*
 
 class Calculator : AppCompatActivity() {
+    private var maxRes: Int = 0
+    private var currentFile: File? = null
     private var index: Int = 0
     private var variable: String = ""
     private var text: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main_layout_table)
+
+
         val variable = this.intent.extras?.getString("variable")
         val variableValue: String? = this.intent.extras?.getString(variable)
         val cords = arrayOf<String>("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -48,11 +55,12 @@ class Calculator : AppCompatActivity() {
             i += 1
         }
 
-
         title = variable
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_layout_table)
+        maxRes = Utils().getMaxRes(this, savedInstanceState)
+
+        currentFile = Utils().getCurrentFile(intent)
+
         val buttonsNumbers = arrayListOf(
             R.id.button0,
             R.id.button1,
@@ -143,6 +151,8 @@ class Calculator : AppCompatActivity() {
         back.setOnClickListener {
             val intentBack = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intentBack.setClass(applicationContext, GraphicsActivity::class.java)
+            if (currentFile != null)
+                Utils().addCurrentFileToIntent(intentBack, currentFile!!)
             for (s in cords) {
                 intentBack.putExtra(s, formula[i])
             }
@@ -151,11 +161,14 @@ class Calculator : AppCompatActivity() {
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentGraphics = Intent(Intent.ACTION_EDIT)
+            if (currentFile != null)
+                Utils().addCurrentFileToIntent(intentGraphics, currentFile!!)
 
             for (s in cords) {
                 intentGraphics.putExtra(s, formula[i])
                 if (s.equals(variable)) {
-                    intentGraphics.putExtra(s, formula[i])
+                    val text = findViewById<EditText>(R.id.editTextCalculus)
+                    intentGraphics.putExtra(s, text.text)
                 }
             }
             startActivity(intentGraphics)
