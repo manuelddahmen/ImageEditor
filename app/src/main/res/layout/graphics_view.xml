@@ -22,13 +22,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.FeatureAppmain">
 
     <ImageView
         android:id="@+id/application_of_formulas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/ic_photo"
+        android:theme="@style/Theme.FeatureAppmain"
         android:contentDescription="@string/application_of_formulas" />
 
     <Button
@@ -37,6 +39,7 @@
         android:layout_height="40sp"
         android:text="@string/draw2"
         app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
@@ -45,5 +48,6 @@
         android:layout_height="40sp"
         android:text="@string/back"
         app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

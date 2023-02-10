@@ -20,7 +20,11 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.MAX_RES_DEFAULT;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,8 +32,11 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.util.HashMap;
 
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library.core.raytracer.tree.AlgebricTree;
@@ -42,11 +49,40 @@ public class GraphicsActivityView extends AppCompatActivity {
     final AlgebricTree[] algebricTree = new AlgebricTree[cord.length];
     HashMap<String, Double> stringDoubleHashMap;
     private int maxRes = 300;
+    private File currentFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics_view);
+
+
+        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
+            maxRes = MAX_RES_DEFAULT;
+        } else {
+            maxRes = savedInstanceState.getInt("maxRes");
+        }
+
+        Intent intent = getIntent();
+        if (getIntent() != null && getIntent().getData() != null) {
+            if (intent.getData() != null) {
+                Uri data = intent.getData();
+                currentFile = new File(data.getPath());
+                System.err.println("File returned from effects' list = " + data);
+
+                if (currentFile != null) {
+                    BufferedImage bi = ImageIO.read(currentFile);
+                    if (bi != null) {
+                        Bitmap bitmap = bi.getBitmap();
+                        if (bitmap != null) {
+                        }
+                    }
+                }
+            }
+        } else {
+            System.err.println("intent data Main==null");
+        }
+
 
         stringDoubleHashMap = new HashMap<>();
 
@@ -66,7 +102,11 @@ public class GraphicsActivityView extends AppCompatActivity {
         Button back = findViewById(R.id.buttonBack2);
         back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
+            if (currentFile != null)
+                intentGraphics.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+
             intentGraphics.setClass(getApplicationContext(), GraphicsActivity.class);
+            intentGraphics.putExtra("maxRes", maxRes);
             int j = 0;
             for (j = 0; j < cord.length; j++) {
                 if (intentGraphics.getExtras() != null) {
@@ -132,7 +172,10 @@ public class GraphicsActivityView extends AppCompatActivity {
                     //throw new RuntimeException(e);
                 }
             }
-        image.setImageBitmap(current.normalize(0, 1).getBitmap());
+        Bitmap bitmap = current.normalize(0, 1).getBitmap();
+        File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
+        this.currentFile = graphics_math;
+        image.setImageBitmap(bitmap);
     }
 
     private int getMaxRes() {

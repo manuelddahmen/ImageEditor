@@ -87,7 +87,7 @@ import one.empty3.feature20220726.PixM;
 public class MyCameraActivity extends AppCompatActivity {
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
-    private static final int MAX_RES_DEFAULT = 200;
+    static final int MAX_RES_DEFAULT = 200;
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
@@ -179,14 +179,14 @@ public class MyCameraActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.main);
-
+/*
         FragmentNavigation fragmentNavigation = new FragmentNavigation();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.stubNavigation,
                         fragmentNavigation)
                 .commit();
-
+*/
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
 

@@ -20,7 +20,11 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.MAX_RES_DEFAULT;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,15 +33,50 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
+
 public class GraphicsActivity extends AppCompatActivity {
     private String[] cords;
     private TextView[] textViews;
     private Button[] buttons;
+    private File currentFile;
+    private int maxRes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
+
+
+        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
+            maxRes = MAX_RES_DEFAULT;
+        } else {
+            maxRes = savedInstanceState.getInt("maxRes");
+        }
+
+        Intent intent = getIntent();
+        if (getIntent() != null && getIntent().getData() != null) {
+            if (intent.getData() != null) {
+                Uri data = intent.getData();
+                currentFile = new File(data.getPath());
+                System.err.println("File returned from effects' list = " + data);
+
+                if (currentFile != null) {
+                    BufferedImage bi = ImageIO.read(currentFile);
+                    if (bi != null) {
+                        Bitmap bitmap = bi.getBitmap();
+                        if (bitmap != null) {
+                        }
+                    }
+                }
+            }
+        } else {
+            System.err.println("intent data Main==null");
+        }
+
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
@@ -61,6 +100,11 @@ public class GraphicsActivity extends AppCompatActivity {
         TextView textViewU = findViewById(R.id.textViewU);
         TextView textViewV = findViewById(R.id.textViewV);
 
+/*
+        String imageStr = getIntent().getStringExtra("currentFile");
+        if (imageStr != null)
+            currentFile = new File(imageStr);
+  */
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
@@ -97,8 +141,18 @@ public class GraphicsActivity extends AppCompatActivity {
                 TextView textView = textViews[i];
                 graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
+            if (currentFile != null)
+                graphicsIntent.putExtra("currentFile", currentFile);
             startActivity(graphicsIntent);
         });
+
+        Button back = findViewById(R.id.buttonBack);
+        back.setOnClickListener(view -> {
+            Intent mainActivity = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            if (currentFile != null)
+                mainActivity.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+        });
+
     }
 
 

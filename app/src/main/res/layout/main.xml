@@ -25,22 +25,22 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/stub_wrap"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints">
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/stubNavigation"
+    <!--
+        <LinearLayout
+            android:id="@+id/stub_wrap"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:inflatedId="@+id/navigationBar"
-            android:layout="@layout/fragment_navigation" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/stubNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:inflatedId="@+id/navigationBar"
+                android:layout="@layout/fragment_navigation" />
+        </LinearLayout>
+    -->
     <LinearLayout
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"
