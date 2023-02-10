@@ -63,10 +63,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         } else {
             maxRes = savedInstanceState.getInt("maxRes");
         }
-        */maxRes = Utils().getMaxRes(
-            this,
-            savedInstanceState!!
-        )
+        */maxRes = Utils().getMaxRes(this, savedInstanceState)
 
 
         val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)

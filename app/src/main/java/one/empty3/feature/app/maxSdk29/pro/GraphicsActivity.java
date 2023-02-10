@@ -82,7 +82,7 @@ public class GraphicsActivity extends AppCompatActivity {
                 }
                 button.setOnClickListener(view -> {
 
-                    Intent calculatorIntent = new Intent(Intent.ACTION_EDIT);
+                    Intent calculatorIntent = new Intent();
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
                     int j = 0;
                     for (String s : cords) {
@@ -102,7 +102,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
         View buttonView = findViewById(R.id.buttonView);
         buttonView.setOnClickListener(view -> {
-            Intent graphicsIntent = new Intent(Intent.ACTION_VIEW);
+            Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             for (int i = 0; i < cords.length; i++) {
                 TextView textView = textViews[i];
@@ -115,7 +115,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
         Button back = findViewById(R.id.buttonBack);
         back.setOnClickListener(view -> {
-            Intent mainActivity = new Intent(Intent.ACTION_EDIT);
+            Intent mainActivity = new Intent();
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
             new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));

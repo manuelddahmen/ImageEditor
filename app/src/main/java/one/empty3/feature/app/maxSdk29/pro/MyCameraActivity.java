@@ -171,15 +171,6 @@ public class MyCameraActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
-            maxRes = MAX_RES_DEFAULT;
-        } else {
-            maxRes = savedInstanceState.getInt("maxRes");
-        }
-        */
-        maxRes = new Utils().getMaxRes(this, savedInstanceState);
-
         setContentView(R.layout.main);
 /*
         FragmentNavigation fragmentNavigation = new FragmentNavigation();
@@ -191,6 +182,7 @@ public class MyCameraActivity extends AppCompatActivity {
 */
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
+        maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
         imageView = (ImageView) this.findViewById(R.id.currentImageView);
 
@@ -200,33 +192,10 @@ public class MyCameraActivity extends AppCompatActivity {
 
 
         currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
-        if (currentFile != null) {
+
+        if (new Utils().loadImageInImageView(currentFile, imageView))
             loaded = true;
-        }
-        /*
-        Intent intent = getIntent();
-        if (getIntent() != null && getIntent().getData() != null) {
-            if (intent.getData() != null) {
-                Uri data = intent.getData();
-                currentFile = new File(data.getPath());
-                System.err.println("File returned from effects' list = " + data);
-                currentBitmap = currentFile;
-                if (currentFile != null) {
-                    BufferedImage bi = ImageIO.read(currentFile);
-                    if (bi != null) {
-                        Bitmap bitmap = bi.getBitmap();
-                        if (bitmap != null) {
-                            imageView.setImageBitmap(bitmap);
-                            currentFileOriginalResolution = currentFile;
-                            loaded = true;
-                        }
-                    }
-                }
-            }
-        } else {
-            System.err.println("intent data Main==null");
-        }
-*/
+
 
         thisActivity = this;
 

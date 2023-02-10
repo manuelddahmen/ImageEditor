@@ -168,31 +168,46 @@ public class Utils() {
         currentFile: File
     ): File {
         intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-        intent.putExtra("currentFile", currentFile)
-        intent.putExtra("data", currentFile)
-        System.err.println("Add currentFile to parameter")
-
+//        intent.putExtra("currentFile", currentFile)
+//        intent.putExtra("data", currentFile)
+        System.out.println("Add currentFile to parameter")
         return currentFile
     }
 
     fun getCurrentFile(intent: Intent): File? {
+
+        if (intent.hasExtra("data") && intent.extras!!.get("data") is File)
+            intent.extras?.get("data") as File
         if (intent.data != null && intent.data is Uri)
             return intent.data!!.getPath()?.let { File(it) }
+        if (intent.data != null && intent.data is File)
+            return intent.data as File
         if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is File))
             return (intent.extras?.get("currentFile") as File)
         if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is String))
             return File(intent.extras?.get("currentFile") as String)
         if (intent.data != null && intent.data is File)
             return intent.data as File
-        if (intent.hasExtra("data") && intent.extras!!.get("data")!!.javaClass.equals(
-                File.listRoots().get(0).javaClass
-            )
-        )
-            return intent.data as File
+        return intent.data as File
         if (intent.hasExtra("data") && intent.extras!!.get("data")!!.javaClass.equals(String.javaClass))
             return File(intent.data as String)
 
         return null
+    }
+
+    fun loadImageInImageView(currentFile: File?, imageView: ImageView): Boolean {
+        if (currentFile != null) {
+            try {
+                imageView.setImageBitmap(
+                    BitmapFactory.decodeStream(
+                        FileInputStream(currentFile)
+                    )
+                )
+                return true
+            } catch (e: FileNotFoundException) {
+            }
+        }
+        return false
     }
 }
 
