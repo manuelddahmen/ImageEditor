@@ -97,7 +97,7 @@ public class GraphicsActivity extends AppCompatActivity {
                         }
                         j++;
                     }
-                    new Utils().addCurrentFileToIntent(this, null, calculatorIntent, currentFile);
+                    new Utils().addCurrentFileToIntent(this, calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
             } else {
@@ -114,7 +114,7 @@ public class GraphicsActivity extends AppCompatActivity {
                 graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(this, null, graphicsIntent, currentFile);
+            new Utils().addCurrentFileToIntent(this, graphicsIntent, currentFile);
             startActivity(graphicsIntent);
         });
 
@@ -122,9 +122,9 @@ public class GraphicsActivity extends AppCompatActivity {
         back.setOnClickListener(view -> {
             Intent mainActivity = new Intent(Intent.ACTION_EDIT);
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
-            new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
+            new Utils().addCurrentFileToIntent(this, mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(this, null, mainActivity, currentFile);
+            new Utils().addCurrentFileToIntent(this, mainActivity, currentFile);
             startActivity(mainActivity);
         });
 

@@ -165,25 +165,14 @@ public class Utils() {
 
     fun addCurrentFileToIntent(
         activity: Activity,
-        imageView: ImageView?,
         intent: Intent,
         currentFile: File
     ): File {
-        val intent = Intent(Intent.ACTION_EDIT)
-        try {
-            val decodeStream = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            var currentBitmap = Utils().writePhoto(activity, decodeStream, "EffectOn") // ???
-
-            intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-            intent.setClass(activity.applicationContext, ChooseEffectsActivity2::class.java)
-            intent.putExtra("currentFile", currentFile)
-            intent.putExtra("data", currentFile)
-            if (imageView != null)
-                imageView.setImageBitmap(decodeStream);
-            System.err.println("Add currentFile to parameter")
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        }
+        intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+        intent.setClass(activity.applicationContext, ChooseEffectsActivity2::class.java)
+        intent.putExtra("currentFile", currentFile)
+        intent.putExtra("data", currentFile)
+        System.err.println("Add currentFile to parameter")
 
         return currentFile
     }
