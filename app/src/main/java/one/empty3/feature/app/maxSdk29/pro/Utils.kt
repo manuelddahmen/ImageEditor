@@ -164,12 +164,10 @@ public class Utils() {
     }
 
     fun addCurrentFileToIntent(
-        activity: Activity,
         intent: Intent,
         currentFile: File
     ): File {
         intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-        intent.setClass(activity.applicationContext, ChooseEffectsActivity2::class.java)
         intent.putExtra("currentFile", currentFile)
         intent.putExtra("data", currentFile)
         System.err.println("Add currentFile to parameter")

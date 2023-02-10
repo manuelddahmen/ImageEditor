@@ -58,10 +58,7 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
 
         setContentView(R.layout.recycler_view_effect_activity)
 
-
-
-        maxRes = Utils().getMaxRes(this, savedInstanceState!!)
-
+        maxRes = Utils().getMaxRes(this, savedInstanceState)
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
@@ -69,7 +66,6 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
         recyclerView.adapter = processFileArrayAdapter
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
-        //recyclerView.addOnItemTouchListener(ItemTouchListener())
         effectApply = findViewById(R.id.applyEffects)
         init(savedInstanceState)
         mediaFile = intent.extras?.get("data") as File

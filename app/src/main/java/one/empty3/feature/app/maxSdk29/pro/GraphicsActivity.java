@@ -69,11 +69,6 @@ public class GraphicsActivity extends AppCompatActivity {
         TextView textViewU = findViewById(R.id.textViewU);
         TextView textViewV = findViewById(R.id.textViewV);
 
-/*
-        String imageStr = getIntent().getStringExtra("currentFile");
-        if (imageStr != null)
-            currentFile = new File(imageStr);
-  */
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
@@ -97,7 +92,7 @@ public class GraphicsActivity extends AppCompatActivity {
                         }
                         j++;
                     }
-                    new Utils().addCurrentFileToIntent(this, calculatorIntent, currentFile);
+                    new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
             } else {
@@ -114,7 +109,7 @@ public class GraphicsActivity extends AppCompatActivity {
                 graphicsIntent.putExtra(cords[i], textView.getText().toString());
             }
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(this, graphicsIntent, currentFile);
+            new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
         });
 
@@ -122,9 +117,9 @@ public class GraphicsActivity extends AppCompatActivity {
         back.setOnClickListener(view -> {
             Intent mainActivity = new Intent(Intent.ACTION_EDIT);
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
-            new Utils().addCurrentFileToIntent(this, mainActivity, currentFile);
+            new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(this, mainActivity, currentFile);
+            new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             startActivity(mainActivity);
         });
 
