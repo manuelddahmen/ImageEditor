@@ -188,10 +188,6 @@ public class Utils() {
             return File(intent.extras?.get("currentFile") as String)
         if (intent.data != null && intent.data is File)
             return intent.data as File
-        return intent.data as File
-        if (intent.hasExtra("data") && intent.extras!!.get("data")!!.javaClass.equals(String.javaClass))
-            return File(intent.data as String)
-
         return null
     }
 

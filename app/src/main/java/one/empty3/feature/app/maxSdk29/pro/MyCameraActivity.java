@@ -425,12 +425,12 @@ public class MyCameraActivity extends AppCompatActivity {
         computePixels.setOnClickListener(v -> {
             if (currentFile != null) {
                 Uri uri = Uri.fromFile(currentFile);
-                Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
+                //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                 Intent intentDraw = new Intent(Intent.ACTION_EDIT);
-                intentDraw.setDataAndType(photoURI, "image/jpeg");
+                intentDraw.setDataAndType(uri, "image/jpeg");
                 intentDraw.putExtra("currentFile", currentFile);
                 intentDraw.putExtra("maxRes", maxRes);
-                intentDraw.putExtra("data", photoURI);
+                intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 startActivity(intentDraw);
             }
