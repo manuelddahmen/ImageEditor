@@ -20,10 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
-import static one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.MAX_RES_DEFAULT;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -34,9 +31,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
 
 public class GraphicsActivity extends AppCompatActivity {
     private String[] cords;
@@ -50,33 +44,9 @@ public class GraphicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
 
+        maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
-        if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
-            maxRes = MAX_RES_DEFAULT;
-        } else {
-            maxRes = savedInstanceState.getInt("maxRes");
-        }
-
-        Intent intent = getIntent();
-        if (getIntent() != null && getIntent().getData() != null) {
-            if (intent.getData() != null) {
-                Uri data = intent.getData();
-                currentFile = new File(data.getPath());
-                System.err.println("File returned from effects' list = " + data);
-
-                if (currentFile != null) {
-                    BufferedImage bi = ImageIO.read(currentFile);
-                    if (bi != null) {
-                        Bitmap bitmap = bi.getBitmap();
-                        if (bitmap != null) {
-                        }
-                    }
-                }
-            }
-        } else {
-            System.err.println("intent data Main==null");
-        }
-
+        currentFile = new Utils().setImageView(this, null);
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);

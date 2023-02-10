@@ -134,6 +134,18 @@ public class GraphicsActivityView extends AppCompatActivity {
         int w = getMaxRes();
         int h = getMaxRes();
 
+        PixM current = null;
+
+        if (currentFile != null) {
+            current = new PixM(ImageIO.read(currentFile));
+        }
+        if (current == null) {
+            if (getMaxRes() <= 0) {
+                current = new PixM(w, h);
+            } else {
+                current = new PixM(w, h);
+            }
+        }
 
         for (int i = 0; i < values.length; i++) {
             algebricTree[i] = new AlgebricTree(formulas[i], stringDoubleHashMap);
@@ -146,7 +158,6 @@ public class GraphicsActivityView extends AppCompatActivity {
         }
         double[] rgba = new double[4];
 
-        PixM current = new PixM(w, h);
         double t = 0;
         for (int x = 0; x < w; x++)
             for (int y = 0; y < h; y++) {
@@ -156,8 +167,9 @@ public class GraphicsActivityView extends AppCompatActivity {
                         algebricTree[j].setParameter("y", (double) y);
                         algebricTree[j].setParameter("t", (double) t);
                     }
-                    for (int c = 0; c < 4; c++) {
-                        algebricTree[c + 2].setParameter(cord[c + 2], algebricTree[c + 2].eval());
+                    for (int c = 0; c < 3; c++) {
+                        algebricTree[c + 2].setParameter(cord[c + 2], current != null ?
+                                current.getValues(x, y)[c] : algebricTree[c + 2].eval());
                     }
 
                     double x2 = algebricTree[0].eval();

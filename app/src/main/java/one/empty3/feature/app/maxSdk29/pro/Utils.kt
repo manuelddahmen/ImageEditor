@@ -20,10 +20,14 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -115,5 +119,43 @@ public class Utils() {
             Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
             throw NullPointerException("No file written, Utils.writePhoto");
         }
+    }
+
+
+    public fun getMaxRes(activity: Activity, savedInstanceState: Bundle): Int {
+        val maxRes: Int;
+        if (savedInstanceState == null ||
+            savedInstanceState.containsKey("maxRes") ||
+            savedInstanceState.getInt("maxRes") <= 0
+        ) {
+            maxRes = MyCameraActivity.MAX_RES_DEFAULT
+        } else {
+            maxRes = savedInstanceState.getInt("maxRes")
+        }
+        return maxRes
+    }
+
+    public fun setImageView(activity: Activity, imageView: ImageView?): File? {
+        var currentFile: File? = null
+        val intent: Intent = activity.intent
+        if (intent?.getData() != null) {
+            if (intent.data != null) {
+                val data = intent.data
+                System.err.println("File returned from effects' list = $data")
+                currentFile = File(data!!.path)
+                if (currentFile != null) {
+                    val bi = ImageIO.read(currentFile)
+                    if (bi != null) {
+                        val bitmap = bi.getBitmap()
+                        if (bitmap != null && imageView != null) {
+                            imageView.setImageBitmap(bitmap)
+                        }
+                    }
+                }
+            }
+        } else {
+            System.err.println("intent data Main==null")
+        }
+        return currentFile
     }
 }

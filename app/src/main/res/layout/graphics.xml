@@ -261,7 +261,7 @@
                     android:id="@+id/buttonBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/Theme.AppCompat.Light"
+                    android:theme="@style/Theme.FeatureAppmain"
                     android:text="@string/back" />
 
                 <Button
