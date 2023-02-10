@@ -27,6 +27,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.unit.max
 import one.empty3.apps.tree.altree.*
 import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library.core.raytracer.tree.AlgebricTree
@@ -86,6 +87,7 @@ class Calculator : AppCompatActivity() {
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
+        editTextId.setText(variableValue)
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
@@ -145,8 +147,6 @@ class Calculator : AppCompatActivity() {
         }
 
 
-        editTextId.setText(variableValue)
-
         val back = findViewById<Button>(R.id.buttonBak);
         back.setOnClickListener {
             val intentBack = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -163,12 +163,13 @@ class Calculator : AppCompatActivity() {
             val intentGraphics = Intent(Intent.ACTION_EDIT)
             if (currentFile != null)
                 Utils().addCurrentFileToIntent(intentGraphics, currentFile!!)
-
+            intentGraphics.putExtra("maxRes", maxRes)
             for (s in cords) {
-                intentGraphics.putExtra(s, formula[i])
                 if (s.equals(variable)) {
                     val text = findViewById<EditText>(R.id.editTextCalculus)
                     intentGraphics.putExtra(s, text.text)
+                } else {
+                    intentGraphics.putExtra(s, formula[i])
                 }
             }
             startActivity(intentGraphics)

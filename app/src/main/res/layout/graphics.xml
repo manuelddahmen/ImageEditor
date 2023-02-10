@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:text="x"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
-                android:text="X" />
+                android:text="x" />
         </TableRow>
 
         <TableRow>
@@ -66,7 +66,7 @@
                 android:text="y"
                 android:layout_height="60dp"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -87,7 +87,7 @@
                 android:text="z"
                 android:layout_height="60dp"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:text="g"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -148,7 +148,7 @@
                 android:id="@+id/textViewB"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:layout_height="60dp"
                 android:text="b"
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:text="a"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -191,7 +191,7 @@
                 android:text="t"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -211,7 +211,7 @@
                 android:id="@+id/textViewU"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:text="u"
                 android:layout_height="60dp"
@@ -233,7 +233,7 @@
                 android:text="v"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="48dp"
+                android:minHeight="32dp"
                 android:tooltipText="complete"
                 android:layout_height="60dp"
                 android:theme="@style/Theme.FeatureAppmain" />
