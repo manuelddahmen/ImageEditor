@@ -55,9 +55,7 @@ package one.empty3.pointset;
 import one.empty3.library.Point3D;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.lighting.Colors;
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
+import one.empty3.apps.tree.altree.*;
 
 import java.util.HashMap;
 import java.util.function.Consumer;

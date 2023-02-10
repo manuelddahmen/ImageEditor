@@ -20,7 +20,7 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.library.core.raytracer.tree.*;
+import one.empty3.apps.tree.altree.*;
 
 public class DirectMaskFilter {
     PixM m1;

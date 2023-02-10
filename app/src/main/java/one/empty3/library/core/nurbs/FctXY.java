@@ -53,9 +53,7 @@
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
+import one.empty3.apps.tree.altree.*;
 
 /*__
  * Created by manue on 28-05-19.

@@ -20,7 +20,7 @@
 
 package one.empty3.library.core.nurbs;
 
-import one.empty3.library.core.raytracer.tree.*;
+import one.empty3.apps.tree.altree.*;
 
 public class F {
     /*

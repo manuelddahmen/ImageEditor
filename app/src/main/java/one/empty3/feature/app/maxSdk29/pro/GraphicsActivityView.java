@@ -35,10 +35,8 @@ import java.util.HashMap;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.apps.tree.altree.*;
 import one.empty3.feature20220726.PixM;
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 
 public class GraphicsActivityView extends AppCompatActivity {
     final String[] cord = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};

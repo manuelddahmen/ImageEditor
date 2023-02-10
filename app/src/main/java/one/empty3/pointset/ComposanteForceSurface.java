@@ -52,11 +52,11 @@
 
 package one.empty3.pointset;
 
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
-
 import java.util.HashMap;
+
+import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
+import one.empty3.apps.tree.altree.AlgebricTree;
+import one.empty3.apps.tree.altree.TreeNodeEvalException;
 
 /*__
  * Created by manue on 16-07-19.

@@ -54,9 +54,7 @@ package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
+import one.empty3.apps.tree.altree.*;
 
 import java.util.HashMap;
 
@@ -154,7 +152,8 @@ public class FunctionCurve extends ParametricCurve {
             double evalY = treeY.eval();
             double evalZ = treeZ.eval();
             return new Point3D(evalX, evalY, evalZ);
-        } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException | NullPointerException exceptione) {
+        } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException |
+                 NullPointerException exceptione) {
             exceptione.printStackTrace();
         }
 
