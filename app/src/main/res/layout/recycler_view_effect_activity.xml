@@ -23,7 +23,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/Theme.FeatureAppmain">
+    android:theme="?android:attr/buttonBarButtonStyle">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_effect"
@@ -31,11 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="655dp"
         app:layoutManager="LinearLayoutManager"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:id="@+id/applyEffects"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 </LinearLayout>

@@ -31,7 +31,7 @@
         android:layout_height="48dp"
         app:srcCompat="@android:drawable/ic_media_ff"
         android:contentDescription="@string/effect_image_to_image"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="48dp"
         android:height="48dp"
         android:text="@string/effect_name"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:id="@+id/buttonAddTOEffect"
@@ -48,7 +48,7 @@
         android:layout_height="48dp"
         android:height="48dp"
         android:text="@string/add"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:id="@+id/buttonRemoveFromList"
@@ -56,7 +56,7 @@
         android:layout_height="48dp"
         android:height="48dp"
         android:text="@string/remove"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:id="@+id/commentEffect"
@@ -64,6 +64,6 @@
         android:layout_height="48dp"
         android:height="48dp"
         android:text="@string/commentEffect"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="?android:attr/buttonBarButtonStyle" />
 
 </LinearLayout>
