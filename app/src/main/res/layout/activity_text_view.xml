@@ -35,8 +35,8 @@
             android:id="@+id/buttonTextBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:width="48dp"
-            android:height="48dp"
+            android:width="30dp"
+            android:height="30dp"
             android:text="@string/back_button_text_activity"
             style="@style/Theme.FeatureAppmain" />
 
@@ -55,14 +55,14 @@
                     android:valueTo="200.0"
                     android:id="@+id/font_size"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp" style="@style/Theme.FeatureAppmain">
+                    android:layout_height="30dp" style="@style/Theme.FeatureAppmain">
                 </com.google.android.material.slider.Slider>
         -->
         <EditText
             android:text="@string/textDp"
             android:id="@+id/font_size"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="30dp"
             style="@style/Theme.FeatureAppmain"
             android:autofillHints="Text size in dp (~pixels*4) "></EditText>
 

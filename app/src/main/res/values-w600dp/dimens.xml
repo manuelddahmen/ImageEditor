@@ -19,5 +19,5 @@
   -->
 
 <resources>
-    <dimen name="fab_margin">48dp</dimen>
+    <dimen name="fab_margin">30dp</dimen>
 </resources>

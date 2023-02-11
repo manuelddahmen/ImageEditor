@@ -39,5 +39,6 @@
         android:layout_height="32dp"
         android:id="@+id/applyEffects"
         android:text="@string/apply_effects"
+        android:layout_weight="0.3"
         android:theme="?android:attr/buttonBarButtonStyle" />
 </LinearLayout>

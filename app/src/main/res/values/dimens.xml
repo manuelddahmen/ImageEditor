@@ -20,7 +20,7 @@
 <resources>
     <dimen name="margin_xsmall">16dp</dimen>
     <dimen name="margin_small">32dp</dimen>
-    <dimen name="margin_medium">48dp</dimen>
+    <dimen name="margin_medium">30dp</dimen>
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_xlarge">92dp</dimen>
 

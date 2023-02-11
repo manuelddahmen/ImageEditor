@@ -42,9 +42,9 @@
 
                 android:id="@+id/textViewX"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:text="x"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -64,9 +64,9 @@
                 android:id="@+id/textViewY"
                 android:layout_width="match_parent"
                 android:text="y"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -85,9 +85,9 @@
                 android:id="@+id/textViewZ"
                 android:layout_width="match_parent"
                 android:text="z"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -106,9 +106,9 @@
                 android:id="@+id/textViewR"
                 android:text="r"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -128,9 +128,9 @@
                 android:layout_width="match_parent"
                 android:text="g"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
@@ -148,9 +148,9 @@
                 android:id="@+id/textViewB"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:text="b"
                 android:theme="@style/Theme.FeatureAppmain" />
 
@@ -168,9 +168,9 @@
 
                 android:id="@+id/textViewA"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:text="a"
                 android:theme="@style/Theme.FeatureAppmain" />
@@ -191,9 +191,9 @@
                 android:text="t"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
@@ -211,10 +211,10 @@
                 android:id="@+id/textViewU"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="32dp"
+                android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:text="u"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button
@@ -233,9 +233,8 @@
                 android:text="v"
                 android:layout_width="match_parent"
                 android:inputType="text"
-                android:minHeight="32dp"
                 android:tooltipText="complete"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain" />
 
             <Button

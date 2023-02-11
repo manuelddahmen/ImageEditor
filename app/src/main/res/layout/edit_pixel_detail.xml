@@ -86,7 +86,7 @@
             android:layout_height="35dp"
             android:text="@string/expression"
             tools:layout_editor_absoluteX="18dp"
-            tools:layout_editor_absoluteY="48dp" />
+            tools:layout_editor_absoluteY="30dp" />
 
         <Button
             android:id="@+id/writeFormula"

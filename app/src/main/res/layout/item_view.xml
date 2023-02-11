@@ -26,6 +26,6 @@
     <TextView
         android:id="@+id/text_view_recyclerview_function"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="30dp"
         android:text="@string/function_string" />
 </androidx.constraintlayout.widget.ConstraintLayout>

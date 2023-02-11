@@ -25,7 +25,7 @@
     android:background="#F3E6E6"
     android:backgroundTintMode="add"
     android:orientation="vertical"
-    android:theme="?android:attr/buttonBarButtonStyle">
+    android:theme="?android:attr/buttonBarButtontheme">
 
 
     <LinearLayout
@@ -45,22 +45,22 @@
             android:inputType="textPersonName"
             android:labelFor="@id/answerText"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="28dp"
             tools:ignore="DuplicateSpeakableTextCheck"
-            android:theme="?android:attr/buttonBarButtonStyle" />
+            android:theme="?android:attr/buttonBarButtontheme" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal"
-        android:theme="?android:attr/buttonBarButtonStyle">
+        android:theme="?android:attr/buttonBarButtontheme">
 
         <Button
             android:id="@+id/button1"
 
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="28dp"
 
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -69,8 +69,8 @@
         <Button
             android:id="@+id/button2"
 
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_2" />
@@ -78,8 +78,8 @@
         <Button
             android:id="@+id/button3"
 
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_3"
@@ -88,8 +88,8 @@
 
         <Button
             android:id="@+id/buttonParenthesisA"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/open_brace"
@@ -99,13 +99,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button4"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_4" />
@@ -113,23 +113,23 @@
         <Button
             android:id="@+id/button5"
 
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_5" />
 
         <Button
             android:id="@+id/button6"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_6" />
 
         <Button
             android:id="@+id/buttonFunction"
-            android:theme="?android:attr/buttonBarButtonStyle"
+            android:theme="?android:attr/buttonBarButtontheme"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -140,77 +140,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal"
-        android:theme="?android:attr/buttonBarButtonStyle">
+        android:theme="?android:attr/buttonBarButtontheme">
 
         <Button
             android:id="@+id/button7"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_7" />
 
         <Button
             android:id="@+id/button8"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_8" />
 
         <Button
             android:id="@+id/button9"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_9" />
 
         <Button
             android:id="@+id/buttonParenthesis"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:width="48dp"
+            android:width="30dp"
             android:text="@string/close_brace" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/dotButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/DOT" />
 
         <Button
             android:id="@+id/button0"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/_0" />
 
         <Button
             android:id="@+id/equalButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/EQUALS" />
 
         <Button
             android:id="@+id/buttonComa"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/coma" />
@@ -218,21 +218,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/addButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/ADD" />
 
         <Button
             android:id="@+id/multButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/MUL" />
@@ -247,8 +247,8 @@
 -->
         <Button
             android:id="@+id/delButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/DEL" />
@@ -257,29 +257,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/substractButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/SUB" />
 
         <Button
             android:id="@+id/divideButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/DIV" />
 
         <Button
             android:id="@+id/expButton"
-            android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_width="48dp"
+            android:theme="?android:attr/buttonBarButtontheme"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/EXP" />
@@ -295,9 +295,9 @@
         <TextView
             android:id="@+id/answerText"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="28dp"
             android:text="@string/result"
-            android:theme="?android:attr/buttonBarButtonStyle"
+            android:theme="?android:attr/buttonBarButtontheme"
             android:typeface="monospace" />
     </LinearLayout>
 
@@ -311,20 +311,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back2"
-            android:theme="?android:attr/buttonBarButtonStyle" />
+            android:theme="?android:attr/buttonBarButtontheme" />
 
         <Button
             android:id="@+id/buttonOk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ok"
-            android:theme="?android:attr/buttonBarButtonStyle" />
+            android:theme="?android:attr/buttonBarButtontheme" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:theme="?android:attr/buttonBarButtonStyle" />
+            android:theme="?android:attr/buttonBarButtontheme" />
     </LinearLayout>
 </LinearLayout>
