@@ -172,7 +172,7 @@ public class GraphicsActivityView extends AppCompatActivity {
                     double y2 = algebricTree[1].eval();
 
                     for (int c = 0; c < 4; c++) {
-                        rgba[c] = algebricTree[c + 2].eval();
+                        rgba[c] = algebricTree[c + 3].eval();
                     }
                     current.setValues((int) x2, (int) y2, rgba[0], rgba[1], rgba[2]);
 
