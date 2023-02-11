@@ -22,8 +22,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.FeatureAppmain"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
     <!--
         <LinearLayout
@@ -42,18 +42,19 @@
         </LinearLayout>
     -->
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/takePhotoButton"
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:autofillHints="@string/capturePhoto"
             android:contentDescription="@string/capturePhoto"
-            android:height="30dp"
             android:src="@drawable/apn"
             android:text="@string/capturePhoto"
             android:background="@color/light_blue_A200"
@@ -63,46 +64,19 @@
             android:id="@+id/choosePhotoButton"
             android:background="@color/light_blue_A200"
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
-            android:height="30dp"
             android:src="@drawable/folder"
             android:text="@string/choosePhoto"
             android:layout_width="wrap_content" />
-        <!--
-                <Button
-                    android:id="@+id/chooseMovie"
-                    android:background="@color/light_blue_A200"
-                    style="@style/Theme.FeatureAppmain"
-                    android:layout_height="30dp"
-                    android:autofillHints="@string/choose_movie"
-                    android:contentDescription="@string/choose_movie"
-                    android:height="30dp"
-                    android:src="@drawable/film"
-                    android:text="@string/choose_movie"
-                    android:layout_width="wrap_content" />-->
-        <!--
 
-            <Button
-                android:id="@+id/loadLastSaved"
-                style="@style/Theme.FeatureAppmain"
-                android:layout_height="30dp"
-                android:autofillHints="@string/last_saved"
-                android:contentDescription="@string/last_saved"
-                android:height="30dp"
-                android:src="@drawable/film"
-                android:text="@string/last_saved"
-                android:layout_width="wrap_content" />
-    -->
         <Button
             android:id="@+id/save"
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="72dp"
-            android:height="30dp"
+            android:layout_height="48dp"
             android:text="@string/save" />
 
         <Button
@@ -110,9 +84,7 @@
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="72dp"
-            android:height="30dp"
+            android:layout_height="48dp"
             android:text="@string/share" />
     </LinearLayout>
 
@@ -120,37 +92,35 @@
     <LinearLayout
         android:id="@+id/selectButtonsLayout"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/currentImageView"
-        app:layout_constraintStart_toStartOf="@id/currentImageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearChooseButtons">
 
         <Button
             android:id="@+id/draw_activity"
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
-            android:height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/draw_activity" />
 
         <Button
             android:id="@+id/selectRectangle"
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
-            android:height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/select_rectangle" />
 
         <Button
             android:id="@+id/unselect_rect"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="64dp"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             android:background="@color/light_blue_400"
-            android:height="30dp"
+            android:height="48dp"
             android:onClick="unselectA"
             android:text="@string/unselect" />
 
@@ -158,30 +128,20 @@
             android:id="@+id/copy"
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
-            android:height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="48dp"
             android:text="@string/copy" />
 
         <Button
             android:id="@+id/paste"
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
-            android:height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/paste" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/currentImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearChooseButtons">
-
-    </LinearLayout>
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
         android:id="@+id/currentImageView"
@@ -190,10 +150,10 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
         android:src="@drawable/icon"
-        app:layout_constraintBottom_toTopOf="@id/effectsButtonNew"
+        app:layout_constraintBottom_toTopOf="@id/effectButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearChooseButtons"
+        app:layout_constraintTop_toBottomOf="@id/selectButtonsLayout"
         android:background="@color/black" />
     <!--
     <Gallery
@@ -203,86 +163,93 @@
 
         />-->
 
-    <Button
-        android:id="@+id/buttonAddText"
-        style="@style/Theme.FeatureAppmain"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/add_text"
-        android:background="@color/light_blue_A400"
-        app:layout_constraintEnd_toStartOf="@id/buttonDraw"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/About"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/currentImageView"
+        android:id="@+id/effectButtons">
 
-    <Button
-        android:id="@+id/buttonDraw"
-        style="@style/Theme.FeatureAppmain"
-        android:layout_width="wrap_content"
-        android:background="@color/light_blue_A400"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/draw_button_text"
-        app:layout_constraintStart_toEndOf="@id/buttonAddText"
-        app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+        <Button
+            android:id="@+id/buttonAddText"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="48dp"
+            android:text="@string/add_text"
+            android:background="@color/light_blue_A400"
+            app:layout_constraintEnd_toStartOf="@id/buttonDraw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+
+        <Button
+            android:id="@+id/buttonDraw"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:background="@color/light_blue_A400"
+            android:layout_height="wrap_content"
+            android:text="@string/draw_button_text"
+            app:layout_constraintStart_toEndOf="@id/buttonAddText"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
 
 
-    <Button
-        android:id="@+id/effectsButtonNew"
-        style="@style/Theme.FeatureAppmain"
-        android:layout_height="30dp"
-        android:background="@color/light_blue_A400"
-        android:height="30dp"
-        android:text="@string/choose_effects"
-        app:layout_constraintStart_toEndOf="@id/buttonDraw"
-        app:layout_constraintTop_toBottomOf="@+id/currentImageView"
-        android:layout_width="wrap_content" />
+        <Button
+            android:id="@+id/effectsButtonNew"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_height="wrap_content"
+            android:background="@color/light_blue_A400"
+            android:text="@string/choose_effects"
+            app:layout_constraintStart_toEndOf="@id/buttonDraw"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            android:layout_width="wrap_content" />
 
-    <Button
-        style="@style/Theme.FeatureAppmain"
-        android:layout_height="30dp"
-        android:background="@color/light_blue_A400"
-        android:height="30dp"
-        android:text="@string/choose_shader_like"
-        app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
-        app:layout_constraintTop_toBottomOf="@+id/currentImageView"
-        android:layout_width="wrap_content"
-        android:id="@+id/activity_compute_pixels" />
+        <Button
+            style="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:background="@color/light_blue_A400"
+            android:text="@string/choose_shader_like"
+            app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            android:layout_width="wrap_content"
+            android:id="@+id/activity_compute_pixels" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/About"
         style="@style/Theme.FeatureAppmain"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:height="30dp"
+        android:layout_height="wrap_content"
         android:background="@color/gray_400"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/about"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/effectsButtonNew" />
+        app:layout_constraintTop_toBottomOf="@id/effectButtons" />
 
     <EditText
         android:id="@+id/editMaximiumResolution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="30dp"
+        android:height="48dp"
         android:autofillHints="@string/maximum_resolution"
         android:ems="10"
         android:hint="@string/maximum_resolution"
         android:inputType="numberDecimal"
-        android:minHeight="30dp"
+        android:minHeight="48dp"
         android:text="@string/maxRes_1200"
         android:tooltipText="Maximum resolution"
-        app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"
-        tools:layout_editor_absoluteX="30dp" />
+        app:layout_constraintTop_toBottomOf="@id/effectButtons"
+        tools:layout_editor_absoluteX="48dp" />
     <!--
         <CheckBox
                 android:id="@+id/betaVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
-                android:minHeight="30dp"
+                android:minHeight="48dp"
                 android:text="@string/beta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
