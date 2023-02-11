@@ -29,13 +29,15 @@
         android:id="@+id/recycler_view_effect"
         listitem="@layout/recycler_view_effect_item"
         android:layout_width="match_parent"
-        android:layout_height="655dp"
+        android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
+        android:layout_weight="0.7"
         android:theme="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="32dp"
         android:id="@+id/applyEffects"
+        android:text="@string/apply_effects"
         android:theme="?android:attr/buttonBarButtonStyle" />
 </LinearLayout>
