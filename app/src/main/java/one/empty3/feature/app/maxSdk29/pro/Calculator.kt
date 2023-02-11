@@ -151,23 +151,30 @@ class Calculator : AppCompatActivity() {
             intentBack.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
                 Utils().addCurrentFileToIntent(intentBack, currentFile!!)
+            var i = 0;
             for (s in cords) {
                 intentBack.putExtra(s, formula[i])
+                i++
             }
             startActivity(intentBack)
         };
+
+
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentGraphics = Intent()
+            intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
                 Utils().addCurrentFileToIntent(intentGraphics, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
+            var i = 0
             for (s in cords) {
                 if (s.equals(variable)) {
                     intentGraphics.putExtra(s, editTextId.text.toString())
                 } else {
                     intentGraphics.putExtra(s, formula[i])
                 }
+                i++
             }
             startActivity(intentGraphics)
         }

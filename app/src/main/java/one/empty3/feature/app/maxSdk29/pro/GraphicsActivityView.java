@@ -155,19 +155,25 @@ public class GraphicsActivityView extends AppCompatActivity {
             for (int y = 0; y < h; y++) {
                 try {
                     for (int j = 0; j < algebricTree.length; j++) {
+                        double[] v = current.getValues(x, y);
+                        algebricTree[j].setParameter("ri", v[0]);
+                        algebricTree[j].setParameter("gi", v[1]);
+                        algebricTree[j].setParameter("bi", v[2]);
                         algebricTree[j].setParameter("w", (double) w);
                         algebricTree[j].setParameter("h", (double) h);
                         algebricTree[j].setParameter("x", (double) x);
                         algebricTree[j].setParameter("y", (double) y);
                         algebricTree[j].setParameter("t", (double) t);
                     }
-                    for (int c = 0; c < 3; c++) {
-                        algebricTree[c + 2].setParameter(cord[c + 2], current != null ?
-                                current.getValues(x, y)[c] : algebricTree[c + 2].eval());
-                    }
-
                     double x2 = algebricTree[0].eval();
                     double y2 = algebricTree[1].eval();
+
+
+                    for (int c = 0; c < 3; c++) {
+                        algebricTree[c + 2].setParameter(cord[c + 2],
+                                algebricTree[c + 2].eval());
+                    }
+
                     for (int c = 0; c < 4; c++) {
                         rgba[c] = algebricTree[c + 2].eval();
                     }
