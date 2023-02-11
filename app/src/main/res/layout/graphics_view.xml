@@ -35,8 +35,8 @@
 
     <Button
         android:id="@+id/buttonDraw"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:text="@string/draw2"
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.FeatureAppmain"
@@ -44,8 +44,8 @@
 
     <Button
         android:id="@+id/buttonBack2"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:text="@string/back"
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.FeatureAppmain"

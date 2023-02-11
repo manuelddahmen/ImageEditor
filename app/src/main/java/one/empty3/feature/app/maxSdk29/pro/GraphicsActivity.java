@@ -119,7 +119,6 @@ public class GraphicsActivity extends AppCompatActivity {
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
             new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             startActivity(mainActivity);
         });
 

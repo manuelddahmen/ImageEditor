@@ -25,7 +25,7 @@
     android:background="#F3E6E6"
     android:backgroundTintMode="add"
     android:orientation="vertical"
-    android:theme="?android:attr/buttonBarButtontheme">
+    android:theme="@style/Theme.FeatureAppmain">
 
 
     <LinearLayout
@@ -47,19 +47,19 @@
             android:textAlignment="center"
             android:textSize="28dp"
             tools:ignore="DuplicateSpeakableTextCheck"
-            android:theme="?android:attr/buttonBarButtontheme" />
+            android:theme="@style/Theme.FeatureAppmain" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:orientation="horizontal"
-        android:theme="?android:attr/buttonBarButtontheme">
+        android:theme="@style/Theme.FeatureAppmain">
 
         <Button
             android:id="@+id/button1"
 
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="28dp"
 
             android:layout_height="match_parent"
@@ -69,7 +69,7 @@
         <Button
             android:id="@+id/button2"
 
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -78,7 +78,7 @@
         <Button
             android:id="@+id/button3"
 
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -88,7 +88,7 @@
 
         <Button
             android:id="@+id/buttonParenthesisA"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -104,7 +104,7 @@
 
         <Button
             android:id="@+id/button4"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -113,7 +113,7 @@
         <Button
             android:id="@+id/button5"
 
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -121,7 +121,7 @@
 
         <Button
             android:id="@+id/button6"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -129,7 +129,7 @@
 
         <Button
             android:id="@+id/buttonFunction"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -142,11 +142,11 @@
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:orientation="horizontal"
-        android:theme="?android:attr/buttonBarButtontheme">
+        android:theme="@style/Theme.FeatureAppmain">
 
         <Button
             android:id="@+id/button7"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -154,7 +154,7 @@
 
         <Button
             android:id="@+id/button8"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -162,7 +162,7 @@
 
         <Button
             android:id="@+id/button9"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -170,7 +170,7 @@
 
         <Button
             android:id="@+id/buttonParenthesis"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -185,7 +185,7 @@
 
         <Button
             android:id="@+id/dotButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -193,7 +193,7 @@
 
         <Button
             android:id="@+id/button0"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -201,7 +201,7 @@
 
         <Button
             android:id="@+id/equalButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -209,7 +209,7 @@
 
         <Button
             android:id="@+id/buttonComa"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -223,7 +223,7 @@
 
         <Button
             android:id="@+id/addButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -231,7 +231,7 @@
 
         <Button
             android:id="@+id/multButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -247,7 +247,7 @@
 -->
         <Button
             android:id="@+id/delButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -262,7 +262,7 @@
 
         <Button
             android:id="@+id/substractButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -270,7 +270,7 @@
 
         <Button
             android:id="@+id/divideButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -278,7 +278,7 @@
 
         <Button
             android:id="@+id/expButton"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -297,7 +297,7 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:text="@string/result"
-            android:theme="?android:attr/buttonBarButtontheme"
+            android:theme="@style/Theme.FeatureAppmain"
             android:typeface="monospace" />
     </LinearLayout>
 
@@ -311,20 +311,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back2"
-            android:theme="?android:attr/buttonBarButtontheme" />
+            android:theme="@style/Theme.FeatureAppmain" />
 
         <Button
             android:id="@+id/buttonOk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ok"
-            android:theme="?android:attr/buttonBarButtontheme" />
+            android:theme="@style/Theme.FeatureAppmain" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"
-            android:theme="?android:attr/buttonBarButtontheme" />
+            android:theme="@style/Theme.FeatureAppmain" />
     </LinearLayout>
 </LinearLayout>
