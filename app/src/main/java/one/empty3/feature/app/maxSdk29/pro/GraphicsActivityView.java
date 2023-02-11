@@ -168,6 +168,10 @@ public class GraphicsActivityView extends AppCompatActivity {
                         algebricTree[j].setParameter("y", (double) y);
                         algebricTree[j].setParameter("t", (double) t);
                     }
+
+                    algebricTree[7].setParameter("a",
+                            (double) algebricTree[7].eval());
+
                     double x2 = algebricTree[0].eval();
                     double y2 = algebricTree[1].eval();
 
