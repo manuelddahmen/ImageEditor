@@ -138,6 +138,9 @@ public class GraphicsActivityView extends AppCompatActivity {
             } else {
                 current = new PixM(w, h);
             }
+        } else {
+            w = current.getColumns();
+            h = current.getLines();
         }
 
         for (int i = 0; i < values.length; i++) {
@@ -167,10 +170,10 @@ public class GraphicsActivityView extends AppCompatActivity {
                         algebricTree[j].setParameter("x", (double) x);
                         algebricTree[j].setParameter("y", (double) y);
                         algebricTree[j].setParameter("t", (double) t);
+                        algebricTree[j].setParameter("a",
+                                (double) algebricTree[7].eval());
                     }
 
-                    algebricTree[7].setParameter("a",
-                            (double) algebricTree[7].eval());
 
                     double x2 = algebricTree[0].eval();
                     double y2 = algebricTree[1].eval();
