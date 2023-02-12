@@ -47,6 +47,7 @@ public class GraphicsActivityView extends AppCompatActivity {
     private int maxRes = 300;
     private File currentFile;
     private PixM current;
+    private int MAX_RES = maxRes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,19 +130,22 @@ public class GraphicsActivityView extends AppCompatActivity {
 
         current = null;
 
-        if (currentFile != null && current == null) {
-            current = new PixM(ImageIO.read(currentFile));
+        if (currentFile != null) {
+            if (getMaxRes() > 0) {
+                current = PixM.getPixM(ImageIO.read(currentFile), getMaxRes());
+            } else {
+                current = new PixM(ImageIO.read(currentFile));
+            }
         }
         if (current == null) {
             if (getMaxRes() <= 0) {
-                current = new PixM(w, h);
+                current = new PixM(MAX_RES, MAX_RES);
             } else {
                 current = new PixM(w, h);
             }
-        } else {
-            w = current.getColumns();
-            h = current.getLines();
         }
+        w = current.getColumns();
+        h = current.getLines();
 
         for (int i = 0; i < values.length; i++) {
             algebricTree[i] = new AlgebricTree(formulas[i], stringDoubleHashMap);
@@ -155,8 +159,9 @@ public class GraphicsActivityView extends AppCompatActivity {
         double[] rgba = new double[4];
 
         double t = 0;
-        for (int x = 0; x < w; x++)
-            for (int y = 0; y < h; y++) {
+        int progress = 0;
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
                 try {
                     for (int j = 0; j < algebricTree.length; j++) {
                         double[] v = current.getValues(x, y);
@@ -170,10 +175,12 @@ public class GraphicsActivityView extends AppCompatActivity {
                         algebricTree[j].setParameter("x", (double) x);
                         algebricTree[j].setParameter("y", (double) y);
                         algebricTree[j].setParameter("t", (double) t);
-                        algebricTree[j].setParameter("a",
-                                (double) algebricTree[7].eval());
+                        algebricTree[j].setParameter("a", 1.0);
                     }
 
+                    for (int j = 0; j < algebricTree.length; j++) {
+                        algebricTree[j].setParameter(cord[j], algebricTree[j].eval());
+                    }
 
                     double x2 = algebricTree[0].eval();
                     double y2 = algebricTree[1].eval();
@@ -188,6 +195,10 @@ public class GraphicsActivityView extends AppCompatActivity {
                     //throw new RuntimeException(e);
                 }
             }
+            progress = (int) (100. * y / h);
+        }
+        progress = 100;
+
         Bitmap bitmap = current.normalize(0, 1).getBitmap();
         File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
         this.currentFile = graphics_math;

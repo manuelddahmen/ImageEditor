@@ -23,7 +23,7 @@
     <style name="Theme.FeatureAppmain" parent="Theme.Material3.DayNight">
         <item name="android:colorBackground">@color/light_blue_600</item>
         <item name="android:color">#170629</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">8dp</item>
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.Button" parent="Theme.Material3.DayNight">

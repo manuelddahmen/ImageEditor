@@ -42,17 +42,17 @@
         </LinearLayout>
     -->
     <LinearLayout
-        android:layout_marginTop="5dp"
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="42dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/takePhotoButton"
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:autofillHints="@string/capturePhoto"
             android:contentDescription="@string/capturePhoto"
             android:src="@drawable/apn"
@@ -64,7 +64,7 @@
             android:id="@+id/choosePhotoButton"
             android:background="@color/light_blue_A200"
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
             android:src="@drawable/folder"
@@ -76,7 +76,7 @@
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:text="@string/save" />
 
         <Button
@@ -84,7 +84,7 @@
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:text="@string/share" />
     </LinearLayout>
 
@@ -92,7 +92,7 @@
     <LinearLayout
         android:id="@+id/selectButtonsLayout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="42dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/currentImageView"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:text="@string/draw_activity" />
 
         <Button
@@ -118,9 +118,9 @@
             android:id="@+id/unselect_rect"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="64dp"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:background="@color/light_blue_400"
-            android:height="48dp"
+            android:height="42dp"
             android:onClick="unselectA"
             android:text="@string/unselect" />
 
@@ -130,7 +130,7 @@
             android:background="@color/light_blue_400"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:height="48dp"
+            android:height="42dp"
             android:text="@string/copy" />
 
         <Button
@@ -138,7 +138,7 @@
             style="@style/Theme.FeatureAppmain"
             android:background="@color/light_blue_400"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:text="@string/paste" />
     </LinearLayout>
 
@@ -177,7 +177,7 @@
             style="@style/Theme.FeatureAppmain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:height="48dp"
+            android:height="42dp"
             android:text="@string/add_text"
             android:background="@color/light_blue_A400"
             app:layout_constraintEnd_toStartOf="@id/buttonDraw"
@@ -207,7 +207,7 @@
 
         <Button
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:background="@color/light_blue_A400"
             android:text="@string/choose_shader_like"
             app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
@@ -233,23 +233,23 @@
         android:id="@+id/editMaximiumResolution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="48dp"
+        android:height="42dp"
         android:autofillHints="@string/maximum_resolution"
         android:ems="10"
         android:hint="@string/maximum_resolution"
         android:inputType="numberDecimal"
-        android:minHeight="48dp"
+        android:minHeight="42dp"
         android:text="@string/maxRes_1200"
         android:tooltipText="Maximum resolution"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
-        tools:layout_editor_absoluteX="48dp" />
+        tools:layout_editor_absoluteX="42dp" />
     <!--
         <CheckBox
                 android:id="@+id/betaVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
-                android:minHeight="48dp"
+                android:minHeight="42dp"
                 android:text="@string/beta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
