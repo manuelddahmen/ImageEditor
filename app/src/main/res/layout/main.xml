@@ -48,13 +48,13 @@
 
         <Button
             android:id="@+id/choosePhotoButton"
-            android:background="@color/light_blue_A200"
             style="@style/Theme.FeatureAppmain"
             android:layout_height="42dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
             android:src="@drawable/folder"
             android:text="@string/choosePhoto"
+            android:background="@color/light_blue_A200"
             android:layout_width="wrap_content" />
 
         <Button
@@ -96,11 +96,9 @@
         <Button
             android:id="@+id/unselect_rect"
             style="@style/Theme.FeatureAppmain"
-            android:layout_width="64dp"
-            android:layout_height="42dp"
             android:background="@color/light_blue_400"
-            android:height="42dp"
-            android:onClick="unselectA"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
             android:text="@string/unselect" />
 
 
