@@ -430,7 +430,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 Intent intentDraw = new Intent(Intent.ACTION_EDIT);
                 intentDraw.setDataAndType(uri, "image/jpeg");
                 intentDraw.putExtra("currentFile", currentFile);
-                intentDraw.putExtra("maxRes", maxRes);
+                intentDraw.putExtra("maxRes", getMaxRes());
                 intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 startActivity(intentDraw);
