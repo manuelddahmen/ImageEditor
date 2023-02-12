@@ -178,10 +178,8 @@
     <string name="draw2">Draw</string>
     <string name="name">Name</string>
     <string name="expression">expression</string>
-    <string name="expression">expression</string>
     <string name="write_formula">Write formula</string>
     <string name="buttonCodeBefore">Add code before</string>
     <string name="title_activity_toolbar">toolbar</string>
-    <string name="hello_world">Hello Round World!</string>
     <string name="hello_world">Hello Round World!</string>
 </resources>
