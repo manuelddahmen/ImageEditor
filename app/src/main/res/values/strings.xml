@@ -41,9 +41,9 @@
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
     <string name="andex_file_selection_title">Movie</string>
-    <string name="browser_title_background_color" translatable="false">#000000</string>
-    <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
-    <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
+    <string name="browser_title_background_color">#000000</string>
+    <string name="browser_title_foreground_color">#FFFFFF</string>
+    <string name="browser_list_background_color">#AAAAAA</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
     </string>
@@ -87,7 +87,7 @@
     <string name="back_without_saving">Back without saving</string>
     <string name="tools">Tools</string>
     <string name="draw">Draw</string>
-    <string name="draw_color" />
+    <string name="draw_color">Draw color</string>
     <string name="select_rectangle">Select</string>
     <string name="draw_activity">Draw</string>
     <string name="unselect">Zoom -</string>
@@ -100,7 +100,7 @@
     <string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
     <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
     <string name="apply">Apply</string>
-    <string name="add_text">Add Text</string>
+    <string name="add_text">Text</string>
     <string name="draw_button_text">Draw</string>
     <string name="back_button_text_activity">Back</string>
     <string name="grid_text_00">00</string>
@@ -114,7 +114,7 @@
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
-    <string name="commentEffect" translatable="false">!!</string>
+    <string name="commentEffect">!!</string>
     <string name="primary_pencil_color">Primary pencil color</string>
     <string name="copy">Copy</string>
     <string name="paste">Paste</string>
@@ -160,7 +160,7 @@
     <string name="function_string">Function String</string>
     <string name="back2">Back</string>
     <string name="name">name</string>
-    <string name="expression">exoression</string>
+    <string name="expression">expression</string>
     <string name="write_formula">Write formula</string>
     <string name="buttonCodeBefore">Add code before</string>
     <string name="buttonCodeAfter">Add code after</string>
@@ -173,12 +173,13 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
     <string name="preview_of_image">Preview of image</string>
     <string name="application_of_formulas">Application of formulas</string>
     <string name="view">View</string>
     <string name="draw2">Draw</string>
+    <string name="hello_world">Hello Round World!</string>
+    <string name="hello_world">Hello world</string>
 
 </resources>

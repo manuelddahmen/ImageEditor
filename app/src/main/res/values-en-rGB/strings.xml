@@ -94,7 +94,7 @@
     <string name="back_without_saving">Back without saving</string>
     <string name="tools">Tools</string>
     <string name="draw">Draw</string>
-    <string name="draw_color" />
+    <string name="draw_color">Draw color</string>
     <string name="select_rectangle">Select</string>
     <string name="draw_activity">Draw</string>
     <string name="unselect">Zoom -</string>
@@ -108,7 +108,7 @@
     <string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
     <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
     <string name="apply">Apply</string>
-    <string name="add_text">Add Text</string>
+    <string name="add_text">Text</string>
     <string name="draw_button_text">Draw</string>
     <string name="back_button_text_activity">Back</string>
     <string name="grid_text_00">00</string>
@@ -176,4 +176,10 @@
     <string name="application_of_formulas">Application of formulas</string>
     <string name="view">View</string>
     <string name="draw2">Draw</string>
+    <string name="name">Name</string>
+    <string name="expression">Expression</string>
+    <string name="write_formula">Write formula</string>
+    <string name="buttonCodeBefore">Add ccde before</string>
+    <string name="title_activity_toolbar">toolbar</string>
+    <string name="hello_world">Hello world</string>
 </resources>

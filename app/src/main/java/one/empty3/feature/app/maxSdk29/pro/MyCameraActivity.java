@@ -525,20 +525,6 @@ public class MyCameraActivity extends AppCompatActivity {
             }
         });
 
-        View select = findViewById(R.id.selectRectangle);
-        select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentFileZoomedBitmap != null) {
-                    imageView.setImageBitmap(currentFileZoomedBitmap);
-                    if (rectfs.size() > 0) {
-                        RectF rectF = rectfs.get(rectfs.size() - 1);
-                        drawPointA = new Point((int) rectF.left, (int) rectF.top);
-                        drawPointB = new Point((int) rectF.right, (int) rectF.bottom);
-                    }
-                }
-            }
-        });
         View addText = findViewById(R.id.buttonAddText);
         addText.setOnClickListener(new View.OnClickListener() {
             @Override

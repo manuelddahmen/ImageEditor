@@ -19,7 +19,6 @@
   -->
 
 <resources>
-    <string name="hello_world">Hello Round World!</string>
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
     <string name="preview_of_image">Preview of image</string>

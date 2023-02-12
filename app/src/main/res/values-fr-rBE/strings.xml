@@ -93,7 +93,7 @@
     <string name="back_without_saving">Retour sans sauvegarger</string>
     <string name="tools">Outils</string>
     <string name="draw">Dessiner</string>
-    <string name="draw_color" />
+    <string name="draw_color">Draw color</string>
     <string name="select_rectangle">Selectionner</string>
     <string name="draw_activity">Dessiner</string>
     <string name="unselect">Zoom-</string>
@@ -174,4 +174,10 @@
     <string name="application_of_formulas">Application of formulas</string>
     <string name="view">View</string>
     <string name="draw2">Draw</string>
+    <string name="hello_world">Hello Round World!</string>
+    <string name="name">Name</string>
+    <string name="expression">expression</string>
+    <string name="write_formula">Write formula</string>
+    <string name="buttonCodeBefore">Add code before</string>
+    <string name="title_activity_toolbar">toolbar</string>
 </resources>
