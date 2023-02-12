@@ -188,7 +188,8 @@ public class GraphicsActivityView extends AppCompatActivity {
                     for (int c = 0; c < 4; c++) {
                         rgba[c] = algebricTree[c + 3].eval();
                     }
-                    current.setValues((int) x2, (int) y2, rgba[0], rgba[1], rgba[2]);
+                    current.setValues((int) Math.round(x2), (int) Math.round(y2),
+                            rgba[0], rgba[1], rgba[2]);
 
                 } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
                     //printValues();
