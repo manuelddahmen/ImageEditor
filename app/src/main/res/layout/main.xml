@@ -143,7 +143,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/About"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +154,7 @@
             android:id="@+id/buttonAddText"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/add_text"
             android:background="@color/light_blue_A400"
             app:layout_constraintEnd_toStartOf="@id/buttonDraw"
@@ -166,7 +166,7 @@
             style="@style/Theme.FeatureAppmain"
             android:layout_width="wrap_content"
             android:background="@color/light_blue_A400"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/draw_button_text"
             app:layout_constraintStart_toEndOf="@id/buttonAddText"
             app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
@@ -175,7 +175,7 @@
         <Button
             android:id="@+id/effectsButtonNew"
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:background="@color/light_blue_A400"
             android:text="@string/choose_effects"
             app:layout_constraintStart_toEndOf="@id/buttonDraw"
@@ -184,7 +184,7 @@
 
         <Button
             style="@style/Theme.FeatureAppmain"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:background="@color/light_blue_A400"
             android:text="@string/choose_shader_like"
             app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
