@@ -52,19 +52,28 @@ public class ImageIO {
     }
 
     public static boolean write(BufferedImage imageOut, String jpg, File out) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(out);
-        imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
-        fileOutputStream.close();
-        return true;
+        if (!out.exists()) {
+            FileOutputStream fileOutputStream = new FileOutputStream(out);
+            imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+            fileOutputStream.close();
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 
     public static boolean write(Bitmap image, String jpg, File out) {
         FileOutputStream fileOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream(out);
-            image.compress(Bitmap.CompressFormat.JPEG, 10, fileOutputStream);
-            return true;
+            if (!out.exists()) {
+                fileOutputStream = new FileOutputStream(out);
+                image.compress(Bitmap.CompressFormat.JPEG, 10, fileOutputStream);
+                return true;
+            } else {
+                return false;
+            }
         } catch (FileNotFoundException e) {
             System.out.println("ImageIO write");
             e.printStackTrace();

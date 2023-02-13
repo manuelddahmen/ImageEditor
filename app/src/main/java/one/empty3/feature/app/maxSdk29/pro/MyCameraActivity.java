@@ -937,11 +937,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 try {
                     finalBitmap = BitmapFactory.decodeStream(new FileInputStream(currentFile));
                     File file = new File(myDir, fname);
-                    if (file.exists()) file.delete();
-                    FileOutputStream out = new FileOutputStream(file);
-                    finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                    out.flush();
-                    out.close();
+                    ImageIO.write(new BufferedImage(finalBitmap), "", file);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (Exception e) {

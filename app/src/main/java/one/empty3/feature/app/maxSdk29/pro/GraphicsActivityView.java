@@ -35,7 +35,9 @@ import java.util.HashMap;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.apps.tree.altree.*;
+import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
+import one.empty3.apps.tree.altree.AlgebricTree;
+import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
 public class GraphicsActivityView extends AppCompatActivity {
@@ -163,8 +165,8 @@ public class GraphicsActivityView extends AppCompatActivity {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 try {
+                    double[] v = current.getValues(x, y);
                     for (int j = 0; j < algebricTree.length; j++) {
-                        double[] v = current.getValues(x, y);
                         algebricTree[j].setParameter("r", v[0]);
                         algebricTree[j].setParameter("g", v[1]);
                         algebricTree[j].setParameter("b", v[2]);
@@ -188,8 +190,12 @@ public class GraphicsActivityView extends AppCompatActivity {
                     for (int c = 0; c < 4; c++) {
                         rgba[c] = algebricTree[c + 3].eval();
                     }
+                    double[] finalColors = new double[3];
+                    for (int i = 0; i < 3; i++) {
+                        finalColors[i] = v[i] * rgba[3] + rgba[i] * (1 - rgba[3]);
+                    }
                     current.setValues((int) Math.round(x2), (int) Math.round(y2),
-                            rgba[0], rgba[1], rgba[2]);
+                            finalColors[0], finalColors[1], finalColors[2]);
 
                 } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
                     //printValues();
