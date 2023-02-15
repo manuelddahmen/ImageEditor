@@ -146,7 +146,8 @@ public class GraphicsActivity extends AppCompatActivity {
                 textViews[i].setText(savedInstanceState.getString(cord));
             }
         }
-        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null)
+            super.onRestoreInstanceState(savedInstanceState);
     }
 
     protected void saveInstanceState(@NonNull Bundle outState) {

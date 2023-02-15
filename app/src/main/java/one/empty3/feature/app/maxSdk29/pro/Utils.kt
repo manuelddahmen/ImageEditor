@@ -27,6 +27,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Parcel
 import android.util.Log
 import android.widget.ImageView
 import javaAnd.awt.image.BufferedImage
@@ -38,9 +39,36 @@ import java.util.*
 
 public class Utils() {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
-
+    val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
+    val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
 
+/*
+    fun getSavedApplicationData(activity: EmptyActivity) {
+        //val file = File(appDir + "/config.txt")
+        val bundle = Parcel.obtain()
+        var i = 0
+        for (cord in cords) {
+            val any = bundle.getObject(cord)
+            if (any is String) {
+                val str = any as String
+                cordsValues[i] = str
+            }
+            i = i + 1
+        }
+    }
+
+    fun saveApplicationData(activity: Activity, cords: StringArray) {
+        //val file = File(appDir + "/config.txt")
+        val bundle = ResourceBundle.getBundle("config")
+        var i = 0
+        for (cord in cords) {
+            //if (cord != null)
+            //    bundle.keySet().add(cord, cords[i])
+            //i = i + 1
+        }
+    }
+*/
     /***
      * Write copy of original file in data folder
      * @param bitmap
