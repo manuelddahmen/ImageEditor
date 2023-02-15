@@ -204,10 +204,9 @@ public class Utils() {
     public fun putExtra(calculatorIntent: Intent, formulas: Array<String>, cord: String) {
         var j = 0
         for (s in cords) {
+            calculatorIntent.putExtra(s, formulas[j])
             if (s == cord) {
                 calculatorIntent.putExtra("variable", cord)
-            } else {
-                calculatorIntent.putExtra(s, formulas[j])
             }
             j++
         }

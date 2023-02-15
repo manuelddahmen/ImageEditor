@@ -74,7 +74,7 @@ public class GraphicsActivity extends AppCompatActivity {
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
         if (getIntent().getExtras() == null || getIntent().getExtras().get("x") == null) {
-            loadInstanceState(savedInstanceState);
+            //loadInstanceState(savedInstanceState);
         }
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
@@ -124,12 +124,11 @@ public class GraphicsActivity extends AppCompatActivity {
         int j = 0;
         for (String s : cords) {
 
-            if (!(s.equals(cord))) {
-                calculatorIntent.putExtra(s, textViews[j].getText().toString());
-            } else {
+            calculatorIntent.putExtra(s, textViews[j].getText().toString());
+            if (s.equals(cord)) {
                 calculatorIntent.putExtra("variable", cord);
+                j++;
             }
-            j++;
         }
     }
 
