@@ -392,7 +392,6 @@ public class MyCameraActivity extends AppCompatActivity {
                     //send an ACTION_CREATE_DOCUMENT intent to the system. It will open a dialog where the user can choose a location and a filename
                     intentSave.addCategory(Intent.CATEGORY_OPENABLE);
                     intentSave.putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".jpg");
-                    //not needed, but maybe usefull
                     intentSave.setDataAndType(photoURI, "image/jpeg");
                     startActivityForResult(intentSave, REQUEST_CREATE_DOCUMENT_SAVE_IMAGE);
 
@@ -1014,22 +1013,26 @@ public class MyCameraActivity extends AppCompatActivity {
             try {
                 Uri uri = data.getData();
 
-                FileInputStream inputStream = new FileInputStream(currentFile);
+                if (!currentFile.exists()) {
+
+                    FileInputStream inputStream = new FileInputStream(currentFile);
 
 
-                int byteRead = -1;
+                    int byteRead = -1;
 
 
-                OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
+                    OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
 
-                while ((byteRead = inputStream.read()) != -1) {
-                    output.write(byteRead);
+                    while ((byteRead = inputStream.read()) != -1) {
+                        output.write(byteRead);
+                    }
+
+                    output.flush();
+                    output.close();
+
+                    inputStream.close();
+
                 }
-
-                output.flush();
-                output.close();
-
-                inputStream.close();
 
             } catch (IOException e) {
 

@@ -27,19 +27,48 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class ParcelableAppData implements Parcelable {
+    private final String filename;
     private String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    private String[] cordsValues = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private Intent intent;
-
-    public ParcelableAppData() {
-        super();
-    }
+    private int maxRes = 200;
 
     public void setIntent(Intent intent) {
         this.intent = intent;
     }
 
+    public void setMaxRes(int maxRes) {
+        this.maxRes = maxRes;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public Intent getIntent() {
+        return intent;
+    }
+
+    public String[] getCords() {
+        return cords;
+    }
+
+    public String[] getCordsValues() {
+        return cordsValues;
+    }
+
+    public int getMaxRes() {
+        return maxRes;
+    }
 
     protected ParcelableAppData(Parcel in) {
+        maxRes = in.readInt();
+        filename = in.readString();
+        int i = 0;
+        for (String s : cords) {
+            cordsValues[i] = in.readString();
+            i++;
+        }
     }
 
     public static final Creator<ParcelableAppData> CREATOR = new Creator<ParcelableAppData>() {
@@ -61,10 +90,14 @@ public class ParcelableAppData implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(maxRes);
+        parcel.writeString(filename);
         int j = 0;
         for (String cord : cords) {
             if (intent.getExtras() != null && intent.getStringExtra(cord) != null) {
                 parcel.writeString(intent.getStringExtra(cord));
+            } else {
+                parcel.writeString(cord);
             }
             j++;
         }
