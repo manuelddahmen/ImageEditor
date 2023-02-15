@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -72,6 +73,9 @@ public class GraphicsActivity extends AppCompatActivity {
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+        if (getIntent().getExtras() == null || getIntent().getExtras().get("x") == null) {
+            loadInstanceState(savedInstanceState);
+        }
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
@@ -84,14 +88,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
                     Intent calculatorIntent = new Intent();
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    int j = 0;
-                    for (String s : cords) {
-                        calculatorIntent.putExtra(s, textViews[j].getText().toString());
-                        if (s.equals(cord)) {
-                            calculatorIntent.putExtra("variable", cord);
-                        }
-                        j++;
-                    }
+                    putExtra(this, calculatorIntent, cord);
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
@@ -104,10 +101,7 @@ public class GraphicsActivity extends AppCompatActivity {
         buttonView.setOnClickListener(view -> {
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
-            for (int i = 0; i < cords.length; i++) {
-                TextView textView = textViews[i];
-                graphicsIntent.putExtra(cords[i], textView.getText().toString());
-            }
+            putExtra(this, graphicsIntent, null);
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
@@ -115,8 +109,10 @@ public class GraphicsActivity extends AppCompatActivity {
 
         Button back = findViewById(R.id.buttonBack);
         back.setOnClickListener(view -> {
+
             Intent mainActivity = new Intent();
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
+            putExtra(this, mainActivity, null);
             new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             startActivity(mainActivity);
@@ -124,5 +120,42 @@ public class GraphicsActivity extends AppCompatActivity {
 
     }
 
+    private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
+        int j = 0;
+        for (String s : cords) {
 
+            if (s.equals(cord)) {
+                calculatorIntent.putExtra(s, textViews[j].getText().toString());
+            } else {
+                calculatorIntent.putExtra("variable", cord);
+            }
+            j++;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveInstanceState(outState);
+    }
+
+    protected void loadInstanceState(@NonNull Bundle savedInstanceState) {
+        int i = 0;
+        for (String cord : cords) {
+            if (savedInstanceState != null && savedInstanceState.get(cord) != null) {
+                textViews[i].setText(savedInstanceState.getString(cord));
+            }
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    protected void saveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int i = 0;
+        for (String cord : cords) {
+            if (outState != null && outState.get(cord) != null) {
+                outState.putString(cord, textViews[i].getText().toString());
+            }
+        }
+    }
 }
