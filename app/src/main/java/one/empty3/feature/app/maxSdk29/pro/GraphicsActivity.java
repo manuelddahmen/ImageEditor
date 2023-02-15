@@ -80,7 +80,7 @@ public class GraphicsActivity extends AppCompatActivity {
             TextView textView = textViews[i];
             Button button = buttons[i];
             String cord = button.getText().toString().toLowerCase();
-            if (textView != null && button != null) {
+            if (textView != null) {
                 String variable = getIntent().getExtras().getString("variable");
                 if (variable != null && variable.equals(cord)) {
                     textView.setText(cord);
@@ -123,12 +123,13 @@ public class GraphicsActivity extends AppCompatActivity {
     private void putExtra(Intent calculatorIntent, String cord) {
         int j = 0;
         for (String s : cords) {
+            String s0 = cords[j];
             String s1 = textViews[j].getText().toString();
-            calculatorIntent.putExtra(s, s1);
-            if (s.equals(cord)) {
+            calculatorIntent.putExtra(s0, s1);
+            if (s0.equals(cord)) {
                 calculatorIntent.putExtra("variable", s1);
-                j++;
             }
+            j++;
         }
     }
 
