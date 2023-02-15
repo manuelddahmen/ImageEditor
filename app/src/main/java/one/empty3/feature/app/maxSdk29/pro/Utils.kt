@@ -206,7 +206,7 @@ public class Utils() {
         for (s in cords) {
             calculatorIntent.putExtra(s, formulas[j])
             if (s == cord) {
-                calculatorIntent.putExtra("variable", cord)
+                calculatorIntent.putExtra("variable", formulas[j])
             }
             j++
         }

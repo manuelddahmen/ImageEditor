@@ -81,7 +81,10 @@ public class GraphicsActivity extends AppCompatActivity {
             Button button = buttons[i];
             String cord = button.getText().toString().toLowerCase();
             if (textView != null && button != null) {
-                if (getIntent().getExtras() != null) {
+                String variable = getIntent().getExtras().getString("variable");
+                if (variable != null && variable.equals(cord)) {
+                    textView.setText(cord);
+                } else if (getIntent().getExtras() != null) {
                     textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 }
                 button.setOnClickListener(view -> {
@@ -92,11 +95,8 @@ public class GraphicsActivity extends AppCompatActivity {
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
-            } else {
-                textView.setText(cord);
             }
         }
-
         View buttonView = findViewById(R.id.buttonView);
         buttonView.setOnClickListener(view -> {
             Intent graphicsIntent = new Intent();
@@ -123,10 +123,10 @@ public class GraphicsActivity extends AppCompatActivity {
     private void putExtra(Intent calculatorIntent, String cord) {
         int j = 0;
         for (String s : cords) {
-
-            calculatorIntent.putExtra(s, textViews[j].getText().toString());
+            String s1 = textViews[j].getText().toString();
+            calculatorIntent.putExtra(s, s1);
             if (s.equals(cord)) {
-                calculatorIntent.putExtra("variable", cord);
+                calculatorIntent.putExtra("variable", s1);
                 j++;
             }
         }
