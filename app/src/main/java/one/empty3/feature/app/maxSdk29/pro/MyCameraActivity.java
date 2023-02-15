@@ -1032,6 +1032,9 @@ public class MyCameraActivity extends AppCompatActivity {
 
                     inputStream.close();
 
+                } else {
+                    Toast.makeText(getApplicationContext(), "Le fichier existe déjà", Toast.LENGTH_SHORT).show();
+                    System.out.println("Le fichier existe déjà");
                 }
 
             } catch (IOException e) {

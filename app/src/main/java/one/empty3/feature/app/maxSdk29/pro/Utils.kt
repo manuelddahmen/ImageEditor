@@ -27,7 +27,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.os.Parcel
 import android.util.Log
 import android.widget.ImageView
 import javaAnd.awt.image.BufferedImage
@@ -200,6 +199,18 @@ public class Utils() {
 //        intent.putExtra("data", currentFile)
         System.out.println("Add currentFile to parameter")
         return currentFile
+    }
+
+    public fun putExtra(calculatorIntent: Intent, formulas: Array<String>, cord: String) {
+        var j = 0
+        for (s in cords) {
+            if (s == cord) {
+                calculatorIntent.putExtra("variable", cord)
+            } else {
+                calculatorIntent.putExtra(s, formulas[j])
+            }
+            j++
+        }
     }
 
     fun getCurrentFile(intent: Intent): File? {

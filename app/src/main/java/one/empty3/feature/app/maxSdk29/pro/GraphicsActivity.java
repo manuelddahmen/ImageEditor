@@ -88,7 +88,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
                     Intent calculatorIntent = new Intent();
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    putExtra(this, calculatorIntent, cord);
+                    putExtra(calculatorIntent, cord);
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
@@ -101,7 +101,7 @@ public class GraphicsActivity extends AppCompatActivity {
         buttonView.setOnClickListener(view -> {
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
-            putExtra(this, graphicsIntent, null);
+            putExtra(graphicsIntent, null);
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
@@ -112,7 +112,7 @@ public class GraphicsActivity extends AppCompatActivity {
 
             Intent mainActivity = new Intent();
             mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
-            putExtra(this, mainActivity, null);
+            putExtra(mainActivity, null);
             new Utils().addCurrentFileToIntent(mainActivity, currentFile);
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             startActivity(mainActivity);
@@ -120,11 +120,11 @@ public class GraphicsActivity extends AppCompatActivity {
 
     }
 
-    private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
+    private void putExtra(Intent calculatorIntent, String cord) {
         int j = 0;
         for (String s : cords) {
 
-            if (s.equals(cord)) {
+            if (!(s.equals(cord))) {
                 calculatorIntent.putExtra(s, textViews[j].getText().toString());
             } else {
                 calculatorIntent.putExtra("variable", cord);

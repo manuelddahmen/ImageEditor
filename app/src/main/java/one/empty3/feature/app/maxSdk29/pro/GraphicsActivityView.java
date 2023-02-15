@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,8 +84,13 @@ public class GraphicsActivityView extends AppCompatActivity {
         stringDoubleHashMap = new HashMap<>();
 
         for (int i = 0; i < cord.length; i++) {
-            formulas[i] = getIntent().getStringExtra(cord[i]);
-            stringDoubleHashMap.put(cord[i], values[i]);
+            if (getIntent().getStringExtra(cord[i]) != null) {
+                formulas[i] = getIntent().getStringExtra(cord[i]);
+                stringDoubleHashMap.put(cord[i], values[i]);
+            } else {
+                Toast.makeText(getApplicationContext(), "paramètre null: " + cord[i],
+                        Toast.LENGTH_SHORT).show();
+            }
         }
 
 

@@ -415,6 +415,15 @@ public class AlgebraicTreeTest {
     }
 
     @Test
+    public void testSimpleVarMultVar() {
+        double x = -2.0;
+        HashMap<String, Double> vars = new HashMap<>();
+        vars.put("x", x);
+
+        testResultVariable("x*x", x * x, vars, true);
+    }
+
+    @Test
     public void testSimpleFunctionDefined() {
         double x = -2.0;
         HashMap<String, Double> vars = new HashMap<>();

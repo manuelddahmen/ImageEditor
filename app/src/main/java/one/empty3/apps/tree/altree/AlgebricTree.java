@@ -81,7 +81,7 @@ public class AlgebricTree extends Tree {
     }
 
     public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
-        root = new one.empty3.apps.tree.altree.TreeNode(formula);
+        root = new TreeNode(formula);
         stackSize = 0; // Restine sommaire//
         add(root, formula);
         return this;
