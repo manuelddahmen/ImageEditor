@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
-def code = 1860000
+def code = 1870000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
