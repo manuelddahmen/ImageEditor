@@ -180,5 +180,6 @@
     <string name="view">View</string>
     <string name="draw2">Draw</string>
     <string name="hello_world">Hello Round World!</string>
+    <string name="title_activity_main_compose_v2">MainActivityComposeV2</string>
 
 </resources>

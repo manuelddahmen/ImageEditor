@@ -57,4 +57,6 @@
 
     </style>
 
+    <style name="Theme.FeatureApp" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>

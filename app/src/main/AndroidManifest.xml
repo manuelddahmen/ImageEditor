@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -34,7 +35,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".MainActivityComposeV2"
+            android:exported="false"
+            android:label="@string/title_activity_main_compose_v2"
+            android:theme="@style/Theme.FeatureApp" />
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
@@ -152,8 +157,8 @@
             android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".LicenceUserData2"
-            android:theme="@style/Theme.FeatureAppmain"
-            android:exported="false" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
+            android:exported="false"
+            android:theme="@style/Theme.FeatureAppmain" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
             android:name=".Calculator"
             android:exported="true"
@@ -164,7 +169,6 @@
             android:exported="true"
             android:label="Draw graphics"
             android:theme="@style/Theme.FeatureAppmain" />
-
         <activity
             android:name=".GraphicsActivityView"
             android:exported="true"
