@@ -20,18 +20,24 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import one.empty3.feature.app.maxSdk29.pro.ui.theme.FeatureAppTheme
+import androidx.compose.ui.unit.dp
 
 class MainActivityComposeV2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,12 +65,29 @@ fun Greeting3(name: String) {
     )
 }
 
+@Composable
+fun ButtonWithIcon() {
+    val context = LocalContext.current
+    Button(onClick = {
+        context.startActivity(Intent(context, MyCameraActivity::class.java))
+
+    }) {
+        Image(
+            painterResource(id = R.drawable.app_icon),
+            contentDescription = "go to app",
+            modifier = Modifier.size(20.dp)
+        )
+
+        Text(text = "go to app", Modifier.padding(start = 10.dp))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3() {
     MaterialTheme {
-        Greeting3("Android")
-//        Button(text="Choisir une image sur votre périphériques")
+        ButtonWithIcon()
+        Greeting3("")
 //        Button(text="Prenez une capture")
 
     }

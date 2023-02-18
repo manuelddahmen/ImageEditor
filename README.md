@@ -44,6 +44,10 @@ Emoji support
 TextActivity works!!!
 FIX: Effect list doesn't work
 compile version33 compose-version++ material version++
+New version
+Add math function compute #9 + image manipulation #2 + theme reviewed #2 Seems OK #13
+Sets graphics view at maxRes=200 (default)(#2)
+Try to solve GraphicsView and Graphics and Calculator activities (synchronize x,y,z,r,g,b)
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -51,11 +55,12 @@ BUG: fixer des problèmes et préparer la version avec peinture et sélection de
 FIX: Image se recharge dès l'ouverture et s'enregistre à la fin (copie de travail courante)
 FIX: Bouton 2 : sélection des effets dans une liste.
 FIX BUG: Bouton save et share déplacés
-FIX BUG: Error in RecyclerView chooseEffects : multiple choices instead of one make application fail. Try to fix: should work. (2nd try)
+FIX BUG: Error in RecyclerView chooseEffects : multiple choices instead of one make application
+fail. Try to fix: should work. (2nd try)
 FIX BUG: null pointer exception (crah) at startup
 Nouvelle fonctionalité: ajouter du texte.
 BUG: l'image dans l'ImageView principale n'est plus à jour
-Add feature: click on image to put text 
+Add feature: click on image to put text
 Erreur dans le fichier Manifest
 Essayer d'optimiser plus et de mettre un fichier de désobscurcissement
 J'essaie de résoudre le problème :
@@ -96,4 +101,8 @@ TextActivity works!!!)
 Emoji support
 FIX: Effect list doesn't work
 compile version33 compose-version++ material version++
+New version
+Add math function compute #9 + image manipulation #2 + theme reviewed #2 Seems OK #13
+Sets graphics view at maxRes=200 (default)(#2)
+Try to solve GraphicsView and Graphics and Calculator activities (synchronize x,y,z,r,g,b)
 </fr-FR>

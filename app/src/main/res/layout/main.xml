@@ -145,9 +145,10 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/About"
+        app:layout_constraintBottom_toTopOf="@id/aboutParameters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/currentImageView"
+
         android:id="@+id/effectButtons">
 
         <Button
@@ -194,32 +195,39 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/About"
-        style="@style/Theme.FeatureAppmain"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/gray_400"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/about"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/effectButtons" />
-
-    <EditText
-        android:id="@+id/editMaximiumResolution"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="48dp"
-        android:autofillHints="@string/maximum_resolution"
-        android:ems="10"
-        android:hint="@string/maximum_resolution"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        android:text="@string/maxRes_1200"
-        android:tooltipText="Maximum resolution"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
-        tools:layout_editor_absoluteX="48dp" />
+        android:id="@+id/aboutParameters"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/About"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_400"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/about" />
+
+        <EditText
+            android:id="@+id/editMaximiumResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="48dp"
+            android:autofillHints="@string/maximum_resolution"
+            android:ems="10"
+            android:hint="@string/maximum_resolution"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:text="@string/maxRes_1200"
+            android:tooltipText="Maximum resolution" />
+    </LinearLayout>
     <!--
         <CheckBox
                 android:id="@+id/betaVersion"
