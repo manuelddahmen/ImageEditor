@@ -1013,29 +1013,30 @@ public class MyCameraActivity extends AppCompatActivity {
             try {
                 Uri uri = data.getData();
 
-                if (!currentFile.exists()) {
+//                if (!currentFile.exists()) {
 
-                    FileInputStream inputStream = new FileInputStream(currentFile);
-
-
-                    int byteRead = -1;
+                FileInputStream inputStream = new FileInputStream(currentFile);
 
 
-                    OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
+                int byteRead = -1;
 
-                    while ((byteRead = inputStream.read()) != -1) {
-                        output.write(byteRead);
-                    }
 
-                    output.flush();
-                    output.close();
+                OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
 
-                    inputStream.close();
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Le fichier existe déjà", Toast.LENGTH_SHORT).show();
-                    System.out.println("Le fichier existe déjà");
+                while ((byteRead = inputStream.read()) != -1) {
+                    output.write(byteRead);
                 }
+
+                output.flush();
+                output.close();
+
+                inputStream.close();
+
+//                }
+//            else {
+//                    Toast.makeText(getApplicationContext(), "Le fichier existe déjà", Toast.LENGTH_SHORT).show();
+//                    System.out.println("Le fichier existe déjà");
+//                }
 
             } catch (IOException e) {
 
