@@ -41,7 +41,7 @@
             android:layout_height="48dp"
             android:autofillHints="@string/capturePhoto"
             android:contentDescription="@string/capturePhoto"
-            android:src="@drawable/apn"
+            android:drawableStart="@drawable/apn"
             android:text="@string/capturePhoto"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content" />
@@ -52,7 +52,7 @@
             android:layout_height="48dp"
             android:autofillHints="@string/choosePhoto"
             android:contentDescription="@string/choosePhoto"
-            android:src="@drawable/folder"
+            android:drawableStart="@drawable/folder"
             android:text="@string/choosePhoto"
             android:background="@color/light_blue_A200"
             android:layout_width="wrap_content" />

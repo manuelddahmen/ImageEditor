@@ -168,6 +168,20 @@ public class MyCameraActivity extends AppCompatActivity {
         return null;
     }
 
+    public void toastButtonDisabled(View button) {
+        if (currentFile == null) {
+            String text = "Pas de fichier image choisis.<br/>" +
+                    "Choisisssez une image dans les fichiers de<br/>" +
+                    "votre appareil et puis essayer les effets, le texte,<br/>" +
+                    "le copier/coller. La fonction draw ne fonctionne pas<br/>" +
+                    "actuellement.<br/>";
+            Integer duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+            toast.show();
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -276,7 +290,7 @@ public class MyCameraActivity extends AppCompatActivity {
                         System.err.println("No file assigned");
                         System.err.println("Can't Start activity : EffectChoose");
                     }
-                }
+                } else toastButtonDisabled(v);
             }
         });
         View fromFiles = findViewById(R.id.choosePhotoButton);
@@ -325,7 +339,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
                             .show();
                 }
-            }
+            } else toastButtonDisabled(v);
         });
         View about = findViewById(R.id.About);
         about.setOnClickListener(new View.OnClickListener() {
@@ -348,7 +362,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     shareIntent.setDataAndType(photoURI, "image/jpeg");
                     shareIntent.putExtra("data", photoURI);
                     startActivity(shareIntent);
-                }
+                } else toastButtonDisabled(v);
             }
 
         });
@@ -396,7 +410,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     startActivityForResult(intentSave, REQUEST_CREATE_DOCUMENT_SAVE_IMAGE);
 
 
-                }
+                } else toastButtonDisabled(v);
 
 
             }
@@ -433,7 +447,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 startActivity(intentDraw);
-            }
+            } else toastButtonDisabled(v);
         });
         imageView.setOnClickListener(new View.OnClickListener() {
 
@@ -506,8 +520,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 }
 
 
-            } else {
-            }
+            } else toastButtonDisabled(v);
             return true;
         });
 
@@ -521,7 +534,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     imageView.setImageBitmap(read.getBitmap());
                     drawPointA = null;
                     drawPointB = null;
-                }
+                } else toastButtonDisabled(v);
             }
         });
 
