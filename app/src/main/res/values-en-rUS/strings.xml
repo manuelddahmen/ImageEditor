@@ -182,4 +182,5 @@
     <string name="buttonCodeBefore">Add code before</string>
     <string name="title_activity_toolbar">toolbar</string>
     <string name="hello_world">Hello Round World!</string>
+    <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
 </resources>

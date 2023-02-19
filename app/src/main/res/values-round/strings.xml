@@ -25,4 +25,5 @@
     <string name="application_of_formulas">Application of formulas</string>
     <string name="view">View</string>
     <string name="draw2">Draw</string>
+    <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
 </resources>
