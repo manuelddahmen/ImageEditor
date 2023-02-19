@@ -180,7 +180,10 @@
     <string name="view">View</string>
     <string name="draw2">Draw</string>
     <string name="hello_world">Hello Round World!</string>
-    <string name="title_activity_main_compose_v2">MainActivityComposeV2</string>
-    <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
+    <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
+    <string name="button_current_file_is_null"><![CDATA["Pas de fichier image choisis.<br/>" +
+                    "Choisisssez une image dans les fichiers de<br/>" +
+                    "le copier/coller. La fonction draw ne fonctionne pas<br/>" +
+                    "actuellement.<br/>"]]></string>
 
 </resources>

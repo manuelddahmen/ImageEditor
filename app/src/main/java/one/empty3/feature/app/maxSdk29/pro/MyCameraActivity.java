@@ -170,11 +170,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
     public void toastButtonDisabled(View button) {
         if (currentFile == null) {
-            String text = "Pas de fichier image choisis.<br/>" +
-                    "Choisisssez une image dans les fichiers de<br/>" +
-                    getString(R.string.button_current_file_is_null) +
-                    "le copier/coller. La fonction draw ne fonctionne pas<br/>" +
-                    "actuellement.<br/>";
+            String text = getString(R.string.button_current_file_is_null);
             Integer duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(getApplicationContext(), text, duration);

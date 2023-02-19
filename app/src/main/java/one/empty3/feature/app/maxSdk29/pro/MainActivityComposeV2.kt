@@ -66,6 +66,15 @@ fun Greeting3(name: String) {
 }
 
 @Composable
+fun Greeting4(name: String) {
+    Text(
+        text = "Ici vous pouvez choisir une de vos photos et  <br/>" +
+                "la transformer soit avec des filtres d'effets artistiques ou fantaisistes<br/>" +
+                "pour transforrer votre photo, alors choisir un effet réaliste.. \n"
+    )
+}
+
+@Composable
 fun ButtonWithIcon() {
     val context = LocalContext.current
     Button(onClick = {
@@ -82,12 +91,49 @@ fun ButtonWithIcon() {
     }
 }
 
+@Composable
+fun ButtonWithIcon2() {
+    val context = LocalContext.current
+    Button(onClick = {
+        context.startActivity(Intent(context, MyCameraActivity::class.java))
+
+    }) {
+        Image(
+            painterResource(id = R.drawable.app_icon),
+            contentDescription = "add a photo",
+            modifier = Modifier.size(20.dp)
+        )
+
+        Text(text = "add a photo", Modifier.padding(start = 10.dp))
+    }
+}
+
+@Composable
+fun ButtonWithIcon3() {
+    val context = LocalContext.current
+    Button(onClick = {
+        context.startActivity(Intent(context, MyCameraActivity::class.java))
+
+    }) {
+        Image(
+            painterResource(id = R.drawable.app_icon),
+            contentDescription = "add a photo",
+            modifier = Modifier.size(20.dp)
+        )
+
+        Text(text = "add a photo", Modifier.padding(start = 10.dp))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview3() {
     MaterialTheme {
         ButtonWithIcon()
         Greeting3("")
+        Greeting4("")
+        ButtonWithIcon2()
+        ButtonWithIcon3()
 //        Button(text="Prenez une capture")
 
     }
