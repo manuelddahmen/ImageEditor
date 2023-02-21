@@ -5,10 +5,11 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
-def code = 1890000
+def code = 1910000
 
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
+
 
     bundle {
         storeArchive {
@@ -51,6 +52,9 @@ android {
     }
 
     composeOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
         kotlinCompilerExtensionVersion = "1.4.0"
     }
 
@@ -100,7 +104,7 @@ android {
                 versionCode code
                 versionName "1.0"
                 kotlin {
-                    version '1.8.0'
+                    version "1.6.0"
                 }
 
                 signingConfig signingConfigs.release
@@ -126,7 +130,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     //implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation 'androidx.compose.compiler:compiler:1.4.0'
+    implementation 'androidx.compose.compiler:compiler:1.4.2'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     //implementation "com.android.support:recyclerview-v7:28.0.0"
@@ -147,7 +151,7 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:4.7'
     // Instrumented testing
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test:core:1.4.0"
+    androidTestImplementation "androidx.test:core:1.5.0"
     androidTestImplementation "androidx.test:rules:1.5.0"
     androidTestImplementation "androidx.test:runner:1.5.2"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"

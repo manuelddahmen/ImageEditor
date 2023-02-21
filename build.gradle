@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        java_version = JavaVersion.VERSION_17
+        java_version = JavaVersion.VERSION_1_8
         kotlinVersion = "1.6.0"
         compose_version = '1.2.0'
     }
