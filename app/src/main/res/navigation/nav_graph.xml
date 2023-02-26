@@ -36,26 +36,32 @@
 
     </activity>
     <activity
+        app:action="@+id/open_effects"
         android:id="@+id/chooseEffectsActivity2_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.ChooseEffectsActivity2"
         android:label="ChooseEffectsActivity2" />
     <activity
+        app:action="@+id/open_text"
         android:id="@+id/textActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.TextActivity"
         android:label="TextActivity" />
     <activity
+        app:action="@+id/graphicsActivity_nav"
         android:id="@+id/graphicsActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivity"
         android:label="GraphicsActivity" />
     <activity
+        app:action="@+id/open_licence_info"
         android:id="@+id/licenceUserData2_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.LicenceUserData2"
         android:label="LicenceUserData2" />
     <activity
+        app:action="@+id/open_graphics_view"
         android:id="@+id/graphicsActivityView_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivityView"
         android:label="GraphicsActivityView" />
     <activity
+        app:action="@+id/open_caculator"
         android:id="@+id/calculator_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.Calculator"
         android:label="Calculator" />
@@ -72,6 +78,9 @@
     <action
         android:id="@+id/open_graphics_view"
         app:destination="@id/graphicsActivityView_nav" />
+    <action
+        android:id="@+id/open_calculator"
+        app:destination="@id/calculator_nav" />
     <action
         android:id="@+id/open_licence_info"
         app:destination="@id/licenceUserData2_nav" />

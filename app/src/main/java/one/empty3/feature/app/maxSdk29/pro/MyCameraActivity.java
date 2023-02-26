@@ -191,7 +191,7 @@ public class MyCameraActivity extends AppCompatActivity {
                         fragmentNavigation)
                 .commit();
 */
-        
+
 
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));

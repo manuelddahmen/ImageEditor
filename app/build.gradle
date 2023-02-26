@@ -10,7 +10,19 @@ def code = 1930000
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
 
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
+        exclude("META-INF/LICENSE")
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/license.txt")
+        exclude("META-INF/NOTICE")
+        exclude("META-INF/NOTICE.txt")
+        exclude("META-INF/notice.txt")
+        exclude("META-INF/ASL2.0")
+        exclude("META-INF/*.kotlin_module")
+    }
 
+    
     bundle {
         storeArchive {
             enable = false
@@ -208,6 +220,7 @@ dependencies {
 
     def nav_version2 = "2.5.3"
     implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version2"
+
 }
 
 publishing {
