@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2023.
   ~
   ~
@@ -20,29 +19,60 @@
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/FirstFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_nav"
+    app:startDestination="@+id/myCameraActivity_nav">
+    <activity
+        android:id="@+id/myCameraActivity_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
+        android:label="MyCameraActivity">
 
-    <fragment
-            android:id="@+id/FirstFragment"
-            android:name="one.empty3.feature.app.FirstFragment"
-            android:label="@string/first_fragment_label"
-            tools:layout="@layout/fragment_first">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:action="ACTION_EDIT"
+            app:mimeType="image/jpg"
+            app:uri="https://empty3.one/dl/jpg" />
 
-        <action
-                android:id="@+id/action_FirstFragment_to_SecondFragment"
-                app:destination="@id/SecondFragment"/>
-    </fragment>
-    <fragment
-            android:id="@+id/SecondFragment"
-            android:name="one.empty3.feature.app.maxSdk29.pro.SecondFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
+    </activity>
+    <activity
+        android:id="@+id/chooseEffectsActivity2_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.ChooseEffectsActivity2"
+        android:label="ChooseEffectsActivity2" />
+    <activity
+        android:id="@+id/textActivity_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.TextActivity"
+        android:label="TextActivity" />
+    <activity
+        android:id="@+id/graphicsActivity_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivity"
+        android:label="GraphicsActivity" />
+    <activity
+        android:id="@+id/licenceUserData2_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.LicenceUserData2"
+        android:label="LicenceUserData2" />
+    <activity
+        android:id="@+id/graphicsActivityView_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivityView"
+        android:label="GraphicsActivityView" />
+    <activity
+        android:id="@+id/calculator_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.Calculator"
+        android:label="Calculator" />
 
-        <action
-                android:id="@+id/action_SecondFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment"/>
-    </fragment>
+    <action
+        android:id="@+id/open_effects"
+        app:destination="@id/chooseEffectsActivity2_nav" />
+    <action
+        android:id="@+id/open_text"
+        app:destination="@id/textActivity_nav" />
+    <action
+        android:id="@+id/open_graphics"
+        app:destination="@id/graphicsActivity_nav" />
+    <action
+        android:id="@+id/open_graphics_view"
+        app:destination="@id/graphicsActivityView_nav" />
+    <action
+        android:id="@+id/open_licence_info"
+        app:destination="@id/licenceUserData2_nav" />
 </navigation>
