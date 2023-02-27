@@ -548,6 +548,14 @@ public class MyCameraActivity extends AppCompatActivity {
             loadImageState(isWorkingResolutionOriginal());
         }
 
+/*
+        NavController navController = Navigation.findNavController(this, R.id.myCameraActivity_nav);
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        NavigationUI.setupWithNavController((androidx.appcompat.widget.Toolbar) toolbar,
+                (NavController) navController, (AppBarConfiguration) appBarConfiguration);
+*/
     }
 
 
@@ -1215,6 +1223,7 @@ public class MyCameraActivity extends AppCompatActivity {
             Intent textIntent = new Intent(Intent.ACTION_VIEW);
             textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
             textIntent.setClass(getApplicationContext(), TextActivity.class);
+            textIntent.putExtra("currentFile", currentFile);
             if (rectfs.size() > 0)
                 textIntent.putExtra("rect", rectfs.size() > 0 ? rectfs.get(rectfs.size() - 1) : null);
             else

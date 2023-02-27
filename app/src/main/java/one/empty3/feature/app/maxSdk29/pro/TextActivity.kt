@@ -67,15 +67,13 @@ class TextActivity() : AppCompatActivity(), Parcelable {
 
 
         val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
-        if (intent != null && intent.data != null) run {
-            val currentImageUri: Uri = intent.data!!
-            this.currentImage = BitmapFactory.decodeFile(currentImageUri.toFile().toString())
-            this.currentFile = currentImageUri.toFile()
 
+        val currentFile1 = Utils().getCurrentFile(intent)
+        if (currentFile1 != null) {
+            currentFile = currentFile1
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
             imageView.setImageBitmap(currentImage)
         }
-
-
         val backButton = findViewById<Button>(R.id.buttonTextBack)
 
         backButton.setOnClickListener {
@@ -86,6 +84,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
                 //val file = Utils().writePhoto(this, currentImage, name)
 
                 textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
+                textIntent.putExtra("currentFile", this.currentFile)
                 textIntent.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
@@ -159,7 +158,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
                 ), INT_WRITE_STORAGE
             )
         }
-
+/*
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -170,19 +169,19 @@ class TextActivity() : AppCompatActivity(), Parcelable {
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-            var textString: String =
-                (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-            val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewOnImage, textString)
-            if (drawTextToBitmap != null) {
-                currentFile = drawTextToBitmap
-                currentImage = BitmapFactory.decodeFile(currentFile.toString())
-                val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
-                imageView.setImageBitmap(this.currentImage)
-                System.out.println("ImageView Text UPDATED")
-            }
-            return true
+  */
+        val textString: String =
+            (findViewById<TextView>(R.id.textViewOnImage).text.toString())
+        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewOnImage, textString)
+        if (drawTextToBitmap != null) {
+            currentFile = drawTextToBitmap
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+            val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
+            imageView.setImageBitmap(this.currentImage)
+            System.out.println("ImageView Text UPDATED")
         }
-        return false
+        return true
+        //}
     }
 
 

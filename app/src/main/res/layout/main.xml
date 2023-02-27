@@ -25,8 +25,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <!--
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
 
-
+            app:layout_constraintBottom_toTopOf="@id/linearChooseButtons" />-->
     <!-- <androidx.fragment.app.FragmentContainerView
          android:id="@+id/nav_host_fragment"
          android:name="androidx.navigation.fragment.NavHostFragment"
@@ -40,7 +46,8 @@
     <LinearLayout
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:orientation="horizontal">
@@ -88,7 +95,7 @@
     <LinearLayout
         android:id="@+id/selectButtonsLayout"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/currentImageView"
         app:layout_constraintStart_toStartOf="parent"
@@ -219,7 +226,7 @@
             android:id="@+id/About"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:background="@color/gray_400"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
