@@ -2,7 +2,7 @@ buildscript {
     ext {
         java_version = JavaVersion.VERSION_11
         kotlinVersion = "1.6.21"
-        compose_version = '1.2.0'
+        compose_version = '1.2.0-rc02'
         kotlin_version = '1.6.21'
     }
     repositories {
@@ -13,6 +13,11 @@ buildscript {
 
     }
     dependencies {
+        // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-compiler
+        classpath 'org.jetbrains.kotlin:kotlin-compiler:1.6.21'
+
+        classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10'
+
         classpath 'com.google.gms:google-services:4.3.15'
         classpath 'com.android.tools.build:gradle:7.4.1'
         //classpath "androidx.databinding:databinding-ktx:7.2.2"
@@ -26,7 +31,6 @@ buildscript {
 
     }
 }
-
 allprojects {
     repositories {
         google()

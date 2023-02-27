@@ -22,17 +22,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_nav"
-    app:startDestination="@+id/myCameraActivity_nav">
+    app:startDestination="@id/myCameraActivity_nav">
     <activity
         android:id="@+id/myCameraActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
-        android:label="MyCameraActivity">
+        android:label="MyCameraActivity"><!--
 
         <deepLink
             android:id="@+id/deepLink"
             app:action="ACTION_EDIT"
             app:mimeType="image/jpg"
-            app:uri="https://empty3.one/dl/jpg" />
+            app:uri="https://empty3.one/dl/jpg" />-->
 
     </activity>
     <activity

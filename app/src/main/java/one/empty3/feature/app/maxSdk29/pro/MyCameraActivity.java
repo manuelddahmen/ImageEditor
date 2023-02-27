@@ -59,9 +59,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-import androidx.multidex.BuildConfig;
 
-import org.jetbrains.annotations.NotNull;
+import com.google.firebase.installations.interop.BuildConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -847,7 +846,7 @@ public class MyCameraActivity extends AppCompatActivity {
      * @param name
      * @return
      */
-    public File writePhoto(@NotNull Bitmap bitmap, String name) {
+    public File writePhoto(@NonNull Bitmap bitmap, String name) {
 
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
