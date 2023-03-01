@@ -6,8 +6,17 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
 
-def code = 1960000
-
+def code = 1970000
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of("11"))
+    }
+}
 android {
     namespace 'one.empty3.feature.app.maxSdk29.pro'
 
@@ -66,9 +75,13 @@ android {
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
     }
-
+// With compileOptions the warning disappears
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-rc02"
+        kotlinCompilerExtensionVersion = "1.4.0"
     }
 
     kotlinOptions {
