@@ -23,7 +23,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="?android:attr/buttonBarButtonStyle">
+    android:theme="@style/Theme.FeatureAppmain">
 
 
     <!-- <androidx.fragment.app.FragmentContainerView
@@ -44,7 +44,7 @@
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
         android:layout_weight="0.7"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+        android:theme="@style/Theme.FeatureAppmain" />
 
     <Button
         android:layout_width="match_parent"
@@ -52,5 +52,5 @@
         android:id="@+id/applyEffects"
         android:text="@string/apply_effects"
         android:layout_weight="0.3"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+        android:theme="@style/Theme.FeatureAppmain" />
 </LinearLayout>

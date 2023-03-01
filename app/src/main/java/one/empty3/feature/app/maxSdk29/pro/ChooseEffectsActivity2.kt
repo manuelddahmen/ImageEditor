@@ -69,6 +69,9 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
         effectApply = findViewById(R.id.applyEffects)
         init(savedInstanceState)
         mediaFile = intent.extras?.get("data") as File
+        if (mediaFile == null) {
+            mediaFile = intent.extras?.get("currentFile") as File
+        }
         maxRes = intent.extras?.get("maxRes") as Int
     }
 
@@ -330,6 +333,8 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
                 }
                 val intent2 = Intent()
                 intent2.setDataAndType(Uri.fromFile(currentProcessFile), "image/jpg")
+                Utils().addCurrentFileToIntent(intent2, currentProcessFile)
+                intent2.extras?.putInt("maxRes", maxRes)
                 intent2.setClass(
                     applicationContext,
                     Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")

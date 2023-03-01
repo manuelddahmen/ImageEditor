@@ -182,15 +182,15 @@ public class MyCameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-/*
+
+        /*
         FragmentNavigation fragmentNavigation = new FragmentNavigation();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.stubNavigation,
+                .add(R.id.nav_view,
                         fragmentNavigation)
                 .commit();
 */
-
 
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));

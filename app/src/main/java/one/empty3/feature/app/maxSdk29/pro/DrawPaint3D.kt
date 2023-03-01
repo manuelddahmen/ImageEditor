@@ -22,14 +22,39 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.View.OnTouchListener
+import androidx.appcompat.app.AppCompatActivity
 
-class DrawPaint3D : Activity() {
+
+class DrawPaint3D : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paint)
 
 
     }
+
+    private val touchListenerBouton1: OnTouchListener = object : OnTouchListener {
+        override fun onTouch(v: View, event: MotionEvent): Boolean {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.setX(event.x + v.getX())
+                    v.setY(event.y + v.getY())
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    v.setX(event.x + v.getX())
+                    v.setY(event.y + v.getY())
+                }
+                MotionEvent.ACTION_UP -> {
+                    v.setX(event.x + v.getX())
+                    v.setY(event.y + v.getY())
+                }
+            }
+            return true
+        }
+    }
+
 
 }
