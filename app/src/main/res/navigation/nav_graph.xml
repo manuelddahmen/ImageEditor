@@ -26,7 +26,8 @@
     <activity
         android:id="@+id/myCameraActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
-        android:label="MyCameraActivity"><!--
+        android:label="MyCameraActivity">
+        <!--
 
         <deepLink
             android:id="@+id/deepLink"
@@ -69,6 +70,7 @@
     <action
         android:id="@+id/open_effects"
         app:destination="@id/chooseEffectsActivity2_nav" />
+
     <action
         android:id="@+id/open_text"
         app:destination="@id/textActivity_nav" />

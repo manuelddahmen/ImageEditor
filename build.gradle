@@ -1,9 +1,9 @@
 buildscript {
     ext {
         java_version = JavaVersion.VERSION_11
-        kotlinVersion = "1.6.21"
+        kotlinVersion = "1.8.0"
         compose_version = '1.2.0-rc02'
-        kotlin_version = '1.6.21'
+        kotlin_version = '1.8.0'
     }
     repositories {
         google()
@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-compiler
-        classpath 'org.jetbrains.kotlin:kotlin-compiler:1.6.21'
+        classpath 'org.jetbrains.kotlin:kotlin-compiler:1.8.0'
 
         classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10'
 
@@ -23,7 +23,7 @@ buildscript {
         //classpath "androidx.databinding:databinding-ktx:7.2.2"
         //classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2'
         // NOTE: Do not place your application dependencies here; they belong
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
         // in the individual module build.gradle files
         //classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
         // Add dependencies.
@@ -31,6 +31,7 @@ buildscript {
 
     }
 }
+
 allprojects {
     repositories {
         google()
