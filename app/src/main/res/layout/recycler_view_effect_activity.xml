@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
-        android:layout_weight="0.7"
+        android:layout_weight="0.8"
         android:theme="@style/Theme.FeatureAppmain" />
 
     <Button
@@ -51,6 +51,6 @@
         android:layout_height="32dp"
         android:id="@+id/applyEffects"
         android:text="@string/apply_effects"
-        android:layout_weight="0.3"
+        android:layout_weight="0.1"
         android:theme="@style/Theme.FeatureAppmain" />
 </LinearLayout>

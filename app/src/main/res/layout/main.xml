@@ -56,6 +56,7 @@
     <LinearLayout
         android:id="@+id/linearChooseButtons"
         android:layout_width="match_parent"
+        style="@style/Theme.FeatureAppmain"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
