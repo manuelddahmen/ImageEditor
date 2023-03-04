@@ -543,6 +543,14 @@ public class MyCameraActivity extends AppCompatActivity {
             }
         });
 
+        View openNewUI = findViewById(R.id.new_layout_app);
+
+        openNewUI.setOnClickListener(view -> {
+            Intent intent2 = new Intent();
+            intent2.setClass(getApplicationContext(), MainActivity.class);
+            startActivity(intent2);
+        });
+
 
         if (!isLoaded()) {
             loadImageState(isWorkingResolutionOriginal());

@@ -59,4 +59,13 @@
 
     <style name="Theme.FeatureApp" parent="android:Theme.Material.Light.NoActionBar" />
 
+    <style name="Theme.FeatureApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FeatureApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FeatureApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

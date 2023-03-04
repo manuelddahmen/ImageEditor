@@ -232,6 +232,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
         android:id="@+id/aboutParameters"
+        app:layout_constraintBottom_toTopOf="@id/"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -270,5 +271,13 @@
                 app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"/>
 
     -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_layout_app"
+        android:id="@+id/new_layout_app"
+        app:layout_constraintTop_toBottomOf="@id/aboutParameters"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -185,5 +185,7 @@
                     "Choisisssez une image dans les fichiers de<br/>" +
                     "le copier/coller. La fonction draw ne fonctionne pas<br/>" +
                     "actuellement.<br/>"]]></string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="new_layout_app">New App Layout</string>
 
 </resources>
