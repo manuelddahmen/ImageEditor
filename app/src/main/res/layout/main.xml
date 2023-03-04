@@ -232,7 +232,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
         android:id="@+id/aboutParameters"
-        app:layout_constraintBottom_toTopOf="@id/"
+        app:layout_constraintBottom_toTopOf="@id/new_layout_app"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
