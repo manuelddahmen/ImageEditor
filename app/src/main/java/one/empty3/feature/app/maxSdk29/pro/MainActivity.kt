@@ -85,11 +85,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.currentFragmentViews, currentActionFragment
             ).commit()
 
-        NavigationAndActionImplementation().addButtonsListeners(
+        /*NavigationAndActionImplementation().addButtonsListeners(
             this,
             applicationState,
             savedInstanceState
-        )
+        )*/
     }
 
     private fun addButtonsListeners() {

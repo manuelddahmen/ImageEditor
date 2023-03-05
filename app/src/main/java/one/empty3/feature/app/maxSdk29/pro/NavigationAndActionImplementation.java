@@ -91,8 +91,7 @@ public class NavigationAndActionImplementation {
 
         currentFile = currentBitmap = new Utils().getCurrentFile(activity.getIntent());
 
-        if (new Utils().loadImageInImageView(currentFile, imageView))
-            loaded = true;
+        if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
 
 
         thisActivity = activity;
@@ -103,137 +102,116 @@ public class NavigationAndActionImplementation {
 
         Button takePhoto = activity.findViewById(R.id.takePhotoButton);
 
-        takePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    activity.requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                }
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                activity.startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        if (takePhoto != null) {
+            takePhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        activity.requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                    }
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activity.startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
 
-            }
-
-        });
-
-/*        Button effectsButton = this.findViewById(R.id.effectsButton);
-        effectsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView = activity.findViewById(R.id.currentImageView);
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                System.err.println("Click on Effect button");
-                if (currentFile != null || currentBitmap != null) {
-                    if (currentFile == null)
-                        currentFile = currentBitmap.getAbsoluteFile();
-                    intent.setDataAndType(Uri.fromFile(currentFile),
-                            "image/jpg");
-                    intent.setClass(imageView.getContext(),
-                            ChooseEffectsActivity.class);
-                    intent.putExtra("data", currentFile);
-                    View viewById = activity.findViewById(R.id.editMaximiumResolution);
-                    intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
-                    System.err.println("Start activity : EffectChoose");
-                    startActivity(intent);
-                } else {
-                    System.err.println("No file assigned");
-                    System.err.println("Can't Start activity : EffectChoose");
                 }
 
-            }
-        });*/
+            });
+        }
+
+
         Button effectsButton2 = activity.findViewById(R.id.effectsButtonNew);
-        effectsButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentFile != null) {
-                    imageView = activity.findViewById(R.id.currentImageView);
-                    Intent intent = new Intent(Intent.ACTION_EDIT);
-                    System.err.println("Click on Effect button");
-                    if (currentFile != null || currentBitmap != null) {
-                        if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
-                        try {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
-                                        BitmapFactory.decodeStream(new FileInputStream(currentFile)),
-                                        "EffectOn");
+        if (effectsButton2 != null) {
+            effectsButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (currentFile != null) {
+                        imageView = activity.findViewById(R.id.currentImageView);
+                        Intent intent = new Intent(Intent.ACTION_EDIT);
+                        System.err.println("Click on Effect button");
+                        if (currentFile != null || currentBitmap != null) {
+                            if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
+                            try {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                    currentFile = currentBitmap = new Utils().writePhoto(thisActivity, BitmapFactory.decodeStream(new FileInputStream(currentFile)), "EffectOn");
+                                }
+                                intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+                                intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
+                                intent.putExtra("data", currentFile);
+                                View viewById = activity.findViewById(R.id.editMaximiumResolution);
+                                intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
+                                System.err.println("Start activity : EffectChoose");
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
                             }
-                            intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-                            intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
-                            intent.putExtra("data", currentFile);
-                            View viewById = activity.findViewById(R.id.editMaximiumResolution);
-                            intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
-                            System.err.println("Start activity : EffectChoose");
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
+                            activity.startActivity(intent);
+                        } else {
+                            System.err.println("No file assigned");
+                            System.err.println("Can't Start activity : EffectChoose");
                         }
-                        activity.startActivity(intent);
-                    } else {
-                        System.err.println("No file assigned");
-                        System.err.println("Can't Start activity : EffectChoose");
+                    } else toastButtonDisabled(v);
+                }
+            });
+        }
+
+        View fromFiles = activity.findViewById(R.id.choosePhotoButton);
+        if (fromFiles != null) {
+            fromFiles.setOnClickListener(v -> {
+                startCreation();
+            });
+        }
+        View copy = activity.findViewById(R.id.copy);
+        if (copy != null) {
+            copy.setOnClickListener(v -> {
+                if (clipboard != null) {
+                    clipboard.copied = true;
+                    copy.setBackgroundColor(Color.rgb(40, 255, 40));
+                    Toast.makeText(activity.getApplicationContext(), "Subimage copied", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        View paste = activity.findViewById(R.id.paste);
+
+        if (paste != null) {
+            paste.setOnClickListener(v -> {
+                clipboard = Clipboard.defaultClipboard;
+                if (currentFile != null) {
+                    if (clipboard == null && Clipboard.defaultClipboard != null)
+                        clipboard = Clipboard.defaultClipboard;
+                    if (clipboard != null && clipboard.copied && clipboard.getDestination() != null && clipboard.getSource() != null) {
+                        PixM dest = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+                        if (rectfs.size() > 0)
+                            clipboard.setDestination(rectfs.get(rectfs.size() - 1));
+                        else {
+                            return;
+                        }
+                        int x = Math.min((int) clipboard.getDestination().left, (int) clipboard.getDestination().right);
+                        int y = Math.min((int) clipboard.getDestination().bottom, (int) clipboard.getDestination().top);
+                        int w = Math.abs((int) clipboard.getDestination().right - (int) clipboard.getDestination().left);
+                        int h = Math.abs((int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
+                        dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
+                        System.err.println("Destionation coord = " + clipboard.getDestination());
+                        System.err.println("Theory Copied pixels = " + clipboard.getSource().getColumns() * clipboard.getSource().getLines());
+                        Bitmap bitmap = dest.getBitmap();
+                        currentBitmap = currentFile = new Utils().writePhoto(activity, bitmap, "copy_paste");
+                        imageView.setImageBitmap(bitmap);
+                        paste.setBackgroundColor(Color.rgb(40, 255, 40));
+                        copy.setBackgroundColor(Color.rgb(40, 255, 40));
+                        Toast.makeText(activity.getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT).show();
                     }
                 } else toastButtonDisabled(v);
-            }
-        });
-        View fromFiles = activity.findViewById(R.id.choosePhotoButton);
-
-        fromFiles.setOnClickListener(v -> {
-            startCreation();
-        });
-
-        View copy = activity.findViewById(R.id.copy);
-        copy.setOnClickListener(v -> {
-            if (clipboard != null) {
-                clipboard.copied = true;
-                copy.setBackgroundColor(Color.rgb(40, 255, 40));
-                Toast.makeText(activity.getApplicationContext(), "Subimage copied", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
-
-        View paste = activity.findViewById(R.id.paste);
-        paste.setOnClickListener(v -> {
-            clipboard = Clipboard.defaultClipboard;
-            if (currentFile != null) {
-                if (clipboard == null && Clipboard.defaultClipboard != null)
-                    clipboard = Clipboard.defaultClipboard;
-                if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
-                        && clipboard.getSource() != null) {
-                    PixM dest = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
-                    if (rectfs.size() > 0)
-                        clipboard.setDestination(rectfs.get(rectfs.size() - 1));
-                    else {
-                        return;
-                    }
-                    int x = Math.min((int) clipboard.getDestination().left, (int) clipboard.getDestination().right);
-                    int y = Math.min((int) clipboard.getDestination().bottom, (int) clipboard.getDestination().top);
-                    int w = Math.abs((int) clipboard.getDestination().right - (int) clipboard.getDestination().left);
-                    int h = Math.abs((int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
-                    dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
-                    System.err.println("Destionation coord = " + clipboard.getDestination());
-                    System.err.println("Theory Copied pixels = " + clipboard.getSource().getColumns() * clipboard.getSource().getLines());
-                    Bitmap bitmap = dest.getBitmap();
-                    currentBitmap = currentFile
-                            = new Utils().writePhoto(activity, bitmap, "copy_paste");
-                    imageView.setImageBitmap(bitmap);
-                    paste.setBackgroundColor(Color.rgb(40, 255, 40));
-                    copy.setBackgroundColor(Color.rgb(40, 255, 40));
-                    Toast.makeText(activity.getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
-                            .show();
-                }
-            } else toastButtonDisabled(v);
-        });
+            });
+        }
         View about = activity.findViewById(R.id.About);
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserData(v);
-            }
-        });
-
+        if (about != null) {
+            about.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openUserData(v);
+                }
+            });
+        }
         View shareView = activity.findViewById(R.id.share);
-        shareView.setOnClickListener(new View.OnClickListener() {
+        if (shareView != null) shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentFile != null) {
@@ -249,9 +227,9 @@ public class NavigationAndActionImplementation {
             }
 
         });
-        shareView.setEnabled(true);
+        if (shareView != null) shareView.setEnabled(true);
         View save = activity.findViewById(R.id.save);
-        save.setOnClickListener(new View.OnClickListener() {
+        if (save != null) save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentFile != null) {
@@ -305,111 +283,117 @@ public class NavigationAndActionImplementation {
         //Draw activity (pass: rectangle, image, image view size.
         View draw_activity_button = activity.findViewById(R.id.draw_activity);
         //draw_activity_button.setEnabled(false);
-        draw_activity_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawPointA != null && drawPointB != null) {
-                    Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
-                    intentDraw.setClass(getApplicationContext(), TextAndImages.class);
-                    intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
-                    intentDraw.putExtra("currentFile", currentFile);
-                    intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
-                    startActivity(intentDraw);
-                }
-            }
-        });
-        Button computePixels = activity.findViewById(R.id.activity_compute_pixels);
-        computePixels.setOnClickListener(v -> {
-            if (currentFile != null) {
-                Uri uri = Uri.fromFile(currentFile);
-                //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
-                Intent intentDraw = new Intent(Intent.ACTION_EDIT);
-                intentDraw.setDataAndType(uri, "image/jpeg");
-                intentDraw.putExtra("currentFile", currentFile);
-                intentDraw.putExtra("maxRes", new Utils().getMaxRes(activity, savedInstanceState));
-                intentDraw.putExtra("data", uri);
-                intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
-                startActivity(intentDraw);
-            } else toastButtonDisabled(v);
-        });
-        imageView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        imageView.setOnTouchListener((View v, MotionEvent event) -> {
-            imageView = activity.findViewById(R.id.currentImageView);
-            if (currentFile != null) {
-                int[] location = new int[2];
-                v.getLocationOnScreen(location);
-                int viewX = location[0];
-                int viewY = location[1];
-                location = new int[]{0, 0};
-                float x = event.getRawX() - viewX;
-                float y = event.getRawY() - viewY;
-
-                Point p = new Point((int) x, (int) y);
-
-                if (drawPointA == null && drawPointB == null) {
-                    System.err.println("Sélection du point A: ");
-                    if (checkPointCordinates(p)) {
-                        drawPointA = p;
-                        System.err.println("Draw point A = (" + drawPointA.getX() + ", " + drawPointA.getY() + ") ");
-                    } else System.err.println("Error cordinates A");
-                    // Sélectionner A
-                } else {
-                    System.err.println("Sélection du point B: ");
-                    // Sélectionner B
-                    if (checkPointCordinates(p)) {
-                        drawPointB = p;
-                        System.err.println("Draw point B = (" + drawPointB.getX() + ", " + drawPointB.getY() + ") ");
-                    } else System.err.println("Error cordinates B");
-                    //drawPointA = new Point(, Touch.getY());
-                }
-                if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
-                    System.err.println("2 points sélectionnés A et B");
-                    ImageViewSelection viewById = activity.findViewById(R.id.currentImageView);
-                    viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (float) drawPointA.getY(), (float) drawPointB.getX(), (float) drawPointB.getY()));
-                    viewById.setDrawingRectState(true);
-                    System.err.println(viewById.getDrawingRect().toString());
-                    //viewById.draw(new Canvas());
-                    // Désélectionner A&B
-                    //drawPointA = null;
-
-
-                    // PixM zone
-                    currentPixM = getSelectedZone();
-
-                    if (currentPixM != null) {
-                        System.err.println("Draw Selection");
-                        imageView.setImageBitmap(currentPixM.getImage().bitmap);
-                        if (clipboard == null && Clipboard.defaultClipboard == null) {
-                            clipboard = Clipboard.defaultClipboard
-                                    = new Clipboard(currentPixM);
-                        } else if (Clipboard.defaultClipboard != null && clipboard != null) {
-                            if (clipboard == null)
-                                clipboard = Clipboard.defaultClipboard;
-                            BufferedImage read = ImageIO.read(currentFile);
-                            clipboard.setDestination(viewById.getDrawingRect());
-                            //rectfs.get(rectfs.size() - 1));
-                        }
-                        System.err.println("Selection drawn");
-                    } else {
-                        System.err.println("current PixM == null");
-
+        if (draw_activity_button != null) {
+            draw_activity_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawPointA != null && drawPointB != null) {
+                        Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
+                        intentDraw.setClass(getApplicationContext(), TextAndImages.class);
+                        intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
+                        intentDraw.putExtra("currentFile", currentFile);
+                        intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
+                        startActivity(intentDraw);
                     }
                 }
+            });
+        }
+        Button computePixels = activity.findViewById(R.id.activity_compute_pixels);
+
+        if (computePixels != null) {
+            computePixels.setOnClickListener(v -> {
+                if (currentFile != null) {
+                    Uri uri = Uri.fromFile(currentFile);
+                    //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
+                    Intent intentDraw = new Intent(Intent.ACTION_EDIT);
+                    intentDraw.setDataAndType(uri, "image/jpeg");
+                    intentDraw.putExtra("currentFile", currentFile);
+                    intentDraw.putExtra("maxRes", new Utils().getMaxRes(activity, savedInstanceState));
+                    intentDraw.putExtra("data", uri);
+                    intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
+                    startActivity(intentDraw);
+                } else toastButtonDisabled(v);
+            });
+        }
+        if (imageView != null) {
+            imageView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            imageView.setOnTouchListener((View v, MotionEvent event) -> {
+                imageView = activity.findViewById(R.id.currentImageView);
+                if (currentFile != null) {
+                    int[] location = new int[2];
+                    v.getLocationOnScreen(location);
+                    int viewX = location[0];
+                    int viewY = location[1];
+                    location = new int[]{0, 0};
+                    float x = event.getRawX() - viewX;
+                    float y = event.getRawY() - viewY;
+
+                    Point p = new Point((int) x, (int) y);
+
+                    if (drawPointA == null && drawPointB == null) {
+                        System.err.println("Sélection du point A: ");
+                        if (checkPointCordinates(p)) {
+                            drawPointA = p;
+                            System.err.println("Draw point A = (" + drawPointA.getX() + ", " + drawPointA.getY() + ") ");
+                        } else System.err.println("Error cordinates A");
+                        // Sélectionner A
+                    } else {
+                        System.err.println("Sélection du point B: ");
+                        // Sélectionner B
+                        if (checkPointCordinates(p)) {
+                            drawPointB = p;
+                            System.err.println("Draw point B = (" + drawPointB.getX() + ", " + drawPointB.getY() + ") ");
+                        } else System.err.println("Error cordinates B");
+                        //drawPointA = new Point(, Touch.getY());
+                    }
+                    if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
+                        System.err.println("2 points sélectionnés A et B");
+                        ImageViewSelection viewById = activity.findViewById(R.id.currentImageView);
+                        viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (float) drawPointA.getY(), (float) drawPointB.getX(), (float) drawPointB.getY()));
+                        viewById.setDrawingRectState(true);
+                        System.err.println(viewById.getDrawingRect().toString());
+                        //viewById.draw(new Canvas());
+                        // Désélectionner A&B
+                        //drawPointA = null;
 
 
-            } else toastButtonDisabled(v);
-            return true;
-        });
+                        // PixM zone
+                        currentPixM = getSelectedZone();
+
+                        if (currentPixM != null) {
+                            System.err.println("Draw Selection");
+                            imageView.setImageBitmap(currentPixM.getImage().bitmap);
+                            if (clipboard == null && Clipboard.defaultClipboard == null) {
+                                clipboard = Clipboard.defaultClipboard = new Clipboard(currentPixM);
+                            } else if (Clipboard.defaultClipboard != null && clipboard != null) {
+                                if (clipboard == null) clipboard = Clipboard.defaultClipboard;
+                                BufferedImage read = ImageIO.read(currentFile);
+                                clipboard.setDestination(viewById.getDrawingRect());
+                                //rectfs.get(rectfs.size() - 1));
+                            }
+                            System.err.println("Selection drawn");
+                        } else {
+                            System.err.println("current PixM == null");
+
+                        }
+                    }
+
+
+                } else toastButtonDisabled(v);
+                return true;
+            });
+        }
 
         //Select rectangle toggle
         View unselect = activity.findViewById(R.id.unselect_rect);
-        unselect.setOnClickListener(new View.OnClickListener() {
+        if (unselect != null) unselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentFile != null) {
@@ -422,7 +406,7 @@ public class NavigationAndActionImplementation {
         });
 
         View addText = activity.findViewById(R.id.buttonAddText);
-        addText.setOnClickListener(new View.OnClickListener() {
+        if (addText != null) addText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addText(view);
@@ -431,7 +415,7 @@ public class NavigationAndActionImplementation {
 
         View openNewUI = activity.findViewById(R.id.new_layout_app);
 
-        openNewUI.setOnClickListener(view -> {
+        if (openNewUI != null) openNewUI.setOnClickListener(view -> {
             Intent intent2 = new Intent();
             intent2.setClass(activity.getApplicationContext(), MainActivity.class);
             startActivity(intent2);

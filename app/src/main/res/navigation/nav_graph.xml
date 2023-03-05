@@ -86,4 +86,34 @@
     <action
         android:id="@+id/open_licence_info"
         app:destination="@id/licenceUserData2_nav" />
+
+    <activity
+        android:id="@+id/activity_main1_nav"
+        tools:layout="@layout/main" />
+    <activity
+        android:id="@+id/activity_main2_nav"
+        tools:layout="@layout/activity_main2" />
+    <fragment
+        android:id="@+id/image_preview_fragment_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.ImagePreviewFragment"
+        tools:layout="@layout/image_preview">
+
+        <action
+            android:id="@id/myCameraActivity_nav"
+            app:destination="@id/myCameraActivity_nav" />
+        <action
+            android:id="@id/graphicsActivity_nav"
+            app:destination="@id/graphicsActivity_nav" />
+        <action
+            android:id="@id/licenceUserData2_nav"
+            app:destination="@id/licenceUserData2_nav" />
+        <action
+            android:id="@id/chooseEffectsActivity2_nav"
+            app:destination="@id/chooseEffectsActivity2_nav" />
+        <action
+            android:id="@id/textActivity_nav"
+            app:destination="@id/textActivity_nav" />
+    </fragment>
+
+
 </navigation>
