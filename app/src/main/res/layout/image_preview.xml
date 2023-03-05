@@ -17,9 +17,10 @@
   ~
   ~
   -->
-<fragment android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
@@ -29,4 +30,4 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
         android:src="@drawable/icon" />
-</fragment>
+</androidx.appcompat.widget.LinearLayoutCompat>
