@@ -22,8 +22,11 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnClickListener
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.Text
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -49,16 +52,28 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val navController: NavController = findNavController(R.id.nav_host_fragment)
+/*        val navController: NavController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
+*/
         val onClickListener: View = findViewById<View>(R.id.fab)
 
+        val subs: ArrayList<View> = ArrayList<View>();
+        subs.add(TextView(onClickListener.context))//
+        subs.add(TextView(onClickListener.context))//
+
+        (subs[0] as TextView).text = getString(R.string.add_picture_file_from_directory)
+        (subs[1] as TextView).text = getString(R.string.add_picture_from_camera)
         onClickListener.setOnClickListener { view ->
-            Snackbar.make(view, "Add a new Image ? ", Snackbar.LENGTH_LONG)
-                .setAction("Add from directory", View.OnClickListener { })
-                .setAction("Add from camera", View.OnClickListener { })
+            Snackbar.make(view, "Add a new picture ? ", Snackbar.LENGTH_LONG)
+                .setAction("Add from directory or camera?", View.OnClickListener {
+                    onClickListener.run {
+                        onClickListener.addFocusables(
+                            subs, onClickListener.textDirection
+                        )
+                    }
+
+                })
                 .show()
         }
         supportFragmentManager.beginTransaction()
