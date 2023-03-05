@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/aboutParameters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/effectButtons">
+
+        <Button
+            android:id="@+id/buttonAddText"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/add_text"
+            android:background="@color/light_blue_A400"
+            app:layout_constraintEnd_toStartOf="@id/buttonDraw"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+
+        <Button
+            android:id="@+id/buttonDraw"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:background="@color/light_blue_A400"
+            android:layout_height="48dp"
+            android:text="@string/draw_button_text"
+            app:layout_constraintStart_toEndOf="@id/buttonAddText"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+
+
+        <Button
+            android:id="@+id/effectsButtonNew"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:background="@color/light_blue_A400"
+            android:text="@string/choose_effects"
+            app:layout_constraintStart_toEndOf="@id/buttonDraw"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            android:layout_width="wrap_content" />
+
+        <Button
+            style="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:background="@color/light_blue_A400"
+            android:text="@string/choose_shader_like"
+            app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            android:layout_width="wrap_content"
+            android:id="@+id/activity_compute_pixels" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/effectButtons"
+        android:id="@+id/aboutParameters"
+        app:layout_constraintBottom_toTopOf="@id/new_layout_app"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/About"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="@color/gray_400"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/about" />
+
+        <EditText
+            android:id="@+id/editMaximiumResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="48dp"
+            android:autofillHints="@string/maximum_resolution"
+            android:ems="10"
+            android:hint="@string/maximum_resolution"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:text="@string/maxRes_1200"
+            android:tooltipText="Maximum resolution" />
+    </LinearLayout>
+    <!--
+        <CheckBox
+                android:id="@+id/betaVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:minHeight="48dp"
+                android:text="@string/beta"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"/>
+
+    -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_layout_app"
+        android:id="@+id/new_layout_app"
+        app:layout_constraintTop_toBottomOf="@id/aboutParameters"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </Button>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -21,8 +21,11 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -43,27 +46,33 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main2)
 
-/*
-        binding = ActivityMain2Binding.inflate(layoutInflater)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController: NavController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        val onClickListener: View = findViewById<View>(R.id.fab)
+
+        onClickListener.setOnClickListener { view ->
+            Snackbar.make(view, "Add a new Image ? ", Snackbar.LENGTH_LONG)
+                .setAction("Add from directory", View.OnClickListener { })
+                .setAction("Add from camera", View.OnClickListener { })
+                .show()
         }
-*/
         supportFragmentManager.beginTransaction()
-            .add(R.id.nav_host_fragment, ImagePreviewFragment()).commit()
+            .add(R.id.button_bar_open_save_share, ImagePreviewFragment()).commit()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.action_bar_container, ActionBarFragment()).commit()
 
+
+        val currentActionFragment: Fragment = StartActivityFragment()
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.currentFragmentViews, currentActionFragment
+            ).commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {

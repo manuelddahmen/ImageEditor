@@ -40,16 +40,34 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_host_fragment">
+
+    </com.google.android.material.navigation.NavigationView>
+
     <FrameLayout
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/button_bar_open_save_share"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
         android:name="androidx.navigation.fragment.NavHostFragment"
+        app:layout_constraintBottom_toTopOf="@id/currentFragmentViews"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
+        app:navGraph="@navigation/nav_graph2" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:id="@+id/currentFragmentViews"
         app:layout_constraintBottom_toTopOf="@id/fab"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar_container"
+        app:layout_constraintTop_toBottomOf="@id/currentFragmentViews"
         app:navGraph="@navigation/nav_graph2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -60,6 +78,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/btn_plus" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
