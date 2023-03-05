@@ -93,7 +93,7 @@ public class MyCameraActivity extends AppCompatActivity {
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     private AppCompatActivity thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
-    private static final int CAMERA_REQUEST = 1888;
+    static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int ONCLICK_STARTACTIVITY_CODE_VIDEO_CHOOSER = 9998;
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 9999;

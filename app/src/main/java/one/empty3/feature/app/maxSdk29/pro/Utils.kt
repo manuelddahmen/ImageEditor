@@ -20,28 +20,33 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.Manifest
 import android.app.Activity
-import android.app.AppComponentFactory
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
+import android.content.pm.PackageManager
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View.OnTouchListener
+import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.PixM
 import java.io.*
+import java.nio.file.Files
+import java.nio.file.Path
 import java.util.*
 
 public class Utils() {
@@ -399,7 +404,6 @@ public class Utils() {
     private fun getFilesFile(s: String): File {
         return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s)
     }
-
 
 }
 

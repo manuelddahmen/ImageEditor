@@ -22,22 +22,19 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Text
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityMain2Binding
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var applicationState: AppData
     lateinit var currentBitmap: File
     lateinit var currentFile: File
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        applicationState = AppData()
 
         setContentView(R.layout.activity_main2)
 
@@ -65,12 +63,10 @@ class MainActivity : AppCompatActivity() {
         (subs[0] as TextView).text = getString(R.string.add_picture_file_from_directory)
         (subs[1] as TextView).text = getString(R.string.add_picture_from_camera)
         onClickListener.setOnClickListener { view ->
-            Snackbar.make(view, "Add a new picture ? ", Snackbar.LENGTH_LONG)
-                .setAction("Add from directory or camera?", View.OnClickListener {
+            Snackbar.make(view, "Add a new picture from Camera ? ", Snackbar.LENGTH_LONG)
+                .setAction("Add from camera?", View.OnClickListener {
                     onClickListener.run {
-                        onClickListener.addFocusables(
-                            subs, onClickListener.textDirection
-                        )
+
                     }
 
                 })
@@ -88,6 +84,17 @@ class MainActivity : AppCompatActivity() {
             .add(
                 R.id.currentFragmentViews, currentActionFragment
             ).commit()
+
+        NavigationAndActionImplementation().addButtonsListeners(
+            this,
+            applicationState,
+            savedInstanceState
+        )
+    }
+
+    private fun addButtonsListeners() {
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
