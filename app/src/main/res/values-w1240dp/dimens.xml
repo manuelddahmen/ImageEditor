@@ -20,4 +20,5 @@
 
 <resources>
     <dimen name="fab_margin">200dp</dimen>
+    <dimen name="image_preview_height">300dp</dimen>
 </resources>

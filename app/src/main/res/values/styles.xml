@@ -19,17 +19,8 @@
   -->
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme">
-        <item name="android:immersive">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
-    <style name="Widget.Theme.FeatureAppmain.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
-    </style>
 
     <style name="Widget.Theme.FeatureAppmain.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>

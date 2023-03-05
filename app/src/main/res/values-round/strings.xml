@@ -26,4 +26,5 @@
     <string name="view">View</string>
     <string name="draw2">Draw</string>
     <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
+    <string name="floating_action_button_to">Floating Action Button to</string>
 </resources>

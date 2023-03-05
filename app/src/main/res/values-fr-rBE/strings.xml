@@ -181,4 +181,5 @@
     <string name="buttonCodeBefore">Add code before</string>
     <string name="title_activity_toolbar">toolbar</string>
     <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
+    <string name="floating_action_button_to">Floating Action Button to</string>
 </resources>

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.image_preview, ImagePreviewFragment())
+            .add(R.id.nav_host_fragment, ImagePreviewFragment()).commit()
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.action_bar_container, ActionBarFragment())
+            .add(R.id.action_bar_container, ActionBarFragment()).commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {

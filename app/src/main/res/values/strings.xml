@@ -187,5 +187,6 @@
                     "actuellement.<br/>"]]></string>
     <string name="title_activity_main">MainActivity</string>
     <string name="new_layout_app">New App Layout</string>
+    <string name="floating_action_button_to">Floating Action Button to</string>
 
 </resources>
