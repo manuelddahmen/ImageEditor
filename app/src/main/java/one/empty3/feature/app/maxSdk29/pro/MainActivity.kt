@@ -28,19 +28,24 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityMain2Binding
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var currentBitmap: File
+    lateinit var currentFile: File
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMain2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setContentView(R.layout.activity_main2)
 
+/*
         binding = ActivityMain2Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+
 
         setSupportActionBar(binding.toolbar)
 
@@ -52,12 +57,13 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-
+*/
         supportFragmentManager.beginTransaction()
             .add(R.id.nav_host_fragment, ImagePreviewFragment()).commit()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.action_bar_container, ActionBarFragment()).commit()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

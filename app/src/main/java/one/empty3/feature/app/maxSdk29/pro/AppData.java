@@ -24,9 +24,14 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
 public class AppData {
     private static final String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private String[] cordsValues = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+
+    private File currentBitmap;
+    private File currentFile;
 
     public AppData() {
     }

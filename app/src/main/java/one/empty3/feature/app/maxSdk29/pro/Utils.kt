@@ -21,19 +21,27 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.app.Activity
+import android.app.AppComponentFactory
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Base64
 import android.util.Log
+import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
+import one.empty3.feature20220726.PixM
+import java.io.*
 import java.util.*
 
 public class Utils() {
@@ -243,5 +251,155 @@ public class Utils() {
         }
         return false
     }
+
+
+    fun saveImageState(
+        activity: MainActivity,
+        imageViewOriginal: Boolean,
+    ) {
+        val file = true
+        val imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
+        if (imageView == null) return
+        val drawable: Drawable = imageView.getDrawable()
+        var bitmapOriginal: Bitmap? = null
+        var bitmap: Bitmap? = null
+        if (drawable is BitmapDrawable) bitmapOriginal =
+            drawable.bitmap else if (drawable.current is BitmapDrawable) {
+            if (isWorkingResolutionOriginal()) {
+                bitmapOriginal = (drawable.current as BitmapDrawable).bitmap
+            }
+            bitmap = PixM.getPixM(bitmap, getMaxRes(activity)).bitmap
+        } else {
+            if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
+                bitmap = Bitmap.createBitmap(
+                    1,
+                    1,
+                    Bitmap.Config.ARGB_8888
+                ) // Single color bitmap will be created of 1x1 pixel
+            } else {
+                // ???
+                if (isWorkingResolutionOriginal()) {
+                    bitmapOriginal = PixM.getPixM(bitmap, 0).bitmap
+                }
+                bitmapOriginal = PixM.getPixM(bitmap, getMaxRes(activity)).bitmap
+                bitmap = bitmapOriginal
+            }
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(
+                0, 0, if (getMaxRes(activity) == 0) canvas.width else getMaxRes(activity),
+                if (getMaxRes(activity) == 0) canvas.height else getMaxRes(activity)
+            )
+            drawable.draw(canvas)
+        }
+        var bm: Bitmap? = null
+        if (bitmap != null) {
+            bm = bitmap
+            val baos = ByteArrayOutputStream()
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, baos) //bm is the bitmap object
+            val b = baos.toByteArray()
+            val encoded = Base64.encodeToString(b, Base64.DEFAULT)
+            var fos: OutputStream? = null
+            try {
+                val filesFile = getFilesFile(MyCameraActivity.IMAGE_VIEW_JPG)
+                fos = FileOutputStream(filesFile)
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+                System.err.println("Image updated")
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+        if (imageViewOriginal && bitmapOriginal != null) {
+            bm = bitmapOriginal
+            val baos = ByteArrayOutputStream()
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, baos) //bm is the bitmap object
+            val b = baos.toByteArray()
+            val encoded = Base64.encodeToString(b, Base64.DEFAULT)
+            var fos: OutputStream? = null
+            val filesFile = getFilesFile(MyCameraActivity.IMAGE_VIEW_ORIGINAL_JPG)
+            try {
+                fos = FileOutputStream(filesFile)
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+                System.err.println("Image updated")
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun isWorkingResolutionOriginal(): Boolean {
+        return false
+    }
+
+    fun getImageRatio(bitmap: Bitmap): Int {
+        return bitmap.width / bitmap.height
+    }
+
+    fun setMaxResImage(activity: Activity, bitmap: Bitmap): Point? {
+        val imageRatio = getImageRatio(bitmap)
+        return Point(
+            getMaxRes(activity) / imageRatio,
+            getMaxRes(activity) * imageRatio
+        )
+    }
+
+    private fun getMaxRes(activity: Activity): Int {
+        val maxResText: EditText = activity.findViewById<EditText>(R.id.editMaximiumResolution)
+        val maxRes = maxResText.text.toString().toDouble().toInt()
+        return maxRes
+    }
+
+    fun loadImageState(activity: MainActivity, originalImage: Boolean) {
+        val file = true
+        val ot = ""
+        val imageFile = getFilesFile("imageViewOriginal.jpg")
+        val imageFileLow = getFilesFile(MyCameraActivity.IMAGE_VIEW_JPG)
+        if (file && imageFile.exists()) {
+            try {
+                var imageViewBitmap: Bitmap? = null
+                imageViewBitmap = if (isWorkingResolutionOriginal()) {
+                    BitmapFactory.decodeStream(FileInputStream(imageFile))
+                } else {
+                    BitmapFactory.decodeStream(FileInputStream(imageFileLow))
+                }
+                if (imageViewBitmap != null) {
+                    val imageView = activity.findViewById<View>(R.id.currentImageView) as ImageView
+                    if (imageView != null) {
+                        imageView.setImageBitmap(imageViewBitmap)
+                        activity.currentFile = imageFile
+                        activity.currentBitmap = imageFile
+                        System.err.println("Image reloaded")
+
+                        //createCurrentUniqueFile();
+                    }
+                }
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun createCurrentUniqueFile(activity: MainActivity) {
+        try {
+            if (activity.currentFile != null) {
+                val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
+                System.err.println("Get file (bitmap) : $photo")
+                val myPhotoV2022 =
+                    this.writePhoto(activity, photo, "MyPhotoV2022" + UUID.randomUUID())
+                System.err.println("Written copy : " + myPhotoV2022!!.absolutePath)
+                //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
+                //fillGallery(photo, FileInputStream(myPhotoV2022))
+                System.err.println("Set in ImageView : " + myPhotoV2022.absolutePath)
+                activity.currentFile = myPhotoV2022
+            }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun getFilesFile(s: String): File {
+        return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s)
+    }
+
+
 }
 

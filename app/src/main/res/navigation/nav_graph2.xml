@@ -29,6 +29,11 @@
     <activity
         android:id="@+id/activity_main2_nav"
         tools:layout="@layout/activity_main2" />
-    <fragment android:id="@+id/nav_host_fragment_content_main"></fragment>
+    <fragment
+        android:id="@+id/image_preview_fragment_nav"
+        android:name="one.empty3.feature.app.maxSdk29.pro.ImagePreviewFragment"
+        tools:layout="@layout/image_preview">
+
+    </fragment>
 
 </navigation>
