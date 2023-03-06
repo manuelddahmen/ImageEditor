@@ -20,8 +20,6 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-import static java.nio.file.Files.copy;
 import static one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.CAMERA_REQUEST;
 
 import android.Manifest;
@@ -51,7 +49,6 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -216,7 +213,7 @@ public class NavigationAndActionImplementation {
             public void onClick(View v) {
                 if (currentFile != null) {
                     Uri uri = Uri.fromFile(currentFile);
-                    Uri photoURI = FileProvider.getUriForFile(activity.getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
+                    Uri photoURI = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getApplicationContext().getPackageName() + ".provider", currentFile);
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
@@ -238,8 +235,8 @@ public class NavigationAndActionImplementation {
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     int requestExternalStorage = 1;
-                    int permission1 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-                    int permission2 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    int permission1 = ActivityCompat.checkSelfPermission(activity.getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                    int permission2 = ActivityCompat.checkSelfPermission(activity.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     if (permission1 != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(thisActivity, permissionsStorage, requestExternalStorage);
                     }
@@ -250,16 +247,9 @@ public class NavigationAndActionImplementation {
                     File picturesDirectory = new File(String.valueOf(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)));
                     Path target = null;
 
-                    try {
-                        target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg").toPath());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg").toPath());
 
-                        return;
-                    }
-
-
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", target == null ? currentFile : target.toFile());
+                    Uri photoURI = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getApplicationContext().getPackageName() + ".provider", target == null ? currentFile : target.toFile());
 
 
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -289,7 +279,7 @@ public class NavigationAndActionImplementation {
                 public void onClick(View v) {
                     if (drawPointA != null && drawPointB != null) {
                         Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
-                        intentDraw.setClass(getApplicationContext(), TextAndImages.class);
+                        intentDraw.setClass(activity.getApplicationContext(), TextAndImages.class);
                         intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
                         intentDraw.putExtra("currentFile", currentFile);
                         intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
@@ -304,13 +294,13 @@ public class NavigationAndActionImplementation {
             computePixels.setOnClickListener(v -> {
                 if (currentFile != null) {
                     Uri uri = Uri.fromFile(currentFile);
-                    //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
+                    //Uri photoURI = FileProvider.getUriForFile(activity.getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                     Intent intentDraw = new Intent(Intent.ACTION_EDIT);
                     intentDraw.setDataAndType(uri, "image/jpeg");
                     intentDraw.putExtra("currentFile", currentFile);
                     intentDraw.putExtra("maxRes", new Utils().getMaxRes(activity, savedInstanceState));
                     intentDraw.putExtra("data", uri);
-                    intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
+                    intentDraw.setClass(activity.getApplicationContext(), GraphicsActivity.class);
                     startActivity(intentDraw);
                 } else toastButtonDisabled(v);
             });
@@ -427,6 +417,10 @@ public class NavigationAndActionImplementation {
         }
 
 
+    }
+
+    private Path copy(Path toPath, Path toPath1) {
+        return null;
     }
 
     private PixM getSelectedZone() {
