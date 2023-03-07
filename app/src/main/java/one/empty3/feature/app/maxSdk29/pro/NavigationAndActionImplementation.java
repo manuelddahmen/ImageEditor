@@ -89,7 +89,8 @@ public class NavigationAndActionImplementation {
 
         currentFile = currentBitmap = new Utils().getCurrentFile(activity.getIntent());
 
-        if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
+        if (currentFile != null)
+            if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
 
 
         thisActivity = activity;
