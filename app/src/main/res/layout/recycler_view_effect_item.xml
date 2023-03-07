@@ -18,52 +18,82 @@
   ~
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:orientation="horizontal">
+    android:layout_height="192dp"
+    android:theme="@style/Theme.FeatureAppmain">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:srcCompat="@android:drawable/ic_media_ff"
-        android:contentDescription="@string/effect_image_to_image"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="vertical"
+        android:theme="@style/Theme.FeatureAppmain"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            android:id="@+id/line1"
+            android:theme="@style/Theme.FeatureAppmain">
+            <!--
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="96dp"
+                            android:minHeight="96dp"
+                            app:srcCompat="@android:drawable/ic_media_ff"
+                            android:contentDescription="@string/effect_image_to_image"
+                            android:theme="@style/Theme.FeatureAppmain" />
+            -->
 
-    <TextView
-        android:id="@+id/textEffectName"
-        android:layout_width="196dp"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/effect_name"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+            <TextView
+                android:id="@+id/textEffectName"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:minHeight="96dp"
+                android:height="96dp"
+                android:textSize="36sp"
+                android:text="@string/effect_name"
+                android:theme="@style/Theme.FeatureAppmain" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonAddTOEffect"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/add"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_weight="0.5"
+            android:id="@+id/line2"
+            android:orientation="horizontal"
+            android:theme="@style/Theme.FeatureAppmain"
+            app:layout_constraintTop_toBottomOf="@id/line1">
 
-    <Button
-        android:id="@+id/buttonRemoveFromList"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/remove"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/buttonAddTOEffect"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:height="48dp"
+                android:text="@string/add"
+                android:theme="@style/Theme.FeatureAppmain" />
 
-    <Button
-        android:id="@+id/commentEffect"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:height="30dp"
-        android:text="@string/commentEffect"
-        android:theme="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/buttonRemoveFromList"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:height="48dp"
+                android:text="@string/remove"
+                android:theme="@style/Theme.FeatureAppmain" />
 
-</LinearLayout>
+            <Button
+                android:id="@+id/commentEffect"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:height="48dp"
+                android:text="@string/commentEffect"
+                android:theme="@style/Theme.FeatureAppmain" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

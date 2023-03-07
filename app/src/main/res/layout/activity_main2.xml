@@ -34,7 +34,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.FeatureApp.PopupOverlay" />
 
@@ -42,15 +42,15 @@
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="96dp"
         android:id="@+id/nav_host_fragment">
 
     </com.google.android.material.navigation.NavigationView>
 
     <FrameLayout
         android:id="@+id/button_bar_open_save_share"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:defaultNavHost="true"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintBottom_toTopOf="@id/imageViewSelection"
@@ -60,8 +60,8 @@
         app:navGraph="@navigation/nav_graph" />
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:id="@+id/imageViewSelection"
         app:layout_constraintBottom_toTopOf="@id/currentFragmentViews"
