@@ -18,61 +18,40 @@
   ~
   -->
 
-<!--suppress ALL -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<fragment android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChooseEffectsActivity"
-    android:theme="@style/Theme.Material3.DayNight">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.FeatureAppmain"
+    android:id="@+id/fragment_choose_effects">
 
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/effectsAutoCompleteTextView"
+    <!-- <androidx.fragment.app.FragmentContainerView
+         android:id="@+id/nav_host_fragment"
+         android:name="androidx.navigation.fragment.NavHostFragment"
+         android:layout_width="match_parent"
+         android:layout_height="60dp"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:defaultNavHost="true"
+         app:navGraph="@navigation/nav_graph" />
+ -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_effect"
+        listitem="@layout/recycler_view_effect_item"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:accessibilityLiveRegion="none"
-        android:autofillHints="effectsSelection"
-        android:background="@color/whiteBackground"
-        android:hint="@string/completeBox"
-        android:importantForAccessibility="yes"
-        android:lines="5"
-        android:theme="@style/Theme.Material3.DayNight"
-        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/effectsAutoCompleteTextView"
-        app:layout_constraintHeight_min="200dp"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_editor_absoluteY="0dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ListView
-        android:id="@+id/simple_dropdown_item_1line_classes"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:theme="@style/Theme.Material3.DayNight"
-        app:layout_constraintBottom_toTopOf="@id/effectsToApply"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/effectsAutoCompleteTextView"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_height="0dp"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_weight="0.8"
+        android:theme="@style/Theme.FeatureAppmain" />
 
     <Button
-        android:id="@+id/effectsToApply"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:accessibilityLiveRegion="none"
-        android:autofillHints="Effect's Selection"
-        android:background="@color/whiteBackground"
-        android:hint="@string/completeBox"
-        android:importantForAccessibility="yes"
-        android:textColor="@color/blackText"
-        android:theme="@style/Theme.Material3.DayNight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/simple_dropdown_item_1line_classes"
-        tools:ignore="SpeakableTextPresentCheck" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="32dp"
+        android:id="@+id/applyEffects"
+        android:text="@string/apply_effects"
+        android:layout_weight="0.1"
+        android:theme="@style/Theme.FeatureAppmain" />
+</fragment>

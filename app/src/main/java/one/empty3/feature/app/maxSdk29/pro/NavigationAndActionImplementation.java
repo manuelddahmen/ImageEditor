@@ -20,6 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static androidx.navigation.Navigation.findNavController;
 import static one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.CAMERA_REQUEST;
 
 import android.Manifest;
@@ -109,7 +110,13 @@ public class NavigationAndActionImplementation {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activity.startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
+                    Bundle bundle = new Bundle();
 
+                    bundle.putString("currentFile", String.valueOf(currentFile));
+
+
+                    findNavController(activity, R.id.currentFragmentViews)
+                            .navigate(R.id.fragment_choose_effects, bundle);
                 }
 
             });

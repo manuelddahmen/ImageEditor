@@ -20,6 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static androidx.navigation.ActivityKt.findNavController;
 import static java.nio.file.Files.copy;
 
 import android.Manifest;
@@ -227,6 +228,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
 
+                //findNavController(thisActivity, R.id.).navigate(R.id.flow_step_one_dest, null)
             }
 
         });
