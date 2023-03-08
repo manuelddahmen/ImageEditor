@@ -144,7 +144,7 @@ class Calculator : AppCompatActivity() {
             }.start()
         }
 
-
+/*
         val back = findViewById<Button>(R.id.buttonBak);
         back.setOnClickListener {
             val intentBack = Intent()
@@ -158,7 +158,7 @@ class Calculator : AppCompatActivity() {
             }
             startActivity(intentBack)
         };
-
+*/
 
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
