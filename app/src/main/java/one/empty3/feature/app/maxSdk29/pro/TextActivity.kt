@@ -74,8 +74,8 @@ class TextActivity() : AppCompatActivity(), Parcelable {
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
             imageView.setImageBitmap(currentImage)
         }
-        val backButton = findViewById<Button>(R.id.buttonTextBack)
-
+        //val backButton = findViewById<Button>(R.id.buttonTextBack)
+/*
         backButton.setOnClickListener {
             try {
                 val textIntent = Intent(Intent.ACTION_VIEW)
@@ -97,7 +97,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
                 e.printStackTrace()
             }
         }
-
+*/
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
             applyText()

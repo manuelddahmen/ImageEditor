@@ -106,7 +106,7 @@ public class GraphicsActivity extends AppCompatActivity {
             new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
         });
-
+/*
         Button back = findViewById(R.id.buttonBack);
         back.setOnClickListener(view -> {
 
@@ -117,7 +117,7 @@ public class GraphicsActivity extends AppCompatActivity {
             mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             startActivity(mainActivity);
         });
-
+*/
     }
 
     private void putExtra(Intent calculatorIntent, String cord) {

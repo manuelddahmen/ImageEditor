@@ -51,13 +51,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button
-        android:id="@+id/buttonBack2"
-        android:layout_width="64dp"
-        android:layout_height="48dp"
-        android:text="@string/back"
-        app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/Theme.FeatureAppmain"
-        app:layout_constraintRight_toRightOf="parent" />
+    <!--
+        <Button
+            android:id="@+id/buttonBack2"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:text="@string/back"
+            app:layout_constraintTop_toTopOf="parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            app:layout_constraintRight_toRightOf="parent" />
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>

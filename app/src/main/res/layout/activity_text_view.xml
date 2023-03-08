@@ -40,16 +40,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         style="@style/Theme.FeatureAppmain">
-
-        <Button
-            android:id="@+id/buttonTextBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="30dp"
-            android:height="30dp"
-            android:text="@string/back_button_text_activity"
-            style="@style/Theme.FeatureAppmain" />
-
+        <!---
+                <Button
+                    android:id="@+id/buttonTextBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="30dp"
+                    android:height="30dp"
+                    android:text="@string/back_button_text_activity"
+                    style="@style/Theme.FeatureAppmain" />
+        -->
         <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
             android:id="@+id/imageViewOnImage"
             android:layout_width="match_parent"

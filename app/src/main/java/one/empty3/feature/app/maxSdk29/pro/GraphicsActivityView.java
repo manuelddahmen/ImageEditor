@@ -100,7 +100,7 @@ public class GraphicsActivityView extends AppCompatActivity {
                 draw();
             }
         });
-
+/*
         Button back = findViewById(R.id.buttonBack2);
         back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
@@ -118,6 +118,7 @@ public class GraphicsActivityView extends AppCompatActivity {
             startActivity(intentGraphics);
 
         });
+        */
         printValues();
     }
 
