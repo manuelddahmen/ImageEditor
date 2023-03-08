@@ -20,7 +20,6 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
-import static androidx.navigation.ActivityKt.findNavController;
 import static java.nio.file.Files.copy;
 
 import android.Manifest;
@@ -118,65 +117,6 @@ public class MyCameraActivity extends AppCompatActivity {
     private Clipboard clipboard;
     private boolean copied;
 
-
-    class LoadImage extends AsyncTask {
-
-        private final File file;
-        private final int resolution;
-
-        public LoadImage(File file, int resolution) {
-            super();
-            this.file = file;
-            this.resolution = resolution;
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            try {
-                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
-                System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
-                imageView.setImageBitmap(photo);
-                //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
-                System.err.println("Image main intent loaded");
-                //saveImageState();
-                maxRes = resolution;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-    }
-
-
-    public InputStream getPathInput(Uri uri) throws FileNotFoundException {
-        InputStream input = getContentResolver().openInputStream(uri);
-        return input;
-    }
-
-    public OutputStream getPathOutput(Uri uri) throws FileNotFoundException {
-        OutputStream output = getContentResolver().openOutputStream(uri);
-        return output;
-    }
-
-    private InputStream getRealPathFromURI(Intent file) {
-        try {
-            return getPathInput(file.getData());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void toastButtonDisabled(View button) {
-        if (currentFile == null) {
-            String text = getString(R.string.button_current_file_is_null);
-            Integer duration = Toast.LENGTH_LONG;
-
-            Toast toast = Toast.makeText(getApplicationContext(), text, duration);
-            toast.show();
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -568,6 +508,65 @@ public class MyCameraActivity extends AppCompatActivity {
 */
     }
 
+
+    class LoadImage extends AsyncTask {
+
+        private final File file;
+        private final int resolution;
+
+        public LoadImage(File file, int resolution) {
+            super();
+            this.file = file;
+            this.resolution = resolution;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
+                System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
+                imageView.setImageBitmap(photo);
+                //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
+                System.err.println("Image main intent loaded");
+                //saveImageState();
+                maxRes = resolution;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+    public InputStream getPathInput(Uri uri) throws FileNotFoundException {
+        InputStream input = getContentResolver().openInputStream(uri);
+        return input;
+    }
+
+    public OutputStream getPathOutput(Uri uri) throws FileNotFoundException {
+        OutputStream output = getContentResolver().openOutputStream(uri);
+        return output;
+    }
+
+    private InputStream getRealPathFromURI(Intent file) {
+        try {
+            return getPathInput(file.getData());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void toastButtonDisabled(View button) {
+        if (currentFile == null) {
+            String text = getString(R.string.button_current_file_is_null);
+            Integer duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+            toast.show();
+        }
+    }
 
     private boolean isLoaded() {
         return loaded;
