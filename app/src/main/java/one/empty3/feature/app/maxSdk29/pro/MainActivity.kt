@@ -42,7 +42,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
+import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -62,14 +62,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
+    val MAX_RES_DEFAULT = 200
+    val IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg"
+    val IMAGE_VIEW_JPG = "imageView.jpg"
+    private val appDataPath = "/one.empty3.feature.app.maxSdk29.pro/"
+    private val CAMERA_REQUEST: Int = 1513351
     private var FILESYSTEM_WRITE_PICTURE: Int = 139183
     private var workingResolutionOriginal: Boolean = false
     private val ONCLICK_STARTACTIVITY_CODE_VIDEO_CHOOSER: Int = 38901831
     private val ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER: Int = 37197319
     private lateinit var applicationState: AppData
-    private var currentBitmap: File? = null
-    private var currentFile: File? = null
+    internal var currentBitmap: File? = null
+    internal var currentFile: File? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMain2Binding
     private var maxRes = 0
@@ -85,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     private var drawPointB: Point? = null
     private val currentFileZoomed = false
     private var currentPixM: PixM? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,8 +108,8 @@ class MainActivity : AppCompatActivity() {
         val onClickListener: View = findViewById<View>(R.id.fab)
 
         val subs: ArrayList<View> = ArrayList<View>();
-        subs.add(TextView(onClickListener.context))//
-        subs.add(TextView(onClickListener.context))//
+        subs.add(TextView(onClickListener.context))
+        subs.add(TextView(onClickListener.context))
 
         (subs[0] as TextView).text = getString(R.string.add_picture_file_from_directory)
         (subs[1] as TextView).text = getString(R.string.add_picture_from_camera)
@@ -119,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
         supportFragmentManager.beginTransaction()
-            .add(R.id.button_bar_open_save_share, ImagePreviewFragment()).commit()
+            .add(R.id.imageViewSelection, ImagePreviewFragment()).commit()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.action_bar_container, ActionBarFragment()).commit()
@@ -134,10 +139,6 @@ class MainActivity : AppCompatActivity() {
         addButtonsListeners(this, applicationState, savedInstanceState)
     }
 
-    private fun addButtonsListeners() {
-
-
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -148,7 +149,9 @@ class MainActivity : AppCompatActivity() {
 
     fun addButtonsListeners(activity: Activity, appData: AppData?, savedInstanceState: Bundle?) {
         maxRes = Utils().getMaxRes(activity, savedInstanceState)
-        imageView = activity.findViewById<View>(R.id.currentImageView) as ImageView
+        imageView = findViewById<FrameLayout>(R.id.imageViewSelection)
+            .findFragment<ImagePreviewFragment>().view as ImageViewSelection
+        //.findViewById<ImageViewSelection>(R.id.currentImageView)
         rectfs = java.util.ArrayList()
         loaded = true
         currentBitmap = Utils().getCurrentFile(activity.intent)
@@ -169,17 +172,17 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            activity.startActivityForResult(cameraIntent, MyCameraActivity.CAMERA_REQUEST)
+            activity.startActivityForResult(cameraIntent, CAMERA_REQUEST)
             val bundle = Bundle()
             bundle.putString("currentFile", currentFile.toString())
-            findNavController(activity, R.id.currentFragmentViews)
-                .navigate(R.id.fragment_choose_effects, bundle)
+
+            startActivity(cameraIntent)
         }
         val effectsButton2 = activity.findViewById<Button>(R.id.effectsButtonNew)
         effectsButton2?.setOnClickListener { v ->
             if (currentFile != null) {
+                val intentEffects = Intent(Intent.ACTION_EDIT)
                 imageView = activity.findViewById(R.id.currentImageView)
-                val intent = Intent(Intent.ACTION_EDIT)
                 System.err.println("Click on Effect button")
                 if (currentFile != null || currentBitmap != null) {
                     if (currentFile == null) currentFile = currentBitmap?.getAbsoluteFile()
@@ -192,12 +195,15 @@ class MainActivity : AppCompatActivity() {
                             )
                             currentFile = currentBitmap
                         }
-                        intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-                        intent.setClass(imageView!!.context, ChooseEffectsActivity2::class.java)
-                        intent.putExtra("data", currentFile)
+                        intentEffects.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+                        intentEffects.setClass(
+                            imageView!!.context,
+                            ChooseEffectsActivity2::class.java
+                        )
+                        intentEffects.putExtra("data", currentFile)
                         val viewById =
                             activity.findViewById<View>(R.id.editMaximiumResolution)
-                        intent.putExtra(
+                        intentEffects.putExtra(
                             "maxRes",
                             (viewById as TextView).text.toString().toDouble().toInt()
                         )
@@ -205,7 +211,7 @@ class MainActivity : AppCompatActivity() {
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
                     }
-                    activity.startActivity(intent)
+                    startActivity(intentEffects)
                 } else {
                     System.err.println("No file assigned")
                     System.err.println("Can't Start activity : EffectChoose")
@@ -595,7 +601,7 @@ class MainActivity : AppCompatActivity() {
             val encoded = Base64.encodeToString(b, Base64.DEFAULT)
             var fos: OutputStream? = null
             try {
-                val filesFile = getFilesFile(MyCameraActivity.IMAGE_VIEW_JPG)
+                val filesFile = getFilesFile(IMAGE_VIEW_JPG)
                 fos = FileOutputStream(filesFile)
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, fos)
                 System.err.println("Image updated")
@@ -610,7 +616,7 @@ class MainActivity : AppCompatActivity() {
             val b = baos.toByteArray()
             val encoded = Base64.encodeToString(b, Base64.DEFAULT)
             var fos: OutputStream? = null
-            val filesFile = getFilesFile(MyCameraActivity.IMAGE_VIEW_ORIGINAL_JPG)
+            val filesFile = getFilesFile(IMAGE_VIEW_ORIGINAL_JPG)
             try {
                 fos = FileOutputStream(filesFile)
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, fos)
@@ -643,7 +649,7 @@ class MainActivity : AppCompatActivity() {
         val file = true
         val ot = ""
         val imageFile = getFilesFile("imageViewOriginal.jpg")
-        val imageFileLow = getFilesFile(MyCameraActivity.IMAGE_VIEW_JPG)
+        val imageFileLow = getFilesFile(IMAGE_VIEW_JPG)
         if (file && imageFile.exists()) {
             try {
                 var imageViewBitmap: Bitmap? = null
@@ -813,7 +819,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(cameraIntent, MyCameraActivity.CAMERA_REQUEST)
+                startActivityForResult(cameraIntent, CAMERA_REQUEST)
             } else {
             }
         }
@@ -878,11 +884,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == MyCameraActivity.CAMERA_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             if (data != null && data.extras != null && data.extras!!["data"] != null) {
                 requestPermissions(
                     arrayOf(Manifest.permission.CAMERA),
-                    MyCameraActivity.CAMERA_REQUEST
+                    CAMERA_REQUEST
                 )
                 val bitmap = data.extras!!["data"] as Bitmap?
                 imageView = findViewById(R.id.currentImageView)
@@ -1097,7 +1103,7 @@ class MainActivity : AppCompatActivity() {
         try {
             if (savedInstanceState.containsKey("maxRes")) {
                 maxRes =
-                    if (savedInstanceState.getInt("maxRes") > -1) savedInstanceState.getInt("maxRes") else MyCameraActivity.MAX_RES_DEFAULT
+                    if (savedInstanceState.getInt("maxRes") > -1) savedInstanceState.getInt("maxRes") else MAX_RES_DEFAULT
                 //currentFile = new File((String) savedInstanceState.getString("currentFile"));
                 //currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
                 //currentDir = new File((String) savedInstanceState.getString("currentDir"));

@@ -35,12 +35,12 @@ class ImagePreviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = layoutInflater.inflate(R.layout.image_preview, container, false)
-        imageView = view.findViewById<ImageViewSelection>(R.id.currentImageView)
+        imageView = view as ImageViewSelection
         imageView?.setOnClickListener({
 
         })
 
-        return view
+        return imageView
     }
 
 }
