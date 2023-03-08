@@ -42,8 +42,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.snackbar.Snackbar
@@ -149,9 +151,8 @@ class MainActivity : AppCompatActivity() {
 
     fun addButtonsListeners(activity: Activity, appData: AppData?, savedInstanceState: Bundle?) {
         maxRes = Utils().getMaxRes(activity, savedInstanceState)
-        imageView = findViewById<FrameLayout>(R.id.imageViewSelection)
-            .findFragment<ImagePreviewFragment>().view as ImageViewSelection
-        //.findViewById<ImageViewSelection>(R.id.currentImageView)
+        val imageView1 = findViewById<FragmentContainerView>(R.id.imageViewSelection)
+            .findViewById<ImageViewSelection>(R.id.currentImageView) as ImageViewSelection?
         rectfs = java.util.ArrayList()
         loaded = true
         currentBitmap = Utils().getCurrentFile(activity.intent)

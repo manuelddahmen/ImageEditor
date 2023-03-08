@@ -27,20 +27,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 class ImagePreviewFragment : Fragment() {
-    private var imageView: ImageViewSelection? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = layoutInflater.inflate(R.layout.image_preview, container, false)
-        imageView = view as ImageViewSelection
-        imageView?.setOnClickListener({
-
-        })
-
-        return imageView
+        return view
     }
 
 }
