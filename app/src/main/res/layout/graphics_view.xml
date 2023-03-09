@@ -24,7 +24,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.FeatureAppmain"
-    style="?android:attr/buttonBarButtonStyle">
+
+    >
 
     <!-- <androidx.fragment.app.FragmentContainerView
          android:id="@+id/nav_host_fragment"
@@ -42,7 +43,8 @@
         android:layout_height="match_parent"
         app:srcCompat="@drawable/ic_photo"
         android:theme="@style/Theme.FeatureAppmain"
-        style="?android:attr/buttonBarButtonStyle"
+
+
         android:contentDescription="@string/application_of_formulas" />
 
     <Button
@@ -52,7 +54,8 @@
         android:text="@string/draw2"
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.FeatureAppmain"
-        style="?android:attr/buttonBarButtonStyle"
+
+
         app:layout_constraintLeft_toLeftOf="parent" />
     <!--
         <Button
@@ -62,7 +65,8 @@
             android:text="@string/back"
             app:layout_constraintTop_toTopOf="parent"
             android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle"
+
+
             app:layout_constraintRight_toRightOf="parent" />
     -->
 </androidx.constraintlayout.widget.ConstraintLayout>

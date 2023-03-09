@@ -24,14 +24,16 @@
     android:layout_width="match_parent"
     android:layout_height="192dp"
     android:theme="@style/Theme.FeatureAppmain"
-    style="?android:attr/buttonBarButtonStyle">
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:orientation="vertical"
         android:theme="@style/Theme.FeatureAppmain"
-        style="?android:attr/buttonBarButtonStyle"
+
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -42,7 +44,8 @@
             android:orientation="horizontal"
             android:id="@+id/line1"
             android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle">
+
+            >
             <!--
                         <ImageView
                             android:id="@+id/imageView2"
@@ -52,7 +55,8 @@
                             app:srcCompat="@android:drawable/ic_media_ff"
                             android:contentDescription="@string/effect_image_to_image"
                             android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle" />
+
+             />
             -->
 
             <TextView
@@ -64,7 +68,8 @@
                 android:textSize="36sp"
                 android:text="@string/effect_name"
                 android:theme="@style/Theme.FeatureAppmain"
-                style="?android:attr/buttonBarButtonStyle" />
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +79,8 @@
             android:id="@+id/line2"
             android:orientation="horizontal"
             android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle"
+
+
             app:layout_constraintTop_toBottomOf="@id/line1">
 
             <Button
@@ -84,7 +90,8 @@
                 android:height="48dp"
                 android:text="@string/add"
                 android:theme="@style/Theme.FeatureAppmain"
-                style="?android:attr/buttonBarButtonStyle" />
+
+                />
 
             <Button
                 android:id="@+id/buttonRemoveFromList"
@@ -93,7 +100,8 @@
                 android:height="48dp"
                 android:text="@string/remove"
                 android:theme="@style/Theme.FeatureAppmain"
-                style="?android:attr/buttonBarButtonStyle" />
+
+                />
 
             <Button
                 android:id="@+id/commentEffect"
@@ -102,7 +110,8 @@
                 android:height="48dp"
                 android:text="@string/commentEffect"
                 android:theme="@style/Theme.FeatureAppmain"
-                style="?android:attr/buttonBarButtonStyle" />
+
+                />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
