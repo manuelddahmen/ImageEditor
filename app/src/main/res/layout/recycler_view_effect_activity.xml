@@ -55,5 +55,5 @@
         android:text="@string/apply_effects"
         android:layout_weight="0.1"
         android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle" />
+        style="?android:attr/buttonBarButtonStyle" />
 </LinearLayout>

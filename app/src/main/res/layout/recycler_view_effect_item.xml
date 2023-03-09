@@ -102,7 +102,7 @@
                 android:height="48dp"
                 android:text="@string/commentEffect"
                 android:theme="@style/Theme.FeatureAppmain"
-            style="?android:attr/buttonBarButtonStyle" />
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
