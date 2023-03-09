@@ -24,6 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/Theme.FeatureAppmain"
+    style="?android:attr/buttonBarButtonStyle"
     android:id="@+id/fragment_choose_effects">
 
 
@@ -45,7 +46,8 @@
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
         android:layout_weight="0.8"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="@style/Theme.FeatureAppmain"
+        style="?android:attr/buttonBarButtonStyle" />
 
     <Button
         android:layout_width="match_parent"
@@ -53,5 +55,6 @@
         android:id="@+id/applyEffects"
         android:text="@string/apply_effects"
         android:layout_weight="0.1"
-        android:theme="@style/Theme.FeatureAppmain" />
+        android:theme="@style/Theme.FeatureAppmain"
+        style="?android:attr/buttonBarButtonStyle" />
 </fragment>

@@ -23,7 +23,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/Theme.FeatureAppmain">
+    android:theme="@style/Theme.FeatureAppmain"
+    style="?android:attr/buttonBarButtonStyle">
 
     <!-- <androidx.fragment.app.FragmentContainerView
          android:id="@+id/nav_host_fragment"
@@ -44,7 +45,8 @@
         android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:theme="@style/Theme.FeatureAppmain">
+        android:theme="@style/Theme.FeatureAppmain"
+        style="?android:attr/buttonBarButtonStyle">
 
         <TableRow>
 
@@ -57,13 +59,15 @@
                 android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:text="x"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonX"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="x" />
         </TableRow>
 
@@ -78,13 +82,15 @@
                 android:inputType="text"
                 android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="y" />
         </TableRow>
 
@@ -99,13 +105,15 @@
                 android:inputType="text"
                 android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonZ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="z" />
         </TableRow>
 
@@ -120,13 +128,15 @@
                 android:inputType="text"
                 android:minHeight="28dp"
                 android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="r" />
         </TableRow>
 
@@ -141,13 +151,15 @@
                 android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="g" />
         </TableRow>
 
@@ -162,13 +174,15 @@
                 android:tooltipText="complete"
                 android:layout_height="wrap_content"
                 android:text="b"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="b" />
         </TableRow>
 
@@ -183,13 +197,15 @@
                 android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:text="a"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="a" />
         </TableRow>
 
@@ -204,13 +220,15 @@
                 android:minHeight="28dp"
                 android:tooltipText="complete"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="t" />
         </TableRow>
 
@@ -225,13 +243,15 @@
                 android:tooltipText="complete"
                 android:text="u"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="u" />
         </TableRow>
 
@@ -245,13 +265,15 @@
                 android:inputType="text"
                 android:tooltipText="complete"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain" />
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/buttonV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="v" />
         </TableRow>
 
@@ -263,7 +285,8 @@
                 android:orientation="horizontal"
                 android:id="@+id/buttons"
 
-                android:theme="@style/Theme.FeatureAppmain">
+                android:theme="@style/Theme.FeatureAppmain"
+                style="?android:attr/buttonBarButtonStyle">
 
                 <!--
                                 <Button
@@ -271,6 +294,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle"
                                     android:text="@string/back" />
                 -->
                 <Button
@@ -278,6 +302,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:text="@string/save" />
 
                 <Button
@@ -285,6 +310,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:text="@string/view" />
 
             </LinearLayout>

@@ -32,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeatureAppmain"
+        style="?android:attr/buttonBarButtonStyle"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
@@ -50,21 +51,25 @@
             android:name=".TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".ChooseEffectsCompose"
             android:exported="false"
             android:label="@string/title_activity_choose_effects_compose"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".ChooseEffectsActivity2"
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".ChooseEffectsActivity"
             android:exported="false"
-            android:theme="@style/Theme.FeatureAppmain">
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle">
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -82,7 +87,8 @@
         <activity
             android:name=".MyCameraActivity"
             android:exported="true"
-            android:theme="@style/Theme.FeatureAppmain">
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle">
 
             <!-- Register as a system camera app -->
             <intent-filter>
@@ -130,31 +136,37 @@
         <activity
             android:name=".LicenceUserData"
             android:exported="false"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".FormulaStore"
             android:exported="false"
             android:label="@string/title_activity_formula_store"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".LicenceUserData2"
             android:exported="false"
-            android:theme="@style/Theme.FeatureAppmain" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
             android:name=".Calculator"
             android:exported="true"
             android:label="Simple Calculator"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".GraphicsActivity"
             android:exported="true"
             android:label="Draw graphics"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
         <activity
             android:name=".GraphicsActivityView"
             android:exported="true"
             android:label="Draw graphics"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <provider
             android:name=".MyFileProvider"
