@@ -37,4 +37,10 @@
         <item name="exampleColor">@color/light_blue_400</item>
     </style>
 
+    <style name="Base.Widget.AppCompat.Button" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/light_blue_400</item>
+
+    </style>
+
+
 </resources>
