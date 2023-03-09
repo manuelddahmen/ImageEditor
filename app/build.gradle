@@ -6,7 +6,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
 
-def code = 1990000
+def code = 2000000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
