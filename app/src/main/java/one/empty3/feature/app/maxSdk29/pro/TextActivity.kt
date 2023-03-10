@@ -101,32 +101,33 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
             applyText()
-
-            try {
-                val textIntent = Intent(Intent.ACTION_VIEW)
-                val name: String = ("" + UUID.randomUUID())
-
-                //val file = Utils().writePhoto(this, currentImage, name)
-
-                textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
-                textIntent.putExtra("currentFile", this.currentFile)
-                textIntent.setClass(
-                    applicationContext,
-                    Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
-                )
-
-                maxRes = Utils().getMaxRes(this, savedInstanceState)
-
-                startActivity(textIntent)
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-            }
+            back()
         }
-        textApply.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            applyText()
-        })
+
 
         initImageView()
+    }
+
+    fun back(): Unit {
+        try {
+            val textIntent = Intent(Intent.ACTION_VIEW)
+            val name: String = ("" + UUID.randomUUID())
+
+            //val file = Utils().writePhoto(this, currentImage, name)
+
+            textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
+            textIntent.putExtra("currentFile", this.currentFile)
+            textIntent.setClass(
+                applicationContext,
+                Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
+            )
+
+            maxRes = Utils().getMaxRes(this, null)
+
+            startActivity(textIntent)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
     }
 
     fun initImageView() {
