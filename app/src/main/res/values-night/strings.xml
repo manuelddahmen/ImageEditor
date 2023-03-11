@@ -24,7 +24,7 @@
     <string name="buttonCodeBfore">Add code before</string>
     <string name="buttonCodeAfter">Add code after</string>
     <string name="backToGraphics">Back to Graphics view</string>
-    <string name="choose_shader_like">GLShader-like</string>
+    <string name="choose_shader_like">Math</string>
     <string name="p_x_y_color">Type for points p(x,y) = Color(r, g, b)</string>
     <string name="go_to_previous_activity">Go to previous activity</string>
     <string name="undo">Undo</string>
