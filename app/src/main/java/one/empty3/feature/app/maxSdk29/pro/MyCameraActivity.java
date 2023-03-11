@@ -51,7 +51,6 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,7 +101,7 @@ public class MyCameraActivity extends AppCompatActivity {
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 9999;
     private static final int FILESYSTEM_WRITE_PICTURE = 1111;
     private static final int MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777;
-    private ImageView imageView;
+    private ImageViewSelection imageView;
     private File currentDir;
     private File currentBitmap;
     private File currentFileOriginalResolution;
@@ -135,23 +134,23 @@ public class MyCameraActivity extends AppCompatActivity {
                         fragmentNavigation)
                 .commit();
 */
-
+/*
         Undo dataWithUndo = Undo.getUndo();
         dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
+  */
         maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
-        imageView = (ImageView) this.findViewById(R.id.currentImageView);
+        imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
 
         rectfs = new ArrayList<RectF>();
 
         loaded = true;
 
-        loadInstanceState();
+        //loadInstanceState();
+
         currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
 
-        if (new Utils().loadImageInImageView(currentFile, imageView))
-            loaded = true;
-
+        if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
 
         thisActivity = this;
 
@@ -180,7 +179,7 @@ public class MyCameraActivity extends AppCompatActivity {
         effectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView = findViewById(R.id.currentImageView);
+                imageView = findViewById(R.id.currentImageViewSelection);
                 Intent intent = new Intent(Intent.ACTION_EDIT);
                 System.err.println("Click on Effect button");
                 if (currentFile != null || currentBitmap != null) {
@@ -207,7 +206,7 @@ public class MyCameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentFile != null) {
-                    imageView = findViewById(R.id.currentImageView);
+                    imageView = findViewById(R.id.currentImageViewSelection);
                     Intent intent = new Intent(Intent.ACTION_EDIT);
                     System.err.println("Click on Effect button");
                     if (currentFile != null || currentBitmap != null) {
@@ -399,7 +398,7 @@ public class MyCameraActivity extends AppCompatActivity {
             }
         });
         imageView.setOnTouchListener((View v, MotionEvent event) -> {
-            imageView = findViewById(R.id.currentImageView);
+            imageView = findViewById(R.id.currentImageViewSelection);
             if (currentFile != null) {
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
@@ -429,7 +428,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 }
                 if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
-                    ImageViewSelection viewById = findViewById(R.id.currentImageView);
+                    ImageViewSelection viewById = findViewById(R.id.currentImageViewSelection);
                     viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (float) drawPointA.getY(), (float) drawPointB.getX(), (float) drawPointB.getY()));
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
@@ -603,7 +602,7 @@ public class MyCameraActivity extends AppCompatActivity {
     public void saveImageState(boolean imageViewOriginal) {
         boolean file = true;
 
-        imageView = findViewById(R.id.currentImageView);
+        imageView = findViewById(R.id.currentImageViewSelection);
         if (imageView == null) return;
 
         Drawable drawable = imageView.getDrawable();
@@ -709,7 +708,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 }
 
                 if (imageViewBitmap != null) {
-                    imageView = (ImageView) this.findViewById(R.id.currentImageView);
+                    imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
                     if (imageView != null) {
                         imageView.setImageBitmap(imageViewBitmap);
                         currentFile = imageFile;
@@ -864,7 +863,7 @@ public class MyCameraActivity extends AppCompatActivity {
             photo = BitmapFactory.decodeStream(fileInputStream);
         }
 
-        imageView = findViewById(R.id.currentImageView);
+        imageView = findViewById(R.id.currentImageViewSelection);
 
         imageView.setImageBitmap(photo);
 
@@ -955,7 +954,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 Bitmap photo = bitmap;
-                imageView = findViewById(R.id.currentImageView);
+                imageView = findViewById(R.id.currentImageViewSelection);
                 imageView.setImageBitmap(photo);
                 System.err.printf("Image set 4/4");
                 File f = writePhoto(photo, "MyImage");
@@ -1208,14 +1207,14 @@ public class MyCameraActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                imageView = findViewById(R.id.currentImageView);
+                imageView = findViewById(R.id.currentImageViewSelection);
             }
         } catch (Exception e) {
             Log.i("MyCameraActivity", "Error in OnRestoreState");
         }
 
 
-        this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
+        this.imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
         thisActivity = this;
 
         super.onRestoreInstanceState(savedInstanceState);
@@ -1250,7 +1249,7 @@ public class MyCameraActivity extends AppCompatActivity {
     public void unselectA(View view) {
         drawPointA = null;
         drawPointB = null;
-        ImageViewSelection imageView = findViewById(R.id.currentImageView);
+        ImageViewSelection imageView = findViewById(R.id.currentImageViewSelection);
         if (rectfs.size() >= 1) rectfs.remove(rectfs.size() - 1);
         imageView.setDrawingRectState(false);
     }

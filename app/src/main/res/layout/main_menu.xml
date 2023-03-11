@@ -130,7 +130,7 @@
     </LinearLayout>
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-        android:id="@+id/currentImageView"
+        android:id="@+id/currentImageViewSelection"
         android:theme="@style/Theme.FeatureAppmain"
 
 

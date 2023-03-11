@@ -55,7 +55,7 @@
             android:background="@color/light_blue_A400"
             app:layout_constraintEnd_toStartOf="@id/buttonDraw"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/currentImageViewSelection" />
 
         <Button
             android:id="@+id/buttonDraw"
@@ -67,7 +67,7 @@
             android:layout_height="48dp"
             android:text="@string/draw_button_text"
             app:layout_constraintStart_toEndOf="@id/buttonAddText"
-            app:layout_constraintTop_toBottomOf="@+id/currentImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/currentImageViewSelection" />
 
 
         <Button
@@ -79,7 +79,7 @@
             android:background="@color/light_blue_A400"
             android:text="@string/choose_effects"
             app:layout_constraintStart_toEndOf="@id/buttonDraw"
-            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageViewSelection"
             android:layout_width="wrap_content" />
 
         <Button
@@ -90,7 +90,7 @@
             android:background="@color/light_blue_A400"
             android:text="@string/choose_shader_like"
             app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
-            app:layout_constraintTop_toBottomOf="@+id/currentImageView"
+            app:layout_constraintTop_toBottomOf="@+id/currentImageViewSelection"
             android:layout_width="wrap_content"
             android:id="@+id/activity_compute_pixels" />
 
