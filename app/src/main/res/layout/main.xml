@@ -27,20 +27,144 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/main_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/main_menu" />
 
     <LinearLayout
+        android:id="@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/currentImageViewSelection"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            app:layout_constraintBottom_toTopOf="@+id/selectButtonsLayout"
+            android:id="@+id/linearChooseButtons"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:orientation="horizontal"
+            android:layout_height="48dp">
+
+            <Button
+                android:id="@+id/takePhotoButton"
+                android:theme="@style/Base.Widget.AppCompat.Button"
+
+
+                android:layout_height="48dp"
+                android:autofillHints="@string/capturePhoto"
+                android:contentDescription="@string/capturePhoto"
+                android:drawableStart="@drawable/apn"
+                android:text="@string/capturePhoto"
+                android:layout_width="wrap_content" />
+
+            <Button
+                android:id="@+id/choosePhotoButton"
+                android:theme="@style/Base.Widget.AppCompat.Button"
+
+                android:layout_height="48dp"
+                android:autofillHints="@string/choosePhoto"
+                android:contentDescription="@string/choosePhoto"
+                android:drawableStart="@drawable/folder"
+                android:text="@string/choosePhoto"
+                android:background="@color/light_blue_A200"
+                android:layout_width="wrap_content" />
+
+            <Button
+                android:id="@+id/save"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_A200"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/share"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_A200"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/share" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/selectButtonsLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearChooseButtons"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="48dp">
+
+            <Button
+                android:id="@+id/draw_activity"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_400"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/draw_activity" />
+
+
+            <Button
+                android:id="@+id/unselect_rect"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_400"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/unselect" />
+
+
+            <Button
+                android:id="@+id/copy"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_400"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="48dp"
+                android:text="@string/copy" />
+
+            <Button
+                android:id="@+id/paste"
+                android:theme="@style/Theme.FeatureAppmain"
+
+
+                android:background="@color/light_blue_400"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/paste" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+        android:id="@+id/currentImageViewSelection"
+        android:theme="@style/Theme.FeatureAppmain"
+        app:layout_constraintTop_toBottomOf="@id/main_menu"
+        app:layout_constraintBottom_toTopOf="@+id/effectButtons"
+
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
+        android:src="@drawable/icon"
+        android:background="@color/black" />
+
+
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/aboutParameters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_menu"
+        app:layout_constraintTop_toBottomOf="@id/currentImageViewSelection"
 
         android:id="@+id/effectButtons">
 

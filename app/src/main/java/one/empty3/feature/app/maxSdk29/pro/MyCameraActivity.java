@@ -59,6 +59,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.installations.interop.BuildConfig;
 
 import java.io.ByteArrayOutputStream;
@@ -146,9 +147,12 @@ public class MyCameraActivity extends AppCompatActivity {
 
         loaded = true;
 
-        //loadInstanceState();
+        loadInstanceState();
 
         currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
+
+        if (currentFile == null)
+            Snackbar.make(imageView, "No image loaded", 5).show();
 
         if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
 
@@ -602,7 +606,6 @@ public class MyCameraActivity extends AppCompatActivity {
     public void saveImageState(boolean imageViewOriginal) {
         boolean file = true;
 
-        imageView = findViewById(R.id.currentImageViewSelection);
         if (imageView == null) return;
 
         Drawable drawable = imageView.getDrawable();
@@ -708,7 +711,6 @@ public class MyCameraActivity extends AppCompatActivity {
                 }
 
                 if (imageViewBitmap != null) {
-                    imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
                     if (imageView != null) {
                         imageView.setImageBitmap(imageViewBitmap);
                         currentFile = imageFile;
@@ -1039,9 +1041,17 @@ public class MyCameraActivity extends AppCompatActivity {
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == Activity.RESULT_OK) {
             InputStream choose_directoryData = null;
             choose_directoryData = getRealPathFromURI(data);
+            if (choose_directoryData == null) {
+                try {
+                    choose_directoryData = new FileInputStream(data.getDataString());
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
             Bitmap photo = null;
             System.err.println(choose_directoryData);
-            ;
             photo = BitmapFactory.decodeStream(choose_directoryData);
             try {
                 System.err.println("Get file (bitmap) : " + photo);
