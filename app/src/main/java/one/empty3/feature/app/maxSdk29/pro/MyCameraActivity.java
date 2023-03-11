@@ -77,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.UUID;
 
 import javaAnd.awt.Point;
@@ -85,6 +86,8 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 public class MyCameraActivity extends AppCompatActivity {
+    Properties properties = new Properties();
+
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
     private static final Integer MAX_TARDINESS = 3000;
     static final int MAX_RES_DEFAULT = 200;
@@ -143,7 +146,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
         loaded = true;
 
-
+        loadInstanceState();
         currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
 
         if (new Utils().loadImageInImageView(currentFile, imageView))
@@ -312,7 +315,7 @@ public class MyCameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentFile != null) {
 
-                    saveImageState(isWorkingResolutionOriginal());
+                    saveImageState(true);
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                     int requestExternalStorage = 1;
@@ -337,7 +340,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     }
 
 
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", target == null ? currentFile : target.toFile());
+                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
 
 
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -506,8 +509,33 @@ public class MyCameraActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController((androidx.appcompat.widget.Toolbar) toolbar,
                 (NavController) navController, (AppBarConfiguration) appBarConfiguration);
 */
+
+
     }
 
+    public void loadInstanceState() {
+        properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream(getFilesFile("app_state.properties")));
+        } catch (FileNotFoundException e) {
+            return;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        for (Object stringO : properties.keySet()) {
+            if (stringO instanceof String) {
+                currentFile = properties.get("currentFile") != null ? new File((String) properties.get("currentFile")) : currentFile;
+                currentBitmap = properties.get("currentBitmap") != null ? new File((String) properties.get("currentBitmap")) : currentBitmap;
+                currentBitmap = properties.get("currentDir") != null ? new File((String) properties.get("currentDir")) : currentDir;
+                maxRes = (properties.get("maxRes") != null) ? (int) properties.get("maxRes") : maxRes;
+
+
+            }
+        }
+    }
 
     class LoadImage extends AsyncTask {
 
@@ -1153,7 +1181,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-
+        loadInstanceState();
 
         loadImageState(isWorkingResolutionOriginal());
 
@@ -1196,12 +1224,22 @@ public class MyCameraActivity extends AppCompatActivity {
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
         saveImageState(isWorkingResolutionOriginal());
         if (outState != null) {
-            //outState.putString("currentFile", currentFile.getAbsolutePath());
-            //outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
-            //outState.putString("currentDir", currentDir.getAbsolutePath());
-            //outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
+            outState.putString("currentFile", currentFile.getAbsolutePath());
+            outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
+            outState.putString("currentDir", currentDir.getAbsolutePath());
+            outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
             outState.putInt("maxRes", maxRes);
-            this.imageView = (ImageView) this.findViewById(R.id.currentImageView);
+
+            properties = new Properties();
+            for (String string : outState.keySet()) {
+                properties.put(string, outState.get(string));
+            }
+            try {
+                properties.save(new FileOutputStream(getFilesFile("app_state.properties"))
+                        , "Properties from app state");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
         super.onSaveInstanceState(outState, outPersistentState);
 

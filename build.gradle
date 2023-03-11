@@ -12,6 +12,7 @@ buildscript {
         maven { url 'https://developer.huawei.com/repo/' }
 
     }
+
     dependencies {
         // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-compiler
         classpath 'org.jetbrains.kotlin:kotlin-compiler:1.8.0'
