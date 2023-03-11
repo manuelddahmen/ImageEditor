@@ -66,7 +66,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         */maxRes = Utils().getMaxRes(this, savedInstanceState)
 
 
-        val imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
 
         val currentFile1 = Utils().getCurrentFile(intent)
         if (currentFile1 != null) {

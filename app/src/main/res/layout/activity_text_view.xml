@@ -25,26 +25,13 @@
     android:layout_height="match_parent"
     style="@style/Theme.FeatureAppmain">
 
-    <!-- <androidx.fragment.app.FragmentContainerView
-         android:id="@+id/nav_host_fragment"
-         android:name="androidx.navigation.fragment.NavHostFragment"
-         android:layout_width="match_parent"
-         android:layout_height="60dp"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:defaultNavHost="true"
-         app:navGraph="@navigation/nav_graph" />
- -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        style="@style/Theme.FeatureAppmain">
-
-        <include
-            layout="@layout/main_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        style="@style/Theme.FeatureAppmain"
+        android:id="@+id/text_details">
 
         <EditText
             android:text="@string/textDp"
@@ -52,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             style="@style/Theme.FeatureAppmain"
-            android:autofillHints="Text size in dp (~pixels*4) "></EditText>
+            android:autofillHints="Text size in dp (~pixels*4) " />
 
         <EditText
             android:id="@+id/textViewOnImage"
@@ -74,31 +61,16 @@
             android:text="@string/apply"
             style="@style/Theme.FeatureAppmain" />
     </LinearLayout>
-    <!--   <GridLayout android:rowCount="2" android:columnCount="3"
-           android:layout_width="wrap_content" android:layout_margin="1dp" android:layout_marginBottom="1dp"
-           android:layout_marginEnd="1dp" android:layout_marginHorizontal="1dp" android:layout_marginLeft="1dp"
-           android:layout_marginRight="1dp" android:layout_marginStart="0dp" android:layout_marginTop="0dp"
-           android:layout_marginVertical="0dp" android:id="@+id/layoutGridText" android:orientation="horizontal"
-           android:layout_height="wrap_content"
-           tools:ignore="MissingConstraints">
-           <Button android:layout_column="0" android:layout_row="0" android:text="@string/grid_text_00">
 
-           </Button>
-           <Button android:layout_column="1" android:layout_row="0" android:text="@string/grid_text_01">
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+        android:id="@+id/imageViewSelection"
+        android:theme="@style/Theme.FeatureAppmain"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
+        android:src="@drawable/icon"
+        app:layout_constraintTop_toBottomOf="@id/text_details"
+        android:background="@color/black" />
 
-           </Button>
-           <Button android:layout_column="2" android:layout_row="0" android:text="@string/grid_text_02">
-
-           </Button>
-           <Button android:layout_column="0" android:layout_row="1" android:text="@string/grid_text_10">
-
-           </Button>
-           <Button android:layout_column="1" android:layout_row="1" android:text="@string/grid_text_11">
-
-           </Button>
-           <Button android:layout_column="2" android:layout_row="1" android:text="@string/grid_text_12">
-
-           </Button>
-       </GridLayout>
-   -->
 </androidx.constraintlayout.widget.ConstraintLayout>
