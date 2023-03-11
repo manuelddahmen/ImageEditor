@@ -40,34 +40,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         style="@style/Theme.FeatureAppmain">
-        <!---
-                <Button
-                    android:id="@+id/buttonTextBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:width="30dp"
-                    android:height="30dp"
-                    android:text="@string/back_button_text_activity"
-                    style="@style/Theme.FeatureAppmain" />
-        -->
-        <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-            android:id="@+id/imageViewOnImage"
+
+        <include
+            layout="@layout/main_menu"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:contentDescription="@string/image_pour_l_ecriture_du_texte"
-            app:srcCompat="@drawable/ic_outer_circle"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="5dp"
-            style="@style/Theme.FeatureAppmain" />
-        <!--
-                <com.google.android.material.slider.Slider
-                    android:valueFrom="48.0"
-                    android:valueTo="200.0"
-                    android:id="@+id/font_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp" style="@style/Theme.FeatureAppmain">
-                </com.google.android.material.slider.Slider>
-        -->
+            android:layout_height="match_parent" />
+
         <EditText
             android:text="@string/textDp"
             android:id="@+id/font_size"

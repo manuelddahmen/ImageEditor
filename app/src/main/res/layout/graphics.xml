@@ -37,311 +37,315 @@
          app:defaultNavHost="true"
          app:navGraph="@navigation/nav_graph" />
  -->
-    <TableLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tableLayout1"
-        android:layout_marginLeft="10dp"
-        android:padding="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:theme="@style/Theme.FeatureAppmain"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tableLayout1"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:theme="@style/Theme.FeatureAppmain"
+
+            >
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:text="x"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
 
-        >
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewX"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:text="x"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonX"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="x" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewY"
-                android:layout_width="match_parent"
-                android:text="y"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="y" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewZ"
-                android:layout_width="match_parent"
-                android:text="z"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonZ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="z" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewR"
-                android:text="r"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="r" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewG"
-                android:layout_width="match_parent"
-                android:text="g"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="g" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewB"
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:layout_height="wrap_content"
-                android:text="b"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="b" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewA"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:text="a"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="a" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewT"
-                android:text="t"
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="t" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewU"
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:minHeight="28dp"
-                android:tooltipText="complete"
-                android:text="u"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonU"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="u" />
-        </TableRow>
-
-        <TableRow>
-
-            <EditText
-
-                android:id="@+id/textViewV"
-                android:text="v"
-                android:layout_width="match_parent"
-                android:inputType="text"
-                android:tooltipText="complete"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-                />
-
-            <Button
-                android:id="@+id/buttonV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.FeatureAppmain"
-
-
-                android:text="v" />
-        </TableRow>
-
-        <TableRow>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/buttons"
-
-                android:theme="@style/Theme.FeatureAppmain"
-
-                >
-
-                <!--
-                                <Button
-                                    android:id="@+id/buttonBack"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:theme="@style/Theme.FeatureAppmain"
-
-
-                                    android:text="@string/back" />
-                -->
                 <Button
-                    android:id="@+id/buttonSave"
+                    android:id="@+id/buttonX"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
-                    android:text="@string/save" />
+                    android:text="x" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewY"
+                    android:layout_width="match_parent"
+                    android:text="y"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
 
                 <Button
-                    android:id="@+id/buttonView"
+                    android:id="@+id/buttonY"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
-                    android:text="@string/view" />
+                    android:text="y" />
+            </TableRow>
 
-            </LinearLayout>
+            <TableRow>
 
-        </TableRow>
-    </TableLayout>
+                <EditText
 
+                    android:id="@+id/textViewZ"
+                    android:layout_width="match_parent"
+                    android:text="z"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="z" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewR"
+                    android:text="r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="r" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewG"
+                    android:layout_width="match_parent"
+                    android:text="g"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="g" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewB"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:layout_height="wrap_content"
+                    android:text="b"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="b" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:text="a"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="a" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewT"
+                    android:text="t"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="t" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewU"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:minHeight="28dp"
+                    android:tooltipText="complete"
+                    android:text="u"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="u" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+
+                    android:id="@+id/textViewV"
+                    android:text="v"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:tooltipText="complete"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Theme.FeatureAppmain"
+
+
+                    android:text="v" />
+            </TableRow>
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/buttons"
+
+                    android:theme="@style/Theme.FeatureAppmain"
+
+                    >
+
+                    <!--
+                                    <Button
+                                        android:id="@+id/buttonBack"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:theme="@style/Theme.FeatureAppmain"
+
+
+                                        android:text="@string/back" />
+                    -->
+                    <Button
+                        android:id="@+id/buttonSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/Theme.FeatureAppmain"
+
+
+                        android:text="@string/save" />
+
+                    <Button
+                        android:id="@+id/buttonView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/Theme.FeatureAppmain"
+
+
+                        android:text="@string/view" />
+
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

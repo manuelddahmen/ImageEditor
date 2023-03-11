@@ -128,4 +128,17 @@
             android:layout_height="48dp"
             android:text="@string/paste" />
     </LinearLayout>
+
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+        android:id="@+id/currentImageView"
+        android:theme="@style/Theme.FeatureAppmain"
+
+
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
+        android:src="@drawable/icon"
+        android:background="@color/black" />
+
 </LinearLayout>

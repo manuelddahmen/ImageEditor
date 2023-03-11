@@ -66,7 +66,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         */maxRes = Utils().getMaxRes(this, savedInstanceState)
 
 
-        val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
 
         val currentFile1 = Utils().getCurrentFile(intent)
         if (currentFile1 != null) {
@@ -131,7 +131,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
     }
 
     fun initImageView() {
-        val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
         imageView.setOnClickListener {
         }
         imageView.setOnTouchListener(object : View.OnTouchListener {
@@ -193,11 +193,11 @@ class TextActivity() : AppCompatActivity(), Parcelable {
   */
         val textString: String =
             (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewOnImage, textString)
+        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewSelection, textString)
         if (drawTextToBitmap != null) {
             currentFile = drawTextToBitmap
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            val imageView = findViewById<ImageViewSelection>(R.id.imageViewOnImage)
+            val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
             imageView.setImageBitmap(this.currentImage)
             System.out.println("ImageView Text UPDATED")
         }
@@ -282,7 +282,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
 
 
     fun writeText() {
-        var imageView = findViewById<ImageView>(R.id.imageViewOnImage)
+        var imageView = findViewById<ImageView>(R.id.imageViewSelection)
         var text = findViewById<EditText>(R.id.textViewOnImage)?.text
 
         var bmpFile = imageView.drawable
