@@ -130,7 +130,7 @@ public class GraphicsActivityView extends AppCompatActivity {
     }
 
     private void draw() {
-        ImageView image = findViewById(R.id.imageViewSelection);
+        ImageView image = findViewById(R.id.currentImageView);
 
         int w = getMaxRes();
         int h = getMaxRes();

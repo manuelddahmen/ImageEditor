@@ -28,8 +28,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="main_menu">
+        android:layout_height="match_parent">
 
         <TableLayout
             android:orientation="vertical"
@@ -40,9 +39,7 @@
             android:padding="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:theme="@style/Theme.FeatureAppmain"
-
-            >
+            android:theme="@style/Theme.FeatureAppmain">
 
             <TableRow>
 
@@ -52,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:text="x"
                     android:theme="@style/Theme.FeatureAppmain"
@@ -62,7 +59,7 @@
                 <Button
                     android:id="@+id/buttonX"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -78,7 +75,7 @@
                     android:text="y"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:theme="@style/Theme.FeatureAppmain"
 
@@ -87,7 +84,7 @@
                 <Button
                     android:id="@+id/buttonY"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -101,9 +98,9 @@
                     android:id="@+id/textViewZ"
                     android:layout_width="match_parent"
                     android:text="z"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:theme="@style/Theme.FeatureAppmain"
 
@@ -126,9 +123,9 @@
                     android:id="@+id/textViewR"
                     android:text="r"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:theme="@style/Theme.FeatureAppmain"
 
@@ -137,7 +134,7 @@
                 <Button
                     android:id="@+id/buttonR"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -152,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:text="g"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
@@ -162,7 +159,7 @@
                 <Button
                     android:id="@+id/buttonG"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -176,7 +173,7 @@
                     android:id="@+id/textViewB"
                     android:layout_width="match_parent"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:layout_height="wrap_content"
                     android:text="b"
@@ -187,7 +184,7 @@
                 <Button
                     android:id="@+id/buttonB"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -202,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:text="a"
                     android:theme="@style/Theme.FeatureAppmain"
@@ -212,7 +209,7 @@
                 <Button
                     android:id="@+id/buttonA"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -227,7 +224,7 @@
                     android:text="t"
                     android:layout_width="match_parent"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:layout_height="wrap_content"
                     android:theme="@style/Theme.FeatureAppmain"
@@ -237,7 +234,7 @@
                 <Button
                     android:id="@+id/buttonT"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -251,7 +248,7 @@
                     android:id="@+id/textViewU"
                     android:layout_width="match_parent"
                     android:inputType="text"
-                    android:minHeight="28dp"
+                    android:minHeight="48dp"
                     android:tooltipText="complete"
                     android:text="u"
                     android:layout_height="wrap_content"
@@ -262,7 +259,7 @@
                 <Button
                     android:id="@+id/buttonU"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -286,7 +283,7 @@
                 <Button
                     android:id="@+id/buttonV"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -318,7 +315,7 @@
                     <Button
                         android:id="@+id/buttonSave"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:theme="@style/Theme.FeatureAppmain"
 
 
@@ -327,7 +324,7 @@
                     <Button
                         android:id="@+id/buttonView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:theme="@style/Theme.FeatureAppmain"
 
 
