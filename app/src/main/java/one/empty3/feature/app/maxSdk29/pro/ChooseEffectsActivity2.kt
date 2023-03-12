@@ -23,18 +23,25 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.PermissionGroupInfo
+import android.content.pm.PermissionInfo
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.webkit.PermissionRequest
 import android.widget.Button
 import android.widget.EditText
 import android.widget.VideoView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker.PermissionResult
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
+import java.security.Permission
+import java.security.Permissions
 
 class ChooseEffectsActivity2 : AppCompatActivity() {
     private val INT_READ_STORAGE: Int = 5152112
@@ -181,6 +188,7 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
                     )
 
                 }
+
                 var currentProcessFile: File = fileIn
                 val currentProcessDir = File(
                     fileIn.absolutePath.substring(

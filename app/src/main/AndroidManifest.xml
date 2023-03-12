@@ -92,7 +92,11 @@
             android:theme="@style/Theme.FeatureAppmain"
 
             >
-
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <!-- Register as a system camera app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
