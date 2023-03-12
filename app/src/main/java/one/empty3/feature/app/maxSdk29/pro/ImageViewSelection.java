@@ -26,7 +26,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -84,7 +87,7 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
             polyLine.getPoints().add(new Point3D((double) rect.right, (double) rect.bottom, 0.0));
             polyLine.getPoints().add(new Point3D((double) rect.left, (double) rect.bottom, 0.0));
             pixels.plotCurve(polyLine, new ColorTexture(Color.YELLOW));
-            setImageBitmap(pixels.getImage().getBitmap());
+            setImageBitmap2(pixels.getImage().getBitmap());
         }
 
 
@@ -105,9 +108,17 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         return rect;
     }
 
-    @Override
-    public void setImageBitmap(Bitmap bm) {
-        super.setImageBitmap(bm);
-        this.pixels = new PixM(bm);
+
+    public void setImageBitmap2(Bitmap bm) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("ImageViewSelection::setImageBitmap",
+                        "change image on UI thread");
+                setImageBitmap(bm);
+                pixels = new PixM(bm);
+            }
+        });
+
     }
 }

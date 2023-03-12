@@ -56,7 +56,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -103,7 +102,7 @@ public class MyCameraActivity extends AppCompatActivity {
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 9999;
     private static final int FILESYSTEM_WRITE_PICTURE = 1111;
     private static final int MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777;
-    private AppCompatImageView imageView;
+    private ImageViewSelection imageView;
     private File currentDir;
     private File currentBitmap;
     private File currentFileOriginalResolution;
@@ -142,7 +141,7 @@ public class MyCameraActivity extends AppCompatActivity {
   */
         maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
-        imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
+        imageView = this.findViewById(R.id.currentImageViewSelection);
 
         rectfs = new ArrayList<RectF>();
 
@@ -279,7 +278,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     Bitmap bitmap = dest.getBitmap();
                     currentBitmap = currentFile
                             = new Utils().writePhoto(this, bitmap, "copy_paste");
-                    imageView.setImageBitmap(bitmap);
+                    imageView.setImageBitmap2(bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
                     Toast.makeText(getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
@@ -447,7 +446,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                     if (currentPixM != null) {
                         System.err.println("Draw Selection");
-                        imageView.setImageBitmap(currentPixM.getImage().bitmap);
+                        imageView.setImageBitmap2(currentPixM.getImage().bitmap);
                         if (clipboard == null && Clipboard.defaultClipboard == null) {
                             clipboard = Clipboard.defaultClipboard
                                     = new Clipboard(currentPixM);
@@ -477,7 +476,7 @@ public class MyCameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentFile != null) {
                     BufferedImage read = ImageIO.read(currentFile);
-                    imageView.setImageBitmap(read.getBitmap());
+                    imageView.setImageBitmap2(read.getBitmap());
                     drawPointA = null;
                     drawPointB = null;
                 } else toastButtonDisabled(v);
@@ -557,7 +556,7 @@ public class MyCameraActivity extends AppCompatActivity {
             try {
                 Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
                 System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
-                imageView.setImageBitmap(photo);
+                imageView.setImageBitmap2(photo);
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded");
                 //saveImageState();
@@ -713,7 +712,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                 if (imageViewBitmap != null) {
                     if (imageView != null) {
-                        imageView.setImageBitmap(imageViewBitmap);
+                        imageView.setImageBitmap2(imageViewBitmap);
                         currentFile = imageFile;
                         currentBitmap = imageFile;
 
@@ -863,17 +862,10 @@ public class MyCameraActivity extends AppCompatActivity {
         if (photo == null) {
             photo = BitmapFactory.decodeStream(fileInputStream);
         }
+        final Bitmap p2 = photo;
 
-        ImageViewSelection imageView2 = findViewById(R.id.currentImageViewSelection);
 
-
-        imageView2.setImageURI(null);
-        imageView2.postInvalidate();
-
-        imageView2.setImageURI(Uri.fromFile(currentFile));
-        imageView2.setImageBitmap(photo);
-        System.out.println("Image set in ImageView 4/4");
-
+        imageView.setImageBitmap2(p2);
     }
 
 
@@ -960,7 +952,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 Bitmap photo = bitmap;
                 imageView = findViewById(R.id.currentImageViewSelection);
-                imageView.setImageBitmap(photo);
+                imageView.setImageBitmap2(photo);
                 System.err.printf("Image set 4/4");
                 File f = writePhoto(photo, "MyImage");
 
@@ -1209,7 +1201,7 @@ public class MyCameraActivity extends AppCompatActivity {
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }
-                        imageView.setImageBitmap(bitmap1);
+                        imageView.setImageBitmap2(bitmap1);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

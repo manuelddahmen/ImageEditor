@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMain2Binding
     private var maxRes = 0
-    private var imageView: ImageView? = null
+    private var imageView: ImageViewSelection? = null
     private var rectfs: java.util.ArrayList<RectF>? = null
     private var loaded = false
     private var thisActivity: Activity? = null
@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                     currentFile = Utils()
                         .writePhoto(activity, bitmap, "copy_paste")
                     currentBitmap = currentFile
-                    imageView!!.setImageBitmap(bitmap)
+                    imageView!!.setImageBitmap2(bitmap)
                     paste.setBackgroundColor(Color.rgb(40, 255, 40))
                     copy!!.setBackgroundColor(Color.rgb(40, 255, 40))
                     Toast.makeText(
@@ -454,7 +454,7 @@ class MainActivity : AppCompatActivity() {
                         currentPixM = getSelectedZone()
                         if (currentPixM != null) {
                             System.err.println("Draw Selection")
-                            imageView!!.setImageBitmap(currentPixM!!.image.bitmap)
+                            imageView!!.setImageBitmap2(currentPixM!!.image.bitmap)
                             if (clipboard == null && Clipboard.defaultClipboard == null) {
                                 Clipboard.defaultClipboard =
                                     Clipboard(currentPixM)
@@ -483,7 +483,7 @@ class MainActivity : AppCompatActivity() {
         unselect?.setOnClickListener { v ->
             if (currentFile != null) {
                 val read = ImageIO.read(currentFile)
-                imageView!!.setImageBitmap(read.getBitmap())
+                imageView!!.setImageBitmap2(read.getBitmap())
                 drawPointA = null
                 drawPointB = null
             } else toastButtonDisabled(v)
@@ -513,7 +513,7 @@ class MainActivity : AppCompatActivity() {
                     File exists?${file.exists()}
                     """.trimIndent()
                 )
-                imageView??.setImageBitmap(photo)
+                imageView??.setImageBitmap2(photo)
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded")
                 //saveImageState();
@@ -660,9 +660,9 @@ class MainActivity : AppCompatActivity() {
                     BitmapFactory.decodeStream(FileInputStream(imageFileLow))
                 }
                 if (imageViewBitmap != null) {
-                    imageView = findViewById<View>(R.id.currentImageView) as ImageView
+                    imageView = findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     if (imageView != null) {
-                        imageView!!.setImageBitmap(imageViewBitmap)
+                        imageView!!.setImageBitmap2(imageViewBitmap)
                         currentFile = imageFile
                         currentBitmap = imageFile
                         System.err.println("Image reloaded")
@@ -806,7 +806,7 @@ class MainActivity : AppCompatActivity() {
             photo = BitmapFactory.decodeStream(fileInputStream)
         }
         imageView = findViewById(R.id.currentImageView)
-        imageView?.setImageBitmap(photo)
+        imageView?.setImageBitmap2(photo)
         println("Image set in ImageView 4/4")
     }
 
@@ -893,7 +893,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 val bitmap = data.extras!!["data"] as Bitmap?
                 imageView = findViewById(R.id.currentImageView)
-                imageView?.setImageBitmap(bitmap)
+                imageView?.setImageBitmap2(bitmap)
                 System.err.printf("Image set 4/4")
                 val f = writePhoto(bitmap!!, "MyImage")
 
@@ -1117,7 +1117,7 @@ class MainActivity : AppCompatActivity() {
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }
-                        imageView!!.setImageBitmap(bitmap1)
+                        imageView!!.setImageBitmap2(bitmap1)
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
                     }
@@ -1127,7 +1127,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.i("MyCameraActivity", "Error in OnRestoreState")
         }
-        imageView = findViewById<View>(R.id.currentImageView) as ImageView
+        imageView = findViewById<View>(R.id.currentImageView) as ImageViewSelection
         thisActivity = this
         super.onRestoreInstanceState(savedInstanceState)
     }
@@ -1140,7 +1140,7 @@ class MainActivity : AppCompatActivity() {
             //outState.putString("currentDir", currentDir.getAbsolutePath());
             //outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
             outState.putInt("maxRes", maxRes)
-            imageView = findViewById<View>(R.id.currentImageView) as ImageView
+            imageView = findViewById<View>(R.id.currentImageView) as ImageViewSelection
         }
         super.onSaveInstanceState(outState, outPersistentState)
     }

@@ -179,7 +179,7 @@ public class Utils() {
         return maxRes
     }
 
-    public fun setImageView(activity: Activity, imageView: ImageView?): File? {
+    public fun setImageView(activity: Activity, imageView: ImageViewSelection?): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
         if (intent?.getData() != null) {
@@ -192,7 +192,7 @@ public class Utils() {
                     if (bi != null) {
                         val bitmap = bi.getBitmap()
                         if (bitmap != null && imageView != null) {
-                            imageView.setImageBitmap(bitmap)
+                            imageView.setImageBitmap2(bitmap)
                         }
                     }
                 }
@@ -242,10 +242,10 @@ public class Utils() {
         return null
     }
 
-    fun loadImageInImageView(currentFile: File?, imageView: ImageView): Boolean {
+    fun loadImageInImageView(currentFile: File?, imageView: ImageViewSelection): Boolean {
         if (currentFile != null) {
             try {
-                imageView.setImageBitmap(
+                imageView.setImageBitmap2(
                     BitmapFactory.decodeStream(
                         FileInputStream(currentFile)
                     )
@@ -367,9 +367,10 @@ public class Utils() {
                     BitmapFactory.decodeStream(FileInputStream(imageFileLow))
                 }
                 if (imageViewBitmap != null) {
-                    val imageView = activity.findViewById<View>(R.id.currentImageView) as ImageView
+                    val imageView: ImageViewSelection =
+                        activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     if (imageView != null) {
-                        imageView.setImageBitmap(imageViewBitmap)
+                        imageView.setImageBitmap2(imageViewBitmap)
                         activity.currentFile = imageFile
                         activity.currentBitmap = imageFile
                         System.err.println("Image reloaded")

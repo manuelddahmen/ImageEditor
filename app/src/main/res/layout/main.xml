@@ -46,9 +46,8 @@
 
             <Button
                 android:id="@+id/takePhotoButton"
-                android:theme="@style/Base.Widget.AppCompat.Button"
-
-
+                android:theme="@style/Theme.FeatureAppmain"
+                android:layout_weight="0.25"
                 android:layout_height="48dp"
                 android:autofillHints="@string/capturePhoto"
                 android:contentDescription="@string/capturePhoto"
@@ -58,8 +57,8 @@
 
             <Button
                 android:id="@+id/choosePhotoButton"
-                android:theme="@style/Base.Widget.AppCompat.Button"
-
+                android:theme="@style/Theme.FeatureAppmain"
+                android:layout_weight="0.25"
                 android:layout_height="48dp"
                 android:autofillHints="@string/choosePhoto"
                 android:contentDescription="@string/choosePhoto"
@@ -71,8 +70,7 @@
             <Button
                 android:id="@+id/save"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_A200"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -81,8 +79,7 @@
             <Button
                 android:id="@+id/share"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_A200"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -100,8 +97,7 @@
             <Button
                 android:id="@+id/draw_activity"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_400"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -111,8 +107,7 @@
             <Button
                 android:id="@+id/unselect_rect"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_400"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -122,8 +117,7 @@
             <Button
                 android:id="@+id/copy"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_400"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,8 +127,7 @@
             <Button
                 android:id="@+id/paste"
                 android:theme="@style/Theme.FeatureAppmain"
-
-
+                android:layout_weight="0.25"
                 android:background="@color/light_blue_400"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -147,11 +140,13 @@
         android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintTop_toBottomOf="@id/main_menu"
         app:layout_constraintBottom_toTopOf="@+id/effectButtons"
-
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:adjustViewBounds="true"
+        android:minHeight="250dp"
+        android:scrollbars="vertical"
         android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
+        app:srcCompat="@drawable/app_icon"
         android:src="@drawable/app_icon" />
 
 
@@ -170,8 +165,7 @@
         <Button
             android:id="@+id/buttonAddText"
             android:theme="@style/Theme.FeatureAppmain"
-
-
+            android:layout_weight="0.25"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="@string/add_text"
@@ -183,8 +177,7 @@
         <Button
             android:id="@+id/buttonDraw"
             android:theme="@style/Theme.FeatureAppmain"
-
-
+            android:layout_weight="0.25"
             android:layout_width="wrap_content"
             android:background="@color/light_blue_A400"
             android:layout_height="48dp"
@@ -196,8 +189,7 @@
         <Button
             android:id="@+id/effectsButtonNew"
             android:theme="@style/Theme.FeatureAppmain"
-
-
+            android:layout_weight="0.25"
             android:layout_height="48dp"
             android:background="@color/light_blue_A400"
             android:text="@string/choose_effects"
@@ -207,8 +199,7 @@
 
         <Button
             android:theme="@style/Theme.FeatureAppmain"
-
-
+            android:layout_weight="0.25"
             android:layout_height="48dp"
             android:background="@color/light_blue_A400"
             android:text="@string/choose_shader_like"
@@ -223,7 +214,6 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
         android:id="@+id/aboutParameters"
@@ -233,17 +223,15 @@
         <Button
             android:id="@+id/About"
             android:theme="@style/Theme.FeatureAppmain"
-
-
-            android:layout_width="96dp"
+            android:layout_weight="0.25"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@color/light_blue_400"
             android:text="@string/about" />
 
         <EditText
             android:theme="@style/Theme.FeatureAppmain"
-
-
+            android:layout_weight="0.75"
             android:id="@+id/editMaximiumResolution"
             android:layout_width="96dp"
             android:layout_height="wrap_content"
@@ -272,15 +260,11 @@
     <Button
         android:layout_width="match_parent"
         android:theme="@style/Theme.FeatureAppmain"
-
-
         android:layout_height="wrap_content"
         android:text="@string/new_layout_app"
         android:id="@+id/new_layout_app"
         app:layout_constraintTop_toBottomOf="@id/aboutParameters"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    </Button>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

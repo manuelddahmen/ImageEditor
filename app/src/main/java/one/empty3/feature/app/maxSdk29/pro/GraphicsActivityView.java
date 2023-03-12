@@ -216,7 +216,7 @@ public class GraphicsActivityView extends AppCompatActivity {
         Bitmap bitmap = current.normalize(0, 1).getBitmap();
         File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
         this.currentFile = graphics_math;
-        image.setImageBitmap(bitmap);
+        image.setImageBitmap2(bitmap);
     }
 
     private int getMaxRes() {
