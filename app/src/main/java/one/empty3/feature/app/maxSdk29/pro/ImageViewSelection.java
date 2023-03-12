@@ -30,14 +30,13 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.PolyLine;
 
-public class ImageViewSelection extends AppCompatImageView {
+public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImageView {
     private final Paint paint =
             new Paint();
     private PixM pixels = null;
@@ -56,6 +55,7 @@ public class ImageViewSelection extends AppCompatImageView {
         super(context);
 
     }
+
 
     public ImageViewSelection(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

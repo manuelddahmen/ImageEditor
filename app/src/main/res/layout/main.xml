@@ -152,8 +152,7 @@
         android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
-        android:src="@drawable/icon"
-        android:background="@color/black" />
+        android:src="@drawable/app_icon" />
 
 
     <LinearLayout

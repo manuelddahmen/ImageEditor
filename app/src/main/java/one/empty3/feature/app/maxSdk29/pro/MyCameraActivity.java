@@ -722,9 +722,7 @@ public class MyCameraActivity extends AppCompatActivity {
                         //createCurrentUniqueFile();
                     }
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e) {
+            } catch (FileNotFoundException | NullPointerException e) {
                 e.printStackTrace();
             }
 
@@ -866,15 +864,14 @@ public class MyCameraActivity extends AppCompatActivity {
             photo = BitmapFactory.decodeStream(fileInputStream);
         }
 
-        imageView = findViewById(R.id.currentImageViewSelection);
-
-        imageView.setImageBitmap(photo);
-
-        imageView.setImageDrawable(new BitmapDrawable(photo));
+        ImageViewSelection imageView2 = findViewById(R.id.currentImageViewSelection);
 
 
-        imageView.performClick();
+        imageView2.setImageURI(null);
+        imageView2.postInvalidate();
 
+        imageView2.setImageURI(Uri.fromFile(currentFile));
+        imageView2.setImageBitmap(photo);
         System.out.println("Image set in ImageView 4/4");
 
     }
@@ -967,11 +964,6 @@ public class MyCameraActivity extends AppCompatActivity {
                 System.err.printf("Image set 4/4");
                 File f = writePhoto(photo, "MyImage");
 
-//                try {
-//                    imageView.setBackground(Drawable.createFromStream(new FileInputStream(f), "chosenFile"));
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
                 if (f == null) {
                     System.err.println("Can't write copy image file from camera ");
 
@@ -1072,14 +1064,11 @@ public class MyCameraActivity extends AppCompatActivity {
                 System.err.println("Set as class member");
                 saveImageState(isWorkingResolutionOriginal());
                 System.err.println("SaveImageState");
-
-                imageView.setImageURI(null);
-                imageView.setImageURI(Uri.fromFile(currentFile));
+                saveImageState(isWorkingResolutionOriginal());
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            supportInvalidateOptionsMenu();
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
         }

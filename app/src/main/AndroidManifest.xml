@@ -23,6 +23,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -68,12 +69,6 @@
             android:label="@string/title_activity_choose_effect_list"
             android:theme="@style/Theme.FeatureAppmain"
 
-            />
-        <activity
-            android:name=".ChooseEffectsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.FeatureAppmain"
-
             >
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -88,6 +83,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MyCameraActivity"
