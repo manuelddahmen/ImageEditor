@@ -66,7 +66,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         */maxRes = Utils().getMaxRes(this, savedInstanceState)
 
 
-        val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
 
         val currentFile1 = Utils().getCurrentFile(intent)
         if (currentFile1 != null) {
@@ -132,7 +132,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
     }
 
     fun initImageView() {
-        val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
+        val imageView = findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
         imageView.setOnClickListener {
         }
         imageView.setOnTouchListener(object : View.OnTouchListener {
@@ -194,11 +194,11 @@ class TextActivity() : AppCompatActivity(), Parcelable {
   */
         val textString: String =
             (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewSelection, textString)
+        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewTextSelection, textString)
         if (drawTextToBitmap != null) {
             currentFile = drawTextToBitmap
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
+            val imageView = findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
             Utils().setImageView(imageView!!, this.currentImage)
             System.out.println("ImageView Text UPDATED")
         }
@@ -284,7 +284,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
 
     fun writeText() {
         var imageView: ImageViewSelection =
-            findViewById<ImageViewSelection>(R.id.imageViewSelection)
+            findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
         var text = findViewById<EditText>(R.id.textViewOnImage)?.text
 
         var bmpFile = imageView.drawable

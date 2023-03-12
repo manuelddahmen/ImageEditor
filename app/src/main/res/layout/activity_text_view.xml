@@ -22,20 +22,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     style="@style/Theme.FeatureAppmain">
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-        android:id="@+id/imageViewSelection"
+        android:id="@+id/imageViewTextSelection"
         android:theme="@style/Theme.FeatureAppmain"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
-        android:src="@drawable/icon"
+        android:src="@drawable/app_icon"
+        app:srcCompat="@drawable/app_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_details"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/black" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
@@ -43,35 +45,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         style="@style/Theme.FeatureAppmain"
-        android:id="@+id/text_details">
+        android:id="@+id/text_details"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTextSelection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
-            android:text="@string/textDp"
+            android:labelFor="@id/imageViewTextSelection"
             android:id="@+id/font_size"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
             style="@style/Theme.FeatureAppmain"
-            android:autofillHints="Text size in dp (~pixels*4) " />
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:autofillHints="Text size in dp (~pixels*4) "
+            android:text="@string/textDp"
+            android:inputType="text|number" />
 
         <EditText
+            android:labelFor="@id/imageViewTextSelection"
             android:id="@+id/textViewOnImage"
+            style="@style/Theme.FeatureAppmain"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:text=""
-            android:hint="@string/ecrire_du_texte_ici"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="84dp"
-            android:gravity="top"
+            android:layout_height="192dp"
             android:autofillHints="Ajouter un texte"
-            android:inputType="textMultiLine"
-            style="@style/Theme.FeatureAppmain" />
+            android:gravity="top"
+            android:hint="@string/ecrire_du_texte_ici"
+            android:inputType="textShortMessage"
+            android:text="" />
 
         <Button
             android:id="@+id/textApplyButton"
+            style="@style/Theme.FeatureAppmain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/apply"
-            style="@style/Theme.FeatureAppmain" />
+            android:layout_height="48dp"
+            android:text="@string/apply" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

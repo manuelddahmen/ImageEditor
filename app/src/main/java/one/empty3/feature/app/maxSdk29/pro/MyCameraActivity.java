@@ -866,7 +866,6 @@ public class MyCameraActivity extends AppCompatActivity {
         final Bitmap p2 = photo;
 
         new Utils().setImageView(imageView, p2);
-        imageView.setImageBitmap2(p2);
     }
 
 
@@ -952,9 +951,11 @@ public class MyCameraActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 Bitmap photo = bitmap;
+
                 imageView = findViewById(R.id.currentImageViewSelection);
-                imageView.setImageBitmap2(photo);
+
                 new Utils().setImageView(imageView, photo);
+
                 System.err.printf("Image set 4/4");
                 File f = writePhoto(photo, "MyImage");
 
