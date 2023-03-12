@@ -34,6 +34,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
@@ -120,5 +122,9 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
             }
         });
 
+    }
+
+    public void setPixels(@NotNull PixM pixM) {
+        pixels = pixM;
     }
 }

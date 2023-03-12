@@ -25,7 +25,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -216,7 +215,7 @@ public class GraphicsActivityView extends AppCompatActivity {
         Bitmap bitmap = current.normalize(0, 1).getBitmap();
         File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
         this.currentFile = graphics_math;
-        image.setImageBitmap2(bitmap);
+        new Utils().setImageView(image, bitmap);
     }
 
     private int getMaxRes() {

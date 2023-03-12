@@ -20,33 +20,22 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
+import android.os.*
 import android.util.Base64
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.widget.*
-import androidx.core.app.ActivityCompat
-import androidx.core.content.FileProvider
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.PixM
 import java.io.*
-import java.nio.file.Files
-import java.nio.file.Path
 import java.util.*
 
 public class Utils() {
@@ -192,7 +181,8 @@ public class Utils() {
                     if (bi != null) {
                         val bitmap = bi.getBitmap()
                         if (bitmap != null && imageView != null) {
-                            imageView.setImageBitmap2(bitmap)
+                            Utils().setImageView(imageView!!, bitmap)
+
                         }
                     }
                 }
@@ -204,7 +194,7 @@ public class Utils() {
     }
 
     fun addCurrentFileToIntent(intent: Intent, currentFile: File): File {
-        intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+        //intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
         intent.putExtra("currentFile", currentFile)
         intent.putExtra("data", currentFile)
         System.out.println("Add currentFile to parameter")
@@ -242,10 +232,9 @@ public class Utils() {
     fun loadImageInImageView(currentFile: File?, imageView: ImageViewSelection): Boolean {
         if (currentFile != null) {
             try {
-                imageView.setImageBitmap2(
-                    BitmapFactory.decodeStream(
-                        FileInputStream(currentFile)
-                    )
+                Utils().setImageView(
+                    imageView!!,
+                    BitmapFactory.decodeStream(FileInputStream(currentFile))
                 )
                 return true
             } catch (e: FileNotFoundException) {
@@ -367,7 +356,7 @@ public class Utils() {
                     val imageView: ImageViewSelection =
                         activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     if (imageView != null) {
-                        imageView.setImageBitmap2(imageViewBitmap)
+                        Utils().setImageView(imageView, imageViewBitmap);
                         activity.currentFile = imageFile
                         activity.currentBitmap = imageFile
                         System.err.println("Image reloaded")
@@ -403,5 +392,16 @@ public class Utils() {
         return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s)
     }
 
+    public fun setImageView(imageView: ImageViewSelection, bitmap: Bitmap) {
+        Handler(Looper.getMainLooper()).post {
+            Log.d(
+                "ImageViewSelection::setImageBitmap",
+                "change image on UI thread"
+            )
+            imageView.setImageBitmap(bitmap)
+            imageView.setPixels(PixM(bitmap))
+        }
+
+    }
 }
 

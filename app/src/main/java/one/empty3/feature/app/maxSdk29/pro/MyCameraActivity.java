@@ -278,7 +278,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     Bitmap bitmap = dest.getBitmap();
                     currentBitmap = currentFile
                             = new Utils().writePhoto(this, bitmap, "copy_paste");
-                    imageView.setImageBitmap2(bitmap);
+                    new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
                     Toast.makeText(getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
@@ -446,7 +446,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                     if (currentPixM != null) {
                         System.err.println("Draw Selection");
-                        imageView.setImageBitmap2(currentPixM.getImage().bitmap);
+                        new Utils().setImageView(imageView, currentPixM.getImage().bitmap);
                         if (clipboard == null && Clipboard.defaultClipboard == null) {
                             clipboard = Clipboard.defaultClipboard
                                     = new Clipboard(currentPixM);
@@ -476,7 +476,7 @@ public class MyCameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentFile != null) {
                     BufferedImage read = ImageIO.read(currentFile);
-                    imageView.setImageBitmap2(read.getBitmap());
+                    new Utils().setImageView(imageView, read.getBitmap());
                     drawPointA = null;
                     drawPointB = null;
                 } else toastButtonDisabled(v);
@@ -556,7 +556,7 @@ public class MyCameraActivity extends AppCompatActivity {
             try {
                 Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
                 System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
-                imageView.setImageBitmap2(photo);
+                new Utils().setImageView(imageView, photo);
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded");
                 //saveImageState();
@@ -712,7 +712,8 @@ public class MyCameraActivity extends AppCompatActivity {
 
                 if (imageViewBitmap != null) {
                     if (imageView != null) {
-                        imageView.setImageBitmap2(imageViewBitmap);
+
+                        new Utils().setImageView(imageView, imageViewBitmap);
                         currentFile = imageFile;
                         currentBitmap = imageFile;
 
@@ -864,7 +865,7 @@ public class MyCameraActivity extends AppCompatActivity {
         }
         final Bitmap p2 = photo;
 
-
+        new Utils().setImageView(imageView, p2);
         imageView.setImageBitmap2(p2);
     }
 
@@ -953,6 +954,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 Bitmap photo = bitmap;
                 imageView = findViewById(R.id.currentImageViewSelection);
                 imageView.setImageBitmap2(photo);
+                new Utils().setImageView(imageView, photo);
                 System.err.printf("Image set 4/4");
                 File f = writePhoto(photo, "MyImage");
 
@@ -1196,12 +1198,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     File bitmap = new File(currentFile.getAbsolutePath());
                     try {
                         Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
-//                try {
-//                    imageView.setBackground(Drawable.createFromStream(new FileInputStream(bitmap), "chosenFile"));
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-                        imageView.setImageBitmap2(bitmap1);
+                        new Utils().setImageView(imageView, bitmap1);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

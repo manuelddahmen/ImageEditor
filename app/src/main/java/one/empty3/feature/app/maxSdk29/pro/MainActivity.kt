@@ -27,6 +27,7 @@ import android.content.pm.PackageManager
 import android.graphics.*
 import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.BitmapDrawable
+import android.media.Image
 import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 import android.net.Uri
@@ -43,9 +44,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.snackbar.Snackbar
@@ -273,7 +272,7 @@ class MainActivity : AppCompatActivity() {
                     currentFile = Utils()
                         .writePhoto(activity, bitmap, "copy_paste")
                     currentBitmap = currentFile
-                    imageView!!.setImageBitmap2(bitmap)
+                    Utils().setImageView(imageView!!, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40))
                     copy!!.setBackgroundColor(Color.rgb(40, 255, 40))
                     Toast.makeText(
@@ -407,7 +406,7 @@ class MainActivity : AppCompatActivity() {
         if (imageView != null) {
             imageView!!.setOnClickListener { }
             imageView!!.setOnTouchListener { v: View, event: MotionEvent ->
-                imageView = activity.findViewById(R.id.currentImageView)
+                imageView = activity.findViewById(R.id.currentImageView) as ImageViewSelection
                 if (currentFile != null) {
                     var location = IntArray(2)
                     v.getLocationOnScreen(location)
@@ -454,7 +453,7 @@ class MainActivity : AppCompatActivity() {
                         currentPixM = getSelectedZone()
                         if (currentPixM != null) {
                             System.err.println("Draw Selection")
-                            imageView!!.setImageBitmap2(currentPixM!!.image.bitmap)
+                            Utils().setImageView(imageView!!, currentPixM!!.image.bitmap)
                             if (clipboard == null && Clipboard.defaultClipboard == null) {
                                 Clipboard.defaultClipboard =
                                     Clipboard(currentPixM)
@@ -483,7 +482,7 @@ class MainActivity : AppCompatActivity() {
         unselect?.setOnClickListener { v ->
             if (currentFile != null) {
                 val read = ImageIO.read(currentFile)
-                imageView!!.setImageBitmap2(read.getBitmap())
+                Utils().setImageView(imageView!!, read.getBitmap());
                 drawPointA = null
                 drawPointB = null
             } else toastButtonDisabled(v)
@@ -662,7 +661,7 @@ class MainActivity : AppCompatActivity() {
                 if (imageViewBitmap != null) {
                     imageView = findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     if (imageView != null) {
-                        imageView!!.setImageBitmap2(imageViewBitmap)
+                        Utils().setImageView(imageView!!, imageViewBitmap)
                         currentFile = imageFile
                         currentBitmap = imageFile
                         System.err.println("Image reloaded")
@@ -805,8 +804,8 @@ class MainActivity : AppCompatActivity() {
         if (photo == null) {
             photo = BitmapFactory.decodeStream(fileInputStream)
         }
-        imageView = findViewById(R.id.currentImageView)
-        imageView?.setImageBitmap2(photo)
+        imageView = findViewById(R.id.currentImageView) as ImageViewSelection
+        Utils().setImageView(imageView!!, photo!!)
         println("Image set in ImageView 4/4")
     }
 
@@ -893,7 +892,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 val bitmap = data.extras!!["data"] as Bitmap?
                 imageView = findViewById(R.id.currentImageView)
-                imageView?.setImageBitmap2(bitmap)
+                Utils().setImageView(imageView!!, bitmap!!)
                 System.err.printf("Image set 4/4")
                 val f = writePhoto(bitmap!!, "MyImage")
 
@@ -1117,7 +1116,7 @@ class MainActivity : AppCompatActivity() {
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }
-                        imageView!!.setImageBitmap2(bitmap1)
+                        Utils().setImageView(imageView!!, bitmap1!!)
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
                     }

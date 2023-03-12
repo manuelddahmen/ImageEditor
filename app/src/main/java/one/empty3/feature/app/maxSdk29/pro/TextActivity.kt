@@ -72,7 +72,8 @@ class TextActivity() : AppCompatActivity(), Parcelable {
         if (currentFile1 != null) {
             currentFile = currentFile1
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            imageView.setImageBitmap2(currentImage)
+            Utils().setImageView(imageView!!, this.currentImage)
+
         }
         //val backButton = findViewById<Button>(R.id.buttonTextBack)
 /*
@@ -198,7 +199,7 @@ class TextActivity() : AppCompatActivity(), Parcelable {
             currentFile = drawTextToBitmap
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
             val imageView = findViewById<ImageViewSelection>(R.id.imageViewSelection)
-            imageView.setImageBitmap2(this.currentImage)
+            Utils().setImageView(imageView!!, this.currentImage)
             System.out.println("ImageView Text UPDATED")
         }
         return true
@@ -294,7 +295,8 @@ class TextActivity() : AppCompatActivity(), Parcelable {
             )
 
 
-            imageView.setImageBitmap2(currentImage)
+            Utils().setImageView(imageView!!, this.currentImage)
+
             initImageView()
 
             imageView.invalidate()
