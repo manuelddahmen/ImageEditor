@@ -203,13 +203,10 @@ public class Utils() {
         return currentFile
     }
 
-    fun addCurrentFileToIntent(
-        intent: Intent,
-        currentFile: File
-    ): File {
+    fun addCurrentFileToIntent(intent: Intent, currentFile: File): File {
         intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-//        intent.putExtra("currentFile", currentFile)
-//        intent.putExtra("data", currentFile)
+        intent.putExtra("currentFile", currentFile)
+        intent.putExtra("data", currentFile)
         System.out.println("Add currentFile to parameter")
         return currentFile
     }
