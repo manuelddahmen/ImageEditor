@@ -56,6 +56,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -102,7 +103,7 @@ public class MyCameraActivity extends AppCompatActivity {
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 9999;
     private static final int FILESYSTEM_WRITE_PICTURE = 1111;
     private static final int MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777;
-    private ImageViewSelection imageView;
+    private AppCompatImageView imageView;
     private File currentDir;
     private File currentBitmap;
     private File currentFileOriginalResolution;
@@ -838,8 +839,8 @@ public class MyCameraActivity extends AppCompatActivity {
 
     private void startCreation() {
 
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("file/*.*");
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
@@ -868,6 +869,11 @@ public class MyCameraActivity extends AppCompatActivity {
         imageView = findViewById(R.id.currentImageViewSelection);
 
         imageView.setImageBitmap(photo);
+
+        imageView.setImageDrawable(new BitmapDrawable(photo));
+
+
+        imageView.performClick();
 
         System.out.println("Image set in ImageView 4/4");
 
@@ -1067,11 +1073,13 @@ public class MyCameraActivity extends AppCompatActivity {
                 saveImageState(isWorkingResolutionOriginal());
                 System.err.println("SaveImageState");
 
-                //createCurrentUniqueFile();
+                imageView.setImageURI(null);
+                imageView.setImageURI(Uri.fromFile(currentFile));
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            saveImageState(isWorkingResolutionOriginal());
+            supportInvalidateOptionsMenu();
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
         }
