@@ -22,7 +22,6 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -95,16 +94,6 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
 
     }
 
-    @Override
-    public void setWillNotDraw(boolean willNotDraw) {
-        super.setWillNotDraw(willNotDraw);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        //drawRect();
-    }
 
     public RectF getDrawingRect() {
         return rect;

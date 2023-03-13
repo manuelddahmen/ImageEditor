@@ -393,14 +393,8 @@ public class Utils() {
     }
 
     public fun setImageView(imageView: ImageViewSelection, bitmap: Bitmap) {
-        Handler(Looper.getMainLooper()).post {
-            Log.d(
-                "ImageViewSelection::setImageBitmap",
-                "change image on UI thread"
-            )
-            imageView.setImageBitmap(bitmap)
-            imageView.setPixels(PixM(bitmap))
-        }
+        imageView.setImageBitmap2(bitmap)
+        imageView.setPixels(PixM(bitmap))
 
     }
 }

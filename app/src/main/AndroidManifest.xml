@@ -23,38 +23,34 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
-        android:allowBackup="true"
-        android:exported="true"
+        android:exported="false"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.FeatureAppmain"
-
-
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_main" />
         <activity
             android:name=".MainActivityComposeV2"
             android:exported="false"
             android:label="@string/title_activity_main_compose_v2" />
 
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
         <activity
             android:name=".TextActivity"
             android:exported="false"
             android:label="@string/title_activity_text"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             />
         <activity
@@ -69,8 +65,7 @@
             android:exported="false"
             android:label="@string/title_activity_choose_effect_list"
             android:theme="@style/Theme.FeatureAppmain"
-
-            >
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -88,10 +83,10 @@
         </activity>
         <activity
             android:name=".MyCameraActivity"
-            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:exported="false"
             android:theme="@style/Theme.FeatureAppmain"
-
-            >
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -103,47 +98,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--
-            <intent-filter android:autoVerify="true">
-                <data android:scheme="file" />
-                <data android:host="empty3.one" />
-                <data android:mimeType="image/*" />
-                <data android:mimeType="video/*" />
 
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.CREATE_DOCUMENT" />
-                <action android:name="android.media.action.IMAGE_CAPTURE" />
-                <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
-                <action android:name="android.media.action.VIDEO_CAMERA" />
-                <action android:name="android.intent.action.EDIT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-            -->
-            <!-- App links for http/s -->
-            <!--
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.EDIT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:scheme="file" />
-                <data android:scheme="content" />
-                <data android:host="empty3.one" />
-                <data android:host="www.empty3.one" />
-                <data android:mimeType="image/jpg" />
-                <data android:mimeType="image/png" />
-            </intent-filter>
-            -->
         </activity> <!-- FileProvider used to share photos with other apps -->
         <activity
             android:name=".LicenceUserData"
             android:exported="false"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             />
         <activity
@@ -151,32 +112,37 @@
             android:exported="false"
             android:label="@string/title_activity_formula_store"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             />
         <activity
             android:name=".LicenceUserData2"
             android:exported="false"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
             android:name=".Calculator"
-            android:exported="true"
+            android:exported="false"
             android:label="Simple Calculator"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             />
         <activity
             android:name=".GraphicsActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="Draw graphics"
             android:theme="@style/Theme.FeatureAppmain"
+            android:hardwareAccelerated="true"
 
             />
         <activity
             android:name=".GraphicsActivityView"
-            android:exported="true"
+            android:exported="false"
             android:label="Draw graphics"
+            android:hardwareAccelerated="true"
             android:theme="@style/Theme.FeatureAppmain"
 
             />
