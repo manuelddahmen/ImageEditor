@@ -90,8 +90,6 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
             pixels.plotCurve(polyLine, new ColorTexture(Color.YELLOW));
             setImageBitmap2(pixels.getImage().getBitmap());
         }
-
-
     }
 
 

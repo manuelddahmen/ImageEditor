@@ -21,11 +21,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <package android:name="com.android.remoteprovisioner" />
+        <package android:name="com.google.android.googlequicksearchbox" />
+        <package android:name="com.google.android.apps.messaging" />
+        <package android:name="com.google.android.cellbroadcastreceiver" />
+        <package android:name="com.google.android.gm" />
+        <package android:name="com.google.android.calendar" />
+        <package android:name="com.google.android.partnersetup" />
+        <package android:name="com.google.android.settings.intelligence" />
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.google.android.apps.messaging" />
+        <package android:name="com.google.android.apps.docs" />
+        <package android:name="com.android.camera2" />
+        <package android:name="com.google.android.apps.photos" />
+        <package android:name="com.google.android.projection.gearhead" />
+        <package android:name="com.google.android.setupwizard" />
+    </queries>
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:exported="false"
@@ -81,25 +98,31 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".MyCameraActivity"
             android:hardwareAccelerated="true"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.FeatureAppmain"
             android:label="@string/title_activity_main">
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.MAIN" />
+                <data android:mimeType="image/*" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter
+                android:scheme="http"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
             </intent-filter>
-            <!-- Register as a system camera app -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
 
-        </activity> <!-- FileProvider used to share photos with other apps -->
+
         <activity
             android:name=".LicenceUserData"
             android:exported="false"
