@@ -26,5 +26,4 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 
-class FeatureAppTheme(function: () -> Unit) {
-}
+

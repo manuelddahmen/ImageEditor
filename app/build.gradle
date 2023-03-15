@@ -183,7 +183,6 @@ dependencies {
     // Adds a remote binary dependency only for the instrumented test APK.
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation "androidx.core:core-ktx:1.9.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation("com.jgoodies:jgoodies-common:1.8.1")
     // Add dependencies.
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
