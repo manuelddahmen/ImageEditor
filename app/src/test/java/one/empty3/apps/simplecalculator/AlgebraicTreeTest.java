@@ -431,4 +431,14 @@ public class AlgebraicTreeTest {
 
         testResultVariable("-x+(2*x)", -x + (2 * x), vars, true);
     }
+
+    @Test
+    public void testSimpleFunctionSinVar() {
+        double r = 12.0;
+        HashMap<String, Double> vars = new HashMap<>();
+        vars.put("r", r);
+
+        testResultVariable("sin(r*10)", Math.sin(r * 10), vars, true);
+    }
+
 }

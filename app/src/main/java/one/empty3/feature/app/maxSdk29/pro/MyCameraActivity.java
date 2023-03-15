@@ -55,8 +55,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -86,10 +88,10 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 public class MyCameraActivity extends AppCompatActivity {
+    private static final int INT_READ_MEDIA_IMAGES = 445165;
     Properties properties = new Properties();
 
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
-    private static final Integer MAX_TARDINESS = 3000;
     static final int MAX_RES_DEFAULT = 200;
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
@@ -168,7 +170,7 @@ public class MyCameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES}, MY_CAMERA_PERMISSION_CODE);
                 }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
@@ -830,7 +832,7 @@ public class MyCameraActivity extends AppCompatActivity {
     }
 
     private void openUserData(View view) {
-        saveImageState(isWorkingResolutionOriginal());
+        //saveImageState(isWorkingResolutionOriginal());
         Intent intent = new Intent(view.getContext(), LicenceUserData.class);
         startActivity(intent);
     }
@@ -943,6 +945,33 @@ public class MyCameraActivity extends AppCompatActivity {
         return file1;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    public boolean requestPermissionAppStorage() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_MEDIA_IMAGES
+        )
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_MEDIA_IMAGES
+                )
+                        != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            requestPermissions(
+                    new String[]{
+                            Manifest.permission.READ_MEDIA_IMAGES}, INT_READ_MEDIA_IMAGES);
+
+            return (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_MEDIA_IMAGES
+            )
+                    != PackageManager.PERMISSION_GRANTED);
+        } else return true;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1032,6 +1061,12 @@ public class MyCameraActivity extends AppCompatActivity {
         }
 
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == Activity.RESULT_OK) {
+
+
+            if (!requestPermissionAppStorage()) {
+                return;
+            }
+
             InputStream choose_directoryData = null;
             choose_directoryData = getRealPathFromURI(data);
             if (choose_directoryData == null) {
@@ -1186,34 +1221,31 @@ public class MyCameraActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         loadInstanceState();
 
-        loadImageState(isWorkingResolutionOriginal());
+        //loadImageState(isWorkingResolutionOriginal());
 
-        try {
-            if (savedInstanceState.containsKey("maxRes")) {
-                maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                        savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
-                //currentFile = new File((String) savedInstanceState.getString("currentFile"));
-                //currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
-                //currentDir = new File((String) savedInstanceState.getString("currentDir"));
-                if (currentBitmap != null) {
-                    File bitmap = new File(currentFile.getAbsolutePath());
-                    try {
-                        Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
-                        new Utils().setImageView(imageView, bitmap1);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+        if (savedInstanceState != null) {
+            try {
+                if (savedInstanceState.containsKey("maxRes")) {
+                    maxRes = savedInstanceState.getInt("maxRes") > -1 ?
+                            savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
+                    //currentFile = new File((String) savedInstanceState.getString("currentFile"));
+                    //currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
+                    //currentDir = new File((String) savedInstanceState.getString("currentDir"));
+                    if (currentBitmap != null) {
+                        File bitmap = new File(currentFile.getAbsolutePath());
+                        try {
+                            Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
+                            new Utils().setImageView(imageView, bitmap1);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    imageView = findViewById(R.id.currentImageViewSelection);
                 }
-                imageView = findViewById(R.id.currentImageViewSelection);
+            } catch (Exception e) {
+                Log.i("MyCameraActivity", "Error in OnRestoreState");
             }
-        } catch (Exception e) {
-            Log.i("MyCameraActivity", "Error in OnRestoreState");
         }
-
-
-        this.imageView = (ImageViewSelection) this.findViewById(R.id.currentImageViewSelection);
-        thisActivity = this;
-
         super.onRestoreInstanceState(savedInstanceState);
 
     }
