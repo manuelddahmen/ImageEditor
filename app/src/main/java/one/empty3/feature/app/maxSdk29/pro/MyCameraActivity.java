@@ -154,7 +154,7 @@ public class MyCameraActivity extends AppCompatActivity {
         currentFile = currentBitmap = new Utils().getCurrentFile(getIntent());
 
         if (currentFile == null)
-            Snackbar.make(imageView, "No image loaded", 5).show();
+            Snackbar.make(findViewById(R.id.currentImageViewSelection), "No image loaded", 5).show();
 
         if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
 
@@ -523,6 +523,14 @@ public class MyCameraActivity extends AppCompatActivity {
 
         try {
             properties.load(new FileInputStream(getFilesFile("app_state.properties")));
+            for (Object stringO : properties.keySet()) {
+                if (stringO instanceof String) {
+                    currentFile = properties.get("currentFile") != null ? new File((String) properties.get("currentFile")) : currentFile;
+                    currentBitmap = properties.get("currentBitmap") != null ? new File((String) properties.get("currentBitmap")) : currentBitmap;
+                    currentBitmap = properties.get("currentDir") != null ? new File((String) properties.get("currentDir")) : currentDir;
+                    maxRes = (properties.get("maxRes") != null) ? (int) properties.get("maxRes") : maxRes;
+                }
+            }
         } catch (FileNotFoundException e) {
             return;
         } catch (IOException e) {
@@ -530,16 +538,6 @@ public class MyCameraActivity extends AppCompatActivity {
         }
 
 
-        for (Object stringO : properties.keySet()) {
-            if (stringO instanceof String) {
-                currentFile = properties.get("currentFile") != null ? new File((String) properties.get("currentFile")) : currentFile;
-                currentBitmap = properties.get("currentBitmap") != null ? new File((String) properties.get("currentBitmap")) : currentBitmap;
-                currentBitmap = properties.get("currentDir") != null ? new File((String) properties.get("currentDir")) : currentDir;
-                maxRes = (properties.get("maxRes") != null) ? (int) properties.get("maxRes") : maxRes;
-
-
-            }
-        }
     }
 
     class LoadImage extends AsyncTask {
