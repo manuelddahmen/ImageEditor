@@ -126,6 +126,9 @@ android {
         compose true
     }
     flavorDimensions "featureVersion"
+
+    buildToolsVersion "30.0.3"
+
     productFlavors {
 
         sdk29 {
