@@ -1,0 +1,7 @@
+
+My application
+Image Featuring (FeatureApp)
+one.empty3.feature.app.maxSdk29.pro does not start.
+I used Pixel API 32 emulator and a physical device Huawei p30 lite with UMEI 12.
+
+I don't know what to do, I never saw the error before.

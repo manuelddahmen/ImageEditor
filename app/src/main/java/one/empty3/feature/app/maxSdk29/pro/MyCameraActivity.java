@@ -91,7 +91,7 @@ public class MyCameraActivity extends AppCompatActivity {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
     Properties properties = new Properties();
 
-    private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
+    private static final String TAG = one.empty3.feature.app.maxSdk29.pro.MyCameraActivity.class.getName();
     static final int MAX_RES_DEFAULT = 200;
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
