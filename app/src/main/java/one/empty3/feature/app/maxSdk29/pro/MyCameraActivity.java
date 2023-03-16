@@ -58,7 +58,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -170,7 +169,7 @@ public class MyCameraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES}, MY_CAMERA_PERMISSION_CODE);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA/*, Manifest.permission.READ_MEDIA_IMAGES*/}, MY_CAMERA_PERMISSION_CODE);
                 }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
@@ -943,32 +942,33 @@ public class MyCameraActivity extends AppCompatActivity {
         return file1;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    public boolean requestPermissionAppStorage() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_MEDIA_IMAGES
-        )
-                != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_MEDIA_IMAGES
-                )
-                        != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            requestPermissions(
-                    new String[]{
-                            Manifest.permission.READ_MEDIA_IMAGES}, INT_READ_MEDIA_IMAGES);
-
-            return (ContextCompat.checkSelfPermission(
+    /*
+        @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+        public boolean requestPermissionAppStorage() {
+            if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.READ_MEDIA_IMAGES
             )
-                    != PackageManager.PERMISSION_GRANTED);
-        } else return true;
-    }
+                    != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_MEDIA_IMAGES
+                    )
+                            != PackageManager.PERMISSION_GRANTED
+            ) {
 
+                requestPermissions(
+                        new String[]{
+                                Manifest.permission.READ_MEDIA_IMAGES}, INT_READ_MEDIA_IMAGES);
+
+                return (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_MEDIA_IMAGES
+                )
+                        != PackageManager.PERMISSION_GRANTED);
+            } else return true;
+        }
+    */
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1061,9 +1061,9 @@ public class MyCameraActivity extends AppCompatActivity {
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == Activity.RESULT_OK) {
 
 
-            if (!requestPermissionAppStorage()) {
-                return;
-            }
+//            if (!requestPermissionAppStorage()) {
+//                return;
+//            }
 
             InputStream choose_directoryData = null;
             choose_directoryData = getRealPathFromURI(data);
