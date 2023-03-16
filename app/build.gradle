@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 
-def code = 2070000
+def code = 2080000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
@@ -127,7 +127,7 @@ android {
     }
     flavorDimensions "featureVersion"
 
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "33.0.1"
 
     productFlavors {
 
