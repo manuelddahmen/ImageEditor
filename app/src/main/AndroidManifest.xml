@@ -19,7 +19,9 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="one.empty3.feature.app.maxSdk29.pro"
+    android:versionName="2.0">
 
     <queries>
         <package android:name="com.android.remoteprovisioner" />

@@ -301,7 +301,7 @@ public class MyCameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentFile != null) {
                     Uri uri = Uri.fromFile(currentFile);
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
+                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile);
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
@@ -344,7 +344,7 @@ public class MyCameraActivity extends AppCompatActivity {
                     }
 
 
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
+                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
 
 
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
