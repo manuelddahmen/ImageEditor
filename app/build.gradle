@@ -139,7 +139,7 @@ android {
                 minSdkVersion 29
                 JavaVersion.VERSION_11
                 versionCode code
-                versionName "2.0"
+                //versionName "2.0"
                 kotlin {
                     version "1.8.0"
                 }
