@@ -30,7 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import one.empty3.apps.simplecalculator.ui.theme.SimpleCalculatorTheme
+import one.empty3.apps.test.ui.theme.SimpleCalculatorTheme
 
 class FormulaStore : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

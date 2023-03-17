@@ -103,7 +103,7 @@
 
         <activity
             android:name=".MyCameraActivity"
-            android:hardwareAccelerated="false"
+            android:hardwareAccelerated="true"
             android:exported="true"
             android:theme="@style/Theme.FeatureAppmain"
             android:label="@string/title_activity_main">
