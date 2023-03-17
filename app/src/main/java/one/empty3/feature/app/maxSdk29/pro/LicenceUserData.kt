@@ -26,15 +26,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
-class LicenceUserData : Activity() {
+class LicenceUserData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
-        findViewById<Button>(R.id.buttonBack).setOnClickListener {
+        findViewById<Button>(R.id.buttonBack)?.setOnClickListener {
             backToMain(it)
         }
-        findViewById<Button>(R.id.AboutButton).setOnClickListener {
+        findViewById<Button>(R.id.AboutButton)?.setOnClickListener {
             openLink(it)
         }
     }
