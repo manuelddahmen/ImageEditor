@@ -160,6 +160,8 @@
     <string name="fragment_function_cancel">Cancel</string>
     <string name="function_string">Function String</string>
     <string name="back2">Back</string>
+    <string name="add_picture_file_from_directory">Add from directory</string>
+    <string name="add_picture_from_camera">Add from camera</string>
     <string name="button">Button</string>
     <string name="buttonCodeBfore">Button</string>
     <string name="buttonCodeAfter">Add code after</string>
@@ -181,5 +183,7 @@
     <string name="buttonCodeBefore">Add code before</string>
     <string name="title_activity_toolbar">toolbar</string>
     <string name="button_current_file_is_null"><![CDATA[votre appareil et puis essayer les effets, le texte,<br/>]]></string>
+    <string name="title_activity_main">MyCameraActivity</string>
+    <string name="new_layout_app">New App Layout</string>
     <string name="floating_action_button_to">Floating Action Button to</string>
 </resources>

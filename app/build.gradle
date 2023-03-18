@@ -5,8 +5,14 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 
+if (hasProperty('buildScan')) {
+    buildScan {
+        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+        termsOfServiceAgree = 'yes'
+    }
+}
 
-def code = 2120000
+def code = 2140000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
@@ -128,7 +134,6 @@ android {
     }
     flavorDimensions "featureVersion"
 
-    buildToolsVersion "33.0.1"
 
     productFlavors {
 

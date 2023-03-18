@@ -76,9 +76,11 @@
             />
         <activity
             android:name=".ChooseEffectsCompose"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_choose_effects_compose"
-            android:theme="@style/Theme.FeatureAppmain"></activity>
+            android:theme="@style/Theme.FeatureAppmain">
+
+        </activity>
         <activity
             android:name=".ChooseEffectsActivity2"
             android:exported="false"
@@ -102,12 +104,13 @@
         </activity>
 
         <activity
-            android:name=".MyCameraActivity"
+            android:name="MyCameraActivity"
             android:hardwareAccelerated="true"
             android:exported="true"
             android:theme="@style/Theme.FeatureAppmain"
             android:label="@string/title_activity_main">
             <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <data android:scheme="package" />
