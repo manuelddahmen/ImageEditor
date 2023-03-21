@@ -12,7 +12,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 2150000
+def code = 2180000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
@@ -193,7 +193,7 @@ dependencies {
     implementation "androidx.core:core-ktx:1.9.0"
     implementation("com.jgoodies:jgoodies-common:1.8.1")
     // Add dependencies.
-    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
+    //implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 
 // Ensure version is 1.4.0-alpha01 or higher.
     implementation "androidx.appcompat:appcompat:1.6.1"
@@ -265,7 +265,7 @@ repositories {
 }
 
 // Add the information to the bottom of the file.
-apply plugin: 'com.huawei.agconnect'
+//apply plugin: 'com.huawei.agconnect'
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
