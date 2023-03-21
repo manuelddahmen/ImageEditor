@@ -9,7 +9,7 @@ buildscript {
         google()
         mavenCentral()
         // Add the Maven address.
-        maven { url 'https://developer.huawei.com/repo/' }
+        //maven { url 'https://developer.huawei.com/repo/' }
 
     }
 
@@ -28,7 +28,7 @@ buildscript {
         // in the individual module build.gradle files
         //classpath('androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2')
         // Add dependencies.
-        classpath 'com.huawei.agconnect:agcp:1.5.2.300'
+        //classpath 'com.huawei.agconnect:agcp:1.5.2.300'
 
     }
 }
