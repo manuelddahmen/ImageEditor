@@ -22,34 +22,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="one.empty3.feature.app.maxSdk29.pro"
     android:versionName="3.0">
-    <!--
-        <queries>
-            <package android:name="com.android.remoteprovisioner" />
-            <package android:name="com.google.android.googlequicksearchbox" />
-            <package android:name="com.google.android.apps.messaging" />
-            <package android:name="com.google.android.cellbroadcastreceiver" />
-            <package android:name="com.google.android.gm" />
-            <package android:name="com.google.android.calendar" />
-            <package android:name="com.google.android.partnersetup" />
-            <package android:name="com.google.android.settings.intelligence" />
-            <package android:name="com.google.android.youtube" />
-            <package android:name="com.google.android.apps.maps" />
-            <package android:name="com.google.android.apps.messaging" />
-            <package android:name="com.google.android.apps.docs" />
-            <package android:name="com.android.camera2" />
-            <package android:name="com.google.android.apps.photos" />
-            <package android:name="com.google.android.projection.gearhead" />
-            <package android:name="com.google.android.setupwizard" />
-        </queries>
-    -->
+
+    <queries>
+        <package android:name="one.empty3.feature.app.maxSdk29.pro" />
+        <package android:name="com.android.remoteprovisioner" />
+        <package android:name="com.google.android.googlequicksearchbox" />
+        <package android:name="com.google.android.apps.messaging" />
+        <package android:name="com.google.android.cellbroadcastreceiver" />
+        <package android:name="com.google.android.gm" />
+        <package android:name="com.google.android.calendar" />
+        <package android:name="com.google.android.partnersetup" />
+        <package android:name="com.google.android.settings.intelligence" />
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.google.android.apps.messaging" />
+        <package android:name="com.google.android.apps.docs" />
+        <package android:name="com.android.camera2" />
+        <package android:name="com.google.android.apps.photos" />
+        <package android:name="com.google.android.projection.gearhead" />
+        <package android:name="com.google.android.setupwizard" />
+    </queries>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="READ_MEDIA_IMAGES" />
 
     <application
-
-        android:exported="false"
+        android:allowBackup="true"
+        android:exported="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/app_icon"
@@ -99,12 +104,11 @@
             android:hardwareAccelerated="true"
             android:exported="true"
             android:theme="@style/Theme.FeatureAppmain"
-            android:label="@string/title_activity_main">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
+            android:label="MyCameraActivity"
+            android:enabled="true">
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="package" />
             </intent-filter>
             <!--  <intent-filter
                   android:scheme="http"
@@ -134,6 +138,7 @@
             android:exported="false"
             android:theme="@style/Theme.FeatureAppmain"
             android:hardwareAccelerated="true"
+            android:label="LicenceUserData2"
 
             ></activity>
         <activity

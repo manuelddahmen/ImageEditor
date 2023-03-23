@@ -12,7 +12,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 2200000
+def code = 2210000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
@@ -32,7 +32,9 @@ android {
         }
     }
 
-
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
     bundle {
         storeArchive {
             enable = false
@@ -50,13 +52,6 @@ android {
             storePassword 'faeeagrzdsd'
             keyAlias 'manuel'
             keyPassword 'faeeagrzdsd'
-        }
-    }
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationId "one.empty3.feature.app.maxSdk29.pro"
-        vectorDrawables {
-            useSupportLibrary true
         }
     }
 
@@ -132,28 +127,23 @@ android {
         dataBinding true
         compose true
     }
-    flavorDimensions "featureVersion"
-
-
-    productFlavors {
-
-        sdk29 {
-            applicationId "one.empty3.feature.app.maxSdk29.pro"
-            dimension "featureVersion"
-            compileSdkVersion 33
-            defaultConfig {
-                targetSdkVersion 33
-                minSdkVersion 30
-                JavaVersion.VERSION_11
-                versionCode code
-                versionName "3.0"
-                kotlin {
-                    version "1.8.0"
-                }
-
-                signingConfig signingConfigs.release
-            }
+    defaultConfig {
+        vectorDrawables {
+            useSupportLibrary true
         }
+        applicationId "one.empty3.feature.app.maxSdk29.pro"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        targetSdkVersion 33
+        minSdkVersion 29
+        compileSdkVersion 33
+        JavaVersion.VERSION_11
+        versionCode code
+        versionName "3.0"
+        kotlin {
+            version "1.8.0"
+        }
+
+        signingConfig signingConfigs.release
     }
 }
 
