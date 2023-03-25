@@ -55,7 +55,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -92,7 +91,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
-    private AppCompatActivity thisActivity;
+    private ActivitySuperClass thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
     static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
@@ -492,8 +491,8 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         openNewUI.setOnClickListener(view -> {
             Intent intent2 = new Intent();
-            intent2.setClass(getApplicationContext(), MainActivity.class);
-            startActivity(intent2);
+            //intent2.setClass(getApplicationContext(), .class);
+            //startActivity(intent2);
         });
 
 
@@ -1069,6 +1068,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             System.err.println("Get file (bitmap) : " + photo);
 
             File myPhotoV2022 = new Utils().writePhoto(this, photo, "loaded-image-");
+            currentFile = myPhotoV2022;
             new Utils().setImageView(this, imageView);
 
             //System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());

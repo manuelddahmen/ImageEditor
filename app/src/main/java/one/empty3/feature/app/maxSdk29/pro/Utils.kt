@@ -83,7 +83,7 @@ public class Utils() {
      * @param name
      * @return file
      */
-    fun writePhoto(activity: Activity, bitmap: Bitmap, name: String): File? {
+    fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
 
         var written = false;
         var fileWritten: File? = null;
@@ -109,7 +109,7 @@ public class Utils() {
     }
 
     public fun writeFile(
-        activity: Activity,
+        activity: ActivitySuperClass,
         bitmap: Bitmap,
         file1: File,
         file2: File
@@ -121,7 +121,7 @@ public class Utils() {
                 if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
                     fileWritten = file1;
                     written = true
-                    System.out.println("File written: $file1")
+                    System.out.println("File written1: $file1")
                     return file1
                 }
             } else {
@@ -139,7 +139,7 @@ public class Utils() {
                 if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
                     written = true;
                     fileWritten = file2;
-                    System.out.println("File written: $file2")
+                    System.out.println("File written2: $file2")
                     return file2
                 }
             }
@@ -187,7 +187,7 @@ public class Utils() {
             currentFile = activity.getCurrentFile()
         }
 
-        System.err.println("set ImageView from  = $data")
+        System.err.println("set ImageView from  = $currentFile")
 
         if (currentFile != null) {
             val bi = ImageIO.read(currentFile)
@@ -254,7 +254,7 @@ public class Utils() {
 
 
     fun saveImageState(
-        activity: MainActivity,
+        activity: ActivitySuperClass,
         imageViewOriginal: Boolean,
     ) {
         val file = true
@@ -348,7 +348,7 @@ public class Utils() {
         return maxRes
     }
 
-    fun loadImageState(activity: MainActivity, originalImage: Boolean) {
+    fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
         val ot = ""
         val imageFile = getFilesFile("imageViewOriginal.jpg")
@@ -364,14 +364,12 @@ public class Utils() {
                 if (imageViewBitmap != null) {
                     val imageView: ImageViewSelection =
                         activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
-                    if (imageView != null) {
-                        Utils().setImageView(imageView, imageViewBitmap);
-                        activity.currentFile = imageFile
-                        activity.currentBitmap = imageFile
-                        System.err.println("Image reloaded")
+                    Utils().setImageView(imageView, imageViewBitmap);
+                    activity.currentFile = imageFile
+                    //activity.currentBitmap = imageFile
+                    System.err.println("Image reloaded")
 
-                        //createCurrentUniqueFile();
-                    }
+                    //createCurrentUniqueFile();
                 }
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
@@ -384,13 +382,13 @@ public class Utils() {
             if (activity.currentFile != null) {
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                val myPhotoV2022 =
+                val myPhotoV2022: File? =
                     this.writePhoto(activity, photo, "MyPhotoV2022" + UUID.randomUUID())
                 System.err.println("Written copy : " + myPhotoV2022!!.absolutePath)
                 //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
                 //fillGallery(photo, FileInputStream(myPhotoV2022))
                 System.err.println("Set in ImageView : " + myPhotoV2022.absolutePath)
-                activity.currentFile = myPhotoV2022
+
                 return myPhotoV2022
             }
         } catch (e: FileNotFoundException) {

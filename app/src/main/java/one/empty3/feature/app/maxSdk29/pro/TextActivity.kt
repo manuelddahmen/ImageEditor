@@ -43,7 +43,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 
-class TextActivity() : AppCompatActivity(), Parcelable {
+class TextActivity() : ActivitySuperClass(), Parcelable {
     private var maxRes: Int = 0
     private val INT_WRITE_STORAGE: Int = 9247492
     private lateinit var currentFile: File
