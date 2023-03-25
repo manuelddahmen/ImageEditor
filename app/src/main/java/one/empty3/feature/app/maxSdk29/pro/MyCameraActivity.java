@@ -55,7 +55,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -73,9 +72,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
@@ -969,7 +966,6 @@ public class MyCameraActivity extends AppCompatActivity {
             } else return true;
         }
     */
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -981,10 +977,16 @@ public class MyCameraActivity extends AppCompatActivity {
 
                 imageView = findViewById(R.id.currentImageViewSelection);
 
-                new Utils().setImageView(imageView, photo);
+                if (photo != null && imageView != null) {
 
-                System.err.printf("Image set 4/4");
-                File f = writePhoto(photo, "MyImage");
+                    new Utils().setImageView(imageView, photo);
+
+                    System.err.printf("Image set 4/4");
+
+                    new Utils().writePhoto(this, photo, "camera-");
+
+                }
+                /*File f = writePhoto(photo, "MyImage");
 
                 if (f == null) {
                     System.err.println("Can't write copy image file from camera ");
@@ -992,14 +994,14 @@ public class MyCameraActivity extends AppCompatActivity {
                 } else {
                     currentFile = f;
                     try {
-                        fillGallery(bitmap, new FileInputStream(f));
+                        fillGallery(bitmap, new FileInputStream(f))
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
 
 
-                saveImageState(isWorkingResolutionOriginal());
+                //saveImageState(isWorkingResolutionOriginal());
 
 
                 String root = Environment.getExternalStorageDirectory().toString();
@@ -1020,7 +1022,11 @@ public class MyCameraActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                 */
             }
+
+
         }
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_VIDEO_CHOOSER && resultCode == Activity.RESULT_OK) {
             InputStream choose_directoryData = null;
@@ -1044,7 +1050,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
             int millis = mp.getDuration();
             Bitmap bitmap;
-            for (int i = 0; i < 10000000; i += 1) {
+            for (int i = 0; i < 100; i += 1) {
                 bitmap = retriever.getFrameAtIndex(i);
 
                 if (bitmap == null) break;
@@ -1079,24 +1085,23 @@ public class MyCameraActivity extends AppCompatActivity {
             Bitmap photo = null;
             System.err.println(choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData);
-            try {
-                System.err.println("Get file (bitmap) : " + photo);
 
-                File myPhotoV2022 = writePhoto(photo, "MyPhotoV2022");
-                System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());
-                //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
-                fillGallery(photo, new FileInputStream(myPhotoV2022));
-                System.err.println("Set in ImageView : " + myPhotoV2022.getAbsolutePath());
+            System.err.println("Get file (bitmap) : " + photo);
 
-                currentFile = myPhotoV2022;
-                System.err.println("Set as class member");
-                saveImageState(isWorkingResolutionOriginal());
-                System.err.println("SaveImageState");
-                saveImageState(isWorkingResolutionOriginal());
+            File myPhotoV2022 = new Utils().writePhoto(this, photo, "loaded-image-");
+            new Utils().setImageView(this, imageView);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            //System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());
+            //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
+            //fillGallery(photo, new FileInputStream(myPhotoV2022));
+            //System.err.println("Set in ImageView : " + myPhotoV2022.getAbsolutePath());
+
+            //currentFile = myPhotoV2022;
+            //System.err.println("Set as class member");
+            ///saveImageState(isWorkingResolutionOriginal());
+            //System.err.println("SaveImageState");
+            //saveImageState(isWorkingResolutionOriginal());
+
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
         }

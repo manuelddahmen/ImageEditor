@@ -73,6 +73,7 @@ public class GraphicsActivity extends AppCompatActivity {
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+        String cord1 = "x";
         if (getIntent().getExtras() == null || getIntent().getExtras().get("x") == null) {
             //loadInstanceState(savedInstanceState);
         }
@@ -82,26 +83,30 @@ public class GraphicsActivity extends AppCompatActivity {
             String cord = button.getText().toString().toLowerCase();
             if (textView != null) {
                 String variable = getIntent().getExtras().getString("variable");
+
                 if (variable != null && variable.equals(cord)) {
+                    cord1 = cord;
                     textView.setText(cord);
                 } else if (getIntent().getExtras() != null) {
                     textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 }
+                String finalCord1 = cord1;
                 button.setOnClickListener(view -> {
 
                     Intent calculatorIntent = new Intent();
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    putExtra(calculatorIntent, cord);
+                    new Utils().putExtra(calculatorIntent, cords, finalCord1);
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
             }
         }
         View buttonView = findViewById(R.id.buttonView);
+        String finalCord = cord1;
         buttonView.setOnClickListener(view -> {
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
-            putExtra(graphicsIntent, null);
+            new Utils().putExtra(graphicsIntent, cords, finalCord);
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
@@ -118,19 +123,6 @@ public class GraphicsActivity extends AppCompatActivity {
             startActivity(mainActivity);
         });
 */
-    }
-
-    private void putExtra(Intent calculatorIntent, String cord) {
-        int j = 0;
-        for (String s : cords) {
-            String s0 = cords[j];
-            String s1 = textViews[j].getText().toString();
-            calculatorIntent.putExtra(s0, s1);
-            if (s0.equals(cord)) {
-                calculatorIntent.putExtra("variable", s1);
-            }
-            j++;
-        }
     }
 
     @Override
