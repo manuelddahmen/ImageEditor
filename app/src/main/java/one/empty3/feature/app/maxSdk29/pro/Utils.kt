@@ -22,15 +22,19 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.EditText
+import com.nostra13.universalimageloader.core.ImageLoader
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -38,11 +42,13 @@ import one.empty3.feature20220726.PixM
 import java.io.*
 import java.util.*
 
+
 public class Utils() {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
+    var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
 /*
     fun getSavedApplicationData(activity: EmptyActivity) {
@@ -171,19 +177,16 @@ public class Utils() {
     public fun setImageView(activity: Activity, imageView: ImageViewSelection?): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
-        if (intent?.getData() != null) {
-            if (intent.data != null) {
-                val data = intent.data
-                System.err.println("File returned from effects' list = $data")
-                currentFile = File(data!!.path)
-                if (currentFile != null) {
-                    val bi = ImageIO.read(currentFile)
-                    if (bi != null) {
-                        val bitmap = bi.getBitmap()
-                        if (bitmap != null && imageView != null) {
-                            Utils().setImageView(imageView!!, bitmap)
-
-                        }
+        if (intent?.data != null) {
+            val data = intent.data
+            System.err.println("File returned from effects' list = $data")
+            currentFile = File(data!!.path)
+            if (currentFile != null) {
+                val bi = ImageIO.read(currentFile)
+                if (bi != null) {
+                    val bitmap = bi.getBitmap()
+                    if (bitmap != null && imageView != null) {
+                        Utils().setImageView(imageView!!, bitmap)
                     }
                 }
             }
@@ -393,6 +396,7 @@ public class Utils() {
     }
 
     public fun setImageView(imageView: ImageViewSelection, bitmap: Bitmap) {
+        //imageLoader.displayImage(bitmap, imageView);
         imageView.setImageBitmap2(bitmap)
         imageView.setPixels(PixM(bitmap))
 

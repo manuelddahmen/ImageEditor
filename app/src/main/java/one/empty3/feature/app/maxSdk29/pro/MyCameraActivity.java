@@ -1065,6 +1065,7 @@ public class MyCameraActivity extends AppCompatActivity {
         }
 
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == Activity.RESULT_OK) {
+            imageView = findViewById(R.id.currentImageViewSelection);
 
 
 //            if (!requestPermissionAppStorage()) {
