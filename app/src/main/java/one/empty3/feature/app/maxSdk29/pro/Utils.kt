@@ -206,6 +206,7 @@ public class Utils() {
         //intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
         intent.putExtra("currentFile", currentFile)
         intent.putExtra("data", currentFile)
+        intent.data = Uri.fromFile(currentFile)
         System.out.println("Add currentFile to parameter")
         return currentFile
     }
