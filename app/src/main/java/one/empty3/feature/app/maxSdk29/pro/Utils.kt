@@ -224,7 +224,7 @@ public class Utils() {
     fun getCurrentFile(intent: Intent): File? {
 
         if (intent.hasExtra("data") && intent.extras!!.get("data") is File)
-            intent.extras?.get("data") as File
+            return intent.extras?.get("data") as File
         if (intent.data != null && intent.data is Uri)
             return intent.data!!.getPath()?.let { File(it) }
         if (intent.data != null && intent.data is File)
