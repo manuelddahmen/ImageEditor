@@ -83,7 +83,7 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-public class MyCameraActivity extends AppCompatActivity {
+public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
     Properties properties = new Properties();
 
@@ -100,11 +100,10 @@ public class MyCameraActivity extends AppCompatActivity {
     private static final int ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER = 9999;
     private static final int FILESYSTEM_WRITE_PICTURE = 1111;
     private static final int MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777;
-    private ImageViewSelection imageView;
     private File currentDir;
     private File currentBitmap;
     private File currentFileOriginalResolution;
-    private File currentFile;
+
     private File currentFileZoomed;
     private boolean beta = false;
     private Point drawPointA = null;
@@ -715,7 +714,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                         System.err.println("Image reloaded");
 
-                        //createCurrentUniqueFile();
+                        currentFile = new Utils().createCurrentUniqueFile(this);
                     }
                 }
             } catch (FileNotFoundException | NullPointerException e) {
@@ -723,26 +722,6 @@ public class MyCameraActivity extends AppCompatActivity {
             }
 
 
-        }
-    }
-
-    private void createCurrentUniqueFile() {
-
-        try {
-            if (currentFile != null) {
-                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(currentFile));
-                System.err.println("Get file (bitmap) : " + photo);
-
-                File myPhotoV2022 = writePhoto(photo, "MyPhotoV2022" + UUID.randomUUID());
-                System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());
-                //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
-                fillGallery(photo, new FileInputStream(myPhotoV2022));
-                System.err.println("Set in ImageView : " + myPhotoV2022.getAbsolutePath());
-
-                currentFile = myPhotoV2022;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 

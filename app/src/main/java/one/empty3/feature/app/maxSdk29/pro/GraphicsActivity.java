@@ -28,15 +28,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-
-public class GraphicsActivity extends AppCompatActivity {
+public class GraphicsActivity extends ActivitySuperClass {
     private String[] cords;
     private TextView[] textViews;
     private Button[] buttons;
-    private File currentFile;
     private int maxRes;
 
     @Override

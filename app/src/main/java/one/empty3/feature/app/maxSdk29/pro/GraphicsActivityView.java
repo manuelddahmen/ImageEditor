@@ -28,7 +28,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -40,14 +39,13 @@ import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
-public class GraphicsActivityView extends AppCompatActivity {
+public class GraphicsActivityView extends ActivitySuperClass {
     final String[] cord = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     final String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cord.length];
     HashMap<String, Double> stringDoubleHashMap;
     private int maxRes = 300;
-    private File currentFile;
     private PixM current;
     private int MAX_RES = maxRes;
 

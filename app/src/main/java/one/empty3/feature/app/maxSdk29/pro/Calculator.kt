@@ -32,9 +32,8 @@ import one.empty3.apps.tree.altree.*
 import java.io.File
 import java.util.*
 
-class Calculator : AppCompatActivity() {
+class Calculator : ActivitySuperClass() {
     private var maxRes: Int = 0
-    private var currentFile: File? = null
     private var index: Int = 0
     private var variable: String = ""
     private var text: String = ""

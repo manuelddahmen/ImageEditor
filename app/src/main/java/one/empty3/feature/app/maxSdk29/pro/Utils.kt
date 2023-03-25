@@ -34,7 +34,8 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import com.nostra13.universalimageloader.core.ImageLoader
+import androidx.core.net.toFile
+//import com.nostra13.universalimageloader.core.ImageLoader
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -48,7 +49,7 @@ public class Utils() {
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
-    var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
+    //var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
 /*
     fun getSavedApplicationData(activity: EmptyActivity) {
@@ -174,25 +175,30 @@ public class Utils() {
         return maxRes
     }
 
-    public fun setImageView(activity: Activity, imageView: ImageViewSelection?): File? {
+    public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection?): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
-        if (intent?.data != null) {
-            val data = intent.data
-            System.err.println("File returned from effects' list = $data")
-            currentFile = File(data!!.path)
-            if (currentFile != null) {
-                val bi = ImageIO.read(currentFile)
-                if (bi != null) {
-                    val bitmap = bi.getBitmap()
-                    if (bitmap != null && imageView != null) {
-                        Utils().setImageView(imageView!!, bitmap)
-                    }
+        val data = intent?.data
+        currentFile = data?.toFile()
+        if (data == null) {
+            currentFile = getCurrentFile(intent = intent)
+        }
+        if (currentFile == null) {
+            currentFile = activity.getCurrentFile()
+        }
+
+        System.err.println("set ImageView from  = $data")
+
+        if (currentFile != null) {
+            val bi = ImageIO.read(currentFile)
+            if (bi != null) {
+                val bitmap = bi.getBitmap()
+                if (bitmap != null && imageView != null) {
+                    imageView.setImageBitmap2(bitmap)
                 }
             }
-        } else {
-            System.err.println("intent data Main==null")
         }
+
         return currentFile
     }
 
@@ -373,7 +379,7 @@ public class Utils() {
         }
     }
 
-    private fun createCurrentUniqueFile(activity: MainActivity) {
+    public fun createCurrentUniqueFile(activity: ActivitySuperClass): File? {
         try {
             if (activity.currentFile != null) {
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
@@ -385,10 +391,12 @@ public class Utils() {
                 //fillGallery(photo, FileInputStream(myPhotoV2022))
                 System.err.println("Set in ImageView : " + myPhotoV2022.absolutePath)
                 activity.currentFile = myPhotoV2022
+                return myPhotoV2022
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
+        return null
     }
 
     private fun getFilesFile(s: String): File {

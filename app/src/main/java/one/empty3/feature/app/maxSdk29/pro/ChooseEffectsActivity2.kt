@@ -43,7 +43,7 @@ import java.io.File
 import java.security.Permission
 import java.security.Permissions
 
-class ChooseEffectsActivity2 : AppCompatActivity() {
+class ChooseEffectsActivity2 : ActivitySuperClass() {
     private val INT_READ_STORAGE: Int = 5152112
     private val INT_WRITE_STORAGE: Int = 5152113
     private var listEffects: HashMap<String, ProcessFile>? = null
@@ -80,6 +80,8 @@ class ChooseEffectsActivity2 : AppCompatActivity() {
             mediaFile = intent.extras?.get("currentFile") as File
         }
         maxRes = intent.extras?.get("maxRes") as Int
+
+        currentFile = mediaFile
     }
 
 //    @RequiresApi(Build.VERSION_CODES.N)
