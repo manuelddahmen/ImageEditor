@@ -20,6 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -31,6 +32,8 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
@@ -118,6 +121,8 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
          */
         printValues();
+        Logger.getAnonymousLogger().log(Level.INFO,
+                "currentFile=" + getClass().toString() + " " + currentFile);
     }
 
     private void printValues() {
@@ -129,13 +134,21 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
     }
 
+
     private void draw() {
+        Logger.getAnonymousLogger().log(Level.INFO,
+                "currentFile=" + getClass().toString() + " " + currentFile);
+
+
         ImageViewSelection image = findViewById(R.id.currentImageView);
 
         int w = getMaxRes();
         int h = getMaxRes();
 
         current = null;
+
+        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES}, 38203820);
 
         if (currentFile != null) {
             if (getMaxRes() > 0) {

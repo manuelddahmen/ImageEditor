@@ -76,6 +76,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
@@ -381,12 +383,15 @@ public class MyCameraActivity extends ActivitySuperClass {
             if (currentFile != null) {
                 Uri uri = Uri.fromFile(currentFile);
                 //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
-                Intent intentDraw = new Intent(Intent.ACTION_EDIT);
+                Intent intentDraw = new Intent();
                 intentDraw.setDataAndType(uri, "image/jpeg");
-                intentDraw.putExtra("currentFile", currentFile);
+                new Utils().addCurrentFileToIntent(intentDraw, currentFile);
                 intentDraw.putExtra("maxRes", getMaxRes());
                 intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
+                Logger.getAnonymousLogger().log(Level.INFO,
+                        "currentFile=" + getClass().toString() + " " + currentFile);
+
                 startActivity(intentDraw);
             } else toastButtonDisabled(v);
         });

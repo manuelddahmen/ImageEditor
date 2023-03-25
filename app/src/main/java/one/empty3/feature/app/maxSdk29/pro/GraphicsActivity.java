@@ -29,6 +29,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class GraphicsActivity extends ActivitySuperClass {
     private String[] cords;
     private TextView[] textViews;
@@ -100,6 +103,8 @@ public class GraphicsActivity extends ActivitySuperClass {
         View buttonView = findViewById(R.id.buttonView);
         String finalCord = cord1;
         buttonView.setOnClickListener(view -> {
+            Logger.getAnonymousLogger().log(Level.INFO,
+                    "currentFile=" + getClass().toString() + " " + currentFile);
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             new Utils().putExtra(graphicsIntent, cords, finalCord);

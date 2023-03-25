@@ -29,6 +29,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.unit.max
 import one.empty3.apps.tree.altree.*
+import one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.Companion
 import java.io.File
 import java.util.*
 
@@ -128,7 +129,7 @@ class Calculator : ActivitySuperClass() {
             val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
                 supportFragmentManager,
-                "one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment"
+                one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.TAG
             )
             Thread {
                 run {
