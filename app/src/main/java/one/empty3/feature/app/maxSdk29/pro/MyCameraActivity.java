@@ -961,7 +961,8 @@ public class MyCameraActivity extends ActivitySuperClass {
 
                     System.err.printf("Image set 4/4");
 
-                    new Utils().writePhoto(this, photo, "camera-");
+
+                    currentFile = new Utils().writePhoto(this, photo, "camera-");
 
                 }
                 /*File f = writePhoto(photo, "MyImage");
