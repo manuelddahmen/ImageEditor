@@ -52,10 +52,10 @@
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <Button
-                    android:id="@+id/buttonBack2"
+                    android:id="@+id/buttonMainActivity"
                     android:layout_width="64dp"
                     android:layout_height="48dp"
-                    android:text="@string/apply"
+                    android:text="@string/main"
                     app:layout_constraintTop_toTopOf="parent"
                     android:theme="@style/Theme.FeatureAppmain"
 
