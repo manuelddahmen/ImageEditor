@@ -100,14 +100,14 @@ public class GraphicsActivityView extends ActivitySuperClass {
                 draw();
             }
         });
-        /*
+
         Button back = findViewById(R.id.buttonBack2);
         back.setOnClickListener(view -> {
-            Intent intentGraphics = new Intent(Intent.ACTION_EDIT);
+            Intent intentGraphics = new Intent();
             if (currentFile != null)
                 intentGraphics.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
 
-            intentGraphics.setClass(getApplicationContext(), GraphicsActivity.class);
+            intentGraphics.setClass(getApplicationContext(), MyCameraActivity.class);
             intentGraphics.putExtra("maxRes", maxRes);
             int j = 0;
             for (j = 0; j < cord.length; j++) {
@@ -119,7 +119,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         });
 
-         */
+
         printValues();
         Logger.getAnonymousLogger().log(Level.INFO,
                 "currentFile=" + getClass().toString() + " " + currentFile);
