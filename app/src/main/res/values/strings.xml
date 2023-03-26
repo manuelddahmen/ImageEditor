@@ -110,7 +110,7 @@
     <string name="grid_text_11">11</string>
     <string name="grid_text_12">12</string>
     <string name="preview_of_shapes">Preview of shapes</string>
-    <string name="textDp">48dp</string>
+    <string name="textDp">48</string>
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
