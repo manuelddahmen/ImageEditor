@@ -42,7 +42,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -814,11 +813,18 @@ public class MyCameraActivity extends ActivitySuperClass {
         startActivity(intent);
     }
 
+    /***Dépendances des modules
+     Ce module DocumentsUI dépend de l'autorisation MANAGE_DOCUMENTS protégée par l'autorisation de signature ; une classe d'autorisation supplémentaire garantit qu'une seule application sur l'appareil dispose de l'autorisation MANAGE_DOCUMENTS .
+     *
+     */
+
     private void startCreation() {
 
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 3208302);
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*"});
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         Intent intent2 = Intent.createChooser(intent, "Choose a file");
@@ -1205,64 +1211,6 @@ public class MyCameraActivity extends ActivitySuperClass {
         }
     }
 
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        loadInstanceState();
-
-        //loadImageState(isWorkingResolutionOriginal());
-
-        if (savedInstanceState != null) {
-            try {
-                if (savedInstanceState.containsKey("maxRes")) {
-                    maxRes = savedInstanceState.getInt("maxRes") > -1 ?
-                            savedInstanceState.getInt("maxRes") : MAX_RES_DEFAULT;
-                    //currentFile = new File((String) savedInstanceState.getString("currentFile"));
-                    //currentBitmap = new File((String) savedInstanceState.getString("currentBitmap"));
-                    //currentDir = new File((String) savedInstanceState.getString("currentDir"));
-                    if (currentBitmap != null) {
-                        File bitmap = new File(currentFile.getAbsolutePath());
-                        try {
-                            Bitmap bitmap1 = BitmapFactory.decodeStream(new FileInputStream(bitmap));
-                            new Utils().setImageView(imageView, bitmap1);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    imageView = findViewById(R.id.currentImageViewSelection);
-                }
-            } catch (Exception e) {
-                Log.i("MyCameraActivity", "Error in OnRestoreState");
-            }
-        }
-        super.onRestoreInstanceState(savedInstanceState);
-
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        saveImageState(isWorkingResolutionOriginal());
-        if (outState != null) {
-            outState.putString("currentFile", currentFile.getAbsolutePath());
-            outState.putString("currentBitmap", currentBitmap.getAbsolutePath());
-            outState.putString("currentDir", currentDir.getAbsolutePath());
-            outState.putString("currentImageViewFile", currentFile.getAbsolutePath());
-            outState.putInt("maxRes", maxRes);
-
-            properties = new Properties();
-            for (String string : outState.keySet()) {
-                properties.put(string, outState.get(string));
-            }
-            try {
-                properties.save(new FileOutputStream(getFilesFile("app_state.properties"))
-                        , "Properties from app state");
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        super.onSaveInstanceState(outState, outPersistentState);
-
-    }
 
     public void unselectA(View view) {
         drawPointA = null;

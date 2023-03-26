@@ -325,6 +325,9 @@ public class Utils() {
                 e.printStackTrace()
             }
         }
+        for (cord in cords) {
+
+        }
     }
 
     private fun isWorkingResolutionOriginal(): Boolean {

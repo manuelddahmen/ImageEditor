@@ -20,13 +20,28 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class ActivitySuperClass extends AppCompatActivity {
+    private static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
+    public final String filenameSaveState = "state.properties";
     protected ImageViewSelection imageView;
     protected File currentFile;
+    protected int maxRes;
+    protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+
+    protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
+    protected String currentCord = cords[0];
 
     public ImageViewSelection getImageView() {
         return imageView;
@@ -43,4 +58,51 @@ public class ActivitySuperClass extends AppCompatActivity {
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        new Utils().saveImageState(this, false);
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(filenameSaveState));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < cords.length; i++) {
+            properties.setProperty(cordsConsts[i], cords[i]);
+        }
+        properties.setProperty("maxRes", "" + maxRes);
+
+        try {
+            properties.store(new FileOutputStream(filenameSaveState), "");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        new Utils().loadImageState(this, false);
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(filenameSaveState));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < cords.length; i++) {
+            cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
+        }
+        maxRes = Integer.parseInt(properties.getProperty("maxRes"));
+    }
+
+    public void passParameters(Intent to) {
+
+    }
+
+    public void getParameters(Intent from) {
+
+    }
+
 }

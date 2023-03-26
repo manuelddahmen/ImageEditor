@@ -101,7 +101,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
             }
         });
 
-        Button back = findViewById(R.id.buttonBack2);
+        Button back = findViewById(R.id.buttonMainActivity);
         back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent();
             if (currentFile != null)

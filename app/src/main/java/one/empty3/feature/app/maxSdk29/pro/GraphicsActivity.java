@@ -36,7 +36,6 @@ public class GraphicsActivity extends ActivitySuperClass {
     private String[] cords;
     private TextView[] textViews;
     private Button[] buttons;
-    private int maxRes;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +70,6 @@ public class GraphicsActivity extends ActivitySuperClass {
 
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
-        cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
         String cord1 = "x";
         if (getIntent().getExtras() == null || getIntent().getExtras().get("x") == null) {
             //loadInstanceState(savedInstanceState);
@@ -93,6 +91,9 @@ public class GraphicsActivity extends ActivitySuperClass {
                 button.setOnClickListener(view -> {
 
                     Intent calculatorIntent = new Intent();
+                    for (int i1 = 0; i1 < textViews.length; i1++) {
+                        calculatorIntent.putExtra(cords[i1], textViews[i1].getText());
+                    }
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
                     new Utils().putExtra(calculatorIntent, cords, finalCord1);
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
@@ -108,6 +109,9 @@ public class GraphicsActivity extends ActivitySuperClass {
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             new Utils().putExtra(graphicsIntent, cords, finalCord);
+            for (int i1 = 0; i1 < textViews.length; i1++) {
+                graphicsIntent.putExtra(cords[i1], textViews[i1].getText());
+            }
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
             startActivity(graphicsIntent);
