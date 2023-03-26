@@ -384,7 +384,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                 Intent intentDraw = new Intent();
                 intentDraw.setDataAndType(uri, "image/jpeg");
-                new Utils().addCurrentFileToIntent(intentDraw, currentFile);
+                new Utils().addCurrentFileToIntent(intentDraw, this, currentFile);
                 intentDraw.putExtra("maxRes", getMaxRes());
                 intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);

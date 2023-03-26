@@ -98,7 +98,7 @@ public class GraphicsActivity extends ActivitySuperClass {
                         }
                     }
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
+                    new Utils().addCurrentFileToIntent(calculatorIntent, null, currentFile);
                     startActivity(calculatorIntent);
                 });
             }
@@ -115,7 +115,7 @@ public class GraphicsActivity extends ActivitySuperClass {
                 graphicsIntent.putExtra(cords[i1], textViews[i1].getText());
             }
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(graphicsIntent, currentFile);
+            new Utils().addCurrentFileToIntent(graphicsIntent, null, currentFile);
             startActivity(graphicsIntent);
         });
 /*

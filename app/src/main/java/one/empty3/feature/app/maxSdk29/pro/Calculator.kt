@@ -45,10 +45,9 @@ class Calculator : ActivitySuperClass() {
 
         val variable = intent.extras?.getString("variable")
         val variableValue: String? = intent.extras?.getString(variable)
-        val formula = arrayOfNulls<String>(10)
 
         for ((index, s) in cordsConsts.withIndex()) {
-            formula[index] = intent.extras?.getString(s)
+            cords[index] = intent.extras?.getString(s)
         }
 
         title = variable
@@ -82,7 +81,7 @@ class Calculator : ActivitySuperClass() {
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
-        editTextId.setText(formula[cords.indexOf(variable)])
+        editTextId.setText(cords[cords.indexOf(variable)])
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
@@ -162,14 +161,14 @@ class Calculator : ActivitySuperClass() {
             val intentGraphics = Intent()
             intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
-                Utils().addCurrentFileToIntent(intentGraphics, this, currentFile!!)
+                Utils().addCurrentFileToIntent(intentGraphics, null, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
             var i = 0
             for (s in cords) {
                 if (s.equals(variable)) {
                     intentGraphics.putExtra(s, editTextId.text.toString())
                 } else {
-                    intentGraphics.putExtra(s, formula[i])
+                    intentGraphics.putExtra(s, cords[i])
                 }
                 i++
             }
