@@ -162,7 +162,7 @@ class Calculator : ActivitySuperClass() {
             val intentGraphics = Intent()
             intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
-                Utils().addCurrentFileToIntent(intentGraphics, currentFile!!)
+                Utils().addCurrentFileToIntent(intentGraphics, this, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
             var i = 0
             for (s in cords) {

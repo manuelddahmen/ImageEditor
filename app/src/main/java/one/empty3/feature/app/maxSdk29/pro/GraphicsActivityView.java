@@ -109,9 +109,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
             intentGraphics.putExtra("maxRes", maxRes);
             int j = 0;
             for (j = 0; j < cordsConsts.length; j++) {
-                if (intentGraphics.getExtras() != null) {
-                    intentGraphics.putExtra(cordsConsts[j], cords[j]);
-                }
+                intentGraphics.putExtra(cordsConsts[j], cords[j]);
             }
             startActivity(intentGraphics);
 

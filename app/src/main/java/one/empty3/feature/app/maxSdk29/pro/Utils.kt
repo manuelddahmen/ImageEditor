@@ -202,14 +202,26 @@ public class Utils() {
         return currentFile
     }
 
-    fun addCurrentFileToIntent(intent: Intent, currentFile: File): File {
+    fun addCurrentFileToIntent(
+        intent: Intent,
+        activity: ActivitySuperClass,
+        currentFile: File
+    ): File {
         //intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
         intent.putExtra("currentFile", currentFile)
         intent.putExtra("data", currentFile)
         intent.data = Uri.fromFile(currentFile)
         System.out.println("Add currentFile to parameter")
+
+        var j = 0
+        while (j < ActivitySuperClass.cordsConsts.size) {
+            intent.putExtra(ActivitySuperClass.cordsConsts[j], activity.cords[j])
+            j++
+        }
+
         return currentFile
     }
+
 
     public fun putExtra(calculatorIntent: Intent, formulas: Array<String>, cord: String) {
         var j = 0
