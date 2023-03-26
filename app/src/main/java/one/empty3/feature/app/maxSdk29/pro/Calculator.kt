@@ -43,15 +43,12 @@ class Calculator : ActivitySuperClass() {
         setContentView(R.layout.main_layout_table)
 
 
-        val variable = this.intent.extras?.getString("variable")
-        val variableValue: String? = this.intent.extras?.getString(variable)
-        val cords = arrayOf<String>("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
+        val variable = intent.extras?.getString("variable")
+        val variableValue: String? = intent.extras?.getString(variable)
         val formula = arrayOfNulls<String>(10)
 
-        var i = 0
-        for (s in cords) {
-            formula[i] = intent.extras?.getString(s)
-            i += 1
+        for ((index, s) in cordsConsts.withIndex()) {
+            formula[index] = intent.extras?.getString(s)
         }
 
         title = variable
@@ -85,7 +82,7 @@ class Calculator : ActivitySuperClass() {
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
-        editTextId.setText(variableValue)
+        editTextId.setText(formula[cords.indexOf(variable)])
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)

@@ -43,10 +43,8 @@ import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
 public class GraphicsActivityView extends ActivitySuperClass {
-    final String[] cord = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
-    final String[] formulas = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    final AlgebricTree[] algebricTree = new AlgebricTree[cord.length];
+    final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
     private int maxRes = 300;
     private PixM current;
@@ -83,12 +81,12 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         stringDoubleHashMap = new HashMap<>();
 
-        for (int i = 0; i < cord.length; i++) {
-            if (getIntent().getStringExtra(cord[i]) != null) {
-                formulas[i] = getIntent().getStringExtra(cord[i]);
-                stringDoubleHashMap.put(cord[i], values[i]);
+        for (int i = 0; i < cordsConsts.length; i++) {
+            if (getIntent().getStringExtra(cordsConsts[i]) != null) {
+                cords[i] = getIntent().getStringExtra(cordsConsts[i]);
+                stringDoubleHashMap.put(cordsConsts[i], values[i]);
             } else {
-                Toast.makeText(getApplicationContext(), "paramètre null: " + cord[i],
+                Toast.makeText(getApplicationContext(), "paramètre null: " + cords[i],
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -110,9 +108,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
             intentGraphics.setClass(getApplicationContext(), MyCameraActivity.class);
             intentGraphics.putExtra("maxRes", maxRes);
             int j = 0;
-            for (j = 0; j < cord.length; j++) {
+            for (j = 0; j < cordsConsts.length; j++) {
                 if (intentGraphics.getExtras() != null) {
-                    intentGraphics.putExtra(cord[j], formulas[j]);
+                    intentGraphics.putExtra(cordsConsts[j], cords[j]);
                 }
             }
             startActivity(intentGraphics);
@@ -128,8 +126,8 @@ public class GraphicsActivityView extends ActivitySuperClass {
     private void printValues() {
 
         stringDoubleHashMap.forEach((s, aDouble) -> System.out.println(s + ":=" + aDouble));
-        for (int i = 0; i < formulas.length; i++) {
-            System.out.println(cord[i] + ":=" + formulas[i]);
+        for (int i = 0; i < cords.length; i++) {
+            System.out.println(cordsConsts[i] + ":=" + cords[i]);
         }
 
     }
@@ -168,7 +166,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
         h = current.getLines();
 
         for (int i = 0; i < values.length; i++) {
-            algebricTree[i] = new AlgebricTree(formulas[i], stringDoubleHashMap);
+            algebricTree[i] = new AlgebricTree(cords[i], stringDoubleHashMap);
             try {
                 algebricTree[i].construct();
             } catch (AlgebraicFormulaSyntaxException e) {

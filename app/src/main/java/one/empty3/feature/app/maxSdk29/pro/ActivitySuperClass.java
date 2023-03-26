@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -59,6 +60,19 @@ public class ActivitySuperClass extends AppCompatActivity {
         this.currentFile = currentFile;
     }
 
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getIntent() != null && getIntent().getExtras() != null)
+            for (int i = 0; i < cordsConsts.length; i++) {
+                if (getIntent().getStringExtra(cordsConsts[i]) != null)
+                    cords[i] = getIntent().getStringExtra(cordsConsts[i]);
+            }
+        currentFile = new Utils().getCurrentFile(getIntent());
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -67,7 +81,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.load(new FileInputStream(filenameSaveState));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         for (int i = 0; i < cords.length; i++) {
             properties.setProperty(cordsConsts[i], cords[i]);
@@ -77,7 +91,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.store(new FileOutputStream(filenameSaveState), "");
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -89,7 +103,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.load(new FileInputStream(filenameSaveState));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         for (int i = 0; i < cords.length; i++) {
             cords[i] = properties.getProperty(cordsConsts[i], cords[i]);

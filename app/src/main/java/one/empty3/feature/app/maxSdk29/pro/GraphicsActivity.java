@@ -83,18 +83,21 @@ public class GraphicsActivity extends ActivitySuperClass {
                 if (variable != null && variable.equals(cord)) {
                     cord1 = cord;
                     textView.setText(cord);
+                    textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 } else if (getIntent().getExtras() != null) {
                     textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
                 }
-                String finalCord1 = cord1;
+                String finalCord1 = cord1 != null ? cord1 : "?";
                 button.setOnClickListener(view -> {
 
                     Intent calculatorIntent = new Intent();
                     for (int i1 = 0; i1 < textViews.length; i1++) {
-                        calculatorIntent.putExtra(cords[i1], textViews[i1].getText());
+                        calculatorIntent.putExtra(cordsConsts[i1], textViews[i1].getText().toString());
+                        if (button.getText().toString().equals(cordsConsts[i1])) {
+                            calculatorIntent.putExtra("variable", cordsConsts[i1]);
+                        }
                     }
                     calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    new Utils().putExtra(calculatorIntent, cords, finalCord1);
                     new Utils().addCurrentFileToIntent(calculatorIntent, currentFile);
                     startActivity(calculatorIntent);
                 });
