@@ -67,7 +67,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.load(new FileInputStream(filenameSaveState));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         for (int i = 0; i < cords.length; i++) {
             properties.setProperty(cordsConsts[i], cords[i]);
@@ -77,7 +77,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.store(new FileOutputStream(filenameSaveState), "");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -89,7 +89,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         try {
             properties.load(new FileInputStream(filenameSaveState));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         for (int i = 0; i < cords.length; i++) {
             cords[i] = properties.getProperty(cordsConsts[i], cords[i]);

@@ -33,7 +33,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GraphicsActivity extends ActivitySuperClass {
-    private String[] cords;
     private TextView[] textViews;
     private Button[] buttons;
 
