@@ -343,7 +343,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 }
                 val intent2 = Intent()
                 intent2.setDataAndType(Uri.fromFile(currentProcessFile), "image/jpg")
-                Utils().addCurrentFileToIntent(intent2, currentProcessFile)
+                Utils().addCurrentFileToIntent(intent2, this, currentProcessFile)
                 intent2.extras?.putInt("maxRes", maxRes)
                 intent2.setClass(
                     applicationContext,
