@@ -235,4 +235,5 @@ public class GraphicsActivityView extends ActivitySuperClass {
     private int getMaxRes() {
         return maxRes;
     }
+
 }
