@@ -161,8 +161,8 @@ public class Utils() {
 
 
     public fun getMaxRes(activity: Activity, savedInstanceState: Bundle?): Int {
-        var maxRes: Int = -1;
-        maxRes = activity.intent.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT);
+        var maxRes: Int = 0;
+        maxRes = activity?.intent?.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT)!!;
         if (savedInstanceState == null ||
             !savedInstanceState.containsKey("maxRes") ||
             savedInstanceState.getInt("maxRes") <= 0
@@ -415,7 +415,7 @@ public class Utils() {
     }
 
     private fun getFilesFile(s: String): File {
-        return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s)
+        return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files" + File.separator + s)
     }
 
     public fun setImageView(imageView: ImageViewSelection, bitmap: Bitmap) {

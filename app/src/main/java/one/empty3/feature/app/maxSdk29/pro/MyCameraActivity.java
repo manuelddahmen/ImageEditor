@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -1061,10 +1062,14 @@ public class MyCameraActivity extends ActivitySuperClass {
 //            if (!requestPermissionAppStorage()) {
 //                return;
 //            }
+// show The Image in a ImageView
+            DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageViewSelection));
 
-            InputStream choose_directoryData = null;
-            choose_directoryData = getRealPathFromURI(data);
-            if (choose_directoryData == null) {
+            AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
+
+            //InputStream choose_directoryData = null;
+            //choose_directoryData = getRealPathFromURI(data);
+            /*if (choose_directoryData == null) {
                 try {
                     choose_directoryData = new FileInputStream(data.getDataString());
                 } catch (FileNotFoundException e) {
@@ -1076,12 +1081,20 @@ public class MyCameraActivity extends ActivitySuperClass {
             Bitmap photo = null;
             System.err.println(choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData);
-
             System.err.println("Get file (bitmap) : " + photo);
 
             File myPhotoV2022 = new Utils().writePhoto(this, photo, "loaded-image-");
             currentFile = myPhotoV2022;
             new Utils().setImageView(this, imageView);
+*/
+            File myPhotoV2022 = null;
+            try {
+                currentFile = new Utils().writePhoto(this, execute.get(), "loaded-image-");
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             //System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());
             //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
