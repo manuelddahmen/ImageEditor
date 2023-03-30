@@ -167,7 +167,7 @@ public class Utils() {
             !savedInstanceState.containsKey("maxRes") ||
             savedInstanceState.getInt("maxRes") <= 0
         ) {
-
+            maxRes = 0
         } else {
             maxRes = savedInstanceState.getInt("maxRes")
 

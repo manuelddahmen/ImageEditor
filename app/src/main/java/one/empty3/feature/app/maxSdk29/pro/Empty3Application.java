@@ -18,5 +18,7 @@
  *
  */
 
-package one.empty3.feature.app.maxSdk29.pro;public class Empty3Application {
+package one.empty3.feature.app.maxSdk29.pro;
+
+public class Empty3Application {
 }
