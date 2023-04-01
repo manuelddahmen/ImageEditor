@@ -75,7 +75,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -695,6 +694,9 @@ public class MyCameraActivity extends ActivitySuperClass {
     }
 
     public void loadImageState(boolean originalImage) {
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES}, 0);
+
         boolean file = true;
         String ot = "";
         File imageFile = getFilesFile("imageViewOriginal.jpg");
@@ -727,10 +729,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
         }
-    }
-
-    private File getFilesFile(String s) {
-        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s);
     }
 
 
@@ -821,7 +819,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     private void startCreation() {
 
-        requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 3208302);
+        requireWriteTempFilePermission();
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -977,44 +975,6 @@ public class MyCameraActivity extends ActivitySuperClass {
                     currentFile = new Utils().writePhoto(this, photo, "camera-");
 
                 }
-                /*File f = writePhoto(photo, "MyImage");
-
-                if (f == null) {
-                    System.err.println("Can't write copy image file from camera ");
-
-                } else {
-                    currentFile = f;
-                    try {
-                        fillGallery(bitmap, new FileInputStream(f))
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-                //saveImageState(isWorkingResolutionOriginal());
-
-
-                String root = Environment.getExternalStorageDirectory().toString();
-                File myDir = new File(root + "/saved_images");
-                myDir.mkdirs();
-
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + UUID.randomUUID();
-                String fname = "Shutta_" + timeStamp + ".jpg";
-
-
-                final Bitmap finalBitmap;
-                try {
-                    finalBitmap = BitmapFactory.decodeStream(new FileInputStream(currentFile));
-                    File file = new File(myDir, fname);
-                    ImageIO.write(new BufferedImage(finalBitmap), "", file);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                 */
             }
 
 
@@ -1059,21 +1019,18 @@ public class MyCameraActivity extends ActivitySuperClass {
             imageView = findViewById(R.id.currentImageViewSelection);
 
 
-//            if (!requestPermissionAppStorage()) {
-//                return;
-//            }
-// show The Image in a ImageView
-            DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageViewSelection));
+            //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageViewSelection));
 
-            AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
+            //AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
 
-            //InputStream choose_directoryData = null;
-            //choose_directoryData = getRealPathFromURI(data);
-            /*if (choose_directoryData == null) {
+            InputStream choose_directoryData = null;
+            choose_directoryData = getRealPathFromURI(data);
+            if (choose_directoryData == null) {
                 try {
                     choose_directoryData = new FileInputStream(data.getDataString());
                 } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
+                    return;
                 }
             }
 
@@ -1083,29 +1040,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             photo = BitmapFactory.decodeStream(choose_directoryData);
             System.err.println("Get file (bitmap) : " + photo);
 
-            File myPhotoV2022 = new Utils().writePhoto(this, photo, "loaded-image-");
-            currentFile = myPhotoV2022;
-            new Utils().setImageView(this, imageView);
-*/
-            File myPhotoV2022 = null;
-            try {
-                currentFile = new Utils().writePhoto(this, execute.get(), "loaded-image-");
-            } catch (ExecutionException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            //System.err.println("Written copy : " + myPhotoV2022.getAbsolutePath());
-            //photo.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(currentFile));
-            //fillGallery(photo, new FileInputStream(myPhotoV2022));
-            //System.err.println("Set in ImageView : " + myPhotoV2022.getAbsolutePath());
-
-            //currentFile = myPhotoV2022;
-            //System.err.println("Set as class member");
-            ///saveImageState(isWorkingResolutionOriginal());
-            //System.err.println("SaveImageState");
-            //saveImageState(isWorkingResolutionOriginal());
+            currentFile = new Utils().writePhoto(this, photo, "loaded-image-");
 
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
@@ -1187,16 +1122,12 @@ public class MyCameraActivity extends ActivitySuperClass {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadImageState(isWorkingResolutionOriginal());
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        loadImageState(isWorkingResolutionOriginal());
+    private void requireWriteTempFilePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 0);
+        } else {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
     }
 
     public void fillFromStorageState(File data) {
@@ -1239,11 +1170,6 @@ public class MyCameraActivity extends ActivitySuperClass {
         Intent selection = intent.putExtra("selection", new Rect((int) drawPointA.getX(), (int) drawPointA.getY(), (int) drawPointB.getX(), (int) drawPointB.getY()));
     }
 
-    @Override
-    protected void onDestroy() {
-        saveImageState(isWorkingResolutionOriginal());
-        super.onDestroy();
-    }
 
     public void addText(View view) {
         if (currentFile != null) {

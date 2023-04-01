@@ -109,6 +109,15 @@ public class ActivitySuperClass extends AppCompatActivity {
             cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
         }
         maxRes = Integer.parseInt(properties.getProperty("maxRes"));
+
+        if (currentFile != null) {
+            if (imageView == null || imageView.getDrawable() == null) {
+                imageView = findViewById(R.id.currentImageViewSelection);
+                if (imageView != null) {
+                    new Utils().setImageView(this, imageView);
+                }
+            }
+        }
     }
 
     public void passParameters(Intent to) {
@@ -119,4 +128,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     }
 
+    protected File getFilesFile(String s) {
+        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s);
+    }
 }

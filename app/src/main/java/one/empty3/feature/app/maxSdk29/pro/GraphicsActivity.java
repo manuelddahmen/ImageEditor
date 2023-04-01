@@ -26,7 +26,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.logging.Level;
@@ -118,44 +117,6 @@ public class GraphicsActivity extends ActivitySuperClass {
             new Utils().addCurrentFileToIntent(graphicsIntent, null, currentFile);
             startActivity(graphicsIntent);
         });
-/*
-        Button back = findViewById(R.id.buttonBack);
-        back.setOnClickListener(view -> {
 
-            Intent mainActivity = new Intent();
-            mainActivity.setClass(getApplicationContext(), MyCameraActivity.class);
-            putExtra(mainActivity, null);
-            new Utils().addCurrentFileToIntent(mainActivity, currentFile);
-            mainActivity.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            startActivity(mainActivity);
-        });
-*/
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        saveInstanceState(outState);
-    }
-
-    protected void loadInstanceState(@NonNull Bundle savedInstanceState) {
-        int i = 0;
-        for (String cord : cords) {
-            if (savedInstanceState != null && savedInstanceState.get(cord) != null) {
-                textViews[i].setText(savedInstanceState.getString(cord));
-            }
-        }
-        if (savedInstanceState != null)
-            super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    protected void saveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        int i = 0;
-        for (String cord : cords) {
-            if (outState != null && outState.get(cord) != null) {
-                outState.putString(cord, textViews[i].getText().toString());
-            }
-        }
     }
 }

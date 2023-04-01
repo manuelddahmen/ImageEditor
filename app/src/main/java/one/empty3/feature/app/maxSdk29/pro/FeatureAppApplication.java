@@ -20,5 +20,8 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
-public class Empty3Application {
+import android.app.Application;
+
+public class FeatureAppApplication extends Application {
+
 }
