@@ -12,7 +12,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 2270000
+def code = 2290000
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
