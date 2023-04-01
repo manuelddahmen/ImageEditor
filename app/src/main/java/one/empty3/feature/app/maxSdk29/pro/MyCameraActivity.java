@@ -569,12 +569,12 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
-        InputStream input = getContentResolver().openInputStream(uri);
+        InputStream input = getApplicationContext().getContentResolver().openInputStream(uri);
         return input;
     }
 
     public OutputStream getPathOutput(Uri uri) throws FileNotFoundException {
-        OutputStream output = getContentResolver().openOutputStream(uri);
+        OutputStream output = getApplicationContext().getContentResolver().openOutputStream(uri);
         return output;
     }
 
@@ -1036,11 +1036,16 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
             Bitmap photo = null;
-            System.err.println(choose_directoryData);
+            System.err.println("FileInputStream" + choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData);
             System.err.println("Get file (bitmap) : " + photo);
 
-            currentFile = new Utils().writePhoto(this, photo, "loaded-image-");
+            if (photo != null) {
+                currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
+                new Utils().setImageView(this, imageView);
+            } else {
+                System.err.println("currentFile == null. Error.");
+            }
 
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
