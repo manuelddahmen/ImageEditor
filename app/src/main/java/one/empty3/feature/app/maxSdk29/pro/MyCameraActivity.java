@@ -112,7 +112,6 @@ public class MyCameraActivity extends ActivitySuperClass {
     private Bitmap currentFileZoomedBitmap;
     private PixM currentPixM = null;
     private boolean loaded;
-    private int maxRes = 200;
     private boolean workingResolutionOriginal = false;
     private Clipboard clipboard;
     private boolean copied;

@@ -46,7 +46,6 @@ public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
-    private int maxRes = 300;
     private PixM current;
     private int MAX_RES = maxRes;
 

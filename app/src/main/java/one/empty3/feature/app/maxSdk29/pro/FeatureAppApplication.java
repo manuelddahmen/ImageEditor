@@ -23,5 +23,8 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.app.Application;
 
 public class FeatureAppApplication extends Application {
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

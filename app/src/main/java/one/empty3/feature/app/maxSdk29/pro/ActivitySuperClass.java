@@ -38,7 +38,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public final String filenameSaveState = "state.properties";
     protected ImageViewSelection imageView;
     protected File currentFile;
-    protected int maxRes;
+    protected int maxRes = 1280;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
 
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};

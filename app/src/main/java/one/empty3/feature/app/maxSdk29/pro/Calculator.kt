@@ -34,7 +34,6 @@ import java.io.File
 import java.util.*
 
 class Calculator : ActivitySuperClass() {
-    private var maxRes: Int = 0
     private var index: Int = 0
     private var variable: String = ""
     private var text: String = ""

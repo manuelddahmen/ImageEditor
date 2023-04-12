@@ -20,12 +20,14 @@
 
 package one.empty3.io;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
-
-import java.io.File;
-import java.util.*;
 
 public abstract class ProcessFile {
     //    public InterfaceMatrix matrix(Bitmap bitmap) {
@@ -40,9 +42,10 @@ public abstract class ProcessFile {
 //    public InterfaceMatrix matrix(int columns, int lines, boolean isBitmap) {
 //        return MFactory.getInstance(lines, columns, isBitmap);
 //    }
-    protected int maxRes = 0;
+    protected int maxRes = 1280;
     private Properties property;
     private File outputDirectory = null;
+
     protected List<File> imagesStack = new ArrayList<>();
 
     public File getOutputDirectory() {

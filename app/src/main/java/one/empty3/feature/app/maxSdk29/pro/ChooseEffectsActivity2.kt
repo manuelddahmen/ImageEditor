@@ -56,7 +56,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private lateinit var effectListStr: Array<String>
     private lateinit var editText1: EditText
     private lateinit var videoEffectPreview: VideoView
-    private var maxRes: Int = 1200;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
