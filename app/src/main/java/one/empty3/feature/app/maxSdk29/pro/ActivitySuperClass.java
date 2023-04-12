@@ -21,6 +21,7 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ActivitySuperClass extends AppCompatActivity {
@@ -60,6 +63,28 @@ public class ActivitySuperClass extends AppCompatActivity {
         this.currentFile = currentFile;
     }
 
+    public InputStream getPathInput(Uri uri) throws FileNotFoundException {
+        InputStream input = getApplicationContext().getContentResolver().openInputStream(uri);
+        return input;
+    }
+
+    protected InputStream getRealPathFromIntentData(Intent file) {
+        try {
+            return getPathInput(file.getData());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected InputStream getRealPathFromURI(Uri uri) {
+        try {
+            return getPathInput(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +104,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         new Utils().saveImageState(this, false);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(filenameSaveState));
+            properties.load(new FileInputStream(getFilesFile(filenameSaveState)));
         } catch (IOException e) {
 //            e.printStackTrace();
         }
@@ -89,7 +114,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         properties.setProperty("maxRes", "" + maxRes);
 
         try {
-            properties.store(new FileOutputStream(filenameSaveState), "");
+            properties.store(new FileOutputStream(getFilesFile(filenameSaveState)), "");
         } catch (IOException e) {
 //            e.printStackTrace();
         }
@@ -101,7 +126,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(filenameSaveState));
+            properties.load(new FileInputStream(getFilesFile(filenameSaveState)));
         } catch (IOException e) {
 //            e.printStackTrace();
         }
