@@ -37,7 +37,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ActivitySuperClass extends AppCompatActivity {
-    private static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
+    public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
+    public String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     public final String filenameSaveState = "state.properties";
     protected ImageViewSelection imageView;
     protected File currentFile;

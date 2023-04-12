@@ -49,7 +49,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var listEffects: HashMap<String, ProcessFile>? = null
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
-    private val appDataPath = "/one.empty3.feature.app.maxSdk29.pro/"
     private lateinit var mediaFile: File
     private lateinit var recyclerView: RecyclerView
     private lateinit var editText: EditText
