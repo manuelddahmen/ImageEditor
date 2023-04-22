@@ -363,20 +363,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         //Draw activity (pass: rectangle, image, image view size.
         View draw_activity_button = findViewById(R.id.draw_activity);
         //draw_activity_button.setEnabled(false);
-        draw_activity_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawPointA != null && drawPointB != null) {
-                    Intent intentDraw = new Intent(Intent.ACTION_CHOOSER);
-                    intentDraw.setClass(getApplicationContext(), TextAndImages.class);
-                    intentDraw.putExtra("drawRectangle", new Rect((int) drawPointA.x, (int) drawPointA.y, (int) drawPointB.x, (int) drawPointB.y));
-                    intentDraw.putExtra("currentFile", currentFile);
-                    intentDraw.putExtra("currentFileZoomed", currentFileZoomed);
-                    startActivity(intentDraw);
-                }
-            }
-        });
-        Button computePixels = findViewById(R.id.activity_compute_pixels);
+      Button computePixels = findViewById(R.id.activity_compute_pixels);
         computePixels.setOnClickListener(v -> {
             if (currentFile != null) {
                 Uri uri = Uri.fromFile(currentFile);
@@ -1163,11 +1150,6 @@ public class MyCameraActivity extends ActivitySuperClass {
         imageView.setDrawingRectState(false);
     }
 
-    public void drawActivity(View view) {
-        Intent intent = new Intent();
-        intent.setClass(getApplicationContext(), TextAndImages.class);
-        Intent selection = intent.putExtra("selection", new Rect((int) drawPointA.getX(), (int) drawPointA.getY(), (int) drawPointB.getX(), (int) drawPointB.getY()));
-    }
 
 
     public void addText(View view) {

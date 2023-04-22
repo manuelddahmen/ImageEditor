@@ -1,3 +1,3 @@
 -keepattributes LineNumberTable,SourceFile
 -renamesourcefileattribute SourceFile
--keep class one.empty3.feature.app.maxsdk29.pro.*
+-keep class one.empty3.**
