@@ -150,7 +150,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         if (currentFile == null)
             Snackbar.make(findViewById(R.id.currentImageViewSelection), "No image loaded", 5).show();
 
-        if (new Utils().loadImageInImageView(currentFile, imageView)) loaded = true;
+        if (new Utils().loadImageInImageView(currentFile, this)) loaded = true;
 
         thisActivity = this;
 
@@ -361,9 +361,13 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
         //Draw activity (pass: rectangle, image, image view size.
-        View draw_activity_button = findViewById(R.id.draw_activity);
-        //draw_activity_button.setEnabled(false);
-      Button computePixels = findViewById(R.id.activity_compute_pixels);
+        View reshape_activity_button = findViewById(R.id.buttonReshape);
+
+        reshape_activity_button.setOnClickListener(view -> {
+
+        });
+
+        Button computePixels = findViewById(R.id.activity_compute_pixels);
         computePixels.setOnClickListener(v -> {
             if (currentFile != null) {
                 Uri uri = Uri.fromFile(currentFile);

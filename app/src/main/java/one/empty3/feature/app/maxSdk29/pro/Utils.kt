@@ -252,13 +252,16 @@ public class Utils() {
         return null
     }
 
-    fun loadImageInImageView(currentFile: File?, imageView: ImageViewSelection): Boolean {
+    fun loadImageInImageView(currentFile: File?, activity: ActivitySuperClass): Boolean {
+        val imageView : ImageViewSelection = activity.imageView
         if (currentFile != null) {
             try {
-                Utils().setImageView(
-                    imageView!!,
-                    BitmapFactory.decodeStream(FileInputStream(currentFile))
-                )
+                val mBitmap :Bitmap = BitmapFactory.decodeStream(FileInputStream(currentFile))
+                val maxRes = getMaxRes(activity)
+                val cb = Bitmap.createBitmap(mBitmap, 0, 0,
+                    getImageRatio(mBitmap)*maxRes, maxRes)
+                val dim : Int= getMaxRes(activity)
+                Utils().setImageView(imageView, cb)
                 return true
             } catch (e: FileNotFoundException) {
             }

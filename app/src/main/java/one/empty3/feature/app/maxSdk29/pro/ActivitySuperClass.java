@@ -97,6 +97,10 @@ public class ActivitySuperClass extends AppCompatActivity {
                     cords[i] = getIntent().getStringExtra(cordsConsts[i]);
             }
         currentFile = new Utils().getCurrentFile(getIntent());
+
+        imageView = findViewById(R.id.currentImageViewSelection);
+
+        new Utils().loadImageInImageView(currentFile, this);
     }
 
     @Override
