@@ -101,20 +101,20 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         imageView = findViewById(R.id.currentImageViewSelection);
 
-        new Utils().loadImageInImageView(currentFile, this);
+        new Utils().loadImageInImageView(this);
 
         if(currentFile==null) {
-            new Utils().loadImageInImageView(null, this);
+            new Utils().loadImageInImageView(this);
         }
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        new Utils().saveImageState(this, false);
+        new Utils().saveImageState(this);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(getFilesFile(filenameSaveState)));
+            properties.load(new FileInputStream(getImageViewPersistantFile()));
         } catch (IOException e) {
 //            e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         properties.setProperty("maxRes", "" + maxRes);
 
         try {
-            properties.store(new FileOutputStream(getFilesFile(filenameSaveState)), "");
+            properties.store(new FileOutputStream(getImageViewPersistantFile()), "");
         } catch (IOException e) {
 //            e.printStackTrace();
         }
@@ -136,7 +136,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(getFilesFile(filenameSaveState)));
+            properties.load(new FileInputStream(getImageViewPersistantFile()));
         } catch (IOException e) {
 //            e.printStackTrace();
         }

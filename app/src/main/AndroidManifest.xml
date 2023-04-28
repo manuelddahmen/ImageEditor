@@ -15,7 +15,6 @@
         <package android:name="com.google.android.settings.intelligence" />
         <package android:name="com.google.android.youtube" />
         <package android:name="com.google.android.apps.maps" />
-        <package android:name="com.google.android.apps.messaging" />
         <package android:name="com.google.android.apps.docs" />
         <package android:name="com.android.camera2" />
         <package android:name="com.google.android.apps.photos" />

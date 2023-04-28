@@ -294,7 +294,7 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
             )
 
 
-            Utils().setImageView(imageView!!, this.currentImage)
+            Utils().setImageView(imageView, currentImage)
 
             initImageView()
 

@@ -257,9 +257,9 @@ public class Utils() {
             activity.currentFile = activity.getImageViewPersistantFile()
         }
         val imageView : ImageViewSelection = activity.imageView
-        if (currentFile.exists()) {
+        if (activity.currentFile.exists()) {
             try {
-                val mBitmap :Bitmap = BitmapFactory.decodeStream(FileInputStream(currentFile))
+                val mBitmap :Bitmap = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 val maxRes = getMaxRes(activity)
                 val cb = Bitmap.createBitmap(mBitmap, 0, 0,
                     getImageRatio(mBitmap)*maxRes, maxRes)
@@ -279,7 +279,7 @@ public class Utils() {
         if (imageView == null) return
         val drawable: Drawable = imageView.getDrawable()
         var bitmap: Bitmap? = null
-        if (drawable is BitmapDrawable)
+        if (drawable is BitmapDrawable) {
             bitmap = drawable.bitmap
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
@@ -342,7 +342,7 @@ public class Utils() {
         val file = true
         val ot = ""
         val imageFile = activity.getImageViewPersistantFile()
-        if (file && imageFile.exists()) {
+        if (file && imageFile?.exists() == true) {
             try {
                 var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
                 if (bitmap != null) {
@@ -353,7 +353,7 @@ public class Utils() {
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")
 
-                    createCurrentUniqueFile();
+                    createCurrentUniqueFile(activity);
                 }
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
