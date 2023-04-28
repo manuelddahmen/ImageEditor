@@ -40,6 +40,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
     public String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     public final String filenameSaveState = "state.properties";
+    public final String imageViewFilename = "imageView.jpg";
     protected ImageViewSelection imageView;
     protected File currentFile;
     protected int maxRes = 1280;
@@ -101,6 +102,10 @@ public class ActivitySuperClass extends AppCompatActivity {
         imageView = findViewById(R.id.currentImageViewSelection);
 
         new Utils().loadImageInImageView(currentFile, this);
+
+        if(currentFile==null) {
+            new Utils().loadImageInImageView(null, this);
+        }
     }
 
     @Override
@@ -160,5 +165,10 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     protected File getFilesFile(String s) {
         return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s);
+    }
+
+    @org.jetbrains.annotations.Nullable
+    public File getImageViewPersistantFile() {
+        return getFilesFile(imageViewFilename);
     }
 }
