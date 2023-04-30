@@ -137,7 +137,7 @@ public class MyCameraActivity extends ActivitySuperClass {
   */
         maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
-        imageView = this.findViewById(R.id.currentImageViewSelection);
+        imageView = this.findViewById(R.id.currentImageView);
 
         rectfs = new ArrayList<RectF>();
 
@@ -148,7 +148,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         currentBitmap = currentFile;
 
         if (currentFile == null)
-            Snackbar.make(findViewById(R.id.currentImageViewSelection), "No image loaded", 5).show();
+            Snackbar.make(findViewById(R.id.currentImageView), "No image loaded", 5).show();
 
         if (new Utils().loadImageInImageView(this)) loaded = true;
 
@@ -179,7 +179,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         effectsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView = findViewById(R.id.currentImageViewSelection);
+                imageView = findViewById(R.id.currentImageView);
                 Intent intent = new Intent(Intent.ACTION_EDIT);
                 System.err.println("Click on Effect button");
                 if (currentFile != null || currentBitmap != null) {
@@ -206,7 +206,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             @Override
             public void onClick(View v) {
                 if (currentFile != null) {
-                    imageView = findViewById(R.id.currentImageViewSelection);
+                    imageView = findViewById(R.id.currentImageView);
                     Intent intent = new Intent(Intent.ACTION_EDIT);
                     System.err.println("Click on Effect button");
                     if (currentFile != null || currentBitmap != null) {
@@ -397,7 +397,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             }
         });
         imageView.setOnTouchListener((View v, MotionEvent event) -> {
-            imageView = findViewById(R.id.currentImageViewSelection);
+            imageView = findViewById(R.id.currentImageView);
             if (currentFile != null) {
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
@@ -427,7 +427,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 }
                 if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
-                    ImageViewSelection viewById = findViewById(R.id.currentImageViewSelection);
+                    ImageViewSelection viewById = findViewById(R.id.currentImageView);
                     viewById.setDrawingRect(new RectF((float) drawPointA.getX(), (float) drawPointA.getY(), (float) drawPointB.getX(), (float) drawPointB.getY()));
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
@@ -953,7 +953,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 Bitmap photo = bitmap;
 
-                imageView = findViewById(R.id.currentImageViewSelection);
+                imageView = findViewById(R.id.currentImageView);
 
                 if (photo != null && imageView != null) {
 
@@ -1006,10 +1006,10 @@ public class MyCameraActivity extends ActivitySuperClass {
         }
 
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == Activity.RESULT_OK) {
-            imageView = findViewById(R.id.currentImageViewSelection);
+            imageView = findViewById(R.id.currentImageView);
 
 
-            //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageViewSelection));
+            //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageView));
 
             //AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
 
@@ -1154,7 +1154,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     public void unselectA(View view) {
         drawPointA = null;
         drawPointB = null;
-        ImageViewSelection imageView = findViewById(R.id.currentImageViewSelection);
+        ImageViewSelection imageView = findViewById(R.id.currentImageView);
         if (rectfs.size() >= 1) rectfs.remove(rectfs.size() - 1);
         imageView.setDrawingRectState(false);
     }
