@@ -99,7 +99,11 @@ public class ActivitySuperClass extends AppCompatActivity {
             }
         currentFile = new Utils().getCurrentFile(getIntent());
 
-        imageView = findViewById(R.id.currentImageViewSelection);
+
+        imageView = findViewById(R.id.imageView);
+        if(imageView==null)
+            imageView = findViewById(R.id.currentImageViewSelection);
+
 
         new Utils().loadImageInImageView(this);
 

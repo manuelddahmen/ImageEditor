@@ -193,11 +193,6 @@ public class GraphicsActivityView extends ActivitySuperClass {
                         algebricTree[j].setParameter("t", (double) t);
                         algebricTree[j].setParameter("a", 0.0);
                     }
-/*
-                    for (int c = 0; c < cord.length; c++) {
-                        stringDoubleHashMap.put(cord[c], algebricTree[c].eval());
-                    }
-*/
 
                     double x2 = algebricTree[0].eval();
                     double y2 = algebricTree[1].eval();

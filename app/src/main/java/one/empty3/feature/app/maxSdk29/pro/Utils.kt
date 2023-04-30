@@ -35,6 +35,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.core.net.toFile
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 //import com.nostra13.universalimageloader.core.ImageLoader
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
@@ -256,8 +257,13 @@ public class Utils() {
         if(activity.currentFile==null) {
             activity.currentFile = activity.getImageViewPersistantFile()
         }
-        val imageView : ImageViewSelection = activity.imageView
-        if (activity.currentFile.exists()) {
+
+        var imageView : ImageViewSelection = activity.imageView
+        if(imageView==null) {
+            activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
+            imageView = activity.imageView
+        }
+        if (activity.currentFile!=null && activity.currentFile.exists()) {
             try {
                 val mBitmap :Bitmap = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 val maxRes = getMaxRes(activity)

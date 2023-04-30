@@ -7,7 +7,7 @@
     tools:context=".ReshapeActivity">
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-        android:id="@+id/currentImageViewSelection"
+        android:id="@+id/currentImageView"
         android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

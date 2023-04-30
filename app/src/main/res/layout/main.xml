@@ -136,7 +136,7 @@
     </LinearLayout>
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-        android:id="@+id/currentImageViewSelection"
+        android:id="@+id/currentImageView"
         android:theme="@style/Theme.FeatureAppmain"
         app:layout_constraintTop_toBottomOf="@id/main_menu"
         app:layout_constraintBottom_toTopOf="@+id/effectButtons"
