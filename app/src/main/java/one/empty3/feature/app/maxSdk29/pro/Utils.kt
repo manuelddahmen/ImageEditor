@@ -46,6 +46,7 @@ import java.util.*
 
 
 public class Utils() {
+    private val maxRes: Int = 400
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -269,8 +270,16 @@ public class Utils() {
                 val fileInputStream = FileInputStream(activity.currentFile) ?: return false
                 val mBitmap : Bitmap = BitmapFactory.decodeStream(fileInputStream) ?: return false
                 val maxRes = getMaxRes(activity)
-                val cb = Bitmap.createBitmap(mBitmap, 0, 0,
-                    getImageRatio(mBitmap)*maxRes, maxRes)
+
+                val cb:Bitmap
+                if(maxRes>0)
+                    cb = Bitmap.createBitmap(mBitmap, 0, 0,
+                        mBitmap.width, mBitmap.height)
+                else
+                    cb = Bitmap.createBitmap(mBitmap, 0, 0,
+                            (getImageRatio(mBitmap)*this.maxRes).toInt(),
+                            this.maxRes)
+
                 val dim : Int= getMaxRes(activity)
                 if(imageView!=null)
                     Utils().setImageView(imageView, cb)
@@ -329,15 +338,15 @@ public class Utils() {
         return false
     }
 
-    fun getImageRatio(bitmap: Bitmap): Int {
-        return bitmap.width / bitmap.height
+    fun getImageRatio(bitmap: Bitmap): Double {
+        return (1.0) * bitmap.width / bitmap.height
     }
 
     fun setMaxResImage(activity: ActivitySuperClass, bitmap: Bitmap): Point? {
         val imageRatio = getImageRatio(bitmap)
         return Point(
-            getMaxRes(activity) / imageRatio,
-            getMaxRes(activity) * imageRatio
+            (getMaxRes(activity) / imageRatio).toInt(),
+            (getMaxRes(activity) * imageRatio).toInt()
         )
     }
 
