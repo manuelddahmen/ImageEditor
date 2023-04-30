@@ -258,7 +258,7 @@ public class Utils() {
             activity.currentFile = activity.getImageViewPersistantFile()
         }
 
-        var imageView : ImageViewSelection = activity.imageView
+        var imageView : ImageViewSelection? = activity.imageView
         if(imageView==null) {
             activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
             imageView = activity.imageView
@@ -270,7 +270,8 @@ public class Utils() {
                 val cb = Bitmap.createBitmap(mBitmap, 0, 0,
                     getImageRatio(mBitmap)*maxRes, maxRes)
                 val dim : Int= getMaxRes(activity)
-                Utils().setImageView(imageView, cb)
+                if(imageView!=null)
+                    Utils().setImageView(imageView, cb)
                 return true
             } catch (e: FileNotFoundException) {
             }
