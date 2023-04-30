@@ -136,7 +136,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==ONSAVE_INSTANCE_STATE) {
+        if(requestCode==ONSAVE_INSTANCE_STATE&&grantResults!=null) {
             boolean g = true;
             for (int granted: grantResults)
                 g = g & (granted==PERMISSION_GRANTED);
@@ -144,7 +144,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             if(g)
                 saveInstanceState();
         }
-        if(requestCode==ONRESTORE_INSTANCE_STATE&&grantResults[0]==RESULT_OK&&grantResults[1]==RESULT_OK) {
+        if(requestCode==ONRESTORE_INSTANCE_STATE&&grantResults!=null) {
             boolean g = true;
             for (int granted: grantResults)
                 g = g & (granted==PERMISSION_GRANTED);
