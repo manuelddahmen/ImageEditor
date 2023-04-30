@@ -158,8 +158,8 @@ public class ActivitySuperClass extends AppCompatActivity {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantFile()));
-        } catch (IOException e) {
-//            e.printStackTrace();
+        } catch (IOException ignored) {
+
         }
         for (int i = 0; i < cords.length; i++) {
             cords[i] = properties.getProperty(cordsConsts[i], cords[i]);

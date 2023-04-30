@@ -88,7 +88,7 @@ class Calculator : ActivitySuperClass() {
                 if (findViewById == findViewById<Button>(R.id.delButton)) {
                     val toString: String = editTextId.text.toString()
                     if (toString.length > 1) {
-                        editTextId.setText(editTextId.text.substring(0, toString.length - 1))
+                        editTextId.setText(toString.substring(0, toString.length - 1))
                     } else if (toString.length == 1) {
                         editTextId.setText("")
                     }
@@ -139,28 +139,12 @@ class Calculator : ActivitySuperClass() {
             }.start()
         }
 
-/*
-        val back = findViewById<Button>(R.id.buttonBak);
-        back.setOnClickListener {
-            val intentBack = Intent()
-            intentBack.setClass(applicationContext, GraphicsActivity::class.java)
-            if (currentFile != null)
-                Utils().addCurrentFileToIntent(intentBack, currentFile!!)
-            var i = 0;
-            for (s in cords) {
-                intentBack.putExtra(s, formula[i])
-                i++
-            }
-            startActivity(intentBack)
-        };
-*/
-
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentGraphics = Intent()
             intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
             if (currentFile != null)
-                Utils().addCurrentFileToIntent(intentGraphics, null, currentFile!!)
+                Utils().addCurrentFileToIntent(intentGraphics, this, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
             var i = 0
             for (s in cords) {

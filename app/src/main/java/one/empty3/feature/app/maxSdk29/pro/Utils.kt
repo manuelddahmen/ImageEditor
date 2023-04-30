@@ -266,7 +266,8 @@ public class Utils() {
         }
         if (activity.currentFile!=null && activity.currentFile.exists()) {
             try {
-                val mBitmap :Bitmap = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
+                val fileInputStream = FileInputStream(activity.currentFile) ?: return false
+                val mBitmap : Bitmap = BitmapFactory.decodeStream(fileInputStream) ?: return false
                 val maxRes = getMaxRes(activity)
                 val cb = Bitmap.createBitmap(mBitmap, 0, 0,
                     getImageRatio(mBitmap)*maxRes, maxRes)
@@ -332,7 +333,7 @@ public class Utils() {
         return bitmap.width / bitmap.height
     }
 
-    fun setMaxResImage(activity: Activity, bitmap: Bitmap): Point? {
+    fun setMaxResImage(activity: ActivitySuperClass, bitmap: Bitmap): Point? {
         val imageRatio = getImageRatio(bitmap)
         return Point(
             getMaxRes(activity) / imageRatio,
@@ -340,9 +341,11 @@ public class Utils() {
         )
     }
 
-    private fun getMaxRes(activity: Activity): Int {
-        val maxResText: EditText = activity.findViewById<EditText>(R.id.editMaximiumResolution)
-        val maxRes = maxResText.text.toString().toDouble().toInt()
+    private fun getMaxRes(activity: ActivitySuperClass): Int {
+        val maxResText: EditText? = activity.findViewById<EditText>(R.id.editMaximiumResolution)
+        val maxRes = maxResText?.text.toString().toDouble().toInt()
+        if(maxRes==0)
+            return activity.maxRes
         return maxRes
     }
 
