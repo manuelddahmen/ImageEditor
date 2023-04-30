@@ -20,13 +20,17 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.PermissionRequest;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.PermissionChecker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,10 +38,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Permission;
+import java.util.Arrays;
 import java.util.Properties;
 
 public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
+    private static final int ONSAVE_INSTANCE_STATE = 21516;
+    private static final int ONRESTORE_INSTANCE_STATE = 51521;
     public String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     public final String filenameSaveState = "state.properties";
     public final String imageViewFilename = "imageView.jpg";
@@ -115,28 +123,24 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        new Utils().saveImageState(this);
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(getImageViewPersistantFile()));
-        } catch (IOException e) {
-//            e.printStackTrace();
-        }
-        for (int i = 0; i < cords.length; i++) {
-            properties.setProperty(cordsConsts[i], cords[i]);
-        }
-        properties.setProperty("maxRes", "" + maxRes);
+        requestPermissions(new String[] {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES}, ONSAVE_INSTANCE_STATE);
 
-        try {
-            properties.store(new FileOutputStream(getImageViewPersistantFile()), "");
-        } catch (IOException e) {
-//            e.printStackTrace();
-        }
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==ONSAVE_INSTANCE_STATE&&grantResults[0]==RESULT_OK&&grantResults[1]==RESULT_OK) {
+            saveInstanceState();
+        }
+        if(requestCode==ONRESTORE_INSTANCE_STATE&&grantResults[0]==RESULT_OK&&grantResults[1]==RESULT_OK) {
+            restoreInstanceState();
+        }
+    }
+
+    private void restoreInstanceState() {
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
@@ -163,6 +167,34 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    protected void saveInstanceState() {
+        new Utils().saveImageState(this);
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(getImageViewPersistantFile()));
+            for (int i = 0; i < cords.length; i++) {
+                properties.setProperty(cordsConsts[i], cords[i]);
+            }
+            properties.setProperty("maxRes", "" + maxRes);
+
+            try {
+                properties.store(new FileOutputStream(getImageViewPersistantFile()), "");
+            } catch (IOException ignored) {
+            }
+        } catch (IOException ignored) {
+        }
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        requestPermissions(new String[] {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
+
     }
 
     public void passParameters(Intent to) {

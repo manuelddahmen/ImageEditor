@@ -288,19 +288,19 @@ public class Utils() {
         val drawable: Drawable = imageView.getDrawable()
         var bitmap: Bitmap? = null
         if (drawable is BitmapDrawable) {
-            bitmap = drawable.bitmap
+            bitmap = drawable.bitmap.copy(Bitmap.Config.ARGB_8888, true)
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
                 bitmap = Bitmap.createBitmap(
-                    1,
-                    1,
+                    activity.maxRes,
+                    activity.maxRes,
                     Bitmap.Config.ARGB_8888
-                ) // Single color bitmap will be created of 1x1 pixel
+                ).copy(Bitmap.Config.ARGB_8888, true) // Single color bitmap will be created of 1x1 pixel
             }
         }
         if(bitmap==null)
             return;
-        val canvas = Canvas(bitmap.copy(Bitmap.Config.ARGB_8888, true))
+        val canvas = Canvas(bitmap)
         drawable.setBounds(
             0, 0, if (getMaxRes(activity) == 0) canvas.width else getMaxRes(activity),
             if (getMaxRes(activity) == 0) canvas.height else getMaxRes(activity)
@@ -308,7 +308,7 @@ public class Utils() {
         drawable.draw(canvas)
         var bm: Bitmap? = null
         if (bitmap != null) {
-            bm = bitmap
+            bm = bitmap.copy(Bitmap.Config.ARGB_8888, true)
             val baos = ByteArrayOutputStream()
             bm.compress(Bitmap.CompressFormat.JPEG, 90, baos) //bm is the bitmap object
             val b = baos.toByteArray()
