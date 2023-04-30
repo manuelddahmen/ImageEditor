@@ -102,7 +102,7 @@ class Calculator : ActivitySuperClass() {
                     val d: Double = tree.eval()
                     val labelAnswer: String = d.toString()
                     textAnswer.text = labelAnswer
-                    Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Valid", Toast.LENGTH_SHORT).show()
 
                 } catch (ex: AlgebraicFormulaSyntaxException) {
                     //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
