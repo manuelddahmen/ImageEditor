@@ -26,7 +26,7 @@
     style="@style/Theme.FeatureAppmain">
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
-        android:id="@+id/imageViewTextSelection"
+        android:id="@+id/currentImageView"
         android:theme="@style/Theme.FeatureAppmain"
         android:layout_width="match_parent"
         android:layout_height="300dp"

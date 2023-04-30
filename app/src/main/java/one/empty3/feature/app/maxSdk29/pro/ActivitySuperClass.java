@@ -102,7 +102,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         if(imageView==null)
-            imageView = findViewById(R.id.currentImageViewSelection);
+            imageView = findViewById(R.id.currentImageView);
 
 
         new Utils().loadImageInImageView(this);
@@ -147,11 +147,17 @@ public class ActivitySuperClass extends AppCompatActivity {
         for (int i = 0; i < cords.length; i++) {
             cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
         }
-        maxRes = Integer.parseInt(properties.getProperty("maxRes"));
+        String maxRes1 = properties.getProperty("maxRes");
+        if(maxRes1!=null) {
+            try {
+                maxRes = Integer.parseInt(maxRes1);
+            } catch (NumberFormatException ex) {
 
+            }
+        }
         if (currentFile != null) {
             if (imageView == null || imageView.getDrawable() == null) {
-                imageView = findViewById(R.id.currentImageViewSelection);
+                imageView = findViewById(R.id.currentImageView);
                 if (imageView != null) {
                     new Utils().setImageView(this, imageView);
                 }

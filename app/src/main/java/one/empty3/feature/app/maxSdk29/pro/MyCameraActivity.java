@@ -364,12 +364,14 @@ public class MyCameraActivity extends ActivitySuperClass {
         View face = findViewById(R.id.buttonReshape);
 
         face.setOnClickListener(view -> {
-            Intent faceIntent = new Intent();
-            Utils utils = new Utils();
-            utils.addCurrentFileToIntent(faceIntent, this, currentFile);
-            utils.putExtra(faceIntent, cords, currentCord);
+            if(currentFile!=null) {
+                Intent faceIntent = new Intent();
+                Utils utils = new Utils();
+                utils.addCurrentFileToIntent(faceIntent, this, currentFile);
+                utils.putExtra(faceIntent, cords, currentCord);
 
-            startActivity(faceIntent);
+                startActivity(faceIntent);
+            }
         });
 
         Button computePixels = findViewById(R.id.activity_compute_pixels);
