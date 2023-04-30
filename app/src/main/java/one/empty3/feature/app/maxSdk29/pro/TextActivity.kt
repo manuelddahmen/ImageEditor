@@ -43,9 +43,8 @@ import java.io.FileNotFoundException
 import java.util.*
 
 
-class TextActivity() : ActivitySuperClass(), Parcelable {
+class TextActivity() : ActivitySuperClass() {
     private val INT_WRITE_STORAGE: Int = 9247492
-    private lateinit var currentFile: File
     private var text: String = ""
     private lateinit var currentImage: Bitmap
     private lateinit var rect: RectF
@@ -199,28 +198,6 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
             //}
         }
         return false
-    }
-
-    constructor(parcel: Parcel) : this() {
-        text = parcel.readString().toString()
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(text)
-    }
-
-    override fun describeContents(): Int {
-        return text.length
-    }
-
-    companion object CREATOR : Parcelable.Creator<TextActivity> {
-        override fun createFromParcel(parcel: Parcel): TextActivity {
-            return TextActivity(parcel)
-        }
-
-        override fun newArray(size: Int): Array<TextActivity?> {
-            return arrayOfNulls(size)
-        }
     }
 
     private fun drawTextToBitmap(resourceId: Int, textToPrint: String): File? {

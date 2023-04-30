@@ -20,9 +20,12 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static android.content.pm.PackageManager.*;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.PermissionRequest;
@@ -30,6 +33,7 @@ import android.webkit.PermissionRequest;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.PackageManagerCompat;
 import androidx.core.content.PermissionChecker;
 
 import java.io.File;
@@ -132,11 +136,20 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==ONSAVE_INSTANCE_STATE&&grantResults[0]==RESULT_OK&&grantResults[1]==RESULT_OK) {
-            saveInstanceState();
+        if(requestCode==ONSAVE_INSTANCE_STATE) {
+            boolean g = true;
+            for (int granted: grantResults)
+                g = g & (granted==PERMISSION_GRANTED);
+
+            if(g)
+                saveInstanceState();
         }
         if(requestCode==ONRESTORE_INSTANCE_STATE&&grantResults[0]==RESULT_OK&&grantResults[1]==RESULT_OK) {
-            restoreInstanceState();
+            boolean g = true;
+            for (int granted: grantResults)
+                g = g & (granted==PERMISSION_GRANTED);
+            if(g)
+                restoreInstanceState();
         }
     }
 

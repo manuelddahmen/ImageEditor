@@ -13,7 +13,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 2450000
+def code = 2470000
 
 java {
     toolchain {
