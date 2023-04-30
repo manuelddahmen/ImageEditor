@@ -296,16 +296,16 @@ public class Utils() {
                     1,
                     Bitmap.Config.ARGB_8888
                 ) // Single color bitmap will be created of 1x1 pixel
-            } else {
-                bitmap = PixM.getPixM(bitmap, getMaxRes(activity)).bitmap
             }
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(
-                0, 0, if (getMaxRes(activity) == 0) canvas.width else getMaxRes(activity),
-                if (getMaxRes(activity) == 0) canvas.height else getMaxRes(activity)
-            )
-            drawable.draw(canvas)
         }
+        if(bitmap==null)
+            return;
+        val canvas = Canvas(bitmap.copy(Bitmap.Config.ARGB_8888, true))
+        drawable.setBounds(
+            0, 0, if (getMaxRes(activity) == 0) canvas.width else getMaxRes(activity),
+            if (getMaxRes(activity) == 0) canvas.height else getMaxRes(activity)
+        )
+        drawable.draw(canvas)
         var bm: Bitmap? = null
         if (bitmap != null) {
             bm = bitmap
