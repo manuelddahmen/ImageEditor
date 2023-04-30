@@ -26,6 +26,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import org.jetbrains.annotations.NotNull;
+
 import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
@@ -92,9 +94,13 @@ public class PixM extends MBitmap {
         this(read.bitmap);
     }
 
-    public static <T> PixM getPixM(Bitmap bitmap) {
-        PixM pixM = new PixM(bitmap);
-        return pixM;
+    public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
+        if(bitmap==null) {
+            throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
+        } else {
+            PixM pixM = new PixM(bitmap);
+            return pixM;
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

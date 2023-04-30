@@ -94,10 +94,10 @@ class Calculator : ActivitySuperClass() {
                     }
                     return@setOnClickListener
                 }
-                editTextId.text = editTextId.text.append(findViewById.text)
-                val tree = AlgebricTree(editTextId.text.toString())
 
                 try {
+                    editTextId.text = editTextId.text.append(findViewById.text)
+                    val tree = AlgebricTree(editTextId.text.toString())
                     tree.construct()
                     val d: Double = tree.eval()
                     val labelAnswer: String = d.toString()
