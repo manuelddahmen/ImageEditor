@@ -343,9 +343,15 @@ public class Utils() {
 
     private fun getMaxRes(activity: ActivitySuperClass): Int {
         val maxResText: EditText? = activity.findViewById<EditText>(R.id.editMaximiumResolution)
-        val maxRes = maxResText?.text.toString().toDouble().toInt()
-        if(maxRes==0)
-            return activity.maxRes
+        val maxResStr = maxResText?.text
+        var maxRes = activity.maxRes
+        if(maxResStr!=null) {
+            try {
+                maxRes = maxResStr.toString().toDouble().toInt()
+            } catch (_: java.lang.NumberFormatException) {
+
+            }
+        }
         return maxRes
     }
 
