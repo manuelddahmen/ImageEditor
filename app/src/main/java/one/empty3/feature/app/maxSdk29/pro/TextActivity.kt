@@ -61,16 +61,17 @@ class TextActivity() : ActivitySuperClass() {
         } else {
             maxRes = savedInstanceState.getInt("maxRes");
         }
-        */maxRes = Utils().getMaxRes(this, savedInstanceState)
+        */
+        maxRes = Utils().getMaxRes(this, savedInstanceState)
 
 
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
 
         val currentFile1 = Utils().getCurrentFile(intent)
-        if (currentFile1 != null) {
+        if (currentFile1 != null && imageView!=null) {
             currentFile = currentFile1
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            Utils().setImageView(imageView!!, this.currentImage)
+            Utils().setImageView(imageView, this.currentImage)
 
         }
         val backButton = findViewById<Button>(R.id.buttonTextToMain)
@@ -89,34 +90,12 @@ class TextActivity() : ActivitySuperClass() {
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
             applyText()
-            back()
         }
 
 
         initImageView()
     }
 
-    fun back(): Unit {
-        try {
-            val textIntent = Intent(Intent.ACTION_VIEW)
-            val name: String = ("" + UUID.randomUUID())
-
-            //val file = Utils().writePhoto(this, currentImage, name)
-
-            textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
-            textIntent.putExtra("currentFile", this.currentFile)
-            textIntent.setClass(
-                applicationContext,
-                Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
-            )
-
-            maxRes = Utils().getMaxRes(this, null)
-
-            startActivity(textIntent)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        }
-    }
 
     fun initImageView() {
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)

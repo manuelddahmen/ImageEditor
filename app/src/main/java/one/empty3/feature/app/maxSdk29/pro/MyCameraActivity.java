@@ -481,12 +481,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         });
 
         View addText = findViewById(R.id.buttonAddText);
-        addText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addText(view);
-            }
-        });
+        addText.setOnClickListener(view -> addText(view));
 
         View openNewUI = findViewById(R.id.new_layout_app);
 
@@ -1164,7 +1159,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     public void addText(View view) {
-        if (currentFile != null) {
+        if (currentFile != null && imageView!=null) {
             Intent textIntent = new Intent(Intent.ACTION_VIEW);
             textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
             textIntent.setClass(getApplicationContext(), TextActivity.class);

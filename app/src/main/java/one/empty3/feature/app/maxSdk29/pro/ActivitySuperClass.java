@@ -205,7 +205,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         requestPermissions(new String[] {
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
 
     }

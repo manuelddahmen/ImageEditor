@@ -354,9 +354,9 @@ public class Utils() {
             try {
                 var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
                 if (bitmap != null) {
-                    val imageView: ImageViewSelection =
+                    activity.imageView =
                         activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
-                    Utils().setImageView(imageView, bitmap);
+                    Utils().setImageView(activity.imageView, bitmap);
                     activity.currentFile = imageFile
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")
