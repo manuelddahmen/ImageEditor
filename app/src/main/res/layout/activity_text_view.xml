@@ -46,13 +46,13 @@
         android:orientation="vertical"
         style="@style/Theme.FeatureAppmain"
         android:id="@+id/text_details"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTextSelection"
+        app:layout_constraintTop_toBottomOf="@+id/currentImageView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
-            android:labelFor="@id/imageViewTextSelection"
+            android:labelFor="@id/currentImageView"
             android:id="@+id/font_size"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:inputType="text|number" />
 
         <EditText
-            android:labelFor="@id/imageViewTextSelection"
+            android:labelFor="@id/currentImageView"
             android:id="@+id/textViewOnImage"
             style="@style/Theme.FeatureAppmain"
             android:layout_width="match_parent"
@@ -79,6 +79,15 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="@string/apply" />
+
+
+        <Button
+                android:id="@+id/buttonTextToMain"
+                style="@style/Theme.FeatureAppmain"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/main" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

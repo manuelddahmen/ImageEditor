@@ -161,14 +161,14 @@ public class Utils() {
     }
 
 
-    public fun getMaxRes(activity: Activity, savedInstanceState: Bundle?): Int {
+    public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
         var maxRes: Int = 0;
         maxRes = activity?.intent?.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT)!!;
         if (savedInstanceState == null ||
             !savedInstanceState.containsKey("maxRes") ||
             savedInstanceState.getInt("maxRes") <= 0
         ) {
-            maxRes = 0
+            maxRes = activity.maxRes;
         } else {
             maxRes = savedInstanceState.getInt("maxRes")
 
@@ -221,6 +221,7 @@ public class Utils() {
                 j++
             }
         }
+        intent.putExtra("maxRes", activity?.maxRes)
         return currentFile
     }
 

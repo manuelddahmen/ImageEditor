@@ -74,30 +74,19 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
             Utils().setImageView(imageView!!, this.currentImage)
 
         }
-        //val backButton = findViewById<Button>(R.id.buttonTextBack)
-/*
+        val backButton = findViewById<Button>(R.id.buttonTextToMain)
         backButton.setOnClickListener {
             try {
-                val textIntent = Intent(Intent.ACTION_VIEW)
+                val textIntent = Intent()
                 val name: String = ("" + UUID.randomUUID())
 
-                //val file = Utils().writePhoto(this, currentImage, name)
 
                 textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
-                textIntent.putExtra("currentFile", this.currentFile)
-                textIntent.setClass(
-                    applicationContext,
-                    Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
-                )
-
-                maxRes = Utils().getMaxRes(this, savedInstanceState)
-
-                startActivity(textIntent)
+                passParameters(textIntent);
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
         }
-*/
         val textApply = findViewById<Button>(R.id.textApplyButton)
         textApply.setOnClickListener {
             applyText()
@@ -131,7 +120,7 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
     }
 
     fun initImageView() {
-        val imageView = findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
+        imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
         imageView.setOnClickListener {
         }
         imageView.setOnTouchListener(object : View.OnTouchListener {
@@ -169,17 +158,23 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             )
+            != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_MEDIA_IMAGES
+            )
             != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_MEDIA_IMAGES
                 ), INT_WRITE_STORAGE
             )
         }
-/*
+
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -190,21 +185,21 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-  */
-        val textString: String =
-            (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-        val drawTextToBitmap: File? = drawTextToBitmap(R.id.imageViewTextSelection, textString)
-        if (drawTextToBitmap != null) {
-            currentFile = drawTextToBitmap
-            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            val imageView = findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
-            Utils().setImageView(imageView!!, this.currentImage)
-            System.out.println("ImageView Text UPDATED")
+            val textString: String =
+                (findViewById<TextView>(R.id.textViewOnImage).text.toString())
+            val drawTextToBitmap: File? = drawTextToBitmap(R.id.currentImageView, textString)
+            if (drawTextToBitmap != null) {
+                currentFile = drawTextToBitmap
+                currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+                imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
+                Utils().setImageView(imageView!!, this.currentImage)
+                System.out.println("ImageView Text UPDATED")
+            }
+            return true
+            //}
         }
-        return true
-        //}
+        return false
     }
-
 
     constructor(parcel: Parcel) : this() {
         text = parcel.readString().toString()
@@ -283,7 +278,7 @@ class TextActivity() : ActivitySuperClass(), Parcelable {
 
     fun writeText() {
         var imageView: ImageViewSelection =
-            findViewById<ImageViewSelection>(R.id.imageViewTextSelection)
+            findViewById<ImageViewSelection>(R.id.currentImageView)
         var text = findViewById<EditText>(R.id.textViewOnImage)?.text
 
         var bmpFile = imageView.drawable

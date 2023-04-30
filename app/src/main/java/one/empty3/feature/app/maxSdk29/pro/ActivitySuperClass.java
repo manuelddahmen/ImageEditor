@@ -167,9 +167,20 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     public void passParameters(Intent to) {
 
+
+        to.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg");
+
+        new Utils().putExtra(to, cords, currentCord);
+        new Utils().addCurrentFileToIntent(to, this, currentFile);
+
+        startActivity(to);
     }
 
     public void getParameters(Intent from) {
+        Utils utils = new Utils();
+        currentFile = utils.getCurrentFile(from);
+        cords = utils.getCordsValues();
+        maxRes = utils.getMaxRes(this, null);
 
     }
 
