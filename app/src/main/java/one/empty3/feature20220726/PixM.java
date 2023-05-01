@@ -126,7 +126,7 @@ public class PixM extends MBitmap {
         if(image.bitmap==null) {
             return null;
         } else {
-            return getPixM(image, (int) maxRes);
+            return getPixM(image.bitmap, (int) maxRes);
         }
     }
     public static PixM getPixM(@NotNull Bitmap image, int maxRes) {

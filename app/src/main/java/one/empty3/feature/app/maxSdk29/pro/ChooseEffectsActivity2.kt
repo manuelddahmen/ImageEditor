@@ -49,13 +49,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var listEffects: HashMap<String, ProcessFile>? = null
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
-    private lateinit var mediaFile: File
     private lateinit var recyclerView: RecyclerView
-    private lateinit var editText: EditText
-    private lateinit var effectListStr: Array<String>
-    private lateinit var editText1: EditText
-    private lateinit var videoEffectPreview: VideoView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,13 +70,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         Log.i("effects#logging", "create Effect Activity")
         effectApply = findViewById(R.id.applyEffects)
         init(savedInstanceState)
-        mediaFile = intent.extras?.get("data") as File
-        if (mediaFile == null) {
-            mediaFile = intent.extras?.get("currentFile") as File
-        }
         maxRes = intent.extras?.get("maxRes") as Int
 
-        currentFile = mediaFile
     }
 
 //    @RequiresApi(Build.VERSION_CODES.N)
@@ -130,7 +119,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             run {
                 val intent = Intent(Intent.ACTION_EDIT)
                 println("Click on Effect button")
-                val fileIn: File = File(mediaFile.toString())
+                val fileIn: File = File(currentFile.toString())
 
                 Log.d("Initial input file", fileIn.toString())
                 Log.d(
@@ -162,7 +151,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 ) {
                     requestPermissions(
                         arrayOf(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
                         ), INT_WRITE_STORAGE
                     )
                 }
@@ -179,14 +169,15 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                     == PackageManager.PERMISSION_GRANTED
                 ) {
                     dir = "photoDir"
-                    dirRoot = mediaFile.toString()
-                        .substring(0, mediaFile.toString().lastIndexOf(File.separator))
+                    dirRoot = currentFile.toString()
+                        .substring(0, currentFile.toString().lastIndexOf(File.separator))
                 } else {
                     println("Error : no permission for read/write storage")
                     dir = "appDir"
                     this.requestPermissions(
                         arrayOf<String>(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
                         ), INT_WRITE_STORAGE
                     )
 
@@ -218,7 +209,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
                             Class.forName(it).newInstance() as ProcessFile
-                        if (index == -1) {
+                            if (index == -1) {
                             if (dir.equals("appDir")) {
                                 currentOutputFile = File(
                                     nextFile(
