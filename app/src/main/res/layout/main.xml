@@ -26,14 +26,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-
+    <!--
+    Buttons in button bars should be borderless; use `style="?android:attr/buttonBarButtonStyle"` (and `?android:attr/buttonBarStyle` on the parent)
+    -->
     <LinearLayout
         android:id="@+id/main_menu"
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/R.id.currentImageView"
+        app:layout_constraintBottom_toTopOf="@+id/currentImageView"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -53,7 +54,9 @@
                 android:contentDescription="@string/capturePhoto"
                 android:drawableStart="@drawable/apn"
                 android:text="@string/capturePhoto"
-                android:layout_width="wrap_content" />
+                    
+                android:layout_width="wrap_content"
+                    />
 
             <Button
                 android:id="@+id/choosePhotoButton"
@@ -64,14 +67,14 @@
                 android:contentDescription="@string/choosePhoto"
                 android:drawableStart="@drawable/folder"
                 android:text="@string/choosePhoto"
-                android:background="@color/light_blue_A200"
+                
                 android:layout_width="wrap_content" />
 
             <Button
                 android:id="@+id/save"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_A200"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/save" />
@@ -80,7 +83,7 @@
                 android:id="@+id/share"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_A200"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/share" />
@@ -98,7 +101,7 @@
                 android:id="@+id/draw_activity"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_400"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/draw_activity" />
@@ -108,7 +111,7 @@
                 android:id="@+id/unselect_rect"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_400"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/unselect" />
@@ -118,7 +121,7 @@
                 android:id="@+id/copy"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_400"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="48dp"
@@ -128,7 +131,7 @@
                 android:id="@+id/paste"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_weight="0.25"
-                android:background="@color/light_blue_400"
+                
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/paste" />
@@ -169,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="@string/add_text"
-            android:background="@color/light_blue_A400"
+            
             app:layout_constraintEnd_toStartOf="@id/buttonReshape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/R.id.currentImageView" />
@@ -179,7 +182,7 @@
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_weight="0.25"
             android:layout_width="wrap_content"
-            android:background="@color/light_blue_A400"
+            
             android:layout_height="48dp"
             android:text="@string/draw_button_text"
             app:layout_constraintStart_toEndOf="@id/buttonAddText"
@@ -191,7 +194,7 @@
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_weight="0.25"
             android:layout_height="48dp"
-            android:background="@color/light_blue_A400"
+            
             android:text="@string/choose_effects"
             app:layout_constraintStart_toEndOf="@id/buttonReshape"
             app:layout_constraintTop_toBottomOf="@+id/R.id.currentImageView"
@@ -201,7 +204,7 @@
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_weight="0.25"
             android:layout_height="48dp"
-            android:background="@color/light_blue_A400"
+            
             android:text="@string/choose_shader_like"
             app:layout_constraintStart_toEndOf="@id/effectsButtonNew"
             app:layout_constraintTop_toBottomOf="@+id/R.id.currentImageView"
@@ -224,16 +227,16 @@
             android:id="@+id/About"
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_weight="0.25"
-            android:layout_width="48dp"
+            android:layout_width="128dp"
             android:layout_height="48dp"
-            android:background="@color/light_blue_400"
+            
             android:text="@string/about" />
 
         <EditText
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_weight="0.75"
             android:id="@+id/editMaximiumResolution"
-            android:layout_width="96dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:height="48dp"
             android:autofillHints="@string/maximum_resolution"

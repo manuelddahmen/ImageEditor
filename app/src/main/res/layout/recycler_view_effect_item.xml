@@ -90,8 +90,9 @@
                 android:height="48dp"
                 android:text="@string/add"
                 android:theme="@style/Theme.FeatureAppmain"
+                    android:layout_weight="0.33"
 
-                />
+                    />
 
             <Button
                 android:id="@+id/buttonRemoveFromList"
@@ -100,8 +101,9 @@
                 android:height="48dp"
                 android:text="@string/remove"
                 android:theme="@style/Theme.FeatureAppmain"
+                    android:layout_weight="0.33"
 
-                />
+                    />
 
             <Button
                 android:id="@+id/commentEffect"
@@ -109,6 +111,7 @@
                 android:layout_height="48dp"
                 android:height="48dp"
                 android:text="@string/commentEffect"
+                    android:layout_weight="0.33"
                 android:theme="@style/Theme.FeatureAppmain"
 
                 />
