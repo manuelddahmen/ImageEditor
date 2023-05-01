@@ -27,8 +27,9 @@
 
     <TextView
         android:id="@+id/textViewUserData1"
-        android:layout_width="354dp"
+        android:layout_width="match_parent"
         android:layout_height="291dp"
+            android:textSize="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="6dp"
@@ -48,8 +49,9 @@
         android:id="@+id/TextViewPrivacy"
         android:layout_width="match_parent"
         android:layout_height="279dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="6dp"
+            android:textSize="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:text="@string/privacy_policy_and_families_policy"
         app:layout_constraintEnd_toEndOf="parent"
