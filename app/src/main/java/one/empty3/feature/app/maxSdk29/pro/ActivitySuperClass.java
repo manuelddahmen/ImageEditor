@@ -120,6 +120,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (currentFile != null) {
             new Utils().loadImageInImageView(this);
         }
+        imageView.invalidate();
     }
 
     @Override

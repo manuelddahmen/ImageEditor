@@ -366,7 +366,6 @@ public class Utils() {
 
     fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
-        val ot = ""
         val imageFile = activity.getImageViewPersistantFile()
         if (file && imageFile?.exists() == true) {
             try {

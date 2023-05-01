@@ -71,11 +71,11 @@ class TextActivity() : ActivitySuperClass() {
         val backButton = findViewById<Button>(R.id.buttonTextToMain)
         backButton.setOnClickListener {
             try {
-                val textIntent = Intent()
+                val textIntent = Intent(it.context, MyCameraActivity::class.java)
                 val name: String = ("" + UUID.randomUUID())
 
 
-                textIntent.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg")
+                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
                 passParameters(textIntent);
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()

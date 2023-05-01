@@ -209,7 +209,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
                             Class.forName(it).newInstance() as ProcessFile
-                            if (index == -1) {
+                        if (index == -1) {
                             if (dir.equals("appDir")) {
                                 currentOutputFile = File(
                                     nextFile(
