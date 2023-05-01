@@ -54,7 +54,7 @@ class TextActivity() : ActivitySuperClass() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
 
-
+        System.err.println("CurrentFile="+currentFile);
         /*
         if ((savedInstanceState == null) || savedInstanceState.getInt("maxRes") <= 0) {
             maxRes = MAX_RES_DEFAULT;
