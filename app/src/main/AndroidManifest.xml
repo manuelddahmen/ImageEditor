@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:versionName="3.0">
+    android:versionName="3.0" >
 
     <queries>
         <package android:name="one.empty3.feature.app.maxSdk29.pro" />
@@ -76,7 +76,7 @@
             android:enabled="true"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:label="MyCameraActivity"
+            android:label="Image Featuring"
             android:theme="@style/Theme.FeatureAppmain">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
