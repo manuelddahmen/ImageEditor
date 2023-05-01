@@ -122,6 +122,8 @@ public class ActivitySuperClass extends AppCompatActivity {
         if(currentFile==null) {
             new Utils().loadImageInImageView(this);
         }
+        if(currentFile==null || !currentFile.exists())
+            currentFile = null;
     }
 
     @Override
@@ -180,6 +182,8 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
         }
+        if(currentFile==null || !currentFile.exists())
+            currentFile = null;
     }
 
     protected void saveInstanceState() {

@@ -147,11 +147,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         currentBitmap = currentFile;
 
-        if (currentFile == null)
-            Snackbar.make(findViewById(R.id.currentImageView), "No image loaded", 5).show();
-
-        if (new Utils().loadImageInImageView(this)) loaded = true;
-
         thisActivity = this;
 
 

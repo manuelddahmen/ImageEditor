@@ -102,24 +102,17 @@ class Calculator : ActivitySuperClass() {
                     val d: Double = tree.eval()
                     val labelAnswer: String = d.toString()
                     textAnswer.text = labelAnswer
-                    Toast.makeText(applicationContext, "Valid", Toast.LENGTH_SHORT).show()
 
                 } catch (ex: AlgebraicFormulaSyntaxException) {
-                    //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
                 } catch (ex: IndexOutOfBoundsException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
                     ex.printStackTrace()
                 } catch (ex: NullPointerException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
                     ex.printStackTrace()
                 }
             }
         }
         val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
-//            val stringFragment : StringFragment= StringFragment()
-//                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
-//                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
             val dialog = ChooseFunctionDialogFragment()
             val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
@@ -147,7 +140,7 @@ class Calculator : ActivitySuperClass() {
                 Utils().addCurrentFileToIntent(intentGraphics, this, currentFile!!)
             intentGraphics.putExtra("maxRes", maxRes)
             var i = 0
-            for (s in cords) {
+            for (s in cordsConsts) {
                 if (s.equals(variable)) {
                     intentGraphics.putExtra(s, editTextId.text.toString())
                 } else {
