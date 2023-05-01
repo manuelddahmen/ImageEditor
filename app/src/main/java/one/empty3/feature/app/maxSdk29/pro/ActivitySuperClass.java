@@ -26,6 +26,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.PermissionRequest;
@@ -111,25 +112,20 @@ public class ActivitySuperClass extends AppCompatActivity {
             }
         currentFile = new Utils().getCurrentFile(getIntent());
 
-
-        imageView = findViewById(R.id.imageView);
-        if(imageView==null)
+        if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
 
+        testIfValidBitmap();
 
-        new Utils().loadImageInImageView(this);
-
-        if(currentFile==null) {
+        if (currentFile != null) {
             new Utils().loadImageInImageView(this);
         }
-        if(currentFile==null || !currentFile.exists())
-            currentFile = null;
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        requestPermissions(new String[] {
+        requestPermissions(new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_MEDIA_IMAGES}, ONSAVE_INSTANCE_STATE);
 
@@ -138,19 +134,19 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==ONSAVE_INSTANCE_STATE&&grantResults!=null) {
+        if (requestCode == ONSAVE_INSTANCE_STATE && grantResults != null) {
             boolean g = true;
-            for (int granted: grantResults)
-                g = g & (granted==PERMISSION_GRANTED);
+            for (int granted : grantResults)
+                g = g & (granted == PERMISSION_GRANTED);
 
-            if(g)
+            if (g)
                 saveInstanceState();
         }
-        if(requestCode==ONRESTORE_INSTANCE_STATE&&grantResults!=null) {
+        if (requestCode == ONRESTORE_INSTANCE_STATE && grantResults != null) {
             boolean g = true;
-            for (int granted: grantResults)
-                g = g & (granted==PERMISSION_GRANTED);
-            if(g)
+            for (int granted : grantResults)
+                g = g & (granted == PERMISSION_GRANTED);
+            if (g)
                 restoreInstanceState();
         }
     }
@@ -164,7 +160,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                 cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
             }
             String maxRes1 = properties.getProperty("maxRes");
-            if(maxRes1!=null) {
+            if (maxRes1 != null) {
                 try {
                     maxRes = Integer.parseInt(maxRes1);
                 } catch (NumberFormatException ex) {
@@ -174,6 +170,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         } catch (IOException ignored) {
 
         }
+        testIfValidBitmap();
         if (currentFile != null) {
             if (imageView == null || imageView.getDrawable() == null) {
                 imageView = findViewById(R.id.currentImageView);
@@ -182,8 +179,30 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
         }
-        if(currentFile==null || !currentFile.exists())
-            currentFile = null;
+    }
+
+    public void testIfValidBitmap() {
+        if (currentFile != null) {
+            if (!currentFile.exists()) {
+                currentFile = null;
+                return;
+            }
+            try {
+                FileInputStream fileInputStream = new FileInputStream(currentFile);
+                if (fileInputStream == null)
+                    currentFile = null;
+                if (BitmapFactory.decodeStream(fileInputStream)
+                        == null)
+                    currentFile = null;
+
+
+            } catch (FileNotFoundException e) {
+                System.err.println("Error file:" + currentFile);
+                currentFile = null;
+            } catch (RuntimeException exception) {
+                currentFile = null;
+            }
+        }
     }
 
     protected void saveInstanceState() {
@@ -208,7 +227,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        requestPermissions(new String[] {
+        requestPermissions(new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
 

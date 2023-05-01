@@ -177,7 +177,7 @@ public class Utils() {
         return maxRes
     }
 
-    public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection?): File? {
+    public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
         val data = intent?.data
