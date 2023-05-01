@@ -55,7 +55,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public final String imageViewFilename = "imageView.jpg";
     protected ImageViewSelection imageView;
     protected File currentFile;
-    protected int maxRes = 1280;
+    protected int maxRes = 400;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
 
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
@@ -160,19 +160,19 @@ public class ActivitySuperClass extends AppCompatActivity {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantFile()));
+            for (int i = 0; i < cords.length; i++) {
+                cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
+            }
+            String maxRes1 = properties.getProperty("maxRes");
+            if(maxRes1!=null) {
+                try {
+                    maxRes = Integer.parseInt(maxRes1);
+                } catch (NumberFormatException ex) {
+
+                }
+            }
         } catch (IOException ignored) {
 
-        }
-        for (int i = 0; i < cords.length; i++) {
-            cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
-        }
-        String maxRes1 = properties.getProperty("maxRes");
-        if(maxRes1!=null) {
-            try {
-                maxRes = Integer.parseInt(maxRes1);
-            } catch (NumberFormatException ex) {
-
-            }
         }
         if (currentFile != null) {
             if (imageView == null || imageView.getDrawable() == null) {

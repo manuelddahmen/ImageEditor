@@ -123,18 +123,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         setContentView(R.layout.main);
 
-        /*
-        FragmentNavigation fragmentNavigation = new FragmentNavigation();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.nav_view,
-                        fragmentNavigation)
-                .commit();
-*/
-/*
-        Undo dataWithUndo = Undo.getUndo();
-        dataWithUndo.doStep(new DataApp(getMaxRes(), currentFile, currentFile, isWorkingResolutionOriginal()));
-  */
         maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
         imageView = this.findViewById(R.id.currentImageView);
@@ -142,8 +130,6 @@ public class MyCameraActivity extends ActivitySuperClass {
         rectfs = new ArrayList<RectF>();
 
         loaded = true;
-
-        loadInstanceState();
 
         currentBitmap = currentFile;
 
@@ -170,32 +156,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         });
 
-/*        Button effectsButton = this.findViewById(R.id.effectsButton);
-        effectsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView = findViewById(R.id.currentImageView);
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                System.err.println("Click on Effect button");
-                if (currentFile != null || currentBitmap != null) {
-                    if (currentFile == null)
-                        currentFile = currentBitmap.getAbsoluteFile();
-                    intent.setDataAndType(Uri.fromFile(currentFile),
-                            "image/jpg");
-                    intent.setClass(imageView.getContext(),
-                            ChooseEffectsActivity.class);
-                    intent.putExtra("data", currentFile);
-                    View viewById = findViewById(R.id.editMaximiumResolution);
-                    intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
-                    System.err.println("Start activity : EffectChoose");
-                    startActivity(intent);
-                } else {
-                    System.err.println("No file assigned");
-                    System.err.println("Can't Start activity : EffectChoose");
-                }
-
-            }
-        });*/
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -503,27 +463,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     }
 
-    public void loadInstanceState() {
-        properties = new Properties();
-
-        try {
-            properties.load(new FileInputStream(getFilesFile("app_state.properties")));
-            for (Object stringO : properties.keySet()) {
-                if (stringO instanceof String) {
-                    currentFile = properties.get("currentFile") != null ? new File((String) properties.get("currentFile")) : currentFile;
-                    currentBitmap = properties.get("currentBitmap") != null ? new File((String) properties.get("currentBitmap")) : currentBitmap;
-                    currentBitmap = properties.get("currentDir") != null ? new File((String) properties.get("currentDir")) : currentDir;
-                    maxRes = (properties.get("maxRes") != null) ? (int) properties.get("maxRes") : maxRes;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            return;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
 
     class LoadImage extends AsyncTask {
 
@@ -1173,6 +1112,11 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     public void setWorkingResolutionOriginal(boolean workingResolutionOriginal) {
         this.workingResolutionOriginal = workingResolutionOriginal;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }
 
