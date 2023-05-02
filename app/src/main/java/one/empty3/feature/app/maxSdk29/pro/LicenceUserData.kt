@@ -28,7 +28,7 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
-class LicenceUserData : AppCompatActivity() {
+class LicenceUserData : ActivitySuperClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
@@ -44,7 +44,7 @@ class LicenceUserData : AppCompatActivity() {
 
         val intent: Intent = Intent(view.context, MyCameraActivity::class.java).apply {
         }
-        startActivity(intent)
+        passParameters(intent)
     }
 
 

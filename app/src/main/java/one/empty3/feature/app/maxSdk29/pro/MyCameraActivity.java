@@ -446,21 +446,20 @@ public class MyCameraActivity extends ActivitySuperClass {
             //startActivity(intent2);
         });
 
-
-        if (!isLoaded()) {
-            loadImageState(isWorkingResolutionOriginal());
+        try {
+            Bitmap bitmap = null;
+            if(imageView==null)
+                imageView = findViewById(R.id.imageViewSelection);
+            if(currentFile!=null)
+                bitmap = BitmapFactory.decodeStream(
+                        new FileInputStream(currentFile));
+            if(imageView!=null && bitmap!=null)
+                new Utils().setImageView(imageView, bitmap);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-
-/*
-        NavController navController = Navigation.findNavController(this, R.id.myCameraActivity_nav);
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        NavigationUI.setupWithNavController((androidx.appcompat.widget.Toolbar) toolbar,
-                (NavController) navController, (AppBarConfiguration) appBarConfiguration);
-*/
-
-
     }
 
 
@@ -730,7 +729,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     private void openUserData(View view) {
         //saveImageState(isWorkingResolutionOriginal());
         Intent intent = new Intent(view.getContext(), LicenceUserData.class);
-        startActivity(intent);
+        passParameters(intent);
     }
 
     /***Dépendances des modules
