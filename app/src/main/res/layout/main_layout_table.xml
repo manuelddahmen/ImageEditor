@@ -67,7 +67,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         android:theme="@style/Theme.FeatureAppmain"
 
@@ -81,7 +81,7 @@
 
             android:layout_width="28dp"
 
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_1" />
 
@@ -92,7 +92,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_2" />
 
@@ -103,7 +103,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_3"
             android:textAlignment="viewStart"
@@ -124,7 +124,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <Button
@@ -133,7 +133,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_4" />
 
@@ -144,7 +144,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_5" />
 
@@ -154,7 +154,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_6" />
 
@@ -173,7 +173,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         android:theme="@style/Theme.FeatureAppmain"
 
@@ -185,7 +185,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_7" />
 
@@ -195,7 +195,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_8" />
 
@@ -205,7 +205,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_9" />
 
@@ -223,7 +223,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <Button
@@ -232,7 +232,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/DOT" />
 
@@ -242,7 +242,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/_0" />
 
@@ -252,7 +252,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/EQUALS" />
 
@@ -262,14 +262,14 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/coma" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <Button
@@ -278,7 +278,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/ADD" />
 
@@ -288,14 +288,14 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/MUL" />
         <!--
 <Button
     android:id="@+id/sqrtButton"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="48dp"
     android:text="@string/sqrt"
     app:layout_constraintStart_toEndOf="@id/multButton"
     app:layout_constraintTop_toBottomOf="@id/equalButton" />
@@ -306,7 +306,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/DEL" />
 
@@ -314,7 +314,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <Button
@@ -323,7 +323,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/SUB" />
 
@@ -333,7 +333,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/DIV" />
 
@@ -343,7 +343,7 @@
 
 
             android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:text="@string/EXP" />
 
@@ -358,7 +358,7 @@
         <TextView
             android:id="@+id/answerText"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="48dp"
             android:text="@string/result"
             android:theme="@style/Theme.FeatureAppmain"
 
@@ -368,7 +368,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="96dp"
         android:orientation="vertical">
         <!--
                 <Button
