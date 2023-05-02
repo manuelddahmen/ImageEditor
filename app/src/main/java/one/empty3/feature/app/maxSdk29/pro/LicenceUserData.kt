@@ -42,8 +42,7 @@ class LicenceUserData : ActivitySuperClass() {
 
     private fun backToMain(view: View) {
 
-        val intent: Intent = Intent(view.context, MyCameraActivity::class.java).apply {
-        }
+        val intent: Intent = Intent(view.context, MyCameraActivity::class.java)
         passParameters(intent)
     }
 

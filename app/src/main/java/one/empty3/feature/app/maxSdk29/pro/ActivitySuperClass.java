@@ -236,10 +236,12 @@ public class ActivitySuperClass extends AppCompatActivity {
     public void passParameters(Intent to) {
 
 
-        to.setDataAndType(Uri.fromFile(this.currentFile), "image/jpg");
+        if(currentFile!=null)
+            to.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
 
         new Utils().putExtra(to, cords, currentCord);
-        new Utils().addCurrentFileToIntent(to, this, currentFile);
+        if(currentFile!=null)
+            new Utils().addCurrentFileToIntent(to, this, currentFile);
 
         startActivity(to);
     }
