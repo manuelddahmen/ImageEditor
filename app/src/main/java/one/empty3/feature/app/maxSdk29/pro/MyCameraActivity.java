@@ -47,6 +47,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,7 +59,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.installations.interop.BuildConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -460,6 +460,18 @@ public class MyCameraActivity extends ActivitySuperClass {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+//        Button crashButton = new Button(this);
+//        crashButton.setText("Test Crash");
+//        crashButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                throw new RuntimeException("Test Crash"); // Force a crash
+//            }
+//        });
+//
+//        addContentView(crashButton, new ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
 
@@ -1010,7 +1022,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
             if (currentFile != null) {
                 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.APPLICATION_ID + ".provider", currentFile);
+                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), one.empty3.feature.app.maxSdk29.pro.BuildConfig.APPLICATION_ID + ".provider", currentFile);
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getName());
                 String fileStr = currentFile.getName();
                 if (myPath.toFile().exists()) {

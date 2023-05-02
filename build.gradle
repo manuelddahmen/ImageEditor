@@ -27,6 +27,8 @@ buildscript {
         //classpath('com.google.ar:core:1.33.0')
         // Add dependencies.
         //classpath 'com.huawei.agconnect:agcp:1.5.2.300'
+        // Add the dependency for the Crashlytics Gradle plugin
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
     }
 }
 
