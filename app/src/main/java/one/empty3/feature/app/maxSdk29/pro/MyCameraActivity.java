@@ -57,6 +57,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.datatransport.BuildConfig;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -317,9 +319,17 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         face.setOnClickListener(view -> {
             if(currentFile!=null) {
+
                 Intent faceIntent = new Intent(Intent.ACTION_VIEW);
+
                 faceIntent.setClass(getApplicationContext(), FaceActivity.class);
+
+                if(currentPixM!=null) {
+                    faceIntent.putExtra("zoom", currentPixM.getBitmap());
+                }
+
                 passParameters(faceIntent);
+
             }
         });
 
@@ -1003,7 +1013,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
             if (currentFile != null) {
                 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), one.empty3.feature.app.maxSdk29.pro.BuildConfig.APPLICATION_ID + ".provider", currentFile);
+                FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), com.google.android.datatransport.BuildConfig.APPLICATION_ID + ".provider", currentFile);
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getName());
                 String fileStr = currentFile.getName();
                 if (myPath.toFile().exists()) {

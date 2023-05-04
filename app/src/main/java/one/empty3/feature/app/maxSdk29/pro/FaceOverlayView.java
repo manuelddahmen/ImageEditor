@@ -52,6 +52,9 @@ public class FaceOverlayView extends ImageViewSelection {
         }
         invalidate();
     }
+
+
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
