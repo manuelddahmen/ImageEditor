@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 <one.empty3.feature.app.maxSdk29.pro.FaceOverlayView
         android:id="@+id/face_overlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:minHeight="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,8 +43,6 @@ import one.empty3.library.PolyLine;
 public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImageView {
     private final Paint paint =
             new Paint();
-    private PixM pixels = null;
-
     {
         paint.setAntiAlias(true);
         paint.setColor(Color.RED);
@@ -76,10 +74,10 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
     public void setDrawingRectState(boolean isDrawingRect) {
         this.isDrawingRect = isDrawingRect;
         if (isDrawingRect) {
-            drawRect();
+  //          drawRect();
         }
     }
-
+/*
     private void drawRect() {
         if (isDrawingRect && pixels != null) {
             PolyLine polyLine = new PolyLine();
@@ -92,7 +90,7 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         }
     }
 
-
+*/
     public RectF getDrawingRect() {
         return rect;
     }
@@ -105,13 +103,13 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
                 Log.d("ImageViewSelection::setImageBitmap",
                         "change image on UI thread");
                 setImageBitmap(bm);
-                pixels = new PixM(bm);
+                //pixels = new PixM(bm);
             }
         });
 
     }
 
     public void setPixels(@NotNull PixM pixM) {
-        pixels = pixM;
+    //    pixels = pixM;
     }
 }

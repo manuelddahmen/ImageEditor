@@ -14,5 +14,7 @@ class FaceActivity : ActivitySuperClass() {
 
         if(currentFile!=null)
             faceOverlayView.setBitmap(ImageIO.read(currentFile).bitmap);
+
+        drawIfBitmap();
     }
 }

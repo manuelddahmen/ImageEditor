@@ -9,26 +9,34 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
-public class FaceOverlayView extends View {
-    private Bitmap mBitmap;
+public class FaceOverlayView extends ImageViewSelection {
     private SparseArray<Face> mFaces;
-    public FaceOverlayView(Context context) {
-        this(context, null);
+    protected Bitmap mBitmap;
+
+    public FaceOverlayView(@NonNull Context context) {
+        super(context);
     }
-    public FaceOverlayView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+
+    public FaceOverlayView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
     }
-    public FaceOverlayView(Context context, AttributeSet attrs, int defStyleAttr) {
+
+    public FaceOverlayView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    public void setBitmap( Bitmap bitmap ) {
-        mBitmap = bitmap;
 
+    public void setBitmap( Bitmap bitmap ) {
+        this.mBitmap = bitmap;
+        setImageBitmap2(bitmap);
 
         FaceDetector detector = new FaceDetector.Builder( getContext() )
                 .setTrackingEnabled(false)
@@ -52,6 +60,7 @@ public class FaceOverlayView extends View {
             drawFaceBox(canvas, scale);
         }
     }
+
     private double drawBitmap( Canvas canvas ) {
         double viewWidth = canvas.getWidth();
         double viewHeight = canvas.getHeight();

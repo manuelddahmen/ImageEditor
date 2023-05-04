@@ -440,21 +440,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             //startActivity(intent2);
         });
 
-        try {
-            Bitmap bitmap = null;
-            if(imageView==null)
-                imageView = findViewById(R.id.imageViewSelection);
-            if(currentFile!=null)
-                bitmap = BitmapFactory.decodeStream(
-                        new FileInputStream(currentFile));
-            if(imageView!=null && bitmap!=null)
-                new Utils().setImageView(imageView, bitmap);
-        } catch (RuntimeException ex) {
-            ex.printStackTrace();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+        drawIfBitmap();
 //        Button crashButton = new Button(this);
 //        crashButton.setText("Test Crash");
 //        crashButton.setOnClickListener(new View.OnClickListener() {
@@ -467,6 +453,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 //                ViewGroup.LayoutParams.MATCH_PARENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
     }
+
 
 
     class LoadImage extends AsyncTask {

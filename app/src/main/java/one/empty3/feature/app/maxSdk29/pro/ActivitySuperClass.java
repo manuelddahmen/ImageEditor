@@ -26,6 +26,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -262,4 +263,24 @@ public class ActivitySuperClass extends AppCompatActivity {
     public File getImageViewPersistantFile() {
         return getFilesFile(imageViewFilename);
     }
-}
+
+
+
+    void drawIfBitmap() {
+
+        try {
+            Bitmap bitmap = null;
+            if(imageView==null)
+                imageView = findViewById(R.id.imageViewSelection);
+            if(currentFile!=null)
+                bitmap = BitmapFactory.decodeStream(
+                        new FileInputStream(currentFile));
+            if(imageView!=null && bitmap!=null)
+                new Utils().setImageView(imageView, bitmap);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }}
