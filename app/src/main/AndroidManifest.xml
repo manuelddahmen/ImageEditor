@@ -5,21 +5,9 @@
 
     <queries>
         <package android:name="one.empty3.feature.app.maxSdk29.pro" />
-        <package android:name="com.android.remoteprovisioner" />
-        <package android:name="com.google.android.googlequicksearchbox" />
-        <package android:name="com.google.android.apps.messaging" />
-        <package android:name="com.google.android.cellbroadcastreceiver" />
-        <package android:name="com.google.android.gm" />
-        <package android:name="com.google.android.calendar" />
-        <package android:name="com.google.android.partnersetup" />
-        <package android:name="com.google.android.settings.intelligence" />
-        <package android:name="com.google.android.youtube" />
-        <package android:name="com.google.android.apps.maps" />
         <package android:name="com.google.android.apps.docs" />
         <package android:name="com.android.camera2" />
         <package android:name="com.google.android.apps.photos" />
-        <package android:name="com.google.android.projection.gearhead" />
-        <package android:name="com.google.android.setupwizard" />
     </queries>
 
     <uses-feature

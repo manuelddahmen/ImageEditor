@@ -47,7 +47,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,8 +56,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -316,16 +313,13 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
         //Draw activity (pass: rectangle, image, image view size.
-        View face = findViewById(R.id.buttonReshape);
+        View face = findViewById(R.id.buttonFace);
 
         face.setOnClickListener(view -> {
             if(currentFile!=null) {
-                Intent faceIntent = new Intent();
-                Utils utils = new Utils();
-                utils.addCurrentFileToIntent(faceIntent, this, currentFile);
-                utils.putExtra(faceIntent, cords, currentCord);
-
-                startActivity(faceIntent);
+                Intent faceIntent = new Intent(Intent.ACTION_VIEW);
+                faceIntent.setClass(getApplicationContext(), FaceActivity.class);
+                passParameters(faceIntent);
             }
         });
 
