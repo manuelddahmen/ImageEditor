@@ -114,7 +114,12 @@
             android:hardwareAccelerated="true"
             android:label="Draw graphics"
             android:theme="@style/Theme.FeatureAppmain" />
-
+        <activity
+                android:name=".FaceActivity"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Face Overpaint"
+                android:theme="@style/Theme.FeatureAppmain" />
         <provider
             android:name=".MyFileProvider"
             android:authorities="one.empty3.fileprovider"

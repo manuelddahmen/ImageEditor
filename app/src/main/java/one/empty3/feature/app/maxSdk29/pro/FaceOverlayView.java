@@ -42,7 +42,7 @@ public class FaceOverlayView extends View {
             mFaces = detector.detect(frame);
             detector.release();
         }
-        //invalidate();
+        invalidate();
     }
     @Override
     protected void onDraw(Canvas canvas) {
