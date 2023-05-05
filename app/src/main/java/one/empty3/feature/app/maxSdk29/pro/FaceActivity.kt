@@ -2,6 +2,8 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.widget.Button
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.compose.runtime.key
@@ -12,8 +14,12 @@ import com.google.android.gms.vision.face.FaceDetector
 import com.google.mlkit.vision.common.InputImage
 import javaAnd.awt.image.imageio.ImageIO
 
-class FaceActivity : ActivitySuperClass() {
+@ExperimentalCamera2Interop class FaceActivity : ActivitySuperClass() {
     private lateinit var detector: FaceDetector
+
+    private fun cameraCaptureRecord(b: Button) {
+        Camera().process(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,11 @@ class FaceActivity : ActivitySuperClass() {
         if (!detector.isOperational) {
             //Handle contingency
         }
+
+        val b : Button =  findViewById<Button>(R.id.camera_preview_video)
+        b.setOnClickListener({
+            cameraCaptureRecord(b)
+        })
     }
 
     fun processNextFrame(image : Bitmap) {
