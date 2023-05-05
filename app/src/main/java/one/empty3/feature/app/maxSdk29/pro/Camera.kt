@@ -31,7 +31,7 @@ import java.util.Locale
 import java.util.concurrent.Executor
 
 @ExperimentalCamera2Interop class Camera {
-    private val FILENAME_FORMAT: String? = "YYYY-mm-dd"
+    private val FILENAME_FORMAT: String? = "yyyy-mm-dd"
     val TAG = this.javaClass.canonicalName
     fun process(activitySuperClass: ActivitySuperClass) {
         val context = activitySuperClass.applicationContext
@@ -87,9 +87,9 @@ import java.util.concurrent.Executor
         }
 
 // Create MediaStoreOutputOptions for our recorder
-        val name = "CameraX-recording-" +
+        val name = activitySuperClass.getFilesFile("CameraX-recording-" +
                 SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-                    .format(System.currentTimeMillis()) + ".mp4"
+                    .format(System.currentTimeMillis()) + ".mp4").toString()
         val contentValues = ContentValues().apply {
             put(MediaStore.Video.Media.DISPLAY_NAME, name)
         }

@@ -51,6 +51,7 @@ public class FaceOverlayView extends ImageViewSelection {
             detector.release();
         }
         invalidate();
+        
     }
 
 
