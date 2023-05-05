@@ -187,4 +187,5 @@
     <string name="new_layout_app">New App Layout</string>
     <string name="floating_action_button_to">Floating Action Button to</string>
     <string name="main">Main</string>
+    <string name="capture">Capture</string>
 </resources>

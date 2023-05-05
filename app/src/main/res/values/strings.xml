@@ -191,5 +191,6 @@
     <string name="add_picture_file_from_directory">Add from directory</string>
     <string name="add_picture_from_camera">Add from camera</string>
     <string name="main">Main</string>
+    <string name="capture">Capture</string>
 
 </resources>
