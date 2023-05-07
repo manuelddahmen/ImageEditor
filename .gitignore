@@ -14,3 +14,5 @@ kotlin-profile/
 native/
 wrapper/
 /app/maxSdk29/
+/app/release/
+/app/debug/
