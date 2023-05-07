@@ -23,20 +23,15 @@ package one.empty3.feature.app.maxSdk29.pro;
 import static android.content.pm.PackageManager.*;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.PermissionRequest;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.PackageManagerCompat;
-import androidx.core.content.PermissionChecker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,8 +39,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Permission;
-import java.util.Arrays;
 import java.util.Properties;
 
 public class ActivitySuperClass extends AppCompatActivity {
@@ -55,6 +48,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     public final String filenameSaveState = "state.properties";
     public final String imageViewFilename = "imageView.jpg";
+    public final String imageViewFilenameProperties = "imageView.properties";
     protected ImageViewSelection imageView;
     protected File currentFile;
     protected int maxRes = 400;
@@ -62,6 +56,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     protected String currentCord = cords[0];
+    protected Bitmap currentBitmap;
 
     public ImageViewSelection getImageView() {
         return imageView;
@@ -156,7 +151,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(getImageViewPersistantFile()));
+            properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
             for (int i = 0; i < cords.length; i++) {
                 cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
             }
@@ -210,14 +205,14 @@ public class ActivitySuperClass extends AppCompatActivity {
         new Utils().saveImageState(this);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(getImageViewPersistantFile()));
+            properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
             for (int i = 0; i < cords.length; i++) {
                 properties.setProperty(cordsConsts[i], cords[i]);
             }
             properties.setProperty("maxRes", "" + maxRes);
 
             try {
-                properties.store(new FileOutputStream(getImageViewPersistantFile()), "");
+                properties.store(new FileOutputStream(getImageViewPersistantPropertiesFile()), "");
             } catch (IOException ignored) {
             }
         } catch (IOException ignored) {
@@ -264,19 +259,23 @@ public class ActivitySuperClass extends AppCompatActivity {
         return getFilesFile(imageViewFilename);
     }
 
+    @org.jetbrains.annotations.Nullable
+    public File getImageViewPersistantPropertiesFile() {
+        return getFilesFile(imageViewFilenameProperties);
+    }
 
 
     void drawIfBitmap() {
 
         try {
-            Bitmap bitmap = null;
+            currentBitmap = null;
             if(imageView==null)
                 imageView = findViewById(R.id.imageViewSelection);
             if(currentFile!=null)
-                bitmap = BitmapFactory.decodeStream(
+                currentBitmap = BitmapFactory.decodeStream(
                         new FileInputStream(currentFile));
-            if(imageView!=null && bitmap!=null)
-                new Utils().setImageView(imageView, bitmap);
+            if(imageView!=null && currentBitmap !=null)
+                new Utils().setImageView(imageView, currentBitmap);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         } catch (FileNotFoundException e) {

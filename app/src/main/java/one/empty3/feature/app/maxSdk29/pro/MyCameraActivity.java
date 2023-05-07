@@ -54,6 +54,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -82,7 +83,7 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-public class MyCameraActivity extends ActivitySuperClass {
+@ExperimentalCamera2Interop public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
     Properties properties = new Properties();
 
@@ -223,15 +224,13 @@ public class MyCameraActivity extends ActivitySuperClass {
                     int w = Math.abs((int) clipboard.getDestination().right - (int) clipboard.getDestination().left);
                     int h = Math.abs((int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
-                    System.err.println("Destionation coord = " + clipboard.getDestination());
-                    System.err.println("Theory Copied pixels = " + clipboard.getSource().getColumns() * clipboard.getSource().getLines());
                     Bitmap bitmap = dest.getBitmap();
                     currentBitmap = currentFile
                             = new Utils().writePhoto(this, bitmap, "copy_paste");
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
-                    Toast.makeText(getApplicationContext(), "Subimage pasted", Toast.LENGTH_SHORT)
+                    Toast.makeText(getApplicationContext(), R.string.subimage_pasted, Toast.LENGTH_SHORT)
                             .show();
                 }
             } else toastButtonDisabled(v);
@@ -410,7 +409,11 @@ public class MyCameraActivity extends ActivitySuperClass {
                             if (clipboard == null)
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
-                            clipboard.setDestination(viewById.getDrawingRect());
+                            if(clipboard.copied) {
+                                clipboard.setDestination(viewById.getDrawingRect());
+                                drawPointA = null;
+                                drawPointB = null;
+                            }
                             //rectfs.get(rectfs.size() - 1));
                         }
                         System.err.println("Selection drawn");

@@ -41,6 +41,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.PolyLine;
 
 public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImageView {
+    protected PixM pixels = null;
     private final Paint paint =
             new Paint();
     {
@@ -110,6 +111,6 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
     }
 
     public void setPixels(@NotNull PixM pixM) {
-    //    pixels = pixM;
+        pixels = pixM;
     }
 }

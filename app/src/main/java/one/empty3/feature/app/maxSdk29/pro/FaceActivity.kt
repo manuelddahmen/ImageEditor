@@ -26,16 +26,21 @@ import javaAnd.awt.image.imageio.ImageIO
 
         val faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
 
-        if(currentFile!=null)
-            faceOverlayView.setBitmap(ImageIO.read(currentFile).bitmap);
 
+        drawIfBitmap();
+
+        if(currentFile!=null) {
+            if(currentBitmap==null)
+                currentBitmap = ImageIO.read(currentFile).bitmap
+            faceOverlayView.setBitmap(currentBitmap);
+        }
 
         val b : Button =  findViewById<Button>(R.id.camera_preview_video)
         b.setOnClickListener({
             cameraCaptureRecord(b)
         })
 
-        drawIfBitmap();
+
     }
 
 }

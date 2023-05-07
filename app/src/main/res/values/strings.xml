@@ -192,5 +192,6 @@
     <string name="add_picture_from_camera">Add from camera</string>
     <string name="main">Main</string>
     <string name="capture">Capture</string>
+    <string name="subimage_pasted">Subimage pasted</string>
 
 </resources>

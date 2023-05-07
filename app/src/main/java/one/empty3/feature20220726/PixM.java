@@ -95,7 +95,7 @@ public class PixM extends MBitmap {
     }
 
     public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
-        if(bitmap==null) {
+        if (bitmap == null) {
             throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
         } else {
             PixM pixM = new PixM(bitmap);
@@ -115,7 +115,7 @@ public class PixM extends MBitmap {
     }
 
     public static PixM getPixM(@NotNull Bitmap image, double maxRes) {
-        if(image==null) {
+        if (image == null) {
             throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
         } else {
             return getPixM(image, (int) maxRes);
@@ -123,14 +123,15 @@ public class PixM extends MBitmap {
     }
 
     public static PixM getPixM(@NotNull BufferedImage image, double maxRes) {
-        if(image.bitmap==null) {
+        if (image.bitmap == null) {
             return null;
         } else {
             return getPixM(image.bitmap, (int) maxRes);
         }
     }
+
     public static PixM getPixM(@NotNull Bitmap image, int maxRes) {
-        if(image==null) {
+        if (image == null) {
             throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
         } else {
             double f = 1.0;
@@ -714,30 +715,34 @@ public class PixM extends MBitmap {
 
     public void pasteSubImage(PixM copy, int x, int y, int w, int h) {
         double[] vc = new double[3];
-        for (int i = 0; i < copy.getColumns(); i++) {
-            for (int j = 0; j < copy.getLines(); j++) {
-                int xx = (int) (x + 1.0 * i / copy.getColumns() * w);
-                int yy = (int) (y + 1.0 * j / copy.getLines() * h);
+        double d = 0.0;
+        if (w > 0 && h > 0)
+            for (int i = 0; i < copy.getColumns(); i++) {
+                for (int j = 0; j < copy.getLines(); j++) {
+                    int xx = (int) (x + 1.0 * i / copy.getColumns() * w);
+                    int yy = (int) (y + 1.0 * j / copy.getLines() * h);
 
-                double dx = (int) (1.0 / copy.getColumns() * w) + 1;
-                double dy = (int) (1.0 / copy.getLines() * h) + 1;
+                    double dx = (int) (1.0 / copy.getColumns() * w) + 1;
+                    double dy = (int) (1.0 / copy.getLines() * h) + 1;
 
-                for (int i2 = xx; i2 < xx + dx; i2++) {
-                    for (int j2 = yy; j2 < yy + dy; j2++) {
+                    if(dx>0 && dy>0) {
+                        for (int i2 = xx; i2 < xx + dx; i2++) {
+                            for (int j2 = yy; j2 < yy + dy; j2++) {
 
-                        for (int c = 0; c < getCompCount(); c++) {
-                            copy.setCompNo(c);
-                            setCompNo(c);
-                            vc[c] = copy.get(i, j);
-                            set(i2, j2, vc[c]);
-                        }
-                        if (bitmap != null) {
-                            bitmap.setPixel(i2, j2, Lumiere.getInt(vc));
+                                for (int c = 0; c < getCompCount(); c++) {
+                                    copy.setCompNo(c);
+                                    setCompNo(c);
+                                    d = copy.get(i, j);
+                                    set(i2, j2, d);
+                                }
+                                /*if (bitmap != null) {
+                                    bitmap.setPixel(i2, j2, Lumiere.getInt(vc));
+                                }*/
+                            }
                         }
                     }
                 }
             }
-        }
     }
 
     public PixM pasteSubImage(int x, int y, int w, int h) {

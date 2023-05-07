@@ -188,4 +188,5 @@
     <string name="floating_action_button_to">Floating Action Button to</string>
     <string name="main">Main</string>
     <string name="capture">Capture</string>
+    <string name="subimage_pasted">Subimage pasted</string>
 </resources>

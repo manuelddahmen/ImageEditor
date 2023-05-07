@@ -9,6 +9,7 @@ import android.hardware.camera2.CameraMetadata
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.ArrayAdapter
+import androidx.camera.camera2.internal.Camera2EncoderProfilesProvider
 import androidx.camera.camera2.internal.annotation.CameraExecutor
 import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
@@ -38,8 +39,8 @@ import java.util.concurrent.Executor
         val qualitySelector = QualitySelector.fromOrderedList(
             listOf(Quality.UHD, Quality.FHD, Quality.HD, Quality.SD),
             FallbackStrategy.lowerQualityOrHigherThan(Quality.SD))
-
         val cameraProvider : ListenableFuture<ProcessCameraProvider> = ProcessCameraProvider.getInstance(context)
+
         val cameraInfo = cameraProvider.get().availableCameraInfos.filter {
             Camera2CameraInfo
                 .from(it)
