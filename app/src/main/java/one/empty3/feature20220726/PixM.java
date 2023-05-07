@@ -713,31 +713,24 @@ public class PixM extends MBitmap {
     }
 
 
-    public void pasteSubImage(PixM copy, int x, int y, int w, int h) {
-        double[] vc = new double[3];
-        double d = 0.0;
+    public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
         if (w > 0 && h > 0)
             for (int i = 0; i < copy.getColumns(); i++) {
                 for (int j = 0; j < copy.getLines(); j++) {
-                    int xx = (int) (x + 1.0 * i / copy.getColumns() * w);
-                    int yy = (int) (y + 1.0 * j / copy.getLines() * h);
+                    int xx = (int) (x + ((1.0 * i) / copy.getColumns()) * w);
+                    int yy = (int) (y + ((1.0 * j) / copy.getLines()) * h);
 
-                    double dx = (int) (1.0 / copy.getColumns() * w) + 1;
-                    double dy = (int) (1.0 / copy.getLines() * h) + 1;
+                    double dx = (1.0 / copy.getColumns()) * w;
+                    double dy = (1.0 / copy.getLines()) * h;
 
-                    if(dx>0 && dy>0) {
-                        for (int i2 = xx; i2 < xx + dx; i2++) {
-                            for (int j2 = yy; j2 < yy + dy; j2++) {
-
-                                for (int c = 0; c < getCompCount(); c++) {
+                    if(dx>=0 && dy>=0) {
+                        for (double i2 = xx; i2 <= xx + dx; i2++) {
+                            for (double j2 = yy; j2 <= yy + dy; j2++) {
+                                for (int c = 0; c < 3; c++) {
                                     copy.setCompNo(c);
                                     setCompNo(c);
-                                    d = copy.get(i, j);
-                                    set(i2, j2, d);
+                                    set((int)i2, (int)j2, copy.get(i, j));
                                 }
-                                /*if (bitmap != null) {
-                                    bitmap.setPixel(i2, j2, Lumiere.getInt(vc));
-                                }*/
                             }
                         }
                     }

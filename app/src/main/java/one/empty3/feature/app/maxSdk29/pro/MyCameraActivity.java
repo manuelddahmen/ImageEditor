@@ -410,7 +410,8 @@ import one.empty3.feature20220726.PixM;
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
                             if(clipboard.copied) {
-                                clipboard.setDestination(viewById.getDrawingRect());
+                                RectF r = new RectF(0,0,currentPixM.getColumns(), currentPixM.getLines());
+                                clipboard.setDestination(r);
                                 drawPointA = null;
                                 drawPointB = null;
                             }
