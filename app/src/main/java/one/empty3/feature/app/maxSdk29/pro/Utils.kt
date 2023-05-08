@@ -46,7 +46,7 @@ import java.util.*
 
 
 public class Utils() {
-    private val maxRes: Int = 400
+    private val maxRes: Int = 200
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")

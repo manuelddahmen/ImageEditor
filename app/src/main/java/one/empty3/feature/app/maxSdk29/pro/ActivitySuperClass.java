@@ -51,7 +51,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public final String imageViewFilenameProperties = "imageView.properties";
     protected ImageViewSelection imageView;
     protected File currentFile;
-    protected int maxRes = 400;
+    protected int maxRes = 200;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
 
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
