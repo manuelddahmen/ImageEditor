@@ -50,6 +50,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -211,9 +212,7 @@ import one.empty3.feature20220726.PixM;
             if (currentFile != null) {
                 if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
                         && clipboard.getSource() != null) {
-                    PixM dest = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
-
-
+                    PixM dest = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
 
                     int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
                     int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
@@ -221,8 +220,7 @@ import one.empty3.feature20220726.PixM;
                     int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     Bitmap bitmap = dest.getBitmap();
-                    currentBitmap = currentFile
-                            = new Utils().writePhoto(this, bitmap, "copy_paste");
+                    currentBitmap = currentFile = new Utils().writePhoto(this, bitmap, "copy_paste");
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
@@ -387,46 +385,41 @@ import one.empty3.feature20220726.PixM;
                 if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
                     ImageViewSelection viewById = findViewById(R.id.currentImageView);
-                    RectF rectF = new RectF(
-                            Math.min((float) drawPointA.getX(),(float) drawPointB.getX() ),
-                            Math.min((float) drawPointA.getY(),(float) drawPointB.getY() ),
-                            Math.max((float) drawPointA.getX(),(float) drawPointB.getX() ),
-                            Math.max((float) drawPointA.getY(),(float) drawPointB.getY() ));
+                    Bitmap bitmap = ImageIO.read(currentFile).bitmap;
+                    RectF rectF = getSelectedCordsImgToView(bitmap, viewById);
                     viewById.setDrawingRect(rectF);
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
                     // PixM zone
-                    currentPixM = getSelectedZone();
+                    ;
+                    if (rectF != null) {
+                        currentPixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
 
-                    if (currentPixM != null) {
-                        System.err.println("Draw Selection");
-                        new Utils().setImageView(imageView, currentPixM.getImage().bitmap);
-                        if (clipboard == null && Clipboard.defaultClipboard == null) {
-                            clipboard = Clipboard.defaultClipboard
-                                    = new Clipboard(currentPixM);
+                        if (currentPixM != null) {
+                            System.err.println("Draw Selection");
+                            new Utils().setImageView(imageView, currentPixM.getImage().bitmap);
+                            if (clipboard == null && Clipboard.defaultClipboard == null) {
+                                clipboard = Clipboard.defaultClipboard
+                                        = new Clipboard(currentPixM);
 
-                        }
-                        if (Clipboard.defaultClipboard != null && clipboard != null) {
-                            if (clipboard == null)
-                                clipboard = Clipboard.defaultClipboard;
-                            BufferedImage read = ImageIO.read(currentFile);
-                            if(clipboard.copied) {
-                                clipboard.setDestination(rectF);
-                                drawPointA = null;
-                                drawPointB = null;
-                                viewById.setDrawingRectState(false);
-                            } else {
-                                clipboard.setSource(currentPixM);
                             }
-                            //rectfs.get(rectfs.size() - 1));
-                        }
-                        System.err.println("Selection drawn");
-                    } else {
-                        System.err.println("current PixM == null");
+                            if (Clipboard.defaultClipboard != null && clipboard != null) {
+                                if (clipboard.copied) {
+                                    clipboard.setDestination(rectF);
+                                    drawPointA = null;
+                                    drawPointB = null;
+                                    viewById.setDrawingRectState(false);
+                                } else {
+                                    clipboard.setSource(currentPixM);
+                                }
+                            }
+                            System.err.println("Selection drawn");
+                        } else {
+                            System.err.println("current PixM == null");
 
+                        }
                     }
                 }
-
 
             } else toastButtonDisabled(v);
             return true;
@@ -469,7 +462,48 @@ import one.empty3.feature20220726.PixM;
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
+    private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
+        if (currentFile != null) {
+            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
 
+            if (drawPointA == null || drawPointB == null) {
+                return null;
+            }
+
+            double xr = 1.0 * imageView.getWidth() / pixM.getColumns();
+            double yr = 1.0 * imageView.getHeight() / pixM.getLines();
+
+            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
+            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
+            int y1 = (int) Math.min(drawPointA.getY()*yr, drawPointB.getY()*yr);
+            int y2 = (int) Math.max(drawPointA.getY()*yr, drawPointB.getY()*yr);
+
+            return new RectF(x1, y1, x2 - x1, y2 - y1);
+
+        }
+        return null;
+    }
+    private RectF getSelectedCordsViewToImg(ImageView imageView, Bitmap bitmap) {
+        if (currentFile != null) {
+            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+
+            if (drawPointA == null || drawPointB == null) {
+                return null;
+            }
+
+            double xr = 1.0 * imageView.getWidth() / pixM.getColumns();
+            double yr = 1.0 * imageView.getHeight() / pixM.getLines();
+
+            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
+            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
+            int y1 = (int) Math.min(drawPointA.getY()*yr, drawPointB.getY()*yr);
+            int y2 = (int) Math.max(drawPointA.getY()*yr, drawPointB.getY()*yr);
+
+            return new RectF(x1, y1, x2 - x1, y2 - y1);
+
+        }
+        return null;
+    }
 
     class LoadImage extends AsyncTask {
 
@@ -660,44 +694,15 @@ import one.empty3.feature20220726.PixM;
     }
 
 
-    private PixM getSelectedZone() {
+    private PixM getSelectedZone(RectF selectedCords) {
         if (currentFile != null) {
-            PixM pixM = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)), maxRes);
+            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
 
-            if (drawPointA == null || drawPointB == null) {
-                return null;
-            }
+            PixM copy = pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
+                    (int)(selectedCords.right-selectedCords.left),
+                    (int)(selectedCords.bottom- selectedCords.top));
 
-            double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
-            double yr = 1.0 / imageView.getHeight() * pixM.getLines();
-
-            int x1 = (int) Math.min(drawPointA.getX() * xr, drawPointB.getX() * xr);
-            int x2 = (int) Math.max(drawPointA.getX() * xr, drawPointB.getX() * xr);
-            int y1 = (int) Math.min(drawPointA.getY() * yr, drawPointB.getY() * yr);
-            int y2 = (int) Math.max(drawPointA.getY() * yr, drawPointB.getY() * yr);
-            PixM copy = pixM.copySubImage(x1, y1, x2 - x1, y2 - y1);
-
-            System.err.printf("Copied rect = (%d, %d, %d, %d)\n", x1, y1, x2 - x1, y2 - y1);
-
-            if (copy != null) {
-                // currentFileZoomedBitmap = copy.getImage().getBitmap();
-            }
-            RectF rectF = new RectF(x1, y1, x2, y2);
-
-            rectfs.add(rectF);
-
-            RectF localRectIn = getLocalRectIn(null);
-
-            if (localRectIn != null) {
-
-                System.err.printf("Local rect = (%f, %f, %f, %f)\n", localRectIn.left, localRectIn.top, localRectIn.right, localRectIn.bottom);
-                drawPointB = null;
-                drawPointA = null;
-                return copy;
-            } else {
-                System.err.println("Error getLocalRectIn : returns null");
-
-            }
+            return copy;
         }
         return null;
     }
