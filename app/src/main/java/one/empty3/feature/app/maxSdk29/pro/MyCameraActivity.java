@@ -408,7 +408,6 @@ import one.empty3.feature20220726.PixM;
                                     clipboard.setDestination(rectF);
                                     drawPointA = null;
                                     drawPointB = null;
-                                    viewById.setDrawingRectState(false);
                                 } else {
                                     clipboard.setSource(currentPixM);
                                 }
@@ -470,34 +469,29 @@ import one.empty3.feature20220726.PixM;
                 return null;
             }
 
-            double xr = 1.0 * imageView.getWidth() / pixM.getColumns();
-            double yr = 1.0 * imageView.getHeight() / pixM.getLines();
+            double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
+            double yr = 1.0 / imageView.getHeight() * pixM.getLines();
 
             int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
             int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
             int y1 = (int) Math.min(drawPointA.getY()*yr, drawPointB.getY()*yr);
             int y2 = (int) Math.max(drawPointA.getY()*yr, drawPointB.getY()*yr);
 
-            return new RectF(x1, y1, x2 - x1, y2 - y1);
+            return new RectF(x1, y1, x2, y2);
 
         }
         return null;
     }
-    private RectF getSelectedCordsViewToImg(ImageView imageView, Bitmap bitmap) {
+    private RectF getSelectedCordsViewToImg(ImageView imageView, RectF rectF) {
         if (currentFile != null) {
-            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+            int x1 = (int) Math.min(rectF.left, rectF.right);
+            int x2 = (int) Math.max(rectF.left, rectF.right);
+            int y1 = (int) Math.min(rectF.bottom, rectF.top);
+            int y2 = (int) Math.max(rectF.bottom, rectF.top);
 
-            if (drawPointA == null || drawPointB == null) {
-                return null;
-            }
+            double xr =1.0/( 1.0 * imageView.getWidth() / (x2-x1));
+            double yr = 1.0/(1.0 * imageView.getHeight() / y2-y1);
 
-            double xr = 1.0 * imageView.getWidth() / pixM.getColumns();
-            double yr = 1.0 * imageView.getHeight() / pixM.getLines();
-
-            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
-            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
-            int y1 = (int) Math.min(drawPointA.getY()*yr, drawPointB.getY()*yr);
-            int y2 = (int) Math.max(drawPointA.getY()*yr, drawPointB.getY()*yr);
 
             return new RectF(x1, y1, x2 - x1, y2 - y1);
 
