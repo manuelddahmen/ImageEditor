@@ -387,11 +387,12 @@ import one.empty3.feature20220726.PixM;
                 if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
                     ImageViewSelection viewById = findViewById(R.id.currentImageView);
-                    viewById.setDrawingRect(new RectF(
+                    RectF rectF = new RectF(
                             Math.min((float) drawPointA.getX(),(float) drawPointB.getX() ),
                             Math.min((float) drawPointA.getY(),(float) drawPointB.getY() ),
                             Math.max((float) drawPointA.getX(),(float) drawPointB.getX() ),
-                            Math.max((float) drawPointA.getY(),(float) drawPointB.getY() )));
+                            Math.max((float) drawPointA.getY(),(float) drawPointB.getY() ));
+                    viewById.setDrawingRect(rectF);
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
                     //viewById.draw(new Canvas());
@@ -413,11 +414,12 @@ import one.empty3.feature20220726.PixM;
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
                             if(clipboard.copied) {
-                                RectF r = viewById.getDrawingRect();
-                                clipboard.setDestination(r);
+                                clipboard.setDestination(rectF);
                                 drawPointA = null;
                                 drawPointB = null;
                                 viewById.setDrawingRectState(false);
+                            } else {
+
                             }
                             //rectfs.get(rectfs.size() - 1));
                         }
