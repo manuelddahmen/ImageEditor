@@ -209,20 +209,16 @@ import one.empty3.feature20220726.PixM;
         paste.setOnClickListener(v -> {
             clipboard = Clipboard.defaultClipboard;
             if (currentFile != null) {
-                if (clipboard == null && Clipboard.defaultClipboard != null)
-                    clipboard = Clipboard.defaultClipboard;
                 if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
                         && clipboard.getSource() != null) {
                     PixM dest = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
-                    if (rectfs.size() > 0)
-                        clipboard.setDestination(rectfs.get(rectfs.size() - 1));
-                    else {
-                        return;
-                    }
-                    int x = Math.min((int) clipboard.getDestination().left, (int) clipboard.getDestination().right);
-                    int y = Math.min((int) clipboard.getDestination().bottom, (int) clipboard.getDestination().top);
-                    int w = Math.abs((int) clipboard.getDestination().right - (int) clipboard.getDestination().left);
-                    int h = Math.abs((int) clipboard.getDestination().bottom - (int) clipboard.getDestination().top);
+
+
+
+                    int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
+                    int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
+                    int w = (int) Math.abs(clipboard.getDestination().right - clipboard.getDestination().left);
+                    int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     Bitmap bitmap = dest.getBitmap();
                     currentBitmap = currentFile
@@ -232,6 +228,10 @@ import one.empty3.feature20220726.PixM;
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
                     Toast.makeText(getApplicationContext(), R.string.subimage_pasted, Toast.LENGTH_SHORT)
                             .show();
+
+                    System.err.println("Image copiée: "+clipboard.getSource().getColumns()+" "+ clipboard.getSource().getLines());
+                    System.err.println("Zone de collage: "+"x:"+x+", y:"+y+" w:"+w+" h:"+h);
+
                 }
             } else toastButtonDisabled(v);
         });
@@ -395,11 +395,6 @@ import one.empty3.feature20220726.PixM;
                     viewById.setDrawingRect(rectF);
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
-                    //viewById.draw(new Canvas());
-                    // Désélectionner A&B
-                    //drawPointA = null;
-
-
                     // PixM zone
                     currentPixM = getSelectedZone();
 
@@ -409,7 +404,9 @@ import one.empty3.feature20220726.PixM;
                         if (clipboard == null && Clipboard.defaultClipboard == null) {
                             clipboard = Clipboard.defaultClipboard
                                     = new Clipboard(currentPixM);
-                        } else if (Clipboard.defaultClipboard != null && clipboard != null) {
+
+                        }
+                        if (Clipboard.defaultClipboard != null && clipboard != null) {
                             if (clipboard == null)
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
@@ -419,7 +416,7 @@ import one.empty3.feature20220726.PixM;
                                 drawPointB = null;
                                 viewById.setDrawingRectState(false);
                             } else {
-
+                                clipboard.setSource(currentPixM);
                             }
                             //rectfs.get(rectfs.size() - 1));
                         }
