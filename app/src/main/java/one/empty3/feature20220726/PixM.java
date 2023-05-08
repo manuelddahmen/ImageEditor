@@ -712,7 +712,7 @@ public class PixM extends MBitmap {
 
     }
 
-
+/*
     public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
         if (w > 0 && h > 0)
             for (int i = 0; i < copy.getColumns(); i++) {
@@ -737,7 +737,23 @@ public class PixM extends MBitmap {
                 }
             }
     }
+    */
+    public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
+        if (w > 0 && h > 0)
+            for (int i = x; i < x + w; i++) {
+                for (int j = y; j < y + h; j++) {
+                    int xx = (int)((1.0 * (i - x) / w) * copy.getColumns());
+                    int yy = (int)((1.0 * (j - y) / h) * copy.getLines());
 
+                    for (int c = 0; c < 3; c++) {
+                        copy.setCompNo(c);
+                        setCompNo(c);
+                        set(i, j, copy.get(xx, yy));
+                    }
+                }
+            }
+    }
+/*
     public PixM pasteSubImage(int x, int y, int w, int h) {
         PixM p2 = new PixM(w, h);
         for (int i = x; i < x + w; i++)
@@ -749,7 +765,7 @@ public class PixM extends MBitmap {
                     set(i - x, j - y, v);
                 }
         return p2;
-    }
+    }*/
 
     public PixM copySubImage(int x, int y, int w, int h) {
         if (w <= 0 || h <= 0)

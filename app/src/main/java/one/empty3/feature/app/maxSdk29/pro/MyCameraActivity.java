@@ -410,7 +410,7 @@ import one.empty3.feature20220726.PixM;
                                 clipboard = Clipboard.defaultClipboard;
                             BufferedImage read = ImageIO.read(currentFile);
                             if(clipboard.copied) {
-                                RectF r = new RectF(0,0,currentPixM.getColumns(), currentPixM.getLines());
+                                RectF r = viewById.getDrawingRect();
                                 clipboard.setDestination(r);
                                 drawPointA = null;
                                 drawPointB = null;
@@ -447,13 +447,11 @@ import one.empty3.feature20220726.PixM;
         addText.setOnClickListener(view -> addText(view));
 
         View openNewUI = findViewById(R.id.new_layout_app);
-
         openNewUI.setOnClickListener(view -> {
             Intent intent2 = new Intent();
-            //intent2.setClass(getApplicationContext(), .class);
-            //startActivity(intent2);
+            intent2.setClass(getApplicationContext(), MyCameraActivity.class);
+            passParameters(intent2);
         });
-
         drawIfBitmap();
 //        Button crashButton = new Button(this);
 //        crashButton.setText("Test Crash");
