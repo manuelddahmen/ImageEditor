@@ -49,7 +49,6 @@ public class PixM extends MBitmap {
         super(l, c);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public PixM(Bitmap image) {
         super(image.getWidth(), image.getHeight());
         float[] colorComponents = new float[4];
@@ -232,29 +231,7 @@ public class PixM extends MBitmap {
     }
 
     public BufferedImage getImage() {
-
-        float[] f = new float[getCompCount()];
-
-        Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.RGBA_F16);
-
-
-        float[] rgba = new float[getCompCount()];
-        for (int i = 0; i < image.getWidth(); i++) {
-            for (int j = 0; j < image.getHeight(); j++) {
-                for (int comp = 0; comp < 3; comp++) {
-                    setCompNo(comp);
-                    float value = (float) (get(i, j));
-                    //value = Math.max(value, 0f);
-                    //value = Math.min(value, 1f);
-
-                    rgba[comp] = value;
-                }
-                image.setPixel(i, j, Color.valueOf(rgba[0], rgba[1], rgba[2]).toArgb());
-            }
-        }
-        return new BufferedImage(image);
-
+        return new BufferedImage(getBitmap());
     }
 /*
 

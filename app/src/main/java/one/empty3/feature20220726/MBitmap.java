@@ -21,6 +21,7 @@
 package one.empty3.feature20220726;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 import java.util.PrimitiveIterator;
 import java.util.Random;
@@ -39,12 +40,14 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public int compCount = 3;
 
     public MBitmap(int c, int l) {
+        x = new double[c*l*3];
         this.bitmap = Bitmap.createBitmap(c, l, Bitmap.Config.RGB_565);
         this.lines = l;
         this.columns = c;
     }
 
     public MBitmap(Bitmap bitmap) {
+        x = new double[bitmap.getWidth()*bitmap.getHeight()*3];
         this.bitmap = bitmap;
         int l = bitmap.getHeight();
         int c = bitmap.getWidth();
@@ -52,10 +55,11 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         this.columns = c;
 
     }
-
-    public MBitmap(Bitmap bitmap, int resMax) {
-        this.bitmap = bitmap;
-    }
+//
+//    public MBitmap(Bitmap bitmap, int resMax) {
+//        bi
+//        this.bitmap = bitmap;
+//    }
 
     public int getColumns() {
         return columns;
@@ -106,10 +110,32 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return v;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
 
+    public Bitmap getBitmap() {
+
+        float[] f = new float[getCompCount()];
+
+        Bitmap image = Bitmap.createBitmap(columns,
+                lines, Bitmap.Config.RGBA_F16);
+
+
+        float[] rgba = new float[getCompCount()];
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                for (int comp = 0; comp < 3; comp++) {
+                    setCompNo(comp);
+                    float value = (float) (get(i, j));
+                    //value = Math.max(value, 0f);
+                    //value = Math.min(value, 1f);
+
+                    rgba[comp] = value;
+                }
+                image.setPixel(i, j, Color.valueOf(rgba[0], rgba[1], rgba[2]).toArgb());
+            }
+        }
+        return image;
+
+    }
     public static double[] getVector(int add, double[]... vectors) {
         int d = 0;
         for (int i = 0; i < vectors.length; i++)
