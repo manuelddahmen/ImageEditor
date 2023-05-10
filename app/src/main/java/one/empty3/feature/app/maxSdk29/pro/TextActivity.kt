@@ -33,6 +33,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
@@ -43,7 +44,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 
-class TextActivity() : ActivitySuperClass() {
+@ExperimentalCamera2Interop class TextActivity() : ActivitySuperClass() {
     private val INT_WRITE_STORAGE: Int = 9247492
     private var text: String = ""
     private lateinit var currentImage: Bitmap
@@ -159,12 +160,13 @@ class TextActivity() : ActivitySuperClass() {
         ) {
             val textString: String =
                 (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-            val drawTextToBitmap: File? = drawTextToBitmap(R.id.currentImageView, textString)
+
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+            val drawTextToBitmap: File? = drawTextToBitmap(textString)
             if (drawTextToBitmap != null) {
                 currentFile = drawTextToBitmap
-                currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
                 imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
-                Utils().setImageView(imageView!!, this.currentImage)
+                Utils().setImageView(imageView, this.currentImage)
                 System.out.println("ImageView Text UPDATED")
             }
             return true
@@ -173,13 +175,11 @@ class TextActivity() : ActivitySuperClass() {
         return false
     }
 
-    private fun drawTextToBitmap(resourceId: Int, textToPrint: String): File? {
+    private fun drawTextToBitmap(textToPrint: String): File? {
         try {
 
             val resources: Resources = applicationContext.resources
             val scale: Float = resources.displayMetrics.density
-
-            val file = Utils().writePhoto(this, currentImage, "text-")
             // resource bitmaps are immutable,
             // so we need to convert it to mutable one
             val currentImage2 = currentImage.copy(currentImage.config, true)
@@ -217,12 +217,16 @@ class TextActivity() : ActivitySuperClass() {
             }
             //canvas.drawText(textToPrint, x * scale, y * scale, paint)
             canvas.drawText(textToPrint, x.toFloat(), y.toFloat(), paint)
+            currentImage = currentImage2
             return Utils().writePhoto(this, currentImage2, "drawtext-")
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()
             return null
+        } catch (ex1 : RuntimeException ) {
+            ex1.printStackTrace()
         }
+        return null
     }
 
 

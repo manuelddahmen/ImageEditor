@@ -29,6 +29,20 @@ SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
 FIX: Java version 17
 
+
+Save button does not work
+Introduce navigation
+Text activity changed to design
+Changes: jvm-11, kotlin-1.8.0, Gradle-8.0.1
+198: list of effects changed to design
+Redesign layout
+Fix GraphicsView error
+Android 13, first test.
+FIXED  Bug: cant launch
+FIXED Android 13 load file issue
+Save does not work (crash)
+Include debug table. Fixer les erreurs de tests Play Console
+Added Face Draw
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -66,4 +80,18 @@ BUG Add text
 Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
+
+Save button does not work
+Introduce navigation
+Text activity changed to design
+Changes: jvm-11, kotlin-1.8.0, Gradle-8.0.1
+198: list of effects changed to design
+Redesign layout
+Fix GraphicsView error
+Android 13, first test.
+FIXED  Bug: cant launch
+FIXED Android 13 load file issue
+Save does not work (crash)
+Include debug table. Fixer les erreurs de tests Play Console
+Added Face Draw
 </fr-FR>
