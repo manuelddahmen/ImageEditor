@@ -41,7 +41,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public MBitmap(int c, int l) {
         x = new double[c*l*3];
-        this.bitmap = Bitmap.createBitmap(c, l, Bitmap.Config.RGB_565);
         this.lines = l;
         this.columns = c;
     }
