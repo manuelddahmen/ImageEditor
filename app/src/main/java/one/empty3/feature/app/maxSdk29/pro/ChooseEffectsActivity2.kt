@@ -23,29 +23,19 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.PermissionGroupInfo
-import android.content.pm.PermissionInfo
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.webkit.PermissionRequest
 import android.widget.Button
-import android.widget.EditText
-import android.widget.VideoView
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker.PermissionResult
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
-import java.security.Permission
-import java.security.Permissions
 
-class ChooseEffectsActivity2 : ActivitySuperClass() {
-    private val INT_READ_STORAGE: Int = 5152112
-    private val INT_WRITE_STORAGE: Int = 5152113
+@ExperimentalCamera2Interop class ChooseEffectsActivity2 : ActivitySuperClass() {
+    private var unautorized: Boolean = false
+    private val READ_WRITE_STORAGE: Int = 15165516
     private var listEffects: HashMap<String, ProcessFile>? = null
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
@@ -71,6 +61,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         effectApply = findViewById(R.id.applyEffects)
         init(savedInstanceState)
         maxRes = intent.extras?.get("maxRes") as Int
+        initAuthorized()
 
     }
 
@@ -107,8 +98,35 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 //    }
 
     fun init(savedInstanceState: Bundle?) {
-        var index = 0
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES
+            ), READ_WRITE_STORAGE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == READ_WRITE_STORAGE && grantResults != null) {
+            var g:Int = 0
+            for (granted in grantResults)
+                if((granted == PackageManager.PERMISSION_GRANTED))
+                    g = g + 1
+
+
+            if (g<2)
+                unautorized = true;
+        }
+    }
+    private fun initAuthorized() {
         effectApply.setOnClickListener {
+            var index = 0
             classnames = Main2022.effects
 
             classnames.forEachIndexed { index1, it ->
@@ -117,8 +135,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
 
             run {
-                val intent = Intent(Intent.ACTION_EDIT)
-                println("Click on Effect button")
+                println("Clicked on Effect button, running effects")
                 val fileIn: File = File(currentFile.toString())
 
                 Log.d("Initial input file", fileIn.toString())
@@ -128,14 +145,15 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 )
 
 
-                var dirRoot: String = filesDir.absolutePath// + File.separator + "data/files"//!!!?
+                var dirRoot: String =
+                    filesDir.absolutePath// + File.separator + "data/files"//!!!?
                 /*uri = FileProvider.getUriForFile(
-                    this@MyCameraActivity,
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    currentFile
-                )
-                dirRoot =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                this@MyCameraActivity,
+                BuildConfig.APPLICATION_ID + ".provider",
+                currentFile
+            )
+            dirRoot =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
 */
 
                 if (ContextCompat.checkSelfPermission(
@@ -153,7 +171,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         arrayOf(
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), INT_WRITE_STORAGE
+                        ), READ_WRITE_STORAGE
                     )
                 }
                 var dir = ""
@@ -178,7 +196,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         arrayOf<String>(
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), INT_WRITE_STORAGE
+                        ), READ_WRITE_STORAGE
                     )
 
                 }
@@ -190,8 +208,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         fileIn.absolutePath.lastIndexOf("/")
                     )
                 )
-                var currentOutputFile: File
-                var currentOutputDir: File
+                var currentOutputFile: File = currentFile
+                var currentOutputDir: File = currentFile
                 index = -1
                 val name = currentProcessFile.name
                 //dir = "appDir"
@@ -305,7 +323,11 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                 && !currentOutputFile.exists()
                             ) {
                                 processFile.setMaxRes(maxRes)
-                                if (!processFile.process(currentProcessFile, currentOutputFile)) {
+                                if (!processFile.process(
+                                        currentProcessFile,
+                                        currentOutputFile
+                                    )
+                                ) {
                                     println("Error processing file.")
                                     println("Error in " + processFile.javaClass.name)
                                     return@setOnClickListener
@@ -333,19 +355,14 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
 
                 }
-                val intent2 = Intent()
-                intent2.setDataAndType(Uri.fromFile(currentProcessFile), "image/jpg")
-                Utils().addCurrentFileToIntent(intent2, this, currentProcessFile)
-                intent2.extras?.putInt("maxRes", maxRes)
-                intent2.setClass(
-                    applicationContext,
-                    Class.forName("one.empty3.feature.app.maxSdk29.pro.MyCameraActivity")
-                )
-                startActivity(intent2)
+
+                currentFile = currentOutputFile.absoluteFile
+                val intent2 = Intent(it.context, MyCameraActivity::class.java)
+                passParameters(intent2)
 
             }
-        }
 
+        }
 //
 //    Log.i("effects#logging", "init Details Effect Activity")
 //    effectList = Main.initListProcesses()
@@ -387,6 +404,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
     }
 
+
     fun comaStringList(str: String): String {
         return "";
     }
@@ -423,19 +441,5 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     override fun onDestroy() {
         Log.i("effects#logging", "destroy Effect Activity")
         super.onDestroy()
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == INT_WRITE_STORAGE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            } else {
-            }
-        }
     }
 }

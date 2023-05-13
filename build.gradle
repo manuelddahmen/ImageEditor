@@ -35,3 +35,15 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+Properties properties = new Properties()
+try {
+    // Other configuration here
+    File propertiesFile = new File('../private.properties/gradle.properties')
+    propertiesFile.withInputStream {
+        properties.load(it)
+    }
+} catch (Exception ex) {
+    ex.printStackTrace()
+}

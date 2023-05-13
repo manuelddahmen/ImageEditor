@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:versionName="3.0" >
-
+<!--
     <queries>
         <package android:name="one.empty3.feature.app.maxSdk29.pro" />
         <package android:name="com.google.android.apps.docs" />
         <package android:name="com.android.camera2" />
         <package android:name="com.google.android.apps.photos" />
     </queries>
-
+-->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />

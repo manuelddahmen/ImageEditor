@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "54141076658",
+    "project_id": "empty3one",
+    "storage_bucket": "empty3one.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54141076658:android:9ed97416a047a49307b5ab",
+        "android_client_info": {
+          "package_name": "one.empty3.feature.app.maxSdk29.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54141076658-n3m344rkjojokqsphloidvg60oluornm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy3ii7JeY0eEUzJXKpZVxyoYTN-_Q7eF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54141076658-n3m344rkjojokqsphloidvg60oluornm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
