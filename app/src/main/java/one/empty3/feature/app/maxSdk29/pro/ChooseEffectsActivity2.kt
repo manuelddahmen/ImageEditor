@@ -29,6 +29,7 @@ import android.widget.Button
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
@@ -122,11 +123,13 @@ import java.io.File
 
             if (g<2)
                 unautorized = true;
+            else
+                unautorized = false;
         }
     }
     private fun initAuthorized() {
+        var index = 0
         effectApply.setOnClickListener {
-            var index = 0
             classnames = Main2022.effects
 
             classnames.forEachIndexed { index1, it ->
@@ -356,7 +359,8 @@ import java.io.File
 
                 }
 
-                currentFile = currentOutputFile.absoluteFile
+                currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
+
                 val intent2 = Intent(it.context, MyCameraActivity::class.java)
                 passParameters(intent2)
 

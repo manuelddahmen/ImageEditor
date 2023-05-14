@@ -91,7 +91,7 @@
                 android:text="@string/add"
                 android:theme="@style/Theme.FeatureAppmain"
                     android:layout_weight="0.33"
-
+                android:background="#9b5faa"
                     />
 
             <Button

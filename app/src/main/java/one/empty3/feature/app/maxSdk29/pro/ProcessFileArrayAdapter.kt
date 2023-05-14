@@ -76,7 +76,7 @@ class ProcessFileArrayAdapter() :
         val buttonAddToEffect: Button =
             holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
         val buttonThreeToEffect: Button =
-            holder.itemView.findViewById(R.id.button) as Button
+            holder.itemView.findViewById(R.id.commentEffect) as Button
         System.out.printf(
             "Layout class is : %s Button1 = %s Button 2 = %s\n",
             text1,

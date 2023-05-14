@@ -230,6 +230,27 @@ public class PixM extends MBitmap {
         return originValue;
     }
 
+    public Bitmap getBitmap() {
+        Bitmap image = Bitmap.createBitmap(columns,
+                lines, Bitmap.Config.RGB_565);
+
+
+        float[] rgba = new float[getCompCount()];
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                for (int c = 0; c < 3; c++) {
+                    setCompNo(c);
+                    float value = (float) (get(i, j));
+                    rgba[c] = value;
+                }
+                image.setPixel(i, j, Color.valueOf(rgba[0], rgba[1], rgba[2]).toArgb());
+            }
+        }
+        return image;
+
+    }
+
+
     public BufferedImage getImage() {
         return new BufferedImage(getBitmap());
     }

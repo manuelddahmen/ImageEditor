@@ -28,8 +28,6 @@ Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
 FIX: Java version 17
-
-
 Save button does not work
 Introduce navigation
 Text activity changed to design
@@ -80,7 +78,6 @@ BUG Add text
 Try to load reduce image load time.
 SOME FIX: Try to display images from Effects and Text
 FIX: requestpermissions android studio waituntil
-
 Save button does not work
 Introduce navigation
 Text activity changed to design
@@ -94,4 +91,6 @@ FIXED Android 13 load file issue
 Save does not work (crash)
 Include debug table. Fixer les erreurs de tests Play Console
 Added Face Draw
+Travail à faire:
+- 
 </fr-FR>

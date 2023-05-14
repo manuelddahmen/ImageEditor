@@ -40,7 +40,11 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public int compCount = 3;
 
     public MBitmap(int c, int l) {
-        x = new double[c*l*3];
+        try {
+            x = new double[c * l * 3];
+        } catch (OutOfMemoryError err) {
+            err.printStackTrace();
+        }
         this.lines = l;
         this.columns = c;
     }
@@ -52,6 +56,18 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         int c = bitmap.getWidth();
         this.lines = l;
         this.columns = c;
+
+        float[] colorComponents = new float[4];
+        for (int i = 0; i < bitmap.getWidth(); i++) {
+            for (int j = 0; j < bitmap.getHeight(); j++) {
+                int rgb = bitmap.getPixel(i, j);
+                colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
+                for (int com = 0; com < getCompCount(); com++) {
+                    setCompNo(com);
+                    set(i, j, colorComponents[com]);
+                }
+            }
+        }
 
     }
 //
@@ -110,31 +126,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
 
-    public Bitmap getBitmap() {
-
-        float[] f = new float[getCompCount()];
-
-        Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.RGBA_F16);
-
-
-        float[] rgba = new float[getCompCount()];
-        for (int i = 0; i < image.getWidth(); i++) {
-            for (int j = 0; j < image.getHeight(); j++) {
-                for (int comp = 0; comp < 3; comp++) {
-                    setCompNo(comp);
-                    float value = (float) (get(i, j));
-                    //value = Math.max(value, 0f);
-                    //value = Math.min(value, 1f);
-
-                    rgba[comp] = value;
-                }
-                image.setPixel(i, j, Color.valueOf(rgba[0], rgba[1], rgba[2]).toArgb());
-            }
-        }
-        return image;
-
-    }
     public static double[] getVector(int add, double[]... vectors) {
         int d = 0;
         for (int i = 0; i < vectors.length; i++)

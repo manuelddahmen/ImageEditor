@@ -164,7 +164,7 @@ public class Utils() {
 
     public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
         var maxRes: Int = 0;
-        maxRes = activity?.intent?.getIntExtra("maxRes", MyCameraActivity.MAX_RES_DEFAULT)!!;
+        maxRes = activity?.intent?.getIntExtra("maxRes", activity.maxRes)!!;
         if (savedInstanceState == null ||
             !savedInstanceState.containsKey("maxRes") ||
             savedInstanceState.getInt("maxRes") <= 0
@@ -298,14 +298,14 @@ public class Utils() {
         val drawable: Drawable = imageView.getDrawable()
         var bitmap: Bitmap? = null
         if (drawable is BitmapDrawable) {
-            bitmap = drawable.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+            bitmap = drawable.bitmap.copy(Bitmap.Config.RGB_565, true)
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
                 bitmap = Bitmap.createBitmap(
                     activity.maxRes,
                     activity.maxRes,
-                    Bitmap.Config.ARGB_8888
-                ).copy(Bitmap.Config.ARGB_8888, true) // Single color bitmap will be created of 1x1 pixel
+                    Bitmap.Config.RGB_565
+                ).copy(Bitmap.Config.RGB_565, true) // Single color bitmap will be created of 1x1 pixel
             }
         }
         if(bitmap==null)
@@ -318,7 +318,7 @@ public class Utils() {
         drawable.draw(canvas)
         var bm: Bitmap? = null
         if (bitmap != null) {
-            bm = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+            bm = bitmap.copy(Bitmap.Config.RGB_565, true)
             val baos = ByteArrayOutputStream()
             bm.compress(Bitmap.CompressFormat.JPEG, 90, baos) //bm is the bitmap object
             val b = baos.toByteArray()
