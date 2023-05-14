@@ -43,7 +43,6 @@ public class PixM extends MBitmap {
     public static final int COMP_INTENSITY = 4;
     private int MAX_DISTANCE_ITERATIONS = 100;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM(int l, int c) {
 
         super(l, c);
@@ -64,7 +63,6 @@ public class PixM extends MBitmap {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
         /*
@@ -81,7 +79,6 @@ public class PixM extends MBitmap {
         }*/
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM(double[][] distances) {
         super(distances.length, distances[0].length);
         for (int i = 0; i < getColumns(); i++)

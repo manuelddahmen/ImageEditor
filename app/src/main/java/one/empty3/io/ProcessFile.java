@@ -97,8 +97,7 @@ public abstract class ProcessFile {
 
 
     protected static boolean isImage(File in) {
-        return in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
-                || in.getAbsolutePath().toLowerCase().endsWith(".png"));
+        return true;
     }
 
 }

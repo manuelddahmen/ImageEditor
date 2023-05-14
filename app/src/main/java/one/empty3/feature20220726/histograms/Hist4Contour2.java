@@ -28,7 +28,6 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class Hist4Contour2 extends ProcessFile {
 
@@ -113,8 +112,7 @@ public class Hist4Contour2 extends ProcessFile {
             return false;
         }
         PixM inP;
-        inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
-        assert inP != null;
+        inP = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
         double max = 0.0;
@@ -153,10 +151,16 @@ public class Hist4Contour2 extends ProcessFile {
         }
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
-        //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
-        ImageIO.write(outP.getImage().getBitmap(), "jpg", out);
-        //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
-        return true;
+        try {
+            //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
+            ImageIO.write(outP.getImage(), "jpg", out);
+            //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
 
     }
 
