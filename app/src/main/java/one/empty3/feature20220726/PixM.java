@@ -568,10 +568,6 @@ public class PixM extends MBitmap {
 
     }
 
-    private GMatrix toGMatrix() {
-        GMatrix gMatrix = new GMatrix(PixM.getPixM(bitmap));
-        return gMatrix;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public double luminance(int x, int y) {

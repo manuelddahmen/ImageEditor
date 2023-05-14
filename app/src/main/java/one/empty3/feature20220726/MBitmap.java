@@ -32,7 +32,6 @@ import one.empty3.library.Point3D;
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = r.next();
-    protected Bitmap bitmap = null;
     protected int columns;
     protected int lines;
     double[] x;
@@ -51,7 +50,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public MBitmap(Bitmap bitmap) {
         x = new double[bitmap.getWidth()*bitmap.getHeight()*3];
-        this.bitmap = bitmap;
         int l = bitmap.getHeight();
         int c = bitmap.getWidth();
         this.lines = l;
@@ -141,12 +139,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public void setP(int i, int j, Point3D p) {
-        if (bitmap != null && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-            bitmap.setPixel(i, j, Lumiere.getInt(new double[]
-                    {p.get(0), p.get(1), p.get(2)}));
-            return;
-        }
-
         for (int d = 0; d < 3; d++) {
             setCompNo(d);
             set(i, j, p.get(d));
@@ -154,13 +146,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public Point3D getP(int i, int j) {
-        if (bitmap != null && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
-                int pixel = bitmap.getPixel(i, j);
-                double[] p = Lumiere.getDoubles(pixel);
-                return new Point3D(p[0], p[1], p[2]);
-            }
-        }
         Point3D p = new Point3D();
 
         for (int d = 0; d < 3; d++) {
@@ -173,12 +158,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public void setValues(int i, int j, double... v) {
-        if (bitmap != null) {
-            if (i >= 0 && i < bitmap.getWidth() && j >= 0 && j < bitmap.getHeight()) {
-                bitmap.setPixel(i, j, Lumiere.getInt(new double[]
-                        {v[0], v[1], v[2]}));
-            }
-        }
 
         for (int d = 0; d < v.length; d++) {
             setCompNo(d);
