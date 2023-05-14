@@ -28,6 +28,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Hist4Contour2 extends ProcessFile {
 
@@ -112,12 +113,12 @@ public class Hist4Contour2 extends ProcessFile {
             return false;
         }
         PixM inP;
-        inP = PixM.getPixM(ImageIO.read(in), maxRes);
+        inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+        assert inP != null;
 
 
         double max = 0.0;
         PixM outP = new PixM(inP.getColumns(), inP.getLines());
-        PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0.mult(1);
