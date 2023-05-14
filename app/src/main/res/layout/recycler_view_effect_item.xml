@@ -110,7 +110,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:height="48dp"
-                android:text="@string/commentEffect"
+                android:text="@string/editProperties"
                     android:layout_weight="0.33"
                 android:theme="@style/Theme.FeatureAppmain"
 

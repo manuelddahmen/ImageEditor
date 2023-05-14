@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2023.
- *
- *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- *
- */
 
 package one.empty3.feature.app.maxSdk29.pro
 
@@ -94,6 +75,8 @@ class ProcessFileArrayAdapter() :
             holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
         val buttonAddToEffect: Button =
             holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
+        val buttonThreeToEffect: Button =
+            holder.itemView.findViewById(R.id.button) as Button
         System.out.printf(
             "Layout class is : %s Button1 = %s Button 2 = %s\n",
             text1,
@@ -101,9 +84,9 @@ class ProcessFileArrayAdapter() :
             buttonRemoveList
         )
         if (Main2022.effects.contains(holder.getEffectClass())) {
-            buttonAddToEffect.setBackgroundColor(0xaaaa0000.toInt())
+            buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
         } else {
-            buttonAddToEffect.setBackgroundColor(0xffffffff.toInt())
+            buttonAddToEffect.setBackgroundColor(0xffaaaaaa.toInt())
         }
 
         buttonAddToEffect.setOnClickListener {
@@ -133,7 +116,7 @@ class ProcessFileArrayAdapter() :
 
 
             if (!b1) {
-                buttonAddToEffect.setBackgroundColor(0xaa000000.toInt())
+                buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
             }
 
 //            val textView: Unit =

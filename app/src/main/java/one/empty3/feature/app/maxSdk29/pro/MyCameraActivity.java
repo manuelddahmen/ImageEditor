@@ -230,6 +230,7 @@ import one.empty3.feature20220726.PixM;
                     System.err.println("Image copiée: "+clipboard.getSource().getColumns()+" "+ clipboard.getSource().getLines());
                     System.err.println("Zone de collage: "+"x:"+x+", y:"+y+" w:"+w+" h:"+h);
 
+
                 }
             } else toastButtonDisabled(v);
         });
@@ -390,8 +391,6 @@ import one.empty3.feature20220726.PixM;
                     viewById.setDrawingRect(rectF);
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
-                    // PixM zone
-                    ;
                     if (rectF != null) {
                         currentPixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
 
@@ -1052,6 +1051,8 @@ import one.empty3.feature20220726.PixM;
                 saveImageState(isWorkingResolutionOriginal());
             }
         }
+
+        new Utils().loadImageInImageView(this);
     }
 
     private void requireWriteTempFilePermission() {
