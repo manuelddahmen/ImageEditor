@@ -24,6 +24,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.BitmapFactory.Options
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -34,6 +35,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.net.toFile
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 //import com.nostra13.universalimageloader.core.ImageLoader
@@ -167,13 +169,15 @@ public class Utils() {
         maxRes = activity?.intent?.getIntExtra("maxRes", activity.maxRes)!!;
         if (savedInstanceState == null ||
             !savedInstanceState.containsKey("maxRes") ||
-            savedInstanceState.getInt("maxRes") <= 0
+            savedInstanceState.getInt("maxRes") !=-1
         ) {
             maxRes = activity.maxRes;
         } else {
             maxRes = savedInstanceState.getInt("maxRes")
 
         }
+        if(maxRes==0)
+            return activity.maxRes
         return maxRes
     }
 
@@ -268,7 +272,20 @@ public class Utils() {
         if (activity.currentFile!=null && activity.currentFile.exists()) {
             try {
                 val fileInputStream = FileInputStream(activity.currentFile) ?: return false
-                val mBitmap : Bitmap = BitmapFactory.decodeStream(fileInputStream) ?: return false
+                var mBitmap: Bitmap
+                    try {
+                        mBitmap =
+                            BitmapFactory.decodeStream(fileInputStream) ?: return false
+                    } catch (ex:OutOfMemoryError) {
+                        Toast.makeText(activity.applicationContext, "No memory, will try smaller image", Toast.LENGTH_LONG).show()
+                        ex.printStackTrace()
+                        val options = Options()
+                        options.outHeight = maxRes
+                        options.outWidth = maxRes
+
+                        mBitmap = BitmapFactory.decodeFile(activity.currentFile.absolutePath, options)
+                    }
+
                 val maxRes = getMaxRes(activity)
 
                 val cb:Bitmap
@@ -302,8 +319,8 @@ public class Utils() {
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
                 bitmap = Bitmap.createBitmap(
-                    activity.maxRes,
-                    activity.maxRes,
+                    activity.getMaxRes(),
+                    activity.getMaxRes(),
                     Bitmap.Config.RGB_565
                 ).copy(Bitmap.Config.RGB_565, true) // Single color bitmap will be created of 1x1 pixel
             }

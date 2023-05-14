@@ -124,7 +124,7 @@ import one.empty3.feature20220726.PixM;
 
         setContentView(R.layout.main);
 
-        maxRes = new Utils().getMaxRes(this, savedInstanceState);
+        var maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
         imageView = this.findViewById(R.id.currentImageView);
 
@@ -518,7 +518,7 @@ import one.empty3.feature20220726.PixM;
                 //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
                 System.err.println("Image main intent loaded");
                 //saveImageState();
-                maxRes = resolution;
+                var maxRes = resolution;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -642,9 +642,10 @@ import one.empty3.feature20220726.PixM;
         return point;
     }
 
-    private int getMaxRes() {
+    @Override
+    public int getMaxRes() {
         EditText maxResText = findViewById(R.id.editMaximiumResolution);
-        maxRes = (int) Double.parseDouble(maxResText.getText().toString());
+        var maxRes = (int) Double.parseDouble(maxResText.getText().toString());
         return maxRes;
     }
 

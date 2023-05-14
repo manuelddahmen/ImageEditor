@@ -26,6 +26,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +52,7 @@ import java.io.File
 
         setContentView(R.layout.recycler_view_effect_activity)
 
-        maxRes = Utils().getMaxRes(this, savedInstanceState)
+        var maxRes = Utils().getMaxRes(this, savedInstanceState)
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
@@ -63,7 +64,6 @@ import java.io.File
         init(savedInstanceState)
         maxRes = intent.extras?.get("maxRes") as Int
         initAuthorized()
-
     }
 
 //    @RequiresApi(Build.VERSION_CODES.N)
@@ -356,7 +356,7 @@ import java.io.File
                     }
                     index++
 
-
+                    Toast.makeText(applicationContext, ("Applied effect:" + (currentProcessFile.absoluteFile?:"No file processed ??")), Toast.LENGTH_SHORT).show()
                 }
 
                 currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");

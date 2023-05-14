@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.io.File;
 import java.util.HashMap;
@@ -42,19 +43,19 @@ import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
-public class GraphicsActivityView extends ActivitySuperClass {
+@ExperimentalCamera2Interop public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
     private PixM current;
-    private int MAX_RES = maxRes;
+    private int MAX_RES = getMaxRes();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics_view);
 
-        maxRes = new Utils().getMaxRes(this, savedInstanceState);
+        int maxRes= new Utils().getMaxRes(this, savedInstanceState);
 
 
         Intent intent = getIntent();
@@ -105,7 +106,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
                 intentGraphics.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
 
             intentGraphics.setClass(getApplicationContext(), MyCameraActivity.class);
-            intentGraphics.putExtra("maxRes", maxRes);
+            intentGraphics.putExtra("maxRes", getMaxRes());
             int j = 0;
             for (j = 0; j < cordsConsts.length; j++) {
                 intentGraphics.putExtra(cordsConsts[j], cords[j]);
@@ -222,8 +223,5 @@ public class GraphicsActivityView extends ActivitySuperClass {
         new Utils().setImageView(image, bitmap);
     }
 
-    private int getMaxRes() {
-        return maxRes;
-    }
 
 }
