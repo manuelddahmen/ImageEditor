@@ -196,7 +196,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public double get(int column, int line) {
-        if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount) {
+        if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x!=null) {
             //if (bitmap != null) {
             //    return Lumiere.getDoubles(bitmap.getPixel(column, line))[compNo];
             //}
@@ -238,7 +238,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     }
 
     public void set(int column, int line, double d) {
-        if (column >= 0 && column < columns && line >= 0 && line < lines) {
+        if (column >= 0 && column < columns && line >= 0 && line < lines && x!=null) {
 //            if (bitmap != null) {
 //                int pixel = bitmap.getPixel(column, line);
 //                double[] ps = Lumiere.getDoubles(pixel);
