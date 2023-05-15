@@ -40,7 +40,7 @@ public class GraphicsActivity extends ActivitySuperClass {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
 
-        maxRes = new Utils().getMaxRes(this, savedInstanceState);
+        setMaxRes(new Utils().getMaxRes(this, savedInstanceState));
 
         currentFile = new Utils().getCurrentFile(getIntent());
 

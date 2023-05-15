@@ -1052,8 +1052,6 @@ import one.empty3.feature20220726.PixM;
                 saveImageState(isWorkingResolutionOriginal());
             }
         }
-
-        new Utils().loadImageInImageView(this);
     }
 
     private void requireWriteTempFilePermission() {

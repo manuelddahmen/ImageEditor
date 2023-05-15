@@ -287,4 +287,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public int getMaxRes() {
         return maxRes;
     }
+    public void setMaxRes(int maxRes) {
+        this.maxRes = maxRes;
+    }
 }
