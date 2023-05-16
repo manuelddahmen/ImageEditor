@@ -370,7 +370,15 @@ public class Utils() {
     private fun getMaxRes(activity: ActivitySuperClass): Int {
         val maxResText: EditText? = activity.findViewById<EditText>(R.id.editMaximiumResolution)
         val maxResStr = maxResText?.text
-        var maxRes = activity.maxRes
+        var maxRes:Int = 200
+        try {
+            maxRes = activity.maxRes
+        } catch (ex:RuntimeException) {
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
+        }catch (ex2 : NullPointerException) {
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
+        }
+
         if(maxResStr!=null) {
             try {
                 maxRes = maxResStr.toString().toDouble().toInt()
