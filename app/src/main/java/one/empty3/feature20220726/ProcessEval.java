@@ -33,7 +33,7 @@ public abstract class ProcessEval {
     private ArrayList<File> files = new ArrayList<>();
     private ArrayList<PixM> pixMaps = new ArrayList<>();
     private ArrayList<double[]> features = new ArrayList<>();
-    private double[] x;
+    private byte[] x;
     private double[] y;
     private double[] w;
     private double[] w1;
@@ -86,7 +86,7 @@ public abstract class ProcessEval {
         return a;
     }
 
-    private double[] dotOuter(double[] x, double[] w) {
+    private double[] dotOuter(byte[] x, double[] w) {
         double[] a = new double[x.length];
         for (int i = 0; i < a.length; i++)
             a[i] = x[i] * w[i];

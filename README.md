@@ -41,6 +41,24 @@ FIXED Android 13 load file issue
 Save does not work (crash)
 Include debug table. Fixer les erreurs de tests Play Console
 Added Face Draw
+Added Face draw rect. OK
+Fix: color and selection, copy and paste subimagesS'occuper des problèmes de collages. (copier-coller)  Resolved.
+Crash launch activity Text: Fixed.
+Try to fix extra persmissions problem
+Faces
+1- S'occuper des problèmes de collages. (copier-coller) - Resolved.
+2- Améliorer "Face" (...)
+3) try to repair ChooseEffectsActivity2
+Try to don't crash when picture is too big for RAM.
+Added Face draw rect. OK
+Fix: color and selection, copy and paste subimagesS'occuper des problèmes de collages. (copier-coller)  Resolved.
+Crash launch activity Text: Fixed.
+Try to fix extra persmissions problem
+Faces
+1- S'occuper des problèmes de collages. (copier-coller) - Resolved.
+2- Améliorer "Face" (...)
+3) try to repair ChooseEffectsActivity2
+Try to don't crash when picture is too big for RAM.
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -92,5 +110,17 @@ Save does not work (crash)
 Include debug table. Fixer les erreurs de tests Play Console
 Added Face Draw
 Travail à faire:
-- 
+Added Face draw rect. OK
+Fix: color and selection, copy and paste subimagesS'occuper des problèmes de collages. (copier-coller)  Resolved.
+Crash launch activity Text: Fixed.
+Added Face draw rect. OK
+Fix: color and selection, copy and paste subimagesS'occuper des problèmes de collages. (copier-coller)  Resolved.
+Crash launch activity Text: Fixed.
+Try to fix extra persmissions problem
+Faces
+1- S'occuper des problèmes de collages. (copier-coller) - Resolved.
+2- Améliorer "Face" (...)
+3) try to repair ChooseEffectsActivity2
+Try to don't crash when picture is too big for RAM.
+
 </fr-FR>

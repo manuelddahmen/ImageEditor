@@ -65,7 +65,7 @@ public class PixM extends MBitmap {
 
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
-        /*
+
         float[] colorComponents = new float[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
@@ -76,7 +76,7 @@ public class PixM extends MBitmap {
                     set(i, j, colorComponents[com]);
                 }
             }
-        }*/
+        }
     }
 
     public PixM(double[][] distances) {
