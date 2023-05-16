@@ -34,6 +34,9 @@ import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @ExperimentalCamera2Interop class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var unautorized: Boolean = false
@@ -61,9 +64,8 @@ import java.io.File
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
         effectApply = findViewById(R.id.applyEffects)
-        init(savedInstanceState)
         maxRes = intent.extras?.get("maxRes") as Int
-        initAuthorized()
+        init(savedInstanceState)
     }
 
 //    @RequiresApi(Build.VERSION_CODES.N)
@@ -119,12 +121,8 @@ import java.io.File
             for (granted in grantResults)
                 if((granted == PackageManager.PERMISSION_GRANTED))
                     g = g + 1
-
-
-            if (g<2)
-                unautorized = true;
-            else
                 unautorized = false;
+                initAuthorized();
         }
     }
     private fun initAuthorized() {
@@ -132,8 +130,8 @@ import java.io.File
         effectApply.setOnClickListener {
             classnames = Main2022.effects
 
-            classnames.forEachIndexed { index1, it ->
-                classnames[index1] = listEffects?.get(it)?.javaClass?.name
+            classnames.forEachIndexed { index1, it1 ->
+                classnames[index1] = listEffects?.get(it1)?.javaClass?.name
             }
 
 
@@ -146,10 +144,11 @@ import java.io.File
                     "Initial input file exists?", "Exists?"
                             + ((fileIn.exists()).toString())
                 )
+                Log.d(packageName, "\"Effects' list size:" + classnames.size)
 
 
-                var dirRoot: String =
-                    filesDir.absolutePath// + File.separator + "data/files"//!!!?
+                var dirRoot: String = filesDir.absolutePath
+                // + File.separator + "data/files"//!!!?
                 /*uri = FileProvider.getUriForFile(
                 this@MyCameraActivity,
                 BuildConfig.APPLICATION_ID + ".provider",
@@ -159,50 +158,12 @@ import java.io.File
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
 */
 
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    requestPermissions(
-                        arrayOf(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), READ_WRITE_STORAGE
-                    )
-                }
+
                 var dir = ""
 
-                if (ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_GRANTED
-                ) {
-                    dir = "photoDir"
-                    dirRoot = currentFile.toString()
-                        .substring(0, currentFile.toString().lastIndexOf(File.separator))
-                } else {
-                    println("Error : no permission for read/write storage")
-                    dir = "appDir"
-                    this.requestPermissions(
-                        arrayOf<String>(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        ), READ_WRITE_STORAGE
-                    )
-
-                }
+                dir = "photoDir"
+                dirRoot = currentFile.toString()
+                    .substring(0, currentFile.toString().lastIndexOf(File.separator))
 
                 var currentProcessFile: File = fileIn
                 val currentProcessDir = File(
@@ -220,16 +181,16 @@ import java.io.File
 
                     return@setOnClickListener;
                 }
-                classnames.forEach {
-                    if (it.isNullOrBlank()) {
+                classnames.forEach { it1->
+                    if (it1.isBlank()) {
                         return@setOnClickListener
                     }
-                    val effectListStr: String = it
-                    val trim = it.trim()
+                    val effectListStr: String = it1
+                    val trim = it1.trim()
                     if (effectListStr.contains(trim)) {
                         val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
-                            Class.forName(it).newInstance() as ProcessFile
+                            Class.forName(it1).newInstance() as ProcessFile
                         if (index == -1) {
                             if (dir.equals("appDir")) {
                                 currentOutputFile = File(
@@ -263,7 +224,7 @@ import java.io.File
                                     currentOutputFile.absolutePath.substring(
                                         0, currentProcessFile.absolutePath
                                             .lastIndexOf(File.separator)
-                                    ) + File.separator + trim + index +
+                                    ) + File.separator + trim + index +"-"+ UUID.randomUUID()+
                                             File.separator + name
                                 )
                                 currentOutputDir = File(
@@ -325,7 +286,7 @@ import java.io.File
                             if (currentProcessFile.exists()
                                 && !currentOutputFile.exists()
                             ) {
-                                processFile.setMaxRes(maxRes)
+                                processFile.setMaxRes(Utils().getMaxRes(this, null))
                                 if (!processFile.process(
                                         currentProcessFile,
                                         currentOutputFile
@@ -356,56 +317,20 @@ import java.io.File
                     }
                     index++
 
-                    Toast.makeText(applicationContext, ("Applied effect:" + (currentProcessFile.absoluteFile?:"No file processed ??")), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        ("Applied effect:" + (currentProcessFile.absoluteFile ?: "No file processed ??")),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
+
+                    val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
+                    passParameters(intent2)
+
                 }
-
-                currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
-
-                val intent2 = Intent(it.context, MyCameraActivity::class.java)
-                passParameters(intent2)
-
             }
-
         }
-//
-//    Log.i("effects#logging", "init Details Effect Activity")
-//    effectList = Main.initListProcesses()
-//    editText = findViewById(R.id.editText)
-//    val l: List<String> = List<String>(effectList.size, init = {
-//        val s0: String = ((effectList[it]).javaClass.toString())
-//        val s: String = (editText.text.toString()
-//                + s0 + ",")
-//        editText.setText(
-//            s.subSequence(0, s.length), TextView.BufferType.EDITABLE
-//        ).toString()
-//
-//    })
-//
-//    editText1 = findViewById(R.id.effectsAutoCompleteTextView)
-//    editText1.setText(savedInstanceState?.getString("classname"))
-//    editText1.addTextChangedListener {
-//        object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                complete()
-//            }
-//
-//            override fun beforeTextChanged(
-//                s: CharSequence?,
-//                start: Int,
-//                count: Int,
-//                after: Int
-//            ) {
-//                complete()
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                complete()
-//            }
-//        }
-//    }
-//
-//
-
     }
 
 
@@ -414,7 +339,7 @@ import java.io.File
     }
 
     private fun nextFile(directory: String, filenameBase: String, extension: String): String {
-        return directory + File.separator + filenameBase + "." + extension
+        return directory+File.separator+filenameBase+"--"+ UUID.randomUUID()+"."+extension
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
