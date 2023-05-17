@@ -103,11 +103,16 @@ public class ActivitySuperClass extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         if (getIntent() != null && getIntent().getExtras() != null)
             for (int i = 0; i < cordsConsts.length; i++) {
                 if (getIntent().getStringExtra(cordsConsts[i]) != null)
                     cords[i] = getIntent().getStringExtra(cordsConsts[i]);
             }
+        if(getIntent()!=null) {
+            getParameters(getIntent());
+        }
         currentFile = new Utils().getCurrentFile(getIntent());
 
         if (imageView == null)
@@ -116,9 +121,13 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         testIfValidBitmap();
 
+
+
         if (currentFile != null) {
             new Utils().loadImageInImageView(this);
         }
+
+
     }
 
     @Override

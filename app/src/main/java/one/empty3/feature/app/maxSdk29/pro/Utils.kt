@@ -36,6 +36,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
@@ -46,7 +47,7 @@ import java.util.*
 import kotlin.math.max
 
 
-public class Utils() {
+@ExperimentalCamera2Interop public class Utils() {
     private val maxRes: Int = 200
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -165,21 +166,20 @@ public class Utils() {
 
     public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
         var maxRes: Int = 0;
-        maxRes = activity?.intent?.getIntExtra("maxRes", activity.maxRes)!!;
-        if (savedInstanceState == null ||
-            !savedInstanceState.containsKey("maxRes") ||
-            savedInstanceState.getInt("maxRes") != -1
-        ) {
-           return getMaxRes(activity);
-        } else {
-            maxRes = savedInstanceState.getInt("maxRes")
+        maxRes = activity.intent.getIntExtra("maxRes", -1)
+        if(maxRes==-1) {
+            if (savedInstanceState == null ||
+                !savedInstanceState.containsKey("maxRes") ||
+                savedInstanceState.getInt("maxRes") != -1
+            ) {
+                return getMaxRes(activity);
+            } else {
+                maxRes = savedInstanceState.getInt("maxRes")
 
+            }
         }
-        if(maxRes>=0) {
-            return maxRes;
+        return maxRes;
         }
-        return ActivitySuperClass.MAXRES_DEFAULT
-    }
 
     public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
@@ -374,24 +374,24 @@ public class Utils() {
 
     public fun getMaxRes(activity: ActivitySuperClass): Int {
         var maxRes: Int = 200
-        val maxResText: EditText? = activity.findViewById<EditText>(R.id.editMaximiumResolution)
-        if(maxResText!=null) {
-            val maxResStr = maxResText.text
-            if (maxResStr != null) {
-                try {
-                    maxRes = maxResStr.toString().toDouble().toInt()
-                    return maxRes;
-                } catch (_: java.lang.NumberFormatException) {
-
+        if(activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
+            val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
+            if (maxResText != null) {
+                val maxResStr = maxResText.text
+                if (maxResStr != null) {
+                    try {
+                        maxRes = maxResStr.toString().toDouble().toInt()
+                        return maxRes;
+                    } catch (_: java.lang.NumberFormatException) {
+                        maxRes = activity.maxRes
+                    } catch (_: NullPointerException) {
+                        maxRes = activity.maxRes
+                    }
                 }
             }
-            try {
-                maxRes = activity.maxRes
-            } catch (ex: RuntimeException) {
-                maxRes = ActivitySuperClass.MAXRES_DEFAULT
-            } catch (ex2: NullPointerException) {
-                maxRes = ActivitySuperClass.MAXRES_DEFAULT
-            }
+        }
+        if(maxRes<0) {
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
         }
         return maxRes
     }

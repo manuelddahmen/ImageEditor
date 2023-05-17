@@ -103,6 +103,12 @@ public abstract class Lumiere extends Representable {
         }
         return res;
     }
+    public static double[] getDoubles(int c, double[] res) {
+        for (int i = 0; i < 3; i++) {
+            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))) / 255.;
+        }
+        return res;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static android.graphics.Color getColorD(double[] d) {
