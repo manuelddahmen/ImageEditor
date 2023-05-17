@@ -49,7 +49,7 @@ public class GradAddProcess extends ProcessFile {
 
             Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1]);
 
-            boolean b = linear.op2d2d(new char[]{'+'}, new int[][]{{0, 1, 2}}, new int[]{2});
+            boolean b = linear.op2d2d(new char[]{'+'}, new int[][]{{0}, {1}}, new int[]{2});
 
             PixM image = linear.getImages()[2];
 

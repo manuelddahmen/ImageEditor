@@ -183,7 +183,7 @@ import kotlin.collections.HashMap
                 }
                 var currentProcessInFile : File = currentFile
                 classnames.forEach { it1->
-                    if (it1.isBlank()) {
+                    if (it1==null || it1.isBlank()) {
                         return@setOnClickListener
                     }
                     val effectListStr: String = it1
