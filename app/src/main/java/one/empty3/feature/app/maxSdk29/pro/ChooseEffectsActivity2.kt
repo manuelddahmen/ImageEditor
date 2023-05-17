@@ -180,104 +180,22 @@ import kotlin.collections.HashMap
 
                     return@setOnClickListener;
                 }
+
+                var processFile: ProcessFile? = null
+
                 var currentProcessInFile : File = currentFile
                 classnames.forEach { it1->
                     if (it1==null || it1.isBlank()) {
-                        return@setOnClickListener
+                        return@forEach
                     }
                     val effectListStr: String = it1
                     val trim = it1.trim()
                     if (effectListStr.contains(trim)) {
-                        val processFile: ProcessFile =
-                            Class.forName(it1).newInstance() as ProcessFile
-                            currentProcessFile = currentProcessInFile
-                            currentOutputFile = File(nextFile(
-                                    currentProcessInFile.parentFile!!.absolutePath,
+                        processFile = Class.forName(it1).newInstance() as ProcessFile
+                        currentProcessFile = currentProcessInFile
+                        if(processFile!=null) {
+                        currentOutputFile = File(nextFile(currentProcessInFile.parentFile!!.absolutePath,
                                     "effect-" + UUID.randomUUID(), "jpg"))
-                            /*if (dir.equals("appDir")) {
-                                currentOutputFile = File(
-                                    nextFile(
-                                        dirRoot +
-                                                File.separator + it + index,
-                                        name.substring(0, name.lastIndexOf(".")),
-                                        "jpg"
-                                    )
-                                )
-                                currentOutputDir = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0,
-                                        currentOutputFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-                            } else {
-                                currentOutputFile = File(
-                                    currentProcessFile.absolutePath.substring(
-                                        0,
-                                        currentProcessFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-                                currentOutputFile = File(
-                                    currentProcessFile.absolutePath.substring(
-                                        0,
-                                        currentProcessFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-                                currentOutputFile = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0, currentProcessFile.absolutePath
-                                            .lastIndexOf(File.separator)
-                                    ) + File.separator + trim + index +"-"+ UUID.randomUUID()+
-                                            File.separator + name
-                                )
-                                currentOutputDir = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0,
-                                        currentOutputFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-                            }
-
-                        } else {
-                            if (dir.equals("appDir")) {
-                                currentOutputFile = File(
-                                    nextFile(
-                                        dirRoot, name.substring(0, name.lastIndexOf(".")),
-                                        ".jpg"
-                                    )
-                                )
-                                currentOutputDir = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0,
-                                        currentOutputFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-
-                            } else {
-                                currentOutputFile = File(
-                                    currentProcessFile
-                                        .absolutePath.substring(
-                                            0, currentProcessFile
-                                                .absolutePath.lastIndexOf('/')
-                                                    - 1
-                                        )
-                                )
-                                currentOutputFile = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0, currentOutputFile.absolutePath
-                                            .lastIndexOf(File.separator)
-                                    ) + File.separator + trim + index +
-                                            File.separator + name
-                                )
-                                currentOutputDir = File(
-                                    currentOutputFile.absolutePath.substring(
-                                        0,
-                                        currentOutputFile.absolutePath.lastIndexOf("/")
-                                    )
-                                )
-
-                            }
-
-                        }*/
                         currentOutputDir.mkdirs()
                         println("Effect class           : " + trim)
                         println("In picture             : " + currentProcessFile)
@@ -288,14 +206,14 @@ import kotlin.collections.HashMap
                             if (currentProcessFile.exists()
                                 && !currentOutputFile.exists()
                             ) {
-                                processFile.setMaxRes(Utils().getMaxRes(this, null))
-                                if (!processFile.process(
+                                processFile!!.setMaxRes(maxRes)
+                                if (!processFile!!.process(
                                         currentProcessFile,
                                         currentOutputFile
                                     )
                                 ) {
                                     println("Error processing file.")
-                                    println("Error in " + processFile.javaClass.name)
+                                    println("Error in " + processFile!!.javaClass.name)
                                     return@setOnClickListener
                                 }
                             } else {
@@ -317,21 +235,25 @@ import kotlin.collections.HashMap
                         }
                         currentProcessFile = currentOutputFile
                         currentProcessInFile = currentProcessFile
+                        }
+
                     }
                     index++
 
 
                 }
-                Toast.makeText(
-                    applicationContext,
-                    ("Applied effect:" + (currentProcessFile.absoluteFile ?: "No file processed ??")),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if(processFile!=null) {
+                    Toast.makeText(
+                        applicationContext,
+                        ("Applied effect:" + (processFile!!.javaClass.name)),
+                    Toast.LENGTH_LONG
+                    ).show()
 
-                currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
+                    currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
 
-                val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
-                passParameters(intent2)
+                    val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
+                    passParameters(intent2)
+                }
             }
         }
     }
