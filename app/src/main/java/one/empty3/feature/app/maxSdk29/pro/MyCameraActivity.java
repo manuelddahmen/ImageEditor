@@ -196,7 +196,7 @@ import one.empty3.feature20220726.PixM;
                     int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     Bitmap bitmap = dest.getBitmap();
-                    currentBitmap = currentFile = new Utils().writePhoto(this, bitmap, "copy_paste");
+                    currentFile = new Utils().writePhoto(this, bitmap, "copy_paste");
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
@@ -648,8 +648,6 @@ import one.empty3.feature20220726.PixM;
 
                         new Utils().setImageView(imageView, imageViewBitmap);
                         currentFile = imageFile;
-                        currentBitmap = imageFile;
-
                         System.err.println("Image reloaded");
 
                         currentFile = new Utils().createCurrentUniqueFile(this);

@@ -113,6 +113,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
 
+
         testIfValidBitmap();
 
         if (currentFile != null) {
