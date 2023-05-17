@@ -59,7 +59,6 @@ public class Hist4Contour2 extends ProcessFile {
         }
     }
 
-    //private final int[][][] levels;
 
 
     public void makeHistogram(double r) {
@@ -109,6 +108,9 @@ public class Hist4Contour2 extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+        kMax = 3;
+        fractMax = 0.05;
+
         PixM inP;
         inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
 
@@ -150,16 +152,10 @@ public class Hist4Contour2 extends ProcessFile {
                 }
             }
         }
-        try {
-            //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
-            ImageIO.write(outP.getImage(), "jpg", out);
-            //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
 
-        return false;
+        //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
+        return ImageIO.write(outP.getImage().getBitmap(), "jpg", out);
 
     }
 

@@ -93,7 +93,7 @@ import kotlin.math.max
         var fileWritten: File? = null;
 
         //Folder is already created
-        var name2 = "photo-" + UUID.randomUUID().toString()
+        var name2 = name + UUID.randomUUID().toString()
         var dirName1 = activity.applicationContext.getFilesDir().absolutePath
         var dirName2 = this.appDir
 
@@ -424,7 +424,7 @@ import kotlin.math.max
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
                 val myPhotoV2022: File? =
-                    this.writePhoto(activity, photo, "MyPhotoV2022" + UUID.randomUUID())
+                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
                 System.err.println("Written copy : " + myPhotoV2022!!.absolutePath)
                 System.err.println("Set in ImageView : " + myPhotoV2022.absolutePath)
 
