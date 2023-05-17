@@ -20,7 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.app.Activity
+//import com.nostra13.universalimageloader.core.ImageLoader
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -37,14 +37,13 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.net.toFile
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
-//import com.nostra13.universalimageloader.core.ImageLoader
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.PixM
 import java.io.*
 import java.util.*
+import kotlin.math.max
 
 
 public class Utils() {
@@ -55,32 +54,32 @@ public class Utils() {
     private val INT_WRITE_STORAGE: Int = 8728932
     //var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
-/*
-    fun getSavedApplicationData(activity: EmptyActivity) {
-        //val file = File(appDir + "/config.txt")
-        val bundle = Parcel.obtain()
-        var i = 0
-        for (cord in cords) {
-            val any = bundle.getObject(cord)
-            if (any is String) {
-                val str = any as String
-                cordsValues[i] = str
+    /*
+        fun getSavedApplicationData(activity: EmptyActivity) {
+            //val file = File(appDir + "/config.txt")
+            val bundle = Parcel.obtain()
+            var i = 0
+            for (cord in cords) {
+                val any = bundle.getObject(cord)
+                if (any is String) {
+                    val str = any as String
+                    cordsValues[i] = str
+                }
+                i = i + 1
             }
-            i = i + 1
         }
-    }
 
-    fun saveApplicationData(activity: Activity, cords: StringArray) {
-        //val file = File(appDir + "/config.txt")
-        val bundle = ResourceBundle.getBundle("config")
-        var i = 0
-        for (cord in cords) {
-            //if (cord != null)
-            //    bundle.keySet().add(cord, cords[i])
-            //i = i + 1
+        fun saveApplicationData(activity: Activity, cords: StringArray) {
+            //val file = File(appDir + "/config.txt")
+            val bundle = ResourceBundle.getBundle("config")
+            var i = 0
+            for (cord in cords) {
+                //if (cord != null)
+                //    bundle.keySet().add(cord, cords[i])
+                //i = i + 1
+            }
         }
-    }
-*/
+    */
     /***
      * Write copy of original file in data folder
      * @param bitmap
@@ -169,16 +168,17 @@ public class Utils() {
         maxRes = activity?.intent?.getIntExtra("maxRes", activity.maxRes)!!;
         if (savedInstanceState == null ||
             !savedInstanceState.containsKey("maxRes") ||
-            savedInstanceState.getInt("maxRes") !=-1
+            savedInstanceState.getInt("maxRes") != -1
         ) {
-            maxRes = activity.maxRes;
+           return getMaxRes(activity);
         } else {
             maxRes = savedInstanceState.getInt("maxRes")
 
         }
-        if(maxRes==0)
-            return activity.maxRes
-        return maxRes
+        if(maxRes>=0) {
+            return maxRes;
+        }
+        return ActivitySuperClass.MAXRES_DEFAULT
     }
 
     public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
@@ -260,45 +260,50 @@ public class Utils() {
     }
 
     fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
-        if(activity.currentFile==null) {
+        if (activity.currentFile == null) {
             activity.currentFile = activity.getImageViewPersistantFile()
         }
 
-        var imageView : ImageViewSelection? = activity.imageView
-        if(imageView==null) {
+        var imageView: ImageViewSelection? = activity.imageView
+        if (imageView == null) {
             activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
             imageView = activity.imageView
         }
-        if (activity.currentFile!=null && activity.currentFile.exists()) {
+        if (activity.currentFile != null && activity.currentFile.exists()) {
             try {
                 val fileInputStream = FileInputStream(activity.currentFile) ?: return false
                 var mBitmap: Bitmap
-                    try {
-                        mBitmap =
-                            BitmapFactory.decodeStream(fileInputStream) ?: return false
-                    } catch (ex:OutOfMemoryError) {
-                        Toast.makeText(activity.applicationContext, "No memory, will try smaller image", Toast.LENGTH_LONG).show()
-                        ex.printStackTrace()
-                        val options = Options()
-                        options.outHeight = maxRes
-                        options.outWidth = maxRes
+                try {
+                    mBitmap =
+                        BitmapFactory.decodeStream(fileInputStream) ?: return false
+                } catch (ex: OutOfMemoryError) {
+                    Toast.makeText(activity.applicationContext, "No memory, will try smaller image", Toast.LENGTH_LONG)
+                        .show()
+                    ex.printStackTrace()
+                    val options = Options()
+                    options.outHeight = maxRes
+                    options.outWidth = maxRes
 
-                        mBitmap = BitmapFactory.decodeFile(activity.currentFile.absolutePath, options)
-                    }
+                    mBitmap = BitmapFactory.decodeFile(activity.currentFile.absolutePath, options)
+                }
 
                 val maxRes = getMaxRes(activity)
 
-                val cb:Bitmap
-                if(maxRes>0)
-                    cb = Bitmap.createBitmap(mBitmap, 0, 0,
-                        mBitmap.width, mBitmap.height)
+                val cb: Bitmap
+                if (maxRes > 0)
+                    cb = Bitmap.createBitmap(
+                        mBitmap, 0, 0,
+                        mBitmap.width, mBitmap.height
+                    )
                 else
-                    cb = Bitmap.createBitmap(mBitmap, 0, 0,
-                            (getImageRatio(mBitmap)*this.maxRes).toInt(),
-                            this.maxRes)
+                    cb = Bitmap.createBitmap(
+                        mBitmap, 0, 0,
+                        (getImageRatio(mBitmap) * this.maxRes).toInt(),
+                        this.maxRes
+                    )
 
-                val dim : Int= getMaxRes(activity)
-                if(imageView!=null)
+                val dim: Int = getMaxRes(activity)
+                if (imageView != null)
                     Utils().setImageView(imageView, cb)
                 return true
             } catch (e: FileNotFoundException) {
@@ -325,7 +330,7 @@ public class Utils() {
                 ).copy(Bitmap.Config.RGB_565, true) // Single color bitmap will be created of 1x1 pixel
             }
         }
-        if(bitmap==null)
+        if (bitmap == null)
             return;
         val canvas = Canvas(bitmap)
         drawable.setBounds(
@@ -367,23 +372,25 @@ public class Utils() {
         )
     }
 
-    private fun getMaxRes(activity: ActivitySuperClass): Int {
+    public fun getMaxRes(activity: ActivitySuperClass): Int {
+        var maxRes: Int = 200
         val maxResText: EditText? = activity.findViewById<EditText>(R.id.editMaximiumResolution)
-        val maxResStr = maxResText?.text
-        var maxRes:Int = 200
-        try {
-            maxRes = activity.maxRes
-        } catch (ex:RuntimeException) {
-            maxRes = ActivitySuperClass.MAXRES_DEFAULT
-        }catch (ex2 : NullPointerException) {
-            maxRes = ActivitySuperClass.MAXRES_DEFAULT
-        }
+        if(maxResText!=null) {
+            val maxResStr = maxResText.text
+            if (maxResStr != null) {
+                try {
+                    maxRes = maxResStr.toString().toDouble().toInt()
+                    return maxRes;
+                } catch (_: java.lang.NumberFormatException) {
 
-        if(maxResStr!=null) {
+                }
+            }
             try {
-                maxRes = maxResStr.toString().toDouble().toInt()
-            } catch (_: java.lang.NumberFormatException) {
-
+                maxRes = activity.maxRes
+            } catch (ex: RuntimeException) {
+                maxRes = ActivitySuperClass.MAXRES_DEFAULT
+            } catch (ex2: NullPointerException) {
+                maxRes = ActivitySuperClass.MAXRES_DEFAULT
             }
         }
         return maxRes

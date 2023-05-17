@@ -181,6 +181,7 @@ import kotlin.collections.HashMap
 
                     return@setOnClickListener;
                 }
+                var currentProcessInFile : File = currentFile
                 classnames.forEach { it1->
                     if (it1.isBlank()) {
                         return@setOnClickListener
@@ -188,11 +189,13 @@ import kotlin.collections.HashMap
                     val effectListStr: String = it1
                     val trim = it1.trim()
                     if (effectListStr.contains(trim)) {
-                        val indexOf: Int = effectListStr.indexOf(trim)
                         val processFile: ProcessFile =
                             Class.forName(it1).newInstance() as ProcessFile
-                        if (index == -1) {
-                            if (dir.equals("appDir")) {
+                            currentProcessFile = currentProcessInFile
+                            currentOutputFile = File(nextFile(
+                                    currentProcessInFile.parentFile!!.absolutePath,
+                                    "effect-" + UUID.randomUUID(), "jpg"))
+                            /*if (dir.equals("appDir")) {
                                 currentOutputFile = File(
                                     nextFile(
                                         dirRoot +
@@ -275,7 +278,7 @@ import kotlin.collections.HashMap
 
                             }
 
-                        }
+                        }*/
                         currentOutputDir.mkdirs()
                         println("Effect class           : " + trim)
                         println("In picture             : " + currentProcessFile)
@@ -314,21 +317,22 @@ import kotlin.collections.HashMap
                             return@setOnClickListener
                         }
                         currentProcessFile = currentOutputFile
+                        currentProcessInFile = currentProcessFile
                     }
                     index++
 
-                    Toast.makeText(
-                        applicationContext,
-                        ("Applied effect:" + (currentProcessFile.absoluteFile ?: "No file processed ??")),
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
-
-                    val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
-                    passParameters(intent2)
 
                 }
+                Toast.makeText(
+                    applicationContext,
+                    ("Applied effect:" + (currentProcessFile.absoluteFile ?: "No file processed ??")),
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
+
+                val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
+                passParameters(intent2)
             }
         }
     }

@@ -32,6 +32,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import one.empty3.feature20220726.PixM;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,6 +46,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
     private static final int ONSAVE_INSTANCE_STATE = 21516;
     private static final int ONRESTORE_INSTANCE_STATE = 51521;
+    public static final int MAXRES_DEFAULT = 200;
     public String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
     public final String filenameSaveState = "state.properties";
     public final String imageViewFilename = "imageView.jpg";
@@ -231,12 +233,11 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     public void passParameters(Intent to) {
 
-
-        if(currentFile!=null)
+        if (currentFile != null)
             to.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-
+        to.putExtra("maxRes", getMaxRes());
         new Utils().putExtra(to, cords, currentCord);
-        if(currentFile!=null)
+        if (currentFile != null)
             new Utils().addCurrentFileToIntent(to, this, currentFile);
 
         startActivity(to);
@@ -269,12 +270,12 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         try {
             currentBitmap = null;
-            if(imageView==null)
+            if (imageView == null)
                 imageView = findViewById(R.id.imageViewSelection);
-            if(currentFile!=null)
+            if (currentFile != null)
                 currentBitmap = BitmapFactory.decodeStream(
                         new FileInputStream(currentFile));
-            if(imageView!=null && currentBitmap !=null)
+            if (imageView != null && currentBitmap != null)
                 new Utils().setImageView(imageView, currentBitmap);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
@@ -285,9 +286,44 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public int getMaxRes() {
-        return maxRes;
+        return new Utils().getMaxRes(this);
     }
+
     public void setMaxRes(int maxRes) {
         this.maxRes = maxRes;
+    }
+
+
+    public Bitmap loadImage(InputStream choose_directoryData, boolean isCurrentFile) {
+        Bitmap photo = null;
+        if (maxRes > 0) {
+            System.err.println("FileInputStream" + choose_directoryData);
+            photo = BitmapFactory.decodeStream(choose_directoryData);
+            photo = PixM.getPixM(photo, maxRes).getImage().getBitmap();
+            System.err.println("Get file (bitmap) : " + photo);
+        } else {
+            System.err.println("FileInputStream" + choose_directoryData);
+            photo = BitmapFactory.decodeStream(choose_directoryData);
+            System.err.println("Get file (bitmap) : " + photo);
+        }
+        if (photo != null && isCurrentFile) {
+            currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
+            new Utils().setImageView(this, imageView);
+            return photo;
+        } else if(photo!=null) {
+            return photo;
+        }else {
+            System.err.println("file == null. Error.");
+            throw new NullPointerException("File==null ActivitySuperClass, loadImage");
+        }
+
+    }
+
+    public Bitmap loadImage(Bitmap photo, File choose_directoryData, boolean isCurrentFile) {
+        try {
+            return loadImage(new FileInputStream(choose_directoryData), isCurrentFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

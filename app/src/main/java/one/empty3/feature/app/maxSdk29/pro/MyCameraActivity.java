@@ -102,7 +102,6 @@ import one.empty3.feature20220726.PixM;
     private static final int FILESYSTEM_WRITE_PICTURE = 1111;
     private static final int MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777;
     private File currentDir;
-    private File currentBitmap;
     private File currentFileOriginalResolution;
 
     private File currentFileZoomed;
@@ -132,7 +131,6 @@ import one.empty3.feature20220726.PixM;
 
         loaded = true;
 
-        currentBitmap = currentFile;
 
         thisActivity = this;
 
@@ -163,31 +161,9 @@ import one.empty3.feature20220726.PixM;
             public void onClick(View v) {
                 if (currentFile != null) {
                     imageView = findViewById(R.id.currentImageView);
-                    Intent intent = new Intent(Intent.ACTION_EDIT);
-                    System.err.println("Click on Effect button");
-                    if (currentFile != null || currentBitmap != null) {
-                        if (currentFile == null) currentFile = currentBitmap.getAbsoluteFile();
-                        try {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                currentFile = currentBitmap = new Utils().writePhoto(thisActivity,
-                                        BitmapFactory.decodeStream(new FileInputStream(currentFile)),
-                                        "EffectOn");
-                            }
-                            intent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-                            intent.setClass(imageView.getContext(), ChooseEffectsActivity2.class);
-                            intent.putExtra("data", currentFile);
-                            View viewById = findViewById(R.id.editMaximiumResolution);
-                            intent.putExtra("maxRes", (int) Double.parseDouble(((TextView) viewById).getText().toString()));
-                            System.err.println("Start activity : EffectChoose");
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        startActivity(intent);
-                    } else {
-                        System.err.println("No file assigned");
-                        System.err.println("Can't Start activity : EffectChoose");
-                    }
-                } else toastButtonDisabled(v);
+                    Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
+                    passParameters(intent1);
+                }
             }
         });
         View fromFiles = findViewById(R.id.choosePhotoButton);
@@ -962,17 +938,7 @@ import one.empty3.feature20220726.PixM;
             }
 
 
-            Bitmap photo = null;
-            System.err.println("FileInputStream" + choose_directoryData);
-            photo = BitmapFactory.decodeStream(choose_directoryData);
-            System.err.println("Get file (bitmap) : " + photo);
-
-            if (photo != null) {
-                currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
-                new Utils().setImageView(this, imageView);
-            } else {
-                System.err.println("currentFile == null. Error.");
-            }
+            loadImage(choose_directoryData, true);
 
         } else if (requestCode == 10000 && resultCode == Activity.RESULT_OK) {
 
