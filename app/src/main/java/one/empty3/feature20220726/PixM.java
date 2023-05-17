@@ -57,7 +57,7 @@ public class PixM extends MBitmap {
                 Lumiere.getDoubles(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
-                    set(i, j, (byte)(colorComponents[com]*255));
+                    set(i, j, (char)(colorComponents[com]*255));
                 }
             }
         }
@@ -73,7 +73,7 @@ public class PixM extends MBitmap {
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     assert colorComponents != null;
-                    set(i, j, (byte)(colorComponents[com]*255));
+                    set(i, j, (char)(colorComponents[com]*255));
                 }
             }
         }

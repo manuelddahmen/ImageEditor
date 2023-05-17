@@ -36,20 +36,20 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     protected int columns;
     protected int lines;
     protected int compNo;
-    byte[] x;
+    char[] x;
 
     public MBitmap(int c, int l) {
         try {
-            x = new byte[c * l * 3];
+            x = new char[c * l * 3];
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
             l = (int) (1.0 * maxRes / c * l);
             try {
-                x = new byte[l * c * 3];
+                x = new char[l * c * 3];
             } catch (OutOfMemoryError err) {
                 err.printStackTrace();
-                x = new byte[100 * 100];
+                x = new char[100 * 100];
                 l = 100;
                 c = 100;
                 Log.e(MBitmap.class.toString(), err.getMessage(), err);
@@ -63,13 +63,13 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         int l = maxRes;
         int c = maxRes;
         try {
-            x = new byte[bitmap.getWidth() * bitmap.getHeight() * 3];
+            x = new char[bitmap.getWidth() * bitmap.getHeight() * 3];
             l = bitmap.getHeight();
             c = bitmap.getWidth();
         } catch (OutOfMemoryError ex) {
             c = maxRes;
             l = (int) (maxRes * bitmap.getHeight() / bitmap.getWidth());
-            x = new byte[l * c * 3];
+            x = new char[l * c * 3];
         }
         this.lines = l;
         this.columns = c;
@@ -98,7 +98,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         this(pix.getLines(), pix.getColumns());
         this.lines = pix.getLines();
         this.columns = pix.getColumns();
-        x = new byte[lines * columns * 3];
+        x = new char[lines * columns * 3];
 
         for (int i = 0; i < pix.getColumns(); i++) {
             for (int j = 0; j < pix.getLines(); j++) {
@@ -237,7 +237,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public void init(int l, int c) {
         this.lines = l;
         this.columns = c;
-        x = new byte[l * c * compCount];
+        x = new char[l * c * compCount];
     }
 
     public double get(int column, int line) {
@@ -292,7 +292,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 //                bitmap.setPixel(column, line, p);
 //                return;
 //            }
-            x[index(column, line)] = (byte) (d*255);
+            x[index(column, line)] = (char) (d*255);
         }
 
     }
