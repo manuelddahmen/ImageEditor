@@ -27,6 +27,7 @@ import one.empty3.library.Point3D;
 
 import java.util.PrimitiveIterator;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
@@ -211,27 +212,24 @@ public class MBitmap /*implements InterfaceMatrix*/ {
             set(i, j, p.get(d));
         }
     }
-
     public Point3D getP(int i, int j) {
         Point3D p = new Point3D();
 
-        for (int d = 0; d < 3; d++) {
+        IntStream.range(0, 3).filter(d -> i >= 0 && i < getColumns() && j >= 0 && j < getLines()).forEach(d -> {
             setCompNo(d);
-            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
-                p.set(d, get(i, j));
-            }
-        }
+            p.set(d, get(i, j));
+        });
         return p;
     }
 
     public void setValues(int i, int j, double... v) {
 
-        for (int d = 0; d < v.length; d++) {
+        IntStream.range(0, v.length).forEach(d -> {
             setCompNo(d);
             if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
                 set(i, j, v[d]);
             }
-        }
+        });
     }
 
     public void init(int l, int c) {
@@ -246,7 +244,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
             //    return Lumiere.getDoubles(bitmap.getPixel(column, line))[compNo];
             //}
 
-            return ((x[index(column, line)])/256.0);
+            return ((x[index(column, line)])/255.0);
         } else
             return noValue; // OutOfBound?
     }

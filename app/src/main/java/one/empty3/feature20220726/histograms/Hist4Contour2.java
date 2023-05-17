@@ -28,6 +28,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Hist4Contour2 extends ProcessFile {
 
@@ -108,15 +109,15 @@ public class Hist4Contour2 extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        if (!isImage(in)) {
-            return false;
-        }
         PixM inP;
-        inP = PixM.getPixM(ImageIO.read(in), maxRes);
+        inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+
+
 
 
         double max = 0.0;
         PixM outP = new PixM(inP.getColumns(), inP.getLines());
+        PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0.mult(1);
@@ -132,7 +133,7 @@ public class Hist4Contour2 extends ProcessFile {
                     }
                 }
                 Point3D n = outP.getP(i, j);
-                if (!n.equals(Point3D.O0)) {
+                if(!n.equals(Point3D.O0)) {
                     for (int l = 0; l < 3; l++) {
                         if (maxP.get(l) < n.get(l)) {
                             maxP.set(l, n.get(l));
@@ -149,8 +150,6 @@ public class Hist4Contour2 extends ProcessFile {
                 }
             }
         }
-        // Colorier en fonction des pixels voisins
-        //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
             ImageIO.write(outP.getImage(), "jpg", out);

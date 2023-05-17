@@ -151,8 +151,8 @@ public class PixM extends MBitmap {
 
 
                             , (int) (1.0 * j / lines2 * image.getHeight()));
-                    float[] colorComponents = new float[4];
-                    colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
+                    double[] colorComponents = new double[4];
+                    Lumiere.getDoubles(rgb, colorComponents);
                     for (int com = 0; com < pixM.getCompCount(); com++) {
                         pixM.setCompNo(com);
                         pixM.set(i, j, colorComponents[com]);
