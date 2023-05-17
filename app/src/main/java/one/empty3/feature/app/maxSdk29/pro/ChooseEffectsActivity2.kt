@@ -55,7 +55,7 @@ import kotlin.collections.HashMap
 
         setContentView(R.layout.recycler_view_effect_activity)
 
-        var maxRes = Utils().getMaxRes(this, savedInstanceState)
+        maxRes = Utils().getMaxRes(this, savedInstanceState)
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
@@ -64,7 +64,6 @@ import kotlin.collections.HashMap
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
         effectApply = findViewById(R.id.applyEffects)
-        maxRes = intent.extras?.get("maxRes") as Int
         init(savedInstanceState)
     }
 

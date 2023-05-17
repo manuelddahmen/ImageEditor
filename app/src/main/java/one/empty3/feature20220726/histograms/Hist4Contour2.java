@@ -110,7 +110,9 @@ public class Hist4Contour2 extends ProcessFile {
     public boolean process(File in, File out) {
         kMax = 3;
         fractMax = 0.05;
-
+        if (!isImage(in)) {
+            return false;
+        }
         PixM inP;
         inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
 
