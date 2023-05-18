@@ -800,6 +800,9 @@ import one.empty3.feature20220726.PixM;
      */
     public File writePhoto(@NonNull Bitmap bitmap, String name) {
 
+
+        boolean shouldOverwrite = true;
+        
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
