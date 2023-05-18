@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+import androidx.databinding.adapters.ToolbarBindingAdapter;
 import one.empty3.feature20220726.PixM;
 
 import java.io.File;
@@ -124,12 +125,6 @@ import java.util.Properties;
 
         testIfValidBitmap();
 
-        if(currentFile==null) {
-            restoreInstanceState();
-        }
-        if (currentFile != null) {
-            new Utils().loadImageInImageView(this);
-        }
 
 
     }
@@ -207,8 +202,6 @@ import java.util.Properties;
             }
             try {
                 FileInputStream fileInputStream = new FileInputStream(currentFile);
-                if (fileInputStream == null)
-                    currentFile = null;
                 if (BitmapFactory.decodeStream(fileInputStream)
                         == null)
                     currentFile = null;
@@ -224,7 +217,7 @@ import java.util.Properties;
     }
 
     protected void saveInstanceState() {
-        //new Utils().saveImageState(this);
+        new Utils().saveImageState(this);
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
@@ -287,7 +280,7 @@ import java.util.Properties;
     }
 
     protected File getFilesFile(String s) {
-        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + File.separator + s);
+        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files" + File.separator + s);
     }
 
     @org.jetbrains.annotations.Nullable
@@ -302,22 +295,16 @@ import java.util.Properties;
 
 
     void drawIfBitmap() {
-
+        restoreInstanceState();
         try {
             currentBitmap = null;
             if (imageView == null)
                 imageView = findViewById(R.id.imageViewSelection);
-            if (currentFile != null)
-                currentBitmap = BitmapFactory.decodeStream(
-                        new FileInputStream(currentFile));
-            if (imageView != null && currentBitmap != null)
-                new Utils().setImageView(imageView, currentBitmap);
+            if (imageView != null && currentFile!=null)
+                new Utils().setImageView(this, imageView);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
-        saveInstanceState();
     }
 
     public int getMaxRes() {

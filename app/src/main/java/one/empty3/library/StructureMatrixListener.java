@@ -42,4 +42,6 @@ package one.empty3.library;
  */
 public abstract class StructureMatrixListener {
     public abstract void actionOnChange();
+
+    public abstract void actionOnChange(Object oldValue, Object newValue, int dim, int posI, int posJ);
 }
