@@ -423,7 +423,7 @@ import one.empty3.feature20220726.PixM;
             intent2.setClass(getApplicationContext(), MyCameraActivity.class);
             passParameters(intent2);
         });
-        drawIfBitmap();
+
 //        Button crashButton = new Button(this);
 //        crashButton.setText("Test Crash");
 //        crashButton.setOnClickListener(new View.OnClickListener() {
@@ -457,6 +457,7 @@ import one.empty3.feature20220726.PixM;
                 }
             }
         });
+        drawIfBitmap();
     }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {

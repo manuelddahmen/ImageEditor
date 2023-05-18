@@ -317,7 +317,7 @@ import java.util.Properties;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
+        saveInstanceState();
     }
 
     public int getMaxRes() {
