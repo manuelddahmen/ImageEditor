@@ -355,7 +355,7 @@ public class Lines4 extends ProcessFile {
 
         });
 
-        Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.RGB_565);
+        Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.ARGB_8888);
             /*Graphics g = bLines.getGraphics();
             for (LineSegment line : lines) {
                 g.setColor(Color.RED);

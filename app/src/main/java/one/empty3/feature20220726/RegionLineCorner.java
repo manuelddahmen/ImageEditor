@@ -25,15 +25,12 @@ import android.graphics.Color;
 import one.empty3.io.ProcessFile;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.*;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import one.empty3.library.core.lighting.Colors;
 
@@ -335,7 +332,7 @@ public class RegionLineCorner extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level" + finalI + "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();
-                ImageIO.write(img4, "JPEG", out);
+                ImageIO.write(img4, "JPEG", out, shouldOverwrite);
                 /*
                 ImageIO.write(img, "JPEG", fileToWrite);
                 ImageIO.write(img, "JPEG", fileToWrite2);

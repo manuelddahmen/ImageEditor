@@ -288,7 +288,7 @@ public class Lines6 extends ProcessFile {
                         stack, new ColorTexture(android.graphics.Color.WHITE));
             });
 
-            ImageIO.write(stack.getImage(), "jpg", out);
+            ImageIO.write(stack.getImage(), "jpg", out, shouldOverwrite);
 
             addSource(out);
 

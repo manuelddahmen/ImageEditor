@@ -281,7 +281,7 @@ public class Lines5 extends ProcessFile {
             );
             temp2.forEach(point3D -> System.out.printf("POINT LIST TEMP2 %s", point3D));
 
-            ImageIO.write(bLines, "jpg", out);
+            ImageIO.write(bLines, "jpg", out, shouldOverwrite);
             return true;
         } catch (
                 IOException e) {

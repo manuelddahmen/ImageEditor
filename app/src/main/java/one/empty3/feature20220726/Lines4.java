@@ -369,7 +369,7 @@ public class Lines4 extends ProcessFile {
                     }
                 }
             }
-            ImageIO.write(o.getImage(), "jpg", out);
+            ImageIO.write(o.getImage(), "jpg", out, shouldOverwrite);
 
             return true;
         } catch (

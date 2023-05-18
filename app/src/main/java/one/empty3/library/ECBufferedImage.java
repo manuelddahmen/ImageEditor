@@ -76,11 +76,11 @@ public class ECBufferedImage {
     public ECBufferedImage(Bitmap read) {
         bitmap = Bitmap.createBitmap(read.getWidth(),
                 read.getHeight(),
-                Bitmap.Config.RGB_565);
+                Bitmap.Config.ARGB_8888);
     }
 
     public ECBufferedImage(int width, int height, int imageType) {
-        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
 
 

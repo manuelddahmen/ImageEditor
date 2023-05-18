@@ -85,7 +85,7 @@ public class ClassificationAvgColors extends ProcessFile {
 
 
         try {
-            return ImageIO.write(toProcess.getImage(), "jpg", out);
+            return ImageIO.write(toProcess.getImage(), "jpg", out, shouldOverwrite);
         } catch (IOException e) {
             e.printStackTrace();
             return false;

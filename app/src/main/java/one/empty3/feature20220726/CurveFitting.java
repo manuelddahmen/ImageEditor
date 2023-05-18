@@ -30,7 +30,6 @@ import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.*;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
@@ -351,11 +350,11 @@ public class CurveFitting extends ProcessFile {
 
             String absolutePath = out.getAbsolutePath();
             absolutePath = absolutePath.substring(0, absolutePath.length() - 4);
-            ImageIO.write(image, "jpg", new File(absolutePath + ".jpg"));
+            ImageIO.write(image, "jpg", new File(absolutePath + ".jpg"), shouldOverwrite);
             ImageIO.write(outPix.normalize(0.0, 1.0, 0., 1.).getImage(), "jpg", new File(
-                    absolutePath + "-outPixels.jpg"));
+                    absolutePath + "-outPixels.jpg"), shouldOverwrite);
             ImageIO.write(inPix.normalize(0.0, 1.0, 0., 1.).getImage(), "jpg", new File(
-                    absolutePath + "-inPixels.jpg"));
+                    absolutePath + "-inPixels.jpg"), shouldOverwrite);
 
             return true;
         } catch (IOException e) {

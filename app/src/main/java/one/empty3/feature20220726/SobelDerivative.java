@@ -20,7 +20,6 @@
 
 package one.empty3.feature20220726;
 
-import javaAnd.awt.Color;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 
@@ -90,7 +89,7 @@ public class SobelDerivative extends ProcessFile {
             }
         }
         try {
-            ImageIO.write(pOut.normalize(0, 1).getImage(), "jpg", out);
+            ImageIO.write(pOut.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         } catch (IOException e) {
             e.printStackTrace();
             return false;

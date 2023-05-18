@@ -32,6 +32,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import one.empty3.feature20220726.PixM;
 
 import java.io.File;
@@ -42,7 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ActivitySuperClass extends AppCompatActivity {
+@ExperimentalCamera2Interop public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
     private static final int ONSAVE_INSTANCE_STATE = 21516;
     private static final int ONRESTORE_INSTANCE_STATE = 51521;

@@ -26,14 +26,10 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.io.ProcessFile;
 
-import javaAnd.awt.*;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class ExtractIntensityInfo extends
@@ -136,7 +132,7 @@ public class ExtractIntensityInfo extends
 
         try {
             ImageIO.write(pix.getImage(),
-                    "JPEG", out);
+                    "JPEG", out, shouldOverwrite);
         } catch (Exception ex) {
         }
 

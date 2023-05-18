@@ -131,7 +131,7 @@ public class PasteBlank extends ProcessFile {
             BufferedImage read = ImageIO.read(in);
             PixM pixM = PixM.getPixM(read, maxRes);
             PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
-            ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out);
+            ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
             return true;
         } catch (IOException e) {
             e.printStackTrace();

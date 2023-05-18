@@ -229,7 +229,7 @@ public class PixM extends MBitmap {
 
     public Bitmap getBitmap() {
         Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.RGB_565);
+                lines, Bitmap.Config.ARGB_8888);
 
 
         float[] rgba = new float[getCompCount()];

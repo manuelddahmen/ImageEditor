@@ -24,7 +24,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Point3D;
-import one.empty3.library.core.lighting.Colors;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import javaAnd.awt.image.imageio.ImageIO;
@@ -410,13 +409,13 @@ public class Lines5colors extends ProcessFile {
 
                 }
             });
-            ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", new File(out.getAbsolutePath() + "-dotted.jpg"));
+            ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", new File(out.getAbsolutePath() + "-dotted.jpg"), shouldOverwrite);
             //ImageIO.write(bLines, "jpg",
             //        new File(out.getAbsolutePath() + "-blines.jpg"));
 //            ImageIO.write(linesImg2, "jpg",
 //                    new File(out.getAbsolutePath() + "-lines-yAxB.jpg"));
             ImageIO.write(img3.normalize(0.0, 1.0).getImage(), "jpg",
-                    new File(out.getAbsolutePath()));
+                    new File(out.getAbsolutePath()), shouldOverwrite);
             return true;
         } catch (
                 IOException e) {

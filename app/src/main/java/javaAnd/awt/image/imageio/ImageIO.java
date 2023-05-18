@@ -51,8 +51,8 @@ public class ImageIO {
         return new BufferedImage(BitmapFactory.decodeStream(fileInputStream));
     }
 
-    public static boolean write(BufferedImage imageOut, String jpg, File out) throws IOException {
-        if (!out.exists()) {
+    public static boolean write(BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {
+        if (!out.exists() || shouldOverwrite) {
             FileOutputStream fileOutputStream = new FileOutputStream(out);
             imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
             fileOutputStream.close();

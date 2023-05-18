@@ -183,8 +183,8 @@ public class Histogram2 extends ProcessFile {
 
 
         Bitmap img = file;
-        Bitmap img2 = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.RGB_565);
-        Bitmap img3 = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap img2 = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap img3 = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
 
 
         List<Circle> pointsOfInterest = getPointsOfInterest(4.0);

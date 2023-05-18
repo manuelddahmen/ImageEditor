@@ -174,7 +174,7 @@ public class Lines5 extends ProcessFile {
 
         }
         // d'après pcount x, y et curve xy supprimer les courbes en trop.
-        Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.RGB_565);
+        Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.ARGB_8888);
             /*Graphics g = bLines.getGraphics();
 
             g.setColor(Color.RED);

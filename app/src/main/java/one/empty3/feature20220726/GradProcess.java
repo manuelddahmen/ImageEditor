@@ -51,7 +51,7 @@ public class GradProcess extends ProcessFile {
 
             PixM image = linear.getImages()[2];
 
-            ImageIO.write(image.normalize(0.0, 1.0).getImage(), "jpg", out);
+            ImageIO.write(image.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
             addSource(out);
             return true;

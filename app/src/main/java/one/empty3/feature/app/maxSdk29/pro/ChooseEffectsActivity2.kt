@@ -120,8 +120,12 @@ import kotlin.collections.HashMap
             for (granted in grantResults)
                 if((granted == PackageManager.PERMISSION_GRANTED))
                     g = g + 1
-                unautorized = false;
-                initAuthorized();
+            if(g>=2) {
+                unautorized = false
+                initAuthorized()
+            } else {
+                unautorized = true
+            }
         }
     }
     private fun initAuthorized() {
@@ -204,7 +208,7 @@ import kotlin.collections.HashMap
                         println("Out picture directory  : " + currentOutputDir)
                         try {
                             if (currentProcessFile.exists()
-                                && !currentOutputFile.exists()
+                                // &&!currentOutputFile.exists()
                             ) {
                                 processFile!!.setMaxRes(maxRes)
                                 if (!processFile!!.process(
@@ -214,16 +218,26 @@ import kotlin.collections.HashMap
                                 ) {
                                     println("Error processing file.")
                                     println("Error in " + processFile!!.javaClass.name)
+                                    Toast.makeText(
+                                        applicationContext,
+                                        ("Error while applying filter" + (processFile!!.javaClass.name)),
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                     return@setOnClickListener
+                                } else {
+                                    currentFile = currentOutputFile
                                 }
                             } else {
-                                println(
+                                println("Success\n"+
                                     "File in doesn't exists, or File out exists\n" +
                                             "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists() +
                                             "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists() +
                                             "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists() +
-                                            "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists()
-                                )
+                                            "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists())
+                                Toast.makeText(applicationContext,
+                                    ("Source file doesn't exist" + (processFile!!.javaClass.name)),
+                                    Toast.LENGTH_LONG
+                                ).show()
                                 return@setOnClickListener
                             }
                         } catch (ex: Exception) {
@@ -249,7 +263,7 @@ import kotlin.collections.HashMap
                     Toast.LENGTH_LONG
                     ).show()
 
-                    currentFile = Utils().writePhoto(this, ImageIO.read(currentProcessFile).bitmap, "effect-");
+                    currentFile = Utils().writePhoto(this, ImageIO.read(currentFile).bitmap, "effect-");
 
                     val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(intent2)

@@ -81,7 +81,7 @@ public class Voronoi extends ProcessFile {
             }
 
 
-            ImageIO.write(pixMOut.getImage(), "jpg", out);
+            ImageIO.write(pixMOut.getImage(), "jpg", out, shouldOverwrite);
 
             return true;
 

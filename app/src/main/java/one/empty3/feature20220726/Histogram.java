@@ -28,8 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /*
  * radial density of region (x, y, r)
@@ -188,9 +186,9 @@ public class Histogram {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level" + finalI + "_NEW_RGB.jpg");
                 fileToWrite.mkdirs();
-                ImageIO.write(img, "JPEG", fileToWrite);
-                ImageIO.write(img, "JPEG", fileToWrite2);
-                ImageIO.write(img, "JPEG", fileToWrite3);
+                ImageIO.write(img, "JPEG", fileToWrite, shouldOverwrite);
+                ImageIO.write(img, "JPEG", fileToWrite2, shouldOverwrite);
+                ImageIO.write(img, "JPEG", fileToWrite3, shouldOverwrite);
 
             } catch (IOException exception) {
                 exception.printStackTrace();

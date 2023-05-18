@@ -67,7 +67,7 @@ public class HeightMapSurface extends ParametricSurface {
 
     public HeightMapSurface() {
         ImageContainer imageContainer = new ImageContainer();
-        imageContainer.getImage().setElem(Bitmap.createBitmap(1000, 1000, Bitmap.Config.RGB_565));
+        imageContainer.getImage().setElem(Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888));
         image.setElem(imageContainer);
 
         surface.setElem(new Plan3D());

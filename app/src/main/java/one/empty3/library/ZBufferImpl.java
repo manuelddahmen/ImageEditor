@@ -569,7 +569,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     public Bitmap image() {
 
-        Bitmap bi2 = Bitmap.createBitmap(la, ha, Bitmap.Config.RGB_565);
+        Bitmap bi2 = Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);

@@ -21,13 +21,10 @@
 package one.empty3.feature20220726.snakes;
 
 import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.snakes.DipSnake;
 import one.empty3.io.ProcessFile;
-import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +49,7 @@ public class SnakeFinderProcess extends ProcessFile {
 
             //image.fillIn(snake, new ColorTexture(Color.WHITE), new ColorTexture(Color.WHITE));
 
-            ImageIO.write(image.normalize(0, 1).getImage(), "jpg", out);
+            ImageIO.write(image.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
             return true;
         } catch (IOException e) {
             e.printStackTrace();

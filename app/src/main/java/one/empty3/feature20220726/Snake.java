@@ -138,7 +138,7 @@ public class Snake extends ProcessFile {
 
         try {
             ImageIO.write(pix3.normalize(0., 1.).getImage(),
-                    "jpg", out);
+                    "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

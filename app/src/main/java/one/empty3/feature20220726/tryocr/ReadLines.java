@@ -87,8 +87,8 @@ public class ReadLines extends ProcessFile {
                 pixOut1.setValues(i, j, sum, sum, sum);
             }
         try {
-            ImageIO.write(pixOut1.getImage(), "jpg", out2);
-            ImageIO.write(pixM2.getImage(), "jpg", out);
+            ImageIO.write(pixOut1.getImage(), "jpg", out2, shouldOverwrite);
+            ImageIO.write(pixM2.getImage(), "jpg", out, shouldOverwrite);
             return true;
         } catch (
                 IOException e) {

@@ -31,7 +31,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 
 import java.io.File;
-import java.util.*;
 
 import javaAnd.awt.image.imageio.ImageIO;
 
@@ -230,8 +229,8 @@ private int sizeElement = 20, elementSize=20;
 
                             }
             //ImageIO.write(pi.getImage(), "JPEG", out);
-            ImageIO.write(moutA.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "a" + "jpg"));
-            ImageIO.write(moutB.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "b" + "jpg"));
+            ImageIO.write(moutA.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "a" + "jpg"), shouldOverwrite);
+            ImageIO.write(moutB.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "b" + "jpg"), shouldOverwrite);
 
             //ImageIO.write(m2g, "JPEG", new File(out.getParent()+5+"jpg"));
             return true;

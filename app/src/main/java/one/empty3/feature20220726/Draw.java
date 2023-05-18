@@ -33,7 +33,7 @@ public class Draw extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            ImageIO.write(ImageIO.read(in), "jpg", out);
+            ImageIO.write(ImageIO.read(in), "jpg", out, shouldOverwrite);
 
         } catch (Exception ex) {
             ex.printStackTrace();

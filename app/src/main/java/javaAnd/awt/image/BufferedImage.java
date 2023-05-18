@@ -39,7 +39,7 @@ public class BufferedImage {
 
     public BufferedImage(int columns, int lines, int typeIntRgb) {
         this();
-        this.bitmap = Bitmap.createBitmap(columns, lines, Bitmap.Config.RGB_565);
+        this.bitmap = Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888);
     }
 
     public BufferedImage(Bitmap decodeStream) {

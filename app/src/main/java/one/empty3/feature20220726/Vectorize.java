@@ -133,7 +133,7 @@ public class Vectorize extends ProcessFile {
                         p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.));
                 }
             }
-            ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", out);
+            ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
             return true;
         } catch (
                 IOException e) {

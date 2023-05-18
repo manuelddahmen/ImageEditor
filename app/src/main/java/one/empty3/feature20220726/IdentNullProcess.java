@@ -35,7 +35,7 @@ public class IdentNullProcess extends ProcessFile {
         try {
             PixM pixM = null;
             pixM = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
-            ImageIO.write(pixM.getImage(), "jpg", out);
+            ImageIO.write(pixM.getImage(), "jpg", out, shouldOverwrite);
             addSource(out);
             return true;
         } catch (

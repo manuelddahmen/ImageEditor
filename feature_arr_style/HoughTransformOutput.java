@@ -20,7 +20,7 @@ public class HoughTransformOutput {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void writeImage(int[][] imgArray, File outFile) throws Exception {
-        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.RGB_565);
+        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
                 img.setPixel(i, j, Color.valueOf(255, 255, 255, imgArray[i][j]).toArgb());
@@ -30,7 +30,7 @@ public class HoughTransformOutput {
     }
 
     public static void writeImage(double[][] imgArray, File outFile) throws Exception {
-        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.RGB_565);
+        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
                 img.setPixel(i, j, (int) imgArray[i][j]);
@@ -44,7 +44,7 @@ public class HoughTransformOutput {
     }
 
     public static void writeImage(double[][] sobelArray, File outFile, int threshold) throws Exception {
-        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.RGB_565);
+        Bitmap img = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {
                 if (sobelArray[i][j] > threshold) {
@@ -103,7 +103,7 @@ public class HoughTransformOutput {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static Bitmap scaledSobelResult(double[][] sobelTotal) {
-        Bitmap total = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.RGB_565);
+        Bitmap total = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
         double max = 0;
         for (int i = 0; i < imgWidth; i++) {
             for (int j = 0; j < imgHeight; j++) {

@@ -150,7 +150,7 @@ public class Histogram3 extends ProcessFile {
         final double radiusIncr = 1;
 
 
-        Bitmap img2 = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap img2 = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
         List<Circle> pointsOfInterest;
         pointsOfInterest = getPointsOfInterest(m, radiusIncr, 0.5);
         // grands;cercles = grandes iles les separer

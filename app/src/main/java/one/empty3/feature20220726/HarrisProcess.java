@@ -36,7 +36,7 @@ public class HarrisProcess extends ProcessFile {
 
             m2.applyFilter(h);
 
-            ImageIO.write(m2.normalize(0.0, 1.0).getImage(), "JPEG", out);
+            ImageIO.write(m2.normalize(0.0, 1.0).getImage(), "JPEG", out, shouldOverwrite);
 
             return true;
         } catch (Exception ex) {

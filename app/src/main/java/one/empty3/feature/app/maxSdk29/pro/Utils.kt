@@ -48,7 +48,7 @@ import kotlin.math.max
 
 
 @ExperimentalCamera2Interop public class Utils() {
-    private val maxRes: Int = 200
+    private var maxRes: Int = 200
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -88,7 +88,7 @@ import kotlin.math.max
      * @return file
      */
     fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
-
+        maxRes = getMaxRes(activity)
         var written = false;
         var fileWritten: File? = null;
 
@@ -109,20 +109,29 @@ import kotlin.math.max
         if (!dir2.exists()) if (!dir2.mkdirs()) {
             System.err.println("Dir not created \$dir2" + file2.absolutePath)
         }
-        return writeFile(activity, bitmap, file1, file2)
+        return writeFile(activity, bitmap, file1, file2, maxRes, true)
     }
 
     public fun writeFile(
         activity: ActivitySuperClass,
         bitmap: Bitmap,
         file1: File,
-        file2: File
-    ): File? {
+        file2: File, maxImageSize : Int, shouldOverwrite : Boolean): File? {
         var written = false;
         var fileWritten: File? = null;
+        var bitmap2 : Bitmap
+        if(maxImageSize>0) {
+            var scaledBy: Int = max(bitmap.width, bitmap.height)
+            bitmap2 = Bitmap.createScaledBitmap(
+                bitmap,
+                (1.0 * maxImageSize / scaledBy).toInt(),
+                (1.0 * maxImageSize / scaledBy).toInt(),
+                true
+            )
+        } else bitmap2 = bitmap
         try {
             if (!file1.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap), "jpg", file1)) {
+                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file1, shouldOverwrite)) {
                     fileWritten = file1;
                     written = true
                     System.out.println("File written1: $file1")
@@ -140,7 +149,7 @@ import kotlin.math.max
         }
         try {
             if (!file2.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap), "jpg", file2)) {
+                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file2, shouldOverwrite)) {
                     written = true;
                     fileWritten = file2;
                     System.out.println("File written2: $file2")
@@ -320,14 +329,14 @@ import kotlin.math.max
         val drawable: Drawable = imageView.getDrawable()
         var bitmap: Bitmap? = null
         if (drawable is BitmapDrawable) {
-            bitmap = drawable.bitmap.copy(Bitmap.Config.RGB_565, true)
+            bitmap = drawable.bitmap.copy(Bitmap.Config.ARGB_8888, true)
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
                 bitmap = Bitmap.createBitmap(
                     activity.getMaxRes(),
                     activity.getMaxRes(),
-                    Bitmap.Config.RGB_565
-                ).copy(Bitmap.Config.RGB_565, true) // Single color bitmap will be created of 1x1 pixel
+                    Bitmap.Config.ARGB_8888
+                ).copy(Bitmap.Config.ARGB_8888, true) // Single color bitmap will be created of 1x1 pixel
             }
         }
         if (bitmap == null)
@@ -340,7 +349,7 @@ import kotlin.math.max
         drawable.draw(canvas)
         var bm: Bitmap? = null
         if (bitmap != null) {
-            bm = bitmap.copy(Bitmap.Config.RGB_565, true)
+            bm = bitmap.copy(Bitmap.Config.ARGB_8888, true)
             val baos = ByteArrayOutputStream()
             bm.compress(Bitmap.CompressFormat.JPEG, 90, baos) //bm is the bitmap object
             val b = baos.toByteArray()
@@ -399,13 +408,19 @@ import kotlin.math.max
     fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
         val imageFile = activity.getImageViewPersistantFile()
-        if (file && imageFile?.exists() == true) {
+        if (file && (imageFile != null) && imageFile.exists()) {
             try {
                 var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
                 if (bitmap != null) {
-                    activity.imageView =
-                        activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
-                    Utils().setImageView(activity.imageView, bitmap);
+                    try {
+                        activity.imageView =
+                            activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
+                    } catch (ex:NullPointerException ) {
+                        ex.printStackTrace()
+                    }
+                    if(activity.imageView!=null) {
+                        Utils().setImageView(activity.imageView, bitmap);
+                    }
                     activity.currentFile = imageFile
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")

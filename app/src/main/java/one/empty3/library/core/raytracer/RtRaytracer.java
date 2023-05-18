@@ -174,23 +174,23 @@ public class RtRaytracer {
         int tmpG;
         int tmpB;
         int tmpA = 0;
-        Bitmap bi2 = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Bitmap bi2 = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-        // On cree le fichier destination
+        // On crée le fichier destination
         mOutputFileRAW = new PrintWriter(new FileOutputStream(new File(outputfilename + ".ppm")));
         mOutputFileRAW.println("P3");
         mOutputFileRAW.println("# Image genereted with Empty3 http://gitlab/Graphics3D/Empty3");
         mOutputFileRAW.println("" + width);
         mOutputFileRAW.println("" + height);
         mOutputFileRAW.println("" + 256);
-        // On parcoure tous les pixels de l'image finale
+        // On parcourt tous les pixels de l'image finale
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++) {
-                // [---Creation du rayon ? emetrre---]
-                // L'origine du rayon est la position de la camera
+                // [---Creation du rayon ? émettre ---]
+                // L'origine du rayon est la position de la caméra
                 currentRay.mVStart = scene.getActiveCamera().getPosition();
 
-                // On calcule le veteur directeur gr?ce ? une m?thode de la classe RtCamera
+                // On calcule le vecteur directeur grâce à une méthode de la classe RtCamera
                 vDir = scene.getActiveCamera().calcDirVec(x, y, width, height);
                 Point3D vDirX1 = scene.getActiveCamera().calcDirVec(x + 1, y, width, height);
                 Point3D vDirX_1 = scene.getActiveCamera().calcDirVec(x - 1, y, width, height);

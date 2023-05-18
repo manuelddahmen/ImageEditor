@@ -48,7 +48,7 @@ public class WriteFile {
         try {
 
             no++;
-            ImageIO.write(imageJpeg, "jpg", n);
+            ImageIO.write(imageJpeg, "jpg", n, shouldOverwrite);
             Logger.getLogger(WriteFile.class.toString()).log(Level.INFO, "file written: " + n.getAbsolutePath());
 
         } catch (Exception ex) {

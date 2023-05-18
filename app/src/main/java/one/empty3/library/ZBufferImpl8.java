@@ -193,7 +193,7 @@ class Data {
     }
 
     public Bitmap getBitmap() {
-        Bitmap bi = Bitmap.createBitmap(la, ha, Bitmap.Config.RGB_565);
+        Bitmap bi = Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888);
 
         int[] c = new int[4];
         for (int j = 0; j < ha; j++)

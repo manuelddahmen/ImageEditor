@@ -89,7 +89,7 @@ public class HoughTransformCircle extends ProcessFile {
     //converts given file into a grayscale image
     private Bitmap toGrayScale(File f) throws Exception {
         Bitmap img = Objects.requireNonNull(ImageIO.read(f)).bitmap;
-        Bitmap grey = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.RGB_565);
+        Bitmap grey = Bitmap.createBitmap(img.getWidth(), img.getHeight(), Bitmap.Config.ARGB_8888);
         //grey.getGraphics().drawImage(img, 0, 0, null);
 
         return grey;

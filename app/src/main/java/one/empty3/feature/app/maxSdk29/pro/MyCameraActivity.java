@@ -43,6 +43,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -51,7 +53,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -434,6 +435,29 @@ import one.empty3.feature20220726.PixM;
 //        addContentView(crashButton, new ViewGroup.LayoutParams(
 //                ViewGroup.LayoutParams.MATCH_PARENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+        EditText maxResView = findViewById(R.id.editMaximiumResolution);
+        maxResView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    setMaxRes((int) Double.parseDouble(editable.toString()));
+                } catch (RuntimeException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
@@ -550,7 +574,7 @@ import one.empty3.feature20220726.PixM;
             bitmap = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565); // Single color bitmap will be created of 1x1 pixel
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
             } else {
                 // ???
                 if (isWorkingResolutionOriginal()) {
@@ -805,7 +829,7 @@ import one.empty3.feature20220726.PixM;
         }
         try {
             if (!file1.exists()) {
-                ImageIO.write(new BufferedImage(bitmap), "jpg", file1);
+                ImageIO.write(new BufferedImage(bitmap), "jpg", file1, shouldOverwrite);
                 System.err.print("Image written 1/2 " + file1 + " return");
                 saveImageState(isWorkingResolutionOriginal());
                 //System.err.println("File (photo) " + file1.getAbsolutePath());
@@ -816,7 +840,7 @@ import one.empty3.feature20220726.PixM;
         }
         try {
             if (!file2.exists()) {
-                ImageIO.write(new BufferedImage(bitmap), "jpg", file2);
+                ImageIO.write(new BufferedImage(bitmap), "jpg", file2, shouldOverwrite);
                 System.err.print("Image written 2/2 " + file2 + " return");
                 //System.err.println("File (photo) " + file2.getAbsolutePath());
                 saveImageState(isWorkingResolutionOriginal());

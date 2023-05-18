@@ -29,10 +29,6 @@ import one.empty3.io.ProcessFile;
 
 import javaAnd.awt.image.imageio.ImageIO;
 
-import one.empty3.feature20220726.*;
-
-import java.util.logging.*;
-
 public class ProxyValue extends ProcessFile {
 
     public boolean process(File in, File out) {
@@ -70,7 +66,7 @@ public class ProxyValue extends ProcessFile {
 
 
         try {
-            ImageIO.write(copy.getImage(), "jpg", out);
+            ImageIO.write(copy.getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

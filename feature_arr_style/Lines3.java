@@ -370,7 +370,7 @@ public class Lines3 extends ProcessFile {
 
             });
 
-            Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.RGB_565);
+            Bitmap bLines = Bitmap.createBitmap(o.getColumns(), o.getLines(), Bitmap.Config.ARGB_8888);
             /*Graphics g = bLines.Graphics();
             for (LineSegment line : lines) {
                 g.setColor(Colors.random());

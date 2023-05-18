@@ -401,7 +401,7 @@ public class Lines3 extends ProcessFile {
             });
 
             ImageIO.write(img3.normalize(0.0, 1.0).getImage(), "jpg",
-                    new File(out.getAbsolutePath()));
+                    new File(out.getAbsolutePath()), shouldOverwrite);
             return true;
         } catch (
                 IOException e) {

@@ -114,7 +114,7 @@ public class InterpretePGM implements Interprete {
 
         pos = text.indexOf("\n", pos) + 1;
 
-        Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.RGB_565);
+        Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
         return bitmap;
 
     }

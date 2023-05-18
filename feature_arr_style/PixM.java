@@ -191,7 +191,7 @@ public class PixM extends MBitmap {
         float[] f = new float[getCompCount()];
 
         Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.RGB_565);
+                lines, Bitmap.Config.ARGB_8888);
 
 
         float[] rgba = new float[getCompCount()];

@@ -20,13 +20,11 @@
 
 package one.empty3.feature20220726.violajonesclassifier;
 
-import one.empty3.feature20220726.GaussFilterPixM;
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.*;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
@@ -65,7 +63,7 @@ public class PartMatch extends ProcessFile {
                     }
                 try {
                     ImageIO.write(pixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
-                            + n + "_angle_" + a + ".jpg"));
+                            + n + "_angle_" + a + ".jpg"), shouldOverwrite);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -145,7 +143,7 @@ public class PartMatch extends ProcessFile {
                 }
             }
 
-            ImageIO.write(outImg, "jpg", out);
+            ImageIO.write(outImg, "jpg", out, shouldOverwrite);
 
             return true;
         } catch (IOException e) {

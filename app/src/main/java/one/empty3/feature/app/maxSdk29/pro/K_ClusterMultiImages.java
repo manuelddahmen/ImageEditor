@@ -204,7 +204,7 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
 
             }));
 
-            ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out);
+            ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
         } catch (Exception ex1) {
             ex1.printStackTrace();

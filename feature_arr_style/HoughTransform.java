@@ -274,7 +274,7 @@ public class HoughTransform extends ProcessFile {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Bitmap getHoughArrayImage() {
         int max = getHighestValue();
-        Bitmap image = Bitmap.createBitmap(maxTheta, doubleHeight, Bitmap.Config.RGB_565);
+        Bitmap image = Bitmap.createBitmap(maxTheta, doubleHeight, Bitmap.Config.ARGB_8888);
         for (int t = 0; t < maxTheta; t++) {
             for (int r = 0; r < doubleHeight; r++) {
                 double value = 255 * ((double) houghArray[t][r]) / max;

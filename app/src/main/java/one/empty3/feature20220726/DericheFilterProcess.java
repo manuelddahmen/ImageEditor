@@ -26,7 +26,6 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class DericheFilterProcess extends ProcessFile {
 
@@ -37,7 +36,7 @@ public class DericheFilterProcess extends ProcessFile {
             PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
-            ImageIO.write(pixM.getImage(), "jpg", out);
+            ImageIO.write(pixM.getImage(), "jpg", out, shouldOverwrite);
 
 
         } catch (IOException e) {
