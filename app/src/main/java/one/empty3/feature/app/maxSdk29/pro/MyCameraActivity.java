@@ -454,7 +454,6 @@ import one.empty3.feature20220726.PixM;
                 try {
                     setMaxRes((int) Double.parseDouble(editable.toString()));
                 } catch (RuntimeException ex) {
-                    ex.printStackTrace();
                 }
             }
         });

@@ -34,6 +34,7 @@ import java.util.List;
  * by mean or mean square or somewhat else.
  */
 public class Histogram {
+    static boolean shouldOverwrite = true;
     private final double diffLevel;
     private final double radiusIncr;
     private double min;

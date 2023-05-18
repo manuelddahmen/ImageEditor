@@ -117,6 +117,8 @@ import kotlin.math.max
         bitmap: Bitmap,
         file1: File,
         file2: File, maxImageSize : Int, shouldOverwrite : Boolean): File? {
+        if(maxImageSize<=0) {
+        }
         var written = false;
         var fileWritten: File? = null;
         var bitmap2 : Bitmap
@@ -124,8 +126,8 @@ import kotlin.math.max
             var scaledBy: Int = max(bitmap.width, bitmap.height)
             bitmap2 = Bitmap.createScaledBitmap(
                 bitmap,
-                (1.0 * maxImageSize / scaledBy).toInt(),
-                (1.0 * maxImageSize / scaledBy).toInt(),
+                (1.0 * maxImageSize / scaledBy*bitmap.width).toInt(),
+                (1.0 * maxImageSize / scaledBy*bitmap.height).toInt(),
                 true
             )
         } else bitmap2 = bitmap

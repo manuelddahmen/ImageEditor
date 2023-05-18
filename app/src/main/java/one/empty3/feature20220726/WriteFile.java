@@ -27,6 +27,7 @@ import java.io.File;
 import java.util.logging.*;
 
 public class WriteFile {
+    static boolean shouldOverwrite = true;
     static int no = 1;
     static String directory = "./output/";
 

@@ -42,6 +42,7 @@ import one.empty3.feature20220726.PixM;
 
 public class K_Clusterer /*extends ReadDataset*/ {
 
+    boolean shouldOverwrite = true;
     public List<double[]> features = new ArrayList<>();
     public final int numberOfFeatures = 5;
 

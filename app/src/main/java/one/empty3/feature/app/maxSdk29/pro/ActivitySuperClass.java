@@ -29,6 +29,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Properties;
 
 @ExperimentalCamera2Interop public class ActivitySuperClass extends AppCompatActivity {
@@ -144,18 +146,21 @@ import java.util.Properties;
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == ONSAVE_INSTANCE_STATE && grantResults != null) {
-            boolean g = true;
-            for (int granted : grantResults)
-                g = g & (granted == PERMISSION_GRANTED);
+            int g = 0;
+            for (int granted : grantResults) {
+                g = g + ((granted == PERMISSION_GRANTED)?1:0);
+            }
 
-            if (g)
+            if (g>=2)
                 saveInstanceState();
         }
         if (requestCode == ONRESTORE_INSTANCE_STATE && grantResults != null) {
-            boolean g = true;
-            for (int granted : grantResults)
-                g = g & (granted == PERMISSION_GRANTED);
-            if (g)
+            int g = 0;
+            for (int granted : grantResults) {
+                g = g + ((granted == PERMISSION_GRANTED)?1:0);
+            }
+
+            if (g>=2)
                 restoreInstanceState();
         }
     }
@@ -175,6 +180,13 @@ import java.util.Properties;
                 } catch (NumberFormatException ex) {
 
                 }
+            }
+            try {
+                String currentFile1 = properties.getProperty("currentFile");
+                currentFile = new File(currentFile1);
+            } catch (RuntimeException ex) {
+                Toast.makeText(getApplicationContext(), "Error restoring currentFile", Toast.LENGTH_LONG)
+                        .show();
             }
         } catch (IOException ignored) {
 
@@ -215,7 +227,7 @@ import java.util.Properties;
     }
 
     protected void saveInstanceState() {
-        new Utils().saveImageState(this);
+        //new Utils().saveImageState(this);
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
@@ -225,7 +237,14 @@ import java.util.Properties;
             properties.setProperty("maxRes", "" + maxRes);
 
             try {
-                properties.store(new FileOutputStream(getImageViewPersistantPropertiesFile()), "");
+                properties.setProperty("currentFile", currentFile.getAbsolutePath());
+            } catch (RuntimeException ex) {
+                Toast.makeText(getApplicationContext(), "Error saving currentFile", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            try {
+                properties.store(new FileOutputStream(getImageViewPersistantPropertiesFile()), "#"+new Date().toString());
             } catch (IOException ignored) {
             }
         } catch (IOException ignored) {
@@ -336,5 +355,11 @@ import java.util.Properties;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveInstanceState();
     }
 }
