@@ -124,8 +124,9 @@ import java.util.Properties;
 
         testIfValidBitmap();
 
-
-
+        if(currentFile==null) {
+            restoreInstanceState();
+        }
         if (currentFile != null) {
             new Utils().loadImageInImageView(this);
         }
@@ -177,28 +178,24 @@ import java.util.Properties;
             if (maxRes1 != null) {
                 try {
                     maxRes = Integer.parseInt(maxRes1);
-                } catch (NumberFormatException ex) {
+                } catch (NumberFormatException ignored) {
 
                 }
             }
             try {
                 String currentFile1 = properties.getProperty("currentFile");
                 currentFile = new File(currentFile1);
+
+                File imageViewPersistantFile = getImageViewPersistantFile();
+                if(imageViewPersistantFile.exists()) {
+                    currentFile = imageViewPersistantFile;
+                }
             } catch (RuntimeException ex) {
                 Toast.makeText(getApplicationContext(), "Error restoring currentFile", Toast.LENGTH_LONG)
                         .show();
             }
         } catch (IOException ignored) {
 
-        }
-        testIfValidBitmap();
-        if (currentFile != null) {
-            if (imageView == null || imageView.getDrawable() == null) {
-                imageView = findViewById(R.id.currentImageView);
-                if (imageView != null) {
-                    new Utils().setImageView(this, imageView);
-                }
-            }
         }
     }
 
@@ -238,8 +235,18 @@ import java.util.Properties;
 
             try {
                 properties.setProperty("currentFile", currentFile.getAbsolutePath());
-            } catch (RuntimeException ex) {
-                Toast.makeText(getApplicationContext(), "Error saving currentFile", Toast.LENGTH_LONG)
+                File imageViewPersistantFile = currentFile;
+                if(currentFile!=null)
+                    new Utils().writeFile(this,
+                            BitmapFactory.decodeStream(
+                                    new FileInputStream(currentFile)),
+                                    getImageViewPersistantFile(), getImageViewPersistantFile(),
+                            maxRes, true);
+                } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (RuntimeException | IOException ex) {
+            Toast.makeText(getApplicationContext(), "Error saving currentFile", Toast.LENGTH_LONG)
                         .show();
             }
 
@@ -247,10 +254,8 @@ import java.util.Properties;
                 properties.store(new FileOutputStream(getImageViewPersistantPropertiesFile()), "#"+new Date().toString());
             } catch (IOException ignored) {
             }
-        } catch (IOException ignored) {
         }
 
-    }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -359,7 +364,7 @@ import java.util.Properties;
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         saveInstanceState();
+        super.onDestroy();
     }
 }
