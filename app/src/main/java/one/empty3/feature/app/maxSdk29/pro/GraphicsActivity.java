@@ -66,8 +66,6 @@ import java.util.logging.Logger;
 
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
-        variableName  = getIntent().getExtras().getString("variableName");
-        variable  = getIntent().getExtras().getString("variable");
 
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
@@ -75,25 +73,22 @@ import java.util.logging.Logger;
             String cord = button.getText().toString().toLowerCase();
             if (textView != null) {
 
-                if (variableName!=null && cord.equals(variableName)) {
-                    String variable1 = getIntent().getStringExtra("variable");
-                    cords[i] = variable1;
-                    textView.setText(variable1);
-                } else if(cords[i]!=null){
+                if (cord.equals(variableName)) {
+                    String variableValue = variable;
+                    cords[i] = variable;
+                    textView.setText(variable);
+                } else {
                     textView.setText(cords[i]);
                 }
+                String clickedVar = textView.getText().toString();
+                String clickedVarName = button.getText().toString();
                 button.setOnClickListener(view -> {
 
                     Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
-                    for (int i1 = 0; i1 < textViews.length; i1++) {
-                        calculatorIntent.putExtra(cordsConsts[i1], textViews[i1].getText().toString());
-                        if (button.getText().toString().equals(cordsConsts[i1])) {
-                            calculatorIntent.putExtra("variableName", cordsConsts[i1]);
-                            calculatorIntent.putExtra("variable", cords[i1]);
-                        }
-                    }
+                    new Utils().putExtra(calculatorIntent, cords, cordsConsts, clickedVar, clickedVarName);
+
                     passParameters(calculatorIntent);
-                    startActivity(calculatorIntent);
+
                 });
             }
         }

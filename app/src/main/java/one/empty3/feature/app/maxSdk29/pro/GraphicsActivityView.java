@@ -24,10 +24,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.io.File;
@@ -52,37 +55,13 @@ import one.empty3.feature20220726.PixM;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.graphics_view);
-
-
-        Intent intent = getIntent();
-        if (getIntent() != null && getIntent().getData() != null) {
-            if (intent.getData() != null) {
-                Uri data = intent.getData();
-                currentFile = new File(data.getPath());
-                System.err.println("File returned from effects' list = " + data);
-
-                if (currentFile != null) {
-                    BufferedImage bi = ImageIO.read(currentFile);
-                    if (bi != null) {
-                        Bitmap bitmap = bi.getBitmap();
-                        if (bitmap != null) {
-                        }
-                    }
-                }
-            }
-        } else {
-            System.err.println("intent data Main==null");
-        }
-
 
         stringDoubleHashMap = new HashMap<>();
 
         for (int i = 0; i < cordsConsts.length; i++) {
-/*            if (getIntent().getStringExtra(cordsConsts[i]) != null) {
-                cords[i] = getIntent().getStringExtra(cordsConsts[i]);
-            }
-*/            stringDoubleHashMap.put(cordsConsts[i], values[i]);
+            stringDoubleHashMap.put(cordsConsts[i], values[i]);
         }
 
 
@@ -124,6 +103,16 @@ import one.empty3.feature20220726.PixM;
 
 
     private void draw() {
+        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_EXTERNAL_STORAGE},
+                38203820);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         Logger.getAnonymousLogger().log(Level.INFO,
                 "currentFile=" + getClass().toString() + " " + currentFile);
 
@@ -134,9 +123,6 @@ import one.empty3.feature20220726.PixM;
         int h = getMaxRes();
 
         current = null;
-
-        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_MEDIA_IMAGES}, 38203820);
 
         if (currentFile != null) {
             if (getMaxRes() > 0) {
@@ -155,13 +141,15 @@ import one.empty3.feature20220726.PixM;
         w = current.getColumns();
         h = current.getLines();
 
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < cordsConsts.length; i++) {
             algebricTree[i] = new AlgebricTree(cords[i], stringDoubleHashMap);
             try {
                 algebricTree[i].construct();
             } catch (AlgebraicFormulaSyntaxException e) {
                 printValues();
-                throw new RuntimeException(e);
+                e.printStackTrace();
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
             }
         }
         double[] rgba = new double[4];
@@ -214,6 +202,4 @@ import one.empty3.feature20220726.PixM;
         this.currentFile = graphics_math;
         new Utils().setImageView(image, bitmap);
     }
-
-
 }
