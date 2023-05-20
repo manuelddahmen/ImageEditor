@@ -82,7 +82,7 @@ import java.util.logging.Logger;
                 }
                 button.setOnClickListener(view -> {
                     for (Button value : buttons) {
-                        if (button.getText().equals(value.getText())) {
+                        if (button.getText().toString().equals(value.getText().toString())) {
                             variable = textView.getText().toString();
                             variableName = button.getText().toString();
                             for (int j = 0; j < cords.length; j++) {

@@ -149,13 +149,8 @@ import java.util.*
                     intentGraphics.putExtra("variableName", s)
                     intentGraphics.putExtra("variable", cord)
                 }
-                intentGraphics.putExtra(s, cords[i])
             }
-            startActivity(intentGraphics)
-
-
-            startActivity(intentGraphics)
-        }
-
+            passParameters(intentGraphics)
+       }
     }
 }

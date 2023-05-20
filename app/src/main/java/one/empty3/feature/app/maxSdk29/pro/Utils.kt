@@ -252,9 +252,9 @@ import kotlin.math.max
         var j = 0
         for (j in this.cords.indices) {
             calculatorIntent.putExtra(this.cords[j], cords[j])
-            if (consts[j].equals(variable) && variable!=null && variableName!=null) {
+            if (consts[j].equals(variableName) && variable!=null && variableName!=null) {
                     calculatorIntent.putExtra("variable", variable)
-                    calculatorIntent.putExtra("variableName", consts[j])
+                    calculatorIntent.putExtra("variableName", variableName)
                 }
             }
 
@@ -487,13 +487,13 @@ import kotlin.math.max
                 activity.cords[i] = varVal
             }
         }
-        activity.variableName = intent.getStringExtra("variableName")
-        activity.variable = intent.getStringExtra("variable")
-        if(activity.variable!=null && activity.variableName!=null) {
-            val indexOf = cords.indexOf(activity.variableName)
-            if(indexOf>=0) {
-                cords[indexOf] = activity.variable
-            }
+        var variableName = intent.getStringExtra("variableName")
+        var variable = intent.getStringExtra("variable")
+        val indexOf = ActivitySuperClass.cordsConsts.indexOf(variableName)
+        if(variableName!=null && variable!=null &&indexOf>=0) {
+            cords[indexOf] = activity.variable
+            activity.variableName = variableName
+            activity.variable = variable
         }
 
     }
