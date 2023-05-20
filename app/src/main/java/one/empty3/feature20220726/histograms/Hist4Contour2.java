@@ -26,7 +26,6 @@ import one.empty3.library.Point3D;
 import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 
@@ -110,7 +109,7 @@ public class Hist4Contour2 extends ProcessFile {
     public boolean process(File in, File out) {
         kMax = 3;
         fractMax = 0.05;
-        if (!isImage(in)) {
+        if (isImage(in)) {
             return false;
         }
         PixM inP;

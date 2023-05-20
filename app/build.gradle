@@ -13,7 +13,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 3009000
+def code = 3012000
 
 java {
     toolchain {
@@ -122,7 +122,9 @@ android {
             }
         }
     }
-
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -264,10 +266,10 @@ dependencies {
     //implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 
 // Ensure version is 1.4.0-alpha01 or higher.
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+//    implementation "androidx.appcompat:appcompat:1.6.1"
+//    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+//    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
     def emoji2_version = "1.2.0"
 

@@ -102,7 +102,7 @@ public class Histogram extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        if (!isImage(in))
+        if (isImage(in))
             return false;
         PixM inP;
         inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);

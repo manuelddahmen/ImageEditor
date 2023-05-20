@@ -45,7 +45,7 @@ public abstract class ProcessFile {
     protected int maxRes = 1280;
     private Properties property;
     private File outputDirectory = null;
-    protected boolean shouldOverwrite = true;
+    public boolean shouldOverwrite = true;
     protected List<File> imagesStack = new ArrayList<>();
 
     public File getOutputDirectory() {
@@ -96,8 +96,13 @@ public abstract class ProcessFile {
     }
 
 
-    protected static boolean isImage(File in) {
-        return true;
+    public boolean isImage(File in) {
+        if(in.exists() && in.isFile()) {
+            BufferedImage read = ImageIO.read(in);
+            return read != null && read.bitmap != null;
+        } else {
+            return false;
+        }
     }
 
 }

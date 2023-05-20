@@ -63,6 +63,9 @@ import java.util.Properties;
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     protected String currentCord = cords[0];
     protected Bitmap currentBitmap;
+    public static final String variableName = "variable";
+    public static String variable = "x";
+    private String variableValue = "x";
 
     public ImageViewSelection getImageView() {
         return imageView;
@@ -122,9 +125,10 @@ import java.util.Properties;
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
 
+        new Utils().loadVarsMathImage(this, getIntent());
+
 
         testIfValidBitmap();
-
 
 
     }
@@ -264,9 +268,16 @@ import java.util.Properties;
         if (currentFile != null)
             to.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
         to.putExtra("maxRes", getMaxRes());
-        new Utils().putExtra(to, cords, currentCord);
+        new Utils().putExtra(to, cords, currentCord, variableName, variable);
         if (currentFile != null)
             new Utils().addCurrentFileToIntent(to, this, currentFile);
+
+        int j = 0;
+        for (j = 0; j < cordsConsts.length; j++) {
+            if(cords[j]!=null)
+                to.putExtra(cordsConsts[j], cords[j]);
+        }
+
 
         startActivity(to);
     }
@@ -275,6 +286,9 @@ import java.util.Properties;
         Utils utils = new Utils();
         currentFile = utils.getCurrentFile(from);
         cords = utils.getCordsValues();
+        String v = from.getStringExtra(variableName);
+        if(v!=null)
+            variable = v;
         maxRes = utils.getMaxRes(this, null);
 
     }

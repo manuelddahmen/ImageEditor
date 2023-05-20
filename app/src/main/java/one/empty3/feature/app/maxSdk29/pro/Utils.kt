@@ -242,7 +242,13 @@ import kotlin.math.max
     }
 
 
-    public fun putExtra(calculatorIntent: Intent, formulas: Array<String>, cord: String) {
+    public fun putExtra(
+        calculatorIntent: Intent,
+        formulas: Array<String>,
+        cord: String,
+        variableName: String?,
+        variable: String
+    ) {
         var j = 0
         for (s in cords) {
             calculatorIntent.putExtra(s, formulas[j])
@@ -251,6 +257,8 @@ import kotlin.math.max
             }
             j++
         }
+        if(variable!=null && variableName!=null)
+            calculatorIntent.putExtra(variableName, variable)
     }
 
     fun getCurrentFile(intent: Intent): File? {
@@ -461,6 +469,17 @@ import kotlin.math.max
         //imageLoader.displayImage(bitmap, imageView);
         imageView.setImageBitmap2(bitmap)
         imageView.setPixels(PixM(bitmap))
+
+    }
+
+    fun loadVarsMathImage(activity : ActivitySuperClass, intent: Intent) {
+
+        for (i in ActivitySuperClass.cordsConsts.indices) {
+            var varVal = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])
+            if (varVal != null) {
+                activity.cords[i] = varVal
+            }
+        }
 
     }
 }

@@ -21,10 +21,11 @@
 package one.empty3.feature20220726;
 
 
-import java.io.File;
-
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
+
+import java.io.File;
+import java.util.Objects;
 
 public class GradAddProcess extends ProcessFile {
 
@@ -33,13 +34,12 @@ public class GradAddProcess extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
-
-        //if (!in.getName().endsWith(".jpg"))
-        //    return false;
-        File file = in;
+        if (!isImage(in))
+            return false;
         PixM pix;
         try {
-            pix = PixM.getPixM(ImageIO.read(file), maxRes);
+            pix = PixM.getPixM(
+                    Objects.requireNonNull(ImageIO.read(in)), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             PixM[][] imagesMatrix = gf.filter(

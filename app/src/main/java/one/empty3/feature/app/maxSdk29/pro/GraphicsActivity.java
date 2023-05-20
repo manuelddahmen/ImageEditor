@@ -25,13 +25,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GraphicsActivity extends ActivitySuperClass {
+@ExperimentalCamera2Interop public class GraphicsActivity extends ActivitySuperClass {
     private TextView[] textViews;
     private Button[] buttons;
 
@@ -39,10 +41,6 @@ public class GraphicsActivity extends ActivitySuperClass {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
-
-        setMaxRes(new Utils().getMaxRes(this, savedInstanceState));
-
-        currentFile = new Utils().getCurrentFile(getIntent());
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
@@ -69,9 +67,8 @@ public class GraphicsActivity extends ActivitySuperClass {
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
         String cord1 = "x";
-        if (getIntent().getExtras() == null || getIntent().getExtras().get("x") == null) {
-            //loadInstanceState(savedInstanceState);
-        }
+
+
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
@@ -109,10 +106,10 @@ public class GraphicsActivity extends ActivitySuperClass {
                     "currentFile=" + getClass().toString() + " " + currentFile);
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
-            new Utils().putExtra(graphicsIntent, cords, finalCord);
             for (int i1 = 0; i1 < textViews.length; i1++) {
                 graphicsIntent.putExtra(cords[i1], textViews[i1].getText());
             }
+            new Utils().putExtra(graphicsIntent, cords, finalCord, variableName, variable);
             graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
             new Utils().addCurrentFileToIntent(graphicsIntent, null, currentFile);
             startActivity(graphicsIntent);

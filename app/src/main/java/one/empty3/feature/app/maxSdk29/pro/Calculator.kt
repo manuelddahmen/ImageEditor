@@ -27,13 +27,14 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.compose.ui.unit.max
 import one.empty3.apps.tree.altree.*
 import one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.Companion
 import java.io.File
 import java.util.*
 
-class Calculator : ActivitySuperClass() {
+@ExperimentalCamera2Interop class Calculator : ActivitySuperClass() {
     private var index: Int = 0
     private var variable: String = ""
     private var text: String = ""
@@ -41,19 +42,13 @@ class Calculator : ActivitySuperClass() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
-
-        val variable = intent.extras?.getString("variable")
-        val variableValue: String? = intent.extras?.getString(variable)
+        var variable = intent.extras?.getString(variableName)
 
         for ((index, s) in cordsConsts.withIndex()) {
             cords[index] = intent.extras?.getString(s)
         }
 
         title = variable
-
-        maxRes = Utils().getMaxRes(this, savedInstanceState)
-
-        currentFile = Utils().getCurrentFile(intent)
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
@@ -80,7 +75,7 @@ class Calculator : ActivitySuperClass() {
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
-        editTextId.setText(cords[cords.indexOf(variable)])
+        editTextId.setText(intent.extras?.getString(variable))
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
@@ -117,7 +112,7 @@ class Calculator : ActivitySuperClass() {
             val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
                 supportFragmentManager,
-                one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.TAG
+                ChooseFunctionDialogFragment.TAG
             )
             Thread {
                 run {
@@ -136,18 +131,18 @@ class Calculator : ActivitySuperClass() {
         ok.setOnClickListener {
             val intentGraphics = Intent()
             intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
-            if (currentFile != null)
-                Utils().addCurrentFileToIntent(intentGraphics, this, currentFile!!)
-            intentGraphics.putExtra("maxRes", maxRes)
+
+
             var i = 0
             for (s in cordsConsts) {
                 if (s.equals(variable)) {
-                    intentGraphics.putExtra(s, editTextId.text.toString())
-                } else {
-                    intentGraphics.putExtra(s, cords[i])
+                    cords[i] = editTextId.text.toString()
+                    variable = s
                 }
                 i++
             }
+            passParameters(intentGraphics)
+
             startActivity(intentGraphics)
         }
 

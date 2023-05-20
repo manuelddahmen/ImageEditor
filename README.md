@@ -59,6 +59,8 @@ Faces
 2- Améliorer "Face" (...)
 3) try to repair ChooseEffectsActivity2
 Try to don't crash when picture is too big for RAM.
+double -> byte -> char
+Hist4Contour2.java
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -122,5 +124,6 @@ Faces
 2- Améliorer "Face" (...)
 3) try to repair ChooseEffectsActivity2
 Try to don't crash when picture is too big for RAM.
-
+double -> byte -> char
+Hist4Contour2.java
 </fr-FR>

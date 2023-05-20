@@ -67,13 +67,9 @@ public class ImageIO {
     public static boolean write(Bitmap image, String jpg, File out) {
         FileOutputStream fileOutputStream = null;
         try {
-            if (!out.exists()) {
                 fileOutputStream = new FileOutputStream(out);
                 image.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
                 return true;
-            } else {
-                return false;
-            }
         } catch (FileNotFoundException e) {
             System.out.println("ImageIO write");
             e.printStackTrace();
