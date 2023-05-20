@@ -33,7 +33,8 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@ExperimentalCamera2Interop public class GraphicsActivity extends ActivitySuperClass {
+@ExperimentalCamera2Interop
+public class GraphicsActivity extends ActivitySuperClass {
     private TextView[] textViews;
     private Button[] buttons;
 
@@ -41,6 +42,13 @@ import java.util.logging.Logger;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
+
+
+        System.out.println("m variableName = " + variableName);
+        System.out.println("m variable =     " + variable);
+        System.out.println("i variableName = " + getIntent().getStringExtra("variableName"));
+        System.out.println("i variable =     " + getIntent().getStringExtra("variable"));
+
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
@@ -68,33 +76,35 @@ import java.util.logging.Logger;
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
 
         for (int i = 0; i < cords.length; i++) {
-            TextView textView = textViews[i];
-            Button button = buttons[i];
-            String cord = button.getText().toString().toLowerCase();
-            if (textView != null) {
-
-                if (cord.equals(variableName)) {
-                    String variableValue = variable;
-                    cords[i] = variable;
-                    textView.setText(variable);
-                } else {
-                    textView.setText(cords[i]);
-                }
-                button.setOnClickListener(view -> {
-                    for (Button value : buttons) {
-                        if (button.getText().toString().equals(value.getText().toString())) {
-                            variable = textView.getText().toString();
-                            variableName = button.getText().toString();
-                            for (int j = 0; j < cords.length; j++) {
-                                cords[j] = textViews[j].getText().toString();
-                            }
-                            Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
-                            passParameters(calculatorIntent);
-                        }
-                    }
-                });
+            textViews[i].setText(cords[i]);
+            if(cordsConsts[i].equals(variableName)) {
+                textViews[i].setText(variable!=null?variable:"");
             }
         }
+
+        for (int k1 = 0; k1 < cordsConsts.length; k1++) {
+
+            Button value = buttons[k1];
+
+            int finalK = k1;
+            TextView textValue = textViews[finalK];
+            value.setOnClickListener(view -> {
+
+                variable = textValue.getText().toString();
+                variableName = value.getText().toString();
+
+                for (int j = 0; j < cords.length; j++) {
+                    cords[j] = textViews[j].getText().toString();
+                }
+
+                Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
+
+                passParameters(calculatorIntent);
+
+            });
+
+        }
+
         View buttonView = findViewById(R.id.buttonView);
         buttonView.setOnClickListener(view -> {
             Logger.getAnonymousLogger().log(Level.INFO,

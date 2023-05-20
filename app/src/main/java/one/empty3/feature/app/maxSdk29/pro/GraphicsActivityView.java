@@ -75,14 +75,7 @@ import one.empty3.feature20220726.PixM;
         Button back = findViewById(R.id.buttonMainActivity);
         back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent(getApplicationContext(), MyCameraActivity.class);
-            if (currentFile != null) {
-                intentGraphics.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-            }
-            intentGraphics.putExtra("maxRes", getMaxRes());
-
-            new Utils().putExtra(intentGraphics, cords, cordsConsts, variableName, variable);
-
-            startActivity(intentGraphics);
+            passParameters(intentGraphics);
 
         });
 

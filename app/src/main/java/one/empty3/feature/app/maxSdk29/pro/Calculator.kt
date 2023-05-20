@@ -42,10 +42,6 @@ import java.util.*
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
-        for ((index, s) in cordsConsts.withIndex()) {
-            cords[index] = intent.extras?.getString(s)
-        }
-
         title = variableName
 
         val buttonsNumbers = arrayListOf(
@@ -135,19 +131,18 @@ import java.util.*
             }.start()
         }
 
+
+
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
             val intentGraphics = Intent(applicationContext, GraphicsActivity::class.java)
-            var i = 0
             for (i in cordsConsts.indices) {
                 val s : String = cordsConsts[i]
                 if (s.equals(variableName)) {
                     val cord : String = editTextId.text.toString()
                     cords[i] = cord
-                    variableName = s
                     variable = cord
-                    intentGraphics.putExtra("variableName", s)
-                    intentGraphics.putExtra("variable", cord)
+                    variableName = s
                 }
             }
             passParameters(intentGraphics)
