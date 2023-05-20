@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
@@ -55,8 +54,6 @@ import one.empty3.feature20220726.PixM;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics_view);
 
-        int maxRes= new Utils().getMaxRes(this, savedInstanceState);
-
 
         Intent intent = getIntent();
         if (getIntent() != null && getIntent().getData() != null) {
@@ -82,13 +79,10 @@ import one.empty3.feature20220726.PixM;
         stringDoubleHashMap = new HashMap<>();
 
         for (int i = 0; i < cordsConsts.length; i++) {
-            if (getIntent().getStringExtra(cordsConsts[i]) != null) {
+/*            if (getIntent().getStringExtra(cordsConsts[i]) != null) {
                 cords[i] = getIntent().getStringExtra(cordsConsts[i]);
-                stringDoubleHashMap.put(cordsConsts[i], values[i]);
-            } else {
-                Toast.makeText(getApplicationContext(), "paramètre null: " + cords[i],
-                        Toast.LENGTH_SHORT).show();
             }
+*/            stringDoubleHashMap.put(cordsConsts[i], values[i]);
         }
 
 
@@ -101,16 +95,14 @@ import one.empty3.feature20220726.PixM;
 
         Button back = findViewById(R.id.buttonMainActivity);
         back.setOnClickListener(view -> {
-            Intent intentGraphics = new Intent();
-            if (currentFile != null)
+            Intent intentGraphics = new Intent(getApplicationContext(), MyCameraActivity.class);
+            if (currentFile != null) {
                 intentGraphics.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
-
-            intentGraphics.setClass(getApplicationContext(), MyCameraActivity.class);
-            intentGraphics.putExtra("maxRes", getMaxRes());
-            int j = 0;
-            for (j = 0; j < cordsConsts.length; j++) {
-                intentGraphics.putExtra(cordsConsts[j], cords[j]);
             }
+            intentGraphics.putExtra("maxRes", getMaxRes());
+
+            new Utils().putExtra(intentGraphics, cords, cordsConsts, variableName, variable);
+
             startActivity(intentGraphics);
 
         });

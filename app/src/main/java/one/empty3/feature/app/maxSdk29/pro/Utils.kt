@@ -245,20 +245,27 @@ import kotlin.math.max
     public fun putExtra(
         calculatorIntent: Intent,
         formulas: Array<String>,
-        cord: String,
+        consts : Array<String>,
         variableName: String?,
-        variable: String
+        variable: String?
     ) {
         var j = 0
-        for (s in cords) {
-            calculatorIntent.putExtra(s, formulas[j])
-            if (s == cord) {
-                calculatorIntent.putExtra("variable", formulas[j])
+        for (j in cords.indices) {
+            calculatorIntent.putExtra(cords[j], formulas[j])
+            if (consts[j].equals(variable) && variable!=null && variableName!=null) {
+                    calculatorIntent.putExtra("variable", variable)
+                    calculatorIntent.putExtra("variableName", consts[j])
+                }
             }
+
+        }
+    @Deprecated(message = "Double")
+    private fun putExtraCords(activity: ActivitySuperClass, calculatorIntent: Intent) {
+        var j = 0
+        for (s in ActivitySuperClass.cordsConsts) {
+            calculatorIntent.putExtra(s, activity.cords[j])
             j++
         }
-        if(variable!=null && variableName!=null)
-            calculatorIntent.putExtra(variableName, variable)
     }
 
     fun getCurrentFile(intent: Intent): File? {
@@ -475,12 +482,21 @@ import kotlin.math.max
     fun loadVarsMathImage(activity : ActivitySuperClass, intent: Intent) {
 
         for (i in ActivitySuperClass.cordsConsts.indices) {
-            var varVal = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])
+            val varVal = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])
             if (varVal != null) {
                 activity.cords[i] = varVal
             }
         }
+        activity.variableName = intent.getStringExtra("variableName")
+        activity.variable = intent.getStringExtra("variable")
+        if(activity.variable!=null && activity.variableName!=null) {
+            val indexOf = cords.indexOf(activity.variableName)
+            if(indexOf>=0) {
+                cords[indexOf] = activity.variable
+            }
+        }
 
     }
+
 }
 

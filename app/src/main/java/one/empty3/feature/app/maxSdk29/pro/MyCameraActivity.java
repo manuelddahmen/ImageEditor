@@ -313,10 +313,9 @@ import one.empty3.feature20220726.PixM;
             if (currentFile != null) {
                 Uri uri = Uri.fromFile(currentFile);
                 //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
-                Intent intentDraw = new Intent();
+                Intent intentDraw = new Intent(getApplicationContext(), GraphicsActivity.class);
                 intentDraw.setDataAndType(uri, "image/jpeg");
                 intentDraw.putExtra("data", uri);
-                intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
                 passParameters(intentDraw);
             } else toastButtonDisabled(v);
         });

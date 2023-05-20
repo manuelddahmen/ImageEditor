@@ -42,13 +42,11 @@ import java.util.*
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
-        var variable = intent.extras?.getString(variableName)
-
         for ((index, s) in cordsConsts.withIndex()) {
             cords[index] = intent.extras?.getString(s)
         }
 
-        title = variable
+        title = variableName
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
@@ -75,7 +73,14 @@ import java.util.*
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
-        editTextId.setText(intent.extras?.getString(variable))
+
+        val indexOf = cordsConsts.indexOf(variableName)
+        System.out.println("m variableName = " + variableName)
+        System.out.println("m variable =     " + variable)
+        System.out.println("i variableName = " + intent.getStringExtra("variableName"))
+        System.out.println("i variable =     "  + intent.getStringExtra("variable"))
+
+        editTextId.setText(cords[indexOf])
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
@@ -100,9 +105,7 @@ import java.util.*
 
                 } catch (ex: AlgebraicFormulaSyntaxException) {
                 } catch (ex: IndexOutOfBoundsException) {
-                    ex.printStackTrace()
                 } catch (ex: NullPointerException) {
-                    ex.printStackTrace()
                 }
             }
         }
@@ -129,19 +132,22 @@ import java.util.*
 
         val ok = findViewById<Button>(R.id.buttonOk);
         ok.setOnClickListener {
-            val intentGraphics = Intent()
-            intentGraphics.setClass(applicationContext, GraphicsActivity::class.java)
-
-
+            val intentGraphics = Intent(applicationContext, GraphicsActivity::class.java)
             var i = 0
-            for (s in cordsConsts) {
-                if (s.equals(variable)) {
-                    cords[i] = editTextId.text.toString()
-                    variable = s
+            for (i in cordsConsts.indices) {
+                val s : String = cordsConsts[i]
+                if (s.equals(variableName)) {
+                    val cord : String = editTextId.text.toString()
+                    cords[i] = cord
+                    variableName = s
+                    variable = cord
+                    intentGraphics.putExtra("variableName", s)
+                    intentGraphics.putExtra("variable", cord)
                 }
-                i++
+                intentGraphics.putExtra(s, cords[i])
             }
-            passParameters(intentGraphics)
+            startActivity(intentGraphics)
+
 
             startActivity(intentGraphics)
         }

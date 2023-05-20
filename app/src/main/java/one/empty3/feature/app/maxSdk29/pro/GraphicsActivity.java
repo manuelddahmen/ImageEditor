@@ -66,53 +66,47 @@ import java.util.logging.Logger;
 
         buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
-        String cord1 = "x";
-
+        variableName  = getIntent().getExtras().getString("variableName");
+        variable  = getIntent().getExtras().getString("variable");
 
         for (int i = 0; i < cords.length; i++) {
             TextView textView = textViews[i];
             Button button = buttons[i];
             String cord = button.getText().toString().toLowerCase();
             if (textView != null) {
-                String variable = getIntent().getExtras().getString("variable");
 
-                if (variable != null && variable.equals(cord)) {
-                    cord1 = cord;
-                    textView.setText(cord);
-                    textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
-                } else if (getIntent().getExtras() != null) {
-                    textView.setText((getIntent().getExtras().get(cords[i])) != null ? ((String) getIntent().getExtras().get(cords[i])) : cords[i]);
+                if (variableName!=null && cord.equals(variableName)) {
+                    String variable1 = getIntent().getStringExtra("variable");
+                    cords[i] = variable1;
+                    textView.setText(variable1);
+                } else if(cords[i]!=null){
+                    textView.setText(cords[i]);
                 }
-                String finalCord1 = cord1 != null ? cord1 : "?";
                 button.setOnClickListener(view -> {
 
-                    Intent calculatorIntent = new Intent();
+                    Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
                     for (int i1 = 0; i1 < textViews.length; i1++) {
                         calculatorIntent.putExtra(cordsConsts[i1], textViews[i1].getText().toString());
                         if (button.getText().toString().equals(cordsConsts[i1])) {
-                            calculatorIntent.putExtra("variable", cordsConsts[i1]);
+                            calculatorIntent.putExtra("variableName", cordsConsts[i1]);
+                            calculatorIntent.putExtra("variable", cords[i1]);
                         }
                     }
-                    calculatorIntent.setClass(getApplicationContext(), Calculator.class);
-                    new Utils().addCurrentFileToIntent(calculatorIntent, null, currentFile);
+                    passParameters(calculatorIntent);
                     startActivity(calculatorIntent);
                 });
             }
         }
         View buttonView = findViewById(R.id.buttonView);
-        String finalCord = cord1;
         buttonView.setOnClickListener(view -> {
             Logger.getAnonymousLogger().log(Level.INFO,
                     "currentFile=" + getClass().toString() + " " + currentFile);
             Intent graphicsIntent = new Intent();
             graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
             for (int i1 = 0; i1 < textViews.length; i1++) {
-                graphicsIntent.putExtra(cords[i1], textViews[i1].getText());
+                graphicsIntent.putExtra(cordsConsts[i1], textViews[i1].getText());
             }
-            new Utils().putExtra(graphicsIntent, cords, finalCord, variableName, variable);
-            graphicsIntent.putExtra("maxRes", new Utils().getMaxRes(this, savedInstanceState));
-            new Utils().addCurrentFileToIntent(graphicsIntent, null, currentFile);
-            startActivity(graphicsIntent);
+            passParameters(graphicsIntent);
         });
 
     }
