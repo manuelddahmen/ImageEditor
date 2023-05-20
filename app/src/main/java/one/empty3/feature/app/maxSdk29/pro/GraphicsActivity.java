@@ -80,15 +80,16 @@ import java.util.logging.Logger;
                 } else {
                     textView.setText(cords[i]);
                 }
-                String clickedVar = textView.getText().toString();
-                String clickedVarName = button.getText().toString();
                 button.setOnClickListener(view -> {
-
-                    Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
-                    new Utils().putExtra(calculatorIntent, cords, cordsConsts, clickedVar, clickedVarName);
-
-                    passParameters(calculatorIntent);
-
+                    for (int i1 = 0; i1 < buttons.length; i1++) {
+                        if(button.getText().equals(buttons[i1])) {
+                            TextView textView1  = textView;
+                            variable = textView1.getText().toString();
+                            variableName = button.getText().toString();
+                            Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
+                            passParameters(calculatorIntent);
+                        }
+                    }
                 });
             }
         }
@@ -96,12 +97,11 @@ import java.util.logging.Logger;
         buttonView.setOnClickListener(view -> {
             Logger.getAnonymousLogger().log(Level.INFO,
                     "currentFile=" + getClass().toString() + " " + currentFile);
-            Intent graphicsIntent = new Intent();
-            graphicsIntent.setClass(getApplicationContext(), GraphicsActivityView.class);
+            Intent graphicsViewIntent = new Intent(getApplicationContext(), GraphicsActivityView.class);
             for (int i1 = 0; i1 < textViews.length; i1++) {
-                graphicsIntent.putExtra(cordsConsts[i1], textViews[i1].getText());
+                cords[i1] = textViews[i1].getText().toString();
             }
-            passParameters(graphicsIntent);
+            passParameters(graphicsViewIntent);
         });
 
     }
