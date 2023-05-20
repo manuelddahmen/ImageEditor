@@ -315,14 +315,9 @@ import one.empty3.feature20220726.PixM;
                 //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                 Intent intentDraw = new Intent();
                 intentDraw.setDataAndType(uri, "image/jpeg");
-                new Utils().addCurrentFileToIntent(intentDraw, this, currentFile);
-                intentDraw.putExtra("maxRes", getMaxRes());
                 intentDraw.putExtra("data", uri);
                 intentDraw.setClass(getApplicationContext(), GraphicsActivity.class);
-                Logger.getAnonymousLogger().log(Level.INFO,
-                        "currentFile=" + getClass().toString() + " " + currentFile);
-
-                startActivity(intentDraw);
+                passParameters(intentDraw);
             } else toastButtonDisabled(v);
         });
         imageView.setOnClickListener(new View.OnClickListener() {
