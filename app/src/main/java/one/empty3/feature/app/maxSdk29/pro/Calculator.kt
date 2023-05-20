@@ -74,13 +74,18 @@ import java.util.*
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editTextId = findViewById<EditText>(R.id.editTextCalculus)
 
-        val indexOf = cordsConsts.indexOf(variableName)
         System.out.println("m variableName = " + variableName)
         System.out.println("m variable =     " + variable)
         System.out.println("i variableName = " + intent.getStringExtra("variableName"))
         System.out.println("i variable =     "  + intent.getStringExtra("variable"))
 
-        editTextId.setText(cords[indexOf])
+        val indexOf = cordsConsts.indexOf(variableName)
+        if(indexOf>=0) {
+            editTextId.setText(cords[indexOf])
+        } else {
+            System.out.println("Calculator: no-variable intent")
+            return
+        }
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)

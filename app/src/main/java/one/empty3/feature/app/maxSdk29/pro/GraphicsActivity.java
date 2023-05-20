@@ -82,10 +82,10 @@ import java.util.logging.Logger;
                 }
                 button.setOnClickListener(view -> {
                     for (Button value : buttons) {
-                        if (button.getText().equals(value)) {
+                        if (button.getText().equals(value.getText())) {
                             variable = textView.getText().toString();
                             variableName = button.getText().toString();
-                            for (int j = 0; j < textViews.length; j++) {
+                            for (int j = 0; j < cords.length; j++) {
                                 cords[j] = textViews[j].getText().toString();
                             }
                             Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);

@@ -244,14 +244,14 @@ import kotlin.math.max
 
     public fun putExtra(
         calculatorIntent: Intent,
-        formulas: Array<String>,
+        cords: Array<String>,
         consts : Array<String>,
         variableName: String?,
         variable: String?
     ) {
         var j = 0
-        for (j in cords.indices) {
-            calculatorIntent.putExtra(cords[j], formulas[j])
+        for (j in this.cords.indices) {
+            calculatorIntent.putExtra(this.cords[j], cords[j])
             if (consts[j].equals(variable) && variable!=null && variableName!=null) {
                     calculatorIntent.putExtra("variable", variable)
                     calculatorIntent.putExtra("variableName", consts[j])
