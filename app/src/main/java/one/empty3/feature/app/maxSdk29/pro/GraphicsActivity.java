@@ -81,11 +81,14 @@ import java.util.logging.Logger;
                     textView.setText(cords[i]);
                 }
                 button.setOnClickListener(view -> {
-                    for (int i1 = 0; i1 < buttons.length; i1++) {
-                        if(button.getText().equals(buttons[i1])) {
-                            TextView textView1  = textView;
+                    for (Button value : buttons) {
+                        if (button.getText().equals(value)) {
+                            TextView textView1 = textView;
                             variable = textView1.getText().toString();
                             variableName = button.getText().toString();
+                            for (int j = 0; j < textViews.length; j++) {
+                                cords[j] = textViews[j].getText().toString();
+                            }
                             Intent calculatorIntent = new Intent(getApplicationContext(), Calculator.class);
                             passParameters(calculatorIntent);
                         }
