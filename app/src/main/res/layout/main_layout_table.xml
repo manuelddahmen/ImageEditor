@@ -55,7 +55,7 @@
             android:ems="10"
             android:fontFamily="sans-serif-condensed"
             android:hint="@string/edit_text_here_or_by_push_numbers"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:labelFor="@id/answerText"
             android:textAlignment="center"
             android:textSize="28dp"

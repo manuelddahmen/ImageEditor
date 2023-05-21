@@ -242,13 +242,7 @@ import kotlin.math.max
     }
 
 
-    public fun putExtra(
-        calculatorIntent: Intent,
-        cords: Array<String>,
-        consts : Array<String>,
-        variableName: String?,
-        variable: String?
-    ) {
+    public fun putExtra(calculatorIntent: Intent, cords: Array<String>, consts : Array<String>, variableName: String?, variable: String?) {
         for (j in cords.indices) {
             calculatorIntent.putExtra(consts[j], cords[j])
             if (consts[j].equals(variableName) && variable!=null && variableName!=null) {
@@ -288,7 +282,6 @@ import kotlin.math.max
         if (activity.currentFile == null) {
             activity.currentFile = activity.getImageViewPersistantFile()
         }
-
         var imageView: ImageViewSelection? = activity.imageView
         if (imageView == null) {
             activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
@@ -480,12 +473,12 @@ import kotlin.math.max
 
     fun loadVarsMathImage(activity : ActivitySuperClass, intent: Intent) {
 
-        for (i in ActivitySuperClass.cordsConsts.indices) {
-            val varVal = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])
-            if (varVal != null) {
-                activity.cords[i] = varVal
-            }
+        if (intent.getExtras() != null)
+            for (i in ActivitySuperClass.cordsConsts.indices) {
+            if (intent.getStringExtra(ActivitySuperClass.cordsConsts[i]) != null)
+                activity.cords[i] = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])!!
         }
+
         activity.variableName = intent.getStringExtra("variableName")
         activity.variable = intent.getStringExtra("variable")
         val indexOf = ActivitySuperClass.cordsConsts.indexOf(activity.variableName)

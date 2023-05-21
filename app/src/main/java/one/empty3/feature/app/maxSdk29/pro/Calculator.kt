@@ -36,20 +36,12 @@ import java.io.File
 import java.util.*
 
 @ExperimentalCamera2Interop class Calculator : ActivitySuperClass() {
-    private var index: Int = 0
-    private var variable: String = ""
-    private var text: String = ""
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
-        variableName = intent.getStringExtra("variableName")
-        variable = intent.getStringExtra("variable")
-
         title = variableName
-
-
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
@@ -145,11 +137,13 @@ import java.util.*
             val intentGraphics = Intent(applicationContext, GraphicsActivity::class.java)
             for (i in cordsConsts.indices) {
                 val cordName : String = cordsConsts[i]
-                if (cordName.equals(this.variableName)) {
-                    val textField = findViewById<TextView>(R.id.editTextCalculus)
+                System.out.println("cordName=" + cordName)
+                if (cordName.equals(variableName)) {
+                    val textField : EditText = findViewById(R.id.editTextCalculus)
+                    System.out.println("Calcul : " + textField.text)
                     val cord : String = textField.text.toString()
-                    this.variable = cord
-                    this.cords[i] = cord
+                    variable = cord
+                    cords[i] = cord
                 }
             }
             passParameters(intentGraphics)

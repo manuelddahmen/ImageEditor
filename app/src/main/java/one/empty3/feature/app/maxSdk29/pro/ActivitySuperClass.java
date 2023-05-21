@@ -110,11 +110,7 @@ import java.util.Properties;
 
 
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-            for (int i = 0; i < cordsConsts.length; i++) {
-                if (getIntent().getStringExtra(cordsConsts[i]) != null)
-                    cords[i] = getIntent().getStringExtra(cordsConsts[i]);
-            }
+
         if(getIntent()!=null) {
             getParameters(getIntent());
         }
@@ -123,7 +119,6 @@ import java.util.Properties;
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
 
-        new Utils().loadVarsMathImage(this, getIntent());
 
 
         testIfValidBitmap();
@@ -282,12 +277,9 @@ import java.util.Properties;
     public void getParameters(Intent from) {
         Utils utils = new Utils();
         currentFile = utils.getCurrentFile(from);
-        cords = utils.getCordsValues();
-        String v = from.getStringExtra(variableName);
-        if(v!=null)
-            variable = v;
         maxRes = utils.getMaxRes(this, null);
-
+        new Utils().loadImageInImageView(this);
+        new Utils().loadVarsMathImage(this, getIntent());
     }
 
     protected File getFilesFile(String s) {
