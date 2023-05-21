@@ -34,6 +34,7 @@ import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.io.ProcessFile
 import java.io.File
+import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -120,39 +121,45 @@ import kotlin.collections.HashMap
             for (granted in grantResults)
                 if((granted == PackageManager.PERMISSION_GRANTED))
                     g = g + 1
-            if(g>=2) {
-                unautorized = false
-                initAuthorized()
-            } else {
-                unautorized = true
-            }
+            if(g>0) {
+                try {
+                    unautorized = false
+                    initAuthorized()
+                } catch (ex:RuntimeException) {
+                    ex.printStackTrace()
+                }
+            } else unautorized = true
+
         }
     }
     private fun initAuthorized() {
         var index = 0
-        effectApply.setOnClickListener {
-            classnames = Main2022.effects
+        if (!unautorized) {
+            effectApply.setOnClickListener {
+                classnames = Main2022.effects
 
-            classnames.forEachIndexed { index1, it1 ->
-                classnames[index1] = listEffects?.get(it1)?.javaClass?.name
-            }
-
-
-            run {
-                println("Clicked on Effect button, running effects")
-                val fileIn: File = File(currentFile.toString())
-
-                Log.d("Initial input file", fileIn.toString())
-                Log.d(
-                    "Initial input file exists?", "Exists?"
-                            + ((fileIn.exists()).toString())
-                )
-                Log.d(packageName, "\"Effects' list size:" + classnames.size)
+                classnames.forEachIndexed { index1, it1 ->
+                    classnames[index1] = listEffects?.get(it1)?.javaClass?.name
+                }
 
 
-                var dirRoot: String = filesDir.absolutePath
-                // + File.separator + "data/files"//!!!?
-                /*uri = FileProvider.getUriForFile(
+                run {
+                    var totalOutput: File = currentFile
+
+                    println("Clicked on Effect button, running effects")
+                    val fileIn: File = File(currentFile.toString())
+
+                    Log.d("Initial input file", fileIn.toString())
+                    Log.d(
+                        "Initial input file exists?", "Exists?"
+                                + ((fileIn.exists()).toString())
+                    )
+                    Log.d(packageName, "\"Effects' list size:" + classnames.size)
+
+
+                    var dirRoot: String = filesDir.absolutePath
+                    // + File.separator + "data/files"//!!!?
+                    /*uri = FileProvider.getUriForFile(
                 this@MyCameraActivity,
                 BuildConfig.APPLICATION_ID + ".provider",
                 currentFile
@@ -162,116 +169,124 @@ import kotlin.collections.HashMap
 */
 
 
-                var dir = ""
+                    var dir = ""
 
-                dir = "photoDir"
-                dirRoot = currentFile.toString()
-                    .substring(0, currentFile.toString().lastIndexOf(File.separator))
+                    dir = "photoDir"
+                    dirRoot = currentFile.toString()
+                        .substring(0, currentFile.toString().lastIndexOf(File.separator))
 
-                var currentProcessFile: File = fileIn
-                val currentProcessDir = File(
-                    fileIn.absolutePath.substring(
-                        0,
-                        fileIn.absolutePath.lastIndexOf("/")
+                    var currentProcessFile: File = fileIn
+                    val currentProcessDir = File(
+                        fileIn.absolutePath.substring(
+                            0,
+                            fileIn.absolutePath.lastIndexOf("/")
+                        )
                     )
-                )
-                var currentOutputFile: File = currentFile
-                var currentOutputDir: File = currentFile
-                index = -1
-                val name = currentProcessFile.name
-                //dir = "appDir"
-                if (classnames.size == 0) {
+                    var currentOutputFile: File = currentFile
+                    var currentOutputDir: File = currentFile
+                    index = -1
+                    val name = currentProcessFile.name
+                    //dir = "appDir"
+                    if (classnames.size == 0) {
 
-                    return@setOnClickListener;
-                }
-
-                var processFile: ProcessFile? = null
-
-                var currentProcessInFile : File = currentFile
-                classnames.forEach { it1->
-                    if (it1==null || it1.isBlank()) {
-                        return@forEach
+                        return@setOnClickListener;
                     }
-                    val effectListStr: String = it1
-                    val trim = it1.trim()
-                    if (effectListStr.contains(trim)) {
-                        processFile = Class.forName(it1).newInstance() as ProcessFile
-                        currentProcessFile = currentProcessInFile
-                        if(processFile!=null) {
-                        currentOutputFile = File(nextFile(currentProcessInFile.parentFile!!.absolutePath,
-                                    "effect-" + UUID.randomUUID(), "jpg"))
-                        currentOutputDir.mkdirs()
-                        println("Effect class           : " + trim)
-                        println("In picture             : " + currentProcessFile)
-                        println("In picture directory   : " + currentProcessDir)
-                        println("Out  picture           : " + currentOutputFile)
-                        println("Out picture directory  : " + currentOutputDir)
-                        try {
-                            if (currentProcessFile.exists()
-                                // &&!currentOutputFile.exists()
-                            ) {
-                                processFile!!.setMaxRes(maxRes)
-                                if (!processFile!!.process(
-                                        currentProcessFile,
-                                        currentOutputFile
+
+                    var processFile: ProcessFile? = null
+
+                    var currentProcessInFile: File = currentFile
+                    classnames.forEach { it1 ->
+                        if (it1 == null || it1.isBlank()) {
+                            return@forEach
+                        }
+                        val effectListStr: String = it1
+                        val trim = it1.trim()
+                        if (effectListStr.contains(trim)) {
+                            processFile = Class.forName(it1).newInstance() as ProcessFile
+                            currentProcessFile = currentProcessInFile
+                            if (processFile != null) {
+                                currentOutputFile = File(
+                                    nextFile(
+                                        currentProcessInFile.parentFile!!.absolutePath,
+                                        "effect-" + UUID.randomUUID(), "jpg"
                                     )
-                                ) {
-                                    println("Error processing file.")
-                                    println("Error in " + processFile!!.javaClass.name)
-                                    Toast.makeText(
-                                        applicationContext,
-                                        ("Error while applying filter" + (processFile!!.javaClass.name)),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    return@setOnClickListener
-                                } else {
-                                    currentFile = currentOutputFile
-                                }
-                            } else {
-                                println("Success\n"+
-                                    "File in doesn't exists, or File out exists\n" +
-                                            "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists() +
-                                            "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists() +
-                                            "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists() +
-                                            "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists())
-                                Toast.makeText(applicationContext,
-                                    ("Source file doesn't exist" + (processFile!!.javaClass.name)),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                return@setOnClickListener
-                            }
-                        } catch (ex: Exception) {
-                            val errMessage = "Error processing file. Exception :$ex"
-                            println(errMessage)
-                            ex.printStackTrace()
+                                )
+                                currentOutputDir.mkdirs()
+                                println("Effect class           : " + trim)
+                                println("In picture             : " + currentProcessFile)
+                                println("In picture directory   : " + currentProcessDir)
+                                println("Out  picture           : " + currentOutputFile)
+                                println("Out picture directory  : " + currentOutputDir)
+                                try {
+                                    if (currentProcessFile.exists()
+                                    // &&!currentOutputFile.exists()
+                                    ) {
+                                        processFile!!.setMaxRes(maxRes)
+                                        if (!processFile!!.process(
+                                                currentProcessFile,
+                                                currentOutputFile
+                                            )
+                                        ) {
+                                            println("Error processing file.")
+                                            println("Error in " + processFile!!.javaClass.name)
+                                            Toast.makeText(
+                                                applicationContext,
+                                                ("Error while applying filter" + (processFile!!.javaClass.name)),
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            return@setOnClickListener
+                                        } else {
+                                            totalOutput = currentOutputFile
+                                        }
+                                    } else {
+                                        println(
+                                            "Success\n" +
+                                                    "File in doesn't exists, or File out exists\n" +
+                                                    "\nPrecision currentProcessDir  exists?: " + currentProcessDir.exists() +
+                                                    "\nPrecision currentProcessFile exists?: " + currentProcessFile.exists() +
+                                                    "\nPrecision currentOutputDir   exists?: " + currentOutputDir.exists() +
+                                                    "\nPrecision currentOutputFile  exists?: " + currentOutputFile.exists()
+                                        )
+                                        Toast.makeText(
+                                            applicationContext,
+                                            ("Source file doesn't exist" + (processFile!!.javaClass.name)),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        return@setOnClickListener
+                                    }
+                                } catch (ex: Exception) {
+                                    val errMessage = "Error processing file. Exception :$ex"
+                                    println(errMessage)
+                                    ex.printStackTrace()
 
-                            return@setOnClickListener
+                                    return@setOnClickListener
+                                }
+                                currentProcessFile = currentOutputFile
+                                currentProcessInFile = currentProcessFile
+                            }
+
                         }
-                        currentProcessFile = currentOutputFile
-                        currentProcessInFile = currentProcessFile
-                        }
+                        index++
+
 
                     }
-                    index++
+                    if (processFile != null && totalOutput != null) {
+                        Toast.makeText(
+                            applicationContext,
+                            ("Applied effect:" + (processFile!!.javaClass.name)),
+                            Toast.LENGTH_LONG
+                        ).show()
 
+                        currentFile =
+                            Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
 
-                }
-                if(processFile!=null) {
-                    Toast.makeText(
-                        applicationContext,
-                        ("Applied effect:" + (processFile!!.javaClass.name)),
-                    Toast.LENGTH_LONG
-                    ).show()
-
-                    currentFile = Utils().writePhoto(this, ImageIO.read(currentFile).bitmap, "effect-");
-
-                    val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
-                    passParameters(intent2)
+                        val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
+                        passParameters(intent2)
+                    }
                 }
             }
         }
     }
-
 
     fun comaStringList(str: String): String {
         return "";
