@@ -42,10 +42,6 @@ public class GraphicsActivity extends ActivitySuperClass {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
 
-        variableName = getIntent().getStringExtra("variableName");
-        variable = getIntent().getStringExtra("variable");
-
-
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);
         Button z = findViewById(R.id.buttonZ);
@@ -71,11 +67,14 @@ public class GraphicsActivity extends ActivitySuperClass {
         Button[] buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
 
+        variableName = getIntent().getStringExtra("variableName");
+        variable = getIntent().getStringExtra("variable");
+
         for (int i = 0; i < cords.length; i++) {
             textViews[i].setText(cords[i]);
-            /*if(cordsConsts[i].equals(variableName)) {
-                textViews[i].setText(variable!=null?variable:"");
-            }*/
+            if(cordsConsts[i].equals(variableName)) {
+                textViews[i].setText(variable);
+            }
         }
 
         for (int k1 = 0; k1 < cordsConsts.length; k1++) {

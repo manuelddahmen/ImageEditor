@@ -194,5 +194,7 @@
     <string name="capture">Capture</string>
     <string name="subimage_pasted">Subimage pasted</string>
     <string name="editProperties">Props</string>
+    <string name="ok_calc">Ok</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

@@ -384,7 +384,7 @@
             android:id="@+id/buttonOk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ok"
+            android:text="@string/ok_calc"
             android:theme="@style/Theme.FeatureAppmain"
 
             />
@@ -393,7 +393,7 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:theme="@style/Theme.FeatureAppmain"
 
             />
