@@ -20,6 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -38,11 +39,17 @@ import java.util.*
     private var index: Int = 0
     private var variable: String = ""
     private var text: String = ""
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
+        variableName = intent.getStringExtra("variableName")
+        variable = intent.getStringExtra("variable")
+
         title = variableName
+
+
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
@@ -137,12 +144,12 @@ import java.util.*
         ok.setOnClickListener {
             val intentGraphics = Intent(applicationContext, GraphicsActivity::class.java)
             for (i in cordsConsts.indices) {
-                val s : String = cordsConsts[i]
-                if (s.equals(variableName)) {
-                    val cord : String = editTextId.text.toString()
-                    cords[i] = cord
-                    variable = cord
-                    variableName = s
+                val cordName : String = cordsConsts[i]
+                if (cordName.equals(this.variableName)) {
+                    val textField = findViewById<TextView>(R.id.editTextCalculus)
+                    val cord : String = textField.text.toString()
+                    this.variable = cord
+                    this.cords[i] = cord
                 }
             }
             passParameters(intentGraphics)

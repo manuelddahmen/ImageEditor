@@ -36,18 +36,14 @@ import java.util.logging.Logger;
 @ExperimentalCamera2Interop
 public class GraphicsActivity extends ActivitySuperClass {
     private TextView[] textViews;
-    private Button[] buttons;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphics);
 
-
-        System.out.println("m variableName = " + variableName);
-        System.out.println("m variable =     " + variable);
-        System.out.println("i variableName = " + getIntent().getStringExtra("variableName"));
-        System.out.println("i variable =     " + getIntent().getStringExtra("variable"));
+        variableName = getIntent().getStringExtra("variableName");
+        variable = getIntent().getStringExtra("variable");
 
 
         Button x = findViewById(R.id.buttonX);
@@ -72,22 +68,22 @@ public class GraphicsActivity extends ActivitySuperClass {
         TextView textViewU = findViewById(R.id.textViewU);
         TextView textViewV = findViewById(R.id.textViewV);
 
-        buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
+        Button[] buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
 
         for (int i = 0; i < cords.length; i++) {
             textViews[i].setText(cords[i]);
-            if(cordsConsts[i].equals(variableName)) {
+            /*if(cordsConsts[i].equals(variableName)) {
                 textViews[i].setText(variable!=null?variable:"");
-            }
+            }*/
         }
 
         for (int k1 = 0; k1 < cordsConsts.length; k1++) {
 
             Button value = buttons[k1];
 
-            int finalK = k1;
-            TextView textValue = textViews[finalK];
+            TextView textValue = textViews[k1];
+
             value.setOnClickListener(view -> {
 
                 variable = textValue.getText().toString();

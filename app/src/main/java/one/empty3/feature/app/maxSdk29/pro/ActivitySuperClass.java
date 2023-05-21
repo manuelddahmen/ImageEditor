@@ -61,7 +61,6 @@ import java.util.Properties;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
 
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
-    protected String currentCord = cords[0];
     protected Bitmap currentBitmap;
     public String variableName;
     public String variable;
@@ -268,6 +267,13 @@ import java.util.Properties;
             to.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
         to.putExtra("maxRes", getMaxRes());
         new Utils().putExtra(to, cords, cordsConsts, variableName, variable);
+
+        System.out.println("c className = " + this.getClass());
+        System.out.println("m variableName = " + variableName);
+        System.out.println("m variable =     " + variable);
+        System.out.println("i variableName = " + getIntent().getStringExtra("variableName"));
+        System.out.println("i variable =     " + getIntent().getStringExtra("variable"));
+        System.out.println("c to.className = " + to.getType());
 
 
         startActivity(to);
