@@ -26,6 +26,32 @@ import one.empty3.library.core.nurbs.ParametricSurface;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Copyright (c) 2023. Manuel Daniel Dahmen
+ *
+ *
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+
+import one.empty3.library.core.nurbs.ParametricCurve;
+import one.empty3.library.core.nurbs.ParametricSurface;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /*__
  * *
  * <p>
@@ -34,17 +60,19 @@ import java.util.List;
  *
  * @author Manuel Dahmen
  */
-public class Point3D extends Representable {
+/*__
+ * *
+ * <p>
+ * Classe pour les éléments à trois coordonnées de type Double
+ * Points, Vecteur 3D et calcul
+ *
+ * @author Manuel Dahmen
+ */public class Point3D extends Representable {
     private Double tempz;
     private Double tempy;
     private Double tempx;
     private StructureMatrix<Double> point3DStructureMatrix;
-    private final StructureMatrixListener setElem = new StructureMatrixListener() {
-        @Override
-        public void actionOnChange() {
-
-        }
-
+    /*private final StructureMatrixListener setElem = new StructureMatrixListener() {
         @Override
         public void actionOnChange(Object oldValue, Object newValue, int dim, int posI, int posJ) {
             switch (dim) {
@@ -59,7 +87,7 @@ public class Point3D extends Representable {
                     break;
             }
         }
-    };
+    };*/
 
     public static void start() {
     }
@@ -490,7 +518,7 @@ public class Point3D extends Representable {
     @Override
     public void drawStructureDrawFast(ZBuffer z) {
 
-        z.testDeep(this, (CFAST.getColorAt(0.5, 0.5)));
+//        z.testDeep(this, new Color(CFAST.getColorAt(0.5, 0.5)));
 
     }
 
@@ -599,7 +627,7 @@ public class Point3D extends Representable {
         point3DStructureMatrix.add(coordArr[0]);
         point3DStructureMatrix.add(coordArr[1]);
         point3DStructureMatrix.add(coordArr[2]);
-        point3DStructureMatrix.addListener(setElem);
+  //      point3DStructureMatrix.addListener(setElem);
 
         return point3DStructureMatrix;
     }
@@ -648,8 +676,13 @@ public class Point3D extends Representable {
         return this;
     }*/
 
+    public android.graphics.Color toColor() {
+        return android.graphics.Color.valueOf
+                ((float)(double)(get(0)), (float)(double)(get(1)), (float)(double)(get(2)));
+    }
     public static Point3D fromColor(Color color) {
-        float[] colorComponents = color.getColorComponents(color);
+        float[] colorComponents = new float[4];
+        colorComponents = color.getComponents(colorComponents);
         Point3D point3D = new Point3D(3);
         for(int i=0; i< colorComponents.length; i++)
             point3D.set(i, (double)colorComponents[i]);
