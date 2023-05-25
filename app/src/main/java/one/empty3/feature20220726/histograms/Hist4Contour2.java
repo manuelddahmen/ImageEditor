@@ -297,7 +297,7 @@ public class Hist4Contour2 extends ProcessFile {
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
-            ImageIO.write(outP.getImage().getBitmap(), "jpg", out);
+            ImageIO.write(outP.getBitmap(), "jpg", out);
             //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
             return true;
 

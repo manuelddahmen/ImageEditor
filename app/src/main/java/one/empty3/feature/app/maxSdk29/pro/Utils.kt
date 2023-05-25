@@ -447,12 +447,8 @@ import kotlin.math.max
             if (activity.currentFile != null) {
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                val myPhotoV2022: File? =
-                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
-                System.err.println("Written copy : " + myPhotoV2022!!.absolutePath)
-                System.err.println("Set in ImageView : " + myPhotoV2022.absolutePath)
-
-                return myPhotoV2022
+                activity.currentFile = this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
+                return activity.currentFile
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()

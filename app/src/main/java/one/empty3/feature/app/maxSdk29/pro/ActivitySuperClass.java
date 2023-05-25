@@ -109,6 +109,17 @@ import java.util.Properties;
         super.onCreate(savedInstanceState);
         if(getIntent()!=null) {
             getParameters(getIntent());
+            if(currentFile==null && savedInstanceState!=null) {
+                try {
+                    if(savedInstanceState.getString("currentFile")!=null) {
+                        currentFile = new File(savedInstanceState.getString("currentFile"));
+                    }
+                } catch (NullPointerException ex1) {
+                    ex1.printStackTrace();
+                } catch(RuntimeException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
@@ -267,8 +278,8 @@ import java.util.Properties;
         Utils utils = new Utils();
         currentFile = utils.getCurrentFile(from);
         maxRes = utils.getMaxRes(this, null);
-        new Utils().loadImageInImageView(this);
-        new Utils().loadVarsMathImage(this, getIntent());
+        utils.loadImageInImageView(this);
+        utils.loadVarsMathImage(this, getIntent());
     }
 
     protected File getFilesFile(String s) {
@@ -287,7 +298,7 @@ import java.util.Properties;
 
 
     void drawIfBitmap() {
-        restoreInstanceState();
+        saveInstanceState();
         try {
             currentBitmap = null;
             if (imageView == null)

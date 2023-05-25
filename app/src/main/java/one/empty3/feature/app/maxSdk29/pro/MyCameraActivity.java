@@ -55,6 +55,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import androidx.core.app.ActivityCompat;
@@ -231,7 +232,7 @@ import one.empty3.feature20220726.PixM;
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
                     shareIntent.setDataAndType(photoURI, "image/jpeg");
                     shareIntent.putExtra("data", photoURI);
-                    startActivity(shareIntent);
+                    passParameters(shareIntent);
                 } else toastButtonDisabled(v);
             }
 
@@ -271,12 +272,16 @@ import one.empty3.feature20220726.PixM;
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
 
 
+                    ActivityResultContracts.CreateDocument createDocument = new ActivityResultContracts.CreateDocument("image/jpeg");
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    //        createDocument.createIntent(getApplicationContext(), "Save as new image");
+
 
                     //send an ACTION_CREATE_DOCUMENT intent to the system. It will open a dialog where the user can choose a location and a filename
                     intentSave.addCategory(Intent.CATEGORY_OPENABLE);
                     intentSave.putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".jpg");
                     intentSave.setDataAndType(photoURI, "image/jpeg");
+                    //createDocument.parseResult(new ²);
                     startActivityForResult(intentSave, REQUEST_CREATE_DOCUMENT_SAVE_IMAGE);
 
 
@@ -401,7 +406,9 @@ import one.empty3.feature20220726.PixM;
             public void onClick(View v) {
                 if (currentFile != null) {
                     BufferedImage read = ImageIO.read(currentFile);
-                    new Utils().setImageView(imageView, read.getBitmap());
+                    if(read.getBitmap()!=null) {
+                        new Utils().setImageView(imageView, read.getBitmap());
+                    }
                     drawPointA = null;
                     drawPointB = null;
                 } else toastButtonDisabled(v);
