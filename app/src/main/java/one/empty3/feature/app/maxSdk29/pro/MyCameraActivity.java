@@ -232,7 +232,7 @@ import one.empty3.feature20220726.PixM;
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
                     shareIntent.setDataAndType(photoURI, "image/jpeg");
                     shareIntent.putExtra("data", photoURI);
-                    passParameters(shareIntent);
+                    startActivity(shareIntent);
                 } else toastButtonDisabled(v);
             }
 
