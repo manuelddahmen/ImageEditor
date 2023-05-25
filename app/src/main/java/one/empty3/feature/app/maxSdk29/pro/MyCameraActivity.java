@@ -272,7 +272,7 @@ import one.empty3.feature20220726.PixM;
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
 
 
-                    ActivityResultContracts.CreateDocument createDocument = new ActivityResultContracts.CreateDocument("image/jpeg");
+                    //ActivityResultContracts.CreateDocument createDocument = new ActivityResultContracts.CreateDocument("image/jpeg");
                     Intent intentSave = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                     //        createDocument.createIntent(getApplicationContext(), "Save as new image");
 
