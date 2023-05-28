@@ -691,11 +691,9 @@ import one.empty3.feature20220726.PixM;
         if (currentFile != null) {
             PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
 
-            PixM copy = pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
+            return pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
                     (int)(selectedCords.right-selectedCords.left),
                     (int)(selectedCords.bottom- selectedCords.top));
-
-            return copy;
         }
         return null;
     }

@@ -764,7 +764,7 @@ public class PixM extends MBitmap {
         PixM p2 = new PixM(w, h);
         for (int i = x; i <= x + w; i++)
             for (int j = y; j <= y + h; j++)
-                for (int c = 0; c < getCompCount(); c++) {
+                for (int c = 0; c < 3; c++) {
                     setCompNo(c);
                     p2.setCompNo(c);
                     p2.set(i - x, j - y, get(i, j));

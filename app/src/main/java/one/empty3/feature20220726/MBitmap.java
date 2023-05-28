@@ -240,11 +240,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
-            //if (bitmap != null) {
-            //    return Lumiere.getDoubles(bitmap.getPixel(column, line))[compNo];
-            //}
-
-            return ((x[index(column, line)])/255.0);
+            return ((x[index(column, line)])/256.0);
         } else
             return noValue; // OutOfBound?
     }
