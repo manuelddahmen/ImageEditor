@@ -216,23 +216,31 @@ public class ActivitySuperClass extends AppCompatActivity {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
+        } catch (RuntimeException | IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
             for (int i = 0; i < cords.length; i++) {
                 properties.setProperty(cordsConsts[i], cords[i]);
             }
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+            try {
             String maxRes1 = properties.getProperty("maxRes", "" + maxRes);
             if(maxRes1!=null && maxRes1.length()>0) {
                 try {
                     maxRes = (int)Double.parseDouble(maxRes1);
-                } catch (NumberFormatException ex) {
-
                 } catch (RuntimeException ex1) {
+                    ex1.printStackTrace();
 
                 }
             }
 
             currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
-        } catch (RuntimeException | IOException ex) {
-        }
+            } catch (RuntimeException ex) {
+                ex.printStackTrace();
+            }
 
         try {
             File currentFile2 = null;
@@ -241,16 +249,14 @@ public class ActivitySuperClass extends AppCompatActivity {
             else
                 currentFile2 = new File(currentFile1);
             if(currentFile2!=null&&currentFile2.exists()) {
-                try {
                     currentFile = currentFile2;
-                } catch (RuntimeException ex) {
-
-                }
             }
         } catch (RuntimeException ex) {
-            Toast.makeText(getApplicationContext(), "Error loading currentFile", Toast.LENGTH_LONG)
-                    .show();
+            ex.printStackTrace();
         }
+        if(currentFile==null)
+            Toast.makeText(getApplicationContext(), "Cannot find current file (working copy)", Toast.LENGTH_SHORT)
+                    .show();
     }
 
     protected void saveInstanceState() {
