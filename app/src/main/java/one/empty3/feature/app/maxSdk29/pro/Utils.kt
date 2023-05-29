@@ -38,12 +38,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
+import androidx.core.util.rangeTo
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
+import one.empty3.Main2022
+import one.empty3.Main2022.initListProcesses
 import one.empty3.feature20220726.PixM
+import one.empty3.io.ProcessFile
 import java.io.*
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.max
 
 
@@ -329,6 +334,9 @@ import kotlin.math.max
         }
         return false
     }
+    fun loadImageInImageView(bitmap: Bitmap, imageViewEffectPreview: ImageViewSelection) {
+        setImageView(imageViewEffectPreview, bitmap)
+    }
 
 
     fun saveImageState(activity: ActivitySuperClass) {
@@ -482,6 +490,17 @@ import kotlin.math.max
             activity.cords[indexOf] = activity.variable
         }
 
+    }
+    public fun runEffectsOnThumbnail(fileIn : File, effect: ProcessFile) : File? {
+        val list = initListProcesses()
+        if(effect!=null) {
+            val randomUUID = UUID.randomUUID()
+            val fileOut = getFilesFile("thumb-" + effect +randomUUID +"-jpg")
+            if (effect.process(fileIn, fileOut)) {
+                return fileOut
+            }
+        }
+        return null
     }
 
 }

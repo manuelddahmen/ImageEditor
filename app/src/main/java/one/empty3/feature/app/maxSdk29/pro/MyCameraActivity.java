@@ -458,7 +458,11 @@ import one.empty3.feature20220726.PixM;
                 }
             }
         });
-        drawIfBitmap();
+        if(currentFile!=null) {
+            drawIfBitmap();
+        } else {
+            restoreInstanceState();
+        }
     }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {

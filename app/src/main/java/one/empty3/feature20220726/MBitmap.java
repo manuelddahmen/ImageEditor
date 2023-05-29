@@ -42,6 +42,9 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public MBitmap(int c, int l) {
         try {
             x = new char[c * l * 3];
+            for (int i = 0; i < x.length; i++) {
+                x[i] = 0;
+            }
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
@@ -79,7 +82,9 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         float[] colorComponents = new float[4];
         for (int i = 0; i < bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
-                int rgb = bitmap.getPixel((int) (1.0 * i * bitmap.getWidth() / c), (int) (1.0 * j * bitmap.getHeight() / l));
+                int rgb = bitmap.getPixel(
+                        (int) (1.0 * i / bitmap.getWidth() * c),
+                        (int) (1.0 * j / bitmap.getHeight() * l));
                 colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
@@ -105,6 +110,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
             for (int j = 0; j < pix.getLines(); j++) {
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
+                    pix.setCompNo(c);
                     set(i, j, pix.get(i, j));
                 }
             }

@@ -67,6 +67,15 @@ public abstract class Lumiere extends Representable {
 
     protected double S = 0.5;
 
+    public static int[] getInts(int rgb, int[] colorComponents) {
+        int[] res = new int[3];
+        for (int i = 0; i < 3; i++) {
+            res[i] = (((rgb & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8)));
+        }
+        return res;
+
+    }
+
     public abstract int getCouleur(int base, Point3D p, Point3D n);
 
     public int getLa() {
@@ -81,7 +90,6 @@ public abstract class Lumiere extends Representable {
         return Ld;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static double[] getRgb(Color c) {
         return new double[]{(c.red() / 255f),
                 (c.green() / 255f),
@@ -110,7 +118,6 @@ public abstract class Lumiere extends Representable {
         return res;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static android.graphics.Color getColorD(double[] d) {
         return Color.valueOf((float) (d[0]), (float) (d[1]), (float) (d[2]));
     }

@@ -107,8 +107,6 @@ public class ActivitySuperClass extends AppCompatActivity {
                     if (savedInstanceState.getString("currentFile") != null) {
                         currentFile = new File(savedInstanceState.getString("currentFile"));
                     }
-                } catch (NullPointerException ex1) {
-                    ex1.printStackTrace();
                 } catch (RuntimeException ex) {
                     ex.printStackTrace();
                 }
@@ -155,7 +153,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         }
     }
 
-    private void restoreInstanceState() {
+    void restoreInstanceState() {
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
@@ -213,6 +211,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     protected void loadInstanceState() {
+        String currentFile1 = null;
         new Utils().loadImageState(this, false);
         Properties properties = new Properties();
         try {
@@ -231,19 +230,24 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
 
-            String currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
+            currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
+        } catch (RuntimeException | IOException ex) {
+        }
 
-            if(currentFile1!=null&&currentFile1.length()>0) {
+        try {
+            File currentFile2 = null;
+            if(currentFile1==null)
+                currentFile2 = getImageViewPersistantFile();
+            else
+                currentFile2 = new File(currentFile1);
+            if(currentFile2!=null&&currentFile2.exists()) {
                 try {
-                    currentFile = new File(currentFile1);
+                    currentFile = currentFile2;
                 } catch (RuntimeException ex) {
 
                 }
-                if (currentFile != null) {
-                }
-
             }
-        } catch (RuntimeException | IOException ex) {
+        } catch (RuntimeException ex) {
             Toast.makeText(getApplicationContext(), "Error loading currentFile", Toast.LENGTH_LONG)
                     .show();
         }
@@ -272,8 +276,6 @@ public class ActivitySuperClass extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         } catch (RuntimeException | IOException ex) {
-            Toast.makeText(getApplicationContext(), "Error saving currentFile", Toast.LENGTH_LONG)
-                    .show();
         }
 
         try {
@@ -319,7 +321,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     protected File getFilesFile(String s) {
-        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files" + File.separator + s);
+        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/"  + s);
     }
 
     @org.jetbrains.annotations.Nullable

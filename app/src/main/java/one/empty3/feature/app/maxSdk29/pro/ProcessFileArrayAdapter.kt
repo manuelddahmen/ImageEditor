@@ -1,26 +1,36 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
+import javaAnd.awt.image.imageio.ImageIO
+import kotlinx.coroutines.joinAll
 
 import one.empty3.Main2022
 import one.empty3.feature.app.maxSdk29.pro.databinding.RecyclerViewEffectItemBinding
+import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
+import java.io.File
 import java.util.ArrayList
+import java.util.function.Predicate
 
-class ProcessFileArrayAdapter() :
+@ExperimentalCamera2Interop class ProcessFileArrayAdapter() :
     RecyclerView.Adapter<ProcessFileArrayAdapter.ViewHolder>(), Parcelable {
     private lateinit var arrayClasses: HashMap<String, ProcessFile>
-    private lateinit var activity: ChooseEffectsActivity2
+    private lateinit var activity: ActivitySuperClass
     private lateinit var main2022: Main2022
     private lateinit var rv: RecyclerView
 
@@ -63,6 +73,7 @@ class ProcessFileArrayAdapter() :
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val index: String = Main2022.indices!![position]
         val processFile: ProcessFile = arrayClasses[index]!!
@@ -75,8 +86,9 @@ class ProcessFileArrayAdapter() :
             holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
         val buttonAddToEffect: Button =
             holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
-        val buttonThreeToEffect: Button =
+        val buttonPropsToEffect: Button =
             holder.itemView.findViewById(R.id.commentEffect) as Button
+        //val imageViewEffectPreview : ImageView = holder.itemView.findViewById(R.id.imageViewEffectPreview)
         System.out.printf(
             "Layout class is : %s Button1 = %s Button 2 = %s\n",
             text1,
@@ -132,6 +144,23 @@ class ProcessFileArrayAdapter() :
 //                    }
 //                }
         }
+        buttonPropsToEffect.setOnClickListener {
+            run {
+                val effectClassModele1 = holder.getEffectClass()
+                val processFile11: ProcessFile =
+                    Main2022.initListProcesses().get(effectClassModele1) as ProcessFile
+                val p = PixM(30, 30)
+                val runEffectsOnThumbnail: File? =
+                    Utils().runEffectsOnThumbnail(activity.currentFile, processFile11);
+                val imageViewEffectPreview: ImageViewSelection =
+                    holder.itemView.findViewById(R.id.imageViewEffectPreview)
+                if (runEffectsOnThumbnail != null && runEffectsOnThumbnail.exists())
+                    Utils().setImageView(
+                        imageViewEffectPreview,
+                        ImageIO.read(runEffectsOnThumbnail).getBitmap()
+                    )
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -162,6 +191,10 @@ class ProcessFileArrayAdapter() :
 
     override fun describeContents(): Int {
         return arrayClasses.size
+    }
+
+    fun setCurrentActivity(chooseEffectsActivity2: ActivitySuperClass) {
+        this.activity = chooseEffectsActivity2
     }
 
     companion object CREATOR : Parcelable.Creator<ProcessFileArrayAdapter> {

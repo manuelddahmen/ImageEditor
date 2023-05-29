@@ -50,14 +50,14 @@ public class PixM extends MBitmap {
 
     public PixM(Bitmap image) {
         super(image.getWidth(), image.getHeight());
-        double [] colorComponents = new double[4];
+        int [] colorComponents = new int[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getInts(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
-                    set(i, j, (char)(colorComponents[com]*255));
+                    set(i, j, colorComponents[com]);
                 }
             }
         }
@@ -65,15 +65,15 @@ public class PixM extends MBitmap {
 
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
-        double[] colorComponents = new double[4];
+        int[] colorComponents = new int[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+                Lumiere.getInts(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     assert colorComponents != null;
-                    set(i, j, (char)(colorComponents[com]*255));
+                    set(i, j, colorComponents[com]);
                 }
             }
         }
@@ -762,8 +762,8 @@ public class PixM extends MBitmap {
         if (w <= 0 || h <= 0)
             return null;
         PixM p2 = new PixM(w, h);
-        for (int i = x; i <= x + w; i++)
-            for (int j = y; j <= y + h; j++)
+        for (int i = x; i < x + w; i++)
+            for (int j = y; j < y + h; j++)
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
                     p2.setCompNo(c);

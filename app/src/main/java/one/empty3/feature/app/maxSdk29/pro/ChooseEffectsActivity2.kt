@@ -65,6 +65,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
         processFileArrayAdapter.setMainAnd(Main2022(), recyclerView, this)
+        processFileArrayAdapter.setCurrentActivity(this)
         recyclerView.adapter = processFileArrayAdapter
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
@@ -72,37 +73,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         init(savedInstanceState)
     }
 
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    fun complete() {
-//        Log.i("autocomplete",
-//            "Autocomplete search")
-//        val split: List<String> = editText1.text.toString().split(",") as List<String>
-//        val effects = editText.text.toString()
-//        val splitEffectsList: List<String> = effects.split(",")
-//        var autoStr : String = ""
-//        for ((i, s1) in split.withIndex()) {
-//            Log.i("filters' list", ""+i+" : "+s1)
-//            if (s1.length > 2) {
-//                val count: Long = splitEffectsList.stream().filter { it.contains(s1) }
-//                    .count()
-//                if (count == 1L) {
-//                    Log.i("autocomplete",
-//                        "Autocomplete replacement: {"+s1+"} by ")
-//                    autoStr += splitEffectsList.stream().filter { it.contains(s1) }
-//                        .findFirst().toString()
-//
-//                } else {
-//                    autoStr += s1
-//                }
-//            }
-//        }
-//        var eff = findViewById<EditText>(R.id.effectsToApply)
-//        eff.setText(autoStr)
-//
-//        return
-//
-//
-//    }
 
     fun init(savedInstanceState: Bundle?) {
         requestPermissions(
