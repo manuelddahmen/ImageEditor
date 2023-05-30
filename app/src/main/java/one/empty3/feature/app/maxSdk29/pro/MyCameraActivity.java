@@ -1118,5 +1118,19 @@ import one.empty3.feature20220726.PixM;
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(currentFile==null)
+            saveInstanceState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(currentFile==null)
+            loadInstanceState();
+    }
 }
 
