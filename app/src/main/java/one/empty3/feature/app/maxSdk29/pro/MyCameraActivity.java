@@ -1122,7 +1122,7 @@ import one.empty3.feature20220726.PixM;
     @Override
     protected void onPause() {
         super.onPause();
-        if(currentFile==null)
+        if(currentFile!=null)
             saveInstanceState();
     }
 
