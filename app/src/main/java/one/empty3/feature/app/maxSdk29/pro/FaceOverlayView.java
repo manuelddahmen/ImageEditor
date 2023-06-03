@@ -88,14 +88,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 mFaces = faces;
 
 
-                mFaces.forEach(new Consumer<Face>() {
-                    @Override
-                    public void accept(Face face) {
-                        action(face);
-                    }
-
-
-                });
+                mFaces.forEach(face -> action(face));
             });
         } catch (Exception ignored) {
             ignored.printStackTrace();
@@ -167,11 +160,11 @@ public class FaceOverlayView extends ImageViewSelection {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
 
-        if (leftEyeContour!=null && leftEyeContour.size() > 2)
+        if (leftEyeContour!=null && leftEyeContour.size() >=2)
             for (int i = 0; i < leftEyeContour.size(); i++) {
                 drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())), paint);
             }
-        if (rightEyeContour!=null && rightEyeContour.size() > 2)
+        if (rightEyeContour!=null && rightEyeContour.size() >= 2)
             for (int i = 0; i < rightEyeContour.size(); i++) {
                     drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
             }
@@ -253,8 +246,8 @@ public class FaceOverlayView extends ImageViewSelection {
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
             Rect rect = face.getBoundingBox();
-            PointF a = coordCanvas(new PointF((int) (rect.left * scale), (int) (rect.top * scale)));
-            PointF b = coordCanvas(new PointF((int) (rect.right * scale), (int) (rect.bottom * scale)));
+            PointF a = coordCanvas(new PointF((int) (rect.left ), (int) (rect.top )));
+            PointF b = coordCanvas(new PointF((int) (rect.right ), (int) (rect.bottom )));
             mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
             action(face);
         }
