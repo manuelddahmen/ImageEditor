@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -166,16 +169,16 @@ public class FaceOverlayView extends ImageViewSelection {
 
         if (leftEyeContour!=null && leftEyeContour.size() > 2)
             for (int i = 0; i < leftEyeContour.size(); i++) {
-                mCanvas.drawLine(leftEyeContour.get(i).x, leftEyeContour.get(i).y,
-                        leftEyeContour.get((i + 1) % leftEyeContour.size()).x, leftEyeContour.get((i + 1) % leftEyeContour.size()).y,
-                        paint);
+                drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())), paint);
             }
         if (rightEyeContour!=null && rightEyeContour.size() > 2)
             for (int i = 0; i < rightEyeContour.size(); i++) {
-                mCanvas.drawLine(rightEyeContour.get(i).x, rightEyeContour.get(i).y,
-                        rightEyeContour.get((i + 1) % rightEyeContour.size()).x, rightEyeContour.get((i + 1) % rightEyeContour.size()).y,
-                        paint);
+                    drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
             }
+    }
+
+    private void drawLine(PointF pointF, PointF pointF1, Paint paint) {
+        mCanvas.drawLine(pointF.x, pointF.y, pointF1.x, pointF1.y, paint);
     }
 
     @Override
@@ -200,11 +203,23 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
         //Rect destBounds = new Rect(0, 0, (int) (imageWidth * scale), (int) (imageHeight * scale));
-        Rect destBounds = new Rect(0, 0, (int) ((imageWidth) * scale)+mCanvas.getWidth()/2, (int) (imageHeight * scale));
+        Rect destBounds = new Rect((int) ((int) (-(imageWidth/2) * scale)+mCanvas.getWidth()/2), 0, (int) ((int) ((imageWidth/2) * scale)+mCanvas.getWidth()/2), (int) (imageHeight * scale));
         mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
         return scale;
     }
+    public PointF coordCanvas(PointF p) {
+        if (mCanvas == null)
+            return p;
+        if (mBitmap == null)
+            return p;
 
+        double viewWidth = mCanvas.getWidth();
+        double viewHeight = mCanvas.getHeight();
+        double imageWidth = mBitmap.getWidth();
+        double imageHeight = mBitmap.getHeight();
+        double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
+        return new PointF((int) ((int) (-(imageWidth/2) * scale)+mCanvas.getWidth()/2+p.x*scale),(int)(p.y*scale));
+    }
 
     public void updateImage(Bitmap bm) {
         super.setImageBitmap2(bm);
@@ -238,8 +253,9 @@ public class FaceOverlayView extends ImageViewSelection {
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
             Rect rect = face.getBoundingBox();
-            mCanvas.drawRect((int) (rect.left * scale), (int) (rect.top * scale),
-                    (int) (rect.right * scale), (int) (rect.bottom * scale), paint);
+            PointF a = coordCanvas(new PointF((int) (rect.left * scale), (int) (rect.top * scale)));
+            PointF b = coordCanvas(new PointF((int) (rect.right * scale), (int) (rect.bottom * scale)));
+            mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
             action(face);
         }
     }
