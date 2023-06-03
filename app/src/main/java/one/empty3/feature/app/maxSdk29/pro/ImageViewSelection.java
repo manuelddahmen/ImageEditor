@@ -101,8 +101,7 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                Log.d("ImageViewSelection::setImageBitmap",
-                        "change image on UI thread");
+                //Log.d("ImageViewSelection::setImageBitmap", "change image on UI thread");
                 setImageBitmap(bm);
                 //pixels = new PixM(bm);
             }

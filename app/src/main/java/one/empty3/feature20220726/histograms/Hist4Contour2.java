@@ -176,8 +176,6 @@ public class Hist4Contour2 extends ProcessFile {
 public class Hist4Contour2 extends ProcessFile {
     private int kMax = 3;
     private double fractMax = 0.05;
-    public Hist4Contour2() {
-     }
 
     public static class Circle {
         public double x = 0.0, y = 0.0, r = 0.0;

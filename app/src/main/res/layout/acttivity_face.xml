@@ -9,12 +9,15 @@
         android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:minHeight="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintBottom_toTopOf="@id/camera_preview_video"/>
 
     <Button
             android:layout_height="48dp"
             android:layout_width="match_parent"
             android:id="@+id/camera_preview_video"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/face_overlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 </androidx.constraintlayout.widget.ConstraintLayout>

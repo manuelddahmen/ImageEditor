@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,9 +24,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
+import com.google.mlkit.vision.face.FaceContour;
 import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
+import com.google.mlkit.vision.face.FaceLandmark;
 import com.google.mlkit.vision.face.internal.FaceDetectorImpl;
 
 import java.util.List;
@@ -64,63 +67,131 @@ public class FaceOverlayView extends ImageViewSelection {
                             .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
                             .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
                             .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                            .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
                             .build();
 
 // Real-time contour detection
-            FaceDetectorOptions realTimeOpts =
-                    new FaceDetectorOptions.Builder()
-                            .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
-                            .build();
+//            FaceDetectorOptions realTimeOpts =
+//                    new FaceDetectorOptions.Builder()
+//                            .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
+//                            .build();
 
             InputImage inputImage = InputImage.fromBitmap(bitmap, 0);
 
             mCanvas = new Canvas(mCopy);
 
             FaceDetector client = FaceDetection.getClient(highAccuracyOpts);
-            client.process(inputImage).addOnSuccessListener(faces ->  {
+            client.process(inputImage).addOnSuccessListener(faces -> {
                 mFaces = faces;
 
 
                 mFaces.forEach(new Consumer<Face>() {
                     @Override
                     public void accept(Face face) {
-
+                        action(face);
                     }
+
+
                 });
-
             });
-
-            /*
-            com.google.android.gms.vision.face.FaceDetector detector = new com.google.android.gms.vision.face.FaceDetector.Builder( getContext() )
-                    .setTrackingEnabled(false)
-                    .setLandmarkType(com.google.android.gms.vision.face.FaceDetector.ALL_LANDMARKS)
-                    .setMode(com.google.android.gms.vision.face.FaceDetector.FAST_MODE)
-                    .build();
-                    */
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
 
         setImageBitmap2(mCopy);
 
-        invalidate();
+        //invalidate();
     }
+    private void action(Face face) {
+        Rect bounds = face.getBoundingBox();
+        float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
+        float rotZ = face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees
 
+        // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
+        // nose available):
+        FaceLandmark leftEar = face.getLandmark(FaceLandmark.LEFT_EAR);
+        if (leftEar != null) {
+            PointF leftEarPos = leftEar.getPosition();
+        }
+
+        // If contour detection was enabled:
+        List<PointF> leftEyeContour = null;
+        try {
+            leftEyeContour =
+                    face.getContour(FaceContour.LEFT_EYE).getPoints();
+        } catch (NullPointerException ex) {
+            //ex.printStackTrace();
+        }
+        List<PointF> rightEyeContour = null;
+        try {
+            // If contour detection was enabled:
+            rightEyeContour =
+                    face.getContour(FaceContour.RIGHT_EYE).getPoints();
+        } catch (NullPointerException ex) {
+            //ex.printStackTrace();
+        }
+        List<PointF> upperLipTopContour = null;
+        try {
+            upperLipTopContour =
+                    face.getContour(FaceContour.UPPER_LIP_TOP).getPoints();
+        } catch (NullPointerException ex) {
+            //ex.printStackTrace();
+        }
+        List<PointF> upperLipBottomContour = null;
+        try {
+            upperLipBottomContour =
+                    face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints();
+        } catch (NullPointerException ex) {
+            //ex.printStackTrace();
+        }
+
+        // If classification was enabled:
+        float smileProb = 0f;
+        if (face.getSmilingProbability() != null) {
+            smileProb = face.getSmilingProbability();
+        }
+        float rightEyeOpenProb = 0f;
+        if (face.getRightEyeOpenProbability() != null) {
+            rightEyeOpenProb = face.getRightEyeOpenProbability();
+        }
+
+        // If face tracking was enabled:
+        int id = -1;
+        if (face.getTrackingId() != null) {
+            id = face.getTrackingId();
+        }
+
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+
+        if (leftEyeContour!=null && leftEyeContour.size() > 2)
+            for (int i = 0; i < leftEyeContour.size(); i++) {
+                mCanvas.drawLine(leftEyeContour.get(i).x, leftEyeContour.get(i).y,
+                        leftEyeContour.get((i + 1) % leftEyeContour.size()).x, leftEyeContour.get((i + 1) % leftEyeContour.size()).y,
+                        paint);
+            }
+        if (rightEyeContour!=null && rightEyeContour.size() > 2)
+            for (int i = 0; i < rightEyeContour.size(); i++) {
+                mCanvas.drawLine(rightEyeContour.get(i).x, rightEyeContour.get(i).y,
+                        rightEyeContour.get((i + 1) % rightEyeContour.size()).x, rightEyeContour.get((i + 1) % rightEyeContour.size()).y,
+                        paint);
+            }
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.mCanvas = canvas;
-        if(mCopy==null)
+        if (mCopy == null)
             setImageBitmap(mBitmap);
-        if(mCopy!=null)
+        if (mCopy != null)
             updateImage(mCopy);
     }
 
     private double drawBitmap() {
-        if(mCanvas==null)
+        if (mCanvas == null)
             return 1.0;
-        if(mBitmap==null)
+        if (mBitmap == null)
             return 1.0;
 
         double viewWidth = mCanvas.getWidth();
@@ -128,8 +199,9 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageWidth = mBitmap.getWidth();
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
-        Rect destBounds = new Rect(0, 0, (int) (imageWidth * scale), (int) (imageHeight * scale));
-        mCanvas.drawBitmap(mBitmap, new Rect(0,0,mBitmap.getWidth(),mBitmap.getHeight()), destBounds, null);
+        //Rect destBounds = new Rect(0, 0, (int) (imageWidth * scale), (int) (imageHeight * scale));
+        Rect destBounds = new Rect(0, 0, (int) ((imageWidth) * scale)+mCanvas.getWidth()/2, (int) (imageHeight * scale));
+        mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
         return scale;
     }
 
@@ -139,7 +211,7 @@ public class FaceOverlayView extends ImageViewSelection {
         new Handler(Looper.getMainLooper()).post(() -> {
             Log.d("ImageViewSelection::setImageBitmap",
                     "change image on UI thread");
-            if(mFaces!=null && mCanvas!=null && bm!=null) {
+            if (mFaces != null && mCanvas != null && bm != null) {
                 double scale = drawBitmap();
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBox(mCanvas, scale));
             }
@@ -151,9 +223,9 @@ public class FaceOverlayView extends ImageViewSelection {
         //paint should be defined as a member variable rather than
         //being created on each onDraw request, but left here for
         //emphasis.
-        if(canvas==null)
+        if (canvas == null)
             return;
-        if(mFaces==null)
+        if (mFaces == null)
             return;
         Paint paint = new Paint();
         paint.setColor(Color.GREEN);
@@ -166,8 +238,9 @@ public class FaceOverlayView extends ImageViewSelection {
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
             Rect rect = face.getBoundingBox();
-            mCanvas.drawRect((int)(rect.left*scale), (int)(rect.top*scale),
-                    (int)(rect.right*scale), (int)(rect.bottom*scale), paint);
+            mCanvas.drawRect((int) (rect.left * scale), (int) (rect.top * scale),
+                    (int) (rect.right * scale), (int) (rect.bottom * scale), paint);
+            action(face);
         }
     }
 }
