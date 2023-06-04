@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionName="3.0" >
-<!--
+    <!--
     <queries>
         <package android:name="one.empty3.feature.app.maxSdk29.pro" />
         <package android:name="com.google.android.apps.docs" />
         <package android:name="com.android.camera2" />
         <package android:name="com.google.android.apps.photos" />
     </queries>
--->
+    -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-            android:maxSdkVersion="32"
-            />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
-            android:name=".FeatureAppApplication"
-            android:allowBackup="true"
-            android:exported="true"
-            android:hardwareAccelerated="true"
-            android:icon="@drawable/app_icon"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/app_icon"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.FeatureAppmain"
-            android:usesCleartextTraffic="true">
+        android:name=".FeatureAppApplication"
+        android:allowBackup="true"
+        android:exported="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FeatureAppmain"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".FaceEffectListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_face_effect_list"
+            android:theme="@style/Theme.FeatureAppmain" />
         <activity
             android:name=".ReshapeActivity"
             android:exported="false" />
@@ -44,7 +49,7 @@
             android:exported="false"
             android:hardwareAccelerated="true"
             android:label="@string/title_activity_choose_effect_list"
-            android:theme="@style/Theme.FeatureAppmain">
+            android:theme="@style/Theme.FeatureAppmain" >
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -65,8 +70,8 @@
             android:exported="true"
             android:hardwareAccelerated="true"
             android:label="Image Featuring"
-            android:theme="@style/Theme.FeatureAppmain">
-            <intent-filter android:autoVerify="true">
+            android:theme="@style/Theme.FeatureAppmain" >
+            <intent-filter android:autoVerify="true" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -115,11 +120,12 @@
             android:label="Draw graphics"
             android:theme="@style/Theme.FeatureAppmain" />
         <activity
-                android:name=".FaceActivity"
-                android:exported="false"
-                android:hardwareAccelerated="true"
-                android:label="Face Overpaint"
-                android:theme="@style/Theme.FeatureAppmain" />
+            android:name=".FaceActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:label="Face Overpaint"
+            android:theme="@style/Theme.FeatureAppmain" />
+
         <provider
             android:name=".MyFileProvider"
             android:authorities="one.empty3.fileprovider"
@@ -129,12 +135,15 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="face"/>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="face" />
     </application>
 
 </manifest>

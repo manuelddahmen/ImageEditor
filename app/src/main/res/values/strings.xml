@@ -196,5 +196,6 @@
     <string name="editProperties">Props</string>
     <string name="ok_calc">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_face_effect_list">FaceEffectListActivity</string>
 
 </resources>

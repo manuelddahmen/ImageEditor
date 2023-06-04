@@ -109,6 +109,12 @@ public class FaceOverlayView extends ImageViewSelection {
         if (leftEar != null) {
             PointF leftEarPos = leftEar.getPosition();
         }
+        // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
+        // nose available):
+        FaceLandmark rightEar = face.getLandmark(FaceLandmark.RIGHT_EAR);
+        if (rightEar != null) {
+            PointF rightEarPos = rightEar.getPosition();
+        }
 
         // If contour detection was enabled:
         List<PointF> leftEyeContour = null;
@@ -166,8 +172,10 @@ public class FaceOverlayView extends ImageViewSelection {
             }
         if (rightEyeContour!=null && rightEyeContour.size() >= 2)
             for (int i = 0; i < rightEyeContour.size(); i++) {
-                    drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
+                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
             }
+
+
     }
 
     private void drawLine(PointF pointF, PointF pointF1, Paint paint) {
