@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
         >
   <androidx.appcompat.widget.LinearLayoutCompat
           android:layout_width="match_parent"
@@ -19,7 +20,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:minHeight="96dp"
-              android:id="@+id/loadSubmenuIcons">
+              android:id="@+id/loadSubmenuIcons"
+              tools:listitem="@layout/live_effects_recycler_view_listitem">
           <!-- Start with face modifications, Item1 = eye's color,2 hairs' color -->
        
        

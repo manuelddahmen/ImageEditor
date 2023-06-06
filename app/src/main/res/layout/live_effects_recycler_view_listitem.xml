@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="vertical"
+        android:minHeight="96dp">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1">
+    
+        <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+                android:layout_width="96dp"
+                android:layout_height="48dp"
+                android:id="@+id/imagePreviewFaceEffect"
+                android:layout_weight="0.3"
+                />
+        <TextView android:id="@+id/effectName"
+                android:layout_width="256dp"
+                android:layout_height="48dp" android:layout_weight="0.3"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="0.3">
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/effectPreview" android:layout_weight="0.3"
+                />
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/effectDetails" android:layout_weight="0.3"
+                />
+    
+</LinearLayout>
+    <include layout="@layout/apply_effect_view" />
+</androidx.appcompat.widget.LinearLayoutCompat>

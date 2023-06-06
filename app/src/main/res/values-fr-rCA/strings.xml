@@ -192,4 +192,6 @@
     <string name="editProperties">Props</string>
     <string name="ok_calc">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="collapse">Collapse</string>
+    <string name="extend">Extend</string>
 </resources>

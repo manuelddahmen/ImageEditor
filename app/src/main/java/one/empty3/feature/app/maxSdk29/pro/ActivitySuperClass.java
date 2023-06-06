@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -260,7 +261,6 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     protected void saveInstanceState() {
-        new Utils().saveImageState(this);
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
@@ -291,14 +291,6 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-//        requestPermissions(new String[]{
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
-        restoreInstanceState();
-    }
 
     public void passParameters(Intent to) {
 
@@ -400,5 +392,22 @@ public class ActivitySuperClass extends AppCompatActivity {
     protected void onDestroy() {
         saveInstanceState();
         super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        new Utils().saveImageState(this);
+        saveInstanceState();
+
+    }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+//        requestPermissions(new String[]{
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
+        new Utils().loadImageState(this, false);
+        restoreInstanceState();
     }
 }

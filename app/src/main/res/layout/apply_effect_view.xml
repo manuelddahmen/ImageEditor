@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+<androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/currentEffectPreview"
+        app:layout_constraintEnd_toStartOf="@id/expandEffectPreview"
+        app:layout_constraintStart_toStartOf="parent"
+    android:text="@string/collapse"
+        android:id="@+id/collapseEffectPreview"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/currentEffectPreview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/collapseEffectPreview"
+            android:text="@string/extend"
+            android:id="@+id/expandEffectPreview"
+            />
+    
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/currentEffectPreview"
+            app:layout_constraintTop_toBottomOf="@id/expandEffectPreview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/applyEffectPreview"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/collapse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/currentEffectPreview"
+            app:layout_constraintEnd_toStartOf="@id/cancelEffectPreview"
+            android:id="@+id/applyEffectPreview"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/extend"
+            app:layout_constraintTop_toBottomOf="@id/currentEffectPreview"
+            app:layout_constraintStart_toEndOf="@id/applyEffectPreview"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/cancelEffectPreview"
+            />
+</androidx.constraintlayout.widget.ConstraintLayout>
