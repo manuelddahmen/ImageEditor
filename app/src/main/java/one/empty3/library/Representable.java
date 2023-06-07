@@ -589,6 +589,13 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
     public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent) {
         ZBufferImpl zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
+        Scene scene1 = new Scene();
+        zBuffer.scene(scene1);// CA MANQUE D'INDEPENDANCE
+        Point3D middle = Point3D.n(bitmap.getWidth()/2, bitmap.getHeight()/2,0);
+
+        scene1.cameraActive(new Camera(middle.plus(Point3D.Z.mult(Math.max(bitmap.getWidth(), bitmap.getHeight()))), middle, Point3D.Y));
+        scene1.cameraActive().declareProperties();
+        zBuffer.camera(scene1.cameraActive());
         zBuffer.setTransparent(transparent);
         zBuffer.draw(this);
         zBuffer.getImage(bitmap, mCanvas);

@@ -124,7 +124,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public Box2D box;
     private int displayType = SURFACE_DISPLAY_TEXT_QUADS;
     ZBufferImpl that;
-    private int transparent;
+    private int transparent = 0;
 
     public ZBufferImpl() {
         that = this;
@@ -164,7 +164,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         //this.cameraC = c;
         this.scene().cameraActive(c);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     public synchronized void draw() {
 
@@ -1306,6 +1305,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     ime.setElementID(i, j, idImg);
                     ime.setElementPoint(i, j, INFINITY);
                     ime.setElementCouleur(i, j, getTexture().getColorAt(1. * i / la, 1. * j / ha));
+                    ime.setElementRepresentable(j, j, null);
                 }
             }
         }
@@ -1500,6 +1500,9 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
         public int COULEUR_FOND_INT(int x, int y) {
             couleur_fond_int = getTexture().getColorAt(1.0 * x / largeur(), 1.0 * y / hauteur());
+            if(Simerepresentable[x][y]==null) {
+                return transparent;
+            }
             return couleur_fond_int;
         }
 
