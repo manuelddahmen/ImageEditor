@@ -75,9 +75,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     public Polygon() {
         super();
-        for (int i = 0; i < 4; i++) {
-            points.add(1, Point3D.random(10.0));
-        }
         declareProperties();
     }
 

@@ -356,6 +356,7 @@ public class StructureMatrix<T> {
     }
 
     public void setAll(T[] all) {
+        dim = 1;
         data1d = Collections.synchronizedList(new ArrayList<>());
         switch (dim) {
             case 1:
@@ -370,6 +371,7 @@ public class StructureMatrix<T> {
 
     public void setAll(T[][] all) {
         data2d = Collections.synchronizedList(new ArrayList<List<T>>());
+        dim = 2;
         switch (dim) {
             case 2:
                 for (int i = 0; i < all.length; i++) {
@@ -388,6 +390,8 @@ public class StructureMatrix<T> {
 
     public void reset() {
         data0d = null;
+        if(dim==0)
+            data0d = null;
         if (dim == 1)
             data1d.clear();
         if (dim == 2)

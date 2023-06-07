@@ -41,6 +41,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import one.empty3.feature20220726.PixM;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.Representable;
@@ -191,13 +192,12 @@ public class FaceOverlayView extends ImageViewSelection {
     }
 
     private void fillPolygon(List<PointF> rightEyeContour, Paint paint) {
-        Polygon polygon = new Polygon();
         int size = rightEyeContour.size();
         Point3D[] point3DS = new Point3D[size];
         for (int i = 0; i < rightEyeContour.size(); i += 2) {
             point3DS[i / 2] = new Point3D(rightEyeContour.get(i / 2).x * 1.0, rightEyeContour.get(i / 2 + 1).y * 1.0, 0d);
         }
-        polygon.setPoints(point3DS);
+        Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.BLACK));
         polygon.drawOnCanvas(mCanvas, mCopy.copy(Bitmap.Config.ARGB_8888, true), Representable.FILL, Color.BLACK);
     }
 
