@@ -61,6 +61,11 @@ Faces
 Try to don't crash when picture is too big for RAM.
 double -> byte -> char
 Hist4Contour2.java
+Now effects thumbnails preview
+Stable save/load picture on Pause/Resume (error correction no 1)
+Faces: try to show Landmarks. Adjusting photo in ImageView
+Implements methods for drawing 3D-shapes from Empty3-library-3d and Transparency.
+PixM char -> double (?) FIX#1
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -120,10 +125,37 @@ Fix: color and selection, copy and paste subimagesS'occuper des problèmes de co
 Crash launch activity Text: Fixed.
 Try to fix extra persmissions problem
 Faces
+Try to don't crash when picture is too big for RAM.
+Gradient OK
+Pass parameters x,y,r,g,b,a across activities
+Seems better
+Calculator.kt+++3-pfft
+Hist4Contour2: isImage() _!isImage()
+CurrentFile member variable problem. FIX2
+Now effects thumbnails preview
+Stable save/load picture on Pause/Resume
+Faces: try to show Landmarks. Adjusting photo in ImageView
+restore/save InstanceState, ImageState
 1- S'occuper des problèmes de collages. (copier-coller) - Resolved.
 2- Améliorer "Face" (...)
 3) try to repair ChooseEffectsActivity2
 Try to don't crash when picture is too big for RAM.
 double -> byte -> char
 Hist4Contour2.java
+Try to don't crash when picture is too big for RAM.
+Gradient OK
+Pass parameters x,y,r,g,b,a across activities
+Seems better
+Calculator.kt+++3-pfft
+Hist4Contour2: isImage() _!isImage()
+CurrentFile member variable problem. FIX2
+Now effects thumbnails preview
+Stable save/load picture on Pause/Resume
+Faces: try to show Landmarks. Adjusting photo in ImageView
+restore/save InstanceState, ImageState
+Now effects thumbnails preview
+Stable save/load picture on Pause/Resume (error correction no 1)
+Faces: try to show Landmarks. Adjusting photo in ImageView
+Implements methods for drawing 3D-shapes from Empty3-library-3d and Transparency.
+PixM char -> double (?) FIX#1
 </fr-FR>
