@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.NinePatch;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -12,6 +13,7 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -39,12 +41,16 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import one.empty3.feature20220726.PixM;
+import one.empty3.library.Point3D;
+import one.empty3.library.Polygon;
+import one.empty3.library.Representable;
 
 public class FaceOverlayView extends ImageViewSelection {
     private List<Face> mFaces;
     protected Bitmap mBitmap;
     private Canvas mCanvas;
     private Bitmap mCopy;
+    private boolean isFinish = false;
 
     public FaceOverlayView(@NonNull Context context) {
         super(context);
@@ -98,6 +104,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
         //invalidate();
     }
+
     private void action(Face face) {
         Rect bounds = face.getBoundingBox();
         float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
@@ -166,17 +173,34 @@ public class FaceOverlayView extends ImageViewSelection {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
 
-        if (leftEyeContour!=null && leftEyeContour.size() >=2)
+        Paint paint2 = new Paint();
+        paint2.setColor(Color.BLUE);
+        if (leftEyeContour != null && leftEyeContour.size() >= 2) {
             for (int i = 0; i < leftEyeContour.size(); i++) {
                 drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())), paint);
+
             }
-        if (rightEyeContour!=null && rightEyeContour.size() >= 2)
+            fillPolygon(leftEyeContour, paint2);
+        }
+        if (rightEyeContour != null && rightEyeContour.size() >= 2) {
             for (int i = 0; i < rightEyeContour.size(); i++) {
                 drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
             }
-
-
+            fillPolygon(rightEyeContour, paint2);
+        }
     }
+
+    private void fillPolygon(List<PointF> rightEyeContour, Paint paint) {
+        Polygon polygon = new Polygon();
+        int size = rightEyeContour.size();
+        Point3D[] point3DS = new Point3D[size];
+        for (int i = 0; i < rightEyeContour.size(); i += 2) {
+            point3DS[i / 2] = new Point3D(rightEyeContour.get(i / 2).x * 1.0, rightEyeContour.get(i / 2 + 1).y * 1.0, 0d);
+        }
+        polygon.setPoints(point3DS);
+        polygon.drawOnCanvas(mCanvas, mCopy.copy(Bitmap.Config.ARGB_8888, true), Representable.FILL, Color.BLACK);
+    }
+
 
     private void drawLine(PointF pointF, PointF pointF1, Paint paint) {
         mCanvas.drawLine(pointF.x, pointF.y, pointF1.x, pointF1.y, paint);
@@ -185,11 +209,17 @@ public class FaceOverlayView extends ImageViewSelection {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (isFinish())
+            return;
         this.mCanvas = canvas;
         if (mCopy == null)
             setImageBitmap(mBitmap);
         if (mCopy != null)
             updateImage(mCopy);
+    }
+
+    private boolean isFinish() {
+        return isFinish;
     }
 
     private double drawBitmap() {
@@ -204,10 +234,11 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
         //Rect destBounds = new Rect(0, 0, (int) (imageWidth * scale), (int) (imageHeight * scale));
-        Rect destBounds = new Rect((int) ((int) (-(imageWidth/2) * scale)+mCanvas.getWidth()/2), 0, (int) ((int) ((imageWidth/2) * scale)+mCanvas.getWidth()/2), (int) (imageHeight * scale));
+        Rect destBounds = new Rect((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2), 0, (int) ((int) ((imageWidth / 2) * scale) + mCanvas.getWidth() / 2), (int) (imageHeight * scale));
         mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
         return scale;
     }
+
     public PointF coordCanvas(PointF p) {
         if (mCanvas == null)
             return p;
@@ -219,7 +250,7 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageWidth = mBitmap.getWidth();
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
-        return new PointF((int) ((int) (-(imageWidth/2) * scale)+mCanvas.getWidth()/2+p.x*scale),(int)(p.y*scale));
+        return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale), (int) (p.y * scale));
     }
 
     public void updateImage(Bitmap bm) {
@@ -233,6 +264,13 @@ public class FaceOverlayView extends ImageViewSelection {
             }
         });
 
+    }
+
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        isFinish = true;
+        return super.onSaveInstanceState();
     }
 
     private void drawFaceBox(Canvas canvas, double scale) {
@@ -254,8 +292,8 @@ public class FaceOverlayView extends ImageViewSelection {
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
             Rect rect = face.getBoundingBox();
-            PointF a = coordCanvas(new PointF((int) (rect.left ), (int) (rect.top )));
-            PointF b = coordCanvas(new PointF((int) (rect.right ), (int) (rect.bottom )));
+            PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
+            PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));
             mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
             action(face);
         }

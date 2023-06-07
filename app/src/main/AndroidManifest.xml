@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionName="3.0" >
+<manifest
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:versionName="3.0"
+        >
     <!--
     <queries>
         <package android:name="one.empty3.feature.app.maxSdk29.pro" />
@@ -10,46 +12,64 @@
     </queries>
     -->
     <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
+            android:name="android.hardware.camera"
+            android:required="false"
+            />
+    
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+            android:name="android.permission.READ_EXTERNAL_STORAGE"
+            android:maxSdkVersion="32"
+            />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
+    
     <application
-        android:name=".FeatureAppApplication"
-        android:allowBackup="true"
-        android:exported="true"
-        android:hardwareAccelerated="true"
-        android:icon="@drawable/app_icon"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/app_icon"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.FeatureAppmain"
-        android:usesCleartextTraffic="true" >
-        <activity
-            android:name=".FaceEffectListActivity"
-            android:exported="false"
-            android:label="@string/title_activity_face_effect_list"
-            android:theme="@style/Theme.FeatureAppmain" />
-        <activity
-            android:name=".ReshapeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TextActivity"
-            android:exported="false"
+            android:name=".FeatureAppApplication"
+            android:allowBackup="true"
+            android:exported="true"
             android:hardwareAccelerated="true"
-            android:label="@string/title_activity_text"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:icon="@drawable/app_icon"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/app_icon"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:usesCleartextTraffic="true"
+            >
+        <activity android:name=".VisualFaceEffects"
+                android:exported="true"
+                android:hardwareAccelerated="true"
+                android:label="Face Visual Effects"
+                android:theme="@style/Theme.FeatureAppmain">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/jpg" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".ChooseEffectsActivity2"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="@string/title_activity_choose_effect_list"
-            android:theme="@style/Theme.FeatureAppmain" >
+                android:name=".FaceEffectListActivity"
+                android:exported="false"
+                android:label="@string/title_activity_face_effect_list"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
+        <activity
+                android:name=".ReshapeActivity"
+                android:exported="false"
+                />
+        <activity
+                android:name=".TextActivity"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="@string/title_activity_text"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
+        <activity
+                android:name=".ChooseEffectsActivity2"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="@string/title_activity_choose_effect_list"
+                android:theme="@style/Theme.FeatureAppmain"
+                >
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
@@ -57,7 +77,7 @@
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
                 <!-- <action android:name="android.intent.action.MAIN" /> -->
-
+    
                 <data android:scheme="package" />
                 <!-- Default for launch requests -->
                 <category android:name="android.intent.category.DEFAULT" />
@@ -65,15 +85,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyCameraActivity"
-            android:enabled="true"
-            android:exported="true"
-            android:hardwareAccelerated="true"
-            android:label="Image Featuring"
-            android:theme="@style/Theme.FeatureAppmain" >
-            <intent-filter android:autoVerify="true" >
+                android:name=".MyCameraActivity"
+                android:enabled="true"
+                android:exported="true"
+                android:hardwareAccelerated="true"
+                android:label="Image Featuring"
+                android:theme="@style/Theme.FeatureAppmain"
+                >
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
-
+    
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!--
@@ -91,59 +112,68 @@
             -->
         </activity>
         <activity
-            android:name=".LicenceUserData"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:theme="@style/Theme.FeatureAppmain" />
+                android:name=".LicenceUserData"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <activity
-            android:name=".LicenceUserData2"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="LicenceUserData2"
-            android:theme="@style/Theme.FeatureAppmain" />
+                android:name=".LicenceUserData2"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="LicenceUserData2"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <activity
-            android:name=".Calculator"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="Simple Calculator"
-            android:theme="@style/Theme.FeatureAppmain" />
+                android:name=".Calculator"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Simple Calculator"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <activity
-            android:name=".GraphicsActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="Draw graphics"
-            android:theme="@style/Theme.FeatureAppmain" />
+                android:name=".GraphicsActivity"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Draw graphics"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <activity
-            android:name=".GraphicsActivityView"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="Draw graphics"
-            android:theme="@style/Theme.FeatureAppmain" />
+                android:name=".GraphicsActivityView"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Draw graphics"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <activity
-            android:name=".FaceActivity"
-            android:exported="false"
-            android:hardwareAccelerated="true"
-            android:label="Face Overpaint"
-            android:theme="@style/Theme.FeatureAppmain" />
-
+                android:name=".FaceActivity"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Face Overpaint"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <provider
-            android:name=".MyFileProvider"
-            android:authorities="one.empty3.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true" />
+                android:name=".MyFileProvider"
+                android:authorities="one.empty3.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true"
+                />
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true" >
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true"
+                >
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"
+                    />
         </provider>
-
+        
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="face" />
+                android:name="com.google.android.gms.vision.DEPENDENCIES"
+                android:value="face"
+                />
     </application>
 
 </manifest>

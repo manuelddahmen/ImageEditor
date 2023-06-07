@@ -63,7 +63,9 @@ import one.empty3.pointset.PCont;
 import java.io.File;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Build;
 
@@ -122,6 +124,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public Box2D box;
     private int displayType = SURFACE_DISPLAY_TEXT_QUADS;
     ZBufferImpl that;
+    private int transparent;
 
     public ZBufferImpl() {
         that = this;
@@ -542,7 +545,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         if (ime.getIME().getElementProf((int) p.x, (int) p.y) >= INFINITY_DEEP) {
             return ime.getIME().getElementCouleur((int) p.x, (int) p.y);
         } else {
-            return Color.TRANSPARENT;
+            return transparent;
         }
     }
 
@@ -1046,6 +1049,27 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             }
         }
     }
+
+    public void getImage(Bitmap bitmap, Canvas mCanvas) {
+        Paint paint = new Paint();
+        for(int i=0; i<bitmap.getWidth(); i++) {
+            for (int j = 0; j < bitmap.getHeight(); j++) {
+                int color = bitmap.getColor(i, j).toArgb();
+                if(color!=isTranparent()) {
+                    paint.setColor(color);
+                    mCanvas.drawPoint(i, j, paint);
+                }
+            }
+        }
+    }
+
+    public int isTranparent() {
+        return transparent;
+    }
+    public void setTransparent(int mTransparent) {
+        this.transparent = mTransparent;
+    }
+
 
     public class Box2D {
 

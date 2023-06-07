@@ -56,6 +56,8 @@
 package one.empty3.library;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -83,6 +85,8 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public static final int SURFACE_DISPLAY_LINES = 5;
     public static final int SURFACE_DISPLAY_POINTS = 6;
     private static final String[] displayTypes = {"All", "Textured Quad", "SURFACE_DISPLAY_TEXT_TRI", "SURFACE_DISPLAY_COL_QUADS", "SURFACE_DISPLAY_COL_TRI", "SURFACE_DISPLAY_LINES", "SURFACE_DISPLAY_POINTS"};
+    public static int FILL = 1;
+    public static int BORDERS = 2;
     private int displayType = 0; //SURFACE_DISPLAY_TEXT_QUADS;
     public static Point3D SCALE1;
     public static final ITexture DEFAULT_TEXTURE = new TextureCol(Colors.random());
@@ -581,6 +585,13 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
     public ITexture texture() {
         return texture;
+    }
+
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent) {
+        ZBufferImpl zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
+        zBuffer.setTransparent(transparent);
+        zBuffer.draw(this);
+        zBuffer.getImage(bitmap, mCanvas);
     }
 }
 

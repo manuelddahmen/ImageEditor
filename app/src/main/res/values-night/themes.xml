@@ -19,9 +19,14 @@
   -->
 
 <resources>
-
+    
     <style name="ThemeOverlay.FeatureApp134a7b212b2e13753a6c06877eb82b06f1fc743d.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">#FF0000AA</item>
         <item name="fullscreenTextColor">#FF8888FF</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FeatureAppmain" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

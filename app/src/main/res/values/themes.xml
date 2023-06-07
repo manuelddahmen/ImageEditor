@@ -19,7 +19,7 @@
   -->
 
 <resources>
-
+    
     <style name="Theme.FeatureAppmain" parent="Theme.Material3.DayNight">
         <item name="android:colorBackground">@color/light_blue_600</item>
         <item name="android:color">#F0F6F9</item>
@@ -27,42 +27,47 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-
+    
+    
     <style name="TextAppearance.AppCompat.Widget.Button" parent="Theme.Material3.DayNight">
         <item name="android:textSize">10sp</item>
-
+    
     </style>
-
+    
     <style name="TextAppearance.AppCompat.Widget.TextView" parent="Theme.Material3.DayNight">
         <item name="android:textSize">10sp</item>
-
+    
     </style>
-
+    
     <style name="TextAppearance.AppCompat.Widget.EditText" parent="Theme.Material3.DayNight">
         <item name="android:textSize">10sp</item>
-
+    
     </style>
-
+    
     <style name="TextAppearance.AppCompat.Body1" parent="Theme.Material3.DayNight">
         <item name="android:textSize">10sp</item>
     </style>
-
+    
     <style name="TextAppearance.AppCompat.Body2" parent="Theme.Material3.DayNight">
         <item name="android:textSize">10sp</item>
     </style>
-
+    
     <style name="Theme.FeatureAppmain.AppBarOverlay" parent="Theme.Material3.DayNight">
-
+    
     </style>
-
+    
     <style name="Theme.FeatureAppmain.PopupOverlay" parent="Theme.Material3.DayNight">
-
+    
     </style>
-
-
+    
+    
     <style name="Theme.FeatureApp.AppBarOverlay" parent="Theme.MaterialComponents.Light.NoActionBar" />
-
+    
     <style name="Theme.FeatureApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FeatureAppmain" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
 
 </resources>
