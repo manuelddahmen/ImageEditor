@@ -1051,6 +1051,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     public void getImage(Bitmap bitmap, Canvas mCanvas) {
         Paint paint = new Paint();
+        //mCanvas.setBitmap(bitmap);
         for(int i=0; i<bitmap.getWidth(); i++) {
             for (int j = 0; j < bitmap.getHeight(); j++) {
                 int color = bitmap.getColor(i, j).toArgb();

@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.util.Log;
 import one.empty3.library.Point3D;
 
+import java.util.Arrays;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -33,27 +34,25 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = 0.;//r.next();
-    public int compCount = 3;
+    protected final int compCount = 3;
     protected int columns;
     protected int lines;
     protected int compNo;
-    char[] x;
+    double[] x;
 
     public MBitmap(int c, int l) {
         try {
-            x = new char[c * l * 3];
-            for (int i = 0; i < x.length; i++) {
-                x[i] = 0;
-            }
+            x = new double[c * l * 3];
+            Arrays.fill(x, 0);
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
             l = (int) (1.0 * maxRes / c * l);
             try {
-                x = new char[l * c * 3];
+                x = new double[l * c * 3];
             } catch (OutOfMemoryError err) {
                 err.printStackTrace();
-                x = new char[100 * 100];
+                x = new double[100 * 100];
                 l = 100;
                 c = 100;
                 Log.e(MBitmap.class.toString(), err.getMessage(), err);
@@ -67,13 +66,13 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         int l = maxRes;
         int c = maxRes;
         try {
-            x = new char[bitmap.getWidth() * bitmap.getHeight() * 3];
+            x = new double[bitmap.getWidth() * bitmap.getHeight() * 3];
             l = bitmap.getHeight();
             c = bitmap.getWidth();
         } catch (OutOfMemoryError ex) {
             c = maxRes;
             l = (int) (maxRes * bitmap.getHeight() / bitmap.getWidth());
-            x = new char[l * c * 3];
+            x = new double[l * c * 3];
         }
         this.lines = l;
         this.columns = c;
@@ -104,7 +103,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         this(pix.getLines(), pix.getColumns());
         this.lines = pix.getLines();
         this.columns = pix.getColumns();
-        x = new char[lines * columns * 3];
+        x = new double[lines * columns * 3];
 
         for (int i = 0; i < pix.getColumns(); i++) {
             for (int j = 0; j < pix.getLines(); j++) {
@@ -241,12 +240,12 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public void init(int l, int c) {
         this.lines = l;
         this.columns = c;
-        x = new char[l * c * compCount];
+        x = new double[l * c * compCount];
     }
 
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
-            return ((x[index(column, line)])/256.0);
+            return ((x[index(column, line)]));
         } else
             return noValue; // OutOfBound?
     }
@@ -292,7 +291,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 //                bitmap.setPixel(column, line, p);
 //                return;
 //            }
-            x[index(column, line)] = (char) (d*255);
+            x[index(column, line)] = (char) (d);
         }
 
     }

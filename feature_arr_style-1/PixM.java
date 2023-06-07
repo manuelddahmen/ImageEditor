@@ -1,3 +1,4 @@
+/*
 package one.empty3.feature_arr_style;
 
 import android.graphics.Bitmap;
@@ -48,7 +49,8 @@ public class PixM extends MBitmap {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
-        /*
+        */
+/*
         float[] colorComponents = new float[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
@@ -59,7 +61,8 @@ public class PixM extends MBitmap {
                     set(i, j, colorComponents[com]);
                 }
             }
-        }*/
+        }*//*
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -144,11 +147,13 @@ public class PixM extends MBitmap {
                         for (int v = -filter.getLines() / 2; v <= filter.getLines() / 2; v++) {
      
                         
-                        /*V derivative = derivative(i, j, 2, null);
+                        */
+/*V derivative = derivative(i, j, 2, null);
                         double v1 = derivative.get(0, 0);
                         double v2 = derivative.get(1, 0);
                         c.set(i, j,(v1+v2)
-                                * filter.filterUVvalue(u, v, u*v));*/
+                                * filter.filterUVvalue(u, v, u*v));*//*
+
                             double filterUVvalue = filter.get(u + filter.getColumns() / 2,
                                     v + filter.getLines() / 2);
                             double vAtUv = get(i + u, j + v);
@@ -211,6 +216,7 @@ public class PixM extends MBitmap {
         return image;
 
     }
+*/
 /*
 
     public void plotCurve(ParametricCurve curve, ITexture texture) {
@@ -225,8 +231,10 @@ public class PixM extends MBitmap {
             }
         }
     }
-*/
-    /*
+*//*
+
+    */
+/*
     public void plotCurve(ParametricCurve curve, Color color, int x, int y) {
 
         float[] rgba = new float[getCompCount()];
@@ -239,8 +247,10 @@ public class PixM extends MBitmap {
             }
         }
     }
-*/
-    /*
+*//*
+
+    */
+/*
     public void fillIn(ParametricCurve curve, ITexture texture, ITexture borderColor) {
         int[] linesIn = new int[getLines()];
         int[] linesOut = new int[getLines()];
@@ -302,7 +312,8 @@ public class PixM extends MBitmap {
 
 
     }
-*/
+*//*
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM normalize(final double min, final double max) {
@@ -410,7 +421,8 @@ public class PixM extends MBitmap {
         return pixM;
     }
 
-    /*
+    */
+/*
         public double distance(ParametricCurve curve, Point3D p) {
             double dI, dist = 10000;
             double j = -1;
@@ -421,7 +433,8 @@ public class PixM extends MBitmap {
                 }
             return j;
         }
-    */
+    *//*
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public double distance(PixM p2) {
         double d = 0.0;
@@ -632,3 +645,4 @@ public class PixM extends MBitmap {
 
     }
 }
+*/

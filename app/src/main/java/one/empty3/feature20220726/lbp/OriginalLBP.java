@@ -57,6 +57,5 @@ public class OriginalLBP {
                 }
                 m.set(i, j, binary);
             }
-        m.compCount = 1;
     }
 }

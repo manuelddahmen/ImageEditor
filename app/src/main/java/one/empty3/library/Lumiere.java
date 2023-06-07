@@ -68,11 +68,10 @@ public abstract class Lumiere extends Representable {
     protected double S = 0.5;
 
     public static int[] getInts(int rgb, int[] colorComponents) {
-        int[] res = new int[3];
         for (int i = 0; i < 3; i++) {
-            res[i] = (((rgb & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8)));
+            colorComponents[i] = (((rgb & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8)));
         }
-        return res;
+        return colorComponents;
 
     }
 
