@@ -67,7 +67,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
     public void setBitmap(Bitmap bitmap) {
 
-        //this.mBitmap = bitmap;
+        this.mBitmap = bitmap;
         mCopy = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         try {
