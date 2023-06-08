@@ -152,6 +152,9 @@ import java.util.UUID
                 ), INT_WRITE_STORAGE
             )
         }
+        else {
+            applyTextNext()
+        }
         return true
     }
 
