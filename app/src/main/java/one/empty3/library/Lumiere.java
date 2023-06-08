@@ -74,9 +74,7 @@ public abstract class Lumiere extends Representable {
         return colorComponents;
 
     }
-
     public abstract int getCouleur(int base, Point3D p, Point3D n);
-
     public int getLa() {
         return La;
     }
@@ -105,7 +103,7 @@ public abstract class Lumiere extends Representable {
     public static int getInt(double[] d) {
         int res = 0;
         for (int i = 0; i < 3; i++) {
-            res += ((int) (float) (d[i] * 256)) << ((2 - i) * 8);
+            res += ((int) (float) (d[i] * 255)) << ((2 - i) * 8);
         }
         return res;//|0xFF000000;
     }
@@ -113,13 +111,13 @@ public abstract class Lumiere extends Representable {
     public static double[] getDoubles(int c) {
         double[] res = new double[3];
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))) ;
+            res[i] = (((c & (0xff << (((2 - i) * 8))) >> ((2 - i) * 8)))) ;
         }
         return res;
     }
     public static double[] getDoubles(int c, double[] res) {
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))) ;
+            res[i] = (((c & ((0xff << ((2 - i) * 8))) >> ((2 - i) * 8)))) ;
         }
         return res;
     }
