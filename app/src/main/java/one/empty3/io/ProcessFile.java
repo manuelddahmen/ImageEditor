@@ -45,6 +45,9 @@ public abstract class ProcessFile {
     protected int maxRes = 1280;
     private Properties property;
     private File outputDirectory = null;
+    /***
+     * Must be set to false?
+     */
     public boolean shouldOverwrite = true;
     protected List<File> imagesStack = new ArrayList<>();
 

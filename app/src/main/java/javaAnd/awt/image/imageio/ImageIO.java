@@ -54,9 +54,9 @@ public class ImageIO {
     public static boolean write(BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {
         if (!out.exists() || shouldOverwrite) {
             FileOutputStream fileOutputStream = new FileOutputStream(out);
-            imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            boolean ret = imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
             fileOutputStream.close();
-            return true;
+            return ret;
         } else {
             return false;
         }
@@ -68,8 +68,7 @@ public class ImageIO {
         FileOutputStream fileOutputStream = null;
         try {
                 fileOutputStream = new FileOutputStream(out);
-                image.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                return true;
+                return image.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
         } catch (FileNotFoundException e) {
             System.out.println("ImageIO write");
             e.printStackTrace();

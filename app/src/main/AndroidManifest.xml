@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:versionName="3.0"
         >
     <!--
@@ -34,7 +35,8 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.FeatureAppmain"
             android:usesCleartextTraffic="true"
-            >
+            android:enableOnBackInvokedCallback="true"
+            tools:targetApi="tiramisu">
         <activity android:name=".VisualFaceEffects"
                 android:exported="true"
                 android:hardwareAccelerated="true"

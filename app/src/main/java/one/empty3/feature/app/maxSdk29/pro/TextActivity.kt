@@ -24,24 +24,29 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.RectF
 import android.net.Uri
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
 import javaAnd.awt.Point
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
-import java.util.*
+import java.util.UUID
 
 
 @ExperimentalCamera2Interop class TextActivity() : ActivitySuperClass() {
@@ -72,9 +77,9 @@ import java.util.*
         val backButton = findViewById<Button>(R.id.buttonTextToMain)
         backButton.setOnClickListener {
             try {
-                val textIntent = Intent(it.context, MyCameraActivity::class.java)
+                val textIntent = Intent(applicationContext, MyCameraActivity::class.java)
                 val name: String = ("" + UUID.randomUUID())
-
+//android:enableOnBackInvokedCallback="true"
 
                 textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
                 passParameters(textIntent);
@@ -126,12 +131,12 @@ import java.util.*
                 this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
-            != PackageManager.PERMISSION_GRANTED ||
+            != PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             )
-            != PackageManager.PERMISSION_GRANTED ||
+            != PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_MEDIA_IMAGES
@@ -147,32 +152,41 @@ import java.util.*
                 ), INT_WRITE_STORAGE
             )
         }
+        return true
+    }
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-            == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            val textString: String =
-                (findViewById<TextView>(R.id.textViewOnImage).text.toString())
-
-            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            val drawTextToBitmap: File? = drawTextToBitmap(textString)
-            if (drawTextToBitmap != null) {
-                currentFile = drawTextToBitmap
-                imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
-                Utils().setImageView(imageView, this.currentImage)
-                System.out.println("ImageView Text UPDATED")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == INT_WRITE_STORAGE && grantResults != null) {
+            var g = 0
+            for (granted in grantResults) {
+                g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
             }
-            return true
-            //}
+
+            if (g > 0) applyTextNext()
         }
-        return false
+    }
+
+    private fun applyTextNext(): Boolean {
+
+        val textString: String =
+            (findViewById<TextView>(R.id.textViewOnImage).text.toString())
+
+        currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+        val drawTextToBitmap: File? = drawTextToBitmap(textString)
+        if (drawTextToBitmap != null) {
+            currentFile = drawTextToBitmap
+            imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
+            Utils().setImageView(imageView, this.currentImage)
+            System.out.println("ImageView Text UPDATED")
+        }
+        return true
+        //}
+
     }
 
     private fun drawTextToBitmap(textToPrint: String): File? {
@@ -230,32 +244,4 @@ import java.util.*
     }
 
 
-    fun writeText() {
-        var imageView: ImageViewSelection =
-            findViewById<ImageViewSelection>(R.id.currentImageView)
-        var text = findViewById<EditText>(R.id.textViewOnImage)?.text
-
-        var bmpFile = imageView.drawable
-
-        if (bmpFile != null) {
-            currentImage = BitmapFactory.decodeStream(
-                FileInputStream(currentFile)
-            )
-
-
-            Utils().setImageView(imageView, currentImage)
-
-            initImageView()
-
-            imageView.invalidate()
-
-        } else {
-            Toast.makeText(
-                applicationContext,
-                "Error while writing text: method returned null",
-                Toast.LENGTH_SHORT
-            )
-                .show()
-        }
-    }
 }

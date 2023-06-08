@@ -35,7 +35,7 @@ import java.util.stream.IntStream;
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
-    public static final Double noValue = -1.;//r.next();
+    public static final Double noValue = 0.0;
     protected final int compCount = 3;
     protected int columns;
     protected int lines;
@@ -67,7 +67,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public MBitmap(Bitmap bitmap) {
         this(bitmap.getWidth(), bitmap.getHeight());
 
-        double[] colorComponents = new double[4];
+        double[] colorComponents = new double[3];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 int rgb = bitmap.getPixel(
