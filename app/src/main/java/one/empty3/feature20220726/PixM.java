@@ -54,7 +54,7 @@ public class PixM extends MBitmap {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                colorComponents = Lumiere.getInts(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -69,7 +69,7 @@ public class PixM extends MBitmap {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getInts(rgb, colorComponents);
+                Lumiere.getDoubles(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     assert colorComponents != null;

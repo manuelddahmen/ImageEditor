@@ -197,8 +197,8 @@ public class FaceOverlayView extends ImageViewSelection {
         for (int i = 0; i < rightEyeContour.size(); i += 1) {
             point3DS[i] = new Point3D(rightEyeContour.get(i).x * 1.0, rightEyeContour.get(i).y * 1.0, 0d);
         }
-        Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.BLACK));
-        polygon.drawOnCanvas(mCanvas, mCopy.copy(Bitmap.Config.ARGB_8888, true), Representable.FILL, Color.BLACK);
+        Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.RED));
+        polygon.drawOnCanvas(mCanvas, mCopy, Representable.FILL, 0);
     }
 
 
@@ -234,8 +234,6 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
         //Rect destBounds = new Rect(0, 0, (int) (imageWidth * scale), (int) (imageHeight * scale));
-        Rect destBounds = new Rect((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2), 0, (int) ((int) ((imageWidth / 2) * scale) + mCanvas.getWidth() / 2), (int) (imageHeight * scale));
-        mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
         return scale;
     }
 
@@ -256,11 +254,17 @@ public class FaceOverlayView extends ImageViewSelection {
     public void updateImage(Bitmap bm) {
         super.setImageBitmap2(bm);
         new Handler(Looper.getMainLooper()).post(() -> {
-            Log.d("ImageViewSelection::setImageBitmap",
-                    "change image on UI thread");
+            //Log.d("ImageViewSelection::setImageBitmap",
+            //        "change image on UI thread");
             if (mFaces != null && mCanvas != null && bm != null) {
                 double scale = drawBitmap();
+
+                double imageWidth = mBitmap.getWidth();
+                double imageHeight = mBitmap.getHeight();
+                Rect destBounds = new Rect((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2), 0, (int) ((int) ((imageWidth / 2) * scale) + mCanvas.getWidth() / 2), (int) (imageHeight * scale));
+                mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBox(mCanvas, scale));
+
             }
         });
 
