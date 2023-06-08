@@ -35,7 +35,7 @@ import java.util.stream.IntStream;
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
-    public static final Double noValue = 1.;//r.next();
+    public static final Double noValue = -1.;//r.next();
     protected final int compCount = 3;
     protected int columns;
     protected int lines;

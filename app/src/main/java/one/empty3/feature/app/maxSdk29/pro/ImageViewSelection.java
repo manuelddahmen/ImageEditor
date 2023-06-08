@@ -75,10 +75,10 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
     public void setDrawingRectState(boolean isDrawingRect) {
         this.isDrawingRect = isDrawingRect;
         if (isDrawingRect) {
-  //          drawRect();
+            drawRect();
         }
     }
-/*
+
     private void drawRect() {
         if (isDrawingRect && pixels != null) {
             PolyLine polyLine = new PolyLine();
@@ -91,19 +91,18 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         }
     }
 
-*/
     public RectF getDrawingRect() {
         return rect;
     }
 
 
     public void setImageBitmap2(Bitmap bm) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
+        boolean post = new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
                 //Log.d("ImageViewSelection::setImageBitmap", "change image on UI thread");
                 setImageBitmap(bm);
-                //pixels = new PixM(bm);
+                pixels = new PixM(bm);
             }
         });
 

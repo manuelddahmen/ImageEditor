@@ -433,7 +433,7 @@ import kotlin.math.max
                         activity.imageView =
                             activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     } catch (ex:NullPointerException ) {
-                        ex.printStackTrace()
+                        return
                     }
                     if(activity.imageView!=null) {
                         Utils().setImageView(activity.imageView, bitmap);

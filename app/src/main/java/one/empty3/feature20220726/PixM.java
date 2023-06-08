@@ -229,13 +229,12 @@ public class PixM extends MBitmap {
                 lines, Bitmap.Config.ARGB_8888);
 
 
-        double[] rgba = new double[getCompCount()];
+        double[] rgba = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
-                    float value = (float) (get(i, j));
-                    rgba[c] = value;
+                    rgba[c] = get(i, j);
                 }
                 image.setPixel(i, j, Lumiere.getInt(rgba));
             }
