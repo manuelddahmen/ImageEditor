@@ -92,8 +92,7 @@ public class PixM extends MBitmap {
     }
 
     public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
-        PixM pixM = new PixM(bitmap);
-        return pixM;
+        return new PixM(bitmap);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

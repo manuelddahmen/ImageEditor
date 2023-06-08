@@ -69,12 +69,14 @@ public abstract class Lumiere extends Representable {
 
     public static int[] getInts(int rgb, int[] colorComponents) {
         for (int i = 0; i < 3; i++) {
-            colorComponents[i] = (((rgb & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8)));
+            colorComponents[i] = ((rgb & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff;
         }
         return colorComponents;
 
     }
+
     public abstract int getCouleur(int base, Point3D p, Point3D n);
+
     public int getLa() {
         return La;
     }
@@ -88,38 +90,35 @@ public abstract class Lumiere extends Representable {
     }
 
     public static double[] getRgb(Color c) {
-        int i = c.toArgb();
-        return getDoubles(i);
+        return new double[]{(c.red() / 255f),
+                (c.green() / 255f),
+                (c.blue() / 255f), 1f};
     }
-    /*
-    *
-    public static double[] getRgb(Color c) {
-        return new double[]{(c.red()),
-                (c.green()),
-                (c.blue())};
-    }*/
 
     public static int getInt(double[] d) {
-        int res = 0;
-        for (int i = 0; i < 3; i++) {
-            res |= (((int) (float) (d[i] * 255))&0xff) << ((2 - i) * 8);
-
-        }
-        return res;//|0xFF000000;
+        //int a = 256& 0xff, r = (int)(d[0]*255)& 0xff, g = (int)(d[1]*255)& 0xff, b = (int)(d[2]*255)& 0xff;
+        int a = 0xff;
+        int r = (int)(d[0])& 0xff;
+        int g = (int)(d[1])& 0xff;
+        int b = (int)(d[2])& 0xff;
+        return ((0xff) << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
     }
 
     public static double[] getDoubles(int c) {
         double[] res = new double[3];
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << (((2 - i) * 8))) >> ((2 - i) * 8)))) ;
+            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff);
         }
         return res;
     }
     public static double[] getDoubles(int c, double[] res) {
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & ((0xff << ((2 - i) * 8))) >> ((2 - i) * 8)))) ;
+            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff);
         }
         return res;
     }
 
+    public static android.graphics.Color getColorD(double[] d) {
+        return Color.valueOf((float) (d[0]), (float) (d[1]), (float) (d[2]));
+    }
 }
