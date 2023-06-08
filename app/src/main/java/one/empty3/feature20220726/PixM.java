@@ -49,30 +49,31 @@ public class PixM extends MBitmap {
     }
 
     public PixM(Bitmap image) {
-        super(image.getWidth(), image.getHeight());
+        super(image);
+        /*
+        this(image.getWidth(), image.getHeight());
         double [] colorComponents = new double[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                colorComponents = Lumiere.getDoubles(rgb, colorComponents);
-                for (int com = 0; com < getCompCount(); com++) {
+                Lumiere.getDoubles(rgb, colorComponents);
+                for (int com = 0; com < 3; com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
                 }
             }
-        }
+        }*/
     }
 
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
-        double[] colorComponents = new double[4];
+        double[] colorComponents = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
                 Lumiere.getDoubles(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
-                    assert colorComponents != null;
                     set(i, j, colorComponents[com]);
                 }
             }
@@ -91,12 +92,8 @@ public class PixM extends MBitmap {
     }
 
     public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
-        if (bitmap == null) {
-            throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
-        } else {
-            PixM pixM = new PixM(bitmap);
-            return pixM;
-        }
+        PixM pixM = new PixM(bitmap);
+        return pixM;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -232,7 +229,7 @@ public class PixM extends MBitmap {
                 lines, Bitmap.Config.ARGB_8888);
 
 
-        float[] rgba = new float[getCompCount()];
+        double[] rgba = new double[getCompCount()];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 for (int c = 0; c < 3; c++) {
@@ -240,7 +237,7 @@ public class PixM extends MBitmap {
                     float value = (float) (get(i, j));
                     rgba[c] = value;
                 }
-                image.setPixel(i, j, Color.valueOf(rgba[0], rgba[1], rgba[2]).toArgb());
+                image.setPixel(i, j, Lumiere.getInt(rgba));
             }
         }
         return image;
@@ -619,7 +616,7 @@ public class PixM extends MBitmap {
 
         double[] rgba = new double[getCompCount()];
         for (double t = 0; t < 1.0; t += 0.001) {
-            rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
+            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
             Point3D p = curve.calculerPoint3D(t);
             for (int c = 0; c < 3; c++) {
                 setCompNo(c);
@@ -633,7 +630,7 @@ public class PixM extends MBitmap {
         double[] rgba = new double[getCompCount()];
         for (double t = 0; t < 1.0; t += 0.001) {
             for (int c = 0; c < 3; c++) {
-                rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
+                Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
                 Point3D p = curve.calculerPoint3D(t);
                 setCompNo(c);
                 set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);

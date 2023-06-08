@@ -23,6 +23,8 @@ package one.empty3.feature20220726;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
+
+import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 
 import java.util.Arrays;
@@ -33,7 +35,7 @@ import java.util.stream.IntStream;
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
-    public static final Double noValue = 0.;//r.next();
+    public static final Double noValue = 1.;//r.next();
     protected final int compCount = 3;
     protected int columns;
     protected int lines;
@@ -43,7 +45,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public MBitmap(int c, int l) {
         try {
             x = new double[c * l * 3];
-            Arrays.fill(x, 0);
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
@@ -52,39 +53,27 @@ public class MBitmap /*implements InterfaceMatrix*/ {
                 x = new double[l * c * 3];
             } catch (OutOfMemoryError err) {
                 err.printStackTrace();
-                x = new double[100 * 100];
+                x = new double[100 * 100 * 3];
                 l = 100;
                 c = 100;
                 Log.e(MBitmap.class.toString(), err.getMessage(), err);
             }
         }
+        Arrays.fill(x, 0);
         this.lines = l;
         this.columns = c;
     }
 
     public MBitmap(Bitmap bitmap) {
-        int l = maxRes;
-        int c = maxRes;
-        try {
-            x = new double[bitmap.getWidth() * bitmap.getHeight() * 3];
-            l = bitmap.getHeight();
-            c = bitmap.getWidth();
-        } catch (OutOfMemoryError ex) {
-            c = maxRes;
-            l = (int) (maxRes * bitmap.getHeight() / bitmap.getWidth());
-            x = new double[l * c * 3];
-        }
-        this.lines = l;
-        this.columns = c;
+        this(bitmap.getWidth(), bitmap.getHeight());
 
-
-        float[] colorComponents = new float[4];
-        for (int i = 0; i < bitmap.getWidth(); i++) {
-            for (int j = 0; j < bitmap.getHeight(); j++) {
+        double[] colorComponents = new double[4];
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < lines; j++) {
                 int rgb = bitmap.getPixel(
-                        (int) (1.0 * i / bitmap.getWidth() * c),
-                        (int) (1.0 * j / bitmap.getHeight() * l));
-                colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
+                        (int) (1.0 * i / bitmap.getWidth() * columns),
+                        (int) (1.0 * j / bitmap.getHeight() * lines));
+                Lumiere.getDoubles(rgb, colorComponents);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -100,10 +89,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 //    }
 
     public MBitmap(PixM pix) {
-        this(pix.getLines(), pix.getColumns());
-        this.lines = pix.getLines();
-        this.columns = pix.getColumns();
-        x = new double[lines * columns * 3];
+        this(pix.getColumns(), pix.getLines());
 
         for (int i = 0; i < pix.getColumns(); i++) {
             for (int j = 0; j < pix.getLines(); j++) {
