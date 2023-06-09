@@ -48,7 +48,7 @@ public abstract class ProcessFile {
     /***
      * Must be set to false?
      */
-    public boolean shouldOverwrite = true;
+    public final boolean shouldOverwrite = true;
     protected List<File> imagesStack = new ArrayList<>();
 
     public File getOutputDirectory() {

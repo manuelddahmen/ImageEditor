@@ -67,7 +67,7 @@ public class PixM extends MBitmap {
 
     public PixM(Bitmap image, boolean isBitmap) {
         super(image);
-        double[] colorComponents = new double[3];
+        /*double[] colorComponents = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
@@ -77,7 +77,7 @@ public class PixM extends MBitmap {
                     set(i, j, colorComponents[com]);
                 }
             }
-        }
+        }*/
     }
 
     public PixM(double[][] distances) {
@@ -360,7 +360,6 @@ public class PixM extends MBitmap {
         return image;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM normalize(final double min, final double max) {
 
         double[] maxRgbai = new double[compCount];
@@ -416,7 +415,7 @@ public class PixM extends MBitmap {
         return image;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public PixM subSampling(double div) {
         double columns2 = 1.0 * columns / div;
         double lines2 = 1.0 * lines / div;
@@ -435,7 +434,6 @@ public class PixM extends MBitmap {
         return pixM;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public double mean(int i, int j, int w, int h) {
         double m = 0.0;
         int p = 0;
@@ -448,7 +446,6 @@ public class PixM extends MBitmap {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM copy() {
 
 
@@ -478,7 +475,6 @@ public class PixM extends MBitmap {
             return j;
         }
     */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public double distance(PixM p2) {
         double d = 0.0;
 
@@ -504,7 +500,6 @@ public class PixM extends MBitmap {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void colorsRegion(int x, int y, int w, int h, double[] comps) {
         for (int i = x; i < x + w; i++)
             for (int j = y; j < y + h; j++)
@@ -514,7 +509,6 @@ public class PixM extends MBitmap {
                 }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public PixM getColorsRegion(int x, int y, int w, int h, int sizeX, int sizeY) {
         PixM subimage = new PixM(sizeX, sizeY);
         for (int i = x; i < x + w; i++)
@@ -529,7 +523,6 @@ public class PixM extends MBitmap {
         return subimage;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void colorsRegion(int x, int y, int w, int h, PixM subimage, int subImageCopyMode) {
         for (int i = x; i < x + w; i++)
             for (int j = y; j < y + h; j++)
@@ -541,7 +534,6 @@ public class PixM extends MBitmap {
                 }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public boolean equals(Object compare) {
         if (compare instanceof PixM)
             //if (Arrays.equals((((PixM) compare).toGMatrix()).x, toGMatrix()))
@@ -550,8 +542,6 @@ public class PixM extends MBitmap {
 
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public double luminance(int x, int y) {
         double l = 0.0;
         setCompNo(0);
@@ -565,7 +555,6 @@ public class PixM extends MBitmap {
         return l;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public double norme(int x, int y) {
         double l = 0.0;
         setCompNo(0);
@@ -579,17 +568,14 @@ public class PixM extends MBitmap {
         return l;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public int getColumns() {
         return columns;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public int getLines() {
         return lines;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void paintAll(double[] doubles) {
         for (int i = 0; i < getColumns(); i++)
             for (int j = 0; j < getLines(); j++)

@@ -38,7 +38,7 @@ public class M3 {
     protected int linesIn;
     protected int compNo;
     protected javaAnd.awt.image.BufferedImage image;
-    private final int compCount = 4;
+    private final int compCount = 3;
     private int currentX;
     private int currentY;
     private int savedY;

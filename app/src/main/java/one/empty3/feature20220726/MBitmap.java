@@ -223,12 +223,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         });
     }
 
-    public void init(int l, int c) {
-        this.lines = l;
-        this.columns = c;
-        x = new double[l * c * compCount];
-    }
-
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
             return ((x[index(column, line)]));
