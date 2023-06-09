@@ -92,33 +92,25 @@ public abstract class Lumiere extends Representable {
     public static double[] getRgb(Color c) {
         return new double[]{(c.red() / 255f),
                 (c.green() / 255f),
-                (c.blue() / 255f), 1f};
+                (c.blue() / 255f), 0f};
     }
 
     public static int getInt(double[] d) {
         //int a = 256& 0xff, r = (int)(d[0]*255)& 0xff, g = (int)(d[1]*255)& 0xff, b = (int)(d[2]*255)& 0xff;
         int a = 0xff;
-        int r = (int)(d[0])& 0xff;
-        int g = (int)(d[1])& 0xff;
-        int b = (int)(d[2])& 0xff;
+        int r = (int)(d[0]*256)& 0xff;
+        int g = (int)(d[1]*256)& 0xff;
+        int b = (int)(d[2]*256)& 0xff;
         return ((0xff) << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
     }
 
     public static double[] getDoubles(int c) {
-        double[] res = new double[3];
-        for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff);
-        }
-        return res;
+        return getDoubles(c, new double[3]);
     }
     public static double[] getDoubles(int c, double[] res) {
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff);
+            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff)/255.;
         }
         return res;
-    }
-
-    public static android.graphics.Color getColorD(double[] d) {
-        return Color.valueOf((float) (d[0]), (float) (d[1]), (float) (d[2]));
     }
 }

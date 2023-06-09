@@ -174,6 +174,14 @@ import kotlin.math.max
         if (written) {
             return fileWritten
         } else {
+            val f = activity.getFilesFile("from_error-" + UUID.randomUUID()+".jpg")
+            if (ImageIO.write(bitmap, "jpg", f)) {
+                written = true;
+                fileWritten = file2;
+                System.out.println("File written 3: SUCCESSFUL (but not sage)")
+                return f
+            }
+
             Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
             throw NullPointerException("No file written, Utils.writePhoto");
         }
