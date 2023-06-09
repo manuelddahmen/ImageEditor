@@ -269,17 +269,8 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void set(int column, int line, double d) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && x != null) {
-//            if (bitmap != null) {
-//                int pixel = bitmap.getPixel(column, line);
-//                double[] ps = Lumiere.getDoubles(pixel);
-//                ps[compNo] = d;
-//                int p = Lumiere.getInt(ps);
-//                bitmap.setPixel(column, line, p);
-//                return;
-//            }
             x[index(column, line)] = d;
         }
-
     }
 
     public void set(int column, int line, double... values) {
