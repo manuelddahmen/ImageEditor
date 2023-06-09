@@ -91,8 +91,8 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public MBitmap(PixM pix) {
         this(pix.getColumns(), pix.getLines());
 
-        for (int i = 0; i < pix.getColumns(); i++) {
-            for (int j = 0; j < pix.getLines(); j++) {
+        for (int i = 0; i < getColumns(); i++) {
+            for (int j = 0; j < getLines(); j++) {
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
                     pix.setCompNo(c);
@@ -233,7 +233,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
             return ((x[index(column, line)]));
         } else
-            return noValue; // OutOfBound?
+            return r.next(); // OutOfBound?
     }
 
     public double getIntensity(int column, int line) {
@@ -277,7 +277,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 //                bitmap.setPixel(column, line, p);
 //                return;
 //            }
-            x[index(column, line)] = (char) (d);
+            x[index(column, line)] = d;
         }
 
     }
