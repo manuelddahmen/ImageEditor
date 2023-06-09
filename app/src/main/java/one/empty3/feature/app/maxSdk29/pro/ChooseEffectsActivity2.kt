@@ -49,7 +49,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
     private lateinit var recyclerView: RecyclerView
-
+    private var hasRun = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,6 +82,21 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 Manifest.permission.READ_MEDIA_IMAGES
             ), READ_WRITE_STORAGE
         )
+        if(!hasRun()) {
+            runEffects()
+        }
+    }
+
+    private fun runEffects() {
+
+        initAuthorized()
+
+        hasRun = true
+
+    }
+
+    private fun hasRun(): Boolean {
+        return hasRun
     }
 
     override fun onRequestPermissionsResult(
@@ -102,6 +117,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 unauthorized = false
 
                 initAuthorized()
+
+                hasRun = true
 
             } catch (ex: RuntimeException) {
 

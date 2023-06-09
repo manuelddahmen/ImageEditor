@@ -61,6 +61,7 @@ public class MakeDataset {
                             r + " " + g + " " + b);
                     //}
                 }
+            pw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -26,6 +26,8 @@ package javaAnd.awt.image.imageio;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,8 +53,9 @@ public class ImageIO {
         return new BufferedImage(BitmapFactory.decodeStream(fileInputStream));
     }
 
-    public static boolean write(BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {
-        if (!out.exists() || shouldOverwrite) {
+    public static boolean write(@NotNull BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {
+        shouldOverwrite = true;
+        if ((!out.exists() || shouldOverwrite)&&imageOut.bitmap!=null) {
             FileOutputStream fileOutputStream = new FileOutputStream(out);
             boolean ret = imageOut.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
             fileOutputStream.close();
@@ -75,25 +78,5 @@ public class ImageIO {
         }
         return false;
     }
-    /*
-    public static Bitmap read(File file) {
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
-            fileInputStream.close();
-            return bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public static boolean write(Bitmap imageOut, String jpg, File out) throws IOException {
 
-Picasso.get().load(imgFile).placeholder(R.drawable.ic_launcher_background).into(holder.imageIV)
-   } public static boolean write(Bitmap imageOut, String jpg, File out) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(out);
-        imageOut.compress(Bitmap.CompressFormat.JPEG, 10, fileOutputStream);
-        fileOutputStream.close();
-        return false;
-    }*/
 }

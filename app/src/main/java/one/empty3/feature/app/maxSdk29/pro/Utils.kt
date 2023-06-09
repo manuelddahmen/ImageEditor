@@ -491,12 +491,13 @@ import kotlin.math.max
         }
 
     }
-    public fun runEffectsOnThumbnail(fileIn : File, effect: ProcessFile) : File? {
-        val list = initListProcesses()
-        if(effect!=null) {
-            val randomUUID = UUID.randomUUID()
-            val fileOut = getFilesFile("thumb-" + effect +randomUUID +"-jpg")
-            if (effect.process(fileIn, fileOut)) {
+    public fun runEffectsOnThumbnail(fileIn : File, p: PixM, effect: ProcessFile) : File? {
+        if(effect!=null && fileIn.exists()) {
+            var randomUUID = UUID.randomUUID()
+            val fileInThumb = getFilesFile("thumbIn-" + effect +randomUUID +"-jpg")
+            ImageIO.write(PixM.getPixM(ImageIO.read(fileIn).bitmap, Math.max(p.columns, p.lines)).bitmap, "jpg", fileInThumb)
+            val fileOut = getFilesFile("thumbOut-" + effect +randomUUID +"-jpg")
+            if (effect.process(fileInThumb, fileOut)) {
                 return fileOut
             }
         }

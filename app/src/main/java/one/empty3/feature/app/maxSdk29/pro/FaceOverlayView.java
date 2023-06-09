@@ -27,6 +27,8 @@ import androidx.annotation.Nullable;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.face.Contour;
+import com.google.android.gms.vision.face.Landmark;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceContour;
@@ -114,14 +116,16 @@ public class FaceOverlayView extends ImageViewSelection {
         // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
         // nose available):
         FaceLandmark leftEar = face.getLandmark(FaceLandmark.LEFT_EAR);
+        PointF leftEarPos = null;
         if (leftEar != null) {
-            PointF leftEarPos = leftEar.getPosition();
+            leftEarPos = leftEar.getPosition();
         }
         // If landmark detection was enabled (mouth, ears, eyes, cheeks, and
         // nose available):
+        PointF rightEarPos = null;
         FaceLandmark rightEar = face.getLandmark(FaceLandmark.RIGHT_EAR);
         if (rightEar != null) {
-            PointF rightEarPos = rightEar.getPosition();
+            rightEarPos = rightEar.getPosition();
         }
 
         // If contour detection was enabled:
@@ -189,6 +193,9 @@ public class FaceOverlayView extends ImageViewSelection {
             }
             fillPolygon(rightEyeContour, paint2);
         }
+        FaceContour contour = face.getContour(FaceContour.FACE);
+        if(contour!=null && contour.getPoints()!=null)
+            fillPolygon(contour.getPoints(), paint2);
     }
 
     private void fillPolygon(List<PointF> rightEyeContour, Paint paint) {

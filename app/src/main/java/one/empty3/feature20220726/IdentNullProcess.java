@@ -33,7 +33,11 @@ public class IdentNullProcess extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         PixM pixM = null;
-        pixM = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+        if(maxRes>0) {
+            pixM = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+        } else {
+            pixM = new PixM(Objects.requireNonNull(ImageIO.read(in)));
+        }
         assert pixM != null;
         ImageIO.write(pixM.getBitmap(), "jpg", out);
         addSource(out);

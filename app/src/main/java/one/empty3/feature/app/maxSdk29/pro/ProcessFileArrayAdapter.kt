@@ -148,13 +148,13 @@ import java.util.function.Predicate
             run {
                 val effectClassModele1 = holder.getEffectClass()
                 val processFile11: ProcessFile =
-                    Main2022.initListProcesses().get(effectClassModele1) as ProcessFile
+                    Main2022.initListProcesses()[effectClassModele1] as ProcessFile
                 val p = PixM(30, 30)
                 val runEffectsOnThumbnail: File? =
-                    Utils().runEffectsOnThumbnail(activity.currentFile, processFile11);
+                    Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
                 val imageViewEffectPreview: ImageViewSelection =
                     holder.itemView.findViewById(R.id.imageViewEffectPreview)
-                if (runEffectsOnThumbnail != null && runEffectsOnThumbnail.exists())
+                if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
                     Utils().setImageView(
                         imageViewEffectPreview,
                         ImageIO.read(runEffectsOnThumbnail).getBitmap()

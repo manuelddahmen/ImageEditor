@@ -31,15 +31,18 @@ public class KMeans extends ProcessFile {
     protected K_Clusterer kClusterer;
 
     public boolean process(File in, File out) {
-        if (!in.getAbsolutePath().endsWith("jpg"))
+        if (!isImage(in))
             return false;
         // init centroids with random colored
         // points.
         try {
-            new MakeDataset(in, new File(out.getAbsolutePath() + ".csv"), maxRes);
+            MakeDataset makeDataset;
+            makeDataset = new MakeDataset(in, new File(out.getAbsolutePath() + ".csv"), maxRes);
 
             kClusterer = new K_Clusterer();
             kClusterer.process(in, new File(out.getAbsolutePath() + ".csv"), out, maxRes);
+
+            addSource(out);
 
             return true;
 

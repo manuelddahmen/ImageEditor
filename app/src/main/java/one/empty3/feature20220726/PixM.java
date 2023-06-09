@@ -87,15 +87,16 @@ public class PixM extends MBitmap {
                 set(i, j, distances[i][j]);
     }
 
-    public PixM(BufferedImage read) {
+    public PixM(@NotNull BufferedImage read) {
         this(read.bitmap);
+        if(read.bitmap==null)
+            throw new NullPointerException("public PixM(@NotNull BufferedImage read) || bitmap is null");
     }
 
     public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
         return new PixM(bitmap);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public Point3D getRgb(int i, int j) {
         setCompNo(0);
         double dr = get(i, j);
@@ -107,11 +108,7 @@ public class PixM extends MBitmap {
     }
 
     public static PixM getPixM(@NotNull Bitmap image, double maxRes) {
-        if (image == null) {
-            throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
-        } else {
-            return getPixM(image, (int) maxRes);
-        }
+        return getPixM(image, (int) maxRes);
     }
 
     public static PixM getPixM(@NotNull BufferedImage image, double maxRes) {
@@ -123,45 +120,38 @@ public class PixM extends MBitmap {
     }
 
     public static PixM getPixM(@NotNull Bitmap image, int maxRes) {
-        if (image == null) {
-            throw new NullPointerException("bitmap==null one.empty3.feature20220726.PixM.getPixM");
-        } else {
-            double f = 1.0;
-            if (maxRes <= 0) {
-                f = 1.0;
-            } else if (maxRes < image.getWidth() && maxRes < image.getHeight()) {
-                f = 1.0 / Math.max(image.getWidth(), image.getHeight()) * maxRes;
-            }
-            double columns2 = 1.0 * image.getWidth() * f;
-            double lines2 = 1.0 * image.getHeight() * f;
-            System.out.println("pixm resampling init  --> (" + maxRes + ", " + maxRes + ")  (" + columns2 + ", " + lines2 + ")");
-            PixM pixM = new PixM((int) (columns2), ((int) lines2));
-
-
-            for (int i = 0; i < (int) columns2; i++) {
-                for (int j = 0; j < (int) lines2; j++) {
-
-
-                    int rgb = image.getPixel(
-                            (int) (1.0 * i / columns2 * image.getWidth())
-
-
-                            , (int) (1.0 * j / lines2 * image.getHeight()));
-                    double[] colorComponents = new double[3];
-                    Lumiere.getDoubles(rgb, colorComponents);
-                    for (int com = 0; com < pixM.getCompCount(); com++) {
-                        pixM.setCompNo(com);
-                        pixM.set(i, j, colorComponents[com]);
-
-                        //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
-                        //        (int) (cli2 * div));
-                        //pixM.set(i, j, );
-                    }
-                }
-
-            }
-            return pixM;
+        double f = 1.0;
+        if (maxRes <= 0) {
+            f = 1.0;
+        } else if (maxRes < image.getWidth() && maxRes < image.getHeight()) {
+            f = 1.0 / Math.max(image.getWidth(), image.getHeight()) * maxRes;
         }
+        double columns2 = 1.0 * image.getWidth() * f;
+        double lines2 = 1.0 * image.getHeight() * f;
+        //System.out.println("pixm resampling init  --> from ("+image.getWidth()+","+image.getHeight()+") with resize<<(" + maxRes + ")>> to (" + columns2 + ", " + lines2 + ")");
+        PixM pixM = new PixM((int) (columns2), ((int) lines2));
+
+
+        for (int i = 0; i < (int) columns2; i++) {
+            for (int j = 0; j < (int) lines2; j++) {
+
+
+                int rgb = image.getPixel(
+                        (int) (1.0 * i / columns2 * image.getWidth()), (int) (1.0 * j / lines2 * image.getHeight()));
+                double[] colorComponents = new double[3];
+                Lumiere.getDoubles(rgb, colorComponents);
+                for (int com = 0; com < pixM.getCompCount(); com++) {
+                    pixM.setCompNo(com);
+                    pixM.set(i, j, colorComponents[com]);
+
+                    //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
+                    //        (int) (cli2 * div));
+                    //pixM.set(i, j, );
+                }
+            }
+
+        }
+        return pixM;
 
     }
 

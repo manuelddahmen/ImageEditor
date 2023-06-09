@@ -42,8 +42,8 @@ public class BufferedImage {
         this.bitmap = Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888);
     }
 
-    public BufferedImage(Bitmap decodeStream) {
-        this.bitmap = decodeStream;
+    public BufferedImage(Bitmap decodedStream) {
+        this.bitmap = decodedStream;
     }
 
     public void setRGB(int i, int j, int anInt) {

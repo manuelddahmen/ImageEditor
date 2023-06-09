@@ -215,7 +215,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void setValues(int i, int j, double... v) {
 
-        IntStream.range(0, v.length).forEach(d -> {
+        IntStream.range(0, 3).forEach(d -> {
             setCompNo(d);
             if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
                 set(i, j, v[d]);
