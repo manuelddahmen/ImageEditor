@@ -198,11 +198,11 @@ public class FaceOverlayView extends ImageViewSelection {
             fillPolygon(contour.getPoints(), paint2);
     }
 
-    private void fillPolygon(List<PointF> rightEyeContour, Paint paint) {
-        int size = rightEyeContour.size();
+    private void fillPolygon(List<PointF> polygonContour, Paint paint) {
+        int size = polygonContour.size();
         Point3D[] point3DS = new Point3D[size];
-        for (int i = 0; i < rightEyeContour.size(); i += 1) {
-            point3DS[i] = new Point3D(rightEyeContour.get(i).x * 1.0, rightEyeContour.get(i).y * 1.0, 0d);
+        for (int i = 0; i < polygonContour.size(); i += 1) {
+            point3DS[i] = new Point3D(polygonContour.get(i).x * 1.0, polygonContour.get(i).y * 1.0, 0d);
         }
         Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.RED));
         polygon.drawOnCanvas(mCanvas, mCopy, Representable.FILL, 0);

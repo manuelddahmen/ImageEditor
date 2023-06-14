@@ -50,6 +50,7 @@ import one.empty3.io.ProcessFile;
 public class Main2022 {
 
     public static ArrayList<String> effects;
+    public static ArrayList<Double> effectsFactors;
 
     public static ArrayList<String> indices = new ArrayList();
 
@@ -113,6 +114,11 @@ public class Main2022 {
         if (effects == null)
             effects = new ArrayList<String>();
         return effects;
+    }
+    public ArrayList<Double> listOfFactors() {
+        if (effectsFactors == null)
+            effectsFactors = new ArrayList<Double>();
+        return effectsFactors;
     }
 
 }

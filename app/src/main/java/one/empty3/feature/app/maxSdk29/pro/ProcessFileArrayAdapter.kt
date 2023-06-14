@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -88,7 +89,9 @@ import java.util.function.Predicate
             holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
         val buttonPropsToEffect: Button =
             holder.itemView.findViewById(R.id.commentEffect) as Button
-        //val imageViewEffectPreview : ImageView = holder.itemView.findViewById(R.id.imageViewEffectPreview)
+        val seekBar: SeekBar =
+            holder.itemView.findViewById(R.id.effectPower) as SeekBar
+//val imageViewEffectPreview : ImageView = holder.itemView.findViewById(R.id.imageViewEffectPreview)
         System.out.printf(
             "Layout class is : %s Button1 = %s Button 2 = %s\n",
             text1,
@@ -161,6 +164,20 @@ import java.util.function.Predicate
                     )
             }
         }
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                System.out.println("Seek value : " + progress)
+                // here, you react to the value being set in seekBar
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // you can probably leave this empty
+            }
+        })
     }
 
     override fun getItemCount(): Int {

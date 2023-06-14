@@ -62,6 +62,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.TemporalComputedObject3D;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.library.core.raytracer.RtIntersectInfo;
@@ -591,7 +592,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         ZBufferImpl zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
         Scene scene1 = new Scene();
         zBuffer.scene(scene1);// CA MANQUE D'INDEPENDANCE
-        Point3D middle = Point3D.n(bitmap.getWidth()/2, bitmap.getHeight()/2,0);
+        Point3D middle = Point3D.n(bitmap.getWidth() / 2, bitmap.getHeight() / 2, 0);
 
         scene1.cameraActive(new Camera(middle.plus(Point3D.Z.mult(Math.max(bitmap.getWidth(), bitmap.getHeight()))), middle, Point3D.Y));
         scene1.cameraActive().declareProperties();
@@ -599,6 +600,11 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         zBuffer.setTransparent(transparent);
         zBuffer.draw(this);
         zBuffer.getImage(bitmap, mCanvas);
+    }
+
+    public void drawOnCanvas2(PixM image, Polygon contours) {
+
+
     }
 }
 
