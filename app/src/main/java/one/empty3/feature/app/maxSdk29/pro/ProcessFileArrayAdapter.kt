@@ -166,8 +166,8 @@ import java.util.function.Predicate
         }
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                System.out.println("Seek value : " + progress)
-                // here, you react to the value being set in seekBar
+                val effectClass = holder.getEffectClass()
+                Main2022.effectsFactors.put(effectClass, progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

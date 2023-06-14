@@ -57,7 +57,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
         Main2022.effects = classnames
         Main2022.indices = ArrayList()
-
+        Main2022.listOfFactors()
         setContentView(R.layout.recycler_view_effect_activity)
 
         maxRes = Utils().getMaxRes(this, savedInstanceState)

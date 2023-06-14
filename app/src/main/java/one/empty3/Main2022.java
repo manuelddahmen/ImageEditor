@@ -22,6 +22,7 @@ package one.empty3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import one.empty3.feature20220726.Classification;
 import one.empty3.feature20220726.DBScanProcess;
@@ -50,7 +51,7 @@ import one.empty3.io.ProcessFile;
 public class Main2022 {
 
     public static ArrayList<String> effects;
-    public static ArrayList<Double> effectsFactors;
+    public static HashMap<String, Integer> effectsFactors;
 
     public static ArrayList<String> indices = new ArrayList();
 
@@ -110,14 +111,13 @@ public class Main2022 {
         return listProcessClasses;
     }
 
-    public ArrayList<String> listOfEffects() {
+    public static ArrayList<String> listOfEffects() {
         if (effects == null)
             effects = new ArrayList<String>();
         return effects;
     }
-    public ArrayList<Double> listOfFactors() {
-        if (effectsFactors == null)
-            effectsFactors = new ArrayList<Double>();
+    public static Map<String, Integer> listOfFactors() {
+        effectsFactors = new HashMap<>();
         return effectsFactors;
     }
 
