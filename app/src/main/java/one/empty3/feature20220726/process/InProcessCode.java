@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
  *    Copyright 2012-2023 Manuel Daniel Dahmen
@@ -17,19 +17,29 @@
  *    limitations under the License.
  */
 
-package one.empty3.feature20220726;
+package one.empty3.feature20220726.process;
 
-import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
+import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.io.ProcessFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ProcessBean extends Thread {
+public class InProcessCode {
+    private ArrayList<String> codes = new ArrayList<>();
 
-    public ProcessBean() {
+    public InProcessCode(String textCode, ProcessFile instance) {
+
+    }
+
+    public void newVersion(String text) {
+        this.codes.add(text);
+    }
+
+    public ArrayList<String> getCodes() {
+        return codes;
+    }
+
+    public void setCodes(ArrayList<String> codes) {
+        this.codes = codes;
     }
 }

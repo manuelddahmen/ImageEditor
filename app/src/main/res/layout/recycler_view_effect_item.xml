@@ -128,8 +128,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:id="@+id/effectPower"
+                android:theme="@style/Theme.FeatureAppmain"
+                android:progress="256"
                 android:min="0"
-                android:max="1000"
+                android:max="255"
                 
                 />
         </LinearLayout>
