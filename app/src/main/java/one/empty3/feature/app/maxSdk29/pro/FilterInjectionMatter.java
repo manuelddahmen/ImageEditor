@@ -21,6 +21,3 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import one.empty3.io.ProcessFile;
-
-public class FilterInjectionMatter extends ProcessFile {
-}

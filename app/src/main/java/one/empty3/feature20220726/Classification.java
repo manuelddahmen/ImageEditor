@@ -84,7 +84,7 @@ public class Classification extends ProcessFile {
             }
 
         try {
-            ImageIO.write(imageOut, "jpg", out, shouldOverwrite);
+            ImageIO.write(imageOut, "jpg", out, false);
         } catch (IOException e) {
             e.printStackTrace();
         }

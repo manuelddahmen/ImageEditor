@@ -19,17 +19,18 @@
 
 package one.empty3.io;
 
-import one.empty3.feature.PixM;
-import one.empty3.feature20220726.ProcessBean;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.ProcessBean;
+
 public abstract class ProcessFile extends ProcessNFiles {
+    protected boolean shouldOverwrite = false;
     public ProcessBean bean;
     private File outputDirectory = null;
     private List<File> imagesStack = new ArrayList<>();
@@ -39,12 +40,8 @@ public abstract class ProcessFile extends ProcessNFiles {
         if( in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
                 || in.getAbsolutePath().toLowerCase().endsWith(".png")))
             return true;
-        try {
-            BufferedImage read = ImageIO.read(in);
-            if(read!=null) return true;
-        } catch (IOException e) {
-
-        }
+        BufferedImage read = ImageIO.read(in);
+        if(read!=null) return true;
         return false;
     }
     public ProcessFile() {

@@ -98,6 +98,9 @@ import java.util.function.Predicate
             buttonAddToEffect,
             buttonRemoveList
         )
+        if(Main2022.effectsFactors!=null && Main2022.effectsFactors.get(text1)!=null)
+            seekBar.setProgress(Main2022.effectsFactors.get(text1)!!, true);
+
         if (Main2022.effects.contains(holder.getEffectClass())) {
             buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
         } else {
@@ -168,6 +171,7 @@ import java.util.function.Predicate
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val effectClass = holder.getEffectClass()
                 Main2022.effectsFactors.put(effectClass, progress)
+                System.err.println(""+javaClass+" "+effectClass+" progress:"+progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

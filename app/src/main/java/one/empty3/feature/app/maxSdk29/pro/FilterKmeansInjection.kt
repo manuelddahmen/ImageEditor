@@ -44,7 +44,6 @@ public open class FilterKMeansInjection : ProcessFile() {
 
     @Override
     override fun process(fileIn: File, fileOut: File): Boolean {
-        val ret = super.process(fileIn, fileOut)
-        return ret && process0(fileIn, fileOut)
+        return process0(fileIn, fileOut)
     }
 }

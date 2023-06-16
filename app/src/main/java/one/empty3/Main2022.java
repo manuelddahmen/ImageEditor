@@ -117,7 +117,9 @@ public class Main2022 {
         return effects;
     }
     public static Map<String, Integer> listOfFactors() {
-        effectsFactors = new HashMap<>();
+        if(effectsFactors==null) {
+            effectsFactors = new HashMap<>();
+        }
         return effectsFactors;
     }
 

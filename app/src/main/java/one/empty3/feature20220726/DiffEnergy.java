@@ -38,6 +38,11 @@ public class DiffEnergy extends ProcessFile {
         super();
     }
 
+    @Override
+    public boolean process(File in, File out) {
+        return false;
+    }
+
     public void setPixMS(int img1, int img2) {
         i1 = PixM.getPixM(Objects.requireNonNull(ImageIO.read(getStackItem(img1))), maxRes);
         i2 = PixM.getPixM(Objects.requireNonNull(ImageIO.read(getStackItem(img2))), maxRes);

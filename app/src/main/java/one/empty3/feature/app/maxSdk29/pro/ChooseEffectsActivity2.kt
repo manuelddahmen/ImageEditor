@@ -34,6 +34,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
+import one.empty3.feature20220726.Mix
 import one.empty3.io.ProcessFile
 import java.io.File
 import java.lang.RuntimeException
@@ -223,11 +224,14 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                 if (currentProcessFile.exists()
                                 // &&!currentOutputFile.exists()
                                 ) {
+                                    val lastCurrentProcessFile = currentProcessFile
+
                                     processFile!!.setMaxRes(maxRes)
                                     if (!(processFile!!.process(
                                             currentProcessFile,
                                             currentOutputFile
                                         ))) {
+
                                         println("Error processing file.")
                                         println("Error in " + processFile!!.javaClass.name)
                                         Toast.makeText(
@@ -237,7 +241,24 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                         ).show()
                                         return@setOnClickListener
                                     } else {
-                                        totalOutput = currentOutputFile
+
+                                        try {
+                                            val mix = Mix()
+                                            val currentOutputFile1 = File(nextFile(currentProcessInFile.parentFile!!.absolutePath, "alpha-" + UUID.randomUUID(), "jpg"))
+                                            mix.progressColor = Mix.MAX_PROGRESS
+                                            val pf = processFile!!.javaClass.simpleName
+                                            if(Main2022.listOfFactors()!=null && Main2022.listOfFactors().get(pf)!=null)
+                                                mix.progressColor = Main2022.listOfFactors().get(pf)!!
+
+                                            mix.processFiles(currentOutputFile1, lastCurrentProcessFile, currentOutputFile)
+
+                                            System.err.println(""+javaClass+" "+it1+" progress : "+mix.progressColor)
+
+                                            currentOutputFile = currentOutputFile1
+                                            totalOutput = currentOutputFile
+                                        } catch (ex : RuntimeException) {
+                                            ex.printStackTrace()
+                                        }
                                     }
                                 } else {
                                     println(
