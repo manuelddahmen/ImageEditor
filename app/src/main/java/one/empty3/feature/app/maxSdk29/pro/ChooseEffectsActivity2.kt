@@ -252,7 +252,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
                                             mix.processFiles(currentOutputFile1, lastCurrentProcessFile, currentOutputFile)
 
-                                            System.err.println(""+javaClass+" "+it1+" progress : "+mix.progressColor)
+                                            //System.err.println(""+javaClass+" "+it1+" progress : "+mix.progressColor)
 
                                             currentOutputFile = currentOutputFile1
                                             totalOutput = currentOutputFile
