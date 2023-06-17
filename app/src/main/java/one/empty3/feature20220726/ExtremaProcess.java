@@ -42,7 +42,7 @@ public class ExtremaProcess extends ProcessFile {
 
     public boolean process(File in, File out) {
         PixM pix = null;
-        if (!in.getName().endsWith(".jpg"))
+        if (!isImage(in))
             return false;
 
         try {

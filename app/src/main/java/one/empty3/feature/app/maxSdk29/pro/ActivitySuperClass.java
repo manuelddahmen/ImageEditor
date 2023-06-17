@@ -43,7 +43,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 @ExperimentalCamera2Interop
 public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
-    public static final int MAXRES_DEFAULT = 200;
+    public static final int MAXRES_DEFAULT = 500;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private static final int ONSAVE_INSTANCE_STATE = 21516;
     private static final int ONRESTORE_INSTANCE_STATE = 51521;

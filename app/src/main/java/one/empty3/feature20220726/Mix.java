@@ -32,7 +32,7 @@ public class Mix extends ProcessNFiles {
             PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
 
             for (int i = 0; i < outPixM.getColumns(); i++) {
-                for (int j = 0; j < outPixM.getColumns(); j++) {
+                for (int j = 0; j < outPixM.getLines(); j++) {
                     for (int c = 0; c < 3; c++) {
                         pixMin1.setCompNo(c);
                         pixMin2.setCompNo(c);
