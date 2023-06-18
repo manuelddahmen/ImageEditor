@@ -1,46 +1,28 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
- */
-
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package one.empty3.library.core;
 
-import android.graphics.Point;
-
+import javaAnd.awt.Point;
 import one.empty3.library.*;
 
+import javaAnd.awt.*;
 
 /*__
  * Created by manue on 23-11-19.
@@ -50,7 +32,7 @@ public class CameraArcBall {
     /*__
      * Created by manue on 06-11-19.
      */
-    private final ZBufferImplJan2023 zBuffer;
+    private final ZBufferImpl zBuffer;
     private Point3D pointCenter;
     private double radius;
     private Point3D currentPosition;
@@ -63,7 +45,8 @@ public class CameraArcBall {
      * @param ray origin: camera.eye ; extrem : vector dir
      * @return t :: orig+t*v
      */
-    public Point3D intersect(Axe ray) {
+    public Point3D  intersect(Axe ray)
+    {
         double t0, t1; // solutions for t if the ray intersects
         // geometric solution
         Point3D L = pointCenter.moins(ray.getP1().getElem());
@@ -71,7 +54,7 @@ public class CameraArcBall {
         // if (tca < 0) return false;
         double d2 = L.prodScalaire(L) - tca * tca;
         if (d2 > radius) throw new NullPointerException();
-        double thc = Math.sqrt(radius * radius - d2);
+        double thc = Math.sqrt(radius*radius - d2);
         t0 = tca - thc;
         t1 = tca + thc;
         if (t0 > t1) {
@@ -89,8 +72,8 @@ public class CameraArcBall {
 
         return ray.getP1().getElem().plus(ray.getVector().mult(t));
     }
-
-    public CameraArcBall(Camera camera, Point3D point, double radius, ZBufferImplJan2023 zBuffer) {
+    public CameraArcBall(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer)
+    {
         currentCamera = camera;
         pointCenter = point;
         this.radius = radius;
@@ -100,13 +83,12 @@ public class CameraArcBall {
     public void init(Representable representable) {
         this.representable = representable;
         Point p = currentCamera.coordonneesPoint2D(pointCenter, zBuffer);
-        lastX = p.x;
-        lastY = p.y;
+        lastX = p.getX();
+        lastY = p.getY();
 
     }
-
     public void moveTo(int x, int y) {
-        Point3D mult = zBuffer.invert(new Point3D((double) x, (double) y, 0.0), currentCamera);
+        Point3D mult = zBuffer.invert(new Point3D((double) x, (double) y, 0.0), currentCamera, 1.0);//??
         Point3D intersect = intersect(new Axe(currentCamera.eye(), mult));
         computeMatrix(pointCenter, currentPosition, intersect);
         currentPosition = intersect;
@@ -114,10 +96,12 @@ public class CameraArcBall {
 
     Matrix33 rot;
 
-    public void computeMatrix(Point3D p0, Point3D intersect1, Point3D intersect2) {
-        if (p0 != null && intersect1 != null && intersect2 != null) {
+    public void computeMatrix(Point3D p0, Point3D intersect1, Point3D intersect2)
+    {
+        if(p0!=null && intersect1!=null && intersect2!=null)
+        {
             Matrix33 matrix33 = representable.getRotation().getElem().getRot().getElem();
-            if (!currentPosition.equals(pointCenter) && !intersect1.equals(intersect2)) {
+            if(!currentPosition.equals(pointCenter) && !intersect1.equals(intersect2)) {
                 Point3D vY = intersect1.moins(p0).prodVect(intersect2.moins(p0)).norme1();
                 Point3D mvZ = currentPosition.moins(pointCenter).norme1();
                 Point3D vX = vY.prodVect(mvZ).norme1();
@@ -128,8 +112,8 @@ public class CameraArcBall {
 
         }
     }
-
-    public Matrix33 matrix() {
+    public Matrix33 matrix()
+    {
         return rot;
     }
 }

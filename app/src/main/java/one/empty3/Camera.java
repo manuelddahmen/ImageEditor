@@ -19,8 +19,6 @@
 
 package one.empty3;
 
-import java.awt.*;
-
 import javaAnd.awt.Point;
 import one.empty3.library.Barycentre;
 import one.empty3.library.Matrix33;

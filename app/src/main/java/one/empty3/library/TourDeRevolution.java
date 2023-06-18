@@ -94,7 +94,7 @@ public class TourDeRevolution extends Representable {
         TourDeRevolution tr = new TourDeRevolution(new File("tour.png"), new Axe(Point3D.Y.mult(-1.), Point3D.Y.mult(1.)));
         tr.generateB();
         PObjet o = tr.getPO();
-        ZBuffer z = new ZBufferImplJan2023(500, 500);
+        ZBuffer z = new ZBufferImpl(500, 500);
         Scene s = new Scene();
         s.add(tr);
         z.scene(s);

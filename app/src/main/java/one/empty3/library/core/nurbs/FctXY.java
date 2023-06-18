@@ -52,7 +52,6 @@
 
 package one.empty3.library.core.nurbs;
 
-import one.empty3.library.StructureMatrix;
 import one.empty3.apps.tree.altree.*;
 
 /*__

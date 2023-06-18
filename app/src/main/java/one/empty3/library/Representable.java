@@ -22,6 +22,9 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
 import one.empty3.library.core.TemporalComputedObject3D;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.library.core.raytracer.RtIntersectInfo;
@@ -38,6 +41,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D {
 
+    public static final Object FILL = 1;
     protected StructureMatrix<Point3D> vectors;
 
     public static final int DISPLAY_ALL = 0;
@@ -637,6 +641,10 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     }
     public void setOrig(Point3D orig) {
         this.vectors.setElem(orig, 3);
+    }
+
+    public void drawOnCanvas(Canvas mCanvas, Bitmap mCopy, Object fill, int i) {
+
     }
 }
 

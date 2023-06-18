@@ -22,7 +22,6 @@ package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
-import one.empty3.library.StructureMatrix;
 
 public class Quad2Volume extends ParametricVolume {
     private StructureMatrix<Polygon> polygons = new StructureMatrix<>(1, Polygon.class);

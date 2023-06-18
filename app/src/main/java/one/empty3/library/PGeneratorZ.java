@@ -57,7 +57,7 @@
  */
 package one.empty3.library;
 
-import android.graphics.Point;
+import javaAnd.awt.Point;
 
 
 /*__
@@ -87,6 +87,6 @@ public abstract class PGeneratorZ extends Representable {
     }
 
     public Point point(ZBuffer z, Point3D p) {
-        return z.camera().coordonneesPoint2D(p, ((ZBufferImplJan2023) z));
+        return z.camera().coordonneesPoint2D(p, ((ZBufferImpl) z));
     }
 }

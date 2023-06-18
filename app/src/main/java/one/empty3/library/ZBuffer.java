@@ -61,7 +61,7 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.graphics.Point;
+import javaAnd.awt.Point;
 
 import one.empty3.library.core.nurbs.ParametricVolume;
 

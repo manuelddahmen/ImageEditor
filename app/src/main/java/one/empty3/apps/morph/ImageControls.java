@@ -25,7 +25,7 @@
 //import one.empty3.library.core.tribase.Plan3D;
 //
 //import javax.swing.*;
-//import java.awt.*;
+//import javaAnd.awt.*;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
 //import java.awt.event.MouseMotionListener;
@@ -240,7 +240,7 @@
 //
 //    private void displayGrid() {
 //        Thread thread = new Thread(() -> {
-//            ZBufferImplJan2023 zBuffer1 = new ZBufferImplJan2023(resX, resY);
+//            ZBufferImpl zBuffer1 = new ZBufferImpl(resX, resY);
 //            while (isRunning()) {
 //
 //                Scene scene1 = new Scene();
@@ -340,7 +340,7 @@
 //        addToScene(scene);
 //
 //        if (zBuffer == null)
-//            zBuffer = new ZBufferImplJan2023(resX, resY);
+//            zBuffer = new ZBufferImpl(resX, resY);
 //        else {
 //            zBuffer.idzpp();
 //        }

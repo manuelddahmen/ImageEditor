@@ -31,7 +31,6 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.Representable;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.core.tribase.TRIObjetGenerateurAbstract;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

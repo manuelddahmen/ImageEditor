@@ -389,7 +389,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
             } else if (r instanceof ParametricCurve) {
                 ParametricCurve n = (ParametricCurve) r;
-                double incr = n.getIncrU().getData0d();
+                double incr = n.getIncrU().getElem();
                 for (double u = n.start(); u <= n.endU(); u += incr) {
                     if (n.isConnected() && displayType != SURFACE_DISPLAY_POINTS) {
                         line(
@@ -422,7 +422,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     }
 
-        @Override
         public int getColorAt(android.graphics.Point p) {
             return 0;
         }
@@ -464,7 +463,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         return ha;
     }
 
-        @Override
         public boolean checkScreen(android.graphics.Point p1) {
             return false;
         }

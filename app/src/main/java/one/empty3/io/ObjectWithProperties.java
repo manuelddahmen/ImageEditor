@@ -19,8 +19,6 @@
 
 package one.empty3.io;
 
-import one.empty3.library.StructureMatrix;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

@@ -38,7 +38,6 @@
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by manue on 29-12-19.

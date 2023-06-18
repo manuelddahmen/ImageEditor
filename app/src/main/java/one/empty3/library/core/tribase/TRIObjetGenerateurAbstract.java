@@ -57,7 +57,7 @@ package one.empty3.library.core.tribase;
 
 
 import android.graphics.Color;
-import android.graphics.Point;
+import javaAnd.awt.Point;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -272,10 +272,10 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
                 double incrMax = 1;
                 for (int t = 0; t < 2; t++) {
                     for (int c = 0; c < 3; c++) {
-                        android.graphics.Point p1 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem(c), (ZBufferImplJan2023) z);
+                        Point p1 = z.camera().coordonneesPoint2D(tris[t]
+                                .getSommet().getElem(c), (ZBufferImpl) z);
                         Point p2 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem((c + 1) % 3), (ZBufferImplJan2023) z);
+                                .getSommet().getElem((c + 1) % 3), (ZBufferImpl) z);
                         if (p1 != null & p2 != null) {
                             double incr = 1.0 / (Math
                                     .abs(p1.x - p2.x) + Math.abs(p1

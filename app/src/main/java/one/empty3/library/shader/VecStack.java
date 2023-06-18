@@ -20,8 +20,6 @@
 
 package one.empty3.library.shader;
 
-import one.empty3.library.StructureMatrix;
-
 /*__
  *  VecStack.
  * fonctions vecteurs

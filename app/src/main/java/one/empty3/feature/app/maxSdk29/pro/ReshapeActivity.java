@@ -1,7 +1,5 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import one.empty3.library.Point3D;

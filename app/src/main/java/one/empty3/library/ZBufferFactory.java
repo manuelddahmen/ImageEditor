@@ -54,20 +54,20 @@ package one.empty3.library;
 
 public class ZBufferFactory {
 
-    private static ZBufferImplJan2023 insta = null;
+    private static ZBufferImpl insta = null;
     private static int la = -1, ha = -1;
 
-    public static ZBufferImplJan2023 instance(int x, int y) {
+    public static ZBufferImpl instance(int x, int y) {
         if (la == x && ha == y && insta != null) {
             return insta;
         }
         la = x;
         ha = y;
-        insta = new ZBufferImplJan2023(x, y);
+        insta = new ZBufferImpl(x, y);
         return insta;
     }
 
-    public static ZBufferImplJan2023 instance(int x, int y, boolean D3) {
+    public static ZBufferImpl instance(int x, int y, boolean D3) {
         if (la == x && ha == y && insta != null)//&& (D3 && insta instanceof ZBuffer3D || !D3))
         {
             return insta;
@@ -77,15 +77,15 @@ public class ZBufferFactory {
         if (D3) {
             // insta = new ZBuffer3DImpl(coordArr, y);
         } else {
-            insta = new ZBufferImplJan2023(x, y);
+            insta = new ZBufferImpl(x, y);
         }
 
         return insta;
     }
 
-    public static ZBufferImplJan2023 instance(int x, int y, Scene s) {
+    public static ZBufferImpl instance(int x, int y, Scene s) {
 
-        ZBufferImplJan2023 z = new ZBufferImplJan2023(x, y);
+        ZBufferImpl z = new ZBufferImpl(x, y);
         z.scene(s);
         return z;
     }

@@ -1,57 +1,26 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
- */
-
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package one.empty3.library;
 
+
+import javaAnd.awt.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,8 +31,8 @@ import java.util.function.Consumer;
  * Created by manue on 07-09-19.
  */
 public class StructureMatrix<T> {
-    private static final int INSERT_ROW = 0;
-    private static final int INSERT_COL = 1;
+    public static final int INSERT_ROW = 0;
+    public static final int INSERT_COL = 1;
     private int dim;
     public T data0d;
     public List<T> data1d;
@@ -89,44 +58,42 @@ public class StructureMatrix<T> {
     public void init(int dim, Class classType) {
         this.dim = dim;
         if (dim == 1)
-            data1d = new ArrayList<>();
+            data1d = Collections.synchronizedList(new ArrayList<>());
         if (dim == 2)
-            data2d = new ArrayList<>();
+            data2d = Collections.synchronizedList(new ArrayList<>());
         this.classType = classType;
     }
 
     public void setElem(T value) {
         dim = 0;
+        if(value instanceof Point3D) {
+
+        }
         this.data0d = value;
         this.classType = value.getClass();
-        listenersPropertyChanged();
+        listenersPropertyChanged(null, value, 0, 0, 0);
     }
 
     public void setElem(T elem, int i) {
         if (i >= data1d.size()) {
             int j = data1d.size();
             while (j <= i) {
-                try {
-                    if (getClassType().equals(Boolean.class)) {
-                        data1d.add((T) Boolean.FALSE);
-                    } else if (getClassType().equals(Integer.class)) {
-                        data1d.add((T) (Integer) 0);
-                    } else if (getClassType().equals(Double.class)) {
-                        data1d.add((T) (Double) 0.);
-                    } else if (getClassType().equals(String.class)) {
-                        data1d.add((T) "");
-                    } else {
-                        data1d.add((T) getClassType().newInstance());
-                    }
-                } catch (InstantiationException | IllegalAccessException e) {
-
-                    e.printStackTrace();
+                if (getClassType().equals(Boolean.class)) {
+                    data1d.add((T) Boolean.FALSE);
+                } else if (getClassType().equals(Integer.class)) {
+                    data1d.add((T) (Integer) 0);
+                } else if (getClassType().equals(Double.class)) {
+                    data1d.add((T) (Double) 0.);
+                } else if (getClassType().equals(String.class)) {
+                    data1d.add((T) "");
+                } else {
+                    data1d.add(null);
                 }
                 j++;
             }
         }
         getData1d().set(i, elem);
-        listenersPropertyChanged();
+        listenersPropertyChanged(null, elem, 1, i, 0);
     }
 
     public void setElem(T elem, int i, int j) {
@@ -134,14 +101,14 @@ public class StructureMatrix<T> {
         this.classType = elem.getClass();
         if (data2d == null)
             data2d = Collections.synchronizedList(new ArrayList<>());
-        while (data2d.size() <= i) {
+        while (i >= data2d.size()) {
             data2d.add(Collections.synchronizedList(new ArrayList<>()));
         }
-        while (data2d.get(i).size() <= j) {
+        while (j >= data2d.get(i).size()) {
             data2d.get(i).add(elem);
         }
         data2d.get(i).set(j, elem);
-        listenersPropertyChanged();
+        listenersPropertyChanged(null, elem, 2, i, j);
     }
 
     public T getElem(int[] indices) {
@@ -192,24 +159,32 @@ public class StructureMatrix<T> {
     public List<List<T>> getData2d() {
         return data2d;
     }
-
+    public boolean inBounds(int i, int j) {
+        return dim==2 && i<getData2d().size() && j<getData2d().get(i).size();
+    }
+    public boolean inBounds(int i) {
+        return dim==1 && i<getData1d().size();
+    }
     public void insert(int pos, int rowCol, T value) {
         if (dim == 1)
             data1d.add(pos, value);
         if (dim == 2) {
-            if (rowCol == INSERT_ROW) {
+            if (rowCol == INSERT_COL) {
                 List<T> ins = Collections.synchronizedList(new ArrayList<T>());
-                for (int i = 0; i < data2d.get(0).size(); i++)
+                for (int i = 0; i < data2d.get(0).size(); i++) {
                     ins.add(value);
+                    listenersPropertyChanged(null, value, dim, pos, i);
+                }
                 data2d.add(pos, ins);
+                listenersPropertyChanged(null, value, dim, pos, 0);
 
-            } else if (rowCol == INSERT_COL) {
+            } else if (rowCol == INSERT_ROW) {
                 for (int i = 0; i < data2d.size(); i++) {
-                    data2d.get(pos).add(i, value);
+                    data2d.get(i).add(pos, value);
+                    listenersPropertyChanged(null, value, dim, i, pos);
                 }
             }
         }
-        listenersPropertyChanged();
     }
 
     public void delete(int pos, int rowCol) {
@@ -225,7 +200,6 @@ public class StructureMatrix<T> {
                 }
             }
         }
-        listenersPropertyChanged();
     }
 
     public void delete(int pos) {
@@ -238,7 +212,6 @@ public class StructureMatrix<T> {
     public void insert(int i, T value) {
         if (dim == 1)
             data1d.add(i, value);
-        listenersPropertyChanged();
     }
 
     public void add(int dim, T value) {
@@ -252,7 +225,6 @@ public class StructureMatrix<T> {
             int ind1 = data2d.size();
             data2d.get(ind1).add(value);
         }
-        listenersPropertyChanged();
     }
 
     public void add(T value) {
@@ -266,14 +238,12 @@ public class StructureMatrix<T> {
             //int ind1 = data2d.size();
             //data2d.get(ind1).add(value);
         }
-        listenersPropertyChanged();
     }
 
     public void addRow() {
         if (this.dim == 2) {
             data2d.add(Collections.synchronizedList(new ArrayList<T>()));
         }
-        listenersPropertyChanged();
     }
 
     @Override
@@ -298,7 +268,7 @@ public class StructureMatrix<T> {
         result = 31 * result + data2d.hashCode();
         return result;
     }
-
+    @Deprecated
     public int getDim() {
         return dim;
     }
@@ -313,7 +283,10 @@ public class StructureMatrix<T> {
         s.append("(dim:" + dim + ")");
         switch (dim) {
             case 0:
-                s.append("(data : {" + data0d.toString() + "} )");
+                if(data0d !=null)
+                    s.append("(data : {" + data0d.toString() + "} )");
+                else
+                    s.append("null 0d-data");
                 break;
             case 1:
                 s.append("(data : (");
@@ -356,7 +329,6 @@ public class StructureMatrix<T> {
     }
 
     public void setAll(T[] all) {
-        dim = 1;
         data1d = Collections.synchronizedList(new ArrayList<>());
         switch (dim) {
             case 1:
@@ -371,7 +343,6 @@ public class StructureMatrix<T> {
 
     public void setAll(T[][] all) {
         data2d = Collections.synchronizedList(new ArrayList<List<T>>());
-        dim = 2;
         switch (dim) {
             case 2:
                 for (int i = 0; i < all.length; i++) {
@@ -380,7 +351,6 @@ public class StructureMatrix<T> {
                 }
 
         }
-        listenersPropertyChanged();
     }
 
     public void setAll(ArrayList<T> all) {
@@ -390,18 +360,16 @@ public class StructureMatrix<T> {
 
     public void reset() {
         data0d = null;
-        if(dim==0)
-            data0d = null;
         if (dim == 1)
             data1d.clear();
         if (dim == 2)
             data2d.clear();
-        listenersPropertyChanged();
     }
 
-    private void listenersPropertyChanged() {
+    private void listenersPropertyChanged(Object oldValue, Object newValue, int dim, int posI, int posJ) {
         if (listeners.size() > 0) {
-            listeners.forEach(listener -> listener.actionOnChange());
+            listeners.forEach(listener ->
+                    listener.actionOnChange(oldValue, newValue, dim, posI, posJ));
         }
     }
 
@@ -416,22 +384,29 @@ public class StructureMatrix<T> {
     }
 
     private T cloneElement(T t) throws IllegalAccessException, CopyRepresentableError, InstantiationException {
-        T t1 = t;
-        if (t instanceof StructureMatrix)
+        T t1 = null;
+        if(t==null)
+            return null;
+        if (t instanceof StructureMatrix) {
             t1 = (T) ((StructureMatrix) t).copy();
-        if (t instanceof MatrixPropertiesObject)
-            t1 = (T) ((Representable) t).copy();
+        } else if(t instanceof Point3D) {
+            t1 = (T) new Point3D(((Point3D)t).get(0),
+                    ((Point3D)t).get(1),((Point3D)t).get(2));
+        } else if (t instanceof MatrixPropertiesObject) {
+            ((MatrixPropertiesObject) t).declareProperties();
+            t1 = (T) ((MatrixPropertiesObject) t).copy();
+        }
         return t1;
     }
 
     public StructureMatrix<T> copy() throws IllegalAccessException, CopyRepresentableError, InstantiationException {
-        StructureMatrix<T> tStructureMatrix = new StructureMatrix<>();
-        tStructureMatrix.setDim(getDim());
+        StructureMatrix<T> tStructureMatrix = new StructureMatrix<T>(this.getDim(), this.classType);
         switch (getDim()) {
             case 0:
                 tStructureMatrix.data0d = cloneElement(data0d);
                 break;
             case 1:
+                tStructureMatrix.data1d = new ArrayList<>();
                 if (data1d != null)
                     data1d.forEach(new Consumer<T>() {
                         @Override
@@ -444,33 +419,36 @@ public class StructureMatrix<T> {
                         }
                     });
                 break;
+
             case 2:
                 if (data2d != null) {
-                    int i[] = new int[2];
+
                     data2d.forEach(new Consumer<List<T>>() {
                         @Override
                         public void accept(List<T> ts) {
-                            i[0]++;
+                            ArrayList<T> objects = new ArrayList<>();
+                            tStructureMatrix.data2d.add(objects);
                             ts.forEach(new Consumer<T>() {
                                 @Override
                                 public void accept(T t) {
                                     try {
-                                        tStructureMatrix.setElem(cloneElement(t), i[0], i[1]);
+                                        objects.add(cloneElement(t));
                                     } catch (IllegalAccessException | CopyRepresentableError |
                                              InstantiationException e) {
                                         e.printStackTrace();
                                     }
-                                    i[1]++;
+
 
                                 }
                             });
+
                         }
 
                     });
                 }
                 break;
-        }
-        return null;
+            }
+        return tStructureMatrix;
 
     }
 

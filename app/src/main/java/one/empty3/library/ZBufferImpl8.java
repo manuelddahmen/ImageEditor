@@ -48,7 +48,7 @@ import one.empty3.pointset.PCont;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Picture;
-import android.graphics.Point;
+import javaAnd.awt.Point
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -212,7 +212,7 @@ class Data {
 
 }
 
-public class ZBufferImpl8 extends ZBufferImplJan2023 {
+public class ZBufferImpl8 extends ZBufferImpl {
 
 
     public static final int DISPLAY_ALL = 0;
@@ -706,7 +706,7 @@ public class ZBufferImpl8 extends ZBufferImplJan2023 {
     }
 
     public ZBuffer getInstance(int x, int y) {
-        return new ZBufferImplJan2023(x, y);
+        return new ZBufferImpl(x, y);
     }
 
     */

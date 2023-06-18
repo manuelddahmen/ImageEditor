@@ -21,8 +21,6 @@
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
-import one.empty3.library.Representable;
-import one.empty3.library.StructureMatrix;
 
 public class Pv extends ParametricVolume {
     private StructureMatrix<ParametricSurface> surfaceAb = new StructureMatrix<>(1, ParametricSurface.class);
