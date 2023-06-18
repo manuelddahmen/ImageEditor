@@ -246,7 +246,8 @@ public class FaceOverlayView extends ImageViewSelection {
         double imageWidth = mBitmap.getWidth();
         double imageHeight = mBitmap.getHeight();
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
-        return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale), (int) (p.y * scale));
+        return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale),
+                (int) ((int) (-(imageHeight / 2) * scale) + mCanvas.getHeight() / 2 + p.y * scale));
     }
 
     public void updateImage(Bitmap bm) {
@@ -259,7 +260,10 @@ public class FaceOverlayView extends ImageViewSelection {
 
                 double imageWidth = mBitmap.getWidth();
                 double imageHeight = mBitmap.getHeight();
-                Rect destBounds = new Rect((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2), 0, (int) ((int) ((imageWidth / 2) * scale) + mCanvas.getWidth() / 2), (int) (imageHeight * scale));
+                PointF p1 = coordCanvas(new PointF(0, 0));
+                PointF p2 = coordCanvas(new PointF((float) imageWidth, (float) imageHeight));
+                Rect destBounds = new Rect((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
+
                 mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBox(mCanvas, scale));
 
