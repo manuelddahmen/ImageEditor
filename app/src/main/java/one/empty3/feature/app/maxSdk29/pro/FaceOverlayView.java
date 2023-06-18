@@ -4,31 +4,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.NinePatch;
 import android.graphics.Paint;
-import javaAnd.awt.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.vision.face.Contour;
-import com.google.android.gms.vision.face.Landmark;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceContour;
@@ -36,16 +23,12 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.google.mlkit.vision.face.FaceLandmark;
-import com.google.mlkit.vision.face.internal.FaceDetectorImpl;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 
-import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.Polygon;
 import one.empty3.library.Representable;
 
@@ -216,12 +199,19 @@ public class FaceOverlayView extends ImageViewSelection {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        /*FaceOverlayView faceOverlayView = findViewById(R.id.face_overlay);
+
+        Drawable drawable = faceOverlayView.getDrawable();
+        if(drawable!=null &&drawable instanceof BitmapDrawable) {
+            canvas = new Canvas(((BitmapDrawable) drawable).getBitmap());
+        }
+*/
         super.onDraw(canvas);
         if (isFinish())
             return;
         this.mCanvas = canvas;
-        if (mCopy == null)
-            setImageBitmap(mBitmap);
+        //if (mCopy == null)
+        //    setImageBitmap(mBitmap);
         if (mCopy != null)
             updateImage(mCopy);
     }
