@@ -59,7 +59,6 @@ public class Main2022 {
         final HashMap<String, ProcessFile> listProcessClasses = new HashMap<>();
         try {
 
-            listProcessClasses.put("Classification", Classification.class.newInstance());
             //listProcessClasses.put("", CornerDetectProcess.class.newInstance());
             //listProcessClasses.put("", CurveFitting.class.newInstance());
             listProcessClasses.put("DBScanProcess", DBScanProcess.class.newInstance());
@@ -78,7 +77,6 @@ public class Main2022 {
             listProcessClasses.put("Histogram3", Histogram3.class.newInstance());
             listProcessClasses.put("Hist4Contour", Hist4Contour.class.newInstance());
             listProcessClasses.put("Hist4Contour2", Hist4Contour2.class.newInstance());
-            listProcessClasses.put("HoughTransform", HoughTransform.class.newInstance());
             //listProcessClasses.put("", HoughTransformCircle.class.newInstance());
             listProcessClasses.put("IdentNullProcess", IdentNullProcess.class.newInstance());
             //listProcessClasses.put("", IsleProcess.class.newInstance());
@@ -89,7 +87,6 @@ public class Main2022 {
             //listProcessClasses.put("Lines5", Lines5.class.newInstance());
             //listProcessClasses.put("Lines5colors", Lines5colors.class.newInstance());
             //listProcessClasses.put("Lines6", Lines6.class.newInstance());
-            listProcessClasses.put("Lines7luckyLinesOutline", Lines7luckyLinesOutline.class.newInstance());
             listProcessClasses.put("ProxyValue", ProxyValue.class.newInstance());
             listProcessClasses.put("ProxyValue2", ProxyValue2.class.newInstance());
             //listProcessClasses.put("Transform1", Transform1.class.newInstance());
@@ -98,6 +95,11 @@ public class Main2022 {
             listProcessClasses.put("LocalExtremaProcess", LocalExtremaProcess.class.newInstance());
 
 
+            /*
+            listProcessClasses.put("Lines7luckyLinesOutline<>", Lines7luckyLinesOutline.class.newInstance());
+            listProcessClasses.put("Classification<>", Classification.class.newInstance());
+            listProcessClasses.put("HoughTransform<>", HoughTransform.class.newInstance());
+            */
             indices.clear();
             listProcessClasses.forEach((s, processFile) -> {
                 indices.add(s);

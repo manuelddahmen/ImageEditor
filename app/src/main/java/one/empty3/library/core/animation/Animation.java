@@ -69,7 +69,7 @@ public class Animation extends Representable {
     public Animation(Scene s, ECDim dim) {
         this.resolution = dim;
         this.scene = s;
-        z = new ZBufferImpl(resolution.getDimx(), resolution.getDimy());
+        z = new ZBufferImplJan2023(resolution.getDimx(), resolution.getDimy());
     }
 
     public void registerPoint3D(Point3D p) {

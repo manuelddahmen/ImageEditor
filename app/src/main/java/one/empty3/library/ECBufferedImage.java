@@ -65,6 +65,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ECBufferedImage {
+    public static final int TYPE_INT_RGB = 1;
     Bitmap bitmap;
     /*__
      *
@@ -112,5 +113,9 @@ public class ECBufferedImage {
         int result = pixelCountMax;
         result = 31 * result + squarepixelCountMax;
         return result;
+    }
+
+    public void setRGB(int i, int j, int elementCouleur) {
+        bitmap.setPixel(i, j, elementCouleur);
     }
 }

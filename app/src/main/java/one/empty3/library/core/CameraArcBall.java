@@ -50,7 +50,7 @@ public class CameraArcBall {
     /*__
      * Created by manue on 06-11-19.
      */
-    private final ZBufferImpl zBuffer;
+    private final ZBufferImplJan2023 zBuffer;
     private Point3D pointCenter;
     private double radius;
     private Point3D currentPosition;
@@ -90,7 +90,7 @@ public class CameraArcBall {
         return ray.getP1().getElem().plus(ray.getVector().mult(t));
     }
 
-    public CameraArcBall(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer) {
+    public CameraArcBall(Camera camera, Point3D point, double radius, ZBufferImplJan2023 zBuffer) {
         currentCamera = camera;
         pointCenter = point;
         this.radius = radius;

@@ -273,9 +273,9 @@ public class TRIObjetGenerateurAbstract extends Representable implements TRIObje
                 for (int t = 0; t < 2; t++) {
                     for (int c = 0; c < 3; c++) {
                         android.graphics.Point p1 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem(c), (ZBufferImpl) z);
+                                .getSommet().getElem(c), (ZBufferImplJan2023) z);
                         Point p2 = z.camera().coordonneesPoint2D(tris[t]
-                                .getSommet().getElem((c + 1) % 3), (ZBufferImpl) z);
+                                .getSommet().getElem((c + 1) % 3), (ZBufferImplJan2023) z);
                         if (p1 != null & p2 != null) {
                             double incr = 1.0 / (Math
                                     .abs(p1.x - p2.x) + Math.abs(p1

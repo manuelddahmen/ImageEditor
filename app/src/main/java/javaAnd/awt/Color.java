@@ -20,10 +20,16 @@
 
 package javaAnd.awt;
 
+import one.empty3.library.Lumiere;
+
 public class Color extends android.graphics.Color/*android.graphics.Color*/ {
+
+    public static final int TRANSLUCENT = 0;
 
     public Color(android.graphics.Color color) {
     }
+
+
 
     public static android.graphics.Color color(int colorAt) {
         return android.graphics.Color.valueOf(colorAt);
@@ -71,4 +77,15 @@ public class Color extends android.graphics.Color/*android.graphics.Color*/ {
         return Color.valueOf(rgb);
     }
 
+    public int getRgb() {
+        return super.toArgb();
+    }
+
+    public int getRGB() {
+        return super.toArgb();
+    }
+
+    public double getAlpha() {
+        return 0;
+    }
 }

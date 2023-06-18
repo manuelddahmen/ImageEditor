@@ -212,7 +212,7 @@ class Data {
 
 }
 
-public class ZBufferImpl8 extends ZBufferImpl {
+public class ZBufferImpl8 extends ZBufferImplJan2023 {
 
 
     public static final int DISPLAY_ALL = 0;
@@ -706,7 +706,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
     public ZBuffer getInstance(int x, int y) {
-        return new ZBufferImpl(x, y);
+        return new ZBufferImplJan2023(x, y);
     }
 
     */

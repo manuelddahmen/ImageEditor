@@ -27,11 +27,8 @@ import javaAnd.awt.image.imageio.ImageIO;
 import java.io.File;
 
 public class ExtremaProcess extends ProcessFile {
-    private boolean setMin = true;
     private final int pointsCount;
     private final int neighbourSize;
-    protected double sub[];
-    private double threshold = 0.5;
 
 
     public ExtremaProcess() {

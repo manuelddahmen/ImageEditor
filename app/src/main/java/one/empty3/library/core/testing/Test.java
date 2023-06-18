@@ -148,7 +148,7 @@ public interface Test extends Runnable {
     /*__
      * Use for drawing fast after scene is drawn
      *
-     * @return instance of running ZBuffer (ZBufferImpl)
+     * @return instance of running ZBuffer (ZBufferImplJan2023)
      */
     ZBuffer getZ();
 

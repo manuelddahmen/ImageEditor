@@ -56,7 +56,7 @@
 //    private BufferedImage imageRead2;
 //    private ZBuffer zBuffer1;
 //    private ZBuffer zBuffer2;
-//    private ZBufferImpl zBufferComputing;
+//    private ZBufferImplJan2023 zBufferComputing;
 //    private ITexture text1;
 //    private ITexture text2;
 //    private String vid1;
@@ -411,11 +411,11 @@
 //                    scene.cameraActive(camera);
 //
 //                    if (zBufferComputing == null)
-//                        zBufferComputing = new ZBufferImpl(resX, resY);
+//                        zBufferComputing = new ZBufferImplJan2023(resX, resY);
 //                    else
 //                        zBufferComputing.idzpp();
 //
-//                    //zBufferComputing.setDisplayType(ZBufferImpl.SURFACE_DISPLAY_TEXT_QUADS);
+//                    //zBufferComputing.setDisplayType(ZBufferImplJan2023.SURFACE_DISPLAY_TEXT_QUADS);
 //
 //                    zBufferComputing.scene(scene);
 //                    zBufferComputing.camera(camera);

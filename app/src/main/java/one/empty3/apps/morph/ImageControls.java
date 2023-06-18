@@ -240,7 +240,7 @@
 //
 //    private void displayGrid() {
 //        Thread thread = new Thread(() -> {
-//            ZBufferImpl zBuffer1 = new ZBufferImpl(resX, resY);
+//            ZBufferImplJan2023 zBuffer1 = new ZBufferImplJan2023(resX, resY);
 //            while (isRunning()) {
 //
 //                Scene scene1 = new Scene();
@@ -340,7 +340,7 @@
 //        addToScene(scene);
 //
 //        if (zBuffer == null)
-//            zBuffer = new ZBufferImpl(resX, resY);
+//            zBuffer = new ZBufferImplJan2023(resX, resY);
 //        else {
 //            zBuffer.idzpp();
 //        }

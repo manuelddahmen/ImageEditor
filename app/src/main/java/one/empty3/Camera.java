@@ -1,58 +1,32 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
+package one.empty3;
 
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
- */
-package one.empty3.library;
-
+import java.awt.*;
 
 import javaAnd.awt.Point;
+import one.empty3.library.Barycentre;
+import one.empty3.library.Matrix33;
+import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
+import one.empty3.library.ZBufferImpl;
 
 /*__
  * @author Manuel Dahmen
@@ -65,16 +39,15 @@ public class Camera extends CameraBox {
     public static final int PERSPECTIVE_ISOM = 0;
     public static final int PERSPECTIVE_OEIL = 1;
     private static final long serialVersionUID = 2743860672948547944L;
-    public int type_perspective = PERSPECTIVE_OEIL;
-
-    public static Camera PARDEFAULT = new Camera();
+    protected int type_perspective = PERSPECTIVE_OEIL;
 
     protected StructureMatrix<Point3D> eye = new StructureMatrix<>(0, Point3D.class);
     protected StructureMatrix<Point3D> lookat = new StructureMatrix<>(0, Point3D.class);
 
+    protected StructureMatrix<Double> scale = new StructureMatrix<>(1, Double.class);
     protected StructureMatrix<Boolean> imposerMatrice = new StructureMatrix<>(0, Point3D.class);
     protected StructureMatrix<Matrix33> matrice = new StructureMatrix<>(0, Matrix33.class);
-    private StructureMatrix<Point3D> verticale = new StructureMatrix<>(0, Point3D.class);
+    protected final StructureMatrix<Point3D> verticale = new StructureMatrix<>(0, Point3D.class);
 
     {
 
@@ -82,28 +55,29 @@ public class Camera extends CameraBox {
     }
 
     private Barycentre position;
-
+    public Camera(boolean pass) {
+        imposerMatrice.setElem(false);
+    }
     public Camera() {
-        this(new Point3D(0d, 0d, -100d), Point3D.O0, Point3D.Y);
-        verticale.setElem(new Point3D(Point3D.Y));
+        this(new Point3D(100d, 0d, 0.0), Point3D.O0, Point3D.Y);
     }
 
     public StructureMatrix<Point3D> getVerticale() {
         return verticale;
     }
 
-    public void setVerticale(StructureMatrix<Point3D> verticale) {
-        this.verticale = verticale;
-    }
-
     public Camera(Point3D eye, Point3D lookat) {
+
         this(eye, lookat, null);
+
     }
 
     public Camera(Point3D eye, Point3D lookat, Point3D up) {
         imposerMatrice.setElem(false);
         this.eye.setElem(eye);
         this.lookat.setElem(lookat);
+        if(up!=null)
+            verticale.setElem(up);
         calculerMatrice(up);
 
     }
@@ -125,7 +99,7 @@ public class Camera extends CameraBox {
 
     protected Point3D calculerVerticaleParDefaut(Point3D senseAxeCamera) {
         Point3D z = senseAxeCamera.norme1();
-        return Point3D.Y.prodVect(z).prodVect(z).mult(-1d).norme1();
+        return Point3D.Z.prodVect(z).mult(-1d).prodVect(z).norme1();
     }
 
     protected Point3D calculerHorizontaParDefaut(Point3D senseAxeCamera) {
@@ -150,29 +124,34 @@ public class Camera extends CameraBox {
         }
         this.matrice.setElem(m.tild());
     }
-
     public void setMatrix(Matrix33 m) {
         // Z SORT DE L4ECRAN
-
+       
         this.matrice.setElem(m.tild());
     }
 
-    public void calculerMatrice(Point3D verticale) {
+    @Deprecated
+    public void calculerMatrice(Point3D vertical) {
         if (!imposerMatrice.getElem()) {
-            if (verticale == null)
-                verticale = calculerVerticaleParDefaut(getLookat().moins(eye.getElem()));
+            if (vertical == null) {
+                verticale.setElem( calculerVerticaleParDefaut(getLookat().moins(eye.getElem())) );
+            } else {
+                verticale.setElem(vertical);
+            }
 
-
-            Point3D z = getLookat().moins(eye.getElem()).norme1();
-            Point3D x = z.prodVect(verticale/* Y */).norme1();
-            Point3D y = verticale;
+            Point3D z = getLookat().moins(getEye()).norme1();
+            Point3D x = z.prodVect(verticale.getElem()).norme1();
+            Point3D y = z.prodVect(x);
 
             setMatrix(x, y, z);
         }
     }
 
     public Point3D calculerPointDansRepere(Point3D p) {
-        Point3D p2 = matrice.getElem().mult(p.moins(getEye()));
+        //Point3D p2 = matrice.getElem().mult(p.moins(getEye()));
+        Point3D p2 = matrice.getElem().mult(p.moins(eye()).plus(getLookat()))
+                .plus(getLookat().moins(p));
+        p2.texture(p.texture());
         return p2;
     }
 
@@ -184,19 +163,14 @@ public class Camera extends CameraBox {
     }
 
     public Point3D getEye() {
-        return calculerPoint(eye.getElem());
+        return eye.getElem();
     }
-
-    private Point3D calculerPoint(Point3D elem) {
-        return elem;
-    }
-
     public void setEye(Point3D eye) {
         this.eye.setElem(eye);
     }
 
     public Point3D getLookat() {
-        return calculerPoint(lookat.getElem());
+        return lookat.getElem();
     }
 
     public void setLookat(Point3D lookat) {
@@ -245,25 +219,36 @@ public class Camera extends CameraBox {
 
     }
 
-    public Point coordonneesPointEcranPerspective(Point3D x3d, int la, int ha) {
-
+    private Point coordonneesPointEcranPerspective(Point3D x3d, int la, int ha) {
 
         if (x3d.getZ() > 0 && -getAngleX() < Math.atan(x3d.getX() / x3d.getZ())
                 && Math.atan(x3d.getX() / x3d.getZ()) < getAngleX() && -getAngleY() < Math.atan(x3d.getY() / x3d.getZ())
                 && Math.atan(x3d.getY() / x3d.getZ()) < getAngleY()) {
 
             double scale = (1.0 / (x3d.getZ()));
-            return new Point((int) (x3d.getX() * scale * la + la / 2), (int) (-x3d.getY() * scale * ha + ha / 2));
-        }
+
+            double x = Math.atan(x3d.getX() / x3d.getZ())/x3d.getZ()*la;
+            double y = Math.atan(x3d.getX() / x3d.getZ())/x3d.getZ()*ha;
+
+            double r = (angleY.getElem()/angleX.getElem());
+            return new Point(
+                    (int) ((   x3d.getX() * scale * la * r + la / 2)),
+                    (int) (( - x3d.getY() *scale * ha + ha / 2)));
+/*
+            Point p = new Point((int) (x + la / 2), (int) (y + ha / 2));
+            Logger.getAnonymousLogger().log(Level.INFO, p.toString());
+
+            return p;
+  */      }
         return null;
 
     }
 
     public Point coordonneesPointEcranIsometrique(Point3D p, ZBufferImpl.Box2D box, int la, int ha) {
-        javaAnd.awt.Point p2 = new Point(
+        Point p2 = new Point(
                 (int) (1.0 * la / (box.getMaxx() - box.getMinx()) * (p.getX() - box.getMinx())),
                 ha - (int) (1.0 * ha / (box.getMaxy() - box.getMiny()) * (p.getY() - box.getMiny())));
-        if (p2.x >= 0.0 && p2.x < la && p2.y >= 0 && p2.y < ha) {
+        if (p2.getX() >= 0.0 && p2.getX() < la && p2.getY() >= 0 && p2.getY() < ha) {
             return p2;
         } else {
             return null;
@@ -271,19 +256,15 @@ public class Camera extends CameraBox {
     }
 
 
-    public Point coordonneesPoint2D(Point3D p, ZBufferImpl impl) {
+    public Point coordonneesPoint2D(Point3D p, ZBuffer impl) {
         switch (type_perspective) {
             case PERSPECTIVE_ISOM:
-                return coordonneesPointEcranIsometrique(coordonneesPoint3D(p), impl.box, impl.la, impl.ha);
+                //return coordonneesPointEcranIsometrique(coordonneesPoint3D(p), impl.box, impl.la, impl.ha);
             case PERSPECTIVE_OEIL:
-                return coordonneesPointEcranPerspective(coordonneesPoint3D(p), impl.la, impl.ha);
+                return coordonneesPointEcranPerspective(calculerPointDansRepere(p), impl.la(), impl.ha());
             default:
                 throw new UnsupportedOperationException("Type de perspective non reconnu");
         }
-    }
-
-    public Point3D coordonneesPoint3D(Point3D p) {
-        return calculerPointDansRepere(p);
     }
 
     public double distanceCamera(Point3D x3d) {
@@ -291,13 +272,22 @@ public class Camera extends CameraBox {
             case PERSPECTIVE_ISOM:
                 return x3d.getZ() - eye.getElem().getZ();
             case PERSPECTIVE_OEIL:
-                return x3d.moins(eye.getElem()).norme();
+                return x3d.moins(eye.getElem()).getZ();
             default:
                 throw new UnsupportedOperationException("Type de perspective non reconnu");
         }
 
     }
 
-    public void ratioHorizontalAngle(int dimx, int dimy) {
+    public StructureMatrix<Double> getScale() {
+        return scale;
+    }
+
+    public void setScale(StructureMatrix<Double> scale) {
+        this.scale = scale;
+    }
+
+    protected void setVerticale(Point3D vert2) {
+        this.verticale.setElem(vert2);
     }
 }

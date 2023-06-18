@@ -44,7 +44,7 @@ import android.graphics.Point;
  * Created by manue on 06-11-19.
  */
 public class ArcBall2 {
-    private final ZBufferImpl zBuffer;
+    private final ZBufferImplJan2023 zBuffer;
     private Point3D pointCenter;
     private double radius;
     private Point3D currentPosition;
@@ -84,7 +84,7 @@ public class ArcBall2 {
         return ray.getP1().getElem().plus(ray.getVector().mult(t));
     }
 
-    public ArcBall2(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer) {
+    public ArcBall2(Camera camera, Point3D point, double radius, ZBufferImplJan2023 zBuffer) {
         currentCamera = camera;
         pointCenter = point;
         this.radius = radius;

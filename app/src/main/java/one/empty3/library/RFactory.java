@@ -31,7 +31,7 @@ public class RFactory {
     public static ZBuffer getZBufferInstance() {
         if(configName.equals("stable"))
             return new ZBufferImpl8();
-        return new ZBufferImpl();
+        return new ZBufferImplJan2023();
     }
     public static Vec getVecInstance() {
         if(configName.equals("stable"))

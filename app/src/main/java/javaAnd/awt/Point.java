@@ -30,6 +30,15 @@ public class Point {
         this.y = y2;
     }
 
+    public Point(Point p1) {
+        x = p1.x;
+        y = p1.y;
+    }
+
+    public static double distance(double x, double y, double x1, double y1) {
+        return Math.sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1));
+    }
+
     public double getX() {
         return x;
     }
@@ -44,5 +53,10 @@ public class Point {
                 "x=" + x +
                 ", y=" + y +
                 ')';
+    }
+
+    public void setLocation(double v, double v1) {
+        this.x = v;
+        this.y = v1;
     }
 }

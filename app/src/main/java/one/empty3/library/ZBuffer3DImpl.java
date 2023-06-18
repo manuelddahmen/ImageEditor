@@ -53,7 +53,7 @@
 package one.empty3.library;
 
 /*
- public class ZBuffer3DImpl extends ZBufferImpl implements ZBuffer3D {
+ public class ZBuffer3DImpl extends ZBufferImplJan2023 implements ZBuffer3D {
  protected int lr;
  private ECBufferedImage imageGauche;
  private ECBufferedImage imageDroite;

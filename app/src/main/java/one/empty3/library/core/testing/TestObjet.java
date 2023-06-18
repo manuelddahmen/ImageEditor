@@ -156,7 +156,7 @@ public abstract class TestObjet implements Test, Runnable {
     private File directory;
     private ZipWriter zip;
     private boolean stop = false;
-    protected ZBufferImpl z;
+    protected ZBufferImplJan2023 z;
     private RegisterOutput o = new RegisterOutput();
     private int onTextureEnds = ON_TEXTURE_ENDS_STOP;
     private int onMaxFrameEvent = ON_MAX_FRAMES_STOP;
@@ -173,7 +173,7 @@ public abstract class TestObjet implements Test, Runnable {
     private Resolution dimension = HD1080;
     private String name;
 
-    protected ZBufferImpl z() {
+    protected ZBufferImplJan2023 z() {
         return z;
     }
 
