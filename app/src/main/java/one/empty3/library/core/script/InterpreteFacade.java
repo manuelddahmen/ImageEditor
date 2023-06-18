@@ -72,6 +72,8 @@ import one.empty3.library.core.tribase.Tubulaire;
 
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

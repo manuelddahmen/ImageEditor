@@ -21,6 +21,7 @@
 //
 //import one.empty3.library.ITexture;
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.Polygons;
 //import one.empty3.library.TextureMorphing;
 //import one.empty3.library.core.nurbs.ParametricSurface;

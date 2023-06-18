@@ -17,9 +17,12 @@
 //package one.empty3.library.core.script;
 //
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.PolyMap;
 //
 //import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 //
 ///*__
 // * @author Se7en

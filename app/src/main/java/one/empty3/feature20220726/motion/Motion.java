@@ -25,6 +25,8 @@ import one.empty3.feature20220726.PixM;
 import javaAnd.awt.image.BufferedImage;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*
  * Motion

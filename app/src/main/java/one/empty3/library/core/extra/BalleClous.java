@@ -25,10 +25,13 @@ package one.empty3.library.core.extra;
 import one.empty3.library.HeightMapSurface;
 import one.empty3.library.Point2D;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Sphere;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Se7en

@@ -22,6 +22,8 @@ package one.empty3.feature20220726.tryocr;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,7 @@ import one.empty3.feature20220726.shape.Rectangle;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 

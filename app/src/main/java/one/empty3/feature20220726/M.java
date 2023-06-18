@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import java.util.PrimitiveIterator;
 import java.util.Random;

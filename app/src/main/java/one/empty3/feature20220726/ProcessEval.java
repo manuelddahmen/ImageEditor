@@ -25,6 +25,8 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Objects;
 
 public abstract class ProcessEval {

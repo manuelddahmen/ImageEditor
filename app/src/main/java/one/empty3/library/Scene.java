@@ -65,6 +65,8 @@ import one.empty3.library.core.animation.Animation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 import java.util.List;
 

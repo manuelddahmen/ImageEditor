@@ -63,6 +63,7 @@ import androidx.annotation.RequiresApi;
 
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureImg;
 import one.empty3.library.core.tribase.TRISphere;
 
@@ -71,6 +72,8 @@ import javaAnd.awt.image.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;

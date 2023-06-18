@@ -36,6 +36,8 @@ import one.empty3.library.core.raytracer.tree.AlgebricTree;
 import one.empty3.library.core.raytracer.tree.Constraint;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * Created by manuel on 30-12-16.

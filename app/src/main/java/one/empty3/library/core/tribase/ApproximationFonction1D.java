@@ -60,6 +60,8 @@ package one.empty3.library.core.tribase;
 import one.empty3.library.*;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.HashMap;
 import java.util.Iterator;
 

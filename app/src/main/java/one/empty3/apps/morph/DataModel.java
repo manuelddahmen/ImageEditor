@@ -22,6 +22,7 @@
 //import javaAnd.awt.image.BufferedImage;
 //import one.empty3.feature.app.replace.javax.imageio.ImageIO;
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.StructureMatrix;
 //
 //import java.awt.image.BufferedImage;

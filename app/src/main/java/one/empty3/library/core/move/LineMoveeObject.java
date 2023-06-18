@@ -55,6 +55,7 @@ package one.empty3.library.core.move;
 import one.empty3.library.LineSegment;
 import one.empty3.library.MoveeObject;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by manuel on 29-06-17.

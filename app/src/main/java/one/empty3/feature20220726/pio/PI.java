@@ -26,6 +26,7 @@ import java.io.File;
 import java.util.*;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 /*
  * point sur images

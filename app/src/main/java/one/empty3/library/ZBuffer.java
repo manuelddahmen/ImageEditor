@@ -60,12 +60,13 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import javaAnd.awt.Point;
-
-import one.empty3.library.core.nurbs.ParametricVolume;
 
 import java.io.File;
+
+import javaAnd.awt.Point;
+import one.empty3.library.core.nurbs.ParametricVolume;
 
 /*__
  * *
@@ -117,7 +118,7 @@ public interface ZBuffer {
      *
      * @return image
      */
-    ECBufferedImage image();
+    Bitmap image();
 
     /*__
      * Verrou

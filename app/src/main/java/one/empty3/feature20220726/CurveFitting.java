@@ -27,6 +27,7 @@ import one.empty3.library.Axe;
 import one.empty3.library.Circle;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import javaAnd.awt.image.imageio.ImageIO;
@@ -35,6 +36,8 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

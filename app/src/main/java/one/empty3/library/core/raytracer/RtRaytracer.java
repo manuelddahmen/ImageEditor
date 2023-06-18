@@ -60,6 +60,7 @@ import androidx.annotation.RequiresApi;
 
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.script.ImageIO2;

@@ -7,6 +7,7 @@
 //import one.empty3.library.ITexture;
 //import one.empty3.library.Lumiere;
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.TextureCol;
 //import one.empty3.library.core.lighting.Colors;
 //import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;

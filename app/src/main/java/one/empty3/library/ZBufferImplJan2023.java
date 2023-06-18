@@ -72,6 +72,8 @@
 //import androidx.annotation.RequiresApi;
 //
 //import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 //import java.util.Iterator;
 //import java.util.List;
 //import java.util.function.Consumer;

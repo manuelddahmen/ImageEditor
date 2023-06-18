@@ -35,6 +35,8 @@ package one.empty3.library.core.raytracer.tree;
 import one.empty3.library.core.raytracer.tree.functions.MathFunctionTreeNodeType;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.

@@ -28,6 +28,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public class Hist4Contour extends ProcessFile {
 

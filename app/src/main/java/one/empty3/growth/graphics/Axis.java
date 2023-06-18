@@ -53,6 +53,7 @@
 package one.empty3.growth.graphics;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public enum Axis {
     X("Axe X", Point3D.X),

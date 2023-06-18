@@ -74,6 +74,8 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;

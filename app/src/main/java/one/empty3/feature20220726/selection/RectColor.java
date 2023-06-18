@@ -21,6 +21,7 @@
 package one.empty3.feature20220726.selection;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public class RectColor {
 

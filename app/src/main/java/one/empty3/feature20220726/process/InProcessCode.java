@@ -23,6 +23,8 @@ import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.io.ProcessFile;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InProcessCode {
     private ArrayList<String> codes = new ArrayList<>();

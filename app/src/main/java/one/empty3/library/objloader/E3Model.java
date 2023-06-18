@@ -65,6 +65,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.StringTokenizer;
 
 /*__

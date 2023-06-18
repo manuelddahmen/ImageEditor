@@ -61,6 +61,8 @@ import one.empty3.library.core.script.Loader;
 
 import java.io.*;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;

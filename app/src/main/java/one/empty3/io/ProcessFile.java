@@ -24,6 +24,8 @@ import javaAnd.awt.image.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 
 import one.empty3.feature20220726.PixM;

@@ -26,6 +26,7 @@
 //import net.miginfocom.swing.MigLayout;
 //import one.empty3.library.CopyRepresentableError;
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.StructureMatrix;
 //
 //import javax.swing.*;

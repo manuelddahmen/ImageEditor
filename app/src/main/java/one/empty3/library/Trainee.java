@@ -55,6 +55,8 @@ package one.empty3.library;
 import one.empty3.library.core.tribase.ApproximationFonction1D;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * Created by manuel on 29-07-16.

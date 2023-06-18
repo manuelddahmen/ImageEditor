@@ -28,6 +28,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import one.empty3.library.StructureMatrix;
+
 public class ObjectWithProperties {
     public List<Class> realTypes = new ArrayList<>();
     ProcessNFiles currentProcess;

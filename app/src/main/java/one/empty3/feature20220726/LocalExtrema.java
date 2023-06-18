@@ -21,6 +21,8 @@
 package one.empty3.feature20220726;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class LocalExtrema extends FilterMatPixM {
     private boolean setMin = false;

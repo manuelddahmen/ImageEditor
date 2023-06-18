@@ -56,6 +56,8 @@ package one.empty3.library.core.script;
 import one.empty3.library.Matrix33;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteMatrix33 implements Interprete {
 

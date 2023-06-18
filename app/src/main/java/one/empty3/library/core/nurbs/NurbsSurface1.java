@@ -61,6 +61,7 @@
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.tribase.TRIObjetGenerateurAbstract;
 
 /*__

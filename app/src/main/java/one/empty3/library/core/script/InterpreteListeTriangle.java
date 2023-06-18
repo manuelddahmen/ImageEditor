@@ -61,6 +61,8 @@ import one.empty3.library.TRI;
 import one.empty3.library.TRIObject;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteListeTriangle implements Interprete {
 

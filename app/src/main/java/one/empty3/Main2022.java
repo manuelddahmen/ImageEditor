@@ -21,6 +21,8 @@
 package one.empty3;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.HashMap;
 import java.util.Map;
 

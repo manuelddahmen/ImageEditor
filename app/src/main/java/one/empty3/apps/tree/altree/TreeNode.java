@@ -55,6 +55,8 @@ package one.empty3.apps.tree.altree;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
 import one.empty3.apps.tree.altree.DoubleTreeNodeType;

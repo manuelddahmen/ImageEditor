@@ -58,9 +58,12 @@
 package one.empty3.library.core.script;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.BSpline;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteBSpline implements Interprete {
 

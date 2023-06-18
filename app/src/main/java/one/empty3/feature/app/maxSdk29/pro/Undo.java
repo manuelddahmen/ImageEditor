@@ -26,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 import java.util.Objects;
 

@@ -40,6 +40,8 @@ package one.empty3.library.core.testing;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

@@ -60,6 +60,8 @@ package one.empty3.library.core.extra;
 import one.empty3.library.*;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 
 public class Spirale implements ISpirale {

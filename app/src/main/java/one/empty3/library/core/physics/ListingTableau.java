@@ -13,6 +13,7 @@
 package one.empty3.library.core.physics;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 
 import java.io.FileNotFoundException;
@@ -20,6 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 
 public class ListingTableau {

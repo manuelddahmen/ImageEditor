@@ -55,6 +55,8 @@ package one.empty3.library.objloader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class MtlLoader {
 

@@ -20,6 +20,7 @@
 package one.empty3.library.core.testing;
 
 import one.empty3.library.Representable;
+import one.empty3.library.StructureMatrix;
 
 public class Path {
     private Representable representable;

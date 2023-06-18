@@ -24,6 +24,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 
 public class ListMathDoubleFunction {

@@ -24,11 +24,14 @@ import one.empty3.feature20220726.M;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 import javaAnd.awt.*;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*
 E = λ1

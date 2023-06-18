@@ -55,9 +55,12 @@ package one.empty3.library.core.script;
 import one.empty3.library.Barycentre;
 import one.empty3.library.Matrix33;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteHomothetie implements Interprete {
 

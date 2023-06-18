@@ -23,6 +23,7 @@ package one.empty3.feature20220726.histograms;
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import javaAnd.awt.image.imageio.ImageIO;
 

@@ -60,9 +60,12 @@ package one.empty3.library.core.script;
 import one.empty3.library.ColorFunction;
 import one.empty3.library.Function;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Tour;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteTour implements Interprete {
 

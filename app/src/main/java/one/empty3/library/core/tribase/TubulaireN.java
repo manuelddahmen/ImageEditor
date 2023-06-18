@@ -72,6 +72,8 @@ import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 
 public class TubulaireN extends Representable implements TRIGenerable, TRIConteneur {

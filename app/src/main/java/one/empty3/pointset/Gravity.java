@@ -53,6 +53,7 @@
 package one.empty3.pointset;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by manue on 16-07-19.

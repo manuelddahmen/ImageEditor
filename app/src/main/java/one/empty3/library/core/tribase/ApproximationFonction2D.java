@@ -60,6 +60,8 @@ package one.empty3.library.core.tribase;
 import one.empty3.library.Courbe;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Manuel DAHMEN

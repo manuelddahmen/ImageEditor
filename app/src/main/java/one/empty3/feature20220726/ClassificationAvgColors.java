@@ -31,6 +31,7 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public class ClassificationAvgColors extends ProcessFile {
     public ClassificationAvgColors() {

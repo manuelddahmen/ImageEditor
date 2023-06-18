@@ -53,8 +53,11 @@
 package one.empty3.library.core.physics;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 
 public class Force {

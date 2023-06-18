@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
+import one.empty3.library.StructureMatrix;
 
 public class ReshapeActivity extends ActivitySuperClass {
     private int lines = 10;

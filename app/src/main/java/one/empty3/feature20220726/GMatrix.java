@@ -29,6 +29,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class GMatrix {

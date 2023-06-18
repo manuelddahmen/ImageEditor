@@ -80,7 +80,7 @@ public abstract class ParametricSurface extends Representable {
 
 
     public Double getIncrU() {
-       return incrU.getElem();
+        return incrU.getElem();
     }
 
     public void setIncrU(Double incr1) {

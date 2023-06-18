@@ -66,6 +66,8 @@ import one.empty3.library.*;
 
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class InterpreteTetraedre implements Interprete {
 

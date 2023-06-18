@@ -61,6 +61,8 @@
 package one.empty3.library.core.script;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author MANUEL DAHMEN

@@ -33,6 +33,8 @@
 package one.empty3.library.core.raytracer.tree;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * Created by manuel on 25-12-16.

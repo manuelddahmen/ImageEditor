@@ -22,12 +22,15 @@ package one.empty3.feature20220726;
 
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 
 public class Voronoi extends ProcessFile {

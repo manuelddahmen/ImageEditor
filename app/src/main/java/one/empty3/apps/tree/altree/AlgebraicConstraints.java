@@ -53,6 +53,8 @@
 package one.empty3.apps.tree.altree;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 import one.empty3.apps.tree.altree.Constraint;
 

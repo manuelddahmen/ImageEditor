@@ -62,14 +62,13 @@ import android.graphics.Bitmap;
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
 
-import one.empty3.library.*;
-import one.empty3.library.core.export.ObjExport;
-import one.empty3.library.core.export.STLExport;
-import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
-import one.empty3.library.core.script.Loader;
-import one.empty3.library.core.script.VersionNonSupporteeException;
-
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,6 +76,22 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
+
+import one.empty3.library.Camera;
+import one.empty3.library.ITexture;
+import one.empty3.library.PaintingAct;
+import one.empty3.library.Point3D;
+import one.empty3.library.RegisterOutput;
+import one.empty3.library.Representable;
+import one.empty3.library.Scene;
+import one.empty3.library.ZBuffer;
+import one.empty3.library.ZBufferFactory;
+import one.empty3.library.ZBufferImpl;
+import one.empty3.library.core.export.ObjExport;
+import one.empty3.library.core.export.STLExport;
+import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
+import one.empty3.library.core.script.Loader;
+import one.empty3.library.core.script.VersionNonSupporteeException;
 
 /*__
  * @author Manuel DAHMEN
@@ -800,7 +815,7 @@ public abstract class TestObjet implements Test, Runnable {
                 }
 
 
-                ri = z.image2();
+                ri = Bitmap.createBitmap(z.image2());
 
                 afterRenderFrame();
 

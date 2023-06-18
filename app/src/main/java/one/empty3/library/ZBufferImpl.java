@@ -24,6 +24,7 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import javaAnd.awt.Color;
@@ -34,6 +35,7 @@ import one.empty3.pointset.PCont;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -473,17 +475,17 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         ha = height;
     }
 
-    public ECBufferedImage image() {
+    public Bitmap image() {
 
-        ECBufferedImage bi2 = new ECBufferedImage(la, ha, ECBufferedImage.TYPE_INT_RGB);
+        Bitmap bi2 = Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
-                bi2.setRGB(i, j, elementCouleur);
+                bi2.setPixel(i, j, elementCouleur);
 
             }
         }
-        this.bi = bi2;
+        //      this.bi = bi2;
         return bi2;
 
     }
@@ -505,7 +507,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     //??
-    public ECBufferedImage image2() {
+    public Bitmap image2() {
         //return image2();
 
 //        BufferedImage bi = new BufferedImage(la, ha, BufferedImage.TYPE_INT_RGB);

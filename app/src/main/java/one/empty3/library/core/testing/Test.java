@@ -59,6 +59,8 @@ import one.empty3.library.ZBuffer;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Manuel DAHMEN

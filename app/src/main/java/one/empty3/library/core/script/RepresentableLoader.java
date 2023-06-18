@@ -54,6 +54,7 @@ package one.empty3.library.core.script;
 
 import one.empty3.library.Cube;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.TRI;
 import one.empty3.library.core.tribase.TRICylindre;
 import one.empty3.library.core.tribase.TRISphere;

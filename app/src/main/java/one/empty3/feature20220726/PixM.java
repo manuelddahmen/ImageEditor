@@ -33,6 +33,7 @@ import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 public class PixM extends MBitmap {

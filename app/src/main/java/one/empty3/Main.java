@@ -5,6 +5,8 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 import one.empty3.feature20220726.*;
 import one.empty3.feature20220726.histograms.Histogram1;

@@ -63,6 +63,8 @@ import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 
 @RequiresApi(api = Build.VERSION_CODES.O)

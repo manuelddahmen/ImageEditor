@@ -61,6 +61,8 @@
 package one.empty3.library.core.testing;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

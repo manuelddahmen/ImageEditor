@@ -54,6 +54,7 @@ package one.empty3.library.core.move;
 
 import one.empty3.library.MoveeObject;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 /*__

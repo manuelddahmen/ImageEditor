@@ -52,10 +52,13 @@
 package one.empty3.library.core.script;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.tribase.TRISphere;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author DAHMEN Manuel

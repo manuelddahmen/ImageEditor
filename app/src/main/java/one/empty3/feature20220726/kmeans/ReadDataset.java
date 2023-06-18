@@ -22,6 +22,8 @@ package one.empty3.feature20220726.kmeans;
 
 import java.io.*;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 import java.util.List;
 

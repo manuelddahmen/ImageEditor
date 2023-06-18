@@ -33,6 +33,7 @@ import one.empty3.library.Camera;
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 import one.empty3.library.Scene;
 import one.empty3.library.core.nurbs.ParametricCurve;

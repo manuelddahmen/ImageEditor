@@ -26,6 +26,8 @@ import one.empty3.io.ProcessFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 
 public class ProcessBean extends Thread {

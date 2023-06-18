@@ -60,6 +60,8 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.StringTokenizer;
 
 // New from JDK 1.4 for endian related problems

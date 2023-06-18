@@ -1,53 +1,20 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
- */
-
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 /*__
@@ -62,70 +29,153 @@
  */
 package one.empty3.library.core.tribase;
 
-import android.graphics.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javaAnd.awt.Color;
+import one.empty3.library.PObjet;
 import one.empty3.library.Point3D;
+import one.empty3.library.Representable;
+import one.empty3.library.TRI;
+import one.empty3.library.TRIConteneur;
 import one.empty3.library.TRIObject;
-import one.empty3.library.core.nurbs.ParametricCurve;
-import one.empty3.library.core.nurbs.ParametricSurface;
+import one.empty3.library.TextureCol;
+import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
+public class TubulaireN2 extends Representable implements TRIGenerable, TRIConteneur {
 
-public class TubulaireN2<T extends ParametricCurve> extends ParametricSurface {
-    public static double TAN_FCT_INCR = 0.000001;
-    public static double NORM_FCT_INCR = 0.000001;
-
-    private T surve;
-
-    private double diam = 1.0;
+    private ArrayList<Point3D> points = new ArrayList<>();
+    private final float TAN_FCT = 0.00005f;
+    private final float NORM_FCT = 0.0005f;
+    public double PERCENT = 0.05f;
+    //private double ratio;
+    private CourbeParametriquePolynomialeBezier beziers;
+    private double diam = 3.0f;
     private int N_TOURS = 40;
-
     private TRIObject tris = null;
 
-
     public TubulaireN2() {
+        this.points = new ArrayList<Point3D>();
     }
 
-    public TubulaireN2(T surve) {
-        this.surve = surve;
+    public void add(Point3D e) {
+        points.add(e);
+    }
+
+    public void addPoint(Point3D p) {
+        points.add(p);
     }
 
     public Point3D calculerNormale(double t) {
-        return calculerTangente(t + NORM_FCT_INCR).moins(calculerTangente(t));
+        if (t < 1.0 - NORM_FCT) {
+
+            return calculerTangente(t + NORM_FCT).moins(calculerTangente(t));
+        } else {
+            return null;
+        }
+    }
+
+    public Point3D calculerPoint(double t) {
+        return beziers.calculerPoint3D(t);
     }
 
     public Point3D calculerTangente(double t) {
-        return surve.calculerPoint3D(t + TAN_FCT_INCR).moins(surve.calculerPoint3D(t));
+        if (t < 1.0 - TAN_FCT) {
+
+            return calculerPoint(t + TAN_FCT).moins(calculerPoint(t));
+        } else {
+            return null;
+        }
     }
 
-    public void diam(double diam) {
+    public PObjet calculPoints(IFct1D3D funct, double value, double angle) {
+        return null;
+    }
+
+    public Point3D cerclePerp(Point3D vect, double angle) {
+        return null;
+    }
+
+    public void clear() {
+        points.clear();
+    }
+
+    public void diam(float diam) {
         this.diam = diam;
     }
 
+    @Override
     public TRIObject generate() {
-        Color color = Color.valueOf(getTexture().getColorAt(0.5, 0.5));
+        android.graphics.Color color = Color.valueOf(texture().getColorAt(0.5, 0.5));
         if (tris == null) {
             tris = new TRIObject();
 
+            generateWire();
 
             double length = 1;
 
+            ArrayList<Point3D> tour0 = vectPerp(0);
+            for (double t = 0; t < length; t += PERCENT) {
+                ArrayList<Point3D> tour1 = vectPerp(t);
+                for (int i = 3; i < tour1.size() - 1; i++) {
+                    double s = 1.0 * (i - 3) / tour1.size();
+                    TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), texture());
+                    t1.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+                    TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), texture());
+                    t2.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+
+                    tris.add(t1);
+                    tris.add(t2);
+                }
+
+                tour0 = tour1;
+            }
         }
         return tris;
     }
 
+    public void generateWire() {
+        Logger.getAnonymousLogger().log(Level.INFO, "WIRE SIZE " + points.size());
+
+        Object[] toArray = points.toArray();
+        Point3D[] arr = new Point3D[toArray.length];
+        int i = 0;
+        for (Object o : toArray) {
+            if (o != null && o instanceof Point3D) {
+                Point3D p = (Point3D) o;
+                arr[i] = p;
+                i++;
+            }
+
+        }
+        beziers = new CourbeParametriquePolynomialeBezier(arr);
+
+    }
+
+    @Override
+    public Representable getObj() {
+        generate();
+        return tris;
+    }
+
+    @Override
+    public Iterable<TRI> iterable() {
+        generate();
+        return tris.getTriangles();
+    }
 
     public void nbrAnneaux(int n) {
-        surve.getParameters().setIncrU(1.0 / n);
-        setMaxX(n);
+        this.PERCENT = 1.0 / n;
     }
 
     public void nbrRotations(int r) {
         this.N_TOURS = r;
-        setMaxY(r);
     }
 
     public void radius(double d) {
-        diam = d * 2;
+        diam = d;
     }
 
     public double tMax() {
@@ -134,17 +184,20 @@ public class TubulaireN2<T extends ParametricCurve> extends ParametricSurface {
 
     @Override
     public String toString() {
-        String s = "tubulaireN2 (\n\t("
-                + surve.toString();
-        s += "\n\n)\n\t" + diam + "\n\t" + getTexture().toString() + "\n)\n";
+        String s = "tubulaire (\n\t(";
+        Iterator<Point3D> it = points.iterator();
+        while (it.hasNext()) {
+            s += "\n\t" + it.next().toString();
+        }
+        s += "\n\n)\n\t" + diam + "\n\t" + texture().toString() + "\n)\n";
         return s;
     }
 
 
-    private Point3D[] vectPerp(double t) {
-        Point3D[] vecteurs = new Point3D[3];
+    private ArrayList<Point3D> vectPerp(double t) {
+        ArrayList<Point3D> vecteurs = new ArrayList<Point3D>();
 
-        Point3D p = surve.calculerPoint3D(t);
+        Point3D p = calculerPoint(t);
         Point3D tangente = calculerTangente(t);
 
         Point3D ref1 = new Point3D(0d, 0d, 1d);
@@ -168,29 +221,17 @@ public class TubulaireN2<T extends ParametricCurve> extends ParametricSurface {
             px = px.norme1();
             py = py.norme1();
 
-            vecteurs[0] = tangente;
-            vecteurs[1] = px;
-            vecteurs[2] = py;
+            vecteurs.add(px);
+            vecteurs.add(py);
+            vecteurs.add(tangente);
 
+            for (int i = 0; i < N_TOURS + 1; i++) {
+                double angle = 2.0f * Math.PI * i / N_TOURS;
+                vecteurs.add(p.plus(px.mult(Math.cos(angle) * diam)).plus(
+                        py.mult(Math.sin(angle) * diam)));
+            }
         }
         return vecteurs;
-    }
-
-    public void curve(T surve) {
-        this.surve = surve;
-    }
-
-    @Override
-    public Point3D calculerPoint3D(double u, double v) {
-        Point3D[] vectPerp = vectPerp(u);
-        return surve.calculerPoint3D(u).plus(
-                vectPerp[1].mult(diam * Math.cos(2 * Math.PI * v)).plus(
-                        vectPerp[2].mult(diam * Math.sin(2 * Math.PI * v))));
-    }
-
-    @Override
-    public Point3D calculerVitesse3D(double u, double v) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

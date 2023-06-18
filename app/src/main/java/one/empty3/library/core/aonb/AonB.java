@@ -53,6 +53,7 @@
 package one.empty3.library.core.aonb;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 import one.empty3.library.ZBuffer;
 import one.empty3.library.core.nurbs.ParametricCurve;

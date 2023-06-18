@@ -64,6 +64,8 @@ package one.empty3.library.core.script;
 import one.empty3.library.core.extra.AttracteurEtrange;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Manuel

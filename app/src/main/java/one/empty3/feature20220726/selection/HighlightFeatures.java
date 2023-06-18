@@ -25,6 +25,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Scene;
 import one.empty3.library.core.nurbs.ParametricCurve;
 

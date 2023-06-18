@@ -65,6 +65,8 @@ import one.empty3.library.core.script.InterpreteException;
 import one.empty3.library.core.script.InterpretesBase;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

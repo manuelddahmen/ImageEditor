@@ -21,6 +21,7 @@
 package one.empty3.feature20220726.shape;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 public class Rectangle extends ParametricCurve {

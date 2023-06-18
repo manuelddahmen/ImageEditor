@@ -66,10 +66,13 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.extra.SimpleSphere;
 
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author MANUEL DAHMEN

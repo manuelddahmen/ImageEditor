@@ -22,6 +22,7 @@ package one.empty3.feature20220726.lbp;
 
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import javaAnd.awt.*;
 

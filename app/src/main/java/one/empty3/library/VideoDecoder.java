@@ -58,6 +58,8 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.io.File;
 
 public abstract class VideoDecoder extends Thread {

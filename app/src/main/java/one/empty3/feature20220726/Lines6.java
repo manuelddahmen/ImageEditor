@@ -25,6 +25,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import javaAnd.awt.*;
@@ -33,6 +34,8 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;

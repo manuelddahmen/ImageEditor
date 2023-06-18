@@ -22,12 +22,15 @@ package one.empty3.feature20220726;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.HashMap;
 import java.util.List;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public class DBScanProcess extends ProcessFile {
     private double[] size;

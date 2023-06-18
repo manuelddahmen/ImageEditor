@@ -61,6 +61,8 @@ package one.empty3.library;
 import android.graphics.Color;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 
 public class BezierCubique extends Representable {

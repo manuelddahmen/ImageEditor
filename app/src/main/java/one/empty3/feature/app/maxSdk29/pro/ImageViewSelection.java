@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.PolyLine;
 
 public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImageView {

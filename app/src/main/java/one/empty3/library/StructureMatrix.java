@@ -23,6 +23,8 @@ package one.empty3.library;
 import javaAnd.awt.Point;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;

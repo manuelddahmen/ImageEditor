@@ -4,6 +4,8 @@
 //import java.io.FileOutputStream;
 //import java.io.PrintWriter;
 //import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 //import java.util.Collections;
 //import java.util.List;
 //import java.util.function.Consumer;

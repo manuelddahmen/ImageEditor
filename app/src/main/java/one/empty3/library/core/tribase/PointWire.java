@@ -62,6 +62,8 @@ import android.graphics.Bitmap;
 import one.empty3.library.*;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class PointWire extends Representable implements IFct1D3D {
 

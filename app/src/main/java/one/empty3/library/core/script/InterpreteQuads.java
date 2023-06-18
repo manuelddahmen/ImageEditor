@@ -61,10 +61,13 @@
 package one.empty3.library.core.script;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Quads;
 import one.empty3.library.TextureCol;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_

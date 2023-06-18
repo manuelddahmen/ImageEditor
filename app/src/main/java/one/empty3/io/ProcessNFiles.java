@@ -21,6 +21,8 @@ package one.empty3.io;
 
 import java.io.File;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.List;
 import java.util.Properties;
 
