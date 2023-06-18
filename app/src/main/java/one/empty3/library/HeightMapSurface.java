@@ -1,67 +1,35 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
- */
-
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
+import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Plan3D;
-
-import android.graphics.Bitmap;
 
 /***
  * Created by manue on 17-03-19.
  * Update 2021.
  */
-public class HeightMapSurface extends ParametricSurface {
+public abstract class HeightMapSurface extends ParametricSurface {
     protected StructureMatrix<ImageContainer> image = new StructureMatrix<>(0, ImageContainer.class);
     protected StructureMatrix<ParametricSurface> surface = new StructureMatrix<>(0, ParametricSurface.class);
 
@@ -73,8 +41,8 @@ public class HeightMapSurface extends ParametricSurface {
         surface.setElem(new Plan3D());
     }
 
-    public HeightMapSurface(ParametricSurface ps, Bitmap image) {
-        this.image.setElem(new ImageContainer(image));
+    public HeightMapSurface(ParametricSurface ps, BufferedImage image) {
+        this.image.setElem(new ImageContainer(image.getBitmap()));
         this.surface.setElem(ps);
     }
 
@@ -82,19 +50,17 @@ public class HeightMapSurface extends ParametricSurface {
 
         Bitmap elem = image.getElem().getImage().getElem();
 
-        int i = (int) (u * (image.getElem().getImage().getElem().getWidth()));
+        int i = (int) (u * (image.getElem().getImage().getElem().getWidth() ));
         int j = (int) (v * (image.getElem().getImage().getElem().getHeight()));
-        if (i < 0) i = 0;
-        if (j < 0) j = 0;
-        if (i >= image.getElem().getImage().getElem().getWidth())
-            i = image.getElem().getImage().getElem().getWidth() - 1;
-        if (j >= image.getElem().getImage().getElem().getHeight())
-            j = image.getElem().getImage().getElem().getHeight() - 1;
+        if(i<0) i = 0;
+        if(j<0) j = 0;
+        if(i>=image.getElem().getImage().getElem().getWidth()) i = image.getElem().getImage().getElem().getWidth()-1;
+        if(j>=image.getElem().getImage().getElem().getHeight()) j = image.getElem().getImage().getElem().getHeight()-1;
 
 
         return surface.getElem().calculerPoint3D(u, v).plus(
-                surface.getElem().calculerTangenteU(u, v).prodVect(surface.getElem().calculerTangenteV(u, v)
-                ).norme1().mult(elem.getPixel(i, j)));
+                surface.getElem().calculerTangenteU(u,v).prodVect(surface.getElem().calculerTangenteV(u,v)
+                ).norme1().mult(elem.getPixel(i,j)));
     }
 
     @Override
