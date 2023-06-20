@@ -25,23 +25,30 @@
 package one.empty3.library;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.media.Image;
-
-import javaAnd.awt.Color;
-import javaAnd.awt.Point;
-import one.empty3.feature20220726.shape.Rectangle;
-import one.empty3.library.core.nurbs.*;
-import one.empty3.pointset.PCont;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javaAnd.awt.Color;
+import javaAnd.awt.Point;
+import one.empty3.feature20220726.shape.Rectangle;
+import one.empty3.library.core.nurbs.ParametricCurve;
+import one.empty3.library.core.nurbs.ParametricSurface;
+import one.empty3.library.core.nurbs.ParametricVolume;
+import one.empty3.library.core.nurbs.Point3DS;
+import one.empty3.library.core.nurbs.RPv;
+import one.empty3.library.core.nurbs.ThickSurface;
+import one.empty3.pointset.PCont;
 
     /*__
      * * Classe de rendu graphique
@@ -88,7 +95,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     private int displayType = SURFACE_DISPLAY_TEXT_TRI;
 
     private boolean FORCE_POSITIVE_NORMALS = true;
-
+    private int transparent = Color.BLACK;
     public ZBufferImpl() {
         that = this;
         scene = new Scene();
@@ -1070,6 +1077,12 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public int idz() {
         return idImg;
     }
+        public int isTranparent() {
+            return transparent;
+        }
+        public void setTransparent(int mTransparent) {
+            this.transparent = mTransparent;
+        }
 
     public void drawElementVolume(Representable representable, ParametricVolume volume) {
         if (representable instanceof ParametricSurface) {
@@ -1145,7 +1158,21 @@ public class ZBufferImpl extends Representable implements ZBuffer {
   */
     }
 
-    public class Box2D {
+        public void getImage(Bitmap bitmap, Canvas mCanvas, Rect inBounds) {
+            Paint paint = new Paint();
+            //mCanvas.setBitmap(bitmap);
+            for(int i=Math.max(0, Math.min(inBounds.left, image().getWidth())); i<Math.min(inBounds.right, bitmap.getWidth()); i++) {
+                for (int j = Math.max(0, Math.min(inBounds.top, image().getHeight())); j < Math.min(inBounds.bottom, bitmap.getHeight()); j++) {
+                    int color = bitmap.getColor(i, j).toArgb();
+                    if(color!=isTranparent()) {
+                        paint.setColor(color);
+                        mCanvas.drawPoint(i, j, paint);
+                    }
+                }
+            }
+        }
+
+        public class Box2D {
 
         private double minx = 1000000;
         private double miny = 1000000;

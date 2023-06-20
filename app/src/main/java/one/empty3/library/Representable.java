@@ -24,6 +24,22 @@ package one.empty3.library;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import one.empty3.library.core.TemporalComputedObject3D;
 import one.empty3.library.core.lighting.Colors;
@@ -31,17 +47,9 @@ import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtMatiere;
 import one.empty3.library.core.raytracer.RtRay;
 import one.empty3.library.core.testing.Path;
-
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D {
 
-    public static final Object FILL = 1;
+    public static final int FILL = 1;
     protected StructureMatrix<Point3D> vectors;
 
     public static final int DISPLAY_ALL = 0;
@@ -643,8 +651,18 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap mCopy, Object fill, int i) {
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent, Rect inBounds) {
+        ZBufferImpl zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
+        Scene scene1 = new Scene();
+        zBuffer.scene(scene1);// CA MANQUE D'INDEPENDANCE
+        Point3D middle = Point3D.n(bitmap.getWidth() / 2, bitmap.getHeight() / 2, 0);
 
+        scene1.cameraActive(new Camera(middle.moins(Point3D.Z.mult(-Math.max(bitmap.getWidth(), bitmap.getHeight()))), middle, Point3D.Y));
+        scene1.cameraActive().declareProperties();
+        zBuffer.camera(scene1.cameraActive());
+        zBuffer.setTransparent(transparent);
+        zBuffer.draw(this);
+        zBuffer.getImage(bitmap, mCanvas, inBounds);
     }
 }
 

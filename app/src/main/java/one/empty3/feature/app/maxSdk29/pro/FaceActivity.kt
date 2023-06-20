@@ -7,7 +7,7 @@ import javaAnd.awt.image.imageio.ImageIO
 
 @ExperimentalCamera2Interop class FaceActivity : ActivitySuperClass() {
     private fun cameraCaptureRecord(b: Button) {
-        Camera().process(this)
+        //Camera().process(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
