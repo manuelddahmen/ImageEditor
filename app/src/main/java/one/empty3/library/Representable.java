@@ -663,7 +663,8 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
         Rect boundingRect = getBoundRect2d();
 
-        if (boundingRect != null && boundingRect.width()>0&& boundingRect.height()>0) {
+        if (boundingRect != null && boundingRect.width()>0&& boundingRect.height()>0 && boundingRect.width()+boundingRect.left<bitmap.getWidth()
+                && boundingRect.height()+boundingRect.top<bitmap.getHeight()) {
             try {
 
                 Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
@@ -677,11 +678,11 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 zBuffer.idzpp();
 
                 scene1.cameraActive(camera);
+                zBuffer.scene(scene1);
                 zBuffer.camera(camera);
 
                 zBuffer.setTransparent(transparent);
 
-                zBuffer.scene(scene1);
 
                 zBuffer.draw();
 
