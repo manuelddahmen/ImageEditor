@@ -1184,9 +1184,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     int color = in.getPixel(xOrigin, yOrigin);
 
                     if (color != isTranparent()) {
-
-                        bitmap.setPixel(i, j, color);
-                        paint.setColor(color);
+                        paint.setColor(texture().getColorAt(0.5, 0.5));
                         mCanvas.drawPoint(i, j, paint);
 
                     }

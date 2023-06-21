@@ -178,7 +178,6 @@ import kotlin.math.max
             if (ImageIO.write(bitmap, "jpg", f)) {
                 written = true;
                 fileWritten = file2;
-                System.out.println("File written 3: SUCCESSFUL (but not sage)")
                 return f
             }
 
