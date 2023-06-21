@@ -651,19 +651,68 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent, Rect inBounds) {
-        ZBufferImpl zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent) {
         Scene scene1 = new Scene();
-        zBuffer.scene(scene1);// CA MANQUE D'INDEPENDANCE
-        Point3D middle = Point3D.n(bitmap.getWidth() / 2, bitmap.getHeight() / 2, 0);
 
-        scene1.cameraActive(new Camera(middle.moins(Point3D.Z.mult(-Math.max(bitmap.getWidth(), bitmap.getHeight()))), middle, Point3D.Y));
-        scene1.cameraActive().declareProperties();
-        zBuffer.camera(scene1.cameraActive());
-        zBuffer.setTransparent(transparent);
-        zBuffer.draw(this);
-        zBuffer.getImage(bitmap, mCanvas, inBounds);
+        scene1.add(this);
+
+        Rect boundingRect = getBoundRect2d();
+
+        if(boundingRect!=null) {
+
+            Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right, boundingRect.bottom);
+
+            ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
+
+            Point3D middle = Point3D.n(boundingRect.left+boundingRect.width() / 2., boundingRect.top+boundingRect.height() / 2., 0);
+
+            Camera camera = new Camera(Point3D.Z.mult(-Math.max(boundingRect.width(), boundingRect.height())).plus(middle), middle, Point3D.Y);
+
+            scene1.cameraActive();
+            zBuffer.idzpp();
+            zBuffer.setTransparent(transparent);
+            zBuffer.scene(scene1);
+        scene1.cameraActive(camera);
+        zBuffer.draw(scene1);
+
+            //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+            zBuffer.drawOnImage(bitmap, zBuffer.image2(), mCanvas, boundingRect);
+        }
     }
+
+    private Rect getBoundRect2d() {
+        return null;
+    }
+
+    public ECBufferedImage drawOnCanvas2(Canvas mCanvas, Bitmap bitmap, int fill, int transparent, Rect inBounds) {
+        scene = new Scene();
+
+        ZBufferImpl zBuffer = new ZBufferImpl();
+
+        Point3D plus = Point3D.X.mult(
+                bitmap.getWidth() / 2.).plus(Point3D.Y.mult(bitmap.getHeight() / 2.));
+
+        Camera camera = new Camera(Point3D.Z.mult(
+                -Math.max(bitmap.getWidth(), bitmap.getHeight())).plus(plus), plus);
+        camera.declareProperties();
+        //scene.add();
+
+        if (zBuffer == null)
+            zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
+        else {
+            zBuffer.idzpp();
+        }
+
+        zBuffer.scene(scene);
+        scene.cameraActive(camera);
+
+        zBuffer.draw(scene);
+
+        return zBuffer.imageInvX();
+
+    }
+
 }
 
 

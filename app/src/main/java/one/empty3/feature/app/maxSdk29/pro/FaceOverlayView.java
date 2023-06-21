@@ -30,6 +30,7 @@ import java.util.Objects;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
+import one.empty3.library.Representable;
 
 public class FaceOverlayView extends ImageViewSelection {
     private List<Face> mFaces;
@@ -133,23 +134,23 @@ public class FaceOverlayView extends ImageViewSelection {
         } catch (NullPointerException ex) {
             //ex.printStackTrace();
         }
-        fillPolygon(face.getContour(FaceContour.FACE).getPoints(), paint3);
-        fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), paint3);
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), paint3);
-        fillPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints(),paint3);
-        fillPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints(),paint3);
+        fillPolygon(face.getContour(FaceContour.FACE).getPoints());
+        fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints());
+        fillPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints());
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints());
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints());
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints());
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints());
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints());
+        fillPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints());
+        fillPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
+        fillPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints());
+        fillPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints());
 
         // If classification was enabled:
         float smileProb = 0f;
@@ -175,32 +176,26 @@ public class FaceOverlayView extends ImageViewSelection {
         if (leftEyeContour != null && leftEyeContour.size() >= 2) {
             for (int i = 0; i < leftEyeContour.size(); i++) {
                 drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())), paint);
-
             }
-            fillPolygon(leftEyeContour, paint2);
         }
         if (rightEyeContour != null && rightEyeContour.size() >= 2) {
             for (int i = 0; i < rightEyeContour.size(); i++) {
                 drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
             }
-            fillPolygon(rightEyeContour, paint2);
         }
-        FaceContour contour = face.getContour(FaceContour.FACE);
-        if(contour!=null && contour.getPoints()!=null)
-            fillPolygon(contour.getPoints(), paint2);
-
     }
 
-    private void fillPolygon(List<PointF> polygonContour, Paint paint) {
+    private void fillPolygon(List<PointF> polygonContour) {
         if (polygonContour != null) {
             int size = polygonContour.size();
             Point3D[] point3DS = new Point3D[size];
             for (int i = 0; i < polygonContour.size(); i += 1) {
-                point3DS[i] = new Point3D(polygonContour.get(i).x * 1.0, polygonContour.get(i).y * 1.0, 0d);
+                PointF pointF = coordCanvas(polygonContour.get(i));
+                point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.RED));
 
-            //polygon.drawOnCanvas(mCanvas, mCopy, Representable.FILL, 0, getDestBounds());
+            polygon.drawOnCanvas(mCanvas, mCopy, Representable.FILL, Color.BLACK);
         }
     }
 
@@ -222,8 +217,6 @@ public class FaceOverlayView extends ImageViewSelection {
         if (isFinish())
             return;
         this.mCanvas = canvas;
-        //if (mCopy == null)
-        //    setImageBitmap(mBitmap);
         if (mCopy != null)
             updateImage(mCopy);
     }

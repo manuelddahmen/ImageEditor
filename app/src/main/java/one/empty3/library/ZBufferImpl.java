@@ -1158,15 +1158,45 @@ public class ZBufferImpl extends Representable implements ZBuffer {
   */
     }
 
-        public void getImage(Bitmap bitmap, Canvas mCanvas, Rect inBounds) {
+        public void getImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds) {
             Paint paint = new Paint();
             //mCanvas.setBitmap(bitmap);
-            for(int i=Math.max(0, Math.min(inBounds.left, image().getWidth())); i<Math.min(inBounds.right, bitmap.getWidth()); i++) {
-                for (int j = Math.max(0, Math.min(inBounds.top, image().getHeight())); j < Math.min(inBounds.bottom, bitmap.getHeight()); j++) {
-                    int color = bitmap.getColor(i, j).toArgb();
-                    if(color!=isTranparent()) {
-                        paint.setColor(color);
-                        mCanvas.drawPoint(i, j, paint);
+            int x0 = Math.max(0, Math.min(inBounds.left, image().getWidth()));
+            int y0 = Math.max(0, Math.min(inBounds.top, image().getHeight()));
+            for(int i=x0; i<Math.min(inBounds.right, bitmap.getWidth()); i++) {
+                for (int j = y0; j < Math.min(inBounds.bottom, bitmap.getHeight()); j++) {
+                    if(i-x0<in.getWidth() && j-y0<in.getHeight()) {
+                        int color = in.getPixel(i-x0, j-y0);
+                        if (color != isTranparent()) {
+                            bitmap.setPixel(i, j, paint.getColor());
+                        }
+                    }
+                }
+            }
+        }
+        public void drawOnImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds) {
+            Paint paint = new Paint();
+            //mCanvas.setBitmap(bitmap);
+            int x0 = inBounds.left;
+            int y0 = inBounds.top;
+            for(int i=x0; i<inBounds.right; i++) {
+                for (int j = y0; j < inBounds.bottom; j++) {
+                    if(i<bitmap.getWidth() && j<bitmap.getHeight()) {
+                        double width = inBounds.right-inBounds.left;
+                        double height = inBounds.bottom-inBounds.top;
+
+                        double rX = (i-x0)/width;
+                        double rY = (j-y0)/height;
+
+                        int xOrigin = (int) (rX*(in.getWidth()-1));
+                        int yOrigin = (int) (rY*(in.getHeight()-1));
+
+                        int color = in.getPixel(xOrigin, yOrigin);
+                        if (color != isTranparent()) {
+                            bitmap.setPixel(i, j, color);
+                            paint.setColor(color);
+                            mCanvas.drawPoint(i, j, paint);
+                        }
                     }
                 }
             }
