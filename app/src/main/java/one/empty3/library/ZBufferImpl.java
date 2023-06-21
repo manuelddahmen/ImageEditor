@@ -1174,7 +1174,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                 if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
                     double width = inBounds.right - inBounds.left;
                     double height = inBounds.bottom - inBounds.top;
-
+/*
                     double rX = (i - x0) / width;
                     double rY = (j - y0) / height;
 
@@ -1188,6 +1188,9 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                         mCanvas.drawPoint(i, j, paint);
 
                     }
+*/
+                    mCanvas.drawBitmap(in, inBounds.left, inBounds.top, paint);
+                    return;
                 }
             }
         }
