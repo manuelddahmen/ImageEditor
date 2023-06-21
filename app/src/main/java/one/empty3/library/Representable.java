@@ -663,7 +663,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
         Rect boundingRect = getBoundRect2d();
 
-        if (boundingRect != null) {
+        if (boundingRect != null && boundingRect.width()>0&& boundingRect.height()>0) {
             try {
 
                 Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
