@@ -47,6 +47,7 @@ import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtMatiere;
 import one.empty3.library.core.raytracer.RtRay;
 import one.empty3.library.core.testing.Path;
+
 public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D {
 
     public static final int FILL = 1;
@@ -83,6 +84,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     private int RENDERING_DEFAULT = 0;
     private Map<String, StructureMatrix> declaredDataStructure;// = Collections.synchronizedMap(new HashMap());
     private Map<String, StructureMatrix> declaredLists;//= new HashMap<>();
+
     public Representable() {
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
             rotation.setElem(new Rotation());
@@ -105,6 +107,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         oriented.texture(a.texture());
         return oriented;
     }
+
     public static void setPaintingActForClass(ZBuffer z, Scene s, PaintingAct pa) {
         Painter p = null;
         classPainters().add(new Painter(z, s, Representable.class));
@@ -172,7 +175,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
 
     public Point3D refPoint(Point3D x) {
-        if(!(this instanceof Point3D) && !(this instanceof Matrix33))
+        if (!(this instanceof Point3D) && !(this instanceof Matrix33))
             return getOrientedPoint(x);
         else
             return x;
@@ -184,6 +187,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         setVectY(vy);
         setVectZ(vz);
     }
+
     /*__
      * DOn't call ZBuffer dessiine methods here: it would loop.
      *
@@ -268,7 +272,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public StructureMatrix getDeclaredProperty(String name) {
         declareProperties();
         for (String s : getDeclaredDataStructure().keySet()) {
-            if(s.startsWith(name)) {
+            if (s.startsWith(name)) {
                 return getDeclaredDataStructure().get(s);
             }
         }
@@ -304,7 +308,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public void setProperty(String propertyName, Object value) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method propertySetter = null;
 
-        propertySetter = this.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), value==null?null:value.getClass());
+        propertySetter = this.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), value == null ? null : value.getClass());
         propertySetter.invoke(this, value);
         Logger.getAnonymousLogger().log(Level.INFO, "RType : " + this.getClass().getName() + " Property: " + propertyName + " New Value set " + getProperty(propertyName));
     }
@@ -374,9 +378,9 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 fileOutputStream.write(bytes, 0, read);
             }
 
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
 
-        
 
     }
 
@@ -576,21 +580,21 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         Representable representable1 = this;
         Object value = null;
         StructureMatrix declaredProperty = null;
-        int i=-1;
-        int j=-1;
+        int i = -1;
+        int j = -1;
         for (int k = 0; k < split.length; k++) {
             String split0 = split[k].split("/")[0];
-            if(value!=null) {
-                if(value instanceof Representable) {
-                    representable1 = ((Representable)value);
+            if (value != null) {
+                if (value instanceof Representable) {
+                    representable1 = ((Representable) value);
                 }
 
             }
             String[] split1 = split0.split(":");
-            if(split1.length>1) {
+            if (split1.length > 1) {
                 i = Integer.parseInt(split1[1]);
             }
-            if(split1.length>2) {
+            if (split1.length > 2) {
                 j = Integer.parseInt(split1[2]);
             }
 
@@ -599,7 +603,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
             if (declaredProperty == null)
                 return null;
             else {
-                if(declaredProperty instanceof StructureMatrix) {
+                if (declaredProperty instanceof StructureMatrix) {
 
                     StructureMatrix sm = (StructureMatrix) declaredProperty;
                     switch (sm.getDim()) {
@@ -647,41 +651,52 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public void setVectZ(Point3D vectZ) {
         this.vectors.setElem(vectZ, 2);
     }
+
     public void setOrig(Point3D orig) {
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int fill, int transparent) {
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent) {
         Scene scene1 = new Scene();
 
         scene1.add(this);
 
         Rect boundingRect = getBoundRect2d();
 
-        if(boundingRect!=null) {
+        if (boundingRect != null) {
+            try {
 
-            Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right, boundingRect.bottom);
+                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
 
-            ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
+                ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
 
-            Point3D middle = Point3D.n(boundingRect.left+boundingRect.width() / 2., boundingRect.top+boundingRect.height() / 2., 0);
+                Point3D middle = Point3D.n(boundingRect.left + boundingRect.width() / 2., boundingRect.top + boundingRect.height() / 2., 0);
 
-            Camera camera = new Camera(Point3D.Z.mult(-Math.max(boundingRect.width(), boundingRect.height())).plus(middle), middle, Point3D.Y);
+                Camera camera = new Camera(Point3D.Z.mult(-Math.max(boundingRect.width(), boundingRect.height())).plus(middle), middle, Point3D.Y);
 
-            scene1.cameraActive();
-            zBuffer.idzpp();
-            zBuffer.setTransparent(transparent);
-            zBuffer.scene(scene1);
-        scene1.cameraActive(camera);
-        zBuffer.draw(scene1);
+                zBuffer.idzpp();
 
-            //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                scene1.cameraActive(camera);
+                zBuffer.camera(camera);
 
-            zBuffer.drawOnImage(bitmap, zBuffer.image2(), mCanvas, boundingRect);
+                zBuffer.setTransparent(transparent);
+
+                zBuffer.scene(scene1);
+
+                zBuffer.draw();
+
+                System.err.println("drawOnCanvas" + boundingRect.toString());
+
+                //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+                zBuffer.drawOnImage(bitmap, zBuffer.image2(), mCanvas, boundingRect);
+            } catch (RuntimeException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
-    private Rect getBoundRect2d() {
+    protected Rect getBoundRect2d() {
         return null;
     }
 

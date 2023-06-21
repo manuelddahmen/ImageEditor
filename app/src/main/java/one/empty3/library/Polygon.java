@@ -170,7 +170,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     }
 
-    public Rect getBoundingRect() {
+    protected Rect getBoundRect2d() {
         Rect rect = new Rect(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 
         for (Point3D point3D : getPoints().getData1d()) {

@@ -50,9 +50,9 @@ import one.empty3.library.core.nurbs.RPv;
 import one.empty3.library.core.nurbs.ThickSurface;
 import one.empty3.pointset.PCont;
 
-    /*__
-     * * Classe de rendu graphique
-     */
+/*__
+ * * Classe de rendu graphique
+ */
 public class ZBufferImpl extends Representable implements ZBuffer {
 
     public static final int DISPLAY_ALL = 0;
@@ -96,6 +96,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     private boolean FORCE_POSITIVE_NORMALS = true;
     private int transparent = Color.BLACK;
+
     public ZBufferImpl() {
         that = this;
         scene = new Scene();
@@ -145,24 +146,26 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         return p0;
         //return camera().calculerPointDansRepere(super.rotate(p0, ref));
     }
+
     public synchronized void draw(Collection<Object> collection) {
         collection.forEach(new Consumer() {
             @Override
             public void accept(Object o) {
-                if(o instanceof Representable) {
+                if (o instanceof Representable) {
                     draw((Representable) o);
-                } else if(o instanceof Collection)
+                } else if (o instanceof Collection)
                     draw((Collection) o);
             }
         });
     }
+
     public synchronized void draw(Representable r) {
         camera().ratioHorizontalAngle(dimx, dimy);
         if (r == null) {
             Logger.getAnonymousLogger().log(Level.INFO, "r is null return");
             return;
         }
-        if(r.texture()!=null)
+        if (r.texture() != null)
             r.texture().timeNext();
 
         if (r instanceof Scene) {
@@ -257,14 +260,14 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                 // Logger.getAnonymousLogger().log(Level.INFO, "(u,v) = ("+u+","+")");
                 for (double v = n.getStartV(); v + n.getIncrV() <= n.getEndV(); v += n.getIncrV()) {
                     Point3D p1, p2, p3, p4;
-                    double u2 = u+n.getIncrU(), v2=v+n.getIncrV();
-                    if(u>n.getEndU()-n.getIncrU()) {
+                    double u2 = u + n.getIncrU(), v2 = v + n.getIncrV();
+                    if (u > n.getEndU() - n.getIncrU()) {
                         Point3D point3D = new Point3D(u2, v2, 0.0);
                         point3D = n.getTerminalU().data0d.result(point3D);
                         u2 = point3D.get(0);
                         v2 = point3D.get(1);
                     }
-                    if(v>n.getEndV()-n.getIncrV()) {
+                    if (v > n.getEndV() - n.getIncrV()) {
                         Point3D point3D = new Point3D(u2, v2, 0.0);
                         point3D = n.getTerminalU().data0d.result(point3D);
                         u2 = point3D.get(0);
@@ -404,7 +407,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                         line(
                                 n.calculerPoint3D(u),
                                 n.calculerPoint3D(u + incr),
-                                n.texture(), u,  u + incr, n);
+                                n.texture(), u, u + incr, n);
                     } else {
                         ime.testDeep(n.calculerPoint3D(u), n.texture().getColorAt(0.5, 0.5));
                     }
@@ -431,12 +434,12 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     }
 
-        public int getColorAt(android.graphics.Point p) {
-            return 0;
-        }
+    public int getColorAt(android.graphics.Point p) {
+        return 0;
+    }
 
 
-        private void tracerLines(Point3D p1, Point3D p2, Point3D p3, Point3D p4, ITexture texture, double u1, double v1,
+    private void tracerLines(Point3D p1, Point3D p2, Point3D p3, Point3D p4, ITexture texture, double u1, double v1,
                              double u2, double v2, ParametricSurface n) {
         line(p1, p2, texture, u1, v1, u2, v1, n);
         line(p2, p3, texture, u2, v1, u2, v2, n);
@@ -472,11 +475,11 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         return ha;
     }
 
-        public boolean checkScreen(android.graphics.Point p1) {
-            return false;
-        }
+    public boolean checkScreen(android.graphics.Point p1) {
+        return false;
+    }
 
-        @Override
+    @Override
     public void setDimension(int width, int height) {
         la = width;
         ha = height;
@@ -502,10 +505,10 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
-                if(ime.getIME()!=null&&ime.getIME().getElementPoint(i, j).equals(INFINITY)) {
+                if (ime.getIME() != null && ime.getIME().getElementPoint(i, j).equals(INFINITY)) {
                     //elementCouleur = Color.TRANSLUCENT;
                 }
-                bi2.setRGB(la-i-1, j, elementCouleur);
+                bi2.setRGB(la - i - 1, j, elementCouleur);
 
             }
         }
@@ -548,7 +551,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public void line(Point3D p1, Point3D p2, ITexture t) {
         Point x1 = camera().coordonneesPoint2D(p1, this);
         Point x2 = camera().coordonneesPoint2D(p2, this);
-        if (x1 == null || x2 == null || (!checkScreen(x1)||!checkScreen(x2))) {
+        if (x1 == null || x2 == null || (!checkScreen(x1) || !checkScreen(x2))) {
             return;
         }
         Point3D n = p1.moins(p2).norme1();
@@ -563,7 +566,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public void line(Point3D p1, Point3D p2, ITexture t, double u, double u1, ParametricCurve curve) {
         Point x1 = camera().coordonneesPoint2D(p1, this);
         Point x2 = camera().coordonneesPoint2D(p2, this);
-        if (x1 == null && x2 == null || (!checkScreen(x1)||!checkScreen(x2))) {
+        if (x1 == null && x2 == null || (!checkScreen(x1) || !checkScreen(x2))) {
             return;
         }
         Point3D n = p1.moins(p2).norme1();
@@ -583,7 +586,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         // TODO Check
         Point x1 = camera().coordonneesPoint2D(p1, this);
         Point x2 = camera().coordonneesPoint2D(p2, this);
-        if (x1 == null && x2 == null|| (!checkScreen(x1)||!checkScreen(x2))) {
+        if (x1 == null && x2 == null || (!checkScreen(x1) || !checkScreen(x2))) {
             return;
         }
         Point3D n = p2.moins(p1).norme1();
@@ -611,12 +614,12 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         return true;
     }
 
-        @Override
-        public void plotPoint(Point3D p, android.graphics.Color c) {
+    @Override
+    public void plotPoint(Point3D p, android.graphics.Color c) {
 
-        }
+    }
 
-        public Lumiere lumiereActive() {
+    public Lumiere lumiereActive() {
         return currentScene.lumiereActive();
     }
 
@@ -656,6 +659,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public int la() {
         return la;
     }
+
     public int ha() {
         return ha;
     }
@@ -775,12 +779,12 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         }
     }
 
-        @Override
-        public void testDeep(Point3D p, android.graphics.Color c) {
+    @Override
+    public void testDeep(Point3D p, android.graphics.Color c) {
 
-        }
+    }
 
-        public void testPoint(Point3D p, Color c) {
+    public void testPoint(Point3D p, Color c) {
         int cc = c.getRGB();
         cc = scene().lumiereActive().getCouleur(c.getRGB(), p, p.getNormale());
         ime.testDeep(p, cc);
@@ -790,7 +794,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     private void tracerAretes(Point3D point3d, Point3D point3d2, Color c) {
         Point p1 = camera().coordonneesPoint2D(point3d, this);
         Point p2 = camera().coordonneesPoint2D(point3d2, this);
-        if (p1 == null || p2 == null|| (!checkScreen(p1)||!checkScreen(p2))) {
+        if (p1 == null || p2 == null || (!checkScreen(p1) || !checkScreen(p2))) {
             return;
         }
         double iteres = Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY() + 1);
@@ -829,7 +833,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public void tracerTriangle(Point3D pp1, Point3D pp2, Point3D pp3,
                                ITexture t,
                                double u0, double v0, double u1, double v1) {
-        if(camera()==null||pp1==null||pp2==null||pp3==null)
+        if (camera() == null || pp1 == null || pp2 == null || pp3 == null)
             return;
         Point p1 = camera().coordonneesPoint2D(pp1, this);
         Point p2 = camera().coordonneesPoint2D(pp2, this);
@@ -837,7 +841,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         if (!checkScreen(p1) || !checkScreen(p2) || !checkScreen(p3)) {
             return;
         }
-        Point3D [] uvs = new Point3D[]
+        Point3D[] uvs = new Point3D[]
                 {Point3D.n(u0, v0, 0.0), Point3D.n(u1, v0, 0.0), Point3D.n(u1, v1, 0.0),
                         Point3D.n(u0, v1, 0.0)};
         Point3D n = pp1.moins(pp2).prodVect(pp3.moins(pp2)).norme1();
@@ -851,7 +855,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             if (pp != null) {
                 double iteres2 = 1.0 / (1 + mathUtilPow2(p3, pp));
                 Point3D p3ab;
-                for (double b = 0; b<=1.0/*Math.sqrt(p3a.moins(pp3).norme()*p3a.moins(pp3).norme()
+                for (double b = 0; b <= 1.0/*Math.sqrt(p3a.moins(pp3).norme()*p3a.moins(pp3).norme()
                         -pp2.moins(pp1).norme()*pp2.moins(pp1).norme())>=b*/; b += iteres2) {
                     p3ab = p3a.plus(pp3.moins(p3a).mult(b));
                     Point3D uv3ab = uv3a.plus(uvs[2].moins(uv3a).mult(b));
@@ -896,7 +900,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             checked++;
         if (!checkScreen(p4))
             checked++;
-        if (p1 == null || p2 == null || p3 == null || p4 == null || checked>0)
+        if (p1 == null || p2 == null || p3 == null || p4 == null || checked > 0)
             return;
 
 
@@ -960,7 +964,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             checked++;
         if (!checkScreen(p3))
             checked++;
-        if(checked>0)
+        if (checked > 0)
             return;
         double iteres1 = 1.0 / (maxDistance(p1, p2, p3) + 1) / 3;
         for (double a = 0; a < 1.0; a += iteres1) {
@@ -1077,12 +1081,14 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public int idz() {
         return idImg;
     }
-        public int isTranparent() {
-            return transparent;
-        }
-        public void setTransparent(int mTransparent) {
-            this.transparent = mTransparent;
-        }
+
+    public int isTranparent() {
+        return transparent;
+    }
+
+    public void setTransparent(int mTransparent) {
+        this.transparent = mTransparent;
+    }
 
     public void drawElementVolume(Representable representable, ParametricVolume volume) {
         if (representable instanceof ParametricSurface) {
@@ -1158,51 +1164,36 @@ public class ZBufferImpl extends Representable implements ZBuffer {
   */
     }
 
-        public void getImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds) {
-            Paint paint = new Paint();
-            //mCanvas.setBitmap(bitmap);
-            int x0 = Math.max(0, Math.min(inBounds.left, image().getWidth()));
-            int y0 = Math.max(0, Math.min(inBounds.top, image().getHeight()));
-            for(int i=x0; i<Math.min(inBounds.right, bitmap.getWidth()); i++) {
-                for (int j = y0; j < Math.min(inBounds.bottom, bitmap.getHeight()); j++) {
-                    if(i-x0<in.getWidth() && j-y0<in.getHeight()) {
-                        int color = in.getPixel(i-x0, j-y0);
-                        if (color != isTranparent()) {
-                            bitmap.setPixel(i, j, paint.getColor());
-                        }
+    public void drawOnImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds) {
+        Paint paint = new Paint();
+        //mCanvas.setBitmap(bitmap);
+        int x0 = inBounds.left;
+        int y0 = inBounds.top;
+        for (int i = x0; i < inBounds.right; i++) {
+            for (int j = y0; j < inBounds.bottom; j++) {
+                if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
+                    double width = inBounds.right - inBounds.left;
+                    double height = inBounds.bottom - inBounds.top;
+
+                    double rX = (i - x0) / width;
+                    double rY = (j - y0) / height;
+
+                    int xOrigin = (int) (rX * (in.getWidth() - 1));
+                    int yOrigin = (int) (rY * (in.getHeight() - 1));
+
+                    int color = in.getPixel(xOrigin, yOrigin);
+
+                    if (color != isTranparent()) {
+                        bitmap.setPixel(i, j, color);
+                        paint.setColor(color);
+                        mCanvas.drawPoint(i, j, paint);
                     }
                 }
             }
         }
-        public void drawOnImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds) {
-            Paint paint = new Paint();
-            //mCanvas.setBitmap(bitmap);
-            int x0 = inBounds.left;
-            int y0 = inBounds.top;
-            for(int i=x0; i<inBounds.right; i++) {
-                for (int j = y0; j < inBounds.bottom; j++) {
-                    if(i<bitmap.getWidth() && j<bitmap.getHeight()) {
-                        double width = inBounds.right-inBounds.left;
-                        double height = inBounds.bottom-inBounds.top;
+    }
 
-                        double rX = (i-x0)/width;
-                        double rY = (j-y0)/height;
-
-                        int xOrigin = (int) (rX*(in.getWidth()-1));
-                        int yOrigin = (int) (rY*(in.getHeight()-1));
-
-                        int color = in.getPixel(xOrigin, yOrigin);
-                        if (color != isTranparent()) {
-                            bitmap.setPixel(i, j, color);
-                            paint.setColor(color);
-                            mCanvas.drawPoint(i, j, paint);
-                        }
-                    }
-                }
-            }
-        }
-
-        public class Box2D {
+    public class Box2D {
 
         private double minx = 1000000;
         private double miny = 1000000;
@@ -1541,9 +1532,9 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                 Point point = camera().coordonneesPoint2D(p, that);
                 double x = point.x;
                 double y = point.y;
-                ime.getuMap()[(int)x][(int)y] = u;
-                ime.getvMap()[(int)x][(int)y] = v;
-                ime.getrMap()[(int)x][(int)y] = representable;
+                ime.getuMap()[(int) x][(int) y] = u;
+                ime.getvMap()[(int) x][(int) y] = v;
+                ime.getrMap()[(int) x][(int) y] = representable;
                 return true;
             }
             return false;
@@ -1766,6 +1757,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     public void ratioVerticalAngle() {
-        this.angleY = 1.0*dimy/dimx*angleX;
+        this.angleY = 1.0 * dimy / dimx * angleX;
     }
 }
