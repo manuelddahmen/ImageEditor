@@ -52,17 +52,12 @@
 
 package one.empty3.library;
 
-import one.empty3.library.elements.PPMFileInputStream;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ECBufferedImage {
     public static final int TYPE_INT_RGB = 1;
@@ -117,5 +112,13 @@ public class ECBufferedImage {
 
     public void setRGB(int i, int j, int elementCouleur) {
         bitmap.setPixel(i, j, elementCouleur);
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

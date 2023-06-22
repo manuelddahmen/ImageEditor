@@ -28,7 +28,8 @@ buildscript {
         // Add dependencies.
         //classpath 'com.huawei.agconnect:agcp:1.5.2.300'
         // Add the dependency for the Crashlytics Gradle plugin
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.6'
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 
@@ -36,7 +37,10 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-
+allprojects {
+    repositories {
+    }
+}
 Properties properties = new Properties()
 try {
     // Other configuration here

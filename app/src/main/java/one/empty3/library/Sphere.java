@@ -1,93 +1,76 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
- */
-
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package one.empty3.library;
 
 import one.empty3.library.core.nurbs.ParametricSurface;
+import one.empty3.library.core.nurbs.Point2Point;
 
 
 public class Sphere extends ParametricSurface {
     protected StructureMatrix<Circle> circle = new StructureMatrix<>(0, Circle.class);
 
-    public Sphere() {
+    public Sphere()
+    {
         super();
         circle.setElem(new Circle());
 
 
     }
-
     public Sphere(Axe axis, double radius) {
         this();
-        circle.setElem(new Circle(axis, radius));
+        circle .setElem(new Circle(axis, radius));
     }
 
     public Sphere(Point3D center, double radius) {
         this();
         getCircle().getAxis().setElem(new Axe(center.plus(Point3D.Y.mult(radius)), center.plus(Point3D.Y.mult(-radius))));
         getCircle().setRadius(radius);
+        terminalU.setElem(new Point2Point() {
+            @Override
+            public Point3D result(Point3D p) {
+                return new Point3D(0.0, p.get(1), p.get(2));
+            }
+        });
+        terminalV.setElem(new Point2Point() {
+            @Override
+            public Point3D result(Point3D p) {
+                return calculerPoint3D(p.get(0), Math.PI/2);
+            }
+        });
+
     }
 
     public Point3D calculerPoint3D(double u, double v) {
         Circle c = circle.getData0d();
-        if (!c.isCalculerRepere1()) {
+        if (!c.isCalculerRepere1())
+        {
             c.calculerRepere1();
         }
+        double cos = Math.cos(-Math.PI / 2 + Math.PI * v);
         return c.getCenter().plus(
-                c.vectX.mult(
-                        Math.cos(2.0 * Math.PI * u) * Math.cos(-Math.PI / 2 + Math.PI * v)).plus(
-                        c.vectY.mult(
-                                        Math.sin(2.0 * Math.PI * u) * Math.cos(-Math.PI / 2 + Math.PI * v))
-                                .plus(c.vectZ.mult(Math.sin(-Math.PI / 2 + Math.PI * v)))
-                ).mult(c.radius.getElem()));
+                c.getVectX().mult(
+                                Math.cos(2.0 * Math.PI * u) * cos).plus(
+                                c.getVectY().mult(
+                                        Math.sin(2.0 * Math.PI * u) * cos))
+                        .plus(c.getVectZ().mult(Math.sin(-Math.PI / 2 + Math.PI * v))
+                        ).norme1().mult(c.radius.getElem()));
     }
 
     public Circle getCircle() {
@@ -107,6 +90,6 @@ public class Sphere extends ParametricSurface {
 
     @Override
     public String toString() {
-        return "sphere (\n\t" + circle.toString() + "\n\t" + texture.toString() + "\n)\t";
+        return "sphere (\n\t"+circle.toString()+"\n\t"+texture.toString()+"\n)\t";
     }
 }

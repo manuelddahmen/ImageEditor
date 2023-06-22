@@ -100,9 +100,8 @@ public class FaceOverlayView extends ImageViewSelection {
         // nose available):
         FaceLandmark leftEar = face.getLandmark(FaceLandmark.LEFT_EAR);
 
-        Paint paint3 = new Paint();
-        paint3.setColor(Color.BLUE);
-        paint3.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLUE);
+        paint.setStyle(Paint.Style.FILL);
 
 
         PointF leftEarPos = null;
@@ -150,19 +149,17 @@ public class FaceOverlayView extends ImageViewSelection {
             id = face.getTrackingId();
         }
 
-        Paint paint = new Paint();
         paint.setColor(Color.RED);
 
-        Paint paint2 = new Paint();
-        paint2.setColor(Color.BLUE);
+        paint.setColor(Color.BLUE);
         if (leftEyeContour != null && leftEyeContour.size() >= 2) {
             for (int i = 0; i < leftEyeContour.size(); i++) {
-                drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())), paint);
+                drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())));
             }
         }
         if (rightEyeContour != null && rightEyeContour.size() >= 2) {
             for (int i = 0; i < rightEyeContour.size(); i++) {
-                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())), paint);
+                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())));
             }
         }
         fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints());
@@ -183,15 +180,46 @@ public class FaceOverlayView extends ImageViewSelection {
         fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
         fillPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints());
         fillPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints());
-
     }
+
+    public void testSphere() {
+/*
+        Sphere sphere = new Sphere(new Axe(Point3D.Z, Point3D.Z.mult(-1)), 10.0);
+        sphere.texture(new ColorTexture(Color.GREEN));
+
+        ZBufferImpl zBuffer = new ZBufferImpl(mCopy.getWidth(), mCopy.getHeight());
+
+        Scene scene = new Scene();
+
+        Point3D center = Point3D.X.mult(mCopy.getWidth()/2.).plus(Point3D.Y.mult(mCopy.getHeight()/2.));
+
+        double maxRes = Math.max(mCopy.getWidth(), mCopy.getHeight());
+
+        one.empty3.library.Camera camera = new Camera(center.plus(Point3D.Z.mult(maxRes)), center, Point3D.Y);
+
+        scene.cameraActive(camera);
+        zBuffer.scene(scene);
+        zBuffer.camera(camera);
+
+        zBuffer.draw(scene);
+
+        Bitmap bitmap = zBuffer.image2();
+
+        mCanvas.drawBitmap(bitmap, 0f, 0f, paint);
+
+ */
+        paint.setColor(Color.GREEN);
+        PointF pointF = coordCanvas(
+                new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
+        mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
+    }
+
     public void drawPolygon() {}
     private void fillPolygon(List<PointF> polygonContour) {
         if (polygonContour != null) {
-            Paint paint = new Paint();
             paint.setColor(Color.RED);
             for (int i = 0; i < polygonContour.size(); i++) {
-                drawLine(coordCanvas(polygonContour.get(i)), coordCanvas(polygonContour.get((i + 1) % polygonContour.size())), paint);
+                drawLine(coordCanvas(polygonContour.get(i)), coordCanvas(polygonContour.get((i + 1) % polygonContour.size())));
             }
             int size = polygonContour.size();
             Point3D[] point3DS = new Point3D[size];
@@ -201,12 +229,12 @@ public class FaceOverlayView extends ImageViewSelection {
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.RED));
 
-            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK);
+            //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK);
         }
     }
 
 
-    private void drawLine(PointF pointF, PointF pointF1, Paint paint) {
+    private void drawLine(PointF pointF, PointF pointF1) {
         mCanvas.drawLine(pointF.x, pointF.y, pointF1.x, pointF1.y, paint);
     }
 
@@ -268,9 +296,8 @@ public class FaceOverlayView extends ImageViewSelection {
                 PointF p1 = coordCanvas(new PointF(0, 0));
                 PointF p2 = coordCanvas(new PointF((float) imageWidth, (float) imageHeight));
                 Rect destBounds = new Rect((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
-
                 mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
-                Objects.requireNonNull(mFaces).forEach(face -> drawFaceBox(mCanvas, scale));
+                Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
             }
         });
@@ -292,15 +319,11 @@ public class FaceOverlayView extends ImageViewSelection {
         return super.onSaveInstanceState();
     }
 
-    private void drawFaceBox(Canvas canvas, double scale) {
-        //paint should be defined as a member variable rather than
-        //being created on each onDraw request, but left here for
-        //emphasis.
+    private void drawFaceBoxes(Canvas canvas, double scale) {
         if (canvas == null)
             return;
         if (mFaces == null)
             return;
-        Paint paint = new Paint();
         paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
@@ -308,6 +331,7 @@ public class FaceOverlayView extends ImageViewSelection {
         float top = 0;
         float right = 0;
         float bottom = 0;
+        testSphere();
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
             Rect rect = face.getBoundingBox();
