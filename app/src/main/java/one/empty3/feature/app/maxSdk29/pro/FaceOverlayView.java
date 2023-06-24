@@ -226,7 +226,7 @@ public class FaceOverlayView extends ImageViewSelection {
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(255, 255, 255)));
 
-            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLUE);
+            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLUE, paint);
         }
     }
 
