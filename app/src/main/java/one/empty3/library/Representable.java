@@ -683,6 +683,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 zBuffer.setTransparent(transparent);
 
+                zBuffer.couleurDeFond(new ColorTexture(transparent));
 
                 zBuffer.draw();
 
@@ -690,7 +691,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                zBuffer.drawOnImage(bitmap, zBuffer.imageInvX().bitmap, mCanvas, boundingRect);
+                zBuffer.drawOnImage(bitmap, zBuffer.image2(), mCanvas, boundingRect);
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
             }

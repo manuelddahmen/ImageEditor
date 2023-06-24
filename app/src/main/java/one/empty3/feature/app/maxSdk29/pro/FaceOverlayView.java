@@ -80,15 +80,14 @@ public class FaceOverlayView extends ImageViewSelection {
                 mFaces = faces;
 
 
-                mFaces.forEach(face -> action(face));
+                //mFaces.forEach(this::action);
             });
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
 
-        setImageBitmap2(mCopy);
 
-        //invalidate();
+        setImageBitmap2(mCopy);
     }
 
     private void action(Face face) {
@@ -154,16 +153,15 @@ public class FaceOverlayView extends ImageViewSelection {
         paint.setColor(Color.BLUE);
         if (leftEyeContour != null && leftEyeContour.size() >= 2) {
             for (int i = 0; i < leftEyeContour.size(); i++) {
-                drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())));
+//                drawLine(coordCanvas(leftEyeContour.get(i)), coordCanvas(leftEyeContour.get((i + 1) % leftEyeContour.size())));
             }
         }
         if (rightEyeContour != null && rightEyeContour.size() >= 2) {
             for (int i = 0; i < rightEyeContour.size(); i++) {
-                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())));
+//                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())));
             }
         }
         fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints());
-
         fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints());
         fillPolygon(face.getContour(FaceContour.FACE).getPoints());
         fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints());
@@ -214,7 +212,6 @@ public class FaceOverlayView extends ImageViewSelection {
         mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
-    public void drawPolygon() {}
     private void fillPolygon(List<PointF> polygonContour) {
         if (polygonContour != null) {
             paint.setColor(Color.RED);
@@ -227,9 +224,9 @@ public class FaceOverlayView extends ImageViewSelection {
                 PointF pointF = coordCanvas(polygonContour.get(i));
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.RED));
+            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(255, 255, 255)));
 
-            //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK);
+            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLUE);
         }
     }
 
@@ -284,7 +281,6 @@ public class FaceOverlayView extends ImageViewSelection {
     }
 
     public void updateImage(Bitmap bm) {
-        super.setImageBitmap2(bm);
         new Handler(Looper.getMainLooper()).post(() -> {
             //Log.d("ImageViewSelection::setImageBitmap",
             //        "change image on UI thread");
@@ -300,6 +296,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
             }
+            super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
         });
 
 

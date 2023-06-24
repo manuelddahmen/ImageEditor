@@ -25,13 +25,6 @@ import javaAnd.awt.image.imageio.ImageIO
                 currentBitmap = ImageIO.read(currentFile).bitmap
             faceOverlayView.setBitmap(currentBitmap);
         }
-
-        val b : Button =  findViewById<Button>(R.id.camera_preview_video)
-        b.setOnClickListener({
-            cameraCaptureRecord(b)
-        })
-
-
     }
 
 }

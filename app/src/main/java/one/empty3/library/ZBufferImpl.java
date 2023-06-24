@@ -92,7 +92,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     private long[][] Simeid;
     private double[][] Simeprof;
     private Scene currentScene;
-    private int displayType = SURFACE_DISPLAY_TEXT_TRI;
+    private int displayType = SURFACE_DISPLAY_TEXT_QUADS;
 
     private boolean FORCE_POSITIVE_NORMALS = true;
     private int transparent = Color.BLACK;
@@ -1169,14 +1169,23 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         //mCanvas.setBitmap(bitmap);
         int x0 = inBounds.left;
         int y0 = inBounds.top;
+
+        paint.setColor(android.graphics.Color.BLACK);
+
+
+        //in = in.copy(Bitmap.Config.ARGB_8888, true);
+
+        //mCanvas.drawBitmap(in, x0, y0, paint);
+
+
         for (int i = x0; i < inBounds.right; i++) {
             for (int j = y0; j < inBounds.bottom; j++) {
                 if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
                     double width = inBounds.right - inBounds.left;
                     double height = inBounds.bottom - inBounds.top;
 
-                    double rX = (i - x0) / width;
-                    double rY = (j - y0) / height;
+                    double rX = (i - inBounds.left) / width;
+                    double rY = (j - inBounds.right) / height;
 
                     int xOrigin = (int) (rX * (in.getWidth() - 1));
                     int yOrigin = (int) (rY * (in.getHeight() - 1));
@@ -1184,16 +1193,13 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     int color = in.getPixel(xOrigin, yOrigin);
 
                     if (color != isTranparent()) {
-                        paint.setColor(texture().getColorAt(0.5, 0.5));
-                        mCanvas.drawPoint(i, j, paint);
-
+                        bitmap.setPixel(i, j, Color.BLUE);
                     }
-
-                    //mCanvas.drawBitmap(in, inBounds.left, inBounds.top, paint);
-                    //return;
                 }
             }
         }
+
+
     }
 
     public class Box2D {

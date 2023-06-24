@@ -12,3 +12,5 @@
 -dontskipnonpubliclibraryclasses
 -dontoptimize
 -dontpreverify
+
+
