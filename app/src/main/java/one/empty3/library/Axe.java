@@ -57,6 +57,8 @@
  */
 package one.empty3.library;
 
+import android.graphics.Rect;
+
 public class Axe extends Representable {
 
     private StructureMatrix<Point3D> p1 = new StructureMatrix<>(0, Point3D.class);
@@ -133,5 +135,13 @@ public class Axe extends Representable {
 
     public static Axe defaut() {
         return new Axe(Point3D.Y, Point3D.Y.mult(-1.));
+    }
+
+    @Override
+    protected Rect getBoundRect2d() {
+        Point3D center1 = getCenter();
+        double length = p1.getElem().moins(p2.getElem()).getLength()*2;
+        return new Rect((int) (center1.get(0)-length), (int) (center1.get(1)-length),
+                (int) (center1.get(0)+length), (int) (center1.get(1)-length));
     }
 }

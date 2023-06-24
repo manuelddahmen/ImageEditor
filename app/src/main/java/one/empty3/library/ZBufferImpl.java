@@ -26,7 +26,6 @@ package one.empty3.library;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.Image;
 
@@ -501,7 +500,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     public ECBufferedImage imageInvX() {
-        ECBufferedImage bi2 = new ECBufferedImage(la, ha, ECBufferedImage.TYPE_INT_RGB);
+        ECBufferedImage bi2 = new ECBufferedImage(la, ha);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
                 int elementCouleur = ime.ime.getElementCouleur(i, j);
@@ -1733,8 +1732,10 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
 
-    public void drawOnImage(Bitmap bitmap, Bitmap in, Canvas mCanvas, Rect inBounds, Paint paint) {
+    public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas, Rect inBounds) {
         paint.setColor(android.graphics.Color.BLUE);
+
+        mCanvas.drawRect(inBounds, paint);
 
         for (int i = inBounds.left; i < inBounds.right; i++) {
             for (int j = inBounds.top; j < inBounds.bottom; j++) {
@@ -1745,19 +1746,21 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     double rX = (i - inBounds.left) / width;
                     double rY = (j - inBounds.top) / height;
 
-                    int xOrigin = (int) (rX * (in.getWidth()));
-                    int yOrigin = (int) (rY * (in.getHeight()));
+                    int xOrigin = (int) (rX * (renderedImage.getWidth()));
+                    int yOrigin = (int) (rY * (renderedImage.getHeight()));
 
-                    int color = in.getPixel(xOrigin, yOrigin);
+                    if(!ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
+                        int color = renderedImage.getPixel(xOrigin, yOrigin);
 
-                    if (color != isTranparent()) {
-                        mCanvas.drawPoint(i-inBounds.left, j-inBounds.top, paint);
-                        bitmap.setPixel(i, j, texture().getColorAt(rX, rY));
+                        if (color != isTranparent()) {
+                            mCanvas.drawPoint(i - inBounds.left, j - inBounds.top, paint);
+                            bitmap.setPixel(i, j, texture().getColorAt(rX, rY));
+                        }
                     }
                 }
             }
         }
 
-
+        System.gc();
     }
 }

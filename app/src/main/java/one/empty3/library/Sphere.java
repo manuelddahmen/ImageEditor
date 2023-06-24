@@ -19,6 +19,8 @@
 
 package one.empty3.library;
 
+import android.graphics.Rect;
+
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.Point2Point;
 
@@ -35,7 +37,7 @@ public class Sphere extends ParametricSurface {
     }
     public Sphere(Axe axis, double radius) {
         this();
-        circle .setElem(new Circle(axis, radius));
+        circle.setElem(new Circle(axis, radius));
     }
 
     public Sphere(Point3D center, double radius) {
@@ -91,5 +93,10 @@ public class Sphere extends ParametricSurface {
     @Override
     public String toString() {
         return "sphere (\n\t"+circle.toString()+"\n\t"+texture.toString()+"\n)\t";
+    }
+
+    @Override
+    protected Rect getBoundRect2d() {
+        return circle.getElem().axis.data0d.getBoundRect2d();
     }
 }

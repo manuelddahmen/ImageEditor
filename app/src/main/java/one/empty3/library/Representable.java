@@ -48,10 +48,8 @@ import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtMatiere;
 import one.empty3.library.core.raytracer.RtRay;
 import one.empty3.library.core.testing.Path;
-
 public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D {
 
-    public static final int FILL = 1;
     protected StructureMatrix<Point3D> vectors;
 
     public static final int DISPLAY_ALL = 0;
@@ -85,6 +83,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     private int RENDERING_DEFAULT = 0;
     private Map<String, StructureMatrix> declaredDataStructure;// = Collections.synchronizedMap(new HashMap());
     private Map<String, StructureMatrix> declaredLists;//= new HashMap<>();
+    Paint paint = new Paint();
 
     public Representable() {
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
@@ -108,7 +107,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         oriented.texture(a.texture());
         return oriented;
     }
-
     public static void setPaintingActForClass(ZBuffer z, Scene s, PaintingAct pa) {
         Painter p = null;
         classPainters().add(new Painter(z, s, Representable.class));
@@ -176,7 +174,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
 
     public Point3D refPoint(Point3D x) {
-        if (!(this instanceof Point3D) && !(this instanceof Matrix33))
+        if(!(this instanceof Point3D) && !(this instanceof Matrix33))
             return getOrientedPoint(x);
         else
             return x;
@@ -188,7 +186,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         setVectY(vy);
         setVectZ(vz);
     }
-
     /*__
      * DOn't call ZBuffer dessiine methods here: it would loop.
      *
@@ -273,7 +270,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public StructureMatrix getDeclaredProperty(String name) {
         declareProperties();
         for (String s : getDeclaredDataStructure().keySet()) {
-            if (s.startsWith(name)) {
+            if(s.startsWith(name)) {
                 return getDeclaredDataStructure().get(s);
             }
         }
@@ -309,7 +306,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public void setProperty(String propertyName, Object value) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method propertySetter = null;
 
-        propertySetter = this.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), value == null ? null : value.getClass());
+        propertySetter = this.getClass().getMethod("set" + ("" + propertyName.charAt(0)).toUpperCase() + (propertyName.substring(1)), value==null?null:value.getClass());
         propertySetter.invoke(this, value);
         Logger.getAnonymousLogger().log(Level.INFO, "RType : " + this.getClass().getName() + " Property: " + propertyName + " New Value set " + getProperty(propertyName));
     }
@@ -379,8 +376,8 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 fileOutputStream.write(bytes, 0, read);
             }
 
-        } catch (Exception ex) {
-        }
+        } catch (Exception ex) {}
+
 
 
     }
@@ -581,21 +578,21 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         Representable representable1 = this;
         Object value = null;
         StructureMatrix declaredProperty = null;
-        int i = -1;
-        int j = -1;
+        int i=-1;
+        int j=-1;
         for (int k = 0; k < split.length; k++) {
             String split0 = split[k].split("/")[0];
-            if (value != null) {
-                if (value instanceof Representable) {
-                    representable1 = ((Representable) value);
+            if(value!=null) {
+                if(value instanceof Representable) {
+                    representable1 = ((Representable)value);
                 }
 
             }
             String[] split1 = split0.split(":");
-            if (split1.length > 1) {
+            if(split1.length>1) {
                 i = Integer.parseInt(split1[1]);
             }
-            if (split1.length > 2) {
+            if(split1.length>2) {
                 j = Integer.parseInt(split1[2]);
             }
 
@@ -604,7 +601,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
             if (declaredProperty == null)
                 return null;
             else {
-                if (declaredProperty instanceof StructureMatrix) {
+                if(declaredProperty instanceof StructureMatrix) {
 
                     StructureMatrix sm = (StructureMatrix) declaredProperty;
                     switch (sm.getDim()) {
@@ -652,12 +649,12 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public void setVectZ(Point3D vectZ) {
         this.vectors.setElem(vectZ, 2);
     }
-
     public void setOrig(Point3D orig) {
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent, Paint paint) {
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent) {
+        paint = new Paint();
         Scene scene1 = new Scene();
 
         scene1.add(this);
@@ -668,7 +665,10 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 && boundingRect.height()+boundingRect.top<bitmap.getHeight()) {
             try {
 
-                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
+                //Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
+
+                Bitmap bitmap1 = Bitmap.createBitmap(boundingRect.width(), boundingRect.height(), Bitmap.Config.ARGB_8888);
+
 
                 ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
 
@@ -692,7 +692,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                zBuffer.drawOnImage(bitmap, zBuffer.imageInvX().getBitmap(), mCanvas, boundingRect, paint);
+                zBuffer.drawOnImage(bitmap, zBuffer.imageInvX().getBitmap(), mCanvas, boundingRect);
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
             }

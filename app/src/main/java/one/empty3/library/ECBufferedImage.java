@@ -70,12 +70,10 @@ public class ECBufferedImage {
     private int squarepixelCountMax = 25;
 
     public ECBufferedImage(Bitmap read) {
-        bitmap = Bitmap.createBitmap(read.getWidth(),
-                read.getHeight(),
-                Bitmap.Config.ARGB_8888);
+        bitmap = read;
     }
 
-    public ECBufferedImage(int width, int height, int imageType) {
+    public ECBufferedImage(int width, int height) {
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
     }
 
@@ -90,17 +88,7 @@ public class ECBufferedImage {
     }
 
     private void getRGBA(int rgba, int[] componentsRGBA) {
-        int a = (rgba & 0xFF000000) >> 24;
-        int r = (rgba & 0xFF000000) >> 16;
-        int g = (rgba & 0xFF000000) >> 8;
-        int b = (rgba & 0xFF000000) >> 0;
-
-        componentsRGBA[0] = a;
-        componentsRGBA[1] = r;
-        componentsRGBA[2] = g;
-        componentsRGBA[3] = b;
-
-
+        Lumiere.getInts(rgba, componentsRGBA);
     }
 
     @Override
