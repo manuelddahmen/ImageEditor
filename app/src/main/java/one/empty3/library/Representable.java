@@ -25,7 +25,7 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.RectF;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -659,16 +659,16 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
         scene1.add(this);
 
-        Rect boundingRect = getBoundRect2d();
+        RectF boundingRect = getBoundRect2d();
 
         if (boundingRect != null && boundingRect.width()>0&& boundingRect.height()>0 && boundingRect.width()+boundingRect.left<bitmap.getWidth()
                 && boundingRect.height()+boundingRect.top<bitmap.getHeight()) {
             try {
 
-                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.width(), boundingRect.height());
+                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (int) boundingRect.left, (int) boundingRect.top, (int) boundingRect.width(), (int) boundingRect.height());
 
 
-                ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
+                ZBufferImpl zBuffer = new ZBufferImpl((int) boundingRect.width(), (int) boundingRect.height());
 
                 Point3D middle = Point3D.n(boundingRect.left + boundingRect.width() / 2., boundingRect.top + boundingRect.height() / 2., 0);
 
@@ -703,8 +703,9 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         }
     }
 
-    protected Rect getBoundRect2d() {
-        return null;
+    public RectF getBoundRect2d() {
+        RectF rectF = new RectF(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
+        return rectF;
     }
 
 

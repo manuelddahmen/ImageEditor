@@ -56,7 +56,7 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -170,8 +170,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     }
 
-    protected Rect getBoundRect2d() {
-        Rect rect = new Rect(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
+    public RectF getBoundRect2d() {
+        RectF rect = new RectF(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
 
         for (Point3D point3D : getPoints().getData1d()) {
             if(point3D.get(0)<=rect.left)

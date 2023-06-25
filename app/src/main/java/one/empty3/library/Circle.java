@@ -19,6 +19,8 @@
 
 package one.empty3.library;
 
+import android.graphics.RectF;
+
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 /*__*
@@ -165,5 +167,16 @@ public class Circle extends ParametricCurve {
 
     public void setCenter(Point3D center) {
         this.center = center;
+    }
+
+    @Override
+    public RectF getBoundRect2d() {
+        RectF boundRect2d = super.getBoundRect2d();
+        boundRect2d.left = (float) (center.get(0) - radius.getElem());
+        boundRect2d.top = (float) (center.get(1)-radius.getElem());
+        boundRect2d.right = (float) (center.get(0)+radius.getElem());
+        boundRect2d.bottom= (float) (center.get(1)+radius.getElem());
+
+        return boundRect2d;
     }
 }

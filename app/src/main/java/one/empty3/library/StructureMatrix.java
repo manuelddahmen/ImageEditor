@@ -70,7 +70,8 @@ public class StructureMatrix<T> {
 
         }
         this.data0d = value;
-        this.classType = value.getClass();
+        if(value!=null)
+            this.classType = value.getClass();
         listenersPropertyChanged(null, value, 0, 0, 0);
     }
 

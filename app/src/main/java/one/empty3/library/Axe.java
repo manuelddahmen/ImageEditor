@@ -57,7 +57,7 @@
  */
 package one.empty3.library;
 
-import android.graphics.Rect;
+import android.graphics.RectF;
 
 public class Axe extends Representable {
 
@@ -138,10 +138,10 @@ public class Axe extends Representable {
     }
 
     @Override
-    protected Rect getBoundRect2d() {
+    public RectF getBoundRect2d() {
         Point3D center1 = getCenter();
         double length = p1.getElem().moins(p2.getElem()).getLength()*2;
-        return new Rect((int) (center1.get(0)-length), (int) (center1.get(1)-length),
+        return new RectF((int) (center1.get(0)-length), (int) (center1.get(1)-length),
                 (int) (center1.get(0)+length), (int) (center1.get(1)-length));
     }
 }
