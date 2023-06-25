@@ -38,9 +38,6 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 
 /*__
@@ -78,7 +75,6 @@ public class ColorTexture extends ITexture {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public int getColorAt(double x, double y) {
         return color.getElem().toArgb();
     }
