@@ -50,12 +50,10 @@ public class ColorTexture extends ITexture {
 
     private StructureMatrix<Color> color = new StructureMatrix<Color>(0, Color.class);
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public ColorTexture() {
-        color.setElem(Color.valueOf(0, 0, 0));
+        color.setElem(Color.valueOf(0f, 0f, 0f));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public ColorTexture(Color c) {
         this();
         if (c != null) {

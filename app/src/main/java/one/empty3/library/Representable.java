@@ -83,7 +83,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     private int RENDERING_DEFAULT = 0;
     private Map<String, StructureMatrix> declaredDataStructure;// = Collections.synchronizedMap(new HashMap());
     private Map<String, StructureMatrix> declaredLists;//= new HashMap<>();
-    Paint paint = new Paint();
+    private Paint paint = new Paint();
 
     public Representable() {
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
@@ -665,16 +665,14 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 && boundingRect.height()+boundingRect.top<bitmap.getHeight()) {
             try {
 
-                //Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.right - boundingRect.left, boundingRect.bottom - boundingRect.top);
-
-                Bitmap bitmap1 = Bitmap.createBitmap(boundingRect.width(), boundingRect.height(), Bitmap.Config.ARGB_8888);
+                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, boundingRect.left, boundingRect.top, boundingRect.width(), boundingRect.height());
 
 
                 ZBufferImpl zBuffer = new ZBufferImpl(boundingRect.width(), boundingRect.height());
 
                 Point3D middle = Point3D.n(boundingRect.left + boundingRect.width() / 2., boundingRect.top + boundingRect.height() / 2., 0);
 
-                Camera camera = new Camera(Point3D.Z.mult(-Math.max(boundingRect.width(), boundingRect.height())).plus(middle), middle, Point3D.Y);
+                Camera camera = new Camera(Point3D.Z.mult(Math.max(boundingRect.width(), boundingRect.height())*2).plus(middle), middle, Point3D.Y);
 
                 zBuffer.idzpp();
 
@@ -684,9 +682,15 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 zBuffer.setTransparent(transparent);
 
+                zBuffer.texture(new ColorTexture(transparent));
+
+
                 zBuffer.couleurDeFond(new ColorTexture(transparent));
 
-                zBuffer.draw();
+                //zBuffer.setDisplayType(ZBufferImpl.SURFACE_DISPLAY_TEXT_QUADS);
+
+                zBuffer.draw(scene1);
+
 
                 System.err.println("drawOnCanvas" + boundingRect.toString());
 
@@ -703,33 +707,6 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         return null;
     }
 
-    public ECBufferedImage drawOnCanvas2(Canvas mCanvas, Bitmap bitmap, int fill, int transparent, Rect inBounds) {
-        scene = new Scene();
-
-        ZBufferImpl zBuffer = new ZBufferImpl();
-
-        Point3D plus = Point3D.X.mult(
-                bitmap.getWidth() / 2.).plus(Point3D.Y.mult(bitmap.getHeight() / 2.));
-
-        Camera camera = new Camera(Point3D.Z.mult(
-                -Math.max(bitmap.getWidth(), bitmap.getHeight())).plus(plus), plus);
-        camera.declareProperties();
-        //scene.add();
-
-        if (zBuffer == null)
-            zBuffer = new ZBufferImpl(bitmap.getWidth(), bitmap.getHeight());
-        else {
-            zBuffer.idzpp();
-        }
-
-        zBuffer.scene(scene);
-        scene.cameraActive(camera);
-
-        zBuffer.draw(scene);
-
-        return zBuffer.imageInvX();
-
-    }
 
 }
 

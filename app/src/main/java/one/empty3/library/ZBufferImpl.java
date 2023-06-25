@@ -26,6 +26,7 @@ package one.empty3.library;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.Image;
 
@@ -95,6 +96,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     private boolean FORCE_POSITIVE_NORMALS = true;
     private int transparent = Color.BLACK;
+    private Paint paint = new Paint();
 
     public ZBufferImpl() {
         that = this;
@@ -1733,9 +1735,11 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
 
     public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas, Rect inBounds) {
-        paint.setColor(android.graphics.Color.BLUE);
+        paint.setColor(android.graphics.Color.WHITE);
 
         mCanvas.drawRect(inBounds, paint);
+
+        int pixels = 0;
 
         for (int i = inBounds.left; i < inBounds.right; i++) {
             for (int j = inBounds.top; j < inBounds.bottom; j++) {
@@ -1753,13 +1757,17 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
                         if (color != isTranparent()) {
-                            mCanvas.drawPoint(i - inBounds.left, j - inBounds.top, paint);
-                            bitmap.setPixel(i, j, texture().getColorAt(rX, rY));
+                            paint.setColor(color);
+                            mCanvas.drawPoint(i, j , paint);
+                            bitmap.setPixel(i - inBounds.left, j- inBounds.top, Color.WHITE);
+                            pixels++;
                         }
                     }
                 }
             }
         }
+
+        System.out.println("rect points : " + pixels);
 
         System.gc();
     }

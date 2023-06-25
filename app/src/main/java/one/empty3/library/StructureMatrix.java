@@ -20,11 +20,9 @@
 package one.empty3.library;
 
 
-import javaAnd.awt.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -66,7 +64,7 @@ public class StructureMatrix<T> {
         this.classType = classType;
     }
 
-    public void setElem(T value) {
+    public void setElem(@NotNull T value) {
         dim = 0;
         if(value instanceof Point3D) {
 

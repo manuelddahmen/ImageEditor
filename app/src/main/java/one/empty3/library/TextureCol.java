@@ -64,19 +64,18 @@ import androidx.annotation.RequiresApi;
 //#TODO Repair
 public class TextureCol extends ITexture {
 
-    private StructureMatrix<Integer> color = new StructureMatrix<>(0, Integer.class);
+    private final StructureMatrix<Integer> color = new StructureMatrix<>(0, Integer.class);
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public TextureCol() {
         color.setElem(Color.valueOf(0f, 0f, 0f).toArgb());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public TextureCol(Color c) {
         if (c != null) {
             color.setElem(c.toArgb());
-        } else
-            color.setElem(Color.valueOf(0, 0, 0, 1).toArgb());
+        } else {
+            color.setElem(Color.BLACK);
+        }
     }
 
     public TextureCol(int c) {
