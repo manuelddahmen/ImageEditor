@@ -170,13 +170,18 @@ public class Circle extends ParametricCurve {
     }
 
     @Override
-    public RectF getBoundRect2d() {
-        RectF boundRect2d = super.getBoundRect2d();
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        StructureMatrix<Point3D> boundRect2d1 = super.getBoundRect2d();
+        RectF boundRect2d = new RectF();
+        center = axis.getElem().getCenter();
         boundRect2d.left = (float) (center.get(0) - radius.getElem());
         boundRect2d.top = (float) (center.get(1)-radius.getElem());
         boundRect2d.right = (float) (center.get(0)+radius.getElem());
         boundRect2d.bottom= (float) (center.get(1)+radius.getElem());
 
-        return boundRect2d;
+        boundRect2d1.setElem(new Point3D((double) boundRect2d.left, (double) boundRect2d.top, 0.0),0);
+        boundRect2d1.setElem(new Point3D((double) boundRect2d.right, (double) boundRect2d.bottom, 0.0),1);
+
+        return boundRect2d1;
     }
 }

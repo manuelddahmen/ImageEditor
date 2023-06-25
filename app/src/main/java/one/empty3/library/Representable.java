@@ -659,20 +659,25 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
         scene1.add(this);
 
-        RectF boundingRect = getBoundRect2d();
-
-        if (boundingRect != null && boundingRect.width()>0&& boundingRect.height()>0 && boundingRect.width()+boundingRect.left<bitmap.getWidth()
-                && boundingRect.height()+boundingRect.top<bitmap.getHeight()) {
+        StructureMatrix<Point3D> boundingRect = getBoundRect2d();
+        double left = boundingRect.getElem(0).get(0);
+        double top = boundingRect.getElem(0).get(1);
+        double right = boundingRect.getElem(1).get(0);
+        double bottom = boundingRect.getElem(1).get(1);
+        double width = right - left;
+        double height = bottom - top;
+        if (boundingRect != null && width>0&& height>0 && width+left<bitmap.getWidth()
+                && height+top<bitmap.getHeight()) {
             try {
 
-                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (int) boundingRect.left, (int) boundingRect.top, (int) boundingRect.width(), (int) boundingRect.height());
+                Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (int) left, (int) top, (int) width, (int) height);
 
 
-                ZBufferImpl zBuffer = new ZBufferImpl((int) boundingRect.width(), (int) boundingRect.height());
+                ZBufferImpl zBuffer = new ZBufferImpl((int) width, (int) height);
 
-                Point3D middle = Point3D.n(boundingRect.left + boundingRect.width() / 2., boundingRect.top + boundingRect.height() / 2., 0);
+                Point3D middle = Point3D.n(left + width / 2., top + height / 2., 0);
 
-                Camera camera = new Camera(Point3D.Z.mult(Math.max(boundingRect.width(), boundingRect.height())*2).plus(middle), middle, Point3D.Y);
+                Camera camera = new Camera(Point3D.Z.mult(Math.max(width, height)*2).plus(middle), middle, Point3D.Y);
 
                 zBuffer.idzpp();
 
@@ -703,9 +708,11 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         }
     }
 
-    public RectF getBoundRect2d() {
-        RectF rectF = new RectF(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
-        return rectF;
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        StructureMatrix<Point3D> point3DStructureMatrix = new StructureMatrix<>(1, Point3D.class);
+        point3DStructureMatrix.setElem(Point3D.X, 0);
+        point3DStructureMatrix.setElem(Point3D.Y, 0);
+        return point3DStructureMatrix;
     }
 
 

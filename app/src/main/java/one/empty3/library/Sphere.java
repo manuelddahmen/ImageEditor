@@ -19,8 +19,6 @@
 
 package one.empty3.library;
 
-import android.graphics.RectF;
-
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.Point2Point;
 
@@ -96,7 +94,7 @@ public class Sphere extends ParametricSurface {
     }
 
     @Override
-    public RectF getBoundRect2d() {
-        return circle.getElem().getBoundRect2d();
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        return ((Circle) circle.getElem()).getBoundRect2d();
     }
 }

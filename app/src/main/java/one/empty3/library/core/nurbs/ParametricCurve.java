@@ -62,7 +62,6 @@ package one.empty3.library.core.nurbs;
 
 import one.empty3.library.ITexture;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 import one.empty3.library.StructureMatrix;
 
@@ -293,6 +292,13 @@ public class ParametricCurve extends Representable {
     public Point3D calculerCurveT(double tCurve, double t) {
         return calculerPoint3D(tCurve);
     }
+
+
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        StructureMatrix<Point3D> boundRect2d = super.getBoundRect2d();
+        return boundRect2d;
+    }
+
 }
 
 

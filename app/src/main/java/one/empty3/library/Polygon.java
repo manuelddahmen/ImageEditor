@@ -56,7 +56,6 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -170,21 +169,21 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     }
 
-    public RectF getBoundRect2d() {
-        RectF rect = new RectF(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
+    public StructureMatrix<Point3D> getBoundRect2d() {
 
+        StructureMatrix<Point3D> boundRect2d = super.getBoundRect2d();
         for (Point3D point3D : getPoints().getData1d()) {
-            if(point3D.get(0)<=rect.left)
-                rect.left = (int) (double) point3D.get(0);
-            if(point3D.get(0)>=rect.right)
-                rect.right = (int) (double) point3D.get(0);
-            if(point3D.get(1)<=rect.top)
-                rect.top = (int) (double) point3D.get(1);
-            if(point3D.get(1)>=rect.bottom)
-                rect.bottom = (int) (double) point3D.get(1);
+            if(point3D.get(0)<=boundRect2d.getElem(0).get(0))
+                boundRect2d.getElem(0).set(0, (double) boundRect2d.getElem(0).get(0));
+            if(point3D.get(0)>=boundRect2d.getElem(1).get(0))
+                boundRect2d.getElem(1).set(0, (double) boundRect2d.getElem(0).get(0));
+            if(point3D.get(1)<=boundRect2d.getElem(0).get(1))
+                boundRect2d.getElem(0).set(1, (double) boundRect2d.getElem(0).get(0));
+            if(point3D.get(1)>=boundRect2d.getElem(1).get(1))
+                boundRect2d.getElem(1).set(1, (double) boundRect2d.getElem(0).get(0));
         }
 
 
-        return rect;
+        return boundRect2d;
     }
 }
