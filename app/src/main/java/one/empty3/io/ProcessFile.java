@@ -19,26 +19,23 @@
 
 package one.empty3.io;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.List;
 
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 import one.empty3.feature20220726.ProcessBean;
 
 public abstract class ProcessFile extends ProcessNFiles {
-    protected boolean shouldOverwrite = false;
+    public boolean shouldOverwrite = false;
     public ProcessBean bean;
     private File outputDirectory = null;
     private List<File> imagesStack = new ArrayList<>();
 
 
-    protected static boolean isImage(File in) {
+    public static boolean isImage(File in) {
         if( in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
                 || in.getAbsolutePath().toLowerCase().endsWith(".png")))
             return true;

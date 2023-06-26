@@ -488,15 +488,11 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     public Bitmap image() {
         bi = null;
-        final AtomicReference<Bitmap> bi2 = new AtomicReference<>();
+        final AtomicReference<Bitmap> bi2 = new AtomicReference<>(
+                Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888, true)
 
-        System.err.println("ZBufferImpl::image() :la: "+la+"; ha :"+ ha);
-
+        );
         while (bi2.get() == null) {
-            /*new Handler(Looper.getMainLooper()).post(() -> {
-                bi2.set(Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888));
-            });
-            */
             bi2.set(Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888, true));
 
             try {

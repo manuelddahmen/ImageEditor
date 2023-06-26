@@ -1,13 +1,12 @@
-package one.empty3.apps.test;
+package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
 
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+
 import org.junit.Test;
 
-import java.io.File;
-
 import javaAnd.awt.Color;
-import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.library.Axe;
 import one.empty3.library.Camera;
 import one.empty3.library.ColorTexture;
@@ -17,9 +16,9 @@ import one.empty3.library.Sphere;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.ZBufferImpl;
 
-public class TestZBufferAndroid {
+@ExperimentalCamera2Interop public class TestZBufferAndroid {
     @Test
-    public void testSphere() {
+    public Bitmap testSphere() {
         Sphere sphere = new Sphere(new Axe(new Point3D(10d, 10d, 1d), new Point3D(10d, 10d, -1d)), 10.);
         StructureMatrix<Point3D> boundingRect = sphere.getBoundRect2d();
         double left = boundingRect.getElem(0).get(0);
@@ -58,7 +57,8 @@ public class TestZBufferAndroid {
 
         assert bitmap!=null;
 
-        ImageIO.write(bitmap, "jpg", new File(System.getProperty("user.home")+"/EmptyCanvasTest/testSphere.jpg"));
+
+        return bitmap;
 
     }
 }

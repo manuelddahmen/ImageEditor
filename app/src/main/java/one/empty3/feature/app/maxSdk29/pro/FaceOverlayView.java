@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
@@ -33,7 +34,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.Sphere;
 
-public class FaceOverlayView extends ImageViewSelection {
+@ExperimentalCamera2Interop public class FaceOverlayView extends ImageViewSelection {
     private List<Face> mFaces;
     protected Bitmap mBitmap;
     private Canvas mCanvas;
@@ -302,9 +303,6 @@ public class FaceOverlayView extends ImageViewSelection {
             }
             super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
         });
-
-
-
     }
     public Rect getDestBounds() {
         double imageWidth = mBitmap.getWidth();
