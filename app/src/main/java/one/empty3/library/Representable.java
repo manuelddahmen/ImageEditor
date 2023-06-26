@@ -25,7 +25,6 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,12 +53,12 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
     public static final int DISPLAY_ALL = 0;
     public static final int SURFACE_DISPLAY_TEXT_QUADS = 1;
+    public static final int SURFACE_DISPLAY_TEXT_TRI = 2;
     public static final int SURFACE_DISPLAY_COL_QUADS = 3;
     public static final int SURFACE_DISPLAY_COL_TRI = 4;
     public static final int SURFACE_DISPLAY_LINES = 5;
     public static final int SURFACE_DISPLAY_POINTS = 6;
     public static final ITexture DEFAULT_TEXTURE = new TextureCol(Colors.random());
-    private static final int SURFACE_DISPLAY_TEXT_TRI = 2;
     private static final String[] displayTypes = {"All", "Textured Quad", "SURFACE_DISPLAY_TEXT_TRI", "SURFACE_DISPLAY_COL_QUADS", "SURFACE_DISPLAY_COL_TRI", "SURFACE_DISPLAY_LINES", "SURFACE_DISPLAY_POINTS"};
     public static Point3D SCALE1;
     protected static ArrayList<Painter> classPainters = new ArrayList<Painter>();
@@ -77,7 +76,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     protected ITexture texture = DEFAULT_TEXTURE;
     protected Render render; //= Render.getInstance(0, -1);
     protected StructureMatrix<T> T; // = new StructureMatrix<T>(0, one.empty3.library.T.class);
-    private int displayType = 0; //SURFACE_DISPLAY_TEXT_QUADS;
+    private int displayType = SURFACE_DISPLAY_TEXT_QUADS;
     private String id;
     private Painter painter = null;
     private int RENDERING_DEFAULT = 0;
@@ -666,8 +665,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         double bottom = boundingRect.getElem(1).get(1);
         double width = right - left;
         double height = bottom - top;
-        if (boundingRect != null && width>0&& height>0 && width+left<bitmap.getWidth()
-                && height+top<bitmap.getHeight()) {
+        if (left>=0 && top>=0 && width > 0 && height > 0 && width + left < bitmap.getWidth() && height + top < bitmap.getHeight()) {
             try {
 
                 Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (int) left, (int) top, (int) width, (int) height);
@@ -711,7 +709,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public StructureMatrix<Point3D> getBoundRect2d() {
         StructureMatrix<Point3D> point3DStructureMatrix = new StructureMatrix<>(1, Point3D.class);
         point3DStructureMatrix.setElem(Point3D.X, 0);
-        point3DStructureMatrix.setElem(Point3D.Y, 0);
+        point3DStructureMatrix.setElem(Point3D.Y, 1);
         return point3DStructureMatrix;
     }
 

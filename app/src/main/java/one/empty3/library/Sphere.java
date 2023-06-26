@@ -26,22 +26,7 @@ import one.empty3.library.core.nurbs.Point2Point;
 public class Sphere extends ParametricSurface {
     protected StructureMatrix<Circle> circle = new StructureMatrix<>(0, Circle.class);
 
-    public Sphere()
     {
-        super();
-        circle.setElem(new Circle());
-
-
-    }
-    public Sphere(Axe axis, double radius) {
-        this();
-        circle.setElem(new Circle(axis, radius));
-    }
-
-    public Sphere(Point3D center, double radius) {
-        this();
-        getCircle().getAxis().setElem(new Axe(center.plus(Point3D.Y.mult(radius)), center.plus(Point3D.Y.mult(-radius))));
-        getCircle().setRadius(radius);
         terminalU.setElem(new Point2Point() {
             @Override
             public Point3D result(Point3D p) {
@@ -54,6 +39,22 @@ public class Sphere extends ParametricSurface {
                 return calculerPoint3D(p.get(0), Math.PI/2);
             }
         });
+
+    }
+    public Sphere()
+    {
+        super();
+        circle.setElem(new Circle());
+    }
+    public Sphere(Axe axis, double radius) {
+        this();
+        circle.setElem(new Circle(axis, radius));
+    }
+
+    public Sphere(Point3D center, double radius) {
+        this();
+        getCircle().getAxis().setElem(new Axe(center.plus(Point3D.Y.mult(radius)), center.plus(Point3D.Y.mult(-radius))));
+        getCircle().setRadius(radius);
 
     }
 

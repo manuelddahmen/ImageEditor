@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -486,18 +487,37 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
     public Bitmap image() {
+        bi = null;
+        final AtomicReference<Bitmap> bi2 = new AtomicReference<>();
 
-        Bitmap bi2 = Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888);
-        for (int i = 0; i < la; i++) {
-            for (int j = 0; j < ha; j++) {
-                int elementCouleur = ime.ime.getElementCouleur(i, j);
-                bi2.setPixel(i, j, elementCouleur);
+        System.err.println("ZBufferImpl::image() :la: "+la+"; ha :"+ ha);
 
+        while (bi2.get() == null) {
+            /*new Handler(Looper.getMainLooper()).post(() -> {
+                bi2.set(Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888));
+            });
+            */
+            bi2.set(Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888, true));
+
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
-        //      this.bi = bi2;
-        return bi2;
 
+        if (bi2.get() != null) {
+
+            for (int i = 0; i < la; i++) {
+                for (int j = 0; j < ha; j++) {
+                    int elementCouleur = ime.getIME().getElementCouleur(i, j);
+                    bi2.get().setPixel(i, j, elementCouleur);
+
+                }
+            }
+            this.bi = new ECBufferedImage(bi2.get());
+            return bi.getBitmap();
+        } else throw new UnsupportedOperationException("ZBufferImpl::image() :  Unexpected result.");
     }
 
     public ECBufferedImage imageInvX() {
@@ -1757,13 +1777,13 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     int xOrigin = (int) (rX * (renderedImage.getWidth()));
                     int yOrigin = (int) (rY * (renderedImage.getHeight()));
 
-                    if(!ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
+                    if (!ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
                         if (color != isTranparent()) {
                             paint.setColor(color);
-                            mCanvas.drawPoint(i, j , paint);
-                            bitmap.setPixel((int) (i - left), (int) (j- top), Color.WHITE);
+                            mCanvas.drawPoint(i, j, paint);
+                            bitmap.setPixel((int) (i - left), (int) (j - top), Color.WHITE);
                             pixels++;
                         }
                     }

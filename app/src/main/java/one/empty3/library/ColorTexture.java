@@ -39,12 +39,15 @@ package one.empty3.library;
 
 import android.graphics.Color;
 
+import org.jetbrains.annotations.NotNull;
+
 
 /*__
  * @author Manuel Dahmen
  */
 public class ColorTexture extends ITexture {
 
+    @NotNull
     private StructureMatrix<Color> color = new StructureMatrix<Color>(0, Color.class);
 
     public ColorTexture() {
@@ -52,7 +55,6 @@ public class ColorTexture extends ITexture {
     }
 
     public ColorTexture(Color c) {
-        this();
         if (c != null) {
             color.setElem(c);
         }
@@ -76,7 +78,12 @@ public class ColorTexture extends ITexture {
     }
 
     public int getColorAt(double x, double y) {
-        return color.getElem().toArgb();
+
+        Color elem = color.getElem();
+        if(elem!=null)
+            return elem.toArgb();
+        else
+            return Color.WHITE;
     }
 
     public void timeNext() {
