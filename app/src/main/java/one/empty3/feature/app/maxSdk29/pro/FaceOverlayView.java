@@ -28,11 +28,9 @@ import com.google.mlkit.vision.face.FaceLandmark;
 import java.util.List;
 import java.util.Objects;
 
-import one.empty3.library.Axe;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
-import one.empty3.library.Sphere;
 
 @ExperimentalCamera2Interop public class FaceOverlayView extends ImageViewSelection {
     private List<Face> mFaces;
@@ -213,8 +211,6 @@ import one.empty3.library.Sphere;
         PointF pointF = coordCanvas(
                 new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
         mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
-        new Sphere(new Axe(Point3D.Z.mult(1.), Point3D.Z.mult(-1.)), 20.)
-                .drawOnCanvas(mCanvas, mCopy, Color.BLACK);
     }
 
     private void fillPolygon(List<PointF> polygonContour) {
@@ -229,9 +225,10 @@ import one.empty3.library.Sphere;
                 PointF pointF = coordCanvas(polygonContour.get(i));
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(255, 255, 255)));
+            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
 
-            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLUE);
+            System.out.println("Draw on canvas");
+            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK);
         }
     }
 

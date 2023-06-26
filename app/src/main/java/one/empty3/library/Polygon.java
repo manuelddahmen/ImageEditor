@@ -56,9 +56,6 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import one.empty3.library.core.nurbs.SurfaceElem;
 
@@ -78,7 +75,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         declareProperties();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public Polygon(Color c) {
         this();
         texture(new TextureCol(c));
@@ -89,7 +85,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         texture(c);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public Polygon(Point3D[] list, Color c) {
         this(list, new TextureCol(c));
     }
@@ -170,19 +165,22 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     }
 
     public StructureMatrix<Point3D> getBoundRect2d() {
-
-        StructureMatrix<Point3D> boundRect2d = super.getBoundRect2d();
+        StructureMatrix<Point3D> boundRect2d = new StructureMatrix<>(1, Point3D.class);
+        boundRect2d.setElem(new Point3D( 10000d,  10000d, 0d), 0);
+        boundRect2d.setElem(new Point3D(-10000d, -10000d, 0d), 1);
         for (Point3D point3D : getPoints().getData1d()) {
+            //System.out.println("currentPoint: point3D"+point3D);
+            System.out.println(point3D);
             if(point3D.get(0)<=boundRect2d.getElem(0).get(0))
-                boundRect2d.getElem(0).set(0, (double) boundRect2d.getElem(0).get(0));
-            if(point3D.get(0)>=boundRect2d.getElem(1).get(0))
-                boundRect2d.getElem(1).set(0, (double) boundRect2d.getElem(0).get(0));
+                boundRect2d.getElem(0).set(0, (double) point3D.get(0));
             if(point3D.get(1)<=boundRect2d.getElem(0).get(1))
-                boundRect2d.getElem(0).set(1, (double) boundRect2d.getElem(0).get(0));
+                boundRect2d.getElem(0).set(1, (double) point3D.get(1));
+            if(point3D.get(0)>=boundRect2d.getElem(1).get(0))
+                boundRect2d.getElem(1).set(0, (double) point3D.get(0));
             if(point3D.get(1)>=boundRect2d.getElem(1).get(1))
-                boundRect2d.getElem(1).set(1, (double) boundRect2d.getElem(0).get(0));
+                boundRect2d.getElem(1).set(1, (double) point3D.get(1));
         }
-
+        //System.out.println("Polygon ("+getPoints().getData1d().size()+")bounds: "+boundRect2d);
 
         return boundRect2d;
     }

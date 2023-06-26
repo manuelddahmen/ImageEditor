@@ -1761,6 +1761,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
         int pixels = 0;
 
+        System.out.println("drawOnImage");
         for (int i = (int) left; i < right; i++) {
             for (int j = (int) top; j < bottom; j++) {
                 if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
