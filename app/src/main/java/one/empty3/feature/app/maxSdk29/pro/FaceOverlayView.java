@@ -208,8 +208,7 @@ import one.empty3.library.Polygon;
 
  */
         paint.setColor(Color.GREEN);
-        PointF pointF = coordCanvas(
-                new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
+        PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
         mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
@@ -222,7 +221,7 @@ import one.empty3.library.Polygon;
             int size = polygonContour.size();
             Point3D[] point3DS = new Point3D[size];
             for (int i = 0; i < polygonContour.size(); i += 1) {
-                PointF pointF = coordCanvas(polygonContour.get(i));
+                PointF pointF = polygonContour.get(i);//coordCanvas(polygonContour.get(i));
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
@@ -298,8 +297,8 @@ import one.empty3.library.Polygon;
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
             }
-            super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
         });
+        super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
     }
     public Rect getDestBounds() {
         double imageWidth = mBitmap.getWidth();

@@ -1750,7 +1750,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
 
     public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas, StructureMatrix<Point3D> inBounds) {
-        paint.setColor(android.graphics.Color.WHITE);
+        paint.setColor(android.graphics.Color.BLUE);
 
         double left = inBounds.getElem(0).get(0);
         double top = inBounds.getElem(0).get(1);
@@ -1778,9 +1778,8 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
                         if (color != isTranparent()) {
-                            paint.setColor(color);
-                            mCanvas.drawPoint(i, j, paint);
-                            bitmap.setPixel((int) (i - left), (int) (j - top), Color.WHITE);
+                            paint.setColor(Color.BLUE);
+                            mCanvas.drawLine(i, j, i+1, j+1, paint);
                             pixels++;
                         }
                     }
@@ -1790,6 +1789,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
         System.out.println("rect points : " + pixels);
 
-        System.gc();
+        //System.gc();
     }
 }
