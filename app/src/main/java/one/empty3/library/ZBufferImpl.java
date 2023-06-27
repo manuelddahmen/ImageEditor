@@ -49,7 +49,6 @@ import one.empty3.library.core.nurbs.Point3DS;
 import one.empty3.library.core.nurbs.RPv;
 import one.empty3.library.core.nurbs.ThickSurface;
 import one.empty3.pointset.PCont;
-
 /*__
  * * Classe de rendu graphique
  */
@@ -1760,8 +1759,16 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         double heightBox = bottom - top;
 
         int pixels = 0;
+/*
+        PointF pointF1 = FaceOverlayView.coordCanvas(mCanvas, bitmap, new PointF((float) left, (float) top));
+        PointF pointF2 = FaceOverlayView.coordCanvas(mCanvas, bitmap, new PointF((float) right, (float) bottom));
 
-        System.out.println("drawOnImage");
+        left   = pointF1.x;
+        top    = pointF1.y;
+        right  = pointF2.x;
+        bottom = pointF2.y;
+*/
+        //System.out.println("drawOnImage");
         for (int i = (int) left; i < right; i++) {
             for (int j = (int) top; j < bottom; j++) {
                 if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
@@ -1778,7 +1785,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
                         if (color != isTranparent()) {
-                            paint.setColor(Color.BLUE);
+                            paint.setColor(color);
                             mCanvas.drawLine(i, j, i+1, j+1, paint);
                             pixels++;
                         }
@@ -1787,7 +1794,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             }
         }
 
-        System.out.println("rect points : " + pixels);
+        //System.out.println("rect points : " + pixels);
 
         //System.gc();
     }

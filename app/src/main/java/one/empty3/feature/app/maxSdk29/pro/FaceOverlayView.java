@@ -221,7 +221,7 @@ import one.empty3.library.Polygon;
             int size = polygonContour.size();
             Point3D[] point3DS = new Point3D[size];
             for (int i = 0; i < polygonContour.size(); i += 1) {
-                PointF pointF = polygonContour.get(i);//coordCanvas(polygonContour.get(i));
+                PointF pointF = polygonContour.get(i);
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
@@ -300,6 +300,16 @@ import one.empty3.library.Polygon;
         });
         super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
     }
+    public double getScaleImageX() {
+        Rect destBounds = getDestBounds();
+        return (destBounds.right-destBounds.left)*1.0/mBitmap.getWidth();
+    }
+
+    public double getScaleImageY() {
+        Rect destBounds = getDestBounds();
+        return (destBounds.bottom-destBounds.top)*1.0/mBitmap.getHeight();
+    }
+
     public Rect getDestBounds() {
         double imageWidth = mBitmap.getWidth();
         double imageHeight = mBitmap.getHeight();
