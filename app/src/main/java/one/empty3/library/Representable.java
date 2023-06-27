@@ -666,7 +666,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         double width = right - left;
         double height = bottom - top;
         if (left>=0 && top>=0 && width > 0 && height > 0 && width + left < bitmap.getWidth() && height + top < bitmap.getHeight()) {
-            System.out.println("Cordinates in bounds");
+            //System.out.println("Cordinates in bounds");
             try {
 
                 Bitmap bitmap1 = Bitmap.createBitmap(bitmap, (int) left, (int) top, (int) width, (int) height);
@@ -676,7 +676,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 Point3D middle = Point3D.n(left + width / 2., top + height / 2., 0);
 
-                Camera camera = new Camera(Point3D.Z.mult(-Math.max(width, height)*2).plus(middle), middle, Point3D.Y);
+                Camera camera = new Camera(Point3D.Z.mult(-Math.max(width, height)).plus(middle), middle, Point3D.Y);
 
                 zBuffer.idzpp();
 
@@ -696,7 +696,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
                 zBuffer.draw(scene1);
 
 
-                System.err.println("drawOnCanvas" + boundingRect.toString());
+                //System.err.println("drawOnCanvas" + boundingRect.toString());
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
