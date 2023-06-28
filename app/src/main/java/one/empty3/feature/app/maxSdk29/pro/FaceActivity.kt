@@ -32,12 +32,12 @@ import java.io.IOException
 
         if(currentFile!=null) {
             if(currentBitmap==null)
-                currentBitmap = ImageIO.read(currentFile).bitmap
+                currentBitmap = ImageIO.read(currentFile).getBitmap()
+
+            Utils().loadImageInImageView(currentBitmap, faceOverlayView)
+
             faceOverlayView.setBitmap(currentBitmap);
         }
-
-
-        //requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_MEDIA_IMAGES), 4232403)
     }
 
     override fun onRequestPermissionsResult(

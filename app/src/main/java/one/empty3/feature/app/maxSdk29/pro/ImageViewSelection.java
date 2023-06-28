@@ -105,6 +105,15 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         });
 
     }
+    public void setImageBitmap3(Bitmap bm) {
+        boolean post = new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                setImageBitmap(bm);
+            }
+        });
+
+    }
 
     public void setPixels(@NotNull PixM pixM) {
         pixels = pixM;

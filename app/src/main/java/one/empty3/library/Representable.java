@@ -653,7 +653,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent, PointF pointF, double scale) {
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent, PointF pointF, PointF scale) {
         paint = new Paint();
         Scene scene1 = new Scene();
 
@@ -701,7 +701,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                zBuffer.drawOnImage(bitmap, zBuffer.image(), mCanvas, boundingRect, pointF, scale);
+                zBuffer.drawOnImage(bitmap, zBuffer.imageInverseX(), mCanvas, boundingRect, pointF, scale);
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
             }

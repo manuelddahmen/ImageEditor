@@ -516,6 +516,36 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         } else throw new UnsupportedOperationException("ZBufferImpl::image() :  Unexpected result.");
     }
 
+    public Bitmap imageInverseX() {
+        bi = null;
+        final AtomicReference<Bitmap> bi2 = new AtomicReference<>(
+                Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888, true)
+
+        );
+        while (bi2.get() == null) {
+            bi2.set(Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888, true));
+
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (bi2.get() != null) {
+
+            for (int i = 0; i < la; i++) {
+                for (int j = 0; j < ha; j++) {
+                    int elementCouleur = ime.getIME().getElementCouleur(i, j);
+                    bi2.get().setPixel(la-i-1, j, elementCouleur);
+
+                }
+            }
+            this.bi = new ECBufferedImage(bi2.get());
+            return bi.getBitmap();
+        } else throw new UnsupportedOperationException("ZBufferImpl::image() :  Unexpected result.");
+    }
+
     public ECBufferedImage imageInvX() {
         ECBufferedImage bi2 = new ECBufferedImage(la, ha);
         for (int i = 0; i < la; i++) {
@@ -1750,7 +1780,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
 
     public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas,
-                            StructureMatrix<Point3D> inBounds, PointF pointF, double scale) {
+                            StructureMatrix<Point3D> inBounds, PointF pointF, PointF scale) {
         paint.setColor(android.graphics.Color.BLUE);
 
         double left = inBounds.getElem(0).get(0);
@@ -1788,8 +1818,8 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
 
                         if (color != isTranparent()) {
-                            int i1 =(int)( pointF.x+i*scale);
-                            int j1 =(int)( pointF.y+j*scale);
+                            int i1 =(int)( pointF.x+i*scale.x);
+                            int j1 =(int)( pointF.y+j*scale.y);
 
                             paint.setColor(color);
                             mCanvas.drawLine(i1, j1, i1+1, j1+1, paint);
@@ -1802,6 +1832,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
         //System.out.println("rect points : " + pixels);
 
-        //System.gc();
+        System.gc();
     }
 }

@@ -164,7 +164,7 @@ import one.empty3.library.Polygon;
         }
         fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints());
         fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints());
-        fillPolygon(face.getContour(FaceContour.FACE).getPoints());
+        //fillPolygon(face.getContour(FaceContour.FACE).getPoints());
         fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints());
         fillPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints());
         fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints());
@@ -209,7 +209,7 @@ import one.empty3.library.Polygon;
  */
         paint.setColor(Color.GREEN);
         PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
-        mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
+        //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
     private void fillPolygon(List<PointF> polygonContour) {
@@ -280,17 +280,18 @@ import one.empty3.library.Polygon;
         return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale),
                 (int) ((int) (-(imageHeight / 2) * scale) + mCanvas.getHeight() / 2 + p.y * scale));
     }
-    public double getScale() {
+    public PointF getScale() {
         if (mCanvas == null)
-            return 0.0;
+            return new PointF(0,0);
         if (mBitmap == null)
-            return 0.0;
+            return new PointF(0,0);
 
         double viewWidth = mCanvas.getWidth();
         double viewHeight = mCanvas.getHeight();
         double imageWidth = mBitmap.getWidth();
         double imageHeight = mBitmap.getHeight();
-        double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
+        double scaleMin = Math.min((float) (viewWidth / imageWidth), (float) (viewHeight / imageHeight));
+        PointF scale = new PointF((float) scaleMin, (float) scaleMin);
         return scale;
     }
 
@@ -306,12 +307,12 @@ import one.empty3.library.Polygon;
                 PointF p1 = coordCanvas(new PointF(0, 0));
                 PointF p2 = coordCanvas(new PointF((float) imageWidth, (float) imageHeight));
                 Rect destBounds = new Rect((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
-                mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, null);
+                mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, paint);
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
             }
         });
-        super.setImageBitmap2(mCopy.copy(Bitmap.Config.ARGB_8888, true));
+        super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
     }
     public double getScaleImageX() {
         Rect destBounds = getDestBounds();
