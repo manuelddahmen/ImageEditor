@@ -227,7 +227,7 @@ import one.empty3.library.Polygon;
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
 
             System.out.println("Draw on canvas");
-            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK);
+            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, coordCanvas(new PointF(0f, 0f)), getScale());
         }
     }
 
@@ -279,6 +279,19 @@ import one.empty3.library.Polygon;
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
         return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale),
                 (int) ((int) (-(imageHeight / 2) * scale) + mCanvas.getHeight() / 2 + p.y * scale));
+    }
+    public double getScale() {
+        if (mCanvas == null)
+            return 0.0;
+        if (mBitmap == null)
+            return 0.0;
+
+        double viewWidth = mCanvas.getWidth();
+        double viewHeight = mCanvas.getHeight();
+        double imageWidth = mBitmap.getWidth();
+        double imageHeight = mBitmap.getHeight();
+        double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
+        return scale;
     }
 
     public void updateImage(Bitmap bm) {

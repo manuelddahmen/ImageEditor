@@ -25,6 +25,7 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -652,7 +653,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         this.vectors.setElem(orig, 3);
     }
 
-    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent) {
+    public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent, PointF pointF, double scale) {
         paint = new Paint();
         Scene scene1 = new Scene();
 
@@ -700,7 +701,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                zBuffer.drawOnImage(bitmap, zBuffer.image(), mCanvas, boundingRect);
+                zBuffer.drawOnImage(bitmap, zBuffer.image(), mCanvas, boundingRect, pointF, scale);
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
             }

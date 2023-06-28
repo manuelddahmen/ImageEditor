@@ -27,6 +27,7 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.media.Image;
 
 import java.io.File;
@@ -1748,7 +1749,8 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     }
 
 
-    public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas, StructureMatrix<Point3D> inBounds) {
+    public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas,
+                            StructureMatrix<Point3D> inBounds, PointF pointF, double scale) {
         paint.setColor(android.graphics.Color.BLUE);
 
         double left = inBounds.getElem(0).get(0);
@@ -1784,9 +1786,13 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     if (!ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
+
                         if (color != isTranparent()) {
+                            int i1 =(int)( pointF.x+i*scale);
+                            int j1 =(int)( pointF.y+j*scale);
+
                             paint.setColor(color);
-                            mCanvas.drawLine(i, j, i+1, j+1, paint);
+                            mCanvas.drawLine(i1, j1, i1+1, j1+1, paint);
                             pixels++;
                         }
                     }
