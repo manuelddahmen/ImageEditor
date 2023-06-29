@@ -42,6 +42,7 @@ import java.util.logging.Logger;
 
 import javaAnd.awt.Color;
 import javaAnd.awt.Point;
+import one.empty3.feature20220726.PixM;
 import one.empty3.feature20220726.shape.Rectangle;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
@@ -537,7 +538,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
             for (int i = 0; i < la; i++) {
                 for (int j = 0; j < ha; j++) {
                     int elementCouleur = ime.getIME().getElementCouleur(i, j);
-                    bi2.get().setPixel(la-i-1, j, elementCouleur);
+                    bi2.get().setPixel(i, j, elementCouleur);
 
                 }
             }
@@ -1781,6 +1782,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
     public void drawOnImage(Bitmap bitmap, Bitmap renderedImage, Canvas mCanvas,
                             StructureMatrix<Point3D> inBounds, PointF pointF, PointF scale) {
+
         paint.setColor(android.graphics.Color.BLUE);
 
         double left = inBounds.getElem(0).get(0);
@@ -1801,8 +1803,8 @@ public class ZBufferImpl extends Representable implements ZBuffer {
         bottom = pointF2.y;
 */
         //System.out.println("drawOnImage");
-        for (int i = (int) left; i < right; i++) {
-            for (int j = (int) top; j < bottom; j++) {
+        for (int i = (int) left; i <= right; i++) {
+            for (int j = (int) top; j <= bottom; j++) {
                 if (i < bitmap.getWidth() && j < bitmap.getHeight()) {
                     double width = right - left;
                     double height = bottom - top;
@@ -1813,7 +1815,9 @@ public class ZBufferImpl extends Representable implements ZBuffer {
                     int xOrigin = (int) (rX * (renderedImage.getWidth()));
                     int yOrigin = (int) (rY * (renderedImage.getHeight()));
 
-                    if (!ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
+                    if (xOrigin>=0 && xOrigin<renderedImage.getWidth()
+                        &&yOrigin>=0 && yOrigin<renderedImage.getHeight() &&
+                            !ime.getIME().getElementPoint(xOrigin, yOrigin).equals(INFINITY)) {
                         int color = renderedImage.getPixel(xOrigin, yOrigin);
 
 
@@ -1832,6 +1836,6 @@ public class ZBufferImpl extends Representable implements ZBuffer {
 
         //System.out.println("rect points : " + pixels);
 
-        System.gc();
     }
+
 }

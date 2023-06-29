@@ -56,7 +56,11 @@
 package one.empty3.library;
 
 import android.graphics.Color;
+import android.graphics.PointF;
 
+import java.util.Arrays;
+
+import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.nurbs.SurfaceElem;
 
 
@@ -183,5 +187,58 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         //System.out.println("Polygon ("+getPoints().getData1d().size()+")bounds: "+boundRect2d);
 
         return boundRect2d;
+    }
+
+
+    public PixM fillPolygon2D(Polygon polygonXy, int transparent, double prof, PointF position, double scale) {
+
+
+        StructureMatrix<Point3D> boundRect2d = polygonXy.getBoundRect2d();
+
+
+        double left = boundRect2d.getElem(0).get(0);
+        double top = boundRect2d.getElem(0).get(1);
+        double right = boundRect2d.getElem(1).get(0);
+        double bottom = boundRect2d.getElem(1).get(1);
+        double widthBox = right - left;
+        double heightBox = bottom - top;
+
+        PixM pixM = new PixM((int) left, (int) top);
+
+        int[] currentColor = new int[(int) (bottom-top)];
+        Arrays.fill(currentColor, transparent);
+
+        for (int i = 0; i < polygonXy.getPoints().getData1d().size(); i++) {
+            Point3D p1 = polygonXy.getPoints().getData1d().get(i);
+            Point3D p2 = polygonXy.getPoints().getData1d().get((i + 1) % polygonXy.getPoints().getData1d().size());
+            pixM.plotCurve(new LineSegment(new Point3D(p1.get(0)-left, p1.get(1)-top, 0.0), new Point3D(p2.get(0)-left, p2.get(1)-top, 0.0)),
+                    new ColorTexture(javaAnd.awt.Color.WHITE));
+        }
+        for(double i=left; i<right; i++)  {
+            for(double j=top; j<bottom; j++) {
+                int xMap = (int) (i-left);
+                int yMap = (int) (j-top);
+
+                Point3D color = pixM.getP(xMap, yMap);
+
+                int imageColor = Lumiere.getInt(new double[]{color.get(0), color.get(1), color.get(2)});
+
+                int polygonColor = polygonXy.texture().getColorAt((i - left) / (right - left), (j - top) / (bottom - top));
+
+                if(imageColor==polygonColor && (currentColor[(int) (j-top)]!=imageColor||currentColor[(int) (j-top)]==-1)) {
+                    currentColor[(int) (j-top)] = imageColor;
+                }
+
+                if(imageColor==polygonColor) {
+                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(imageColor));
+                }
+
+                if(imageColor!=polygonColor&&imageColor==transparent) {
+                    currentColor[(int) (j-top)] = transparent;
+                }
+
+            }
+        }
+        return pixM;
     }
 }

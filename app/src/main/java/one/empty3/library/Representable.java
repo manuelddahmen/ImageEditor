@@ -677,7 +677,15 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 Point3D middle = Point3D.n(left + width / 2., top + height / 2., 0);
 
-                Camera camera = new Camera(Point3D.Z.mult(-Math.max(width, height)).plus(middle), middle, Point3D.Y);
+                double v = -Math.max(width, height);
+                Camera camera = new Camera(Point3D.Z.mult(v)
+                        .plus(middle), middle, Point3D.Y.mult(-1));
+                camera.declareProperties();
+
+                double angleX = Math.asin((width/2)/Math.sqrt((width/2)*(width/2)+v*v));
+                double angleY = Math.asin((height/2)/Math.sqrt((height/2)*(height/2)+v*v));
+
+                camera.angleXY(angleX, angleY);
 
                 zBuffer.idzpp();
 
@@ -701,7 +709,8 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
 
                 //inBounds = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                zBuffer.drawOnImage(bitmap, zBuffer.imageInverseX(), mCanvas, boundingRect, pointF, scale);
+                zBuffer.drawOnImage(bitmap, zBuffer.image(),
+                        mCanvas, boundingRect, pointF, scale);
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
             }

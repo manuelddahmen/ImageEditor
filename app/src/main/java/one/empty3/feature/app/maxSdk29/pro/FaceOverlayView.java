@@ -28,9 +28,11 @@ import com.google.mlkit.vision.face.FaceLandmark;
 import java.util.List;
 import java.util.Objects;
 
+import one.empty3.feature20220726.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
+import one.empty3.library.StructureMatrix;
 
 @ExperimentalCamera2Interop public class FaceOverlayView extends ImageViewSelection {
     private List<Face> mFaces;
@@ -226,8 +228,21 @@ import one.empty3.library.Polygon;
             }
             Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
 
+            StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
+
             System.out.println("Draw on canvas");
-            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, coordCanvas(new PointF(0f, 0f)), getScale());
+
+            PointF point0 = coordCanvas(new PointF(0f, 0f));
+
+            PointF scale = getScale();
+
+            PixM pixM = polygon.fillPolygon2D(polygon, Color.BLACK, 0.0, point0, scale.x);
+            Bitmap bitmap = pixM.getBitmap();
+            mCanvas.drawBitmap(bitmap, (float)(double) (point0.x+scale.x*(double)boundRect2d.getElem(0).get(0)),
+                    (float)(double) (point0.y+scale.y*(double)boundRect2d.getElem(0).get(0)),
+                    paint);
+
+            polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);
         }
     }
 
