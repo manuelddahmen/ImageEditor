@@ -236,12 +236,20 @@ import one.empty3.library.StructureMatrix;
 
             PointF scale = getScale();
 
-            PixM pixM = polygon.fillPolygon2D(polygon, Color.BLACK, 0.0, point0, scale.x);
-            Bitmap bitmap = pixM.getBitmap();
-            mCanvas.drawBitmap(bitmap, (float)(double) (point0.x+scale.x*(double)boundRect2d.getElem(0).get(0)),
-                    (float)(double) (point0.y+scale.y*(double)boundRect2d.getElem(0).get(0)),
-                    paint);
-
+            {
+                PixM pixM = polygon.fillPolygon2D(Color.BLACK, 0.0, point0, scale.x);
+                Bitmap bitmap = pixM.getBitmap();
+                if (bitmap != null) {
+                    float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
+                    float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
+                    float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));;
+                    float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));;
+                    float w = x2-x1;
+                    float h = y2-y1;
+                    mCanvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
+                            new Rect((int) x1, (int) y1, (int) w, (int) h), paint);
+                }
+            }
             polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);
         }
     }

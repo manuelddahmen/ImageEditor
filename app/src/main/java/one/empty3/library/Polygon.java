@@ -190,10 +190,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     }
 
 
-    public PixM fillPolygon2D(Polygon polygonXy, int transparent, double prof, PointF position, double scale) {
+    public PixM fillPolygon2D(int transparent, double prof, PointF position, double scale) {
 
 
-        StructureMatrix<Point3D> boundRect2d = polygonXy.getBoundRect2d();
+        StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
 
         double left = boundRect2d.getElem(0).get(0);
@@ -203,14 +203,14 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         double widthBox = right - left;
         double heightBox = bottom - top;
 
-        PixM pixM = new PixM((int) left, (int) top);
+        PixM pixM = new PixM((int) (right-left), (int) (bottom-top));
 
         int[] currentColor = new int[(int) (bottom-top)];
         Arrays.fill(currentColor, transparent);
 
-        for (int i = 0; i < polygonXy.getPoints().getData1d().size(); i++) {
-            Point3D p1 = polygonXy.getPoints().getData1d().get(i);
-            Point3D p2 = polygonXy.getPoints().getData1d().get((i + 1) % polygonXy.getPoints().getData1d().size());
+        for (int i = 0; i < this.getPoints().getData1d().size(); i++) {
+            Point3D p1 = this.getPoints().getData1d().get(i);
+            Point3D p2 = this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size());
             pixM.plotCurve(new LineSegment(new Point3D(p1.get(0)-left, p1.get(1)-top, 0.0), new Point3D(p2.get(0)-left, p2.get(1)-top, 0.0)),
                     new ColorTexture(javaAnd.awt.Color.WHITE));
         }
@@ -223,7 +223,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 int imageColor = Lumiere.getInt(new double[]{color.get(0), color.get(1), color.get(2)});
 
-                int polygonColor = polygonXy.texture().getColorAt((i - left) / (right - left), (j - top) / (bottom - top));
+                int polygonColor = this.texture().getColorAt((i - left) / (right - left), (j - top) / (bottom - top));
 
                 if(imageColor==polygonColor && (currentColor[(int) (j-top)]!=imageColor||currentColor[(int) (j-top)]==-1)) {
                     currentColor[(int) (j-top)] = imageColor;
