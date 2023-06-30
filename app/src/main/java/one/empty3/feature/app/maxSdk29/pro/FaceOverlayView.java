@@ -230,24 +230,28 @@ import one.empty3.library.StructureMatrix;
 
             StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
 
-            System.out.println("Draw on canvas");
+            //System.out.println("Draw on canvas");
 
             PointF point0 = coordCanvas(new PointF(0f, 0f));
 
             PointF scale = getScale();
 
             {
-                PixM pixM = polygon.fillPolygon2D(Color.BLACK, 0.0, point0, scale.x);
-                Bitmap bitmap = pixM.getBitmap();
-                if (bitmap != null) {
-                    float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
-                    float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
-                    float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));;
-                    float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));;
-                    float w = x2-x1;
-                    float h = y2-y1;
-                    mCanvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
-                            new Rect((int) x1, (int) y1, (int) w, (int) h), paint);
+                PixM pixM = polygon.fillPolygon2D(mCanvas, Color.BLACK, 0.0, point0, scale.x);
+                if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
+                    Bitmap bitmap = pixM.getBitmap();
+                    if (bitmap != null) {
+                        float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
+                        float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
+                        float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));
+                        ;
+                        float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));
+                        ;
+                        float w = x2 - x1;
+                        float h = y2 - y1;
+//                        if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
+//                            mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, true), (int) x1, (int) y1, paint);
+                    }
                 }
             }
             polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);

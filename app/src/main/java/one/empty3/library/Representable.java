@@ -83,7 +83,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     private int RENDERING_DEFAULT = 0;
     private Map<String, StructureMatrix> declaredDataStructure;// = Collections.synchronizedMap(new HashMap());
     private Map<String, StructureMatrix> declaredLists;//= new HashMap<>();
-    private Paint paint = new Paint();
+    protected Paint paint = new Paint();
 
     public Representable() {
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
