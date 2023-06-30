@@ -52,10 +52,6 @@
 
 package one.empty3.library;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import android.graphics.Color;
 
 /*__
@@ -109,7 +105,7 @@ public abstract class Lumiere extends Representable {
     }
     public static double[] getDoubles(int c, double[] res) {
         for (int i = 0; i < 3; i++) {
-            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff)/255.;
+            res[i] = (((c & (0xff << ((2 - i) * 8))) >> ((2 - i) * 8))& 0xff)/256.;
         }
         return res;
     }

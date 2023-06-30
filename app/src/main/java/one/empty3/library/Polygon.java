@@ -55,18 +55,22 @@
  */
 package one.empty3.library;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+
 import java.util.Arrays;
 
+import one.empty3.feature.app.maxSdk29.pro.FaceOverlayView;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.nurbs.SurfaceElem;
 
 
-/*__
+@ExperimentalCamera2Interop /*__
  * @author Manuel
  */
 public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
@@ -192,9 +196,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     }
 
 
-    public PixM fillPolygon2D(Canvas canvas, int transparent, double prof, PointF position, double scale) {
+    public PixM fillPolygon2D(Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
         int pixels = 0;
 
+        int colorTemp = this.texture().getColorAt(0.5, 0.5);
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
@@ -211,6 +216,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
 
+        int count = 0;
+
         int[] currentColor = new int[(int) (heightBox)];
         Arrays.fill(currentColor, transparent);
 
@@ -218,13 +225,15 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
             Point3D p1 = this.getPoints().getData1d().get(i);
             Point3D p2 = this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size());
             pixM.plotCurve(new LineSegment(new Point3D(p1.get(0)-left, p1.get(1)-top, 0.0), new Point3D(p2.get(0)-left, p2.get(1)-top, 0.0)),
-                    texture());
+                    new ColorTexture(colorTemp));
         }
 
         paint = new Paint();
 
-        for(double j=top; j<bottom; j++) {
-            for(double i=left; i<right; i++)  {
+        System.out.println("filLPolygon2D: (" +(right-left)+", "+ (bottom-top)+")s");
+
+        for(double i=left; i<right; i++)  {
+            for(double j=top; j<bottom; j++) {
                 int xMap = (int) (i-left);
                 int yMap = (int) (j-top);
 
@@ -232,27 +241,36 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 int imageColor = Lumiere.getInt(new double[]{color.get(0), color.get(1), color.get(2)});
 
-                int polygonColor = this.texture().getColorAt((i - left) / (right - left), (j - top) / (bottom - top));
+                int polygonColor = this.texture().getColorAt(xMap / (right - left), yMap / (bottom - top));
 
-                if(imageColor==polygonColor &&currentColor[(int) (j-top)]==transparent) {
-                    currentColor[(int) (j-top)] = imageColor;
+                if(imageColor==colorTemp &&currentColor[(int) yMap]==colorTemp) {
+                    currentColor[(int) yMap] = transparent;
+                } else if(imageColor==colorTemp &&currentColor[(int) yMap]!=colorTemp) {
+                    currentColor[(int) yMap] = colorTemp;
                 }
 
-                if(currentColor[(int) (j-top)] == polygonColor) {
-                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(imageColor));
+                if(currentColor[(int) yMap] == colorTemp) {
+                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(polygonColor));
                     paint.setColor(polygonColor);
-                    canvas.drawLine((float) i, (float) j, (float) i, (float) j, paint);
+
+                    float i1 = (float)(i+left);
+                    float j1 = (float)(j+top);
+
+                    PointF p = FaceOverlayView.coordCanvas(canvas, bitmap, new PointF((float) i, (float) j));
+
+                    i1 = (float) (i*scale+position.x);
+                    j1 = (float) (j*scale+position.y);
+
+                    canvas.drawLine((float)i1, (float) j1, (float) i1+1, (float) j1, paint);
                     pixels++;
                 }
 
-                if(imageColor!=polygonColor &&currentColor[(int) (j-top)]==polygonColor) {
-                    currentColor[(int) (j-top)] = transparent;
-                }
 
+                count++;
             }
         }
 
-        System.out.println("Points drawn : " + pixels + "fillPolygon");
+        System.out.println("Points count : "+count+" | Points drawn : " + pixels + "fillPolygon");
 
         return pixM;
     }

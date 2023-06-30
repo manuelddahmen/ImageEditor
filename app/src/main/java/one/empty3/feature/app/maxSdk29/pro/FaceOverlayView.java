@@ -226,7 +226,7 @@ import one.empty3.library.StructureMatrix;
                 PointF pointF = polygonContour.get(i);
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.rgb(0, 0, 255)));
+            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.BLUE));
 
             StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
 
@@ -237,20 +237,29 @@ import one.empty3.library.StructureMatrix;
             PointF scale = getScale();
 
             {
-                PixM pixM = polygon.fillPolygon2D(mCanvas, Color.BLACK, 0.0, point0, scale.x);
+                PixM pixM = polygon.fillPolygon2D(mCanvas, mBitmap, Color.BLACK, 0.0, point0, scale.x);
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
                     Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
-                        float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
-                        float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
-                        float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));
-                        ;
-                        float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));
-                        ;
+                        //float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
+                        //float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
+                        //float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));
+                        //float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));
+
+                        PointF p1 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(0).get(0),
+                                (float)(double)boundRect2d.getElem(0).get(1)));
+                        PointF p2 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(1).get(0),
+                                (float)(double)boundRect2d.getElem(1).get(1)));
+
+                        float x1 = p1.x;
+                        float y1 = p1.y;
+                        float x2 = p2.x;
+                        float y2 = p2.y;
+
                         float w = x2 - x1;
                         float h = y2 - y1;
                         if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
-                            ;//mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, true), (int) x1, (int) y1, paint);
+                            ;//mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, false), (int) x1, (int) y1, paint);
                     }
                 }
             }
@@ -306,6 +315,20 @@ import one.empty3.library.StructureMatrix;
         double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
         return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale),
                 (int) ((int) (-(imageHeight / 2) * scale) + mCanvas.getHeight() / 2 + p.y * scale));
+    }
+    public static PointF coordCanvas(Canvas canvas, Bitmap bitmap, PointF p) {
+        if (canvas == null)
+            return p;
+        if (bitmap == null)
+            return p;
+
+        double viewWidth = canvas.getWidth();
+        double viewHeight = canvas.getHeight();
+        double imageWidth = bitmap.getWidth();
+        double imageHeight = bitmap.getHeight();
+        double scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight);
+        return new PointF((int) ((int) (-(imageWidth / 2) * scale) + canvas.getWidth() / 2 + p.x * scale),
+                (int) ((int) (-(imageHeight / 2) * scale) + canvas.getHeight() / 2 + p.y * scale));
     }
     public PointF getScale() {
         if (mCanvas == null)

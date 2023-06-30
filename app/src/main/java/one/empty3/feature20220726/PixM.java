@@ -586,8 +586,8 @@ public class PixM extends MBitmap {
     public void plotCurve(ParametricCurve curve, ITexture texture) {
 
         double[] rgba = new double[getCompCount()];
-        for (double t = 0; t < 1.0; t += 0.0001) {
-            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+        for (double t = 0; t < 1.0; t += 0.001) {
+            Lumiere.getDoubles(Color.valueOf(texture.getColorAt(t, 0.)).toArgb(), rgba);
             Point3D p = curve.calculerPoint3D(t);
             for (int c = 0; c < 3; c++) {
                 setCompNo(c);
