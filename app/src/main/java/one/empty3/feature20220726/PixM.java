@@ -22,9 +22,6 @@ package one.empty3.feature20220726;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +30,6 @@ import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
 public class PixM extends MBitmap {
@@ -590,7 +586,7 @@ public class PixM extends MBitmap {
     public void plotCurve(ParametricCurve curve, ITexture texture) {
 
         double[] rgba = new double[getCompCount()];
-        for (double t = 0; t < 1.0; t += 0.001) {
+        for (double t = 0; t < 1.0; t += 0.0001) {
             Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
             Point3D p = curve.calculerPoint3D(t);
             for (int c = 0; c < 3; c++) {

@@ -249,8 +249,8 @@ import one.empty3.library.StructureMatrix;
                         ;
                         float w = x2 - x1;
                         float h = y2 - y1;
-//                        if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
-//                            mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, true), (int) x1, (int) y1, paint);
+                        if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
+                            ;//mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, true), (int) x1, (int) y1, paint);
                     }
                 }
             }

@@ -218,7 +218,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
             Point3D p1 = this.getPoints().getData1d().get(i);
             Point3D p2 = this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size());
             pixM.plotCurve(new LineSegment(new Point3D(p1.get(0)-left, p1.get(1)-top, 0.0), new Point3D(p2.get(0)-left, p2.get(1)-top, 0.0)),
-                    new ColorTexture(javaAnd.awt.Color.WHITE));
+                    texture());
         }
 
         paint = new Paint();
@@ -234,7 +234,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 int polygonColor = this.texture().getColorAt((i - left) / (right - left), (j - top) / (bottom - top));
 
-                if(imageColor==polygonColor &&currentColor[(int) (j-top)]==-1) {
+                if(imageColor==polygonColor &&currentColor[(int) (j-top)]==transparent) {
                     currentColor[(int) (j-top)] = imageColor;
                 }
 
@@ -245,7 +245,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                     pixels++;
                 }
 
-                if(imageColor==polygonColor &&currentColor[(int) (j-top)]==polygonColor) {
+                if(imageColor!=polygonColor &&currentColor[(int) (j-top)]==polygonColor) {
                     currentColor[(int) (j-top)] = transparent;
                 }
 
