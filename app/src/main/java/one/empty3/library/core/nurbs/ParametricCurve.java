@@ -137,7 +137,7 @@ public class ParametricCurve extends Representable {
     }
 
     public StructureMatrix<Double> getIncrU() {
-        Double incr = 1.0;
+        Double incr = 0.1;
         if (parameters.isGlobal()) {
             incr = parameters.getIncrU();
         } else {

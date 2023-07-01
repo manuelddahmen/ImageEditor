@@ -67,6 +67,7 @@ import java.util.Arrays;
 
 import one.empty3.feature.app.maxSdk29.pro.FaceOverlayView;
 import one.empty3.feature20220726.PixM;
+import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.SurfaceElem;
 
 
@@ -176,18 +177,18 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
     public StructureMatrix<Point3D> getBoundRect2d() {
         StructureMatrix<Point3D> boundRect2d = new StructureMatrix<>(1, Point3D.class);
-        boundRect2d.setElem(new Point3D( 10000d,  10000d, 0d), 0);
+        boundRect2d.setElem(new Point3D(10000d, 10000d, 0d), 0);
         boundRect2d.setElem(new Point3D(-10000d, -10000d, 0d), 1);
         for (Point3D point3D : getPoints().getData1d()) {
             //System.out.println("currentPoint: point3D"+point3D);
             //System.out.println(point3D);
-            if(point3D.get(0)<=boundRect2d.getElem(0).get(0))
+            if (point3D.get(0) <= boundRect2d.getElem(0).get(0))
                 boundRect2d.getElem(0).set(0, (double) point3D.get(0));
-            if(point3D.get(1)<=boundRect2d.getElem(0).get(1))
+            if (point3D.get(1) <= boundRect2d.getElem(0).get(1))
                 boundRect2d.getElem(0).set(1, (double) point3D.get(1));
-            if(point3D.get(0)>=boundRect2d.getElem(1).get(0))
+            if (point3D.get(0) >= boundRect2d.getElem(1).get(0))
                 boundRect2d.getElem(1).set(0, (double) point3D.get(0));
-            if(point3D.get(1)>=boundRect2d.getElem(1).get(1))
+            if (point3D.get(1) >= boundRect2d.getElem(1).get(1))
                 boundRect2d.getElem(1).set(1, (double) point3D.get(1));
         }
         //System.out.println("Polygon ("+getPoints().getData1d().size()+")bounds: "+boundRect2d);
@@ -195,6 +196,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         return boundRect2d;
     }
 
+    private Point3D getPosition(Point3D p, double scale, PointF position) {
+        return new Point3D(p.get(0) * scale + position.x, p.get(1) * scale + position.y, 0.0);
+    }
 
     public PixM fillPolygon2D(Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
         int pixels = 0;
@@ -203,6 +207,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
+        boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
+        boundRect2d.setElem(getPosition(boundRect2d.getElem(1), scale, position), 1);
 
         double left = boundRect2d.getElem(0).get(0);
         double top = boundRect2d.getElem(0).get(1);
@@ -211,7 +217,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         double widthBox = right - left;
         double heightBox = bottom - top;
 
-        if(!(widthBox>0 && heightBox>0))
+        if (!(widthBox > 0 && heightBox > 0))
             return null;
 
         PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
@@ -220,22 +226,25 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         int[] currentColor = new int[(int) (heightBox)];
         Arrays.fill(currentColor, transparent);
-
+        //boolean[] isIn = new boolean[(int) (heightBox)];
+        //Arrays.fill(isIn, false);
         for (int i = 0; i < this.getPoints().getData1d().size(); i++) {
-            Point3D p1 = this.getPoints().getData1d().get(i);
-            Point3D p2 = this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size());
-            pixM.plotCurve(new LineSegment(new Point3D(p1.get(0)-left, p1.get(1)-top, 0.0), new Point3D(p2.get(0)-left, p2.get(1)-top, 0.0)),
-                    new ColorTexture(colorTemp));
+            Point3D p1 = getPosition(this.getPoints().getData1d().get(i), scale, position);
+            Point3D p2 = getPosition(this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size()), scale, position);
+            ParametricCurve curve = new LineSegment(new Point3D(p1.get(0) - left, p1.get(1) - top, 0.0), new Point3D(p2.get(0) - left, p2.get(1) - top, 0.0));
+            curve.texture(new ColorTexture(colorTemp));
+            curve.setIncrU(0.1);
+            pixM.plotCurve(curve, new ColorTexture(colorTemp));
         }
 
         paint = new Paint();
 
-        System.out.println("filLPolygon2D: (" +(right-left)+", "+ (bottom-top)+")s");
+        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
-        for(double i=left; i<right; i++)  {
-            for(double j=top; j<bottom; j++) {
-                int xMap = (int) (i-left);
-                int yMap = (int) (j-top);
+        for (double i = left; i < right; i++) {
+            for (double j = top; j < bottom; j++) {
+                int xMap = (int) (i - left);
+                int yMap = (int) (j - top);
 
                 Point3D color = pixM.getP(xMap, yMap);
 
@@ -243,26 +252,39 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 int polygonColor = this.texture().getColorAt(xMap / (right - left), yMap / (bottom - top));
 
-                if(imageColor==colorTemp &&currentColor[(int) yMap]==colorTemp) {
-                    currentColor[(int) yMap] = transparent;
-                } else if(imageColor==colorTemp &&currentColor[(int) yMap]!=colorTemp) {
-                    currentColor[(int) yMap] = colorTemp;
-                }
+                if(yMap>= currentColor.length)
+                    continue;
 
-                if(currentColor[(int) yMap] == colorTemp) {
+                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp) {
+                    currentColor[(int) yMap] = transparent;
+                    //isIn[yMap] = false;
+                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent) {
+                    currentColor[(int) yMap] = colorTemp;
+                    //isIn[yMap] = true;
+                } /*else if(imageColor==colorTemp) {
+                    isIn[(yMap)] = true;
+                } else if(imageColor!=colorTemp) {
+                    isIn[(yMap)] = false;
+                }*/
+
+
+
+                if (currentColor[(int) yMap] == colorTemp/* && isIn[(int)yMap]*/) {
                     pixM.setValues(xMap, yMap, Lumiere.getDoubles(polygonColor));
                     paint.setColor(polygonColor);
 
-                    float i1 = (float)(i+left);
-                    float j1 = (float)(j+top);
+                    float i1 = (float) (i);
+                    float j1 = (float) (j);
 
                     PointF p = FaceOverlayView.coordCanvas(canvas, bitmap, new PointF((float) i, (float) j));
 
-                    i1 = (float) (i*scale+position.x);
-                    j1 = (float) (j*scale+position.y);
-
-                    canvas.drawLine((float)i1, (float) j1, (float) i1+1, (float) j1, paint);
-                    pixels++;
+                    /*i1 = (float) (i * scale + position.x);
+                    j1 = (float) (j * scale + position.y);
+*/
+                    if (i1 < canvas.getWidth() - 1 && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
+                        canvas.drawLine((float) i1, (float) j1, (float) i1 + 1, (float) j1, paint);
+                        pixels++;
+                    }
                 }
 
 
@@ -270,7 +292,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
             }
         }
 
-        System.out.println("Points count : "+count+" | Points drawn : " + pixels + "fillPolygon");
+        System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
         return pixM;
     }

@@ -65,7 +65,16 @@ Now effects thumbnails preview
 Stable save/load picture on Pause/Resume (error correction no 1)
 Faces: try to show Landmarks. Adjusting photo in ImageView
 Implements methods for drawing 3D-shapes from Empty3-library-3d and Transparency.
-PixM char -> double (?) FIX#1
+PixM char -> double (?) FIX#9
+TextActivity : changes.
+ChooseEffectActivity2: only IdentNullProcess works.
+Face contours
+ZBufferImpl Java implementation #1
+Try to use ZBufferImpl 3D drawer.
+First drawn polygons.
+In place subimages
+Try to fill polygons with colors #2
+
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -157,5 +166,13 @@ Now effects thumbnails preview
 Stable save/load picture on Pause/Resume (error correction no 1)
 Faces: try to show Landmarks. Adjusting photo in ImageView
 Implements methods for drawing 3D-shapes from Empty3-library-3d and Transparency.
-PixM char -> double (?) FIX#1
+PixM char -> double (?) FIX#9
+TextActivity : changes.
+ChooseEffectActivity2: only IdentNullProcess works.
+Face contours
+ZBufferImpl Java implementation #1
+Try to use ZBufferImpl 3D drawer.
+First drawn polygons.
+In place subimages
+Try to fill polygons with colors #2
 </fr-FR>
