@@ -38,7 +38,7 @@
             android:enableOnBackInvokedCallback="true"
             tools:targetApi="tiramisu">
         <activity android:name=".VisualFaceEffects"
-                android:exported="true"
+                android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Visual Effects"
                 android:theme="@style/Theme.FeatureAppmain">

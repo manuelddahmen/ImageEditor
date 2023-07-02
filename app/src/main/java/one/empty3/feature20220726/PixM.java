@@ -586,16 +586,31 @@ public class PixM extends MBitmap {
     public void plotCurve(ParametricCurve curve, ITexture texture) {
 
         double[] rgba = new double[getCompCount()];
-        for (double t = curve.getStartU(); t < curve.getEndU(); t += curve.getIncrU().getElem()) {
+        double t;
+        for (t = curve.getStartU(); t < curve.getEndU(); t += curve.getIncrU().getElem()) {
             Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
-            for (double t1 = t; t1 < t+curve.getIncrU().getElem(); t1+= 0.001) {
+            double t1;
+            for (t1 = t; t1 < t+curve.getIncrU().getElem(); t1+= 0.001) {
                 Point3D p = curve.calculerPoint3D(t1);
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
                     set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
                 }
             }
+            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+            Point3D p = curve.calculerPoint3D(t+curve.getIncrU().getElem());
+            for (int c = 0; c < 3; c++) {
+                setCompNo(c);
+                set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
+            }
         }
+        Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+        Point3D p = curve.calculerPoint3D(curve.getEndU());
+        for (int c = 0; c < 3; c++) {
+            setCompNo(c);
+            set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
+        }
+
     }
 
     public void plotCurve(ParametricCurve curve, Color color, int x, int y) {

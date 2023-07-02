@@ -199,6 +199,24 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         return new Point3D(p.get(0) * scale + position.x, p.get(1) * scale + position.y, 0.0);
     }
 
+    public boolean leftToRightScanPixM(PixM pixM, int x, int y) {
+        boolean foundLeft = false;
+        boolean foundRight = false;
+        if(x>=0 && x<pixM.getColumns()) {
+            for(int i=0; i<x && !foundLeft; i++) {
+                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+                    foundLeft = true;
+                }
+            }
+            for(int i = x; i<pixM.getColumns() && !foundRight; i++) {
+                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+                    foundRight = true;
+                }
+            }
+        }
+        return !(foundLeft&&!foundRight) || (foundLeft&&foundRight) && !(!foundLeft&&!foundRight);
+    }
+
     public PixM fillPolygon2D(Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
         int pixels = 0;
 
@@ -225,8 +243,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         int[] currentColor = new int[(int) (heightBox+1)];
         Arrays.fill(currentColor, transparent);
-        boolean [] histFirst = new boolean[(int)(heightBox+1)];
-        Arrays.fill(histFirst, true);
 
         int size = this.getPoints().getData1d().size();
         for (int i = 0; i < size; i++) {
@@ -253,7 +269,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 double[] color = pixM.getValues(xMap, yMap);
 
+                double[] colorP1 = pixM.getValues(xMap+1, yMap);
+
                 int imageColor = Lumiere.getInt(color);
+                int imageColorP1 = Lumiere.getInt(colorP1);
 
                 int polygonColor = this.texture().getColorAt(xMap / (right - left), yMap / (bottom - top));
 
@@ -261,13 +280,13 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                     continue;
                 }
 
-                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp /*&& histFirst[(int)yMap]*/) {
+
+                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp && imageColorP1!=colorTemp) {
                     currentColor[(int) yMap] = transparent;
-                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent /*&& !histFirst[(int)yMap]*/) {
+                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent && imageColorP1!=colorTemp) {
                     currentColor[(int) yMap] = colorTemp;
-                    histFirst[(int)yMap] = false;
-                }
-                if (currentColor[(int) yMap] == colorTemp) {
+                } else if (currentColor[(int) yMap] == colorTemp  &&
+                        leftToRightScanPixM(pixM, xMap, yMap)) {
                     pixM.setValues(xMap, yMap, Lumiere.getDoubles(colorTemp));
 
                     float i1 = (float) (i);

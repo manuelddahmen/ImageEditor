@@ -38,6 +38,7 @@ import java.io.IOException
 
             faceOverlayView.setBitmap(currentBitmap);
         }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -66,6 +67,9 @@ import java.io.IOException
                 }
             }
         }
+        val button = findViewById<Button>(R.id.camera_preview_video)
+
+        button.performClick()
     }
 
 }
