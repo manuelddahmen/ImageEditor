@@ -65,7 +65,6 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.Arrays;
 
-import one.empty3.feature.app.maxSdk29.pro.FaceOverlayView;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.SurfaceElem;
@@ -224,13 +223,15 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         int count = 0;
 
-        int[] currentColor = new int[(int) (heightBox)];
+        int[] currentColor = new int[(int) (heightBox+1)];
         Arrays.fill(currentColor, transparent);
-        //boolean[] isIn = new boolean[(int) (heightBox)];
-        //Arrays.fill(isIn, false);
-        for (int i = 0; i < this.getPoints().getData1d().size(); i++) {
-            Point3D p1 = getPosition(this.getPoints().getData1d().get(i), scale, position);
-            Point3D p2 = getPosition(this.getPoints().getData1d().get((i + 1) % this.getPoints().getData1d().size()), scale, position);
+        boolean [] histFirst = new boolean[(int)(heightBox+1)];
+        Arrays.fill(histFirst, true);
+
+        int size = this.getPoints().getData1d().size();
+        for (int i = 0; i < size; i++) {
+            Point3D p1 = getPosition(this.getPoints().getData1d().get((i+size)%size), scale, position);
+            Point3D p2 = getPosition(this.getPoints().getData1d().get((i + 1 + size) % size), scale, position);
             ParametricCurve curve = new LineSegment(new Point3D(p1.get(0) - left, p1.get(1) - top, 0.0), new Point3D(p2.get(0) - left, p2.get(1) - top, 0.0));
             curve.texture(new ColorTexture(colorTemp));
             curve.setIncrU(0.1);
@@ -239,6 +240,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         paint = new Paint();
 
+        paint.setColor(colorTemp);
+        paint.setAntiAlias(true);
+        paint.setStrokeWidth(2);
+
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
         for (double i = left; i < right; i++) {
@@ -246,43 +251,30 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
-                Point3D color = pixM.getP(xMap, yMap);
+                double[] color = pixM.getValues(xMap, yMap);
 
-                int imageColor = Lumiere.getInt(new double[]{color.get(0), color.get(1), color.get(2)});
+                int imageColor = Lumiere.getInt(color);
 
                 int polygonColor = this.texture().getColorAt(xMap / (right - left), yMap / (bottom - top));
 
-                if(yMap>= currentColor.length)
+                if(yMap>= currentColor.length) {
                     continue;
+                }
 
-                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp) {
+                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp /*&& histFirst[(int)yMap]*/) {
                     currentColor[(int) yMap] = transparent;
-                    //isIn[yMap] = false;
-                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent) {
+                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent /*&& !histFirst[(int)yMap]*/) {
                     currentColor[(int) yMap] = colorTemp;
-                    //isIn[yMap] = true;
-                } /*else if(imageColor==colorTemp) {
-                    isIn[(yMap)] = true;
-                } else if(imageColor!=colorTemp) {
-                    isIn[(yMap)] = false;
-                }*/
-
-
-
-                if (currentColor[(int) yMap] == colorTemp/* && isIn[(int)yMap]*/) {
-                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(polygonColor));
-                    paint.setColor(polygonColor);
+                    histFirst[(int)yMap] = false;
+                }
+                if (currentColor[(int) yMap] == colorTemp) {
+                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(colorTemp));
 
                     float i1 = (float) (i);
                     float j1 = (float) (j);
 
-                    PointF p = FaceOverlayView.coordCanvas(canvas, bitmap, new PointF((float) i, (float) j));
-
-                    /*i1 = (float) (i * scale + position.x);
-                    j1 = (float) (j * scale + position.y);
-*/
-                    if (i1 < canvas.getWidth() - 1 && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
-                        canvas.drawLine((float) i1, (float) j1, (float) i1 + 1, (float) j1, paint);
+                    if (i1 < canvas.getWidth() && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
+                        canvas.drawPoint(i1, j1, paint);
                         pixels++;
                     }
                 }
