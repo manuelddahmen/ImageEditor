@@ -39,6 +39,9 @@ import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
 import androidx.core.util.rangeTo
+import com.android.installreferrer.api.InstallReferrerClient
+import com.android.installreferrer.api.InstallReferrerClient.InstallReferrerResponse
+import com.android.installreferrer.api.InstallReferrerStateListener
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -121,18 +124,19 @@ import kotlin.math.max
         activity: ActivitySuperClass,
         bitmap: Bitmap,
         file1: File,
-        file2: File, maxImageSize : Int, shouldOverwrite : Boolean): File? {
-        if(maxImageSize<=0) {
+        file2: File, maxImageSize: Int, shouldOverwrite: Boolean
+    ): File? {
+        if (maxImageSize <= 0) {
         }
         var written = false;
         var fileWritten: File? = null;
-        var bitmap2 : Bitmap
-        if(maxImageSize>0) {
+        var bitmap2: Bitmap
+        if (maxImageSize > 0) {
             var scaledBy: Int = max(bitmap.width, bitmap.height)
             bitmap2 = Bitmap.createScaledBitmap(
                 bitmap,
-                (1.0 * maxImageSize / scaledBy*bitmap.width).toInt(),
-                (1.0 * maxImageSize / scaledBy*bitmap.height).toInt(),
+                (1.0 * maxImageSize / scaledBy * bitmap.width).toInt(),
+                (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
                 true
             )
         } else bitmap2 = bitmap
@@ -174,7 +178,7 @@ import kotlin.math.max
         if (written) {
             return fileWritten
         } else {
-            val f = activity.getFilesFile("from_error-" + UUID.randomUUID()+".jpg")
+            val f = activity.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
             if (ImageIO.write(bitmap, "jpg", f)) {
                 written = true;
                 fileWritten = file2;
@@ -190,7 +194,7 @@ import kotlin.math.max
     public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
         var maxRes: Int = 0;
         maxRes = activity.intent.getIntExtra("maxRes", -1)
-        if(maxRes==-1) {
+        if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
                 savedInstanceState.getInt("maxRes") != -1
@@ -202,7 +206,7 @@ import kotlin.math.max
             }
         }
         return maxRes;
-        }
+    }
 
     public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
@@ -254,16 +258,23 @@ import kotlin.math.max
     }
 
 
-    public fun putExtra(calculatorIntent: Intent, cords: Array<String>, consts : Array<String>, variableName: String?, variable: String?) {
+    public fun putExtra(
+        calculatorIntent: Intent,
+        cords: Array<String>,
+        consts: Array<String>,
+        variableName: String?,
+        variable: String?
+    ) {
         for (j in cords.indices) {
             calculatorIntent.putExtra(consts[j], cords[j])
-            if (consts[j].equals(variableName) && variable!=null && variableName!=null) {
-                    calculatorIntent.putExtra("variable", variable)
-                    calculatorIntent.putExtra("variableName", variableName)
-                }
+            if (consts[j].equals(variableName) && variable != null && variableName != null) {
+                calculatorIntent.putExtra("variable", variable)
+                calculatorIntent.putExtra("variableName", variableName)
             }
-
         }
+
+    }
+
     @Deprecated(message = "Double")
     private fun putExtraCords(activity: ActivitySuperClass, calculatorIntent: Intent) {
         var j = 0
@@ -307,7 +318,11 @@ import kotlin.math.max
                     mBitmap =
                         BitmapFactory.decodeStream(fileInputStream) ?: return false
                 } catch (ex: OutOfMemoryError) {
-                    Toast.makeText(activity.applicationContext, "No memory, will try smaller image", Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        activity.applicationContext,
+                        "No memory, will try smaller image",
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                     ex.printStackTrace()
                     val options = Options()
@@ -341,6 +356,7 @@ import kotlin.math.max
         }
         return false
     }
+
     fun loadImageInImageView(bitmap: Bitmap, imageViewEffectPreview: ImageViewSelection) {
         setImageView(imageViewEffectPreview, bitmap)
     }
@@ -360,7 +376,10 @@ import kotlin.math.max
                     activity.getMaxRes(),
                     activity.getMaxRes(),
                     Bitmap.Config.ARGB_8888
-                ).copy(Bitmap.Config.ARGB_8888, true) // Single color bitmap will be created of 1x1 pixel
+                ).copy(
+                    Bitmap.Config.ARGB_8888,
+                    true
+                ) // Single color bitmap will be created of 1x1 pixel
             }
         }
         if (bitmap == null)
@@ -407,7 +426,7 @@ import kotlin.math.max
 
     public fun getMaxRes(activity: ActivitySuperClass): Int {
         var maxRes: Int = 200
-        if(activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
+        if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
             val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
             if (maxResText != null) {
                 val maxResStr = maxResText.text
@@ -423,7 +442,7 @@ import kotlin.math.max
                 }
             }
         }
-        if(maxRes<0) {
+        if (maxRes < 0) {
             maxRes = ActivitySuperClass.MAXRES_DEFAULT
         }
         return maxRes
@@ -439,10 +458,10 @@ import kotlin.math.max
                     try {
                         activity.imageView =
                             activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
-                    } catch (ex:NullPointerException ) {
+                    } catch (ex: NullPointerException) {
                         return
                     }
-                    if(activity.imageView!=null) {
+                    if (activity.imageView != null) {
                         Utils().setImageView(activity.imageView, bitmap);
                     }
                     activity.currentFile = imageFile
@@ -462,7 +481,8 @@ import kotlin.math.max
             if (activity.currentFile != null) {
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                activity.currentFile = this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
+                activity.currentFile =
+                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
                 return activity.currentFile
             }
         } catch (e: FileNotFoundException) {
@@ -482,33 +502,73 @@ import kotlin.math.max
 
     }
 
-    fun loadVarsMathImage(activity : ActivitySuperClass, intent: Intent) {
+    fun loadVarsMathImage(activity: ActivitySuperClass, intent: Intent) {
 
         if (intent.getExtras() != null)
             for (i in ActivitySuperClass.cordsConsts.indices) {
-            if (intent.getStringExtra(ActivitySuperClass.cordsConsts[i]) != null)
-                activity.cords[i] = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])!!
-        }
+                if (intent.getStringExtra(ActivitySuperClass.cordsConsts[i]) != null)
+                    activity.cords[i] = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])!!
+            }
 
         activity.variableName = intent.getStringExtra("variableName")
         activity.variable = intent.getStringExtra("variable")
         val indexOf = ActivitySuperClass.cordsConsts.indexOf(activity.variableName)
-        if(activity.variableName!=null && activity.variable!=null &&indexOf>=0) {
+        if (activity.variableName != null && activity.variable != null && indexOf >= 0) {
             activity.cords[indexOf] = activity.variable
         }
 
     }
-    public fun runEffectsOnThumbnail(fileIn : File, p: PixM, effect: ProcessFile) : File? {
-        if(effect!=null && fileIn.exists()) {
+
+    public fun runEffectsOnThumbnail(fileIn: File, p: PixM, effect: ProcessFile): File? {
+        if (effect != null && fileIn.exists()) {
             var randomUUID = UUID.randomUUID()
-            val fileInThumb = getFilesFile("thumbIn-" + effect +randomUUID +"-jpg")
-            ImageIO.write(PixM.getPixM(ImageIO.read(fileIn).bitmap, Math.max(p.columns, p.lines)).bitmap, "jpg", fileInThumb)
-            val fileOut = getFilesFile("thumbOut-" + effect +randomUUID +"-jpg")
+            val fileInThumb = getFilesFile("thumbIn-" + effect + randomUUID + "-jpg")
+            ImageIO.write(
+                PixM.getPixM(
+                    ImageIO.read(fileIn).bitmap,
+                    Math.max(p.columns, p.lines)
+                ).bitmap, "jpg", fileInThumb
+            )
+            val fileOut = getFilesFile("thumbOut-" + effect + randomUUID + "-jpg")
             if (effect.process(fileInThumb, fileOut)) {
                 return fileOut
             }
         }
         return null
+    }
+
+    private lateinit var referrerClient: InstallReferrerClient
+
+    fun installReferrer(activity: ActivitySuperClass) {
+        this.referrerClient = InstallReferrerClient.newBuilder(activity.applicationContext).build()
+        this.referrerClient.startConnection(object : InstallReferrerStateListener {
+
+            override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                when (responseCode) {
+                    InstallReferrerResponse.OK -> {
+                        // Connection established.
+                        System.out.println("Connection established with InstallReferrer.")
+                    }
+
+                    InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
+                        // API not available on the current Play Store app.
+                        System.err.println("Connection not established with InstallReferrer : API not available")
+                    }
+
+                    InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
+                        // Connection couldn't be established.
+                        System.err.println("Connection not established with InstallReferrer : Service Unavailable")
+                    }
+                }
+            }
+
+            override fun onInstallReferrerServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        })
+
+        return
     }
 
 }

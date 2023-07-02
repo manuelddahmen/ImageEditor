@@ -20,6 +20,8 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,18 +29,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
-import one.empty3.Run;
-import one.empty3.feature20220726.PixM;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Properties;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import one.empty3.feature20220726.PixM;
 
 @ExperimentalCamera2Interop
 public class ActivitySuperClass extends AppCompatActivity {
@@ -101,6 +107,11 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        new Utils().installReferrer(this);
+
+
         if (getIntent() != null) {
             getParameters(getIntent());
             if (currentFile == null && savedInstanceState != null) {

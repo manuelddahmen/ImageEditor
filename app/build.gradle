@@ -336,6 +336,8 @@ dependencies {
     implementation "androidx.camera:camera-extensions:${camerax_version}"
 
     implementation 'com.google.android.play:integrity:1.1.0'
+
+        implementation "com.android.installreferrer:installreferrer:2.2"
 }
 
 publishing {
