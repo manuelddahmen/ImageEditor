@@ -25,6 +25,9 @@ import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.google.mlkit.vision.face.FaceLandmark;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +43,7 @@ import one.empty3.library.StructureMatrix;
     private Canvas mCanvas;
     private Bitmap mCopy;
     private boolean isFinish = false;
+    private FaceActivity activity;
 
     public FaceOverlayView(@NonNull Context context) {
         super(context);
@@ -237,7 +241,7 @@ import one.empty3.library.StructureMatrix;
             PointF scale = getScale();
 
             {
-                PixM pixM = polygon.fillPolygon2D(mCanvas, mBitmap, Color.BLACK, 0.0, point0, scale.x);
+                PixM pixM = polygon.fillPolygon2D(mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
                     Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
@@ -275,12 +279,11 @@ import one.empty3.library.StructureMatrix;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (isFinish())
-            return;
-        this.mCanvas = canvas;
-        if (mCopy != null)
-            updateImage(mCopy);
-
+        if(!isFinish) {
+            this.mCanvas = canvas;
+            if (mCopy != null)
+                updateImage(mCopy);
+        }
     }
 
     private boolean isFinish() {
@@ -363,6 +366,11 @@ import one.empty3.library.StructureMatrix;
             }
         });
         super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
+        if(activity!=null) {
+            File file = new Utils().writePhoto(activity, mCopy.copy(Bitmap.Config.ARGB_8888,
+                    true), "face-");
+            this.activity.currentFile = file;
+        }
     }
     public double getScaleImageX() {
         Rect destBounds = getDestBounds();
@@ -409,5 +417,13 @@ import one.empty3.library.StructureMatrix;
             mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
             action(face);
         }
+    }
+
+    public void setActivity(@NotNull FaceActivity faceActivity) {
+        this.activity = faceActivity;
+    }
+
+    public void setFinish(boolean b) {
+        isFinish = b;
     }
 }

@@ -33,14 +33,18 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        // Check that you have the following line (if not, add it):
+//        google()  // Google's Maven repository
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-allprojects {
-    repositories {
-    }
-}
+
 Properties properties = new Properties()
 try {
     // Other configuration here

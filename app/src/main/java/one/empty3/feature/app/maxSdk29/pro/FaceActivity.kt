@@ -1,6 +1,7 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
@@ -14,9 +15,6 @@ import java.io.File
 import java.io.IOException
 
 @ExperimentalCamera2Interop class FaceActivity : ActivitySuperClass() {
-    private fun cameraCaptureRecord(b: Button) {
-        //Camera().process(this)
-    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +35,19 @@ import java.io.IOException
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
             faceOverlayView.setBitmap(currentBitmap);
+
+            faceOverlayView.setActivity(this)
+        }
+
+        val camera_preview_video_face = findViewById<Button>(R.id.camera_preview_video_face)
+
+        camera_preview_video_face.performClick()
+
+        camera_preview_video_face.setOnClickListener {
+            faceOverlayView.setFinish(true)
+
+            val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
+            passParameters(intentBack)
         }
 
     }
@@ -67,9 +78,8 @@ import java.io.IOException
                 }
             }
         }
-        val button = findViewById<Button>(R.id.camera_preview_video)
-
-        button.performClick()
     }
+
+
 
 }

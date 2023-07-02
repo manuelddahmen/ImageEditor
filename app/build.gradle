@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 
 if (hasProperty('buildScan')) {
     buildScan {
@@ -13,7 +13,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 30880000
+def code = 30100000
 
 java {
     toolchain {
@@ -349,6 +349,9 @@ publishing {
         }
     }
     repositories {
+
+        // Check that you have the following line (if not, add it):
+        google()  // Google's Maven repository
         maven {
             url "https://maven.pkg.jetbrains.space/empty3/p/empty3/maven"
             credentials {

@@ -11,12 +11,12 @@
         android:minHeight="300dp"
         app:layout_constraintTop_toTopOf="parent"
         app:flow_horizontalAlign="start"
-        app:layout_constraintBottom_toTopOf="@id/camera_preview_video"/>
+        app:layout_constraintBottom_toTopOf="@id/camera_preview_video_face"/>
 
     <Button
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:id="@+id/camera_preview_video"
+            android:id="@+id/camera_preview_video_face"
             app:layout_constraintTop_toBottomOf="@id/face_overlay"
             app:layout_constraintBottom_toBottomOf="parent"
             />

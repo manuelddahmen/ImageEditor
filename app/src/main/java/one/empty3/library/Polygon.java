@@ -313,6 +313,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                     if (i1 < canvas.getWidth() && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
                         canvas.drawPoint(i1, j1, paint);
+                        //bitmap.setPixel();
                         pixels++;
                     }
                 }
