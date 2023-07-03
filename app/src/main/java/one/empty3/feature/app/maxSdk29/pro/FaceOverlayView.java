@@ -168,23 +168,23 @@ import one.empty3.library.StructureMatrix;
 //                drawLine(coordCanvas(rightEyeContour.get(i)), coordCanvas(rightEyeContour.get((i + 1) % rightEyeContour.size())));
             }
         }
-        fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints());
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints());
-        //fillPolygon(face.getContour(FaceContour.FACE).getPoints());
-        fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints());
-        fillPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints());
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints());
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints());
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints());
-        fillPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints());
-        fillPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
-        fillPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints());
-        fillPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints());
+        fillPolygon(face.getContour(FaceContour.FACE).getPoints(), Color.RED, Color.RED);
+        fillPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints(), Color.RED, Color.BLUE);
+        fillPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints(), Color.RED, Color.BLUE);
     }
 
     public void testSphere() {
@@ -218,9 +218,9 @@ import one.empty3.library.StructureMatrix;
         //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
-    private void fillPolygon(List<PointF> polygonContour) {
+    private void fillPolygon(List<PointF> polygonContour, int contourColor, int inColor) {
         if (polygonContour != null) {
-            paint.setColor(Color.RED);
+            paint.setColor(contourColor);
             for (int i = 0; i < polygonContour.size(); i++) {
                 drawLine(coordCanvas(polygonContour.get(i)), coordCanvas(polygonContour.get((i + 1) % polygonContour.size())));
             }
@@ -230,7 +230,7 @@ import one.empty3.library.StructureMatrix;
                 PointF pointF = polygonContour.get(i);
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(Color.BLUE));
+            Polygon polygon = new Polygon(point3DS, new ColorTexture(inColor));
 
             StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
 
@@ -363,14 +363,14 @@ import one.empty3.library.StructureMatrix;
                 mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, paint);
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
+                if (activity != null) {
+                    File file = new Utils().writePhoto(activity, mCopy.copy(Bitmap.Config.ARGB_8888,
+                            false), "face-");
+                    this.activity.currentFile = file;
+                }
             }
         });
         super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
-        if(activity!=null) {
-            File file = new Utils().writePhoto(activity, mCopy.copy(Bitmap.Config.ARGB_8888,
-                    true), "face-");
-            this.activity.currentFile = file;
-        }
     }
     public double getScaleImageX() {
         Rect destBounds = getDestBounds();

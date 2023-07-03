@@ -198,6 +198,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     private Point3D getPosition(Point3D p, double scale, PointF position) {
         return new Point3D(p.get(0) * scale + position.x, p.get(1) * scale + position.y, 0.0);
     }
+    private Point3D getPositionOnPicture(Point3D pCanvas, double scale, PointF position) {
+        return new Point3D((pCanvas.get(0)  - position.x)/ scale,
+                (pCanvas.get(1) - position.y)/scale, 0.0);
+    }
     public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean [] columnLeft, boolean [] columnRight) {
         boolean foundLeft = columnLeft[y];
         boolean foundRight = columnRight[y];
@@ -313,6 +317,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                     if (i1 < canvas.getWidth() && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
                         canvas.drawPoint(i1, j1, paint);
+                        Point3D positionOnPicture = getPositionOnPicture(new Point3D((double) i, (double) j, 0.0),
+                                scale, position);
+                        bitmap.setPixel((int)(double)(positionOnPicture.get(0)),
+                                (int)(double)(positionOnPicture.get(1)), paint.getColor());
                         //bitmap.setPixel();
                         pixels++;
                     }

@@ -47,9 +47,11 @@ import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.Main2022.initListProcesses
+import one.empty3.Run
 import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
 import java.io.*
+import java.lang.RuntimeException
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.max
@@ -133,12 +135,29 @@ import kotlin.math.max
         var bitmap2: Bitmap
         if (maxImageSize > 0) {
             var scaledBy: Int = max(bitmap.width, bitmap.height)
-            bitmap2 = Bitmap.createScaledBitmap(
-                bitmap,
-                (1.0 * maxImageSize / scaledBy * bitmap.width).toInt(),
-                (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
-                true
-            )
+            try {
+                bitmap2 = Bitmap.createScaledBitmap(
+                    bitmap,
+                    (1.0 * maxImageSize / scaledBy * bitmap.width).toInt(),
+                    (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
+                    true
+                )
+            } catch (ex :  RuntimeException) {
+                try {
+                    ex.printStackTrace()
+                bitmap2 = Bitmap.createScaledBitmap(
+                    bitmap,
+                    (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
+                    (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
+                    true
+                )
+                } catch (ex :  RuntimeException) {
+                        ex.printStackTrace()
+                        bitmap2 = Bitmap.createScaledBitmap(bitmap, 400, 400, true
+                        )
+
+                    }
+            }
         } else bitmap2 = bitmap
         try {
             if (!file1.exists()) {
@@ -425,25 +444,31 @@ import kotlin.math.max
     }
 
     public fun getMaxRes(activity: ActivitySuperClass): Int {
-        var maxRes: Int = 200
+        var maxRes: Int = R.id.editMaximiumResolution
         if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
             val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
             if (maxResText != null) {
-                val maxResStr = maxResText.text
-                if (maxResStr != null) {
-                    try {
-                        maxRes = maxResStr.toString().toDouble().toInt()
-                        return maxRes;
-                    } catch (_: java.lang.NumberFormatException) {
-                        maxRes = activity.maxRes
-                    } catch (_: NullPointerException) {
-                        maxRes = activity.maxRes
+                try {
+                    val maxResStr = maxResText.text
+                    if (maxResStr != null) {
+                        try {
+                            maxRes = maxResStr.toString().toDouble().toInt()
+                            return maxRes;
+                        } catch (_: java.lang.NumberFormatException) {
+                            maxRes = activity.maxRes
+                        } catch (_: NullPointerException) {
+                            maxRes = activity.maxRes
+                        }
                     }
+                } catch (ex:RuntimeException) {
+                    maxRes = R.string.maxRes_1200
                 }
+            } else {
+                maxRes = R.string.maxRes_1200
             }
         }
         if (maxRes < 0) {
-            maxRes = ActivitySuperClass.MAXRES_DEFAULT
+            maxRes = R.string.maxRes_1200
         }
         return maxRes
     }
@@ -540,35 +565,39 @@ import kotlin.math.max
     private lateinit var referrerClient: InstallReferrerClient
 
     fun installReferrer(activity: ActivitySuperClass) {
-        this.referrerClient = InstallReferrerClient.newBuilder(activity.applicationContext).build()
-        this.referrerClient.startConnection(object : InstallReferrerStateListener {
+        try {
+            this.referrerClient =
+                InstallReferrerClient.newBuilder(activity.applicationContext).build()
+            this.referrerClient.startConnection(object : InstallReferrerStateListener {
 
-            override fun onInstallReferrerSetupFinished(responseCode: Int) {
-                when (responseCode) {
-                    InstallReferrerResponse.OK -> {
-                        // Connection established.
-                        System.out.println("Connection established with InstallReferrer.")
-                    }
+                override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                    when (responseCode) {
+                        InstallReferrerResponse.OK -> {
+                            // Connection established.
+                            System.out.println("Connection established with InstallReferrer.")
+                        }
 
-                    InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
-                        // API not available on the current Play Store app.
-                        System.err.println("Connection not established with InstallReferrer : API not available")
-                    }
+                        InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
+                            // API not available on the current Play Store app.
+                            System.err.println("Connection not established with InstallReferrer : API not available")
+                        }
 
-                    InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                        // Connection couldn't be established.
-                        System.err.println("Connection not established with InstallReferrer : Service Unavailable")
+                        InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
+                            // Connection couldn't be established.
+                            System.err.println("Connection not established with InstallReferrer : Service Unavailable")
+                        }
                     }
                 }
-            }
 
-            override fun onInstallReferrerServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        })
+                override fun onInstallReferrerServiceDisconnected() {
+                    // Try to restart the connection on the next request to
+                    // Google Play by calling the startConnection() method.
+                }
+            })
 
-        return
+        } catch (re : RuntimeException) {
+            re.printStackTrace()
+        }
     }
 
 }
