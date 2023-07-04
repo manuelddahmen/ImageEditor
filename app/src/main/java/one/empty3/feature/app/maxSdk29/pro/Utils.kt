@@ -444,31 +444,25 @@ import kotlin.math.max
     }
 
     public fun getMaxRes(activity: ActivitySuperClass): Int {
-        var maxRes: Int = R.id.editMaximiumResolution
+        var maxRes: Int = 200
         if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
             val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
             if (maxResText != null) {
-                try {
-                    val maxResStr = maxResText.text
-                    if (maxResStr != null) {
-                        try {
-                            maxRes = maxResStr.toString().toDouble().toInt()
-                            return maxRes;
-                        } catch (_: java.lang.NumberFormatException) {
-                            maxRes = activity.maxRes
-                        } catch (_: NullPointerException) {
-                            maxRes = activity.maxRes
-                        }
+                val maxResStr = maxResText.text
+                if (maxResStr != null) {
+                    try {
+                        maxRes = maxResStr.toString().toDouble().toInt()
+                        return maxRes;
+                    } catch (_: java.lang.NumberFormatException) {
+                        maxRes = activity.maxRes
+                    } catch (_: NullPointerException) {
+                        maxRes = activity.maxRes
                     }
-                } catch (ex:RuntimeException) {
-                    maxRes = R.string.maxRes_1200
                 }
-            } else {
-                maxRes = R.string.maxRes_1200
             }
         }
         if (maxRes < 0) {
-            maxRes = R.string.maxRes_1200
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
         }
         return maxRes
     }

@@ -250,10 +250,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
         boundRect2d.setElem(getPosition(boundRect2d.getElem(1), scale, position), 1);
 
-        double left = boundRect2d.getElem(0).get(0);
-        double top = boundRect2d.getElem(0).get(1);
-        double right = boundRect2d.getElem(1).get(0);
-        double bottom = boundRect2d.getElem(1).get(1);
+        double left = boundRect2d.getElem(0).get(0)-1;
+        double top = boundRect2d.getElem(0).get(1)-1;
+        double right = boundRect2d.getElem(1).get(0)+1;
+        double bottom = boundRect2d.getElem(1).get(1)+1;
         double widthBox = right - left;
         double heightBox = bottom - top;
 
@@ -310,13 +310,13 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                     currentColor[(int) yMap] = colorTemp;
                 } else if (currentColor[(int) yMap] == colorTemp  &&
                         leftToRightScanPixM(pixM, xMap, yMap)) {
-                    pixM.setValues(xMap, yMap, Lumiere.getDoubles(colorTemp));
+                    //pixM.setValues(xMap, yMap, Lumiere.getDoubles(colorTemp));
 
                     float i1 = (float) (i);
                     float j1 = (float) (j);
 
                     if (i1 < canvas.getWidth() && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
-                        canvas.drawPoint(i1, j1, paint);
+                        //canvas.drawPoint(i1, j1, paint);
                         Point3D positionOnPicture = getPositionOnPicture(new Point3D((double) i, (double) j, 0.0),
                                 scale, position);
                         bitmap.setPixel((int)(double)(positionOnPicture.get(0)),

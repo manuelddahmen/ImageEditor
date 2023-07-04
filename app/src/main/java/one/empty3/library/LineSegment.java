@@ -85,6 +85,7 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         super();
         this.setOrigine(new Point3D());
         this.setExtremite(new Point3D());
+        setIncrU(0.1);
     }
 
     // prodScalaire product (3D) which allows vector operations in arguments
