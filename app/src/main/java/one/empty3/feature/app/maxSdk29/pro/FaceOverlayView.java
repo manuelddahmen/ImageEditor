@@ -44,6 +44,7 @@ import one.empty3.library.StructureMatrix;
     private Bitmap mCopy;
     private boolean isFinish = false;
     private FaceActivity activity;
+    private boolean isDrawing = false;
 
     public FaceOverlayView(@NonNull Context context) {
         super(context);
@@ -279,11 +280,19 @@ import one.empty3.library.StructureMatrix;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(!isFinish) {
-            this.mCanvas = canvas;
-            if (mCopy != null)
-                updateImage(mCopy);
+        if(!isDrawing()) {
+            if (!isFinish) {
+                isDrawing = true;
+                this.mCanvas = canvas;
+                if (mCopy != null)
+                    updateImage(mCopy);
+                isDrawing = false;
+            }
         }
+    }
+
+    private boolean isDrawing() {
+        return isDrawing;
     }
 
     private boolean isFinish() {
@@ -425,5 +434,9 @@ import one.empty3.library.StructureMatrix;
 
     public void setFinish(boolean b) {
         isFinish = b;
+    }
+
+    public void setDrawing(boolean b) {
+        this.isDrawing = b;
     }
 }

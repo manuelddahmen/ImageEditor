@@ -222,7 +222,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         return !(foundLeft&&!foundRight) || (foundLeft&&foundRight) && !(!foundLeft&&!foundRight);
     }
 
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y) {
+    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean isDrawingOnImage) {
         boolean foundLeft = false;
         boolean foundRight = false;
         if(x>=0 && x<pixM.getColumns()) {
@@ -241,19 +241,24 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     }
 
     public PixM fillPolygon2D(Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
+        boolean isDrawingOnImage = true;
         int pixels = 0;
 
         int colorTemp = this.texture().getColorAt(0.5, 0.5);
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
-        boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
-        boundRect2d.setElem(getPosition(boundRect2d.getElem(1), scale, position), 1);
 
-        double left = boundRect2d.getElem(0).get(0)-1;
-        double top = boundRect2d.getElem(0).get(1)-1;
-        double right = boundRect2d.getElem(1).get(0)+1;
-        double bottom = boundRect2d.getElem(1).get(1)+1;
+        if(!isDrawingOnImage) {
+            boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
+            boundRect2d.setElem(getPosition(boundRect2d.getElem(1), scale, position), 1);
+        } else {
+
+        }
+        double left =  (boundRect2d.getElem(0).get(0)-1);
+        double top =  (boundRect2d.getElem(0).get(1)-1);
+        double right =  (boundRect2d.getElem(1).get(0)+1);
+        double bottom =  (boundRect2d.getElem(1).get(1)+1);
         double widthBox = right - left;
         double heightBox = bottom - top;
 
@@ -269,8 +274,17 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         int size = this.getPoints().getData1d().size();
         for (int i = 0; i < size; i++) {
-            Point3D p1 = getPosition(this.getPoints().getData1d().get((i+size)%size), scale, position);
-            Point3D p2 = getPosition(this.getPoints().getData1d().get((i + 1 + size) % size), scale, position);
+            Point3D p1 = null;
+            Point3D p2 = null;
+
+            if(!isDrawingOnImage) {
+                p1 = getPosition(this.getPoints().getData1d().get((i + size) % size), scale, position);
+                p2 = getPosition(this.getPoints().getData1d().get((i + 1 + size) % size), scale, position);
+            } else {
+                p1 = this.getPoints().getData1d().get((i + size) % size);
+                p2 = this.getPoints().getData1d().get((i + 1 + size) % size);
+            }
+
             ParametricCurve curve = new LineSegment(new Point3D(p1.get(0) - left, p1.get(1) - top, 0.0), new Point3D(p2.get(0) - left, p2.get(1) - top, 0.0));
             curve.texture(new ColorTexture(colorTemp));
             curve.setIncrU(0.1);
@@ -297,7 +311,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                 int imageColor = Lumiere.getInt(color);
                 int imageColorP1 = Lumiere.getInt(colorP1);
 
-                int polygonColor = this.texture().getColorAt(xMap / (right - left), yMap / (bottom - top));
+                int polygonColor = this.texture().getColorAt(1.0*xMap / (right - left), 1.0*yMap / (bottom - top));
 
                 if(yMap>= currentColor.length) {
                     continue;
@@ -309,20 +323,19 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
                 } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent && imageColorP1!=colorTemp) {
                     currentColor[(int) yMap] = colorTemp;
                 } else if (currentColor[(int) yMap] == colorTemp  &&
-                        leftToRightScanPixM(pixM, xMap, yMap)) {
-                    //pixM.setValues(xMap, yMap, Lumiere.getDoubles(colorTemp));
+                        leftToRightScanPixM(pixM, xMap, yMap, isDrawingOnImage)) {
 
-                    float i1 = (float) (i);
-                    float j1 = (float) (j);
-
-                    if (i1 < canvas.getWidth() && i1 >= 0 && j1 < canvas.getHeight() && j1 >= 0) {
-                        //canvas.drawPoint(i1, j1, paint);
-                        Point3D positionOnPicture = getPositionOnPicture(new Point3D((double) i, (double) j, 0.0),
-                                scale, position);
+                    if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
+                        Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
+                        canvas.drawPoint((int)(double)positionOnPicture.get(0), (int)(double)positionOnPicture.get(1), paint);
+                        pixels++;
+                    } else if(isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0){
+                        Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
                         bitmap.setPixel((int)(double)(positionOnPicture.get(0)),
                                 (int)(double)(positionOnPicture.get(1)), paint.getColor());
                         //bitmap.setPixel();
                         pixels++;
+
                     }
                 }
 

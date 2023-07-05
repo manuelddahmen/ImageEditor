@@ -46,6 +46,8 @@ import java.io.IOException
         camera_preview_video_face.setOnClickListener {
             faceOverlayView.setFinish(true)
 
+            faceOverlayView.setDrawing(false)
+
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
             passParameters(intentBack)
         }
