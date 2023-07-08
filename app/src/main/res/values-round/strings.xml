@@ -35,4 +35,6 @@
     <string name="cancel">Cancel</string>
     <string name="collapse">Collapse</string>
     <string name="extend">Extend</string>
+    <string name="draw_face_mask">Draw face mask</string>
+    <string name="face_drawing_settings">Face drawing settings</string>
 </resources>

@@ -237,5 +237,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="draw_face_mask">Draw face mask</string>
+    <string name="face_drawing_settings">Face drawing settings</string>
 
 </resources>
