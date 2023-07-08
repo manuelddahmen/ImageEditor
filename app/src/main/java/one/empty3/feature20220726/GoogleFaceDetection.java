@@ -4,8 +4,6 @@ import android.graphics.PointF;
 
 import java.util.List;
 
-import one.empty3.library.Polygon;
-
 public class GoogleFaceDetection {
     public static class FaceData {
         public static class Surface {
@@ -13,17 +11,10 @@ public class GoogleFaceDetection {
             private int colorContours;
             private int colorTransparent;
             private int surfaceId;
-            private Polygon polygon;
+            private List<PointF> polygon;
             private PixM contours;
 
-            public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
-                this.surfaceId = surfaceId;
-                this.polygon = polygon;
-                this.contours = contours;
-
-            }
-
-            public Surface(int surfaceId, List<PointF> points, PixM contours, int colorFill, int colorContours, int colorTransparent) {
+            public Surface(int surfaceId, List<PointF> polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
                 this.surfaceId = surfaceId;
                 this.polygon = polygon;
                 this.contours = contours;
@@ -44,7 +35,7 @@ public class GoogleFaceDetection {
                 return polygon;
             }
 
-            public void setPolygon(Polygon polygon) {
+            public void setPolygon(List<PointF> polygon) {
                 this.polygon = polygon;
             }
 
