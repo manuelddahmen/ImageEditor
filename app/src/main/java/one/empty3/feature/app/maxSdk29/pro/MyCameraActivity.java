@@ -300,7 +300,7 @@ import one.empty3.feature20220726.PixM;
 
                 Intent faceIntent = new Intent(Intent.ACTION_VIEW);
 
-                faceIntent.setClass(getApplicationContext(), FaceActivitySettings.class);
+                faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 
                 if(currentPixM!=null) {
                     faceIntent.putExtra("zoom", currentPixM.getBitmap());

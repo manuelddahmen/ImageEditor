@@ -154,6 +154,14 @@
                 android:label="Face Overpaint"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
+        
+        <activity
+                android:name=".FaceActivitySettings"
+                android:exported="false"
+                android:hardwareAccelerated="true"
+                android:label="Face Overpaint"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
         <provider
                 android:name=".MyFileProvider"
                 android:authorities="one.empty3.fileprovider"

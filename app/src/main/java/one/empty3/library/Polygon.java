@@ -65,6 +65,7 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.Arrays;
 
+import one.empty3.feature20220726.GoogleFaceDetection;
 import one.empty3.feature20220726.PixM;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.SurfaceElem;
@@ -240,7 +241,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         return !(foundLeft&&!foundRight) || (foundLeft&&foundRight) && !(!foundLeft&&!foundRight);
     }
 
-    public PixM fillPolygon2D(Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
+    public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
@@ -266,6 +267,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
             return null;
 
         PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
+
+        faceSurface.setContours(pixM);
 
         int count = 0;
 

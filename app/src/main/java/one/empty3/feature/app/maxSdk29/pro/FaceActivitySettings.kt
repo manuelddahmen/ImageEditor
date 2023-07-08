@@ -64,7 +64,19 @@ import java.io.IOException
         }
 
         if (g > 0 && requestCode==4232403) {
-            ;
+            run {
+                val testSphere: Bitmap = TestZBufferAndroid().testSphere()
+
+
+                val file = "testSphere.jpg"
+                try {
+                    val filesFile = getFilesFile(file)
+                    println(filesFile)
+                    ImageIO.write(testSphere, "jpg", filesFile)
+                } catch (e: IOException) {
+                    throw RuntimeException(e)
+                }
+            }
         }
     }
 

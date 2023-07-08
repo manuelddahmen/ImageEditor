@@ -51,7 +51,11 @@ import java.io.IOException
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
             passParameters(intentBack)
         }
-
+        val face_draw_settings = findViewById<Button>(R.id.face_draw_settings)
+        face_draw_settings.setOnClickListener {
+            val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
+            passParameters(intentSettings)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -67,17 +71,7 @@ import java.io.IOException
 
         if (g > 0 && requestCode==4232403) {
             run {
-                val testSphere: Bitmap = TestZBufferAndroid().testSphere()
-
-
-                val file = "testSphere.jpg"
-                try {
-                    val filesFile = getFilesFile(file)
-                    println(filesFile)
-                    ImageIO.write(testSphere, "jpg", filesFile)
-                } catch (e: IOException) {
-                    throw RuntimeException(e)
-                }
+                ;
             }
         }
     }
