@@ -2,9 +2,12 @@ package one.empty3.feature20220726;
 
 import android.graphics.PointF;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleFaceDetection {
+    private List<FaceData> dataFaces;
+
     public static class FaceData {
         public static class Surface {
             private int colorFill;
@@ -81,18 +84,28 @@ public class GoogleFaceDetection {
         public void setFaceSurfaces(List<Surface> faceSurfaces) {
             this.faceSurfaces = faceSurfaces;
         }
-    }
-    private List<FaceData> DataFaces;
 
+        public FaceData(List<Surface> faceSurfaces) {
+            this.faceSurfaces = faceSurfaces;
+            if(faceSurfaces==null)
+                this.faceSurfaces = new ArrayList<>();
+        }
+        public FaceData() {
+            this.faceSurfaces = new ArrayList<>();
+        }
+    }
     public GoogleFaceDetection(List<FaceData> dataFaces) {
-        DataFaces = dataFaces;
+        dataFaces = dataFaces;
+    }
+    public GoogleFaceDetection() {
+        dataFaces = new ArrayList<>();
     }
 
     public List<FaceData> getDataFaces() {
-        return DataFaces;
+        return dataFaces;
     }
 
     public void setDataFaces(List<FaceData> dataFaces) {
-        DataFaces = dataFaces;
+        this.dataFaces = dataFaces;
     }
 }

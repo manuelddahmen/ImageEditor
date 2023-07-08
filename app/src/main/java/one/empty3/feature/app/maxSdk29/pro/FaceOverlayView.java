@@ -28,7 +28,6 @@ import com.google.mlkit.vision.face.FaceLandmark;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -440,7 +439,7 @@ import one.empty3.library.StructureMatrix;
             //Log.d("ImageViewSelection::setImageBitmap",
             //        "change image on UI thread");
             if (mFaces != null && mCanvas != null && bm != null) {
-                googleFaceDetection = new GoogleFaceDetection(new ArrayList<>());
+                googleFaceDetection = new GoogleFaceDetection();
 
                 double scale = drawBitmap();
 
