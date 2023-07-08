@@ -55,7 +55,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import androidx.core.app.ActivityCompat;
@@ -74,14 +73,11 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
@@ -304,7 +300,7 @@ import one.empty3.feature20220726.PixM;
 
                 Intent faceIntent = new Intent(Intent.ACTION_VIEW);
 
-                faceIntent.setClass(getApplicationContext(), FaceActivity.class);
+                faceIntent.setClass(getApplicationContext(), FaceActivitySettings.class);
 
                 if(currentPixM!=null) {
                     faceIntent.putExtra("zoom", currentPixM.getBitmap());

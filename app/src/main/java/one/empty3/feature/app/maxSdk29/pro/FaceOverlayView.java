@@ -43,7 +43,7 @@ import one.empty3.library.StructureMatrix;
     private Canvas mCanvas;
     private Bitmap mCopy;
     private boolean isFinish = false;
-    private FaceActivity activity;
+    private ActivitySuperClass activity;
     private boolean isDrawing = false;
 
     public FaceOverlayView(@NonNull Context context) {
@@ -433,8 +433,8 @@ import one.empty3.library.StructureMatrix;
         }
     }
 
-    public void setActivity(@NotNull FaceActivity faceActivity) {
-        this.activity = faceActivity;
+    public void setActivity(@NotNull ActivitySuperClass faceActivitySettings) {
+        this.activity = faceActivitySettings;
     }
 
     public void setFinish(boolean b) {
