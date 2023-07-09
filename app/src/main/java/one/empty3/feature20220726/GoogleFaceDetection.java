@@ -1,9 +1,9 @@
 package one.empty3.feature20220726;
 
-import android.graphics.PointF;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import one.empty3.library.Polygon;
 
 public class GoogleFaceDetection {
     private List<FaceData> dataFaces;
@@ -14,10 +14,10 @@ public class GoogleFaceDetection {
             private int colorContours;
             private int colorTransparent;
             private int surfaceId;
-            private List<PointF> polygon;
+            private Polygon polygon;
             private PixM contours;
 
-            public Surface(int surfaceId, List<PointF> polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
+            public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
                 this.surfaceId = surfaceId;
                 this.polygon = polygon;
                 this.contours = contours;
@@ -34,11 +34,11 @@ public class GoogleFaceDetection {
                 this.surfaceId = surfaceId;
             }
 
-            public List<PointF> getPolygon() {
+            public Polygon getPolygon() {
                 return polygon;
             }
 
-            public void setPolygon(List<PointF> polygon) {
+            public void setPolygon(Polygon polygon) {
                 this.polygon = polygon;
             }
 

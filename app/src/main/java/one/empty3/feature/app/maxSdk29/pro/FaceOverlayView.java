@@ -43,7 +43,7 @@ import one.empty3.library.StructureMatrix;
     private List<Face> mFaces;
     protected Bitmap mBitmap;
     private Canvas mCanvas;
-    private Bitmap mCopy;
+    Bitmap mCopy;
     private boolean isFinish = false;
     private ActivitySuperClass activity;
     private boolean isDrawing = false;
@@ -182,87 +182,99 @@ import one.empty3.library.StructureMatrix;
         int surfaceId = FaceContour.FACE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.FACE).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.FACE).getPoints(), Color.RED), null,
                         Color.RED, Color.BLUE, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LEFT_EYE).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId =FaceContour.RIGHT_EYE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.RIGHT_EYE).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.NOSE_BOTTOM;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.NOSE_BOTTOM).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.NOSE_BRIDGE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.NOSE_BRIDGE).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_EYEBROW_BOTTOM;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYEBROW_TOP;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_EYEBROW_TOP;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_TOP;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_BOTTOM;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LOWER_LIP_BOTTOM;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LOWER_LIP_TOP;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LOWER_LIP_TOP).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_TOP;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_CHEEK;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.LEFT_CHEEK).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_CHEEK;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, face.getContour(FaceContour.RIGHT_CHEEK).getPoints(), null,
+                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
 
         for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
             fillPolygon(faceSurface, faceSurface.getPolygon(), faceSurface.getColorContours(), faceSurface.getColorFill());
         }
+    }
+
+    private Polygon getPolygon(List<PointF> polygonContour, int contourColor) {
+        int size = polygonContour.size();
+        Point3D[] point3DS = new Point3D[size];
+        for (int i = 0; i < polygonContour.size(); i += 1) {
+            PointF pointF = polygonContour.get(i);
+            point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
+        }
+        Polygon polygon = new Polygon(point3DS, new ColorTexture(contourColor));
+
+        return polygon;
     }
 
     public void testSphere() {
@@ -296,21 +308,14 @@ import one.empty3.library.StructureMatrix;
         //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
-    private void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, List<PointF> polygonContour, int contourColor, int inColor) {
+    private void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, Polygon polygonContour, int contourColor, int inColor) {
         if (polygonContour != null) {
             paint.setColor(contourColor);
-            for (int i = 0; i < polygonContour.size(); i++) {
+            /*for (int i = 0; i < polygonContour.size(); i++) {
                 drawLine(coordCanvas(polygonContour.get(i)), coordCanvas(polygonContour.get((i + 1) % polygonContour.size())));
             }
-            int size = polygonContour.size();
-            Point3D[] point3DS = new Point3D[size];
-            for (int i = 0; i < polygonContour.size(); i += 1) {
-                PointF pointF = polygonContour.get(i);
-                point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
-            }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(contourColor));
-
-            StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
+            */
+            StructureMatrix<Point3D> boundRect2d = polygonContour.getBoundRect2d();
 
             //System.out.println("Draw on canvas");
 
@@ -319,7 +324,7 @@ import one.empty3.library.StructureMatrix;
             PointF scale = getScale();
 
             {
-                PixM pixM = polygon.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
+                PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
                     /*Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
@@ -361,17 +366,17 @@ import one.empty3.library.StructureMatrix;
                 if (mCopy != null)
                     updateImage(mCopy);
 
-
+                isFinish = true;
                 isDrawing = false;
             }
         }
     }
 
-    private boolean isDrawing() {
+    public boolean isDrawing() {
         return isDrawing;
     }
 
-    private boolean isFinish() {
+    public boolean isFinish() {
         return isFinish;
     }
 

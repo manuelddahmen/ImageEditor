@@ -11,6 +11,11 @@ import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import javaAnd.awt.Point
 import javaAnd.awt.image.imageio.ImageIO
+import one.empty3.feature20220726.GoogleFaceDetection
+import one.empty3.library.ColorTexture
+import one.empty3.library.Point3D
+import one.empty3.library.Polygon
+import java.util.function.Consumer
 
 @ExperimentalCamera2Interop
 class FaceActivity : ActivitySuperClass() {
@@ -40,21 +45,26 @@ class FaceActivity : ActivitySuperClass() {
 
         val camera_preview_video_face = findViewById<Button>(R.id.camera_preview_video_face)
 
-        camera_preview_video_face.performClick()
-
         camera_preview_video_face.setOnClickListener {
-            faceOverlayView.setFinish(true)
-
-            faceOverlayView.setDrawing(false)
-
-
+            if(faceOverlayView.isFinish()) {
+                faceOverlayView.isDrawing = false
+                faceOverlayView.isFinish = false
+                faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
+                val writePhoto = Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
+                currentFile = writePhoto
+                Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+            }
         }
         val face_draw_settings = findViewById<Button>(R.id.face_draw_settings)
         face_draw_settings.setOnClickListener {
+            faceOverlayView.isFinish = true
             val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
             passParameters(intentSettings)
         }
 
+        faceOverlayView.setOnClickListener{
+
+        }
         faceOverlayView.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 val location = IntArray(2)
@@ -66,8 +76,21 @@ class FaceActivity : ActivitySuperClass() {
 
                 val p = Point(x.toInt(), y.toInt())
 
-                if (checkPointCordinates(p)) {
 
+
+                if (checkPointCordinates(p)) {
+                    faceOverlayView.googleFaceDetection.dataFaces.forEach { faceData ->
+                        {
+                            faceData.faceSurfaces.forEach { surface: GoogleFaceDetection.FaceData.Surface? ->
+                                {
+                                    if(surface!=null) {
+                                        //surface.polygon.
+                                    }
+                                }
+
+                            }
+                        }
+                    }
                 }
                 return true
             }
@@ -76,12 +99,16 @@ class FaceActivity : ActivitySuperClass() {
         val backToMain = findViewById<Button>(R.id.back_to_main2)
 
         backToMain.setOnClickListener {
+            faceOverlayView.isDrawing = false
+            faceOverlayView.isFinish = true
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
             passParameters(intentBack)
 
         }
     }
+    fun onceDrawFaceoverlay(faceOverlayView: FaceOverlayView) {
 
+    }
     fun checkPointCordinates(a: Point): Boolean {
         val x = a.getX().toInt()
         val y = a.getY().toInt()

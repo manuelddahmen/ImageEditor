@@ -252,6 +252,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
+        faceSurface.setPolygon(this);
 
         if(!isDrawingOnImage) {
             boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
