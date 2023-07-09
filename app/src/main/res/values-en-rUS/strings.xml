@@ -198,4 +198,5 @@
     <string name="extend">Extend</string>
     <string name="draw_face_mask">Draw face mask</string>
     <string name="face_drawing_settings">Face drawing settings</string>
+    <string name="back_to_main">Back to main</string>
 </resources>

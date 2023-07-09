@@ -60,6 +60,14 @@ import one.empty3.library.StructureMatrix;
         super(context, attrs, defStyleAttr);
     }
 
+    public GoogleFaceDetection getGoogleFaceDetection() {
+        return googleFaceDetection;
+    }
+
+    public void setGoogleFaceDetection(GoogleFaceDetection googleFaceDetection) {
+        this.googleFaceDetection = googleFaceDetection;
+    }
+
     public void setBitmap(Bitmap bitmap) {
 
         this.mBitmap = bitmap;
