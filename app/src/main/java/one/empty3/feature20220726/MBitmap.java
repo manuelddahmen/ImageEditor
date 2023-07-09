@@ -21,17 +21,15 @@
 package one.empty3.feature20220726;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.util.Log;
-
-import one.empty3.library.Lumiere;
-import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 
 import java.util.Arrays;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.stream.IntStream;
+
+import one.empty3.library.Lumiere;
+import one.empty3.library.Point3D;
 
 public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
@@ -216,9 +214,9 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void setValues(int i, int j, double... v) {
 
-        IntStream.range(0, 3).forEach(d -> {
+        IntStream.range(0, getCompCount()).forEach(d -> {
             setCompNo(d);
-            if (i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
+            if (i<v.length && i >= 0 && i < getColumns() && j >= 0 && j < getLines()) {
                 set(i, j, v[d]);
             }
         });

@@ -245,6 +245,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
+        int fillColorPolygon = faceSurface.getSurfaceId();
+        double[] fillColorArrayPolygon = Lumiere.getDoubles(fillColorPolygon);
+
         int colorTemp = this.texture().getColorAt(0.5, 0.5);
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
@@ -330,13 +333,12 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                     if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
                         Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
-                        canvas.drawPoint((int)(double)positionOnPicture.get(0), (int)(double)positionOnPicture.get(1), paint);
+                        canvas.drawPoint((int)(double)positionOnPicture.get(0),
+                                (int)(double)positionOnPicture.get(1), paint);
                         pixels++;
                     } else if(isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0){
-                        Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
-                        bitmap.setPixel((int)(double)(positionOnPicture.get(0)),
-                                (int)(double)(positionOnPicture.get(1)), paint.getColor());
-                        //bitmap.setPixel();
+                        bitmap.setPixel((int) i, (int) j, paint.getColor());
+                        pixM.setValues(xMap, yMap, fillColorArrayPolygon);
                         pixels++;
 
                     }

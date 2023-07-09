@@ -175,7 +175,7 @@ import one.empty3.library.StructureMatrix;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
                         surfaceId, face.getContour(FaceContour.FACE).getPoints(), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
+                        Color.RED, Color.BLUE, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
@@ -300,7 +300,7 @@ import one.empty3.library.StructureMatrix;
                 PointF pointF = polygonContour.get(i);
                 point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
             }
-            Polygon polygon = new Polygon(point3DS, new ColorTexture(inColor));
+            Polygon polygon = new Polygon(point3DS, new ColorTexture(contourColor));
 
             StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
 
@@ -313,13 +313,8 @@ import one.empty3.library.StructureMatrix;
             {
                 PixM pixM = polygon.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
-                    Bitmap bitmap = pixM.getBitmap();
+                    /*Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
-                        //float x1 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(0).get(0));
-                        //float y1 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(0).get(1));
-                        //float x2 = (float) (double) (point0.x + scale.x * (double) boundRect2d.getElem(1).get(0));
-                        //float y2 = (float) (double) (point0.y + scale.y * (double) boundRect2d.getElem(1).get(1));
-
                         PointF p1 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(0).get(0),
                                 (float)(double)boundRect2d.getElem(0).get(1)));
                         PointF p2 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(1).get(0),
@@ -336,17 +331,12 @@ import one.empty3.library.StructureMatrix;
 
                         if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
                             ;//mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, false), (int) x1, (int) y1, paint);
-                    }
+                    }*/
                 }
             }
             //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);
         }
-        try {
-            System.gc();
-        }    catch (RuntimeException exception) {
-            exception.printStackTrace();
-        }
-    }
+   }
 
 
     private void drawLine(PointF pointF, PointF pointF1) {
@@ -362,6 +352,8 @@ import one.empty3.library.StructureMatrix;
                 this.mCanvas = canvas;
                 if (mCopy != null)
                     updateImage(mCopy);
+
+
                 isDrawing = false;
             }
         }

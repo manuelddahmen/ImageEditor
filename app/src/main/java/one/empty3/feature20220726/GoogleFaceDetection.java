@@ -95,7 +95,7 @@ public class GoogleFaceDetection {
         }
     }
     public GoogleFaceDetection(List<FaceData> dataFaces) {
-        dataFaces = dataFaces;
+        this.dataFaces = dataFaces;
     }
     public GoogleFaceDetection() {
         dataFaces = new ArrayList<>();

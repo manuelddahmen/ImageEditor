@@ -1,18 +1,13 @@
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
-import java.io.File
-import java.io.IOException
 
 @ExperimentalCamera2Interop class FaceActivity : ActivitySuperClass() {
 
@@ -47,6 +42,8 @@ import java.io.IOException
             faceOverlayView.setFinish(true)
 
             faceOverlayView.setDrawing(false)
+
+
 
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
             passParameters(intentBack)
