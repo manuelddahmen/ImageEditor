@@ -1048,9 +1048,10 @@ import one.empty3.feature20220726.PixM;
 
     private void requireWriteTempFilePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 0);
+            requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_EXTERNAL_STORAGE}, 2621621);
         } else {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2621621);
         }
     }
 

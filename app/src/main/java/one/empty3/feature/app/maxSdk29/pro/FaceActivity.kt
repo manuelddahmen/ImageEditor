@@ -23,7 +23,6 @@ class FaceActivity : ActivitySuperClass() {
     private lateinit var originalImage: File
     private var selectedPoint : android.graphics.Point? = null
     private lateinit var faceOverlayView:FaceOverlayView
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

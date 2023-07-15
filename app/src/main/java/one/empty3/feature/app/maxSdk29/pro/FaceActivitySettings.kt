@@ -19,7 +19,6 @@ import java.io.IOException
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView:FaceOverlayView
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
