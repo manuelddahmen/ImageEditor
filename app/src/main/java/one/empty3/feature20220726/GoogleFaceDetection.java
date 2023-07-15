@@ -1,22 +1,54 @@
 package one.empty3.feature20220726;
 
+import android.graphics.Color;
+import android.graphics.Point;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
-@ExperimentalCamera2Interop public class GoogleFaceDetection {
-    public double[] TRANSPARENT = new double[] {0,0,0};
+@ExperimentalCamera2Interop public class GoogleFaceDetection implements Parcelable {
+    private FaceData.Surface selectedSurface;
+    public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
 
-    public class FaceData {
-        @ExperimentalCamera2Interop public class Surface {
+    protected GoogleFaceDetection(Parcel in) {
+    }
+
+    public static final Creator<GoogleFaceDetection> CREATOR = new Creator<GoogleFaceDetection>() {
+        @Override
+        public GoogleFaceDetection createFromParcel(Parcel in) {
+            return new GoogleFaceDetection(in);
+        }
+
+        @Override
+        public GoogleFaceDetection[] newArray(int size) {
+            return new GoogleFaceDetection[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
+    }
+
+    public static class FaceData {
+        @ExperimentalCamera2Interop public static class Surface {
             private int colorFill;
             private int colorContours;
             private int colorTransparent;
@@ -123,7 +155,7 @@ import one.empty3.library.StructureMatrix;
         this.dataFaces = dataFaces;
     }
 
-    public Polygon getPolygon(Point pInPicture) {
+    public FaceData.Surface getSurface(android.graphics.Point pInPicture) {
         final FaceData.Surface[] surface = {null};
         for (FaceData dataFace : dataFaces) {
             dataFace.getFaceSurfaces().forEach(new Consumer<FaceData.Surface>() {
@@ -135,9 +167,16 @@ import one.empty3.library.StructureMatrix;
             });
         }
         if(surface[0]!=null)
-            return surface[0].getPolygon();
+            return surface[0];
         else
             return null;
     }
 
+    public FaceData.Surface getSelectedSurface() {
+        return selectedSurface;
+    }
+
+    public void setSelectedSurface(FaceData.Surface selectedSurface) {
+        this.selectedSurface = selectedSurface;
+    }
 }

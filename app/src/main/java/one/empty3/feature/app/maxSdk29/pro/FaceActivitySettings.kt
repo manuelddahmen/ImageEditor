@@ -11,11 +11,13 @@ import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import javaAnd.awt.image.imageio.ImageIO
+import one.empty3.feature20220726.GoogleFaceDetection
 import java.io.IOException
 
 @ExperimentalCamera2Interop class FaceActivitySettings : ActivitySuperClass() {
 
     private lateinit var selectedPoint: Point
+    private lateinit var faceOverlayView:FaceOverlayView
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +25,15 @@ import java.io.IOException
 
         setContentView(R.layout.face_draw_settings)
 
-        val faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
+        faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
 
+
+        if(intent.extras?.get("selectedPoint.x")!=null) {
+            selectedPoint = Point(intent.extras?.get("selectedPoint.x") as Int, intent.extras?.get("selectedPoint.y") as Int)
+        }
+        val get = intent.extras?.get("googleFaceDetect")
+        if(get!=null)
+            faceOverlayView.googleFaceDetection = get as GoogleFaceDetection
 
         drawIfBitmap();
 
@@ -50,6 +59,16 @@ import java.io.IOException
             faceOverlayView.setDrawing(false)
 
             val intentBack = Intent(applicationContext, FaceActivity::class.java)
+
+            if(selectedPoint!=null) {
+                intentBack.putExtra("point.x", selectedPoint.x)
+                intentBack.putExtra("point.y", selectedPoint.y)
+            }
+            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+            }
+
+
             passParameters(intentBack)
         }
 

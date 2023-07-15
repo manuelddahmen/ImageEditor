@@ -182,8 +182,8 @@ import one.empty3.library.StructureMatrix;
         int surfaceId = FaceContour.FACE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.FACE).getPoints(), Color.WHITE), null,
-                        Color.WHITE, Color.BLUE, Color.BLACK));
+                        surfaceId, getPolygon(face.getContour(FaceContour.FACE).getPoints(), Color.YELLOW), null,
+                        Color.YELLOW, Color.BLUE, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYE;
         faceData.getFaceSurfaces().add(
                 new GoogleFaceDetection.FaceData.Surface(

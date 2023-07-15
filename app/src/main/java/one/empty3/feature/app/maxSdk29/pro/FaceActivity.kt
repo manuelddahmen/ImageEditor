@@ -2,6 +2,7 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
@@ -9,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import javaAnd.awt.Point
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.library.ColorTexture
@@ -21,7 +21,7 @@ import java.util.function.Consumer
 @ExperimentalCamera2Interop
 class FaceActivity : ActivitySuperClass() {
     private lateinit var originalImage: File
-    private lateinit var selectedPoint : Point
+    private var selectedPoint : android.graphics.Point? = null
     private lateinit var faceOverlayView:FaceOverlayView
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +34,19 @@ class FaceActivity : ActivitySuperClass() {
 
         drawIfBitmap();
 
+        if(intent.extras?.get("selectedPoint.x") !=null) {
+            selectedPoint?.x = (intent.extras?.get("selectedPoint.x") as Int)
+        }
+        if(intent.extras?.get("selectedPoint.y") !=null) {
+            selectedPoint?.y = (intent.extras?.get("selectedPoint.y") as Int)
+        }
 
-        if (currentFile != null) {
+        if(intent.extras?.get("googleFaceDetect")!=null) {
+            faceOverlayView.googleFaceDetection = intent.extras!!.get("googleFaceDetect") as GoogleFaceDetection?
+        }
+
+
+            if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
 
@@ -63,15 +74,22 @@ class FaceActivity : ActivitySuperClass() {
         face_draw_settings.setOnClickListener {
             faceOverlayView.isFinish = true
             val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
+            selectedPoint = (selectedPoint?:null) as Point
             if(selectedPoint!=null) {
-                intentSettings.putExtra("point.x", selectedPoint.x)
-                intentSettings.putExtra("point.y", selectedPoint.y)
+                intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
+                intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
+            }
+            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+                intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
             passParameters(intentSettings)
         }
 
         faceOverlayView.setOnClickListener{
-
+            val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
+            if(surface!=null) {
+                faceOverlayView.googleFaceDetection.selectedSurface = surface
+            }
         }
         faceOverlayView.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -87,19 +105,7 @@ class FaceActivity : ActivitySuperClass() {
 
 
                 if (checkPointCordinates(p)) {
-                    selectedPoint = p;
-                    /*faceOverlayView.googleFaceDetection.dataFaces.forEach { faceData ->
-                        {
-                            faceData.faceSurfaces.forEach { surface: GoogleFaceDetection.FaceData.Surface? ->
-                                {
-                                    if(surface!=null) {
-                                        //surface.polygon.
-                                    }
-                                }
 
-                            }
-                        }
-                    }*/
                 }
                 return true
             }
@@ -112,6 +118,13 @@ class FaceActivity : ActivitySuperClass() {
             faceOverlayView.isFinish = true
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
 
+            if(selectedPoint!=null) {
+                intentBack.putExtra("selectedPoint.x", selectedPoint!!.x)
+                intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
+            }
+            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+             }
             passParameters(intentBack)
 
         }
@@ -120,8 +133,8 @@ class FaceActivity : ActivitySuperClass() {
 
     }
     fun checkPointCordinates(a: Point): Boolean {
-        val x = a.getX().toInt()
-        val y = a.getY().toInt()
+        val x = a.x
+        val y = a.y
         return if (x >= 0 && x < faceOverlayView.width && y >= 0 && y < faceOverlayView.height) {
             true
         } else {
