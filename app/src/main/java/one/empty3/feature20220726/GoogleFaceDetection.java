@@ -1,15 +1,22 @@
 package one.empty3.feature20220726;
 
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
+import javaAnd.awt.Point;
+import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
+import one.empty3.library.StructureMatrix;
 
-public class GoogleFaceDetection {
+@ExperimentalCamera2Interop public class GoogleFaceDetection {
+    public double[] TRANSPARENT = new double[] {0,0,0};
     private List<FaceData> dataFaces;
 
-    public static class FaceData {
-        public static class Surface {
+    public class FaceData {
+        @ExperimentalCamera2Interop public class Surface {
             private int colorFill;
             private int colorContours;
             private int colorTransparent;
@@ -73,6 +80,13 @@ public class GoogleFaceDetection {
             public void setColorTransparent(int colorTransparent) {
                 this.colorTransparent = colorTransparent;
             }
+
+            public boolean isContaning(Point pInPicture) {
+                StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
+                double[] values = contours.getValues((int) (double) (pInPicture.x - boundRect2d.getElem(0).get(0)),
+                        (int) (double) (pInPicture.y - boundRect2d.getElem(0).get(1)));
+                return values.equals(TRANSPARENT);
+            }
         }
 
         private List<Surface> faceSurfaces;
@@ -108,4 +122,22 @@ public class GoogleFaceDetection {
     public void setDataFaces(List<FaceData> dataFaces) {
         this.dataFaces = dataFaces;
     }
+
+    public Polygon getPolygon(Point pInPicture) {
+        final FaceData.Surface[] surface = {null};
+        for (FaceData dataFace : dataFaces) {
+            dataFace.getFaceSurfaces().forEach(new Consumer<FaceData.Surface>() {
+                @Override
+                public void accept(FaceData.Surface surface1) {
+                    if(surface1.isContaning(pInPicture))
+                        surface[0] = surface1;
+                }
+            });
+        }
+        if(surface[0]!=null)
+            return surface[0].getPolygon();
+        else
+            return null;
+    }
+
 }

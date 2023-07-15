@@ -15,10 +15,13 @@ import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.library.ColorTexture
 import one.empty3.library.Point3D
 import one.empty3.library.Polygon
+import java.io.File
 import java.util.function.Consumer
 
 @ExperimentalCamera2Interop
 class FaceActivity : ActivitySuperClass() {
+    private lateinit var originalImage: File
+    private lateinit var selectedPoint : Point
     private lateinit var faceOverlayView:FaceOverlayView
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,7 @@ class FaceActivity : ActivitySuperClass() {
                 faceOverlayView.isFinish = false
                 faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
                 val writePhoto = Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
+                originalImage = currentFile
                 currentFile = writePhoto
                 Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
             }
@@ -59,6 +63,10 @@ class FaceActivity : ActivitySuperClass() {
         face_draw_settings.setOnClickListener {
             faceOverlayView.isFinish = true
             val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
+            if(selectedPoint!=null) {
+                intentSettings.putExtra("point.x", selectedPoint.x)
+                intentSettings.putExtra("point.y", selectedPoint.y)
+            }
             passParameters(intentSettings)
         }
 
@@ -79,7 +87,8 @@ class FaceActivity : ActivitySuperClass() {
 
 
                 if (checkPointCordinates(p)) {
-                    faceOverlayView.googleFaceDetection.dataFaces.forEach { faceData ->
+                    selectedPoint = p;
+                    /*faceOverlayView.googleFaceDetection.dataFaces.forEach { faceData ->
                         {
                             faceData.faceSurfaces.forEach { surface: GoogleFaceDetection.FaceData.Surface? ->
                                 {
@@ -90,7 +99,7 @@ class FaceActivity : ActivitySuperClass() {
 
                             }
                         }
-                    }
+                    }*/
                 }
                 return true
             }
@@ -102,6 +111,7 @@ class FaceActivity : ActivitySuperClass() {
             faceOverlayView.isDrawing = false
             faceOverlayView.isFinish = true
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
+
             passParameters(intentBack)
 
         }

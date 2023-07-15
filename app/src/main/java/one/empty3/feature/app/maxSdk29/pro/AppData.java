@@ -26,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 
+import one.empty3.feature20220726.GoogleFaceDetection;
+
 public class AppData {
     private static final String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private String[] cordsValues = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
@@ -36,6 +38,7 @@ public class AppData {
     public AppData() {
     }
 
+    private GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
 
     private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
     }
@@ -46,5 +49,13 @@ public class AppData {
 
     public void setCordsValues(String[] cordsValues) {
         this.cordsValues = cordsValues;
+    }
+
+    public GoogleFaceDetection getGoogleFaceDetection() {
+        return googleFaceDetection;
+    }
+
+    public void setGoogleFaceDetection(GoogleFaceDetection googleFaceDetection) {
+        this.googleFaceDetection = googleFaceDetection;
     }
 }

@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:versionName="3.0"
+        
         >
     <!--
     <queries>
@@ -185,5 +186,5 @@
                 android:value="face"
                 />
     </application>
-
+    
 </manifest>

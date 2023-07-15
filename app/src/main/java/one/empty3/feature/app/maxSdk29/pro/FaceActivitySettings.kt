@@ -3,6 +3,7 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -13,6 +14,8 @@ import javaAnd.awt.image.imageio.ImageIO
 import java.io.IOException
 
 @ExperimentalCamera2Interop class FaceActivitySettings : ActivitySuperClass() {
+
+    private lateinit var selectedPoint: Point
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,14 @@ import java.io.IOException
 
             val intentBack = Intent(applicationContext, FaceActivity::class.java)
             passParameters(intentBack)
+        }
+
+        selectedPoint = Point()
+        if(intent.extras?.get("selectedPoint.x") !=null) {
+            selectedPoint.x = intent.extras?.get("selectedPoint.x") as Int
+        }
+        if(intent.extras?.get("selectedPoint.y") !=null) {
+            selectedPoint.y = intent.extras?.get("selectedPoint.y") as Int
         }
 
     }
