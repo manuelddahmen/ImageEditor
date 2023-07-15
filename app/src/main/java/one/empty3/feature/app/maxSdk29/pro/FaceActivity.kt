@@ -74,7 +74,6 @@ class FaceActivity : ActivitySuperClass() {
         face_draw_settings.setOnClickListener {
             faceOverlayView.isFinish = true
             val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
-            selectedPoint = (selectedPoint?:null) as Point
             if(selectedPoint!=null) {
                 intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
                 intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
