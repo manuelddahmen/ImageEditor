@@ -20,9 +20,25 @@
     <Button
             android:layout_height="48dp"
             android:layout_width="match_parent"
+            android:id="@+id/choose_color"
+            app:layout_constraintBottom_toTopOf="@id/choose_image"
+            android:text="@string/choose_color"
+            app:layout_constraintTop_toBottomOf="@id/face_overlay"
+            />
+    <Button
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:id="@+id/choose_image"
+            app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back"
+            android:text="@string/choose_image"
+            app:layout_constraintTop_toBottomOf="@id/choose_color"
+            />
+    <Button
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
             android:id="@+id/face_draw_settings_back"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/title_activity_visual_face_effects"
-            app:layout_constraintTop_toBottomOf="@id/face_draw_settings_back"
+            app:layout_constraintTop_toBottomOf="@id/choose_image"
             />
 </androidx.constraintlayout.widget.ConstraintLayout>
