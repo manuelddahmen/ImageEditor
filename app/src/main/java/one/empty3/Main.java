@@ -1,19 +1,36 @@
 package one.empty3;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
-
-import one.empty3.feature20220726.*;
+import one.empty3.feature20220726.Classification;
+import one.empty3.feature20220726.DBScanProcess;
+import one.empty3.feature20220726.DericheFilterProcess;
+import one.empty3.feature20220726.DiffEnergy;
+import one.empty3.feature20220726.Draw;
+import one.empty3.feature20220726.ExtremaProcess;
+import one.empty3.feature20220726.GaussFilterProcess;
+import one.empty3.feature20220726.GradProcess;
+import one.empty3.feature20220726.HarrisProcess;
+import one.empty3.feature20220726.Histogram2;
+import one.empty3.feature20220726.Histogram3;
+import one.empty3.feature20220726.HoughTransform;
+import one.empty3.feature20220726.IdentNullProcess;
+import one.empty3.feature20220726.KMeans;
+import one.empty3.feature20220726.Lines;
+import one.empty3.feature20220726.Lines3;
+import one.empty3.feature20220726.Lines4;
+import one.empty3.feature20220726.Lines5;
+import one.empty3.feature20220726.Lines5colors;
+import one.empty3.feature20220726.MagnitudeProcess;
+import one.empty3.feature20220726.ProxyValue;
+import one.empty3.feature20220726.ProxyValue2;
+import one.empty3.feature20220726.Transform1;
+import one.empty3.feature20220726.TrueHarrisProcess;
+import one.empty3.feature20220726.Voronoi;
 import one.empty3.feature20220726.histograms.Histogram1;
 import one.empty3.io.ProcessFile;
 
 public class Main {
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static ArrayList<ProcessFile> initListProcesses() {
         final ArrayList<ProcessFile> listProcessClasses = new ArrayList<>();
         try {

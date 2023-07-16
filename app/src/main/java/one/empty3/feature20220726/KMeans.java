@@ -36,13 +36,10 @@ public class KMeans extends ProcessFile {
         // init centroids with random colored
         // points.
         try {
-            MakeDataset makeDataset;
-            makeDataset = new MakeDataset(in, new File(out.getAbsolutePath() + ".csv"), maxRes);
+            new MakeDataset(in, new File(out.getAbsolutePath() + ".csv"), maxRes);
 
             kClusterer = new K_Clusterer();
             kClusterer.process(in, new File(out.getAbsolutePath() + ".csv"), out, maxRes);
-
-            addSource(out);
 
             return true;
 

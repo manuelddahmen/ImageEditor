@@ -122,10 +122,12 @@ public class PixM extends MBitmap {
             f = 1.0;
         } else if (maxRes < image.getWidth() && maxRes < image.getHeight()) {
             f = 1.0 / Math.max(image.getWidth(), image.getHeight()) * maxRes;
+        } else if (maxRes >= image.getWidth() || maxRes >= image.getHeight()) {
+            f = 1.0;
         }
         double columns2 = 1.0 * image.getWidth() * f;
         double lines2 = 1.0 * image.getHeight() * f;
-        //System.out.println("pixm resampling init  --> from ("+image.getWidth()+","+image.getHeight()+") with resize<<(" + maxRes + ")>> to (" + columns2 + ", " + lines2 + ")");
+
         PixM pixM = new PixM((int) (columns2), ((int) lines2));
 
 

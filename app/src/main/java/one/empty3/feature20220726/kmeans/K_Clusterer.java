@@ -30,23 +30,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 import javaAnd.awt.Color;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-public class K_Clusterer /*extends ReadDataset*/ {
+public class K_Clusterer {
 
-    boolean shouldOverwrite = true;
-    public List<double[]> features = new ArrayList<>();
+    protected List<double[]> features = new ArrayList<>();
     public final int numberOfFeatures = 5;
+    public static final int k = 20;
+    protected Map<double[], Integer> clustersPrint;
+    protected Map<double[], Integer> clusters;
+    public Map<Integer, double[]> centroids;
 
     public List<double[]> getFeatures() {
         return features;
@@ -59,6 +61,9 @@ public class K_Clusterer /*extends ReadDataset*/ {
         try {
             BufferedReader readFile = new BufferedReader(new FileReader(file));
             String line;
+
+            features = new ArrayList<>();
+
             while ((line = readFile.readLine()) != null) {
 
                 String[] split = line.split(" ");
@@ -77,6 +82,8 @@ public class K_Clusterer /*extends ReadDataset*/ {
             e.printStackTrace();
         }
 
+        System.out.println("Debug KClusterer"+features.size());
+
     }
 
 
@@ -92,11 +99,6 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     }
 
-    private static final int K = 20;
-    static int k = 20;
-    protected Map<double[], Integer> clustersPrint;
-    protected Map<double[], Integer> clusters;
-    public Map<Integer, double[]> centroids;
 
     public K_Clusterer() {
     }
@@ -104,21 +106,13 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     //main method
     public void process(File in, File inCsv, File out, int res) throws IOException {
-        features = new ArrayList<>();
-
         PixM pix;
         try {
-            if (res > 0)
-                pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
-            else
-                pix = new PixM(Objects.requireNonNull(ImageIO.read(in)));
-            PixM pix2 = new PixM(
-                    pix.getColumns(),
-                    pix.getLines()
-            );
 
-            String fileCsv = inCsv.getAbsolutePath();
-            features.clear();
+            pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
+
+            PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
+
             read(inCsv); //load data
 
 
@@ -130,21 +124,22 @@ public class K_Clusterer /*extends ReadDataset*/ {
             centroids = new HashMap<>();
 
             //features = r1.features;
+            int r = 0;
 
+            int iterations = 1000;
             do {
-                int k = K;
                 //Scanner sc = new Scanner(System.in);
                 int max_iterations = 100;//sc.nextInt();
                 int distance = 1;//sc.nextInt();
                 //Hashmap to store centroids with index
                 // calculating initial centroids
-                double[] x1 = new double[numberOfFeatures];
-                int r = 0;
+                double[] x1;
+
+                int j = 0;
                 for (int i = 0; i < k; i++) {
-
-                    x1 = features.get(r++);
+                    x1 = features.get(r);
                     centroids.put(i, x1);
-
+                    r++;
                 }
                 //Hashmap for finding cluster indexes
                 clusters = kmeans(distance, centroids, k);
@@ -152,13 +147,8 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 double[] db = new double[numberOfFeatures];
                 //reassigning to new clusters
                 for (int i = 0; i < max_iterations; i++) {
-                    for (int j = 0; j < k; j++) {
-                        List<double[]> list = new ArrayList<>();
-                        for (double[] key : clusters.keySet()) {
-                            if (clusters.get(key) == j) {
-                                list.add(key);
-                            }
-                        }
+                    for (j = 0; j < k; j++) {
+                        List<double[]> list = new ArrayList<>(clusters.keySet());
                         db = centroidCalculator(j, list);
                         centroids.put(j, db);
 
@@ -186,26 +176,55 @@ public class K_Clusterer /*extends ReadDataset*/ {
                     wcss += sse;
                 }
                 String dis = "";
-                if (distance == 1)
+                /*if (distance == 1)
                     dis = "Euclidean";
                 else
                     dis = "Manhattan";
+                */
                 ex = 0;
-            } while (ex == 1);
+                iterations++;
+            } while (iterations<100);
 
-            android.graphics.Color[] colors = new android.graphics.Color[k];
-            for (int i = 0; i < k; i++)
+            android.graphics.Color[] colors = new android.graphics.Color[centroids.size()];
+            for (int i = 0; i < centroids.size(); i++)
                 colors[i] = Color.random();
             clustersPrint = clusters;
+/*
+            centroids.forEach((integer1, db1) -> {
+                clustersPrint.forEach((db2, integer2) -> {
+                    if (integer1.equals(integer2)) {
+                        pix2.setValues((int) (float) (db1[0]), (int) (float) (db1[1]),
+                                colors[integer2].red(), colors[integer2].green(),
+                                colors[integer2].blue());
+                    }
 
+                });
+            });
+*/
+            clustersPrint.forEach(new BiConsumer<double[], Integer>() {
+                @Override
+                public void accept(double[] doubles, Integer integer1) {
+                    centroids.forEach(new BiConsumer<Integer, double[]>() {
+                        @Override
+                        public void accept(Integer integer2, double[] doubles) {
+                            if(Objects.equals(integer2, integer1)) {
+                                pix2.setValues((int) (float) (doubles[0]), (int) (float) (doubles[1]),
+                                        colors[integer2].red(), colors[integer2].green(),
+                                        colors[integer2].blue());
+                            }
+                        }
+                    });
+                }
+            });
+/*
             centroids.forEach((integer1, db1) -> clustersPrint.forEach((doubles, integer2) -> {
                 pix2.setValues((int) (float) (doubles[0]), (int) (float) (doubles[1]),
                         colors[integer2].red(), colors[integer2].green(),
                         colors[integer2].blue());
 
             }));
-
-            ImageIO.write(pix2.normalize(0.0, 1.0).getBitmap(), "jpg", out);//.getImage()
+*/
+            ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out, true);//.getImage()
 
         } catch (Exception ex1) {
             ex1.printStackTrace();

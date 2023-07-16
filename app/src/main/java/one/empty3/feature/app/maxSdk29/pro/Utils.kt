@@ -160,8 +160,8 @@ import kotlin.math.max
             }
         } else bitmap2 = bitmap
         try {
-            if (!file1.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file1, shouldOverwrite)) {
+            if (!file1.exists() || shouldOverwrite) {
+                if (ImageIO.write(bitmap2, "jpg", file1)) {
                     fileWritten = file1;
                     written = true
                     System.out.println("File written1: $file1")
@@ -544,11 +544,12 @@ import kotlin.math.max
             val fileInThumb = getFilesFile("thumbIn-" + effect + randomUUID + "-jpg")
             ImageIO.write(
                 PixM.getPixM(
-                    ImageIO.read(fileIn).bitmap,
-                    Math.max(p.columns, p.lines)
+                    ImageIO.read(fileIn).getBitmap(),
+                    Math.max(p.getColumns(), p.getLines())
                 ).bitmap, "jpg", fileInThumb
             )
             val fileOut = getFilesFile("thumbOut-" + effect + randomUUID + "-jpg")
+            effect.setMaxRes(30)
             if (effect.process(fileInThumb, fileOut)) {
                 return fileOut
             }

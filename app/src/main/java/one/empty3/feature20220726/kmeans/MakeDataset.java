@@ -20,14 +20,14 @@
 
 package one.empty3.feature20220726.kmeans;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+
+import javaAnd.awt.image.BufferedImage;
+import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.feature20220726.PixM;
 
 /*
  line : l, c, r, g, b
@@ -38,29 +38,28 @@ public class MakeDataset {
         try {
             BufferedImage img = ImageIO.read(image);
             PixM pix;
-            if (res > 0)
 
-                pix = PixM.getPixM(img, res);
-            else
-                pix = new PixM(img);
+            assert img != null;
+            pix = PixM.getPixM(img, res);
 
             PrintWriter pw = new PrintWriter(outputCsv);
-            for (int l = 0; l < pix.getLines(); l++)
-                for (int c = 0; c < pix.getColumns(); c++) {
-                    //if (pix.luminance(c, l) > 0.1) { // ADDED
-                    pix.setCompNo(0);
-                    double r = pix.get(c, l);
+            if (pix != null) {
+                for (int l = 0; l < pix.getLines(); l++)
+                    for (int c = 0; c < pix.getColumns(); c++) {
+                        //if (pix.luminance(c, l) > 0.1) { // ADDED
+                        pix.setCompNo(0);
+                        double r = pix.get(c, l);
 
-                    pix.setCompNo(1);
-                    double g = pix.get(c, l);
+                        pix.setCompNo(1);
+                        double g = pix.get(c, l);
 
-                    pix.setCompNo(2);
-                    double b = pix.get(c, l);
+                        pix.setCompNo(2);
+                        double b = pix.get(c, l);
 
-                    pw.println("" + c + " " + l + " " +
-                            r + " " + g + " " + b);
-                    //}
-                }
+                        pw.println("" + c + " " + l + " " +
+                                r + " " + g + " " + b);
+                    }
+            }
             pw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
