@@ -38,29 +38,40 @@ public class MakeDataset {
         try {
             BufferedImage img = ImageIO.read(image);
             PixM pix;
+            if (res > 0)
 
-            assert img != null;
-            pix = PixM.getPixM(img, res);
+                pix = PixM.getPixM(img, res);
+            else
+                pix = new PixM(img);
+
+            System.out.println("size out : " + pix.getColumns()+", "+pix.getLines());
+
+            int i = 0;
 
             PrintWriter pw = new PrintWriter(outputCsv);
-            if (pix != null) {
-                for (int l = 0; l < pix.getLines(); l++)
-                    for (int c = 0; c < pix.getColumns(); c++) {
-                        //if (pix.luminance(c, l) > 0.1) { // ADDED
-                        pix.setCompNo(0);
-                        double r = pix.get(c, l);
+            for (int l = 0; l < pix.getLines(); l++)
+                for (int c = 0; c < pix.getColumns(); c++) {
+                    //if (pix.luminance(c, l) > 0.1) { // ADDED
+                    pix.setCompNo(0);
+                    double r = pix.get(c, l);
 
-                        pix.setCompNo(1);
-                        double g = pix.get(c, l);
+                    pix.setCompNo(1);
+                    double g = pix.get(c, l);
 
-                        pix.setCompNo(2);
-                        double b = pix.get(c, l);
+                    pix.setCompNo(2);
+                    double b = pix.get(c, l);
 
-                        pw.println("" + c + " " + l + " " +
-                                r + " " + g + " " + b);
-                    }
-            }
+                     pw.println("" + c + " " + l + " " +
+                            r + " " + g + " " + b);
+                    //}
+                    i++;
+                }
             pw.close();
+
+
+            System.out.println("MakeDataset csv lines: " + i);
+            System.out.println("MakeDataset : " + outputCsv.getAbsolutePath());
+            System.out.println("MakeDataset output csv exists?: " + outputCsv.exists());
         } catch (IOException ex) {
             ex.printStackTrace();
         }

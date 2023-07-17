@@ -31,7 +31,6 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 
 public class ClassificationAvgColors extends ProcessFile {
     public ClassificationAvgColors() {
@@ -47,7 +46,7 @@ public class ClassificationAvgColors extends ProcessFile {
         BufferedImage original = ImageIO.read(in);
         PixM pixMOriginal = new PixM(Objects.requireNonNull(original));
         PixM toProcess = new PixM(original);
-        Map<Integer, double[]> c = classification.kClusterer.centroids;
+        Map<Integer, double[]> c = classification.kclusterer.centroids;
         Map<Integer, Point3D> sum = new HashMap<>();
         Map<Integer, Integer> count = new HashMap<>();
         // Faire les moyennes des points de même groupe

@@ -28,7 +28,7 @@ import one.empty3.io.ProcessFile;
 
 
 public class KMeans extends ProcessFile {
-    protected K_Clusterer kClusterer;
+    protected K_Clusterer kclusterer;
 
     public boolean process(File in, File out) {
         if (!isImage(in))
@@ -36,10 +36,20 @@ public class KMeans extends ProcessFile {
         // init centroids with random colored
         // points.
         try {
-            new MakeDataset(in, new File(out.getAbsolutePath() + ".csv"), maxRes);
+            File inCsv = new File(out.getAbsolutePath() + ".csv");
+            if(inCsv.exists()) {
+                boolean deleted = inCsv.delete();
+                if(deleted)
+                    System.out.println("Fichier csv supprimé");
+            }
 
-            kClusterer = new K_Clusterer();
-            kClusterer.process(in, new File(out.getAbsolutePath() + ".csv"), out, maxRes);
+
+            new MakeDataset(in, inCsv, maxRes);
+
+            kclusterer = new K_Clusterer();
+            kclusterer.process(in, inCsv, out, maxRes);
+
+            addSource(out);
 
             return true;
 

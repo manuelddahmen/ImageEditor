@@ -65,7 +65,7 @@ public class Distance {
             double comp = (point1[i + 2] - point2[i + 2]) * (point1[i + 2] - point2[i + 2]);
             sumSpace += comp;
         }
-        return Math.sqrt(sumSpace * sumColor);
+        return Math.sqrt(sumSpace /** sumColor*/);
     }
 
     public static double manhattanDistance(double[] point1, double[] point2) {

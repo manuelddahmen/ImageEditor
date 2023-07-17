@@ -232,7 +232,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                             currentOutputFile
                                         ))) {
 
-                                        println("Error processing file.")
+                                        println("Error processing file.Error processing file.")
                                         println("Error in " + processFile!!.javaClass.name)
                                         Toast.makeText(
                                             applicationContext,
