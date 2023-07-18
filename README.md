@@ -73,8 +73,13 @@ ZBufferImpl Java implementation #1
 Try to use ZBufferImpl 3D drawer.
 First drawn polygons.
 In place subimages
-Try to fill polygons with colors #2
+Try to fill polygons with colors #9 WORK
+Dependencies updates.
+Try with InstallReferrer
+SettingsActivityFace for Faces parts colors and textures.
 
+Restore KMeans.java to 09-jun-2023.
+Error in PixM.setValues(int,int,double...) FIXED.
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -174,5 +179,10 @@ ZBufferImpl Java implementation #1
 Try to use ZBufferImpl 3D drawer.
 First drawn polygons.
 In place subimages
-Try to fill polygons with colors #2
+   Try to fill polygons with colors #9 WORK
+   Dependencies updates.
+   Try with InstallReferrer
+   SettingsActivityFace for Faces parts colors and textures.
+Restore KMeans.java to 09-jun-2023.
+Error in PixM.setValues(int,int,double...) FIXED.
 </fr-FR>
