@@ -48,22 +48,24 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(10);
     }
-
+    private Class that;
     private RectF rect = null;
     private boolean isDrawingRect = false;
 
     public ImageViewSelection(@NonNull Context context) {
         super(context);
-
+        that = this.getClass();
     }
 
 
     public ImageViewSelection(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        that = this.getClass();
     }
 
     public ImageViewSelection(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        that = this.getClass();
     }
 
     public void setDrawingRect(RectF rect) {
@@ -100,7 +102,9 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
             public void run() {
                 //Log.d("ImageViewSelection::setImageBitmap", "change image on UI thread");
                 setImageBitmap(bm);
-                pixels = new PixM(bm);
+                if(that.equals(ImageViewSelection.class)) {
+                    pixels = new PixM(bm);
+                }
             }
         });
 

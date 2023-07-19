@@ -27,7 +27,7 @@ import one.empty3.feature20220726.kmeans.MakeDataset;
 import one.empty3.io.ProcessFile;
 
 
-public class KMeans extends ProcessFile {
+public class KMeansRandom extends ProcessFile {
     protected K_Clusterer kclusterer;
 
     public boolean process(File in, File out) {
@@ -47,7 +47,7 @@ public class KMeans extends ProcessFile {
             new MakeDataset(in, inCsv, maxRes);
 
             kclusterer = new K_Clusterer();
-            kclusterer.setRandom(false);
+            kclusterer.setRandom(true);
             kclusterer.process(in, inCsv, out, maxRes);
 
             addSource(out);

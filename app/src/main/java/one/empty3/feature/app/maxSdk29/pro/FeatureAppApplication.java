@@ -23,7 +23,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.app.Application;
 
 public class FeatureAppApplication extends Application {
-    private int maxRes = 200;
+    private int maxRes = R.string.maxRes_1200;
     @Override
     public void onCreate() {
         super.onCreate();

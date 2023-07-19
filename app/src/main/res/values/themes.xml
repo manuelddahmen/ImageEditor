@@ -21,7 +21,8 @@
 <resources>
     
     <style name="Theme.FeatureAppmain" parent="Theme.Material3.DayNight">
-        <item name="android:colorBackground">@color/light_blue_600</item>
+        <!--<item name="android:colorBackground">@color/light_blue_600</item>-->
+        <item name="android:colorBackground">#FFFFFF</item>
         <item name="android:color">#F0F6F9</item>
         <item name="android:textSize">10sp</item>
         <item name="windowActionBar">false</item>

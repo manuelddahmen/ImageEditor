@@ -46,16 +46,20 @@ public class K_Clusterer /*extends ReadDataset*/ {
     protected Map<double[], Integer> clustersPrint;
     protected Map<double[], Integer> clusters;
     public Map<Integer, double[]> centroids;
+    private boolean random = true;
+
     public K_Clusterer() {
     }
+
     public List<double[]> getFeatures() {
         return features;
     }
+
     public void read(File s) throws NumberFormatException, IOException {
 
         try {
             BufferedReader readFile = new BufferedReader(new FileReader(s));
-            int j=0;
+            int j = 0;
             String line;
             while ((line = readFile.readLine()) != null) {
 
@@ -63,7 +67,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 double[] feature = new double[5];
                 int i;
 
-                assert split.length==5;
+                assert split.length == 5;
 
                 for (i = 0; i < split.length; i++)
                     feature[i] = Double.parseDouble(split[i]);
@@ -75,7 +79,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             readFile.close();
 
 
-            System.out.println("MakeDataset csv out size: " + j+" " + features.size());
+            System.out.println("MakeDataset csv out size: " + j + " " + features.size());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -85,11 +89,9 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     void display() {
         for (double[] db : features) {
-                System.out.println(db[0] + " "+db[1] + " "+db[2] + " "+db[3] + " "+db[4]);
+            System.out.println(db[0] + " " + db[1] + " " + db[2] + " " + db[3] + " " + db[4]);
         }
     }
-
-
 
 
     //main method
@@ -101,7 +103,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
             PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
 
-            System.out.println("size out : " + pix2.getColumns()+", "+pix2.getLines());
+            System.out.println("size out : " + pix2.getColumns() + ", " + pix2.getLines());
 
             String fileCsv = inCsv.getAbsolutePath();
             features.clear();
@@ -130,8 +132,8 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 double[] x1 = new double[numberOfFeatures];
                 int r = 0;
                 for (int i = 0; i < k; i++) {
-                    int r1 = (int)(Math.random()*features.size());
-                    r1 = (r1>=features.size()?features.size()-1:r1);
+                    int r1 = (int) (Math.random() * features.size());
+                    r1 = (r1 >= features.size() ? features.size() - 1 : r1);
 
                     x1 = features.get(r1);
                     centroids.put(i, x1);
@@ -178,20 +180,46 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 }
                 String dis = "";
                 dis = "Euclidean";
-                ex ++;
-            } while (ex<1);
+                ex++;
+            } while (ex < 1);
 
             android.graphics.Color[] colors = new android.graphics.Color[K];
             for (int i = 0; i < K; i++)
                 colors[i] = Colors.random();
             clustersPrint = clusters;
 
-            centroids.forEach((integer1, db1) -> clustersPrint.forEach((doubles, integer2) -> {
-                pix2.setValues((int) (float) (doubles[0]), (int) (float) (doubles[1]),
-                        colors[integer2].red(), colors[integer2].green(),
-                        colors[integer2].blue());
 
-            }));
+            double[][] realValues = new double[K][6];
+
+
+            centroids.forEach((i, doubles) -> {
+                clustersPrint.forEach((d1, i2) -> {
+
+                    for (int j = 2; j < 5; j++) {
+                        pix.setCompNo(j - 2);
+                        realValues[i2][j] += pix.get((int) (float) (d1[0]), (int) (float) (d1[1]));
+                    }
+                    realValues[i2][5]++;
+                });
+            });
+
+
+            for(int i2=0; i2<K; i2++) {
+                for (int j = 2; j < 5; j++) {
+                    realValues[i2][j] /= realValues[i2][5];
+                }
+            }
+            centroids.forEach((i, doubles) -> {
+                clustersPrint.forEach((d1, i2) -> {
+                    if(random) {
+                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
+                        colors[i2].red(), colors[i2].green(), colors[i2].blue());
+                    } else {
+                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
+                                realValues[i2][2], realValues[i2][3], realValues[i2][4]);
+                    }
+                });
+            });
 
             ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out);//.getImage()
 
@@ -245,4 +273,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
         return clusters;
     }
 
+    public void setRandom(boolean b) {
+        this.random = b;
+    }
 }
