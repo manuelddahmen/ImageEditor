@@ -21,8 +21,20 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.app.Application;
+import android.util.Log;
 
-public class FeatureAppApplication extends Application {
+import androidx.annotation.NonNull;
+import androidx.work.Configuration;
+
+public class FeatureAppApplication extends Application implements Configuration.Provider {
+
+    @NonNull
+    public Configuration getWorkManagerConfiguration() {
+        Configuration configuration = new Configuration.Builder()
+                .setMinimumLoggingLevel(Log.VERBOSE)
+                .build();
+        return configuration;
+    }
     private int maxRes = R.string.maxRes_1200;
     @Override
     public void onCreate() {

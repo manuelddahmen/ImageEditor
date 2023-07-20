@@ -21,12 +21,9 @@
 package one.empty3;
 
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import one.empty3.feature20220726.Classification;
 import one.empty3.feature20220726.DBScanProcess;
 import one.empty3.feature20220726.ExtremaProcess;
 import one.empty3.feature20220726.GaussFilterProcess;
@@ -37,10 +34,9 @@ import one.empty3.feature20220726.HarrisProcess;
 import one.empty3.feature20220726.Histogram0;
 import one.empty3.feature20220726.Histogram2;
 import one.empty3.feature20220726.Histogram3;
-import one.empty3.feature20220726.HoughTransform;
 import one.empty3.feature20220726.IdentNullProcess;
 import one.empty3.feature20220726.KMeans;
-import one.empty3.feature20220726.Lines7luckyLinesOutline;
+import one.empty3.feature20220726.KMeansRandom;
 import one.empty3.feature20220726.LocalExtremaProcess;
 import one.empty3.feature20220726.ProxyValue;
 import one.empty3.feature20220726.ProxyValue2;
@@ -83,6 +79,7 @@ public class Main2022 {
             listProcessClasses.put("IdentNullProcess", IdentNullProcess.class.newInstance());
             //listProcessClasses.put("", IsleProcess.class.newInstance());
             listProcessClasses.put("KMeans", KMeans.class.newInstance());
+            listProcessClasses.put("KMeansRandom", KMeansRandom.class.newInstance());
             //listProcessClasses.put("Lines", Lines.class.newInstance());
             //listProcessClasses.put("Lines3", Lines3.class.newInstance());
             //listProcessClasses.put("Lines4", Lines4.class.newInstance());
