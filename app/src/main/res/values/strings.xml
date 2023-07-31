@@ -242,5 +242,6 @@
     <string name="back_to_main">Back to main</string>
     <string name="choose_image">Choose image</string>
     <string name="choose_color">Choose color</string>
+    <string name="title_activity_picture_data">PictureDataActivity</string>
 
 </resources>

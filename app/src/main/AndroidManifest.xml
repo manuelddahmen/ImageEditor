@@ -3,7 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:versionName="3.0"
-        
         >
     <!--
     <queries>
@@ -28,6 +27,7 @@
     <application
             android:name=".FeatureAppApplication"
             android:allowBackup="true"
+            android:enableOnBackInvokedCallback="true"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:icon="@drawable/app_icon"
@@ -36,16 +36,26 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.FeatureAppmain"
             android:usesCleartextTraffic="true"
-            android:enableOnBackInvokedCallback="true"
-            tools:targetApi="tiramisu">
-        <activity android:name=".VisualFaceEffects"
+            tools:targetApi="tiramisu"
+            >
+        <activity
+                android:name=".PictureDataActivity"
+                android:exported="false"
+                android:label="@string/title_activity_picture_data"
+                android:theme="@style/Theme.FeatureAppmain"
+                />
+        <activity
+                android:name=".VisualFaceEffects"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Visual Effects"
-                android:theme="@style/Theme.FeatureAppmain">
+                android:theme="@style/Theme.FeatureAppmain"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+    
                 <category android:name="android.intent.category.DEFAULT" />
+    
                 <data android:mimeType="image/jpg" />
             </intent-filter>
         </activity>
@@ -155,7 +165,6 @@
                 android:label="Face Overpaint"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
-        
         <activity
                 android:name=".FaceActivitySettings"
                 android:exported="false"
@@ -163,6 +172,7 @@
                 android:label="Face Overpaint"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
+        
         <provider
                 android:name=".MyFileProvider"
                 android:authorities="one.empty3.fileprovider"
@@ -186,5 +196,5 @@
                 android:value="face"
                 />
     </application>
-    
+
 </manifest>

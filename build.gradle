@@ -4,17 +4,19 @@ buildscript {
     ext.java_version = JavaVersion.VERSION_11
     ext {
         compose_ui_version = '1.4.2'
+        roomVersion = '1.1.1'
+        archLifecycleVersion = '1.1.1'
     }
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io"
+        maven {
+            url "https://jitpack.io"
         }
         maven {
             url "https://mvnrepository.com/"
         }
     }
-
 
 
     dependencies {
