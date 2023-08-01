@@ -21,15 +21,13 @@ package one.empty3.io;
 
 import java.io.File;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.List;
 import java.util.Properties;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.ProcessBean;
 import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.ProcessBean;
 import one.empty3.feature20220726.process.InProcessCode;
 
 public class ProcessNFiles  {
@@ -37,7 +35,7 @@ public class ProcessNFiles  {
     public List<ProcessNFiles> processNFiles = new ArrayList<>();
     protected ObjectWithProperties properties;
     public ProcessBean bean;
-    protected int maxRes = 400;
+    protected int maxRes = 1200;
     private Properties property;
     private File outputDirectory = null;
     private List<File> imagesStack = new ArrayList<>();

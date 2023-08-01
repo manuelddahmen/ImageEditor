@@ -48,6 +48,7 @@ import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.Main2022.initListProcesses
 import one.empty3.Run
+import one.empty3.feature20220726.MBitmap.maxRes
 import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
 import java.io.*
@@ -58,7 +59,6 @@ import kotlin.math.max
 
 
 @ExperimentalCamera2Interop public class Utils() {
-    private var maxRes: Int = 200
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -98,7 +98,7 @@ import kotlin.math.max
      * @return file
      */
     fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
-        maxRes = getMaxRes(activity)
+        val maxRes = getMaxRes(activity)
         var written = false;
         var fileWritten: File? = null;
 
@@ -212,7 +212,7 @@ import kotlin.math.max
 
     public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
         var maxRes: Int = 0;
-        maxRes = activity.intent.getIntExtra("maxRes", -1)
+        maxRes = activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
@@ -272,7 +272,7 @@ import kotlin.math.max
                 j++
             }
         }
-        intent.putExtra("maxRes", activity?.maxRes)
+        intent.putExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         return currentFile
     }
 
@@ -362,8 +362,8 @@ import kotlin.math.max
                 else
                     cb = Bitmap.createBitmap(
                         mBitmap, 0, 0,
-                        (getImageRatio(mBitmap) * this.maxRes).toInt(),
-                        this.maxRes
+                        (getImageRatio(mBitmap) * maxRes).toInt(),
+                        maxRes
                     )
 
                 val dim: Int = getMaxRes(activity)
@@ -444,7 +444,7 @@ import kotlin.math.max
     }
 
     public fun getMaxRes(activity: ActivitySuperClass): Int {
-        var maxRes: Int = 200
+        var maxRes: Int = 1200
         if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
             val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
             if (maxResText != null) {
@@ -454,9 +454,9 @@ import kotlin.math.max
                         maxRes = maxResStr.toString().toDouble().toInt()
                         return maxRes;
                     } catch (_: java.lang.NumberFormatException) {
-                        maxRes = activity.maxRes
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
                     } catch (_: NullPointerException) {
-                        maxRes = activity.maxRes
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
                     }
                 }
             }

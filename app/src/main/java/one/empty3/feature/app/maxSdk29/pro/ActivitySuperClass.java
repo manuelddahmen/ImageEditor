@@ -49,7 +49,7 @@ import one.empty3.feature20220726.PixM;
 @ExperimentalCamera2Interop
 public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
-    public static final int MAXRES_DEFAULT = 500;
+    public static final int MAXRES_DEFAULT = 1200;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private static final int ONSAVE_INSTANCE_STATE = 21516;
     private static final int ONRESTORE_INSTANCE_STATE = 51521;
@@ -239,7 +239,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             ex.printStackTrace();
         }
             try {
-            String maxRes1 = properties.getProperty("maxRes", "" + maxRes);
+            String maxRes1 = properties.getProperty("maxRes", "" + MAXRES_DEFAULT);
             if(maxRes1!=null && maxRes1.length()>0) {
                 try {
                     maxRes = (int)Double.parseDouble(maxRes1);

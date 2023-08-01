@@ -31,7 +31,7 @@ public class ExampleUnitTest {
         System.out.println("in : " + in.getAbsolutePath());
         System.out.println("out: " + out.getAbsolutePath());
         try {
-            processFile.setMaxRes(200);
+            processFile.setMaxRes(1200);
             processFile.shouldOverwrite = true;
             if (processFile.isImage(in)) {
                 Assert.assertTrue(processFile.process(in, out));

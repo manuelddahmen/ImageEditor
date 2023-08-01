@@ -1,8 +1,5 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
-import one.empty3.Main2022;
-import one.empty3.io.ProcessFile;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,8 +7,8 @@ import java.io.File;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import one.empty3.Main2022;
+import one.empty3.io.ProcessFile;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -33,7 +30,7 @@ public class ExampleUnitTest {
         System.out.println("in : " + in.getAbsolutePath());
         System.out.println("out: " + out.getAbsolutePath());
         try {
-            processFile.setMaxRes(200);
+            processFile.setMaxRes(1200);
             processFile.shouldOverwrite = true;
             if (processFile.isImage(in)) {
                 Assert.assertTrue(processFile.process(in, out));
