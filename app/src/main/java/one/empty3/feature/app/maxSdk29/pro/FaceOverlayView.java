@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
@@ -514,7 +513,7 @@ import one.empty3.library.StructureMatrix;
             Rect rect = face.getBoundingBox();
             PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
             PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));
-            mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
+            //mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
             action(face, faceData);
         }
     }
