@@ -17,6 +17,16 @@
             app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back"
             />
     
+    <one.empty3.feature.app.maxSdk29.pro.FaceOverlayView
+            android:id="@+id/polygon_details"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:minHeight="300dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:flow_horizontalAlign="start"
+            app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back"
+            />
     <Button
             android:layout_height="48dp"
             android:layout_width="match_parent"

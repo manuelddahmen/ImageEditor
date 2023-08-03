@@ -31,7 +31,7 @@ public class ParcelableAppData implements Parcelable {
     private String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private String[] cordsValues = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private Intent intent;
-    private int maxRes = ActivitySuperClass.MAXRES_DEFAULT;
+    private int maxRes = (int) Double.parseDouble(String.valueOf(R.string.maxRes_1200));
 
     public void setIntent(Intent intent) {
         this.intent = intent;

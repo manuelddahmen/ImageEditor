@@ -1,5 +1,6 @@
 package one.empty3.feature20220726;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Parcel;
@@ -7,6 +8,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,39 @@ import one.empty3.library.StructureMatrix;
     private List<FaceData> dataFaces;
 
     protected GoogleFaceDetection(Parcel in) {
+        in.readTypedObject(new Creator<Object>() {
+            @Override
+            public Object createFromParcel(Parcel parcel) {
+                GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+                int numFaces = parcel.readInt();
+                for (int face = 0; face < numFaces; face++) {
+                    int id = parcel.readInt();
+
+                    FaceData faceData = new FaceData();
+
+                    int numPoly = parcel.readInt();
+
+                    for (int i = 0; i < numPoly; i++) {
+                        Polygon polygon = Polygon.CREATOR.createFromParcel(parcel);
+                        PixM contours = PixM.CREATOR.createFromParcel(parcel);
+                        int colorFill = parcel.readInt();
+                        int colorContours = parcel.readInt();
+                        int colorTransparent = parcel.readInt();
+
+                        faceData.getFaceSurfaces().add(new FaceData.Surface(id, polygon, contours, colorFill, colorContours,
+                                colorTransparent));
+
+                    }
+                    googleFaceDetection.getDataFaces().add(faceData);
+                }
+                return googleFaceDetection;
+            }
+
+            @Override
+            public Object[] newArray(int i) {
+                return new Object[0];
+            }
+        });
     }
 
     public static final Creator<GoogleFaceDetection> CREATOR = new Creator<GoogleFaceDetection>() {
@@ -44,7 +80,24 @@ import one.empty3.library.StructureMatrix;
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(getDataFaces().size());
+        for (int face = 0; face < getDataFaces().size(); face++) {
+            parcel.writeInt(getDataFaces().size());
 
+            FaceData faceData =getDataFaces().get(face);
+
+            parcel.writeInt(faceData.getFaceSurfaces().size());
+
+            for (int j = 0; j < faceData.getFaceSurfaces().size(); j++) {
+                FaceData.Surface surface = faceData.getFaceSurfaces().get(j);
+                parcel.writeParcelable(surface.polygon, 1);
+                parcel.writeParcelable(surface.contours, 1);
+                parcel.writeInt(getSelectedSurface().colorFill);
+                parcel.writeInt(getSelectedSurface().colorContours);
+                parcel.writeInt(getSelectedSurface().colorTransparent);
+
+            }
+        }
     }
 
     public static class FaceData {
@@ -55,6 +108,8 @@ import one.empty3.library.StructureMatrix;
             private int surfaceId;
             private Polygon polygon;
             private PixM contours;
+            @Nullable
+            public Bitmap actualDrawing;
 
             public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
                 this.surfaceId = surfaceId;
@@ -63,6 +118,7 @@ import one.empty3.library.StructureMatrix;
                 this.colorFill = colorFill;
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
+                actualDrawing = contours.getBitmap();
             }
 
             public int getSurfaceId() {
@@ -178,5 +234,9 @@ import one.empty3.library.StructureMatrix;
 
     public void setSelectedSurface(FaceData.Surface selectedSurface) {
         this.selectedSurface = selectedSurface;
+    }
+
+    public Bitmap getBitmap() {
+        return null;
     }
 }

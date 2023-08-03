@@ -4,21 +4,26 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
-
-import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+import androidx.compose.material3.surfaceColorAtElevation
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
-import java.io.IOException
+import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
+import one.empty3.library.Lumiere
+import one.empty3.library.Polygon
+import java.util.function.Consumer
 
-@ExperimentalCamera2Interop class FaceActivitySettings : ActivitySuperClass() {
+@ExperimentalCamera2Interop
+class FaceActivitySettings : ActivitySuperClass() {
 
+    private lateinit var selectedSurface: Surface
     private lateinit var selectedPoint: Point
-    private lateinit var faceOverlayView:FaceOverlayView
-
+    private lateinit var faceOverlayView: FaceOverlayView
+    private lateinit var googleFaceDetection: GoogleFaceDetection
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,18 +32,21 @@ import java.io.IOException
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
 
 
-        if(intent.extras?.get("selectedPoint.x")!=null) {
-            selectedPoint = Point(intent.extras?.get("selectedPoint.x") as Int, intent.extras?.get("selectedPoint.y") as Int)
+        if (intent.extras?.get("selectedPoint.x") != null) {
+            selectedPoint = Point(
+                intent.extras?.get("selectedPoint.x") as Int,
+                intent.extras?.get("selectedPoint.y") as Int
+            )
         }
         val get = intent.extras?.get("googleFaceDetect")
-        if(get!=null)
-            faceOverlayView.googleFaceDetection = get as GoogleFaceDetection
+        if (get != null)
+            googleFaceDetection = get as GoogleFaceDetection
 
         drawIfBitmap();
 
 
-        if(currentFile!=null) {
-            if(currentBitmap==null)
+        if (currentFile != null) {
+            if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
@@ -59,11 +67,11 @@ import java.io.IOException
 
             val intentBack = Intent(applicationContext, FaceActivity::class.java)
 
-            if(selectedPoint!=null) {
+            if (selectedPoint != null) {
                 intentBack.putExtra("point.x", selectedPoint.x)
                 intentBack.putExtra("point.y", selectedPoint.y)
             }
-            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+            if (faceOverlayView.googleFaceDetection.selectedSurface != null) {
                 intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
@@ -72,13 +80,69 @@ import java.io.IOException
         }
 
         selectedPoint = Point()
-        if(intent.extras?.get("selectedPoint.x") !=null) {
+        if (intent.extras?.get("selectedPoint.x") != null) {
             selectedPoint.x = intent.extras?.get("selectedPoint.x") as Int
         }
-        if(intent.extras?.get("selectedPoint.y") !=null) {
+        if (intent.extras?.get("selectedPoint.y") != null) {
             selectedPoint.y = intent.extras?.get("selectedPoint.y") as Int
         }
 
+        faceOverlayView.setOnClickListener({
+
+        })
+
+        faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
+            val location = IntArray(2)
+            v.getLocationOnScreen(location)
+            val viewX = location[0]
+            val viewY = location[1]
+            val x: Float = event.getRawX() - viewX
+            val y: Float = event.getRawY() - viewY
+
+            val p = Point(x.toInt(), y.toInt())
+
+            if (checkPointCordinates(p))
+                selectedPoint = p
+
+            selectShapeAt(p)
+
+            true
+        }
+    }
+
+    private fun selectShapeAt(p: Point) {
+        googleFaceDetection.dataFaces.forEach { faceData ->
+            run {
+                faceData.faceSurfaces.forEach(action = { surface ->
+                    run {
+                        val polygon = surface.polygon
+                        if (polygon != null) {
+                            val doubles = Lumiere.getDoubles(surface.colorFill)
+                            val boundRect2d = polygon.boundRect2d
+                            if(p.x>=boundRect2d.getElem(0).x && p.x<=boundRect2d.getElem(1).x
+                                &&p.y>=boundRect2d.getElem(0).y && p.y<=boundRect2d.getElem(1).y) {
+                                if(!surface.contours.getValues(p.x as Int, p.y as Int)
+                                        .equals(doubles)) {
+                                    // point in polygon
+                                    selectedSurface = surface
+                                    drawPolygon()
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    private fun drawPolygon() {
+        val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+
+        polygonView.setImageBitmap2(selectedSurface.actualDrawing)
+    }
+
+    private fun checkPointCordinates(p: Point): Boolean {
+        return true
     }
 
     override fun onRequestPermissionsResult(
@@ -92,23 +156,11 @@ import java.io.IOException
             g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
         }
 
-        if (g > 0 && requestCode==4232403) {
+        if (g > 0 && requestCode == 4232403) {
             run {
-                val testSphere: Bitmap = TestZBufferAndroid().testSphere()
-
-
-                val file = "testSphere.jpg"
-                try {
-                    val filesFile = getFilesFile(file)
-                    println(filesFile)
-                    ImageIO.write(testSphere, "jpg", filesFile)
-                } catch (e: IOException) {
-                    throw RuntimeException(e)
-                }
             }
         }
     }
-
 
 
 }

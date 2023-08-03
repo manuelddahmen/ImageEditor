@@ -60,7 +60,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.Arrays;
@@ -74,7 +77,7 @@ import one.empty3.library.core.nurbs.SurfaceElem;
 @ExperimentalCamera2Interop /*__
  * @author Manuel
  */
-public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
+public class Polygon extends Representable implements SurfaceElem, ClosedCurve, Parcelable {
 
     /*__
      *
@@ -105,6 +108,28 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         this.texture = c;
         points.setAll(list);
     }
+
+    protected Polygon(Parcel in) {
+        int size = in.readInt();
+        double[] pointsListXyz = new double[size * 3];
+        in.readDoubleArray(pointsListXyz);
+        StructureMatrix<Point3D> point3DStructureMatrix = new StructureMatrix<>();
+        for (int k = 0; k < pointsListXyz.length; k += 3) {
+            point3DStructureMatrix.setElem(new Point3D(pointsListXyz[k], pointsListXyz[k + 1], pointsListXyz[k + 2]), k / 3);
+        }
+    }
+
+    public static final Creator<Polygon> CREATOR = new Creator<Polygon>() {
+        @Override
+        public Polygon createFromParcel(Parcel in) {
+            return new Polygon(in);
+        }
+
+        @Override
+        public Polygon[] newArray(int size) {
+            return new Polygon[size];
+        }
+    };
 
     public void add(Point3D point3D) {
         int newLength;
@@ -199,46 +224,48 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
     private Point3D getPosition(Point3D p, double scale, PointF position) {
         return new Point3D(p.get(0) * scale + position.x, p.get(1) * scale + position.y, 0.0);
     }
+
     private Point3D getPositionOnPicture(Point3D pCanvas, double scale, PointF position) {
-        return new Point3D((pCanvas.get(0)  - position.x)/ scale,
-                (pCanvas.get(1) - position.y)/scale, 0.0);
+        return new Point3D((pCanvas.get(0) - position.x) / scale,
+                (pCanvas.get(1) - position.y) / scale, 0.0);
     }
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean [] columnLeft, boolean [] columnRight) {
+
+    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean[] columnLeft, boolean[] columnRight) {
         boolean foundLeft = columnLeft[y];
         boolean foundRight = columnRight[y];
-        if(x>=0 && x<pixM.getColumns()) {
-            for(int i=0; i<x && !foundLeft; i++) {
-                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+        if (x >= 0 && x < pixM.getColumns()) {
+            for (int i = 0; i < x && !foundLeft; i++) {
+                if (!pixM.getP(i, y).equals(Point3D.O0)) {
                     foundLeft = true;
                 }
             }
-            for(int i = x; i<pixM.getColumns() && !foundRight; i++) {
-                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+            for (int i = x; i < pixM.getColumns() && !foundRight; i++) {
+                if (!pixM.getP(i, y).equals(Point3D.O0)) {
                     foundRight = true;
                 }
             }
         }
         columnLeft[y] = foundLeft;
         columnRight[y] = foundRight;
-        return !(foundLeft&&!foundRight) || (foundLeft&&foundRight) && !(!foundLeft&&!foundRight);
+        return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
     public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean isDrawingOnImage) {
         boolean foundLeft = false;
         boolean foundRight = false;
-        if(x>=0 && x<pixM.getColumns()) {
-            for(int i=0; i<x && !foundLeft; i++) {
-                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+        if (x >= 0 && x < pixM.getColumns()) {
+            for (int i = 0; i < x && !foundLeft; i++) {
+                if (!pixM.getP(i, y).equals(Point3D.O0)) {
                     foundLeft = true;
                 }
             }
-            for(int i = x; i<pixM.getColumns() && !foundRight; i++) {
-                if(!pixM.getP(i, y).equals(Point3D.O0)) {
+            for (int i = x; i < pixM.getColumns() && !foundRight; i++) {
+                if (!pixM.getP(i, y).equals(Point3D.O0)) {
                     foundRight = true;
                 }
             }
         }
-        return !(foundLeft&&!foundRight) || (foundLeft&&foundRight) && !(!foundLeft&&!foundRight);
+        return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
     public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
@@ -254,16 +281,16 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         faceSurface.setPolygon(this);
 
-        if(!isDrawingOnImage) {
+        if (!isDrawingOnImage) {
             boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
             boundRect2d.setElem(getPosition(boundRect2d.getElem(1), scale, position), 1);
         } else {
 
         }
-        double left =  (boundRect2d.getElem(0).get(0)-1);
-        double top =  (boundRect2d.getElem(0).get(1)-1);
-        double right =  (boundRect2d.getElem(1).get(0)+1);
-        double bottom =  (boundRect2d.getElem(1).get(1)+1);
+        double left = (boundRect2d.getElem(0).get(0) - 1);
+        double top = (boundRect2d.getElem(0).get(1) - 1);
+        double right = (boundRect2d.getElem(1).get(0) + 1);
+        double bottom = (boundRect2d.getElem(1).get(1) + 1);
         double widthBox = right - left;
         double heightBox = bottom - top;
 
@@ -276,7 +303,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
         int count = 0;
 
-        int[] currentColor = new int[(int) (heightBox+1)];
+        int[] currentColor = new int[(int) (heightBox + 1)];
         Arrays.fill(currentColor, transparent);
 
         int size = this.getPoints().getData1d().size();
@@ -284,7 +311,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
             Point3D p1 = null;
             Point3D p2 = null;
 
-            if(!isDrawingOnImage) {
+            if (!isDrawingOnImage) {
                 p1 = getPosition(this.getPoints().getData1d().get((i + size) % size), scale, position);
                 p2 = getPosition(this.getPoints().getData1d().get((i + 1 + size) % size), scale, position);
             } else {
@@ -313,31 +340,31 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
 
                 double[] color = pixM.getValues(xMap, yMap);
 
-                double[] colorP1 = pixM.getValues(xMap+1, yMap);
+                double[] colorP1 = pixM.getValues(xMap + 1, yMap);
 
                 int imageColor = Lumiere.getInt(color);
                 int imageColorP1 = Lumiere.getInt(colorP1);
 
-                int polygonColor = this.texture().getColorAt(1.0*xMap / (right - left), 1.0*yMap / (bottom - top));
+                int polygonColor = this.texture().getColorAt(1.0 * xMap / (right - left), 1.0 * yMap / (bottom - top));
 
-                if(yMap>= currentColor.length) {
+                if (yMap >= currentColor.length) {
                     continue;
                 }
 
 
-                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp && imageColorP1!=colorTemp) {
+                if (imageColor == colorTemp && currentColor[(int) yMap] == colorTemp && imageColorP1 != colorTemp) {
                     currentColor[(int) yMap] = transparent;
-                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent && imageColorP1!=colorTemp) {
+                } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent && imageColorP1 != colorTemp) {
                     currentColor[(int) yMap] = colorTemp;
-                } else if (currentColor[(int) yMap] == colorTemp  &&
+                } else if (currentColor[(int) yMap] == colorTemp &&
                         leftToRightScanPixM(pixM, xMap, yMap, isDrawingOnImage)) {
 
                     if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
                         Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
-                        canvas.drawPoint((int)(double)positionOnPicture.get(0),
-                                (int)(double)positionOnPicture.get(1), paint);
+                        canvas.drawPoint((int) (double) positionOnPicture.get(0),
+                                (int) (double) positionOnPicture.get(1), paint);
                         pixels++;
-                    } else if(isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0){
+                    } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
                         bitmap.setPixel((int) i, (int) j, paint.getColor());
                         pixM.setValues(xMap, yMap, fillColorArrayPolygon);
                         pixels++;
@@ -353,5 +380,23 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve {
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
         return pixM;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        int size = getPoints().getData1d().size();
+        double[] pointsListXyz = new double[getPoints().getData1d().size() * 3];
+        for (int k = 0; k < pointsListXyz.length; k++) {
+            for (int j = 0; j < 3; j++) {
+                pointsListXyz[j + 3 * k] = getPoints().getElem(k).get(j);
+            }
+        }
+        parcel.writeInt(size);
+        parcel.writeDoubleArray(pointsListXyz);
     }
 }

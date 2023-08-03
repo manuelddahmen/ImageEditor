@@ -22,6 +22,10 @@ package one.empty3.feature20220726;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +36,7 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-public class PixM extends MBitmap {
+public class PixM extends MBitmap implements Parcelable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
@@ -89,6 +93,32 @@ public class PixM extends MBitmap {
         if(read.bitmap==null)
             throw new NullPointerException("public PixM(@NotNull BufferedImage read) || bitmap is null");
     }
+
+    protected PixM(Parcel in) {
+        super(in.readInt(), in.readInt());
+        for (int i = 0; i < getColumns(); i++) {
+            for (int j = 0; j < getLines(); j++) {
+                for (int i1 = 0; i1 < compCount; i1++) {
+                    setCompNo(i1);
+                    set(i, j, in.readDouble());
+                }
+            }
+        }
+
+        MAX_DISTANCE_ITERATIONS = in.readInt();
+    }
+
+    public static final Creator<PixM> CREATOR = new Creator<PixM>() {
+        @Override
+        public PixM createFromParcel(Parcel in) {
+            return new PixM(in);
+        }
+
+        @Override
+        public PixM[] newArray(int size) {
+            return new PixM[size];
+        }
+    };
 
     public static <T> PixM getPixM(@NotNull Bitmap bitmap) {
         return new PixM(bitmap);
@@ -759,4 +789,22 @@ public class PixM extends MBitmap {
         return p2;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int k) {
+        parcel.writeInt(getColumns());
+        parcel.writeInt(getLines());
+        for (int i = 0; i < getColumns(); i++) {
+            for (int j = 0; j < getLines(); j++) {
+                for (int i1 = 0; i1 < compCount; i1++) {
+                    setCompNo(i1);
+                    parcel.writeDouble(get(i, j));
+                }
+            }
+        }
+    }
 }
