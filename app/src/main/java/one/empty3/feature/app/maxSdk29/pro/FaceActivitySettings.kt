@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.compose.material3.surfaceColorAtElevation
 import javaAnd.awt.image.imageio.ImageIO
@@ -23,7 +24,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private lateinit var selectedSurface: Surface
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private lateinit var googleFaceDetection: GoogleFaceDetection
+    private var googleFaceDetection: GoogleFaceDetection? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,10 +33,10 @@ class FaceActivitySettings : ActivitySuperClass() {
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
 
 
-        if (intent.extras?.get("selectedPoint.x") != null) {
+        if (intent.extras?.getInt("selectedPoint.x") != null) {
             selectedPoint = Point(
-                intent.extras?.get("selectedPoint.x") as Int,
-                intent.extras?.get("selectedPoint.y") as Int
+                intent.extras?.getInt("selectedPoint.x") as Int,
+                intent.extras?.getInt("selectedPoint.y") as Int
             )
         }
         val get = intent.extras?.get("googleFaceDetect")
@@ -111,34 +112,43 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun selectShapeAt(p: Point) {
-        googleFaceDetection.dataFaces.forEach { faceData ->
-            run {
-                faceData.faceSurfaces.forEach(action = { surface ->
-                    run {
-                        val polygon = surface.polygon
-                        if (polygon != null) {
-                            val doubles = Lumiere.getDoubles(surface.colorFill)
-                            val boundRect2d = polygon.boundRect2d
-                            if(p.x>=boundRect2d.getElem(0).x && p.x<=boundRect2d.getElem(1).x
-                                &&p.y>=boundRect2d.getElem(0).y && p.y<=boundRect2d.getElem(1).y) {
-                                if(!surface.contours.getValues(p.x as Int, p.y as Int)
-                                        .equals(doubles)) {
-                                    // point in polygon
-                                    selectedSurface = surface
-                                    drawPolygon()
+        if(googleFaceDetection!=null) {
+            googleFaceDetection?.dataFaces?.forEach { faceData ->
+                run {
+                    faceData.faceSurfaces?.forEach(action = { surface ->
+                        run {
+                            val polygon = surface.polygon
+                            if (polygon != null) {
+                                val doubles = Lumiere.getDoubles(surface.colorFill)
+                                val boundRect2d = polygon.boundRect2d
+                                if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
+                                    && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(
+                                        1
+                                    ).y
+                                ) {
+                                    if (!surface.contours.getValues(p.x as Int, p.y as Int)
+                                            .equals(doubles)
+                                    ) {
+                                        // point in polygon
+                                        selectedSurface = surface
+                                        drawPolygon()
+                                    }
                                 }
                             }
                         }
-                    }
-                })
+                    })
+                }
             }
+        } else {
+            Toast.makeText(applicationContext, "Google face detection : data == null",
+                Toast.LENGTH_LONG).show()
         }
     }
 
     private fun drawPolygon() {
         val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
 
-        polygonView.setImageBitmap2(selectedSurface.actualDrawing)
+        polygonView.setImageBitmap3(selectedSurface.contours.bitmap)
     }
 
     private fun checkPointCordinates(p: Point): Boolean {

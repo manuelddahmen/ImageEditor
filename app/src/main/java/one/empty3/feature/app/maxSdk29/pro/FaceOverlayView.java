@@ -325,6 +325,7 @@ import one.empty3.library.StructureMatrix;
             {
                 PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
+                    faceSurface.setContours(pixM);
                     /*Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
                         PointF p1 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(0).get(0),

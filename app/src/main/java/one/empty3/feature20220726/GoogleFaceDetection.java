@@ -118,7 +118,7 @@ import one.empty3.library.StructureMatrix;
                 this.colorFill = colorFill;
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
-                actualDrawing = contours.getBitmap();
+                //actualDrawing = contours.getBitmap();
             }
 
             public int getSurfaceId() {

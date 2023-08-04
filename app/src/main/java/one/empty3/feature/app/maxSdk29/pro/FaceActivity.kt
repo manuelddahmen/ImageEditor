@@ -33,11 +33,11 @@ class FaceActivity : ActivitySuperClass() {
 
         drawIfBitmap();
 
-        if(intent.extras?.get("selectedPoint.x") !=null) {
-            selectedPoint?.x = (intent.extras?.get("selectedPoint.x") as Int)
+        if(intent.extras?.getDouble("selectedPoint.x") !=null) {
+            selectedPoint?.x = (intent.extras?.getDouble("selectedPoint.x") as Int)
         }
-        if(intent.extras?.get("selectedPoint.y") !=null) {
-            selectedPoint?.y = (intent.extras?.get("selectedPoint.y") as Int)
+        if(intent.extras?.getDouble("selectedPoint.y") !=null) {
+            selectedPoint?.y = (intent.extras?.getDouble("selectedPoint.y") as Int)
         }
 
         if(intent.extras?.get("googleFaceDetect")!=null) {
@@ -77,16 +77,21 @@ class FaceActivity : ActivitySuperClass() {
                 intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
                 intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
             }
-            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+            if(faceOverlayView.googleFaceDetection==null) {
+                faceOverlayView.performClick()
+            }
+            if(faceOverlayView.googleFaceDetection!=null) {
                 intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
             passParameters(intentSettings)
         }
 
         faceOverlayView.setOnClickListener{
-            val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
-            if(surface!=null) {
-                faceOverlayView.googleFaceDetection.selectedSurface = surface
+            if (faceOverlayView.googleFaceDetection!=null) {
+                val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
+                if (surface != null) {
+                    faceOverlayView.googleFaceDetection.selectedSurface = surface
+                }
             }
         }
         faceOverlayView.setOnTouchListener(object : View.OnTouchListener {
@@ -120,7 +125,7 @@ class FaceActivity : ActivitySuperClass() {
                 intentBack.putExtra("selectedPoint.x", selectedPoint!!.x)
                 intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
             }
-            if(faceOverlayView.googleFaceDetection.selectedSurface!=null) {
+            if(faceOverlayView.googleFaceDetection!=null) {
                 intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
              }
             passParameters(intentBack)
