@@ -88,7 +88,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("point.x", selectedPoint.x)
                 intentBack.putExtra("point.y", selectedPoint.y)
             }
-            if (faceOverlayView.googleFaceDetection!=null) {
+            if (faceOverlayView.googleFaceDetection != null) {
                 //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
@@ -126,13 +126,19 @@ class FaceActivitySettings : ActivitySuperClass() {
             true
         }
 
-        var polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
-        polygonView.setOnClickListener(View.OnClickListener {
-            if(selectedSurfaces!=null && selectedSurfaces.size>1) {
-                val size = selectedSurfaces.size - 1
-                selectedSurface = (selectedSurface+1)%size
-            }
+        val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+
+        polygonView.setOnClickListener({
+
         })
+        polygonView.setOnTouchListener { v: View, event: MotionEvent ->
+            if (selectedSurfaces != null && selectedSurfaces.size > 1) {
+                val size = selectedSurfaces.size
+                selectedSurface = (selectedSurface + 1) % size
+            }
+            true
+        }
+
     }
 
     private fun selectShapeAt(p: Point) {
@@ -156,7 +162,6 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     ) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
-                                        selectedSurface = 0
                                         drawPolygon()
                                     }
                                 }
@@ -169,6 +174,14 @@ class FaceActivitySettings : ActivitySuperClass() {
             Toast.makeText(applicationContext, "Google face detection : data == null",
                 Toast.LENGTH_LONG).show()
         }
+        if(selectedSurface>=selectedSurfaces.size) {
+            selectedSurface = 0
+        }
+
+        println("Size : " + selectedSurfaces.size)
+        selectedSurfaces.forEach({
+            println("Selected surface : " + it.toString())
+        })
     }
 
     private fun drawPolygon() {

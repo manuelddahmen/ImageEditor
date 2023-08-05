@@ -182,6 +182,19 @@ import one.empty3.library.StructureMatrix;
                         (int) (double) (pInPicture.y - boundRect2d.getElem(0).get(1)));
                 return values.equals(TRANSPARENT);
             }
+
+            @Override
+            public String toString() {
+                return "Surface{" +
+                        "colorFill=" + colorFill +
+                        ", colorContours=" + colorContours +
+                        ", colorTransparent=" + colorTransparent +
+                        ", surfaceId=" + surfaceId +
+                        ", polygon=" + polygon +
+                        ", contours=" + contours +
+                        ", actualDrawing=" + actualDrawing +
+                        '}';
+            }
         }
 
         private List<Surface> faceSurfaces;
