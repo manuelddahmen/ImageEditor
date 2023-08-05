@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Point
+import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -18,13 +20,23 @@ import one.empty3.library.Lumiere
 import one.empty3.library.Polygon
 import java.util.function.Consumer
 
+inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
+    Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
+}
+
+inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
+    Build.VERSION.SDK_INT >= 33 -> getParcelable(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelable(key) as? T
+}
+
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
 
     private lateinit var selectedSurface: Surface
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private var googleFaceDetection: GoogleFaceDetection? = null
+    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,9 +51,12 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intent.extras?.getInt("selectedPoint.y") as Int
             )
         }
-        val get = intent.extras?.get("googleFaceDetect")
-        if (get != null)
-            googleFaceDetection = get as GoogleFaceDetection
+        //val get = intent.parcelable<GoogleFaceDetection>("googleFaceDetect")
+        //if (get != null)
+        //    googleFaceDetection = get as GoogleFaceDetection
+
+        googleFaceDetection = GoogleFaceDetection.getInstance()
+
 
         drawIfBitmap();
 
@@ -72,8 +87,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("point.x", selectedPoint.x)
                 intentBack.putExtra("point.y", selectedPoint.y)
             }
-            if (faceOverlayView.googleFaceDetection.selectedSurface != null) {
-                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+            if (faceOverlayView.googleFaceDetection!=null) {
+                //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
 

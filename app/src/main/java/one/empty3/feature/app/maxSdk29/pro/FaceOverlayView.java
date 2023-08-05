@@ -64,7 +64,7 @@ import one.empty3.library.StructureMatrix;
     }
 
     public void setGoogleFaceDetection(GoogleFaceDetection googleFaceDetection) {
-        this.googleFaceDetection = googleFaceDetection;
+        this.googleFaceDetection = GoogleFaceDetection.getInstance();
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -444,7 +444,7 @@ import one.empty3.library.StructureMatrix;
             //Log.d("ImageViewSelection::setImageBitmap",
             //        "change image on UI thread");
             if (mFaces != null && mCanvas != null && bm != null) {
-                googleFaceDetection = new GoogleFaceDetection();
+                googleFaceDetection = GoogleFaceDetection.getInstance();
 
                 double scale = drawBitmap();
 
@@ -462,9 +462,9 @@ import one.empty3.library.StructureMatrix;
                             false), "face-");
                     this.activity.currentFile = file;
                 }
+                super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
             }
         });
-        super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
     }
     public double getScaleImageX() {
         Rect destBounds = getDestBounds();

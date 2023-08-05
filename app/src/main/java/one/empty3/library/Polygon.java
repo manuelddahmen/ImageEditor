@@ -113,10 +113,13 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         int size = in.readInt();
         double[] pointsListXyz = new double[size * 3];
         in.readDoubleArray(pointsListXyz);
-        StructureMatrix<Point3D> point3DStructureMatrix = new StructureMatrix<>();
-        for (int k = 0; k < pointsListXyz.length; k += 3) {
-            point3DStructureMatrix.setElem(new Point3D(pointsListXyz[k], pointsListXyz[k + 1], pointsListXyz[k + 2]), k / 3);
+        Point3D [] point3Ds = new Point3D[size];
+        for (int k = 0; k < pointsListXyz.length; k ++) {
+            point3Ds[k] =  new Point3D(pointsListXyz[k*3],
+                    pointsListXyz[k*3 + 1],
+                    pointsListXyz[k*3 + 2]);
         }
+        setPoints(point3Ds);
     }
 
     public static final Creator<Polygon> CREATOR = new Creator<Polygon>() {
@@ -390,10 +393,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         int size = getPoints().getData1d().size();
-        double[] pointsListXyz = new double[getPoints().getData1d().size() * 3];
-        for (int k = 0; k < pointsListXyz.length; k++) {
+        double[] pointsListXyz = new double[size * 3];
+        for (int k = 0; k <size; k++) {
             for (int j = 0; j < 3; j++) {
-                pointsListXyz[j + 3 * k] = getPoints().getElem(k).get(j);
+                pointsListXyz[j + k * 3] = getPoints().getElem(k).get(j);
             }
         }
         parcel.writeInt(size);

@@ -21,15 +21,22 @@ import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
 @ExperimentalCamera2Interop public class GoogleFaceDetection implements Parcelable {
+    static GoogleFaceDetection instance;
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
+
+    public static GoogleFaceDetection getInstance() {
+        if(instance==null)
+            instance = new GoogleFaceDetection();
+        return instance;
+    }
 
     protected GoogleFaceDetection(Parcel in) {
         in.readTypedObject(new Creator<Object>() {
             @Override
             public Object createFromParcel(Parcel parcel) {
-                GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance();
                 int numFaces = parcel.readInt();
                 for (int face = 0; face < numFaces; face++) {
                     int id = parcel.readInt();
@@ -92,9 +99,9 @@ import one.empty3.library.StructureMatrix;
                 FaceData.Surface surface = faceData.getFaceSurfaces().get(j);
                 parcel.writeParcelable(surface.polygon, 1);
                 parcel.writeParcelable(surface.contours, 1);
-                parcel.writeInt(getSelectedSurface().colorFill);
-                parcel.writeInt(getSelectedSurface().colorContours);
-                parcel.writeInt(getSelectedSurface().colorTransparent);
+                parcel.writeInt(surface.colorFill);
+                parcel.writeInt(surface.colorContours);
+                parcel.writeInt(surface.colorTransparent);
 
             }
         }

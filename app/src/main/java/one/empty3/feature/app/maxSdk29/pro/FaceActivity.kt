@@ -40,9 +40,9 @@ class FaceActivity : ActivitySuperClass() {
             selectedPoint?.y = (intent.extras?.getDouble("selectedPoint.y") as Int)
         }
 
-        if(intent.extras?.get("googleFaceDetect")!=null) {
-            faceOverlayView.googleFaceDetection = intent.extras!!.get("googleFaceDetect") as GoogleFaceDetection?
-        }
+        //if(intent.extras?.get("googleFaceDetect")!=null) {
+        //    faceOverlayView.googleFaceDetection = intent.extras!!.get("googleFaceDetect") as GoogleFaceDetection?
+        //}
 
 
             if (currentFile != null) {
@@ -66,11 +66,11 @@ class FaceActivity : ActivitySuperClass() {
                 val writePhoto = Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
                 originalImage = currentFile
                 currentFile = writePhoto
-                Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+                //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
             }
         }
-        val face_draw_settings = findViewById<Button>(R.id.face_draw_settings)
-        face_draw_settings.setOnClickListener {
+        val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
+        faceDrawSettings.setOnClickListener {
             faceOverlayView.isFinish = true
             val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
             if(selectedPoint!=null) {
@@ -81,7 +81,7 @@ class FaceActivity : ActivitySuperClass() {
                 faceOverlayView.performClick()
             }
             if(faceOverlayView.googleFaceDetection!=null) {
-                intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
             passParameters(intentSettings)
         }
@@ -126,7 +126,7 @@ class FaceActivity : ActivitySuperClass() {
                 intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
             }
             if(faceOverlayView.googleFaceDetection!=null) {
-                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
              }
             passParameters(intentBack)
 
