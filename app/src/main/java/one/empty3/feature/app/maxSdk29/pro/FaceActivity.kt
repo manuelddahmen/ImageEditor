@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import javaAnd.awt.image.imageio.ImageIO
@@ -71,19 +72,24 @@ class FaceActivity : ActivitySuperClass() {
         }
         val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
         faceDrawSettings.setOnClickListener {
-            faceOverlayView.isFinish = true
-            val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
-            if(selectedPoint!=null) {
-                intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
-                intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
-            }
-            if(faceOverlayView.googleFaceDetection==null) {
-                faceOverlayView.performClick()
-            }
             if(faceOverlayView.googleFaceDetection!=null) {
-                //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                faceOverlayView.isFinish = true
+                val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
+                if (selectedPoint != null) {
+                    intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
+                    intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
+                }
+                if (faceOverlayView.googleFaceDetection == null) {
+                    faceOverlayView.performClick()
+                }
+                if (faceOverlayView.googleFaceDetection != null) {
+                    //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                }
+                passParameters(intentSettings)
+            } else {
+                Toast.makeText(applicationContext, "Attendez que la détection de visage soit terminée."
+                , Toast.LENGTH_LONG).show()
             }
-            passParameters(intentSettings)
         }
 
         faceOverlayView.setOnClickListener{

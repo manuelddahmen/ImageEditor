@@ -33,10 +33,11 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
 
-    private lateinit var selectedSurface: Surface
+    private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
     private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance()
+    private lateinit var selectedSurfaces:ArrayList<Surface>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -124,9 +125,18 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             true
         }
+
+        var polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+        polygonView.setOnClickListener(View.OnClickListener {
+            if(selectedSurfaces!=null && selectedSurfaces.size>1) {
+                val size = selectedSurfaces.size - 1
+                selectedSurface = (selectedSurface+1)%size
+            }
+        })
     }
 
     private fun selectShapeAt(p: Point) {
+         selectedSurfaces = ArrayList()
         if(googleFaceDetection!=null) {
             googleFaceDetection?.dataFaces?.forEach { faceData ->
                 run {
@@ -145,7 +155,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                                             .equals(doubles)
                                     ) {
                                         // point in polygon
-                                        selectedSurface = surface
+                                        selectedSurfaces.add(surface)
+                                        selectedSurface = 0
                                         drawPolygon()
                                     }
                                 }
@@ -163,7 +174,9 @@ class FaceActivitySettings : ActivitySuperClass() {
     private fun drawPolygon() {
         val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
 
-        polygonView.setImageBitmap3(selectedSurface.contours.bitmap)
+        val selectedSurfaceObject = selectedSurfaces[selectedSurface]
+
+        polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
     }
 
     private fun checkPointCordinates(p: Point): Boolean {
