@@ -3,6 +3,7 @@ package one.empty3.feature20220726;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -115,8 +116,9 @@ import one.empty3.library.StructureMatrix;
             private int surfaceId;
             private Polygon polygon;
             private PixM contours;
+            private PixM filledContours;
             @Nullable
-            public Bitmap actualDrawing;
+            public PixM actualDrawing;
 
             public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
                 this.surfaceId = surfaceId;
@@ -125,7 +127,8 @@ import one.empty3.library.StructureMatrix;
                 this.colorFill = colorFill;
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
-                //actualDrawing = contours.getBitmap();
+                filledContours = polygon.fillPolygon2D(this, null, contours.getBitmap(),
+                        colorTransparent, 0, new PointF(0,0), 1.0);
             }
 
             public int getSurfaceId() {

@@ -23,12 +23,13 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.io.File;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
 
-public class AppData {
+@ExperimentalCamera2Interop public class AppData {
     private static final String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private String[] cordsValues = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
 
@@ -38,7 +39,7 @@ public class AppData {
     public AppData() {
     }
 
-    private GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+    private GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance();
 
     private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
     }
