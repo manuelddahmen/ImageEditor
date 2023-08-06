@@ -31,6 +31,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
 
+    private lateinit var polygonView: FaceOverlayView
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
@@ -42,7 +43,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         setContentView(R.layout.face_draw_settings)
 
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
-
+        polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
 
         if (intent.extras?.getInt("selectedPoint.x") != null) {
             selectedPoint = Point(
@@ -102,54 +103,30 @@ class FaceActivitySettings : ActivitySuperClass() {
             selectedPoint.y = intent.extras?.get("selectedPoint.y") as Int
         }
 
-        faceOverlayView.setOnClickListener({
+        faceOverlayView.setOnClickListener {
 
-        })
+        }
 
         faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
-            /*val location = IntArray(2)
-            faceOverlayView.getLocationOnScreen(location)
-            val viewX = location[0]
-            val viewY = location[1]
-            val x: Float = event.rawX - viewX
-            val y: Float = event.rawY - viewY
+            if(event.actionMasked==MotionEvent.ACTION_UP) {
 
-            var p = PointF(x, y)
-*/
-            var p0 = coordCanvas(PointF(0f, 0f))
+                var p0 = coordCanvas(PointF(0f, 0f))
 
-            var p = PointF(event.x, event.y)
+                var p = PointF(event.x, event.y)
 
-            var p1 = PointF((p.x-p0.x)*getScale().x, (p.y-p0.y)*getScale().x)
+                var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().x)
 
-            val p2 = Point(p1.x.toInt(), p1.y.toInt())
+                val p2 = Point(p1.x.toInt(), p1.y.toInt())
 
-            selectedPoint = p2
+                selectedPoint = p2
 
-            selectShapeAt(p2)
+                selectShapeAt(p2)
 
-            drawPolygon()
+                drawPolygon()
 
-            true
-        }
-
-        val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
-
-        polygonView.setOnClickListener {
-
-        }
-        polygonView.setOnTouchListener { v: View, event: MotionEvent ->
-            if (selectedSurfaces != null && selectedSurfaces.size > 1) {
-                val size = selectedSurfaces.size
-                selectedSurface = (selectedSurface + 1)
-                if(selectedSurface>=size)
-                    selectedSurface = 0
-                if(selectedSurfaces.size>0)
-                    drawPolygon()
             }
             true
         }
-
     }
 
     fun coordCanvas(p: PointF): PointF {
@@ -204,7 +181,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     ) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
-                                        drawPolygon()
+                                        //drawPolygon()
                                     }
                                 }
                             }
@@ -223,7 +200,6 @@ class FaceActivitySettings : ActivitySuperClass() {
                 selectedSurface = 0
 
         }
-        true
 
 
         if(selectedSurface>=selectedSurfaces.size) {
@@ -236,12 +212,13 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun drawPolygon() {
+        polygonView.invalidate()
+
         if(selectedSurfaces.size>selectedSurface) {
 
-            val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
-            polygonView.setPixels(selectedSurfaceObject.contours)
+            polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
+            //polygonView.setPixels(selectedSurfaceObject.contours)
         }
     }
 
