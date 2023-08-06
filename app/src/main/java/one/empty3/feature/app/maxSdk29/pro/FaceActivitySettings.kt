@@ -128,6 +128,8 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             selectShapeAt(p2)
 
+            drawPolygon()
+
             true
         }
 
@@ -142,8 +144,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                 selectedSurface = (selectedSurface + 1)
                 if(selectedSurface>=size)
                     selectedSurface = 0
-
-                drawPolygon()
+                if(selectedSurfaces.size>0)
+                    drawPolygon()
             }
             true
         }
@@ -182,7 +184,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun selectShapeAt(p: Point) {
-         selectedSurfaces = ArrayList()
+        selectedSurfaces = ArrayList()
         if(googleFaceDetection!=null) {
             googleFaceDetection?.dataFaces?.forEach { faceData ->
                 run {
@@ -214,7 +216,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             Toast.makeText(applicationContext, "Google face detection : data == null",
                 Toast.LENGTH_LONG).show()
         }
-        if (selectedSurfaces != null && selectedSurfaces.size > 1) {
+        if (selectedSurfaces.size > 1) {
             val size = selectedSurfaces.size
             selectedSurface = (selectedSurface + 1)
             if(selectedSurface>=size)
@@ -234,12 +236,13 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun drawPolygon() {
-        val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+        if(selectedSurfaces.size>selectedSurface) {
 
-        val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-
-        polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
-        polygonView.setPixels(selectedSurfaceObject.contours)
+            val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+            val selectedSurfaceObject = selectedSurfaces[selectedSurface]
+            polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
+            polygonView.setPixels(selectedSurfaceObject.contours)
+        }
     }
 
 
