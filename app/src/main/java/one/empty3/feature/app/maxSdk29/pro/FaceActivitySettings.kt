@@ -217,7 +217,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         if(selectedSurfaces.size>selectedSurface) {
 
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
+            polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
             //polygonView.setPixels(selectedSurfaceObject.contours)
         }
     }
