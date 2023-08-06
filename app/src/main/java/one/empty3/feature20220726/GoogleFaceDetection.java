@@ -127,8 +127,6 @@ import one.empty3.library.StructureMatrix;
                 this.colorFill = colorFill;
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
-                filledContours = polygon.fillPolygon2D(this, null, contours.getBitmap(),
-                        colorTransparent, 0, new PointF(0,0), 1.0);
             }
 
             public int getSurfaceId() {
@@ -179,6 +177,11 @@ import one.empty3.library.StructureMatrix;
                 this.colorTransparent = colorTransparent;
             }
 
+            public void computeFilledSurface(PointF position, double scale) {
+                filledContours = polygon.fillPolygon2D(this, null, contours.getBitmap(),
+                        colorTransparent, 0, position, scale);
+            }
+
             public boolean isContaning(Point pInPicture) {
                 StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
                 double[] values = contours.getValues((int) (double) (pInPicture.x - boundRect2d.getElem(0).get(0)),
@@ -197,6 +200,10 @@ import one.empty3.library.StructureMatrix;
                         ", contours=" + contours +
                         ", actualDrawing=" + actualDrawing +
                         '}';
+            }
+
+            public void setFilledContours(PixM filledContours) {
+                this.filledContours = filledContours;
             }
         }
 

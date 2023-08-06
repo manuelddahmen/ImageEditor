@@ -179,85 +179,50 @@ import one.empty3.library.StructureMatrix;
             }
         }
         int surfaceId = FaceContour.FACE;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.FACE).getPoints(), Color.YELLOW), null,
-                        Color.YELLOW, Color.BLUE, Color.BLACK));
+
+        FaceContour[] faceContours = {
+                face.getContour(FaceContour.FACE), face.getContour(FaceContour.LEFT_EYE),
+                face.getContour(FaceContour.RIGHT_EYE), face.getContour(FaceContour.NOSE_BOTTOM),
+                face.getContour(FaceContour.NOSE_BRIDGE), face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM),
+                face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM), face.getContour(FaceContour.LEFT_EYEBROW_TOP),
+                face.getContour(FaceContour.RIGHT_EYEBROW_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
+                face.getContour(FaceContour.UPPER_LIP_BOTTOM), face.getContour(FaceContour.LOWER_LIP_BOTTOM),
+                face.getContour(FaceContour.LOWER_LIP_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
+                face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};
+
+        surfaceId = FaceContour.FACE;
         surfaceId = FaceContour.LEFT_EYE;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYE).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId =FaceContour.RIGHT_EYE;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYE).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.NOSE_BOTTOM;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.NOSE_BOTTOM).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.NOSE_BRIDGE;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.NOSE_BRIDGE).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_EYEBROW_BOTTOM;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_EYEBROW_TOP;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_EYEBROW_TOP;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_TOP;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_BOTTOM;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LOWER_LIP_BOTTOM;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LOWER_LIP_TOP;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.UPPER_LIP_TOP;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.LEFT_CHEEK;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.LEFT_CHEEK).getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
         surfaceId = FaceContour.RIGHT_CHEEK;
-        faceData.getFaceSurfaces().add(
-                new GoogleFaceDetection.FaceData.Surface(
-                        surfaceId, getPolygon(face.getContour(FaceContour.RIGHT_CHEEK).getPoints(), Color.RED), null,
+
+        int i=0;
+        for(FaceContour faceContour : faceContours) {
+            if (i == 0 && faceContour!=null) {
+                faceData.getFaceSurfaces().add(
+                        new GoogleFaceDetection.FaceData.Surface(
+                                surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
+                        Color.YELLOW, Color.BLUE, Color.BLACK));
+        } else if(faceContour!=null){
+                faceData.getFaceSurfaces().add(
+                        new GoogleFaceDetection.FaceData.Surface(
+                                surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
                         Color.BLUE, Color.RED, Color.BLACK));
+
+            }
+            i++;
+        }
 
         for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
             fillPolygon(faceSurface, faceSurface.getPolygon(), faceSurface.getColorContours(), faceSurface.getColorFill());
@@ -326,6 +291,7 @@ import one.empty3.library.StructureMatrix;
                 PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
                     faceSurface.setContours(pixM);
+                    faceSurface.setFilledContours(pixM);
                     /*Bitmap bitmap = pixM.getBitmap();
                     if (bitmap != null) {
                         PointF p1 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(0).get(0),

@@ -322,7 +322,7 @@ import kotlin.math.max
 
     fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
         if (activity.currentFile == null) {
-            activity.currentFile = activity.getImageViewPersistantFile()
+            activity.currentFile = activity.imageViewPersistantFile
         }
         var imageView: ImageViewSelection? = activity.imageView
         if (imageView == null) {
@@ -469,7 +469,7 @@ import kotlin.math.max
 
     fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
-        val imageFile = activity.getImageViewPersistantFile()
+        val imageFile = activity.imageViewPersistantFile
         if (file && (imageFile != null) && imageFile.exists()) {
             try {
                 var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))

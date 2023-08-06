@@ -379,7 +379,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                 count++;
             }
         }
-
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
         return pixM;

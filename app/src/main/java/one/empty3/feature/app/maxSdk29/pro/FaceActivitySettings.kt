@@ -2,8 +2,8 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Point
+import android.graphics.PointF
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -12,13 +12,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import androidx.compose.material3.surfaceColorAtElevation
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
+import one.empty3.feature20220726.PixM
 import one.empty3.library.Lumiere
-import one.empty3.library.Polygon
-import java.util.function.Consumer
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -109,36 +107,78 @@ class FaceActivitySettings : ActivitySuperClass() {
         })
 
         faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
-            val location = IntArray(2)
-            v.getLocationOnScreen(location)
+            /*val location = IntArray(2)
+            faceOverlayView.getLocationOnScreen(location)
             val viewX = location[0]
             val viewY = location[1]
-            val x: Float = event.getRawX() - viewX
-            val y: Float = event.getRawY() - viewY
+            val x: Float = event.rawX - viewX
+            val y: Float = event.rawY - viewY
 
-            val p = Point(x.toInt(), y.toInt())
+            var p = PointF(x, y)
+*/
+            var p0 = coordCanvas(PointF(0f, 0f))
 
-            if (checkPointCordinates(p))
-                selectedPoint = p
+            var p = PointF(event.x, event.y)
 
-            selectShapeAt(p)
+            var p1 = PointF((p.x-p0.x)*getScale().x, (p.y-p0.y)*getScale().x)
+
+            val p2 = Point(p1.x.toInt(), p1.y.toInt())
+
+            selectedPoint = p2
+
+            selectShapeAt(p2)
 
             true
         }
 
         val polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
 
-        polygonView.setOnClickListener({
+        polygonView.setOnClickListener {
 
-        })
+        }
         polygonView.setOnTouchListener { v: View, event: MotionEvent ->
             if (selectedSurfaces != null && selectedSurfaces.size > 1) {
                 val size = selectedSurfaces.size
-                selectedSurface = (selectedSurface + 1) % size
+                selectedSurface = (selectedSurface + 1)
+                if(selectedSurface>=size)
+                    selectedSurface = 0
+
+                drawPolygon()
             }
             true
         }
 
+    }
+
+    fun coordCanvas(p: PointF): PointF {
+        val mBitmap = faceOverlayView.mBitmap
+        if (faceOverlayView.mBitmap == null) return p
+        val viewWidth: Double = faceOverlayView.getWidth().toDouble()
+        val viewHeight: Double = faceOverlayView.getHeight().toDouble()
+        val imageWidth: Double = mBitmap.getWidth().toDouble()
+        val imageHeight: Double = mBitmap.getHeight().toDouble()
+        val scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight)
+        return PointF(
+            ((-(imageWidth / 2) * scale).toInt() + faceOverlayView.getWidth() / 2 + p.x * scale).toInt()
+                .toFloat(),
+            ((-(imageHeight / 2) * scale).toInt() + faceOverlayView.getHeight() / 2 + p.y * scale).toInt()
+                .toFloat()
+        )
+    }
+
+
+    fun getScale(): PointF {
+        val mBitmap = faceOverlayView.mBitmap
+        if (mBitmap == null) return PointF(0f, 0f)
+        val viewWidth: Double = faceOverlayView.getWidth().toDouble()
+        val viewHeight: Double = faceOverlayView.getHeight().toDouble()
+        val imageWidth: Double = mBitmap.getWidth().toDouble()
+        val imageHeight: Double = mBitmap.getHeight().toDouble()
+        val scaleMin = Math.min(
+            (viewWidth / imageWidth).toFloat(),
+            (viewHeight / imageHeight).toFloat()
+        ).toDouble()
+        return PointF(scaleMin.toFloat(), scaleMin.toFloat())
     }
 
     private fun selectShapeAt(p: Point) {
@@ -174,14 +214,23 @@ class FaceActivitySettings : ActivitySuperClass() {
             Toast.makeText(applicationContext, "Google face detection : data == null",
                 Toast.LENGTH_LONG).show()
         }
+        if (selectedSurfaces != null && selectedSurfaces.size > 1) {
+            val size = selectedSurfaces.size
+            selectedSurface = (selectedSurface + 1)
+            if(selectedSurface>=size)
+                selectedSurface = 0
+
+        }
+        true
+
+
         if(selectedSurface>=selectedSurfaces.size) {
             selectedSurface = 0
         }
 
+
         println("Size : " + selectedSurfaces.size)
-        selectedSurfaces.forEach({
-            println("Selected surface : " + it.toString())
-        })
+        println("Current face : $selectedSurface")
     }
 
     private fun drawPolygon() {
@@ -189,12 +238,10 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val selectedSurfaceObject = selectedSurfaces[selectedSurface]
 
-        polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
+        polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
+        polygonView.setPixels(selectedSurfaceObject.contours)
     }
 
-    private fun checkPointCordinates(p: Point): Boolean {
-        return true
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
