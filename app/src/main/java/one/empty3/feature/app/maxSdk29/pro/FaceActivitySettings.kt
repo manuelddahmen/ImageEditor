@@ -2,6 +2,7 @@ package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Point
 import android.graphics.PointF
 import android.os.Build
@@ -17,6 +18,7 @@ import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
 import one.empty3.feature20220726.PixM
 import one.empty3.library.Lumiere
+import java.io.File
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -31,6 +33,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
 
+    private lateinit var originalImage: File
     private lateinit var polygonView: ImageViewSelection
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
@@ -60,12 +63,17 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         drawIfBitmap();
 
+        if(intent.hasExtra("originalImage")!=null) {
+            originalImage = intent.extras!!.get("originalImage") as File
+        }
 
         if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
 
-            Utils().loadImageInImageView(currentBitmap, faceOverlayView)
+            var originalBitmap : Bitmap = ImageIO.read(originalImage).getBitmap()
+
+            Utils().loadImageInImageView(originalBitmap, faceOverlayView)
 
             faceOverlayView.setBitmap(currentBitmap);
 
@@ -91,7 +99,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
+            originalImage = currentFile
 
+            if(originalImage!=null) {
+                intentBack.putExtra("originalImage", originalImage)
+            }
             passParameters(intentBack)
         }
 
@@ -182,8 +194,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 val boundRect2d = polygon.boundRect2d
                                 if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
                                     && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(1).y) {
-                                    if (!surface.contours.getValues(p.x as Int, p.y as Int)
-                                            .equals(doubles)) {
+                                    if (surface.filledContours.getValues(p.x as Int, p.y as Int).equals(doubles)) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
                                         //drawPolygon()

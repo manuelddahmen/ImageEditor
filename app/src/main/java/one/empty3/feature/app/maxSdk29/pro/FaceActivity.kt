@@ -3,21 +3,14 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature20220726.GoogleFaceDetection
-import one.empty3.library.ColorTexture
-import one.empty3.library.Point3D
-import one.empty3.library.Polygon
 import java.io.File
-import java.util.function.Consumer
 
 @ExperimentalCamera2Interop
 class FaceActivity : ActivitySuperClass() {
@@ -52,9 +45,9 @@ class FaceActivity : ActivitySuperClass() {
             faceOverlayView.setActivity(this)
         }
 
-        val camera_preview_video_face = findViewById<Button>(R.id.camera_preview_video_face)
+        val faceDetection = findViewById<Button>(R.id.face_detection)
 
-        camera_preview_video_face.setOnClickListener {
+        faceDetection.setOnClickListener {
             if(faceOverlayView.isFinish()) {
                 faceOverlayView.isDrawing = false
                 faceOverlayView.isFinish = false
@@ -79,6 +72,9 @@ class FaceActivity : ActivitySuperClass() {
                 }
                 if (faceOverlayView.googleFaceDetection != null) {
                     //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                }
+                if(originalImage!=null) {
+                    intentSettings.putExtra("originalImage", originalImage)
                 }
                 passParameters(intentSettings)
             } else {
@@ -124,6 +120,10 @@ class FaceActivity : ActivitySuperClass() {
             if(faceOverlayView.googleFaceDetection!=null) {
                 //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
              }
+
+            if(originalImage!=null) {
+                intentBack.putExtra("originalImage", originalImage)
+            }
             passParameters(intentBack)
 
         }

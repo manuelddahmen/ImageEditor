@@ -205,6 +205,19 @@ import one.empty3.library.StructureMatrix;
             public void setFilledContours(PixM filledContours) {
                 this.filledContours = filledContours;
             }
+
+            public PixM getFilledContours() {
+                return filledContours;
+            }
+
+            @Nullable
+            public PixM getActualDrawing() {
+                return actualDrawing;
+            }
+
+            public void setActualDrawing(@Nullable PixM actualDrawing) {
+                this.actualDrawing = actualDrawing;
+            }
         }
 
         private List<Surface> faceSurfaces;
