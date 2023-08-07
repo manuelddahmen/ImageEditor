@@ -31,7 +31,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
 
-    private lateinit var polygonView: FaceOverlayView
+    private lateinit var polygonView: ImageViewSelection
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
@@ -43,7 +43,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         setContentView(R.layout.face_draw_settings)
 
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
-        polygonView = findViewById<FaceOverlayView>(R.id.polygon_details)
+        polygonView = findViewById<ImageViewSelection>(R.id.polygon_details)
 
         if (intent.extras?.getInt("selectedPoint.x") != null) {
             selectedPoint = Point(
@@ -88,7 +88,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("point.y", selectedPoint.y)
             }
             if (faceOverlayView.googleFaceDetection != null) {
-                //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
 
@@ -127,6 +127,15 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
             true
         }
+
+        val colorChooser : Button= findViewById<Button>(R.id.choose_color)
+
+        colorChooser.setOnClickListener {
+            val dialog: ColorChooser = ColorChooser()
+
+            //dialog.open
+        }
+
     }
 
     fun coordCanvas(p: PointF): PointF {
@@ -172,13 +181,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 val doubles = Lumiere.getDoubles(surface.colorFill)
                                 val boundRect2d = polygon.boundRect2d
                                 if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
-                                    && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(
-                                        1
-                                    ).y
-                                ) {
+                                    && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(1).y) {
                                     if (!surface.contours.getValues(p.x as Int, p.y as Int)
-                                            .equals(doubles)
-                                    ) {
+                                            .equals(doubles)) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
                                         //drawPolygon()
@@ -212,12 +217,12 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun drawPolygon() {
-        polygonView.invalidate()
+        //polygonView.invalidate()
 
         if(selectedSurfaces.size>selectedSurface) {
 
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap2(selectedSurfaceObject.contours.bitmap)
+            polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
             //polygonView.setPixels(selectedSurfaceObject.contours)
         }
     }

@@ -368,7 +368,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                                 (int) (double) positionOnPicture.get(1), paint);
                         pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-                        //++bitmap.setPixel((int) i, (int) j, paint.getColor());
+                        bitmap.setPixel((int) i, (int) j, paint.getColor());
                         pixM.setValues(xMap, yMap, fillColorArrayPolygon);
                         pixels++;
 

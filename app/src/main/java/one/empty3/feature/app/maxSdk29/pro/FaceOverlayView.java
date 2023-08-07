@@ -37,7 +37,8 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
-@ExperimentalCamera2Interop public class FaceOverlayView extends ImageViewSelection {
+@ExperimentalCamera2Interop
+public class FaceOverlayView extends ImageViewSelection {
     private GoogleFaceDetection googleFaceDetection;
     private List<Face> mFaces;
     protected Bitmap mBitmap;
@@ -104,7 +105,7 @@ import one.empty3.library.StructureMatrix;
         }
 
 
-        setImageBitmap2(mCopy);
+        setImageBitmap3(mCopy);
     }
 
     private void action(Face face, GoogleFaceDetection.FaceData faceData) {
@@ -192,7 +193,7 @@ import one.empty3.library.StructureMatrix;
 
         surfaceId = FaceContour.FACE;
         surfaceId = FaceContour.LEFT_EYE;
-        surfaceId =FaceContour.RIGHT_EYE;
+        surfaceId = FaceContour.RIGHT_EYE;
         surfaceId = FaceContour.NOSE_BOTTOM;
         surfaceId = FaceContour.NOSE_BRIDGE;
         surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
@@ -207,18 +208,18 @@ import one.empty3.library.StructureMatrix;
         surfaceId = FaceContour.LEFT_CHEEK;
         surfaceId = FaceContour.RIGHT_CHEEK;
 
-        int i=0;
-        for(FaceContour faceContour : faceContours) {
-            if (i == 0 && faceContour!=null) {
+        int i = 0;
+        for (FaceContour faceContour : faceContours) {
+            if (i == 0 && faceContour != null) {
                 faceData.getFaceSurfaces().add(
                         new GoogleFaceDetection.FaceData.Surface(
                                 surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
-                        Color.YELLOW, Color.BLUE, Color.BLACK));
-        } else if(faceContour!=null){
+                                Color.YELLOW, Color.BLUE, Color.BLACK));
+            } else if (faceContour != null) {
                 faceData.getFaceSurfaces().add(
                         new GoogleFaceDetection.FaceData.Surface(
                                 surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
-                        Color.BLUE, Color.RED, Color.BLACK));
+                                Color.RED, Color.RED, Color.BLACK));
 
             }
             i++;
@@ -236,9 +237,8 @@ import one.empty3.library.StructureMatrix;
             PointF pointF = polygonContour.get(i);
             point3DS[i] = new Point3D(pointF.x * 1.0, pointF.y * 1.0, 0d);
         }
-        Polygon polygon = new Polygon(point3DS, new ColorTexture(contourColor));
 
-        return polygon;
+        return new Polygon(point3DS, new ColorTexture(contourColor));
     }
 
     public void testSphere() {
@@ -289,7 +289,7 @@ import one.empty3.library.StructureMatrix;
 
             {
                 PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
-                if(pixM!=null && pixM.getLines()>0 && pixM.getColumns()>0) {
+                if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
                     faceSurface.setContours(pixM);
                     faceSurface.setFilledContours(pixM);
                     /*Bitmap bitmap = pixM.getBitmap();
@@ -315,7 +315,7 @@ import one.empty3.library.StructureMatrix;
             }
             //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);
         }
-   }
+    }
 
 
     private void drawLine(PointF pointF, PointF pointF1) {
@@ -325,7 +325,7 @@ import one.empty3.library.StructureMatrix;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(!isDrawing()) {
+        if (!isDrawing()) {
             if (!isFinish) {
                 isDrawing = true;
                 this.mCanvas = canvas;
@@ -375,6 +375,7 @@ import one.empty3.library.StructureMatrix;
         return new PointF((int) ((int) (-(imageWidth / 2) * scale) + mCanvas.getWidth() / 2 + p.x * scale),
                 (int) ((int) (-(imageHeight / 2) * scale) + mCanvas.getHeight() / 2 + p.y * scale));
     }
+
     public static PointF coordCanvas(Canvas canvas, Bitmap bitmap, PointF p) {
         if (canvas == null)
             return p;
@@ -389,11 +390,12 @@ import one.empty3.library.StructureMatrix;
         return new PointF((int) ((int) (-(imageWidth / 2) * scale) + canvas.getWidth() / 2 + p.x * scale),
                 (int) ((int) (-(imageHeight / 2) * scale) + canvas.getHeight() / 2 + p.y * scale));
     }
+
     public PointF getScale() {
         if (mCanvas == null)
-            return new PointF(0,0);
+            return new PointF(0, 0);
         if (mBitmap == null)
-            return new PointF(0,0);
+            return new PointF(0, 0);
 
         double viewWidth = mCanvas.getWidth();
         double viewHeight = mCanvas.getHeight();
@@ -432,14 +434,15 @@ import one.empty3.library.StructureMatrix;
             }
         });
     }
+
     public double getScaleImageX() {
         Rect destBounds = getDestBounds();
-        return (destBounds.right-destBounds.left)*1.0/mBitmap.getWidth();
+        return (destBounds.right - destBounds.left) * 1.0 / mBitmap.getWidth();
     }
 
     public double getScaleImageY() {
         Rect destBounds = getDestBounds();
-        return (destBounds.bottom-destBounds.top)*1.0/mBitmap.getHeight();
+        return (destBounds.bottom - destBounds.top) * 1.0 / mBitmap.getHeight();
     }
 
     public Rect getDestBounds() {
@@ -449,6 +452,7 @@ import one.empty3.library.StructureMatrix;
         PointF p2 = coordCanvas(new PointF((float) imageWidth, (float) imageHeight));
         return new Rect((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
     }
+
     @Nullable
     @Override
     protected Parcelable onSaveInstanceState() {

@@ -41,11 +41,6 @@ class FaceActivity : ActivitySuperClass() {
             selectedPoint?.y = (intent.extras?.getDouble("selectedPoint.y") as Int)
         }
 
-        //if(intent.extras?.get("googleFaceDetect")!=null) {
-        //    faceOverlayView.googleFaceDetection = intent.extras!!.get("googleFaceDetect") as GoogleFaceDetection?
-        //}
-
-
             if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
@@ -111,11 +106,6 @@ class FaceActivity : ActivitySuperClass() {
 
                 val p = Point(x.toInt(), y.toInt())
 
-
-
-                if (checkPointCordinates(p)) {
-
-                }
                 return true
             }
         })
@@ -171,4 +161,5 @@ class FaceActivity : ActivitySuperClass() {
 
 
 }
+
 
