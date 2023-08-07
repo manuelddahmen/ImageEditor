@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+import androidx.core.graphics.minus
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
@@ -73,7 +74,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             var originalBitmap : Bitmap = ImageIO.read(originalImage).getBitmap()
 
-            Utils().loadImageInImageView(originalBitmap, faceOverlayView)
+            Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
             faceOverlayView.setBitmap(currentBitmap);
 
@@ -192,9 +193,13 @@ class FaceActivitySettings : ActivitySuperClass() {
                             if (polygon != null) {
                                 val doubles = Lumiere.getDoubles(surface.colorFill)
                                 val boundRect2d = polygon.boundRect2d
+                                val pPolygonPoint0 = Point(
+                                    boundRect2d.getElem(0).x.toInt(),
+                                    boundRect2d.getElem(0).y.toInt())
+                                var pBounds = pPolygonPoint0
                                 if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
                                     && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(1).y) {
-                                    if (surface.filledContours.getValues(p.x as Int, p.y as Int).equals(doubles)) {
+                                    if (surface.filledContours.getValues(p.x-pBounds as Int, p.y-pBounds as Int).equals(doubles)) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
                                         //drawPolygon()

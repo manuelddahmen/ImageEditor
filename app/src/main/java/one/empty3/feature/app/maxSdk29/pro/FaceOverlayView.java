@@ -220,11 +220,9 @@ public class FaceOverlayView extends ImageViewSelection {
                         new GoogleFaceDetection.FaceData.Surface(
                                 surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
                                 Color.RED, Color.RED, Color.BLACK));
-
             }
             i++;
         }
-
         for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
             fillPolygon(faceSurface, faceSurface.getPolygon(), faceSurface.getColorContours(), faceSurface.getColorFill());
         }
@@ -272,7 +270,8 @@ public class FaceOverlayView extends ImageViewSelection {
         //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
     }
 
-    private void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, Polygon polygonContour, int contourColor, int inColor) {
+    private void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, Polygon polygonContour,
+                             int contourColor, int inColor) {
         if (polygonContour != null) {
             paint.setColor(contourColor);
             /*for (int i = 0; i < polygonContour.size(); i++) {
@@ -288,29 +287,12 @@ public class FaceOverlayView extends ImageViewSelection {
             PointF scale = getScale();
 
             {
+                polygonContour.texture(new ColorTexture(inColor));
                 PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
                 if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
                     faceSurface.setContours(pixM);
                     faceSurface.setFilledContours(pixM);
-                    /*Bitmap bitmap = pixM.getBitmap();
-                    if (bitmap != null) {
-                        PointF p1 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(0).get(0),
-                                (float)(double)boundRect2d.getElem(0).get(1)));
-                        PointF p2 = coordCanvas(new PointF((float)(double)boundRect2d.getElem(1).get(0),
-                                (float)(double)boundRect2d.getElem(1).get(1)));
 
-                        float x1 = p1.x;
-                        float y1 = p1.y;
-                        float x2 = p2.x;
-                        float y2 = p2.y;
-
-                        float w = x2 - x1;
-                        float h = y2 - y1;
-
-
-                        if(x1>=0 && x1<mCanvas.getWidth()&&y1>=0&&y1<mCanvas.getHeight())
-                            ;//mCanvas.drawBitmap(bitmap.copy(Bitmap.Config.ARGB_8888, false), (int) x1, (int) y1, paint);
-                    }*/
                 }
             }
             //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);

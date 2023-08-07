@@ -275,8 +275,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
-        int fillColorPolygon = faceSurface.getColorFill();
-        double[] fillColorArrayPolygon = Lumiere.getDoubles(fillColorPolygon);
 
         int colorTemp = this.texture().getColorAt(0.5, 0.5);
 
@@ -330,6 +328,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         paint = new Paint();
 
+        double[] fillColorArrayPolygon = Lumiere.getDoubles(colorTemp);
         paint.setColor(colorTemp);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(2);
