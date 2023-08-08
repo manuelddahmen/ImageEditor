@@ -286,16 +286,15 @@ public class FaceOverlayView extends ImageViewSelection {
 
             PointF scale = getScale();
 
-            {
-                polygonContour.texture(new ColorTexture(inColor));
-                PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
-                if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
-                    faceSurface.setContours(pixM);
-                    faceSurface.setFilledContours(pixM);
+
+            polygonContour.texture(new ColorTexture(inColor));
+
+            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
+            if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
+                faceSurface.setContours(pixM);
+                faceSurface.setFilledContours(pixM);
 
                 }
-            }
-            //polygon.drawOnCanvas(mCanvas, mCopy, Color.BLACK, point0, scale);
         }
     }
 

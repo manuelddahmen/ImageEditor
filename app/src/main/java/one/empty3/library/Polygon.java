@@ -271,7 +271,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double prof, PointF position, double scale) {
+    public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double deep, PointF position, double scale) {
         boolean isDrawingOnImage = true;
         int pixels = 0;
 

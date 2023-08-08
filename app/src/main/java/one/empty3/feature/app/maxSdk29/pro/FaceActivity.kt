@@ -14,7 +14,7 @@ import java.io.File
 
 @ExperimentalCamera2Interop
 class FaceActivity : ActivitySuperClass() {
-    private lateinit var originalImage: File
+    private var originalImage: File? = null
     private var selectedPoint : android.graphics.Point? = null
     private lateinit var faceOverlayView:FaceOverlayView
     override fun onCreate(savedInstanceState: Bundle?) {

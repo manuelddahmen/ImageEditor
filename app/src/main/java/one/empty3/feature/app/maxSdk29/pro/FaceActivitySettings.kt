@@ -20,6 +20,7 @@ import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
 import one.empty3.feature20220726.PixM
 import one.empty3.library.Lumiere
 import java.io.File
+import java.util.Arrays
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -127,7 +128,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                 var p = PointF(event.x, event.y)
 
-                var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().x)
+                var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().y)
 
                 val p2 = Point(p1.x.toInt(), p1.y.toInt())
 
@@ -193,13 +194,12 @@ class FaceActivitySettings : ActivitySuperClass() {
                             if (polygon != null) {
                                 val doubles = Lumiere.getDoubles(surface.colorFill)
                                 val boundRect2d = polygon.boundRect2d
-                                val pPolygonPoint0 = Point(
-                                    boundRect2d.getElem(0).x.toInt(),
-                                    boundRect2d.getElem(0).y.toInt())
-                                var pBounds = pPolygonPoint0
+                                val pPolygonPoint0 = Point(boundRect2d.getElem(0).x.toInt(), boundRect2d.getElem(0).y.toInt())
+                                var pBounds = pPolygonPoint0//Point(0,0)
                                 if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
                                     && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(1).y) {
-                                    if (surface.filledContours.getValues(p.x-pBounds as Int, p.y-pBounds as Int).equals(doubles)) {
+                                    if (Arrays.equals(surface.filledContours.getValues(p.x-pBounds.x as Int, p.y-pBounds.y as Int),
+                                            doubles)) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
                                         //drawPolygon()
@@ -238,7 +238,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         if(selectedSurfaces.size>selectedSurface) {
 
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap3(selectedSurfaceObject.contours.bitmap)
+            polygonView.setImageBitmap3(selectedSurfaceObject.filledContours.bitmap)
             //polygonView.setPixels(selectedSurfaceObject.contours)
         }
     }
@@ -252,7 +252,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         var g = 0
         for (granted in grantResults) {
-            g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
+            g += if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
         }
 
         if (g > 0 && requestCode == 4232403) {

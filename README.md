@@ -80,6 +80,9 @@ SettingsActivityFace for Faces parts colors and textures.
 
 Restore KMeans.java to 09-jun-2023.
 Error in PixM.setValues(int,int,double...) FIXED.
+Essayer de peindre (méthode drawPolygon) les polygones reconnus du visage sur l'écran dans une ImageView
+Change face's colors (#1)
+</nl-NL>
 </en-US>
 <fr-FR>
 Quelques effets artistiques
@@ -185,4 +188,6 @@ In place subimages
    SettingsActivityFace for Faces parts colors and textures.
 Restore KMeans.java to 09-jun-2023.
 Error in PixM.setValues(int,int,double...) FIXED.
-</fr-FR>
+Essayer de peindre (méthode drawPolygon) les polygones reconnus du visage sur l'écran dans une ImageView
+Change face's colors (#1)
+   </nl-NL></fr-FR>

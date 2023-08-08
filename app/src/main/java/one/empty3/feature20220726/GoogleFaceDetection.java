@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import one.empty3.library.ColorTexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
@@ -178,6 +179,7 @@ import one.empty3.library.StructureMatrix;
             }
 
             public void computeFilledSurface(PointF position, double scale) {
+                polygon.texture(new ColorTexture(colorFill));
                 filledContours = polygon.fillPolygon2D(this, null, contours.getBitmap(),
                         colorTransparent, 0, position, scale);
             }
