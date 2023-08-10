@@ -27,6 +27,7 @@ import com.google.mlkit.vision.face.FaceLandmark;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,9 +41,9 @@ import one.empty3.library.StructureMatrix;
 @ExperimentalCamera2Interop
 public class FaceOverlayView extends ImageViewSelection {
     private GoogleFaceDetection googleFaceDetection;
-    private List<Face> mFaces;
+    List<Face> mFaces;
     protected Bitmap mBitmap;
-    private Canvas mCanvas;
+    Canvas mCanvas;
     Bitmap mCopy;
     private boolean isFinish = false;
     private ActivitySuperClass activity;
@@ -239,7 +240,7 @@ public class FaceOverlayView extends ImageViewSelection {
         return new Polygon(point3DS, new ColorTexture(contourColor));
     }
 
-    public void testSphere() {
+    //public void testSphere() {
 /*
         Sphere sphere = new Sphere(new Axe(Point3D.Z, Point3D.Z.mult(-1)), 10.0);
         sphere.texture(new ColorTexture(Color.GREEN));
@@ -265,15 +266,15 @@ public class FaceOverlayView extends ImageViewSelection {
         mCanvas.drawBitmap(bitmap, 0f, 0f, paint);
 
  */
-        paint.setColor(Color.GREEN);
-        PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
+        //paint.setColor(Color.GREEN);
+        //PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
         //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
-    }
+   // }
 
     private void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, Polygon polygonContour,
                              int contourColor, int inColor) {
         if (polygonContour != null) {
-            paint.setColor(contourColor);
+            paint.setColor(inColor);
             /*for (int i = 0; i < polygonContour.size(); i++) {
                 drawLine(coordCanvas(polygonContour.get(i)), coordCanvas(polygonContour.get((i + 1) % polygonContour.size())));
             }
@@ -402,8 +403,9 @@ public class FaceOverlayView extends ImageViewSelection {
                 PointF p1 = coordCanvas(new PointF(0, 0));
                 PointF p2 = coordCanvas(new PointF((float) imageWidth, (float) imageHeight));
                 Rect destBounds = new Rect((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
-                //!!!mCanvas.drawBitmap(mBitmap, new Rect(0, 0, mBitmap.getWidth(), mBitmap.getHeight()), destBounds, paint);
-                //googleFaceDetection
+
+                googleFaceDetection.setDataFaces(new ArrayList<>());
+
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
                 if (activity != null) {
@@ -454,7 +456,7 @@ public class FaceOverlayView extends ImageViewSelection {
         float top = 0;
         float right = 0;
         float bottom = 0;
-        testSphere();
+        //testSphere();
         for (int i = 0; i < mFaces.size(); i++) {
             Face face = mFaces.get(i);
 

@@ -343,6 +343,28 @@ public class ActivitySuperClass extends AppCompatActivity {
         return getFilesFile(imageViewFilenameProperties);
     }
 
+    public boolean saveActivityProperties(Properties properties) {
+        File filesFile = getFilesFile(this.getClass().getCanonicalName() + ".txt");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filesFile);
+            properties.store(fileOutputStream, "Properties for activity: "+getClass());
+            return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public Properties loadActivityProperties(Properties properties) {
+        File filesFile = getFilesFile(this.getClass().getCanonicalName() + ".txt");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filesFile);
+            properties.load(fileInputStream);
+            return properties;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     void drawIfBitmap() {
         saveInstanceState();

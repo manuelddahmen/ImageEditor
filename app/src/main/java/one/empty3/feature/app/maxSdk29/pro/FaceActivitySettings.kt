@@ -7,20 +7,18 @@ import android.graphics.Point
 import android.graphics.PointF
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import androidx.core.graphics.minus
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
-import one.empty3.feature20220726.PixM
 import one.empty3.library.Lumiere
 import java.io.File
-import java.util.Arrays
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -120,7 +118,6 @@ class FaceActivitySettings : ActivitySuperClass() {
         faceOverlayView.setOnClickListener {
 
         }
-
         faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
             if(event.actionMasked==MotionEvent.ACTION_UP) {
 
@@ -128,7 +125,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                 var p = PointF(event.x, event.y)
 
-                var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().y)
+                var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().x)
 
                 val p2 = Point(p1.x.toInt(), p1.y.toInt())
 
@@ -141,7 +138,30 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
             true
         }
+        /*
+        faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
+            if(event.actionMasked==MotionEvent.ACTION_UP) {
+                val scale = getScale()
 
+                var p0 = PointF(v.x, v.y)
+
+                var p = PointF(event.x, event.y)
+
+                //var p1 = PointF((p.x - p0.x) * getScale().x, (p.y - p0.y) * getScale().y)
+                var p1 = coordCanvas(PointF((p.x-p0.x)*scale.x , (p.y-p0.y)*scale.y))
+
+                val p2 = Point(p1.x.toInt(), p1.y.toInt())
+
+                selectedPoint = p2
+
+                selectShapeAt(p2)
+
+                drawPolygon()
+
+            }
+            true
+        }
+*/
         val colorChooser : Button= findViewById<Button>(R.id.choose_color)
 
         colorChooser.setOnClickListener {
@@ -155,15 +175,15 @@ class FaceActivitySettings : ActivitySuperClass() {
     fun coordCanvas(p: PointF): PointF {
         val mBitmap = faceOverlayView.mBitmap
         if (faceOverlayView.mBitmap == null) return p
-        val viewWidth: Double = faceOverlayView.getWidth().toDouble()
-        val viewHeight: Double = faceOverlayView.getHeight().toDouble()
-        val imageWidth: Double = mBitmap.getWidth().toDouble()
-        val imageHeight: Double = mBitmap.getHeight().toDouble()
+        val viewWidth: Double = faceOverlayView.width.toDouble()
+        val viewHeight: Double = faceOverlayView.height.toDouble()
+        val imageWidth: Double = mBitmap.width.toDouble()
+        val imageHeight: Double = mBitmap.height.toDouble()
         val scale = Math.min(viewWidth / imageWidth, viewHeight / imageHeight)
         return PointF(
-            ((-(imageWidth / 2) * scale).toInt() + faceOverlayView.getWidth() / 2 + p.x * scale).toInt()
+            ((-(imageWidth / 2) * scale).toInt() + faceOverlayView.width / 2 + p.x * scale).toInt()
                 .toFloat(),
-            ((-(imageHeight / 2) * scale).toInt() + faceOverlayView.getHeight() / 2 + p.y * scale).toInt()
+            ((-(imageHeight / 2) * scale).toInt() + faceOverlayView.height / 2 + p.y * scale).toInt()
                 .toFloat()
         )
     }
@@ -183,6 +203,20 @@ class FaceActivitySettings : ActivitySuperClass() {
         return PointF(scaleMin.toFloat(), scaleMin.toFloat())
     }
 
+    private fun equalsArrays(
+        arr1: DoubleArray?,
+        arr2: DoubleArray?,
+        inter: Double): Boolean {
+        if(arr1!=null && arr2!=null && arr1.size==3 && arr2.size==3) {
+            for (i1 in 0..2) {
+                if(arr1[i1]>arr2[i1]+inter || arr1[i1]<arr2[i1]-inter)
+                    return false
+            }
+            return true
+        }
+        return false
+    }
+
     private fun selectShapeAt(p: Point) {
         selectedSurfaces = ArrayList()
         if(googleFaceDetection!=null) {
@@ -198,10 +232,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 var pBounds = pPolygonPoint0//Point(0,0)
                                 if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
                                     && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(1).y) {
-                                    if (Arrays.equals(surface.filledContours.getValues(p.x-pBounds.x as Int, p.y-pBounds.y as Int),
-                                            doubles)) {
+                                    if (equalsArrays(surface.filledContours.getValues(p.x-pBounds.x as Int, p.y-pBounds.y as Int),
+                                            doubles, 1.0/256)) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
+                                        //surface.filledContours.setValues(p.x-pBounds.x as Int, p.y-pBounds.y, 1.0, 1.0, 1.0)
                                         //drawPolygon()
                                     }
                                 }
@@ -236,10 +271,10 @@ class FaceActivitySettings : ActivitySuperClass() {
         //polygonView.invalidate()
 
         if(selectedSurfaces.size>selectedSurface) {
-
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap3(selectedSurfaceObject.filledContours.bitmap)
-            //polygonView.setPixels(selectedSurfaceObject.contours)
+            polygonView.setImageBitmap3(selectedSurfaceObject
+                .filledContours.bitmap.copy(
+                    Bitmap.Config.ARGB_8888, true))
         }
     }
 
