@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.toArgb
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
+import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.io.File
@@ -207,6 +208,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 val newColorFill = selectedColor
                 selectedSurfaceAllPicture!!.filledContours.replaceColor(oldColorFill,
                     newColorFill.toArgb())
+                selectedSurfaceAllPicture!!.polygon.texture(ColorTexture(selectedColor.toArgb()))
             }
         }
     }

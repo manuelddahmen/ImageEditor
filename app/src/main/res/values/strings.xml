@@ -243,5 +243,7 @@
     <string name="choose_image">Choose image</string>
     <string name="choose_color">Choose color</string>
     <string name="title_activity_picture_data">PictureDataActivity</string>
+    <string name="apply_color">Apply color</string>
+    <string name="apply_image">Apply image</string>
 
 </resources>
