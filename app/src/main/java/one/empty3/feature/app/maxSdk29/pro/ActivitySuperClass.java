@@ -42,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Properties;
 
 import one.empty3.feature20220726.PixM;
@@ -126,7 +127,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         }
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
-        if(currentFile!=null) {
+        if (currentFile != null) {
             testIfValidBitmap();
         } else
             loadInstanceState();
@@ -173,7 +174,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             for (int i = 0; i < cords.length; i++) {
                 cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
             }
-            String maxRes1 = properties.getProperty("maxRes");
+            String maxRes1 = properties.getProperty("maxRes", ""+maxRes);
             if (maxRes1 != null) {
                 try {
                     maxRes = Integer.parseInt(maxRes1);
@@ -182,12 +183,13 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
             try {
-                String currentFile1 = properties.getProperty("currentFile");
+                String currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
                 currentFile = new File(currentFile1);
-
-                File imageViewPersistantFile = getImageViewPersistantFile();
-                if (imageViewPersistantFile.exists()) {
-                    currentFile = imageViewPersistantFile;
+                if(currentFile1==null || currentFile1.length()==0) {
+                    File imageViewPersistantFile = getImageViewPersistantFile();
+                    if (imageViewPersistantFile.exists()) {
+                        currentFile = imageViewPersistantFile;
+                   }
                 }
             } catch (RuntimeException ex) {
                 Toast.makeText(getApplicationContext(), "Error restoring currentFile", Toast.LENGTH_LONG)
@@ -233,40 +235,41 @@ public class ActivitySuperClass extends AppCompatActivity {
         }
         try {
             for (int i = 0; i < cords.length; i++) {
-                properties.setProperty(cordsConsts[i], cords[i]);
+                cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
             }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
-            try {
+        try {
             String maxRes1 = properties.getProperty("maxRes", "" + MAXRES_DEFAULT);
-            if(maxRes1!=null && maxRes1.length()>0) {
+            if (maxRes1 != null && maxRes1.length() > 0) {
                 try {
-                    maxRes = (int)Double.parseDouble(maxRes1);
+                    maxRes = (int) (Double.parseDouble(maxRes1));
                 } catch (RuntimeException ex1) {
                     ex1.printStackTrace();
 
                 }
             }
-
             currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
-            } catch (RuntimeException ex) {
-                ex.printStackTrace();
-            }
+            if(currentFile1!=null)
+                currentFile = new File(currentFile1);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
 
         try {
             File currentFile2 = null;
-            if(currentFile1==null)
+            if (currentFile1 == null)
                 currentFile2 = getImageViewPersistantFile();
             else
                 currentFile2 = new File(currentFile1);
-            if(currentFile2!=null&&currentFile2.exists()) {
-                    currentFile = currentFile2;
+            if (currentFile2 != null && currentFile2.exists()) {
+                currentFile = currentFile2;
             }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
-        if(currentFile==null)
+        if (currentFile == null)
             Toast.makeText(getApplicationContext(), "Cannot find current file (working copy)", Toast.LENGTH_SHORT)
                     .show();
     }
@@ -287,12 +290,14 @@ public class ActivitySuperClass extends AppCompatActivity {
                     new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
                                     new FileInputStream(currentFile)),
-                            getImageViewPersistantFile(), getImageViewPersistantFile(),
+                            Objects.requireNonNull(getImageViewPersistantFile()), getImageViewPersistantFile(),
                             maxRes, true);
+
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
         } catch (RuntimeException | IOException ex) {
+            ex.printStackTrace();
         }
 
         try {
@@ -300,7 +305,6 @@ public class ActivitySuperClass extends AppCompatActivity {
         } catch (IOException ignored) {
         }
     }
-
 
 
     public void passParameters(Intent to) {
@@ -330,7 +334,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     protected File getFilesFile(String s) {
-        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/"  + s);
+        return new File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/" + s);
     }
 
     @org.jetbrains.annotations.Nullable
@@ -347,13 +351,14 @@ public class ActivitySuperClass extends AppCompatActivity {
         File filesFile = getFilesFile(this.getClass().getCanonicalName() + ".txt");
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(filesFile);
-            properties.store(fileOutputStream, "Properties for activity: "+getClass());
+            properties.store(fileOutputStream, "Properties for activity: " + getClass());
             return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     public Properties loadActivityProperties(Properties properties) {
         File filesFile = getFilesFile(this.getClass().getCanonicalName() + ".txt");
         try {
@@ -434,6 +439,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         saveInstanceState();
 
     }
+
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);

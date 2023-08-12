@@ -161,7 +161,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
     // Barcode model
     implementation 'com.google.mlkit:barcode-scanning:17.1.0'
     // Or comment the dependency above and uncomment the dependency below to
