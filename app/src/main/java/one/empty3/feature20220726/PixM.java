@@ -844,7 +844,7 @@ public class PixM extends MBitmap implements Parcelable {
             for (int j = y; j < height; j++) {
                 assert bitmaToDraw != null;
                 double xOrig = Math.min(1.0 * (i - x) / width * bitmaToDraw.getWidth(), bitmaToDraw.getWidth() - 1);
-                double yOrig = Math.min(1.0 * (j - y) / width * bitmaToDraw.getHeight(), bitmaToDraw.getHeight() - 1);
+                double yOrig = Math.min(1.0 * (j - y) / height * bitmaToDraw.getHeight(), bitmaToDraw.getHeight() - 1);
 
                 int pixel = bitmaToDraw.getPixel((int) xOrig, (int) yOrig);
                 Lumiere.getDoubles(pixel, tmpColor2);

@@ -207,7 +207,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val fileChooser = findViewById<Button>(R.id.choose_image)
 
-        fileChooser.setOnClickListener({
+        fileChooser.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setType("image/*")
             intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
@@ -219,8 +219,20 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intent2,
                 ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER
             )
-        })
+        }
 
+
+        val applyImage = findViewById<Button>(R.id.applyImage)
+        applyImage.setOnClickListener {
+            if (this.selectedSurfaceAllPicture != null && selectedImage!=null) {
+                val filledContours = selectedSurfaceAllPicture!!.filledContours
+                filledContours.paintIfNot(0, 0, filledContours.columns, filledContours.lines,
+                    selectedImage,
+                    selectedSurfaceAllPicture!!.colorTransparent)
+                println("Image painted")
+            }
+
+        }
         val applyColor = findViewById<Button>(R.id.applyColor)
         applyColor.setOnClickListener {
 
@@ -406,7 +418,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode==ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode== RESULT_OK) {
+        if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             val intentChoosed = data
 
 
@@ -434,17 +446,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                 photo = BitmapFactory.decodeStream(choose_directoryData)
                 System.err.println("Get file (bitmap) : $photo")
             }
-            if(photo!=null) {
-                this.currentBitmap = photo!!
-                if(this.selectedSurfaceAllPicture!=null) {
-                    val filledContours = selectedSurfaceAllPicture!!.filledContours
-                    filledContours.paintIfNot(
-                        0, 0, filledContours.columns, filledContours.lines,
-                        selectedSurfaceAllPicture!!.filledContours.bitmap,
-                                selectedSurfaceAllPicture!!.colorTransparent)
-                }
+            if (photo != null) {
+                this.selectedImage = photo!!
             }
         }
     }
-
 }
