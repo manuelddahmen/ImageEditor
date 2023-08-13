@@ -222,6 +222,16 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         });
     }
 
+    final double [] tmpColor = new double[compCount];
+    public void setValues(int i, int j, int color) {
+
+        Lumiere.getDoubles(color, tmpColor);
+        IntStream.range(0, getCompCount()).forEach(c -> {
+            setCompNo(c);
+            set(i, j, tmpColor[c]);
+
+        });
+    }
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
             return ((x[index(column, line)]));

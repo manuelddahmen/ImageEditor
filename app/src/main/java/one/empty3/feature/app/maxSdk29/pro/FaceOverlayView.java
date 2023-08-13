@@ -66,7 +66,7 @@ public class FaceOverlayView extends ImageViewSelection {
     }
 
     public void setGoogleFaceDetection(GoogleFaceDetection googleFaceDetection) {
-        this.googleFaceDetection = GoogleFaceDetection.getInstance(true);
+        this.googleFaceDetection = GoogleFaceDetection.getInstance(false);
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -306,8 +306,7 @@ public class FaceOverlayView extends ImageViewSelection {
         if (googleFaceDetection != null) {
             for(GoogleFaceDetection.FaceData face  :googleFaceDetection.getDataFaces()) {
                 for(GoogleFaceDetection.FaceData.Surface surface: face.getFaceSurfaces()) {
-                    StructureMatrix<Point3D> boundRect2d = surface.getPolygon().getBoundRect2d();
-                     surface.getPolygon().fillPolygon2DfromData(surface, mCanvas, mCopy, Color.BLACK);
+                     surface.getPolygon().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
 
 
                 }
@@ -410,7 +409,7 @@ public class FaceOverlayView extends ImageViewSelection {
             //Log.d("ImageViewSelection::setImageBitmap",
             //        "change image on UI thread");
             if (mFaces != null && mCanvas != null && bm != null) {
-                googleFaceDetection = GoogleFaceDetection.getInstance(true);
+                googleFaceDetection = GoogleFaceDetection.getInstance(false);
 
                 double scale = drawBitmap();
 

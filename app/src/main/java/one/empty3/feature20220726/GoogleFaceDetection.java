@@ -38,7 +38,7 @@ import one.empty3.library.StructureMatrix;
         in.readTypedObject(new Creator<Object>() {
             @Override
             public Object createFromParcel(Parcel parcel) {
-                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(true);
+                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(false);
                 int numFaces = parcel.readInt();
                 for (int face = 0; face < numFaces; face++) {
                     int id = parcel.readInt();

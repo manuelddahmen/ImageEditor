@@ -401,12 +401,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         parcel.writeDoubleArray(pointsListXyz);
     }
 
-    public void fillPolygon2DfromData(GoogleFaceDetection.FaceData.Surface surface, Canvas mCanvas, Bitmap mCopy, int black) {
-        boolean isDrawingOnImage = true;
+    public void fillPolygon2DFromData(GoogleFaceDetection.FaceData.Surface surface, Bitmap mCopy, int black) {
         int pixels = 0;
 
-
-        int colorTemp = this.texture().getColorAt(0.5, 0.5);
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
@@ -423,10 +420,6 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         PixM pixM = surface.getFilledContours();
 
         int count = 0;
-
-        paint.setColor(colorTemp);
-        paint.setAntiAlias(true);
-        paint.setStrokeWidth(2);
 
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 

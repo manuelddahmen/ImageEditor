@@ -28,6 +28,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.ITexture;
@@ -833,4 +834,24 @@ public class PixM extends MBitmap implements Parcelable {
             return true;
         }
         return false;
-    }}
+    }
+
+    private double[] tmpColor2 = new double[3];
+    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmaToDraw, int colorTransparent) {
+        double[] tmpColor3 = new double[3];
+        Lumiere.getDoubles(colorTransparent, tmpColor3);
+        for (int i = x; i < width; i++) {
+            for (int j = y; j < height; j++) {
+                assert bitmaToDraw != null;
+                double xOrig = Math.min(1.0 * (i - x) / width * bitmaToDraw.getWidth(), bitmaToDraw.getWidth() - 1);
+                double yOrig = Math.min(1.0 * (j - y) / width * bitmaToDraw.getHeight(), bitmaToDraw.getHeight() - 1);
+
+                int pixel = bitmaToDraw.getPixel((int) xOrig, (int) yOrig);
+                Lumiere.getDoubles(pixel, tmpColor2);
+                if (!equalsArrays(tmpColor2, tmpColor3, 0.01)) {
+                    setValues(i, j, tmpColor2);
+                }
+            }
+        }
+    }
+}

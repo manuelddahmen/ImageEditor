@@ -3,6 +3,7 @@ package one.empty3.feature.app.maxSdk29.pro
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.PointF
 import android.os.Build
@@ -18,10 +19,14 @@ import androidx.compose.ui.graphics.toArgb
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
+import one.empty3.feature20220726.PixM
 import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -35,6 +40,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 
 @ExperimentalCamera2Interop
 class FaceActivitySettings : ActivitySuperClass() {
+    val ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER = 543451
     private val OPTION_SELECT_WHERE_CLICKED = 1
     private val OPTION_SELECT_ALL = 2
     private val SELECTED_OPTION_COLOR = 1
@@ -47,7 +53,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(true)
+    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(false)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
     private var selectedColor = Color.White
@@ -92,7 +98,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         //if (get != null)
         //    googleFaceDetection = get as GoogleFaceDetection
 
-        googleFaceDetection = GoogleFaceDetection.getInstance(true)
+        googleFaceDetection = GoogleFaceDetection.getInstance(false)
 
 
         drawIfBitmap()
@@ -202,7 +208,17 @@ class FaceActivitySettings : ActivitySuperClass() {
         val fileChooser = findViewById<Button>(R.id.choose_image)
 
         fileChooser.setOnClickListener({
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.setType("image/*")
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
 
+            val intent2 = Intent.createChooser(intent, "Choose a file")
+            System.err.println(intent2)
+            startActivityForResult(
+                intent2,
+                ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER
+            )
         })
 
         val applyColor = findViewById<Button>(R.id.applyColor)
@@ -389,5 +405,46 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode==ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode== RESULT_OK) {
+            val intentChoosed = data
+
+
+            //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageView));
+
+            //AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
+            var choose_directoryData: InputStream? = null
+            choose_directoryData = getRealPathFromIntentData(data)
+            if (choose_directoryData == null) {
+                choose_directoryData = try {
+                    FileInputStream(data!!.dataString)
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                    return
+                }
+            }
+            var photo: Bitmap? = null
+            if (maxRes > 0) {
+                System.err.println("FileInputStream$choose_directoryData")
+                photo = BitmapFactory.decodeStream(choose_directoryData)
+                photo = PixM.getPixM(photo, maxRes).image.getBitmap()
+                System.err.println("Get file (bitmap) : $photo")
+            } else {
+                System.err.println("FileInputStream$choose_directoryData")
+                photo = BitmapFactory.decodeStream(choose_directoryData)
+                System.err.println("Get file (bitmap) : $photo")
+            }
+            if(photo!=null) {
+                this.currentBitmap = photo!!
+                if(this.selectedSurfaceAllPicture!=null) {
+                    val filledContours = selectedSurfaceAllPicture!!.filledContours
+                    filledContours.paintIfNot(
+                        0, 0, filledContours.columns, filledContours.lines,
+                        selectedSurfaceAllPicture!!.filledContours.bitmap,
+                                selectedSurfaceAllPicture!!.colorTransparent)
+                }
+            }
+        }
+    }
 
 }
