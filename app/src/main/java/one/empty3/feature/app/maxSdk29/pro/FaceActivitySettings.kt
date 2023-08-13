@@ -47,7 +47,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance()
+    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(true)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
     private var selectedColor = Color.White
@@ -92,7 +92,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         //if (get != null)
         //    googleFaceDetection = get as GoogleFaceDetection
 
-        googleFaceDetection = GoogleFaceDetection.getInstance()
+        googleFaceDetection = GoogleFaceDetection.getInstance(true)
 
 
         drawIfBitmap()

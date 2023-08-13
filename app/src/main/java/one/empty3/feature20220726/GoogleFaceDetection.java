@@ -28,8 +28,8 @@ import one.empty3.library.StructureMatrix;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
 
-    public static GoogleFaceDetection getInstance() {
-        if(instance==null)
+    public static GoogleFaceDetection getInstance(boolean newInstance) {
+        if(instance==null || newInstance)
             instance = new GoogleFaceDetection();
         return instance;
     }
@@ -38,7 +38,7 @@ import one.empty3.library.StructureMatrix;
         in.readTypedObject(new Creator<Object>() {
             @Override
             public Object createFromParcel(Parcel parcel) {
-                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance();
+                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(true);
                 int numFaces = parcel.readInt();
                 for (int face = 0; face < numFaces; face++) {
                     int id = parcel.readInt();

@@ -39,7 +39,7 @@ import one.empty3.feature20220726.GoogleFaceDetection;
     public AppData() {
     }
 
-    private GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance();
+    private GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(true);
 
     private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
     }
