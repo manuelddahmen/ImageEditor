@@ -400,4 +400,57 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         parcel.writeInt(size);
         parcel.writeDoubleArray(pointsListXyz);
     }
+
+    public void fillPolygon2DfromData(GoogleFaceDetection.FaceData.Surface surface, Canvas mCanvas, Bitmap mCopy, int black) {
+        boolean isDrawingOnImage = true;
+        int pixels = 0;
+
+
+        int colorTemp = this.texture().getColorAt(0.5, 0.5);
+
+        StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
+
+        double left = (boundRect2d.getElem(0).get(0) - 1);
+        double top = (boundRect2d.getElem(0).get(1) - 1);
+        double right = (boundRect2d.getElem(1).get(0) + 1);
+        double bottom = (boundRect2d.getElem(1).get(1) + 1);
+        double widthBox = right - left;
+        double heightBox = bottom - top;
+
+        if (!(widthBox > 0 && heightBox > 0))
+            return;
+
+        PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
+
+        int count = 0;
+
+        paint.setColor(colorTemp);
+        paint.setAntiAlias(true);
+        paint.setStrokeWidth(2);
+
+        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
+
+        for (double i = left; i < right; i++) {
+            for (double j = top; j < bottom; j++) {
+                int xMap = (int) (i - left);
+                int yMap = (int) (j - top);
+
+                double[] color = pixM.getValues(xMap, yMap);
+                int imageColor = Lumiere.getInt(color);
+
+                int polygonColor = this.texture().getColorAt(1.0 * xMap / (right - left), 1.0 * yMap / (bottom - top));
+
+
+                pixM.getValues(xMap, yMap);
+                mCopy.setPixel((int) i, (int) j, paint.getColor());
+                pixels++;
+
+
+                count++;
+            }
+        }
+        System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
+
+        return;
+    }
 }

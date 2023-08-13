@@ -109,4 +109,18 @@ public abstract class Lumiere extends Representable {
         }
         return res;
     }
+
+
+    private boolean equalsArrays(double[] arr1, double [] arr2, Double inter) {
+        if (arr1 != null && arr2 != null && arr1.length == 3 && arr2.length == 3) {
+            for (int i1 = 0; i1 < 3; i1++) {
+
+
+                if (arr1[i1] > arr2[i1] + inter || arr1[i1] < arr2[i1] - inter)
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

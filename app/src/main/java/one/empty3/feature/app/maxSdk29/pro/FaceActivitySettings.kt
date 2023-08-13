@@ -51,10 +51,11 @@ class FaceActivitySettings : ActivitySuperClass() {
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
     private var selectedColor = Color.White
-    private lateinit var selectedImage : Bitmap
+    private lateinit var selectedImage: Bitmap
     private var selectedOption = SELECTED_OPTION_COLOR
 
-    class ColorDialogListener(var selectedColor2: Color, var activity: FaceActivitySettings) : AmbilWarnaDialog.OnAmbilWarnaListener {
+    class ColorDialogListener(var selectedColor2: Color, var activity: FaceActivitySettings) :
+        AmbilWarnaDialog.OnAmbilWarnaListener {
         override fun onOk(dialog: AmbilWarnaDialog, color: Int) {
             activity.selectedColor = Color(color)
             val findViewById = activity.findViewById<Button>(R.id.choose_color)
@@ -62,9 +63,11 @@ class FaceActivitySettings : ActivitySuperClass() {
             // color is the color selected by the user.
 
         }
+
         fun setFaceActivitySettings(faceActivitySettings: FaceActivitySettings) {
             this.activity = faceActivitySettings
         }
+
         override fun onCancel(dialog: AmbilWarnaDialog) {
             // cancel was selected by the user
         }
@@ -184,14 +187,15 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val colorChooser: Button = findViewById<Button>(R.id.choose_color)
 
-        val colorChooserDialog : ColorDialogListener = ColorDialogListener(selectedColor,this)
+        val colorChooserDialog: ColorDialogListener = ColorDialogListener(selectedColor, this)
 
         colorChooser.setOnClickListener {
 
-            val dialog : AmbilWarnaDialog = AmbilWarnaDialog(/* context = */ this, /* color = */
+            val dialog: AmbilWarnaDialog = AmbilWarnaDialog(/* context = */ this, /* color = */
                 selectedColor.toArgb(),
                 /* listener = */
-                colorChooserDialog)
+                colorChooserDialog
+            )
             dialog.show()
         }
 
@@ -203,12 +207,21 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val applyColor = findViewById<Button>(R.id.applyColor)
         applyColor.setOnClickListener {
-            if (selectedColor != null && selectedSurfaceAllPicture != null) {
-                val oldColorFill = selectedSurfaceAllPicture!!.colorFill
+
+            var sel = selectedSurfaceAllPicture
+
+            if (sel == null && selectedSurface < selectedSurfaces.size) sel =
+                selectedSurfaces[selectedSurface]
+
+            if (selectedColor != null && sel != null) {
+                val oldColorFill = sel.colorFill
                 val newColorFill = selectedColor
-                selectedSurfaceAllPicture!!.filledContours.replaceColor(oldColorFill,
-                    newColorFill.toArgb())
-                selectedSurfaceAllPicture!!.polygon.texture(ColorTexture(selectedColor.toArgb()))
+                sel.filledContours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
+                sel.contours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
+                sel.polygon.texture(ColorTexture(newColorFill.toArgb()))
+                sel.colorFill = newColorFill.toArgb()
+                drawSurface()
+                drawSurfaces()
             }
         }
     }
@@ -287,13 +300,16 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 )
                                 var pBounds = pPolygonPoint0//Point(0,0)
 
-                                if(option==OPTION_SELECT_ALL || p==null) {
+                                if (option == OPTION_SELECT_ALL || p == null) {
                                     if (i == currentSurface)
                                         selectedSurfaceAllPicture = surface
 
                                     drawSurface()
+                                    selectedSurfaces.add(surface)
                                     i++
-                                } else if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(1).x
+                                } else if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(
+                                        1
+                                    ).x
                                     && p.y >= boundRect2d.getElem(0).y && p.y <= boundRect2d.getElem(
                                         1
                                     ).y
@@ -352,6 +368,9 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
     }
 
+    fun drawSurfaces() {
+        faceOverlayView.fillPolygons(googleFaceDetection)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

@@ -808,13 +808,14 @@ public class PixM extends MBitmap implements Parcelable {
         }
     }
 
-    public void replaceColor(int oldColorFill, int newColorFill) {
+    public void replaceColor(int oldColorFill, int newColorFill, double d) {
         double[] doublesOld = Lumiere.getDoubles(oldColorFill);
         double[] doublesNew = Lumiere.getDoubles(newColorFill);
 
+        Point3D p0 = new Point3D(doublesOld);
         for (int i = 0; i < getColumns(); i++) {
             for (int j = 0; j < getLines(); j++) {
-                if(getValues(i, j).equals(doublesOld)) {
+                if(getP(i, j).moins(p0).norme()<d) {
                     setValues(i, j, doublesNew);
                 }
             }
