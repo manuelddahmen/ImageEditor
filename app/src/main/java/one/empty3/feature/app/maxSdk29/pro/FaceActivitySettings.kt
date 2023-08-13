@@ -279,7 +279,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         }
     }
-
+    
 
     fun getScale(): PointF {
         val mBitmap = faceOverlayView.mBitmap
