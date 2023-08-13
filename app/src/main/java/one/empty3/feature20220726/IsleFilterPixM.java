@@ -35,7 +35,7 @@ public class IsleFilterPixM
     }
 
     public boolean selectPoint(int x, int y) {
-        float[] sel = new float[3];
+        double[] sel = new double[3];
         getColor(x, y, sel);
         double d = 0;
         for (int i = 0; i < 3; i++)

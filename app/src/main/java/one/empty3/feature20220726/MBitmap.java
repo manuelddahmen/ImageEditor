@@ -239,13 +239,14 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return Math.sqrt(i);
     }
 
-    public void getColor(int column, int line,
-                         float[] comps) {
+    public double[] getColor(int column, int line,
+                             double[] comps) {
         for (int c = 0; c < 3; c++) {
             setCompNo(c);
-            comps[c] = (float) (get(column, line));
+            comps[c] = (double) (get(column, line));
 
         }
+        return comps;
     }
 
     public int getCompNo() {

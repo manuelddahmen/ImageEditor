@@ -113,11 +113,11 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         int size = in.readInt();
         double[] pointsListXyz = new double[size * 3];
         in.readDoubleArray(pointsListXyz);
-        Point3D [] point3Ds = new Point3D[size];
-        for (int k = 0; k < pointsListXyz.length; k ++) {
-            point3Ds[k] =  new Point3D(pointsListXyz[k*3],
-                    pointsListXyz[k*3 + 1],
-                    pointsListXyz[k*3 + 2]);
+        Point3D[] point3Ds = new Point3D[size];
+        for (int k = 0; k < pointsListXyz.length; k++) {
+            point3Ds[k] = new Point3D(pointsListXyz[k * 3],
+                    pointsListXyz[k * 3 + 1],
+                    pointsListXyz[k * 3 + 2]);
         }
         setPoints(point3Ds);
     }
@@ -392,7 +392,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         int size = getPoints().getData1d().size();
         double[] pointsListXyz = new double[size * 3];
-        for (int k = 0; k <size; k++) {
+        for (int k = 0; k < size; k++) {
             for (int j = 0; j < 3; j++) {
                 pointsListXyz[j + k * 3] = getPoints().getElem(k).get(j);
             }
@@ -420,7 +420,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         if (!(widthBox > 0 && heightBox > 0))
             return;
 
-        PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
+        PixM pixM = surface.getFilledContours();
 
         int count = 0;
 
@@ -430,19 +430,19 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
+        double[] transparent = Lumiere.getDoubles(surface.getColorTransparent());
+
+
+        final double[] floats = new double[3];
         for (double i = left; i < right; i++) {
             for (double j = top; j < bottom; j++) {
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
                 double[] color = pixM.getValues(xMap, yMap);
-                int imageColor = Lumiere.getInt(color);
-
-                int polygonColor = this.texture().getColorAt(1.0 * xMap / (right - left), 1.0 * yMap / (bottom - top));
-
-
-                pixM.getValues(xMap, yMap);
-                mCopy.setPixel((int) i, (int) j, paint.getColor());
+                int colorToDraw = Lumiere.getInt(color);
+                if (!PixM.equalsArrays(transparent, color, 0.05))
+                    mCopy.setPixel((int) i, (int) j, colorToDraw);
                 pixels++;
 
 

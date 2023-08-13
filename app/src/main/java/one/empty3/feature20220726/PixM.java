@@ -822,4 +822,15 @@ public class PixM extends MBitmap implements Parcelable {
         }
 
     }
-}
+
+    public static boolean equalsArrays(double[] arr1, double[] arr2, double inter) {
+        if (arr1 != null && arr2 != null && arr1.length == 3 && arr2.length == 3) {
+            for (int i1 = 0; i1 < 3; i1++) {
+                if (arr1[i1] > arr2[i1] + inter || arr1[i1] < arr2[i1] - inter)
+                    return false;
+            }
+
+            return true;
+        }
+        return false;
+    }}
