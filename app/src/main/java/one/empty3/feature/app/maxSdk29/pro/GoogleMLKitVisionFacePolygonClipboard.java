@@ -7,6 +7,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 
 @ExperimentalCamera2Interop public class GoogleMLKitVisionFacePolygonClipboard {
+        private GoogleMLKitVisionFacePolygonClipboard instance = new GoogleMLKitVisionFacePolygonClipboard();
         private GoogleFaceDetection.FaceData.Surface source;
         private GoogleFaceDetection.FaceData.Surface destination;
         private StructureMatrix<Point3D> mapSource = new StructureMatrix<Point3D>(2, Point3D.class);
@@ -15,8 +16,20 @@ import one.empty3.library.StructureMatrix;
                 this.source = source;
         }
 
+        private GoogleMLKitVisionFacePolygonClipboard() {
+                if(instance==null)
+                        instance = new GoogleMLKitVisionFacePolygonClipboard();
+        }
+
+        public GoogleMLKitVisionFacePolygonClipboard getInstance() {
+                if(instance==null) new GoogleMLKitVisionFacePolygonClipboard();
+                return instance;
+        }
         public void simplePaste() {
-                destination.setFilledContours(source.getFilledContours().copy());
+                if(instance.source!=null && instance.destination!=null && instance.source.getSurfaceId()==instance.destination.getSurfaceId()) {
+                        instance.destination.setFilledContours(instance.source.getFilledContours().resize(instance.destination.getFilledContours().getColumns(),
+                                instance.destination.getFilledContours().getLines()));
+                }
         }
 
 

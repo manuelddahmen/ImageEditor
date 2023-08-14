@@ -64,7 +64,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     protected File currentFile;
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     protected Bitmap currentBitmap;
-    private int maxRes = R.string.maxRes_1200;
+    protected int maxRes = R.string.maxRes_1200;
 
     public ImageViewSelection getImageView() {
         return imageView;

@@ -854,4 +854,35 @@ public class PixM extends MBitmap implements Parcelable {
             }
         }
     }
+
+    public PixM resize(int columnsResized, int linesResized) {
+        PixM resized = new PixM(columnsResized, linesResized);
+        Point3D incr = new Point3D(1.0, 1.0, 0.0);
+
+        incr.set(0, 1.0 * columnsResized / columns);
+        incr.set(1, 1.0 * linesResized / lines);
+
+        double incrX = 1.0 * incr.get(0);
+        double incrY = 1.0 * incr.get(1);
+
+        for (double i = 0; i < (int) columnsResized; i++) {
+            for (double j = 0; j < (int) linesResized; j++) {
+                double iOrig = i / incrX;
+                while (iOrig < (i + 1) / incrX) {
+                    double jOrig = i / incrY;
+                    while (jOrig < (j + 1) / incrY) {
+                        for (int c = 0; c < compCount; c++) {
+                            setCompNo(c);
+                            resized.setCompNo(c);
+
+                            resized.setValues((int) i, (int) j, getValues((int) iOrig, (int) jOrig));
+                        }
+                        jOrig += 1/incrY;
+                    }
+                    iOrig += 1/incrX;
+                }
+            }
+        }
+        return resized;
+    }
 }

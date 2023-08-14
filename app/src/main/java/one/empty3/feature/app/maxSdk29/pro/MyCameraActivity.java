@@ -123,7 +123,7 @@ import one.empty3.feature20220726.PixM;
 
         setContentView(R.layout.main);
 
-        var maxRes = new Utils().getMaxRes(this, savedInstanceState);
+        maxRes = new Utils().getMaxRes(this, savedInstanceState);
 
         imageView = this.findViewById(R.id.currentImageView);
 
@@ -461,6 +461,16 @@ import one.empty3.feature20220726.PixM;
         } else {
             restoreInstanceState();
         }
+
+        View settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent settingsIntent = new Intent(getApplicationContext(), SettingsScrollingActivity.class);
+                passParameters(settingsIntent);
+
+            }
+        });
     }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {

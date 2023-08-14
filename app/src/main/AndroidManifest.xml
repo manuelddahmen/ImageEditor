@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     
     <application
-            
             android:name=".FeatureAppApplication"
             android:allowBackup="true"
             android:enableOnBackInvokedCallback="true"
@@ -40,18 +39,24 @@
             tools:targetApi="tiramisu"
             >
         <activity
-                android:screenOrientation="portrait"
+                android:name=".SettingsScrollingActivity"
+                android:exported="false"
+                android:label="@string/title_activity_settings_scrolling"
+                android:theme="@style/Theme.FeatureAppmain.NoActionBar"
+                />
+        <activity
                 android:name=".PictureDataActivity"
                 android:exported="false"
                 android:label="@string/title_activity_picture_data"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".VisualFaceEffects"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Visual Effects"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
             <intent-filter>
@@ -63,31 +68,31 @@
             </intent-filter>
         </activity>
         <activity
-                android:screenOrientation="portrait"
                 android:name=".FaceEffectListActivity"
                 android:exported="false"
                 android:label="@string/title_activity_face_effect_list"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".ReshapeActivity"
                 android:exported="false"
+                android:screenOrientation="portrait"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".TextActivity"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="@string/title_activity_text"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".ChooseEffectsActivity2"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="@string/title_activity_choose_effect_list"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
             <intent-filter>
@@ -105,12 +110,12 @@
             </intent-filter>
         </activity>
         <activity
-                android:screenOrientation="portrait"
                 android:name=".MyCameraActivity"
                 android:enabled="true"
                 android:exported="true"
                 android:hardwareAccelerated="true"
                 android:label="Image Featuring"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
             <intent-filter android:autoVerify="true">
@@ -133,58 +138,58 @@
             -->
         </activity>
         <activity
-                android:screenOrientation="portrait"
                 android:name=".LicenceUserData"
                 android:exported="false"
                 android:hardwareAccelerated="true"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".LicenceUserData2"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="LicenceUserData2"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".Calculator"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Simple Calculator"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".GraphicsActivity"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Draw graphics"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".GraphicsActivityView"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Draw graphics"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".FaceActivity"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Overpaint"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
-                android:screenOrientation="portrait"
                 android:name=".FaceActivitySettings"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Overpaint"
+                android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         

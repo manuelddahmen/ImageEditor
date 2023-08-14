@@ -42,4 +42,6 @@
     <string name="choose_color">Choose color</string>
     <string name="apply_color">Apply color</string>
     <string name="apply_image">Apply image</string>
+    <string name="refresh">Refresh</string>
+    <string name="licence">Licence</string>
 </resources>

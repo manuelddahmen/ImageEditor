@@ -22,6 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro
 
 //import com.nostra13.universalimageloader.core.ImageLoader
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapFactory.Options
@@ -38,23 +39,18 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
-import androidx.core.util.rangeTo
+import androidx.preference.PreferenceManager
 import com.android.installreferrer.api.InstallReferrerClient
 import com.android.installreferrer.api.InstallReferrerClient.InstallReferrerResponse
 import com.android.installreferrer.api.InstallReferrerStateListener
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.Main2022
-import one.empty3.Main2022.initListProcesses
-import one.empty3.Run
 import one.empty3.feature20220726.MBitmap.maxRes
 import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
 import java.io.*
-import java.lang.RuntimeException
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.max
 
 
@@ -211,7 +207,14 @@ import kotlin.math.max
 
 
     public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
-        var maxRes: Int = 0;
+        val defaultSharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
+
+        val float = defaultSharedPreferences.getFloat("maxRes", 0.0f)
+
+        if(float>0) {
+            maxRes = float.toInt()
+        }
         maxRes = activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||

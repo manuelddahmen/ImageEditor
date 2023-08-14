@@ -220,7 +220,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
         android:id="@+id/aboutParameters"
-        app:layout_constraintBottom_toTopOf="@id/new_layout_app"
+        app:layout_constraintBottom_toTopOf="@id/bottom_buttons"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -260,14 +260,34 @@
                 app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"/>
 
     -->
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:id="@+id/bottom_buttons"
+        app:layout_constraintTop_toBottomOf="@id/aboutParameters"
+        >
     <Button
         android:layout_width="match_parent"
         android:theme="@style/Theme.FeatureAppmain"
-        android:layout_height="wrap_content"
-        android:text="@string/new_layout_app"
+        android:layout_height="48dp"
+        android:text="@string/refresh"
         android:id="@+id/new_layout_app"
-        app:layout_constraintTop_toBottomOf="@id/aboutParameters"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_weight="0.33"/>
+    <Button
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:text="@string/action_settings"
+            android:id="@+id/settings"
+            android:layout_weight="0.33" />
+    <Button
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:text="@string/licence"
+            android:id="@+id/licence"
+            android:layout_weight="0.33"/>
 
-
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

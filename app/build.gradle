@@ -265,6 +265,7 @@ dependencies {
     implementation 'com.google.mlkit:vision-common:17.3.0'
     implementation platform('androidx.compose:compose-bom:2023.06.01')
     implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.preference:preference:1.2.0'
     // Adds a remote binary dependency only for local tests.
     testImplementation 'junit:junit:4.13.2'
 
