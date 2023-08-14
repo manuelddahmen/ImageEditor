@@ -72,7 +72,7 @@ import kotlin.math.max
 
         //Folder is already created
         var name2 = name + UUID.randomUUID().toString()
-        var dirName1 = activity.applicationContext.getFilesDir().absolutePath
+        var dirName1 = activity.applicationContext.filesDir.absolutePath
         var dirName2 = this.appDir
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()

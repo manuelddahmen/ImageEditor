@@ -238,9 +238,6 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             var sel = selectedSurfaceAllPicture
 
-            if (sel == null && selectedSurface < selectedSurfaces.size) sel =
-                selectedSurfaces[selectedSurface]
-
             if (selectedColor != null && sel != null) {
                 val oldColorFill = sel.colorFill
                 val newColorFill = selectedColor
