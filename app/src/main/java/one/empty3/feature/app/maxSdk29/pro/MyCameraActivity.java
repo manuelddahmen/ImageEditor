@@ -49,7 +49,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -632,12 +631,6 @@ import one.empty3.feature20220726.PixM;
         return point;
     }
 
-    @Override
-    public int getMaxRes() {
-        EditText maxResText = findViewById(R.id.editMaximiumResolution);
-        var maxRes = (int) Double.parseDouble(maxResText.getText().toString());
-        return maxRes;
-    }
 
     public void loadImageState(boolean originalImage) {
         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,

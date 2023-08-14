@@ -22,7 +22,6 @@ package one.empty3.feature.app.maxSdk29.pro
 
 //import com.nostra13.universalimageloader.core.ImageLoader
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapFactory.Options
@@ -59,34 +58,7 @@ import kotlin.math.max
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
-    //var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
-    /*
-        fun getSavedApplicationData(activity: EmptyActivity) {
-            //val file = File(appDir + "/config.txt")
-            val bundle = Parcel.obtain()
-            var i = 0
-            for (cord in cords) {
-                val any = bundle.getObject(cord)
-                if (any is String) {
-                    val str = any as String
-                    cordsValues[i] = str
-                }
-                i = i + 1
-            }
-        }
-
-        fun saveApplicationData(activity: Activity, cords: StringArray) {
-            //val file = File(appDir + "/config.txt")
-            val bundle = ResourceBundle.getBundle("config")
-            var i = 0
-            for (cord in cords) {
-                //if (cord != null)
-                //    bundle.keySet().add(cord, cords[i])
-                //i = i + 1
-            }
-        }
-    */
     /***
      * Write copy of original file in data folder
      * @param bitmap
