@@ -43,8 +43,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -73,7 +71,6 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
@@ -436,26 +433,6 @@ import one.empty3.feature20220726.PixM;
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
-        EditText maxResView = findViewById(R.id.editMaximiumResolution);
-        maxResView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                try {
-                    setMaxRes((int) Double.parseDouble(editable.toString()));
-                } catch (RuntimeException ex) {
-                }
-            }
-        });
         if(currentFile!=null) {
             drawIfBitmap();
         } else {

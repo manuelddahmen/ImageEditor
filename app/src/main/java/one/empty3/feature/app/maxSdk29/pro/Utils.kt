@@ -210,11 +210,20 @@ import kotlin.math.max
         val defaultSharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
 
-        val float = defaultSharedPreferences.getFloat("maxRes", 0.0f)
+        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
-        if(float>0) {
-            maxRes = float.toInt()
+        if(floatStr!=null) {
+            try {
+                maxRes = floatStr.toFloat().toInt()
+
+                System.out.println("maxRes = "+maxRes)
+
+                return maxRes
+            } catch (e : java.lang.RuntimeException) {
+                println("Error casting maxRes"+floatStr.javaClass)
+            }
         }
+
         maxRes = activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||
@@ -227,6 +236,7 @@ import kotlin.math.max
 
             }
         }
+        println("maxRes = $maxRes")
         return maxRes;
     }
 

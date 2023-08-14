@@ -52,4 +52,5 @@
     <string name="apply_image">Apply image</string>
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
+    <string name="licenses" />
 </resources>

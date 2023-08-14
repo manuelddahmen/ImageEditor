@@ -158,7 +158,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/aboutParameters"
+        app:layout_constraintBottom_toTopOf="@id/bottom_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/currentImageView"
@@ -214,58 +214,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/effectButtons"
-        android:id="@+id/aboutParameters"
-        app:layout_constraintBottom_toTopOf="@id/bottom_buttons"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/About"
-            android:theme="@style/Theme.FeatureAppmain"
-            android:layout_weight="0.25"
-            android:layout_width="wrap_content"
-            android:layout_height="64dp"
-            
-            android:text="@string/about" />
-
-        <EditText
-            android:theme="@style/Theme.FeatureAppmain"
-            android:layout_weight="0.75"
-            android:id="@+id/editMaximiumResolution"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:height="64dp"
-            android:autofillHints="@string/maximum_resolution"
-            android:ems="10"
-            android:hint="@string/maximum_resolution"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            android:text="@string/maxRes_1200"
-            android:tooltipText="Maximum resolution" />
-    </LinearLayout>
-    <!--
-        <CheckBox
-                android:id="@+id/betaVersion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
-                android:minHeight="48dp"
-                android:text="@string/beta"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/effectsButtonNew"/>
-
-    -->
-<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
         android:id="@+id/bottom_buttons"
-        app:layout_constraintTop_toBottomOf="@id/aboutParameters"
+        app:layout_constraintTop_toBottomOf="@id/effectButtons"
+            app:layout_constraintBottom_toBottomOf="parent"
         >
     <Button
         android:layout_width="match_parent"
@@ -273,21 +227,22 @@
         android:layout_height="48dp"
         android:text="@string/refresh"
         android:id="@+id/new_layout_app"
-            android:layout_weight="0.33"/>
+            android:layout_weight="0.25"/>
     <Button
             android:layout_width="match_parent"
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_height="48dp"
             android:text="@string/action_settings"
             android:id="@+id/settings"
-            android:layout_weight="0.33" />
+            android:layout_weight="0.25" />
     <Button
             android:layout_width="match_parent"
             android:theme="@style/Theme.FeatureAppmain"
             android:layout_height="48dp"
             android:text="@string/licence"
-            android:id="@+id/licence"
-            android:layout_weight="0.33"/>
+            android:id="@+id/About"
+            android:layout_weight="0.25"
+            />
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
