@@ -39,6 +39,10 @@
             tools:targetApi="tiramisu"
             >
         <activity
+                android:name=".MainActivityFragments"
+                android:exported="false"
+                />
+        <activity
                 android:name=".SettingsScrollingActivity"
                 android:exported="false"
                 android:label="@string/title_activity_settings_scrolling"

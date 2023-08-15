@@ -102,9 +102,9 @@ import one.empty3.feature20220726.PixM;
 
     private File currentFileZoomed;
     private boolean beta = false;
-    private Point drawPointA = null;
-    private Point drawPointB = null;
-    private List<RectF> rectfs = new ArrayList<RectF>();
+    public Point drawPointA = null;
+    public Point drawPointB = null;
+    public List<RectF> rectfs = new ArrayList<RectF>();
     private Bitmap currentFileZoomedBitmap;
     private PixM currentPixM = null;
     private boolean loaded;

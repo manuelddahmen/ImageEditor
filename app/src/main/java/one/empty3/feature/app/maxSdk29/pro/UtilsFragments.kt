@@ -38,59 +38,28 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
-import androidx.core.util.rangeTo
+import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.android.installreferrer.api.InstallReferrerClient
 import com.android.installreferrer.api.InstallReferrerClient.InstallReferrerResponse
 import com.android.installreferrer.api.InstallReferrerStateListener
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.Main2022
-import one.empty3.Main2022.initListProcesses
-import one.empty3.Run
 import one.empty3.feature20220726.MBitmap.maxRes
 import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
 import java.io.*
-import java.lang.RuntimeException
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.max
 
 
-@ExperimentalCamera2Interop public class Utils() {
+@ExperimentalCamera2Interop public class UtilsFragments {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
-    //var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
-    /*
-        fun getSavedApplicationData(activity: EmptyActivity) {
-            //val file = File(appDir + "/config.txt")
-            val bundle = Parcel.obtain()
-            var i = 0
-            for (cord in cords) {
-                val any = bundle.getObject(cord)
-                if (any is String) {
-                    val str = any as String
-                    cordsValues[i] = str
-                }
-                i = i + 1
-            }
-        }
-
-        fun saveApplicationData(activity: Activity, cords: StringArray) {
-            //val file = File(appDir + "/config.txt")
-            val bundle = ResourceBundle.getBundle("config")
-            var i = 0
-            for (cord in cords) {
-                //if (cord != null)
-                //    bundle.keySet().add(cord, cords[i])
-                //i = i + 1
-            }
-        }
-    */
     /***
      * Write copy of original file in data folder
      * @param bitmap
@@ -104,7 +73,7 @@ import kotlin.math.max
 
         //Folder is already created
         var name2 = name + UUID.randomUUID().toString()
-        var dirName1 = activity.applicationContext.getFilesDir().absolutePath
+        var dirName1 = activity.applicationContext.filesDir.absolutePath
         var dirName2 = this.appDir
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
@@ -123,7 +92,7 @@ import kotlin.math.max
     }
 
     public fun writeFile(
-        activity: ActivitySuperClass,
+        activity: Fragment,
         bitmap: Bitmap,
         file1: File,
         file2: File, maxImageSize: Int, shouldOverwrite: Boolean
@@ -148,7 +117,7 @@ import kotlin.math.max
                     bitmap2 = Bitmap.createScaledBitmap(
                         bitmap,
                         (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
-                        (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
                         true
                     )
                 } catch (ex :  RuntimeException) {
@@ -210,20 +179,70 @@ import kotlin.math.max
     }
 
 
-    public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
-        var maxRes: Int = 0;
-        maxRes = activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+    public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
+        val defaultSharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
+
+        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
+
+        if(floatStr!=null) {
+            try {
+                maxRes = floatStr.toFloat().toInt()
+
+                System.out.println("maxRes = "+maxRes)
+
+                return maxRes
+            } catch (e : java.lang.RuntimeException) {
+                println("Error casting maxRes"+floatStr.javaClass)
+            }
+        }
+
+        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
                 savedInstanceState.getInt("maxRes") != -1
             ) {
-                return getMaxRes(activity);
+                return getMaxRes(fragmenty);
             } else {
                 maxRes = savedInstanceState.getInt("maxRes")
 
             }
         }
+        println("maxRes = $maxRes")
+        return maxRes;
+    }
+    public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
+        val defaultSharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
+
+        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
+
+        if(floatStr!=null) {
+            try {
+                maxRes = floatStr.toFloat().toInt()
+
+                System.out.println("maxRes = "+maxRes)
+
+                return maxRes
+            } catch (e : java.lang.RuntimeException) {
+                println("Error casting maxRes"+floatStr.javaClass)
+            }
+        }
+
+        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        if (maxRes == -1) {
+            if (savedInstanceState == null ||
+                !savedInstanceState.containsKey("maxRes") ||
+                savedInstanceState.getInt("maxRes") != -1
+            ) {
+                return getMaxRes(fragment.activity);
+            } else {
+                maxRes = savedInstanceState.getInt("maxRes")
+
+            }
+        }
+        println("maxRes = $maxRes")
         return maxRes;
     }
 
@@ -443,10 +462,10 @@ import kotlin.math.max
         )
     }
 
-    public fun getMaxRes(activity: ActivitySuperClass): Int {
+    public fun getMaxRes(fragment: FragmentSuperClass): Int {
         var maxRes: Int = 1200
-        if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
-            val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
+        if (fragment.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
+            val maxResText: EditText? = fragment.requireActivity().findViewById(R.id.editMaximiumResolution)
             if (maxResText != null) {
                 val maxResStr = maxResText.text
                 if (maxResStr != null) {
