@@ -43,7 +43,6 @@ open class FragmentSuperClass : Fragment() {
  *
  *
  */
-    open class ActivitySuperClass : AppCompatActivity() {
         lateinit var activity: ActivitySuperClass
         val filenameSaveState = "state.properties"
         val imageViewFilename = "imageView.jpg"
@@ -52,13 +51,13 @@ open class FragmentSuperClass : Fragment() {
         var variableName: String? = null
         var variable: String? = null
         var imageView: ImageViewSelection? = null
-        var currentFile: File? = null
+        protected var currentFile: File? = null
         protected var cords = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
         protected var currentBitmap: Bitmap? = null
         protected var maxRes = R.string.maxRes_1200
         @Throws(FileNotFoundException::class)
         fun getPathInput(uri: Uri?): InputStream? {
-            return applicationContext.contentResolver.openInputStream(
+            return activity.applicationContext.contentResolver.openInputStream(
                 uri!!
             )
         }
@@ -83,9 +82,8 @@ open class FragmentSuperClass : Fragment() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            activity = this
-            if (intent != null) {
-                getParameters(intent)
+            if (activity.intent != null) {
+                getParameters(activity.intent)
                 if (currentFile == null && savedInstanceState != null) {
                     try {
                         if (savedInstanceState.getString("currentFile") != null) {
@@ -96,7 +94,7 @@ open class FragmentSuperClass : Fragment() {
                     }
                 }
             }
-            if (imageView == null) imageView = findViewById(R.id.currentImageView)
+            if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
             if (currentFile != null) {
                 testIfValidBitmap()
             } else loadInstanceState()
@@ -164,7 +162,7 @@ open class FragmentSuperClass : Fragment() {
                     }
                 } catch (ex: RuntimeException) {
                     Toast.makeText(
-                        applicationContext,
+                        activity.applicationContext,
                         "Error restoring currentFile",
                         Toast.LENGTH_LONG
                     )
@@ -246,7 +244,7 @@ open class FragmentSuperClass : Fragment() {
                 ex.printStackTrace()
             }
             if (currentFile == null) Toast.makeText(
-                applicationContext,
+                activity.applicationContext,
                 "Cannot find current file (working copy)",
                 Toast.LENGTH_SHORT
             )
@@ -310,8 +308,8 @@ open class FragmentSuperClass : Fragment() {
             println("c className = " + this.javaClass)
             println("m variableName = $variableName")
             println("m variable =     $variable")
-            println("i variableName = " + intent.getStringExtra("variableName"))
-            println("i variable =     " + intent.getStringExtra("variable"))
+            println("i variableName = " + activity.intent.getStringExtra("variableName"))
+            println("i variable =     " + activity.intent.getStringExtra("variable"))
             println("c to.className = " + to.type)
             startActivity(to)
         }
@@ -319,9 +317,9 @@ open class FragmentSuperClass : Fragment() {
         fun getParameters(from: Intent?) {
             val utils = Utils()
             currentFile = utils.getCurrentFile(from!!)
-            maxRes = utils.getMaxRes(this, null)
-            utils.loadImageInImageView()
-            utils.loadVarsMathImage(this, intent)
+            maxRes = utils.getMaxRes(this)
+            utils.loadImageInImageView(this)
+            utils.loadVarsMathImage(this, activity.intent)
         }
 
         protected fun getFilesFile(s: String): File {
@@ -359,8 +357,8 @@ open class FragmentSuperClass : Fragment() {
             saveInstanceState()
             try {
                 currentBitmap = null
-                if (imageView == null) imageView = findViewById(R.id.imageViewSelection)
-                if (imageView != null && currentFile != null) Utils().setImageView(this, imageView)
+                if (imageView == null) imageView = activity.findViewById(R.id.imageViewSelection)
+                if (imageView != null && currentFile != null) Utils().setImageView(this, activity.imageView)
             } catch (ex: RuntimeException) {
                 ex.printStackTrace()
             }
@@ -388,7 +386,7 @@ open class FragmentSuperClass : Fragment() {
             }
             return if (photo != null && isCurrentFile) {
                 currentFile = Utils().writePhoto(this, photo, "loaded_image-")
-                Utils().setImageView(this, imageView)
+                Utils().setImageView(this, activity.imageView)
                 photo
             } else if (photo != null) {
                 photo
@@ -411,27 +409,4 @@ open class FragmentSuperClass : Fragment() {
             super.onDestroy()
         }
 
-        override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-            super.onSaveInstanceState(outState, outPersistentState)
-            Utils().saveImageState(this)
-            saveInstanceState()
-        }
-
-        override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-            super.onRestoreInstanceState(savedInstanceState)
-            //        requestPermissions(new String[]{
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
-            Utils().loadImageState(this, false)
-            restoreInstanceState()
-        }
-
-        companion object {
-            const val TAG = "one.empty3.feature.app.maxSdk29.pro"
-            const val MAXRES_DEFAULT = 1200
-            protected val cordsConsts = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
-            private const val ONSAVE_INSTANCE_STATE = 21516
-            private const val ONRESTORE_INSTANCE_STATE = 51521
-        }
-    }
 }

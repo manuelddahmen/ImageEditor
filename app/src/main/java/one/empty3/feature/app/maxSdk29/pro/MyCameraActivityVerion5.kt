@@ -1,6 +1,8 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.Manifest
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -18,6 +20,7 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
@@ -74,8 +77,7 @@ import java.util.UUID
 @ExperimentalCamera2Interop
 class MyCameraActivityVerion5 : FragmentSuperClass() {
     var properties = Properties()
-    private val appDataPath = "/one.empty3.feature.app.maxSdk29.pro/"
-    private var thisActivity: ActivitySuperClass? = null
+    private var thisActivity: FragmentSuperClass? = null
     private var currentDir: File? = null
     private val currentFileOriginalResolution: File? = null
     private val currentFileZoomed: File? = null
@@ -101,15 +103,15 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        maxRes = Utils().getMaxRes(this, savedInstanceState)
-        imageView = findViewById(R.id.currentImageView)
+        maxRes = Utils().getMaxRes(this)
+        imageView = activity.findViewById(R.id.currentImageView)
         rectfs = ArrayList()
         isLoaded = true
-        thisActivity = this
+        thisActivity = this.requireActivity3()
         currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-        val takePhoto = findViewById<Button>(R.id.takePhotoButton)
+        val takePhoto = requireActivity3().findViewById<Button>(R.id.takePhotoButton)
         takePhoto.setOnClickListener {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (requireActivity3().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(Manifest.permission.CAMERA /*, Manifest.permission.READ_MEDIA_IMAGES*/),
                     MY_CAMERA_PERMISSION_CODE
@@ -124,26 +126,26 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
 
             //findNavController(thisActivity, R.id.).navigate(R.id.flow_step_one_dest, null)
         }
-        val effectsButton2 = findViewById<Button>(R.id.effectsButtonNew)
+        val effectsButton2 = requireActivity3().findViewById<Button>(R.id.effectsButtonNew)
         effectsButton2.setOnClickListener {
             if (currentFile != null) {
-                imageView = findViewById(R.id.currentImageView)
-                val intent1 = Intent(applicationContext, ChooseEffectsActivity2::class.java)
+                imageView = requireActivity3().findViewById(R.id.currentImageView)
+                val intent1 = Intent(requireActivity3().applicationContext, ChooseEffectsActivity2::class.java)
                 passParameters(intent1)
             }
         }
-        val fromFiles = findViewById<View>(R.id.choosePhotoButton)
+        val fromFiles = requireActivity3().findViewById<View>(R.id.choosePhotoButton)
         fromFiles.setOnClickListener { v: View? -> startCreation() }
-        val copy = findViewById<View>(R.id.copy)
+        val copy = requireActivity3().findViewById<View>(R.id.copy)
         copy.setOnClickListener { v: View? ->
             if (clipboard != null) {
                 clipboard!!.copied = true
                 copy.setBackgroundColor(Color.rgb(40, 255, 40))
-                Toast.makeText(applicationContext, "Subimage copied", Toast.LENGTH_SHORT)
+                Toast.makeText(requireActivity3().applicationContext, "Subimage copied", Toast.LENGTH_SHORT)
                     .show()
             }
         }
-        val paste = findViewById<View>(R.id.paste)
+        val paste = requireActivity3().findViewById<View>(R.id.paste)
         paste.setOnClickListener { v: View? ->
             clipboard = Clipboard.defaultClipboard
             if (currentFile != null) {
@@ -174,11 +176,11 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                     val bitmap = dest.bitmap
                     currentFile = Utils()
                         .writePhoto(this, bitmap, "copy_paste")
-                    Utils().setImageView(imageView, bitmap)
+                    Utils().setImageView(requireActivity3().imageView, bitmap)
                     paste.setBackgroundColor(Color.rgb(40, 255, 40))
                     copy.setBackgroundColor(Color.rgb(40, 255, 40))
                     Toast.makeText(
-                        applicationContext,
+                        requireActivity3().applicationContext,
                         R.string.subimage_pasted,
                         Toast.LENGTH_SHORT
                     )
@@ -191,16 +193,16 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                 }
             } else toastButtonDisabled(v)
         }
-        val about = findViewById<View>(R.id.About)
+        val about = requireActivity3().findViewById<View>(R.id.About)
         about.setOnClickListener { v -> openUserData(v) }
-        val shareView = findViewById<View>(R.id.share)
+        val shareView = requireActivity3().findViewById<View>(R.id.share)
         shareView.setOnClickListener { v ->
             if (currentFile != null) {
                 val uri = Uri.fromFile(currentFile)
                 val photoURI = FileProvider.getUriForFile(
-                    applicationContext,
-                    applicationContext.packageName + ".provider",
-                    currentFile
+                    requireActivity3().applicationContext,
+                    requireActivity3().applicationContext.packageName + ".provider",
+                    requireActivity3().currentFile
                 )
                 val shareIntent = Intent(Intent.ACTION_SEND)
                 shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
@@ -211,7 +213,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
             } else toastButtonDisabled(v)
         }
         shareView.isEnabled = true
-        val save = findViewById<View>(R.id.save)
+        val save = requireActivity3().findViewById<View>(R.id.save)
         save.setOnClickListener(View.OnClickListener { v ->
             if (currentFile != null) {
                 saveImageState(true)
@@ -221,33 +223,33 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                 )
                 val requestExternalStorage = 1
                 val permission1 = ActivityCompat.checkSelfPermission(
-                    applicationContext,
+                    requireActivity3().applicationContext,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 )
                 val permission2 = ActivityCompat.checkSelfPermission(
-                    applicationContext,
+                    requireActivity3().applicationContext,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
                 if (permission1 != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
-                        thisActivity,
+                        requireActivity3().thisActivity,
                         permissionsStorage,
                         requestExternalStorage
                     )
                 }
                 if (permission2 != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
-                        thisActivity,
+                        requireActivity3().thisActivity,
                         permissionsStorage,
                         requestExternalStorage
                     )
                 }
                 val picturesDirectory =
-                    File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString())
+                    File(requireActivity3().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString())
                 var target: Path? = null
                 target = try {
                     Files.copy(
-                        currentFile.toPath(),
+                        requireActivity3().currentFile.toPath(),
                         File(picturesDirectory.absolutePath + UUID.randomUUID() + ".jpg").toPath()
                     )
                 } catch (e: IOException) {
@@ -255,9 +257,9 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                     return@OnClickListener
                 }
                 val photoURI = FileProvider.getUriForFile(
-                    applicationContext,
-                    applicationContext.packageName + ".provider",
-                    if (target == null) currentFile else target.toFile()
+                    requireActivity3().applicationContext,
+                    requireActivity3().applicationContext.packageName + ".provider",
+                    if (target == null) requireActivity3().currentFile else target.toFile()
                 )
 
 
@@ -277,24 +279,24 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
 
 
         //Draw activity (pass: rectangle, image, image view size.
-        val face = findViewById<View>(R.id.buttonFace)
+        val face = requireActivity3().findViewById<View>(R.id.buttonFace)
         face.setOnClickListener { view: View? ->
             if (currentFile != null) {
                 val faceIntent = Intent(Intent.ACTION_VIEW)
-                faceIntent.setClass(applicationContext, FaceActivity::class.java)
+                faceIntent.setClass(requireActivity3().applicationContext, FaceActivity::class.java)
                 if (currentPixM != null) {
                     faceIntent.putExtra("zoom", currentPixM!!.bitmap)
                 }
                 passParameters(faceIntent)
             }
         }
-        val computePixels = findViewById<Button>(R.id.activity_compute_pixels)
+        val computePixels = requireActivity3().findViewById<Button>(R.id.activity_compute_pixels)
         computePixels.setOnClickListener { v: View? ->
             if (currentFile != null) {
                 val uri = Uri.fromFile(currentFile)
                 //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getApplicationContext().getPackageName() + ".provider", currentFile);
                 val intentDraw =
-                    Intent(applicationContext, GraphicsActivity::class.java)
+                    Intent(requireActivity3().applicationContext, GraphicsActivity::class.java)
                 intentDraw.setDataAndType(uri, "image/jpeg")
                 intentDraw.putExtra("data", uri)
                 passParameters(intentDraw)
@@ -302,7 +304,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         }
         imageView.setOnClickListener { }
         imageView.setOnTouchListener { v: View, event: MotionEvent ->
-            imageView = findViewById(R.id.currentImageView)
+            imageView = requireActivity3().findViewById(R.id.currentImageView)
             if (currentFile != null) {
                 val location = IntArray(2)
                 v.getLocationOnScreen(location)
@@ -330,7 +332,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                 if (drawPointA != null && drawPointB != null && drawPointA!!.getX() != drawPointB!!.getX() && drawPointA!!.getY() != drawPointB!!.getY()) {
                     System.err.println("2 points sélectionnés A et B")
                     val viewById =
-                        findViewById<ImageViewSelection>(R.id.currentImageView)
+                        requireActivity3().findViewById<ImageViewSelection>(R.id.currentImageView)
                     val bitmap =
                         ImageIO.read(currentFile).bitmap
                     val rectF = getSelectedCordsImgToView(bitmap, viewById)
@@ -369,7 +371,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         }
 
         //Select rectangle toggle
-        val unselect = findViewById<View>(R.id.unselect_rect)
+        val unselect = requireActivity3().findViewById<View>(R.id.unselect_rect)
         unselect.setOnClickListener { v ->
             if (currentFile != null) {
                 val read = ImageIO.read(currentFile)
@@ -381,17 +383,17 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                 drawPointB = null
             } else toastButtonDisabled(v)
         }
-        val addText = findViewById<View>(R.id.buttonAddText)
+        val addText = requireActivity3().findViewById<View>(R.id.buttonAddText)
         addText.setOnClickListener { view: View? ->
             addText(
                 view
             )
         }
-        val openNewUI = findViewById<View>(R.id.new_layout_app)
+        val openNewUI = requireActivity3().findViewById<View>(R.id.new_layout_app)
         openNewUI.setOnClickListener { view: View? ->
             val intent2 = Intent()
             intent2.setClass(
-                applicationContext,
+                requireActivity3().applicationContext,
                 MyCameraActivity::class.java
             )
             passParameters(intent2)
@@ -413,10 +415,10 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         } else {
             restoreInstanceState()
         }
-        val settings = findViewById<View>(R.id.settings)
+        val settings = requireActivity3().findViewById<View>(R.id.settings)
         settings.setOnClickListener {
             val settingsIntent = Intent(
-                applicationContext,
+                requireActivity3().applicationContext,
                 SettingsScrollingActivity::class.java
             )
             passParameters(settingsIntent)
@@ -482,7 +484,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
 
     @Throws(FileNotFoundException::class)
     fun getPathOutput(uri: Uri?): OutputStream? {
-        return applicationContext.contentResolver.openOutputStream(
+        return requireActivity3().applicationContext.contentResolver.openOutputStream(
             uri!!
         )
     }
@@ -500,7 +502,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         if (currentFile == null) {
             val text = getString(R.string.button_current_file_is_null)
             val duration = Toast.LENGTH_LONG
-            val toast = Toast.makeText(applicationContext, text, duration)
+            val toast = Toast.makeText(requireActivity3().applicationContext, text, duration)
             toast.show()
         }
     }
@@ -741,7 +743,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         var dirName1 = ""
         var dirName2 = ""
         dirName1 = Environment.getDataDirectory().path
-        dirName2 = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.absolutePath
+        dirName2 = requireActivity3().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.absolutePath
         n++
 
 
@@ -812,11 +814,11 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             if (data != null && data.extras != null && data.extras!!["data"] != null) {
                 requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
                 val bitmap = data.extras!!["data"] as Bitmap?
-                imageView = findViewById(R.id.currentImageView)
+                imageView = requireActivity3().findViewById(R.id.currentImageView)
                 if (bitmap != null && imageView != null) {
                     Utils().setImageView(imageView, bitmap)
                     System.err.printf("Image set 4/4")
@@ -846,7 +848,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
             val rev = ArrayList<Bitmap>()
 
             //Create a new Media Player
-            val mp = MediaPlayer.create(baseContext, videoFileUri)
+            val mp = MediaPlayer.create(requireActivity3().baseContext, videoFileUri)
             val millis = mp.duration
             var bitmap: Bitmap?
             var i = 0
@@ -864,7 +866,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
             }
         }
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER && resultCode == RESULT_OK) {
-            imageView = findViewById(R.id.currentImageView)
+            imageView = requireActivity3().findViewById(R.id.currentImageView)
 
 
             //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageView));
@@ -890,7 +892,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
 //                if (!currentFile.exists()) {
                 val inputStream = FileInputStream(currentFile)
                 var byteRead = -1
-                val output = applicationContext.contentResolver.openOutputStream(
+                val output = requireActivity3().applicationContext.contentResolver.openOutputStream(
                     uri!!
                 )
                 while (inputStream.read().also { byteRead = it } != -1) {
@@ -915,11 +917,11 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath
                 FileProvider.getUriForFile(
                     Objects.requireNonNull(
-                        applicationContext
+                        requireActivity3().applicationContext
                     ), BuildConfig.APPLICATION_ID + ".provider", currentFile
                 )
                 val myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.name)
-                val fileStr = currentFile.name
+                val fileStr = requireActivity3().currentFile.name
                 if (myPath.toFile().exists()) {
                 } else {
                     val dir =
@@ -933,14 +935,14 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
                         file1.mkdirs()
                     }
                     val mime = MimeTypeMap.getSingleton()
-                    val ext = currentFile.name.substring(currentFile.name.lastIndexOf(".") + 1)
+                    val ext = requireActivity3().currentFile.name.substring(currentFile.name.lastIndexOf(".") + 1)
                     val type = mime.getMimeTypeFromExtension(ext)
                     file = myPath.toFile()
                     try {
-                        Files.copy(currentFile.toPath(), myPath)
+                        Files.copy(requireActivity3().currentFile.toPath(), myPath)
                         var uri = Uri.fromFile(file)
                         uri = FileProvider.getUriForFile(
-                            applicationContext,
+                            arequireActivity3().pplicationContext,
                             BuildConfig.APPLICATION_ID + ".provider",
                             file
                         )
@@ -995,7 +997,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
     fun unselectA(view: View?) {
         drawPointA = null
         drawPointB = null
-        val imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
+        val imageView = requireActivity3().findViewById<ImageViewSelection>(R.id.currentImageView)
         if (rectfs.size >= 1) rectfs.removeAt(rectfs.size - 1)
         imageView.setDrawingRectState(false)
     }
@@ -1004,7 +1006,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         if (currentFile != null && imageView != null) {
             val textIntent = Intent(Intent.ACTION_VIEW)
             textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-            textIntent.setClass(applicationContext, TextActivity::class.java)
+            textIntent.setClass(requireActivity3().applicationContext, TextActivity::class.java)
             textIntent.putExtra("currentFile", currentFile)
             if (rectfs.size > 0) textIntent.putExtra(
                 "rect",
@@ -1013,11 +1015,6 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
             startActivity(textIntent)
         }
     }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
     override fun onPause() {
         super.onPause()
         if (currentFile != null) saveInstanceState()
@@ -1042,4 +1039,8 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         private const val FILESYSTEM_WRITE_PICTURE = 1111
         private const val MY_EXTERNAL_STORAGE_PERMISSION_CODE = 7777
     }
+    private fun requireActivity3() : FragmentSuperClass {
+        return (requireActivity() as FragmentSuperClass)
+    }
+
 }
