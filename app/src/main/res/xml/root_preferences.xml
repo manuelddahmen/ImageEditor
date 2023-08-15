@@ -10,7 +10,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory app:title="@string/signature_title">
         
         <EditTextPreference
                 app:key="signature"

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:title="Home"
+            android:id="@+id/home" />
+   <item
+            android:id="@+id/settings_menuitem"
+            android:title="Settings" />
+    <item
+            android:id="@+id/licences"
+            android:title="Licences" />
+    <item
+            android:id="@+id/copy_menuitem"
+            android:title="Copy" />
+    <item
+            android:id="@+id/open_menuitem"
+            android:title="Open" />
+    <item
+            android:id="@+id/save_menuitem"
+            android:title="Save" />
+    <item
+            android:id="@+id/paste_menuitem"
+            android:title="Paste" />
+    <item
+            android:id="@+id/effects_menuitem"
+            android:title="Effects" />
+   <item
+            android:id="@+id/share_menuitem"
+            android:title="Share" />
+    <item
+            android:id="@+id/refresh_menuitem"
+            android:title="Refresh" />
+    <item
+            android:id="@+id/text_menuitem"
+            android:title="Text" />
+    <item
+            android:id="@+id/effect_menuitem"
+            android:title="Effects" />
+
+
+</menu>

@@ -38,7 +38,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.core.net.toFile
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.android.installreferrer.api.InstallReferrerClient
 import com.android.installreferrer.api.InstallReferrerClient.InstallReferrerResponse
@@ -54,7 +54,7 @@ import java.util.*
 import kotlin.math.max
 
 
-@ExperimentalCamera2Interop public class Utils() {
+@ExperimentalCamera2Interop public class UtilsFragments {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -66,17 +66,17 @@ import kotlin.math.max
      * @param name
      * @return file
      */
-    fun writePhoto(fragment: FragmentSuperClass, bitmap: Bitmap, name: String): File? {
-        val maxRes = getMaxRes(fragment)
+    fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
+        val maxRes = getMaxRes(activity)
         var written = false;
         var fileWritten: File? = null;
 
         //Folder is already created
         var name2 = name + UUID.randomUUID().toString()
-        var dirName1 = fragment.activity.applicationContext.getFilesDir().absolutePath
+        var dirName1 = activity.applicationContext.filesDir.absolutePath
         var dirName2 = this.appDir
 
-        fragment.activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
+        activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
         var file1 = File(dirName1 + File.separator + name2 + ".jpg")
         val dir2 = File(dirName2)
@@ -88,11 +88,11 @@ import kotlin.math.max
         if (!dir2.exists()) if (!dir2.mkdirs()) {
             System.err.println("Dir not created \$dir2" + file2.absolutePath)
         }
-        return writeFile(fragment.activity!!, bitmap, file1, file2, maxRes, true)
+        return writeFile(activity, bitmap, file1, file2, maxRes, true)
     }
 
     public fun writeFile(
-        fragment: FragmentSuperClass?,
+        activity: Fragment,
         bitmap: Bitmap,
         file1: File,
         file2: File, maxImageSize: Int, shouldOverwrite: Boolean
@@ -116,7 +116,7 @@ import kotlin.math.max
                     ex.printStackTrace()
                     bitmap2 = Bitmap.createScaledBitmap(
                         bitmap,
-                        (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
                         (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
                         true
                     )
@@ -166,7 +166,7 @@ import kotlin.math.max
         if (written) {
             return fileWritten
         } else {
-            val f = (fragment.activity as ActivitySuperClass).getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
+            val f = activity.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
             if (ImageIO.write(bitmap, "jpg", f)) {
                 written = true;
                 fileWritten = file2;
@@ -179,8 +179,7 @@ import kotlin.math.max
     }
 
 
-
-    public fun getMaxRes(fragment: FragmentSuperClass): Int {
+    public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
         val defaultSharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
 
@@ -197,19 +196,66 @@ import kotlin.math.max
                 println("Error casting maxRes"+floatStr.javaClass)
             }
         }
-        return maxRes
+
+        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        if (maxRes == -1) {
+            if (savedInstanceState == null ||
+                !savedInstanceState.containsKey("maxRes") ||
+                savedInstanceState.getInt("maxRes") != -1
+            ) {
+                return getMaxRes(fragmenty);
+            } else {
+                maxRes = savedInstanceState.getInt("maxRes")
+
+            }
+        }
+        println("maxRes = $maxRes")
+        return maxRes;
+    }
+    public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
+        val defaultSharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
+
+        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
+
+        if(floatStr!=null) {
+            try {
+                maxRes = floatStr.toFloat().toInt()
+
+                System.out.println("maxRes = "+maxRes)
+
+                return maxRes
+            } catch (e : java.lang.RuntimeException) {
+                println("Error casting maxRes"+floatStr.javaClass)
+            }
+        }
+
+        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        if (maxRes == -1) {
+            if (savedInstanceState == null ||
+                !savedInstanceState.containsKey("maxRes") ||
+                savedInstanceState.getInt("maxRes") != -1
+            ) {
+                return getMaxRes(fragment.activity);
+            } else {
+                maxRes = savedInstanceState.getInt("maxRes")
+
+            }
+        }
+        println("maxRes = $maxRes")
+        return maxRes;
     }
 
-    public fun setImageView(fragment: FragmentSuperClass, imageView: ImageViewSelection): File? {
+    public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
-        val intent: Intent = fragment.activity.intent
+        val intent: Intent = activity.intent
         val data = intent?.data
         currentFile = data?.toFile()
         if (data == null) {
             currentFile = getCurrentFile(intent = intent)
         }
         if (currentFile == null) {
-            currentFile = (fragment.activity as ActivitySuperClass).getCurrentFile()
+            currentFile = activity.getCurrentFile()
         }
 
         System.err.println("set ImageView from  = $currentFile")
@@ -240,12 +286,12 @@ import kotlin.math.max
 
         if (activity != null) {
             var j = 0
-            while (j < FragmentSuperClass.cordsConsts.size) {
-                intent.putExtra(FragmentSuperClass.cordsConsts[j], activity.cords[j])
+            while (j < ActivitySuperClass.cordsConsts.size) {
+                intent.putExtra(ActivitySuperClass.cordsConsts[j], activity.cords[j])
                 j++
             }
         }
-        intent.putExtra("maxRes", FragmentSuperClass.MAXRES_DEFAULT)
+        intent.putExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         return currentFile
     }
 
@@ -267,10 +313,11 @@ import kotlin.math.max
 
     }
 
-    private fun putExtraCords(fragment: FragmentSuperClass, calculatorIntent: Intent) {
+    @Deprecated(message = "Double")
+    private fun putExtraCords(activity: ActivitySuperClass, calculatorIntent: Intent) {
         var j = 0
-        for (s in (fragment.activity as ActivitySuperClass).cordsConsts) {
-            calculatorIntent.putExtra(s, (fragment.activity as ActivitySuperClass).cords[j])
+        for (s in ActivitySuperClass.cordsConsts) {
+            calculatorIntent.putExtra(s, activity.cords[j])
             j++
         }
     }
@@ -292,7 +339,7 @@ import kotlin.math.max
         return null
     }
 
-    fun loadImageInImageView(fragment: FragmentSuperClass): Boolean {
+    fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
         if (activity.currentFile == null) {
             activity.currentFile = activity.imageViewPersistantFile
         }
@@ -353,7 +400,7 @@ import kotlin.math.max
     }
 
 
-    fun saveImageState(fragment: FragmentSuperClass) {
+    fun saveImageState(activity: ActivitySuperClass) {
         val file = true
         val imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
         if (imageView == null) return
@@ -407,35 +454,59 @@ import kotlin.math.max
         return (1.0) * bitmap.width / bitmap.height
     }
 
-    fun setMaxResImage(fragment: FragmentSuperClass, bitmap: Bitmap): Point? {
+    fun setMaxResImage(activity: ActivitySuperClass, bitmap: Bitmap): Point? {
         val imageRatio = getImageRatio(bitmap)
         return Point(
-            (getMaxRes(fragment) / imageRatio).toInt(),
-            (getMaxRes(fragment) * imageRatio).toInt()
+            (getMaxRes(activity) / imageRatio).toInt(),
+            (getMaxRes(activity) * imageRatio).toInt()
         )
     }
 
-    fun loadImageState(fragment: FragmentSuperClass, originalImage: Boolean) {
+    public fun getMaxRes(fragment: FragmentSuperClass): Int {
+        var maxRes: Int = 1200
+        if (fragment.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
+            val maxResText: EditText? = fragment.requireActivity().findViewById(R.id.editMaximiumResolution)
+            if (maxResText != null) {
+                val maxResStr = maxResText.text
+                if (maxResStr != null) {
+                    try {
+                        maxRes = maxResStr.toString().toDouble().toInt()
+                        return maxRes;
+                    } catch (_: java.lang.NumberFormatException) {
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
+                    } catch (_: NullPointerException) {
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
+                    }
+                }
+            }
+        }
+        if (maxRes < 0) {
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
+        }
+        return maxRes
+    }
+
+    fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
-        val imageFile = (fragment.activity as ActivitySuperClass).imageViewPersistantFile
-        if (file && (imageFile != null) && (fragment.activity as ActivitySuperClass).imageFile.exists()) {
+        val imageFile = activity.imageViewPersistantFile
+        if (file && (imageFile != null) && imageFile.exists()) {
             try {
                 var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
                 if (bitmap != null) {
                     try {
-                        (fragment.activity as ActivitySuperClass).imageView =
-                            (fragment.activity as ActivitySuperClass).findViewById<View>(R.id.currentImageView) as ImageViewSelection
+                        activity.imageView =
+                            activity.findViewById<View>(R.id.currentImageView) as ImageViewSelection
                     } catch (ex: NullPointerException) {
                         return
                     }
-                    if ((fragment.activity as ActivitySuperClass).imageView != null) {
-                        Utils().setImageView((fragment.activity as ActivitySuperClass).imageView, bitmap);
+                    if (activity.imageView != null) {
+                        Utils().setImageView(activity.imageView, bitmap);
                     }
-                    (fragment.activity as ActivitySuperClass).currentFile = imageFile
+                    activity.currentFile = imageFile
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")
 
-                    createCurrentUniqueFile((fragment.activity as ActivitySuperClass));
+                    createCurrentUniqueFile(activity);
                 }
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
@@ -443,14 +514,14 @@ import kotlin.math.max
         }
     }
 
-    public fun createCurrentUniqueFile(fragment: FragmentSuperClass): File? {
+    public fun createCurrentUniqueFile(activity: ActivitySuperClass): File? {
         try {
             if (activity.currentFile != null) {
-                val photo = BitmapFactory.decodeStream(FileInputStream((fragment.activity as ActivitySuperClass).currentFile))
+                val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                (fragment.activity as ActivitySuperClass).currentFile =
-                    this.writePhoto((fragment.activity as ActivitySuperClass)., photo, "create-unique" + UUID.randomUUID())
-                return (fragment.activity as ActivitySuperClass).currentFile
+                activity.currentFile =
+                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
+                return activity.currentFile
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -469,19 +540,19 @@ import kotlin.math.max
 
     }
 
-    fun loadVarsMathImage(fragment: FragmentSuperClass, intent: Intent) {
+    fun loadVarsMathImage(activity: ActivitySuperClass, intent: Intent) {
 
         if (intent.getExtras() != null)
-            for (i in (fragment.activity as ActivitySuperClass).cordsConsts.indices) {
-                if (intent.getStringExtra((fragment.activity as ActivitySuperClass).cordsConsts[i]) != null)
-                    (fragment.activity as ActivitySuperClass).cords[i] = intent.getStringExtra((fragment.activity as ActivitySuperClass).cordsConsts[i])!!
+            for (i in ActivitySuperClass.cordsConsts.indices) {
+                if (intent.getStringExtra(ActivitySuperClass.cordsConsts[i]) != null)
+                    activity.cords[i] = intent.getStringExtra(ActivitySuperClass.cordsConsts[i])!!
             }
 
-        (fragment.activity as ActivitySuperClass).variableName = intent.getStringExtra("variableName")
-        (fragment.activity as ActivitySuperClass).variable = intent.getStringExtra("variable")
-        val indexOf = (fragment.activity as ActivitySuperClass).cordsConsts.indexOf((fragment.activity as ActivitySuperClass).variableName)
-        if ((fragment.activity as ActivitySuperClass).variableName != null && (fragment.activity as ActivitySuperClass).variable != null && indexOf >= 0) {
-            (fragment.activity as ActivitySuperClass).cords[indexOf] = (fragment.activity as ActivitySuperClass).variable
+        activity.variableName = intent.getStringExtra("variableName")
+        activity.variable = intent.getStringExtra("variable")
+        val indexOf = ActivitySuperClass.cordsConsts.indexOf(activity.variableName)
+        if (activity.variableName != null && activity.variable != null && indexOf >= 0) {
+            activity.cords[indexOf] = activity.variable
         }
 
     }
@@ -507,10 +578,10 @@ import kotlin.math.max
 
     private lateinit var referrerClient: InstallReferrerClient
 
-    fun installReferrer(fragment: FragmentSuperClass) {
+    fun installReferrer(activity: ActivitySuperClass) {
         try {
             this.referrerClient =
-                InstallReferrerClient.newBuilder((fragment.activity as ActivitySuperClass).applicationContext).build()
+                InstallReferrerClient.newBuilder(activity.applicationContext).build()
             this.referrerClient.startConnection(object : InstallReferrerStateListener {
 
                 override fun onInstallReferrerSetupFinished(responseCode: Int) {
