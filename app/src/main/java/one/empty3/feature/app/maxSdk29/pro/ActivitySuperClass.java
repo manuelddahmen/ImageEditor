@@ -109,7 +109,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        new Utils().installReferrer(this);
+//        new Utils().installReferrer(this);
 
 
         if (getIntent() != null) {

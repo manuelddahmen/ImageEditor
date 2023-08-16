@@ -35,9 +35,9 @@ import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.net.toFile
-import androidx.preference.PreferenceManager
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -54,12 +54,39 @@ import java.util.UUID
 import kotlin.math.max
 
 
-public class Utils {
+public class Utils0Activities() {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
+    //var imageLoader: ImageLoader = ImageLoader.getInstance() // Get singleton instance
 
+    /*
+        fun getSavedApplicationData(activity: EmptyActivity) {
+            //val file = File(appDir + "/config.txt")
+            val bundle = Parcel.obtain()
+            var i = 0
+            for (cord in cords) {
+                val any = bundle.getObject(cord)
+                if (any is String) {
+                    val str = any as String
+                    cordsValues[i] = str
+                }
+                i = i + 1
+            }
+        }
+
+        fun saveApplicationData(activity: Activity, cords: StringArray) {
+            //val file = File(appDir + "/config.txt")
+            val bundle = ResourceBundle.getBundle("config")
+            var i = 0
+            for (cord in cords) {
+                //if (cord != null)
+                //    bundle.keySet().add(cord, cords[i])
+                //i = i + 1
+            }
+        }
+    */
     /***
      * Write copy of original file in data folder
      * @param bitmap
@@ -73,7 +100,7 @@ public class Utils {
 
         //Folder is already created
         var name2 = name + UUID.randomUUID().toString()
-        var dirName1 = activity.applicationContext.filesDir.absolutePath
+        var dirName1 = activity.applicationContext.getFilesDir().absolutePath
         var dirName2 = this.appDir
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
@@ -90,134 +117,6 @@ public class Utils {
         }
         return writeFile(activity, bitmap, file1, file2, maxRes, true)
     }
-
-    fun getMaxRes(activity: ActivitySuperClass): Int {
-        val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
-
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
-
-        if(floatStr!=null) {
-            try {
-                maxRes = floatStr.toFloat().toInt()
-
-                System.out.println("maxRes = "+maxRes)
-
-                return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
-            }
-        }
-        return maxRes
-    }
-
-    fun getMaxRes(fragment: FragmentSuperClass): Int {
-        val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
-
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
-
-        if(floatStr!=null) {
-            try {
-                maxRes = floatStr.toFloat().toInt()
-
-                System.out.println("maxRes = "+maxRes)
-
-                return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
-            }
-        }
-        return maxRes
-    }
-
-    public fun writeFile(
-        fragment: FragmentSuperClass,
-        bitmap: Bitmap,
-        file1: File,
-        file2: File, maxImageSize: Int, shouldOverwrite: Boolean
-    ): File? {
-        if (maxImageSize <= 0) {
-        }
-        var written = false;
-        var fileWritten: File? = null;
-        var bitmap2: Bitmap
-        if (maxImageSize > 0) {
-            var scaledBy: Int = max(bitmap.width, bitmap.height)
-            try {
-                bitmap2 = Bitmap.createScaledBitmap(
-                    bitmap,
-                    (1.0 * maxImageSize / scaledBy * bitmap.width).toInt(),
-                    (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
-                    true
-                )
-            } catch (ex :  RuntimeException) {
-                try {
-                    ex.printStackTrace()
-                    bitmap2 = Bitmap.createScaledBitmap(
-                        bitmap,
-                        (1.0 * maxImageSize * getMaxRes(fragment.activity)).toInt(),
-                        (1.0 * maxImageSize * getMaxRes(fragment.activity)).toInt(),
-                        true
-                    )
-                } catch (ex :  RuntimeException) {
-                    ex.printStackTrace()
-                    bitmap2 = Bitmap.createScaledBitmap(bitmap, 400, 400, true
-                    )
-
-                }
-            }
-        } else bitmap2 = bitmap
-        try {
-            if (!file1.exists() || shouldOverwrite) {
-                if (ImageIO.write(bitmap2, "jpg", file1)) {
-                    fileWritten = file1;
-                    written = true
-                    System.out.println("File written1: $file1")
-                    return file1
-                }
-            } else {
-                System.err.println("File exists: $file1")
-            }
-        } catch (ex: android.system.ErrnoException) {
-            ex.printStackTrace()
-        } catch (ex: NullPointerException) {
-            ex.printStackTrace()
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-        try {
-            if (!file2.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file2, shouldOverwrite)) {
-                    written = true;
-                    fileWritten = file2;
-                    System.out.println("File written2: $file2")
-                    return file2
-                }
-            }
-        } catch (ex: android.system.ErrnoException) {
-            ex.printStackTrace()
-        } catch (ex: NullPointerException) {
-            ex.printStackTrace()
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-
-        if (written) {
-            return fileWritten
-        } else {
-            val f = fragment.activity.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
-            if (ImageIO.write(bitmap, "jpg", f)) {
-                written = true;
-                fileWritten = file2;
-                return f
-            }
-
-            Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
-            throw NullPointerException("No file written, Utils.writePhoto");
-        }
-    }
-
 
     public fun writeFile(
         activity: ActivitySuperClass,
@@ -305,39 +204,25 @@ public class Utils {
             throw NullPointerException("No file written, Utils.writePhoto");
         }
     }
-    public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
-        val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
 
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
-        if(floatStr!=null) {
-            try {
-                maxRes = floatStr.toFloat().toInt()
-
-                System.out.println("maxRes = "+maxRes)
-
-                return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
-            }
-        }
-
-        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+    public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
+        var maxRes: Int = 0;
+        maxRes = activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
                 savedInstanceState.getInt("maxRes") != -1
             ) {
-                return getMaxRes(fragment.activity);
+                return getMaxRes(activity);
             } else {
                 maxRes = savedInstanceState.getInt("maxRes")
 
             }
         }
-        println("maxRes = $maxRes")
         return maxRes;
     }
+
     public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
@@ -554,6 +439,30 @@ public class Utils {
         )
     }
 
+    public fun getMaxRes(activity: ActivitySuperClass): Int {
+        var maxRes: Int = 1200
+        if (activity.javaClass.isAssignableFrom(MyCameraActivity::class.java)) {
+            val maxResText: EditText? = activity.findViewById(R.id.editMaximiumResolution)
+            if (maxResText != null) {
+                val maxResStr = maxResText.text
+                if (maxResStr != null) {
+                    try {
+                        maxRes = maxResStr.toString().toDouble().toInt()
+                        return maxRes;
+                    } catch (_: java.lang.NumberFormatException) {
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
+                    } catch (_: NullPointerException) {
+                        maxRes = ActivitySuperClass.MAXRES_DEFAULT
+                    }
+                }
+            }
+        }
+        if (maxRes < 0) {
+            maxRes = ActivitySuperClass.MAXRES_DEFAULT
+        }
+        return maxRes
+    }
+
     fun loadImageState(activity: ActivitySuperClass, originalImage: Boolean) {
         val file = true
         val imageFile = activity.imageViewPersistantFile
@@ -643,44 +552,6 @@ public class Utils {
         }
         return null
     }
-/*
-    private lateinit var referrerClient: InstallReferrerClient
 
-    fun installReferrer(activity: ActivitySuperClass) {
-        try {
-            this.referrerClient =
-                InstallReferrerClient.newBuilder(activity.applicationContext).build()
-            this.referrerClient.startConnection(object : InstallReferrerStateListener {
-
-                override fun onInstallReferrerSetupFinished(responseCode: Int) {
-                    when (responseCode) {
-                        InstallReferrerResponse.OK -> {
-                            // Connection established.
-                            System.out.println("Connection established with InstallReferrer.")
-                        }
-
-                        InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
-                            // API not available on the current Play Store app.
-                            System.err.println("Connection not established with InstallReferrer : API not available")
-                        }
-
-                        InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                            // Connection couldn't be established.
-                            System.err.println("Connection not established with InstallReferrer : Service Unavailable")
-                        }
-                    }
-                }
-
-                override fun onInstallReferrerServiceDisconnected() {
-                    // Try to restart the connection on the next request to
-                    // Google Play by calling the startConnection() method.
-                }
-            })
-
-        } catch (re : RuntimeException) {
-            re.printStackTrace()
-        }
-    }
-*/
 }
 
