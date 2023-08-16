@@ -207,4 +207,5 @@
     <string name="licence">Licence</string>
     <string name="licenses" />
     <string name="settings_of_application">Settings of application</string>
+    <string name="display_place" />
 </resources>

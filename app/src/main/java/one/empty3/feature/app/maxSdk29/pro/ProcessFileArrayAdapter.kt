@@ -28,7 +28,7 @@ import java.io.File
 import java.util.ArrayList
 import java.util.function.Predicate
 
-@ExperimentalCamera2Interop class ProcessFileArrayAdapter() :
+class ProcessFileArrayAdapter() :
     RecyclerView.Adapter<ProcessFileArrayAdapter.ViewHolder>(), Parcelable {
     private lateinit var arrayClasses: HashMap<String, ProcessFile>
     private lateinit var activity: ActivitySuperClass

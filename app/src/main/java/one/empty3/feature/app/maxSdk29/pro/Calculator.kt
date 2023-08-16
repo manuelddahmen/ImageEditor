@@ -35,7 +35,7 @@ import one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.Companio
 import java.io.File
 import java.util.*
 
-@ExperimentalCamera2Interop class Calculator : ActivitySuperClass() {
+class Calculator : ActivitySuperClass() {
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

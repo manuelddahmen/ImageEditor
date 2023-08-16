@@ -6,7 +6,7 @@ import one.empty3.feature20220726.GoogleFaceDetection;
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 
-@ExperimentalCamera2Interop public class GoogleMLKitVisionFacePolygonClipboard {
+public class GoogleMLKitVisionFacePolygonClipboard {
         private GoogleMLKitVisionFacePolygonClipboard instance = new GoogleMLKitVisionFacePolygonClipboard();
         private GoogleFaceDetection.FaceData.Surface source;
         private GoogleFaceDetection.FaceData.Surface destination;

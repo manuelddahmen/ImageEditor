@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.fragment.app.Fragment
 import one.empty3.feature20220726.PixM
 import java.io.File
@@ -20,7 +19,7 @@ import java.util.Date
 import java.util.Objects
 import java.util.Properties
 
-@ExperimentalCamera2Interop
+
 open class FragmentSuperClass : Fragment() {
     /*
  * Copyright (c) 2023.

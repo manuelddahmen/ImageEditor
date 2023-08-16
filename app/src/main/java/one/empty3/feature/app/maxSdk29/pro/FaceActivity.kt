@@ -12,7 +12,7 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import javaAnd.awt.image.imageio.ImageIO
 import java.io.File
 
-@ExperimentalCamera2Interop
+
 class FaceActivity : ActivitySuperClass() {
     private var originalImage: File? = null
     private var selectedPoint : android.graphics.Point? = null

@@ -33,7 +33,7 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@ExperimentalCamera2Interop
+
 public class GraphicsActivity extends ActivitySuperClass {
     private TextView[] textViews;
 

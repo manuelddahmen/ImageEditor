@@ -53,7 +53,7 @@ import java.util.*
 import kotlin.math.max
 
 
-@ExperimentalCamera2Interop public class Utils {
+public class Utils {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")

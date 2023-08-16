@@ -38,7 +38,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
     else -> @Suppress("DEPRECATION") getParcelable(key) as? T
 }
 
-@ExperimentalCamera2Interop
+
 class FaceActivitySettings : ActivitySuperClass() {
     val ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER = 543451
     private val OPTION_SELECT_WHERE_CLICKED = 1

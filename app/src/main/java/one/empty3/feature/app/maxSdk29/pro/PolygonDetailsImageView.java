@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
-@ExperimentalCamera2Interop public class PolygonDetailsImageView extends FaceOverlayView{
+public class PolygonDetailsImageView extends FaceOverlayView{
     public PolygonDetailsImageView(@NonNull Context context) {
         super(context);
     }

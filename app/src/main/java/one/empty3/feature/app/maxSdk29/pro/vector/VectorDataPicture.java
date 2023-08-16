@@ -11,7 +11,7 @@ import java.util.List;
 
 import one.empty3.library.Polygon;
 
-@ExperimentalCamera2Interop public class VectorDataPicture implements Parcelable {
+public class VectorDataPicture implements Parcelable {
     List<Polygon> polygons = new ArrayList<>();
 
     protected VectorDataPicture(Parcel in) {

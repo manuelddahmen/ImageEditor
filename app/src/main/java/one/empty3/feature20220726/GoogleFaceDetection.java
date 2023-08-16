@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +21,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
-@ExperimentalCamera2Interop public class GoogleFaceDetection implements Parcelable {
+public class GoogleFaceDetection implements Parcelable {
     static GoogleFaceDetection instance;
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
@@ -110,7 +109,7 @@ import one.empty3.library.StructureMatrix;
     }
 
     public static class FaceData {
-        @ExperimentalCamera2Interop public static class Surface {
+        public static class Surface {
             private int colorFill;
             private int colorContours;
             private int colorTransparent;

@@ -16,7 +16,7 @@ import one.empty3.library.Sphere;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.ZBufferImpl;
 
-@ExperimentalCamera2Interop public class TestZBufferAndroid {
+public class TestZBufferAndroid {
     @Test
     public Bitmap testSphere() {
         Sphere sphere = new Sphere(new Axe(new Point3D(10d, 10d, 1d), new Point3D(10d, 10d, -1d)), 10.);

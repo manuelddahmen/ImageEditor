@@ -42,7 +42,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-@ExperimentalCamera2Interop
+
 class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var unauthorized: Boolean = false
     private val READ_WRITE_STORAGE: Int = 15165516

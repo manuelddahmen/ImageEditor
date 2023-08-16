@@ -10,7 +10,7 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import one.empty3.feature.app.maxSdk29.pro.FragmentSuperClass
 import one.empty3.feature.app.maxSdk29.pro.R
 
- @ExperimentalCamera2Interop class MainActivityFragmentsFragment : FragmentSuperClass() {
+ class MainActivityFragmentsFragment : FragmentSuperClass() {
 
     companion object {
         fun newInstance() = MainActivityFragmentsFragment()

@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
 
-@ExperimentalCamera2Interop class Camera {
+class Camera {
     private val FILENAME_FORMAT: String? = "yyyy-mm-dd"
     val TAG = this.javaClass.canonicalName
     fun process(activitySuperClass: ActivitySuperClass) {

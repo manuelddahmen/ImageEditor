@@ -14,7 +14,7 @@ import java.util.List;
 import one.empty3.feature.app.maxSdk29.pro.ActivitySuperClass;
 import one.empty3.feature.app.maxSdk29.pro.R;
 
-@ExperimentalCamera2Interop public class WordActivity extends ActivitySuperClass {
+public class WordActivity extends ActivitySuperClass {
     private WordViewModel mWordViewModel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

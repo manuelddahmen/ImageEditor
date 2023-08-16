@@ -53,6 +53,9 @@
 /*
  * 2013 Manuel Dahmen
  */
+/*__
+ * @author Manuel
+ */
 package one.empty3.library;
 
 import android.graphics.Bitmap;
@@ -64,7 +67,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.util.Arrays;
 
@@ -74,9 +76,6 @@ import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.SurfaceElem;
 
 
-@ExperimentalCamera2Interop /*__
- * @author Manuel
- */
 public class Polygon extends Representable implements SurfaceElem, ClosedCurve, Parcelable {
 
     /*__

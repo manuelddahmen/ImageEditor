@@ -33,7 +33,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +46,7 @@ import java.util.Properties;
 
 import one.empty3.feature20220726.PixM;
 
-@ExperimentalCamera2Interop
+
 public class ActivitySuperClass extends AppCompatActivity {
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
     public static final int MAXRES_DEFAULT = 1200;

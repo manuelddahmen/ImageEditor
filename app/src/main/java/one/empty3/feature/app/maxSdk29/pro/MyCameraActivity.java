@@ -80,7 +80,7 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
-@ExperimentalCamera2Interop public class MyCameraActivity extends ActivitySuperClass {
+public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
     Properties properties = new Properties();
 

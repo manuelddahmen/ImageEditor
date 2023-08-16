@@ -45,7 +45,7 @@ import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
-@ExperimentalCamera2Interop public class GraphicsActivityView extends ActivitySuperClass {
+public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;

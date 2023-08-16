@@ -74,7 +74,7 @@ import java.util.UUID
 *
 *
 */
-@ExperimentalCamera2Interop
+
 class MyCameraActivityVerion5 : FragmentSuperClass() {
     var properties = Properties()
     private var thisActivity: FragmentSuperClass? = null

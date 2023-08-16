@@ -49,7 +49,7 @@ import java.io.FileNotFoundException
 import java.util.UUID
 
 
-@ExperimentalCamera2Interop class TextActivity() : ActivitySuperClass() {
+class TextActivity() : ActivitySuperClass() {
     private val INT_WRITE_STORAGE: Int = 9247492
     private var text: String = ""
     private lateinit var currentImage: Bitmap
