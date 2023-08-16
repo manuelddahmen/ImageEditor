@@ -36,7 +36,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.core.net.toFile
 import androidx.preference.PreferenceManager
 import com.android.installreferrer.api.InstallReferrerClient

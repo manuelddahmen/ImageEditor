@@ -1,7 +1,7 @@
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Bundle
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 
 class FaceEffectListActivity : ActivitySuperClass() {
     override fun onCreate(savedInstanceState: Bundle?) {

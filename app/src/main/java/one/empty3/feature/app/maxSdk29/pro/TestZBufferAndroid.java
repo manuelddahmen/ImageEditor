@@ -2,7 +2,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
 
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 
 import org.junit.Test;
 

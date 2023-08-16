@@ -1,6 +1,6 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
 import one.empty3.library.Point3D;

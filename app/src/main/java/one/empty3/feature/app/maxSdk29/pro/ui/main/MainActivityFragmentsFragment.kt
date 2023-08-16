@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import one.empty3.feature.app.maxSdk29.pro.FragmentSuperClass
 import one.empty3.feature.app.maxSdk29.pro.R
 

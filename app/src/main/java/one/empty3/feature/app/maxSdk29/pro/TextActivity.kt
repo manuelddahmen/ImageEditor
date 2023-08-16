@@ -39,7 +39,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import javaAnd.awt.Point

@@ -3,7 +3,7 @@ package one.empty3.feature.app.maxSdk29.pro.word;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;

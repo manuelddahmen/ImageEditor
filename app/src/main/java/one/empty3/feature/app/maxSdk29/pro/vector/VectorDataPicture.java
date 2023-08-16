@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 
 import java.util.ArrayList;
 import java.util.List;

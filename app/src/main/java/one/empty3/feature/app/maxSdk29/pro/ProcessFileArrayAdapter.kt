@@ -14,7 +14,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO

@@ -4,12 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.annotation.OptIn
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.fragment.app.FragmentTransaction
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivitySettingsScrollingBinding
 
@@ -40,7 +35,7 @@ class SettingsScrollingActivity : AppCompatActivity() {
         return true
     }
 
-    @OptIn(ExperimentalCamera2Interop::class) override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var myMenuIntent : Intent
         return when (item.itemId) {
             R.id.home -> {

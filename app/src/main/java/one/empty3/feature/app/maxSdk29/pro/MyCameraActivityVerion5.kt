@@ -32,7 +32,7 @@ import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.google.android.datatransport.BuildConfig

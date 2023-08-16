@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

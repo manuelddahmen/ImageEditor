@@ -28,7 +28,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.compose.ui.unit.max
 import one.empty3.apps.tree.altree.*
 import one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.Companion

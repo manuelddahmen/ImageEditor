@@ -31,7 +31,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop;
+;
 
 import java.io.File;
 import java.util.HashMap;

@@ -29,7 +29,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO
