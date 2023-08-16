@@ -119,7 +119,7 @@ import one.empty3.feature20220726.PixM;
 
         setContentView(R.layout.main);
 
-        maxRes = new Utils().getMaxRes(this, savedInstanceState);
+        maxRes = new Utils().getMaxRes(this);
 
         imageView = this.findViewById(R.id.currentImageView);
 

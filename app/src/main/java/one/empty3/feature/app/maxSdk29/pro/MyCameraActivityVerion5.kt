@@ -517,26 +517,23 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
             if (isWorkingResolutionOriginal) {
                 bitmapOriginal = (drawable.current as BitmapDrawable).bitmap
             }
-            bitmap = PixM.getPixM(bitmap!!, getMaxRes()).bitmap
+            bitmap = PixM.getPixM(bitmap!!, maxRes).bitmap
         } else {
             if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
-                bitmap = Bitmap.createBitmap(
-                    1,
-                    1,
-                    Bitmap.Config.ARGB_8888
-                ) // Single color bitmap will be created of 1x1 pixel
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+            // Single color bitmap will be created of 1x1 pixel
             } else {
                 // ???
                 if (isWorkingResolutionOriginal) {
                     bitmapOriginal = PixM.getPixM(bitmap!!, 0).bitmap
                 }
-                bitmapOriginal = PixM.getPixM(bitmap!!, getMaxRes()).bitmap
+                bitmapOriginal = PixM.getPixM(bitmap!!, maxRes).bitmap
                 bitmap = bitmapOriginal
             }
             val canvas = Canvas(bitmap!!)
             drawable.setBounds(
-                0, 0, if (getMaxRes() == 0) canvas.width else getMaxRes(),
-                if (getMaxRes() == 0) canvas.height else getMaxRes()
+                0, 0, if (maxRes == 0) canvas.width else maxRes,
+                if (maxRes == 0) canvas.height else maxRes
             )
             drawable.draw(canvas)
         }
@@ -582,8 +579,8 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
     fun setMaxResImage(bitmap: Bitmap): Point {
         val imageRatio = getImageRatio(bitmap)
         return Point(
-            getMaxRes() / imageRatio,
-            getMaxRes() * imageRatio
+            maxRes / imageRatio,
+            maxRes * imageRatio
         )
     }
 

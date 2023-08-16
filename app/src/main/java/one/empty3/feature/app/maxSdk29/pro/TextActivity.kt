@@ -62,7 +62,7 @@ import java.util.UUID
 
         System.err.println("CurrentFile="+currentFile);
 
-        maxRes = Utils().getMaxRes(this, savedInstanceState)
+        maxRes = Utils().getMaxRes(this)
 
 
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)

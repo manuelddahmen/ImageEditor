@@ -1,5 +1,5 @@
 def compose_version = '1.4.3'
-def kotlin_version = '1.8.10'
+def kotlin_version = '1.8.20'
 buildscript {
     ext.java_version = JavaVersion.VERSION_11
     ext {

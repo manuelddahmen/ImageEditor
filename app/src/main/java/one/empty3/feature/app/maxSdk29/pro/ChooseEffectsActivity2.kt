@@ -61,7 +61,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         Main2022.listOfFactors()
         setContentView(R.layout.recycler_view_effect_activity)
 
-        maxRes = Utils().getMaxRes(this, savedInstanceState)
+        maxRes = Utils().getMaxRes(this)
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
@@ -347,3 +347,4 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         super.onDestroy()
     }
 }
+

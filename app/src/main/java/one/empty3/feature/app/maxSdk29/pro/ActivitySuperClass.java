@@ -328,7 +328,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public void getParameters(Intent from) {
         Utils utils = new Utils();
         currentFile = utils.getCurrentFile(from);
-        maxRes = utils.getMaxRes(this, null);
+        maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
     }

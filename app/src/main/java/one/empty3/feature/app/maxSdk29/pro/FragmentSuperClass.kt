@@ -56,7 +56,11 @@ open class FragmentSuperClass : Fragment() {
     protected var currentFile: File? = null
     protected var cords = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     protected var currentBitmap: Bitmap? = null
-    protected var maxRes = R.string.maxRes_1200
+    var maxRes :Int
+         get() {
+            return Utils().getMaxRes(this)
+        }
+        set(value) {maxRes = value}
     lateinit var activity: ActivitySuperClass
         @Throws(FileNotFoundException::class)
         fun getPathInput(uri: Uri?): InputStream? {
@@ -101,6 +105,8 @@ open class FragmentSuperClass : Fragment() {
             if (currentFile != null) {
                 testIfValidBitmap()
             } else loadInstanceState()
+
+            maxRes = Utils().getMaxRes(this.activity)
         }
 
         override fun onSaveInstanceState(outState: Bundle) {
@@ -272,7 +278,7 @@ open class FragmentSuperClass : Fragment() {
                     val imageViewPersistantFile = currentFile
                     if (currentFile != null) Objects.requireNonNull(this.imageViewPersistantFile)?.let {
                         Utils().writeFile(
-                            activity,
+                            this,
                             BitmapFactory.decodeStream(
                                 FileInputStream(currentFile)
                             ),
@@ -300,7 +306,7 @@ open class FragmentSuperClass : Fragment() {
 
         fun passParameters(to: Intent) {
             if (currentFile != null) to.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-            to.putExtra("maxRes", getMaxRes())
+            to.putExtra("maxRes", maxRes)
             Utils().putExtra(
                 to,
                 cords,
@@ -320,7 +326,7 @@ open class FragmentSuperClass : Fragment() {
         fun getParameters(from: Intent?) {
             val utils = Utils()
             currentFile = utils.getCurrentFile(from!!)
-            maxRes = utils.getMaxRes(activity)
+            maxRes = utils.getMaxRes(this.activity)
             utils.loadImageInImageView(activity)
             utils.loadVarsMathImage(activity, activity.intent)
         }
@@ -365,14 +371,6 @@ open class FragmentSuperClass : Fragment() {
             } catch (ex: RuntimeException) {
                 ex.printStackTrace()
             }
-        }
-
-        fun getMaxRes(): Int {
-            return Utils().getMaxRes(activity)
-        }
-
-        fun setMaxRes(maxRes: Int) {
-            this.maxRes = maxRes
         }
 
         fun loadImage(choose_directoryData: InputStream, isCurrentFile: Boolean): Bitmap {
