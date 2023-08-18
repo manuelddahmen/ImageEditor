@@ -54,7 +54,7 @@
                 android:contentDescription="@string/capturePhoto"
                 android:drawableStart="@drawable/apn"
                 android:text="@string/capturePhoto"
-                    
+                
                 android:layout_width="wrap_content"
                     />
 

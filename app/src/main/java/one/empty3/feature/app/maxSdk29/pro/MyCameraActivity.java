@@ -133,24 +133,21 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-
+/*
         Button takePhoto = findViewById(R.id.takePhotoButton);
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA/*, Manifest.permission.READ_MEDIA_IMAGES*/}, MY_CAMERA_PERMISSION_CODE);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
                 }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
-
-
-                //findNavController(thisActivity, R.id.).navigate(R.id.flow_step_one_dest, null)
             }
 
         });
-
+*/
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override

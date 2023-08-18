@@ -15,8 +15,8 @@ import java.io.File
 
 class FaceActivity : ActivitySuperClass() {
     private var originalImage: File? = null
-    private var selectedPoint : android.graphics.Point? = null
-    private lateinit var faceOverlayView:FaceOverlayView
+    private var selectedPoint: android.graphics.Point? = null
+    private lateinit var faceOverlayView: FaceOverlayView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,40 +27,54 @@ class FaceActivity : ActivitySuperClass() {
 
         drawIfBitmap();
 
-        if(intent.extras?.getDouble("selectedPoint.x") !=null) {
+        if (intent.extras?.getDouble("selectedPoint.x") != null) {
             selectedPoint?.x = (intent.extras?.getDouble("selectedPoint.x") as Int)
         }
-        if(intent.extras?.getDouble("selectedPoint.y") !=null) {
+        if (intent.extras?.getDouble("selectedPoint.y") != null) {
             selectedPoint?.y = (intent.extras?.getDouble("selectedPoint.y") as Int)
         }
 
-            if (currentFile != null) {
+        if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
-            faceOverlayView.setBitmap(currentBitmap);
+            try {
+                faceOverlayView.setImageBitmap3(currentBitmap);
 
-            faceOverlayView.setActivity(this)
+                faceOverlayView.setActivity(this)
+
+            } catch (ex : RuntimeException) {
+                Toast.makeText(applicationContext, "Error while execute face detection",
+                    Toast.LENGTH_LONG).show()
+            }
         }
 
         val faceDetection = findViewById<Button>(R.id.face_detection)
 
         faceDetection.setOnClickListener {
-            if(faceOverlayView.isFinish()) {
+            if (faceOverlayView.isFinish()) {
                 faceOverlayView.isDrawing = false
                 faceOverlayView.isFinish = false
-                faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
-                val writePhoto = Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
-                originalImage = currentFile
-                currentFile = writePhoto
-                //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+                try {
+                    faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
+                    val writePhoto =
+                        Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
+                    originalImage = currentFile
+                    currentFile = writePhoto
+                    //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+                } catch (ex: RuntimeException) {
+                    Toast.makeText(
+                        applicationContext, "Error while execute face detection",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
         val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
         faceDrawSettings.setOnClickListener {
-            if(faceOverlayView.googleFaceDetection!=null) {
+            if (faceOverlayView.googleFaceDetection != null) {
                 faceOverlayView.isFinish = true
                 val intentSettings = Intent(applicationContext, FaceActivitySettings::class.java)
                 if (selectedPoint != null) {
@@ -73,18 +87,21 @@ class FaceActivity : ActivitySuperClass() {
                 if (faceOverlayView.googleFaceDetection != null) {
                     //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
                 }
-                if(originalImage!=null) {
+                if (originalImage != null) {
                     intentSettings.putExtra("originalImage", originalImage)
                 }
                 passParameters(intentSettings)
             } else {
-                Toast.makeText(applicationContext, "Attendez que la détection de visage soit terminée."
-                , Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Attendez que la détection de visage soit terminée.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
-        faceOverlayView.setOnClickListener{
-            if (faceOverlayView.googleFaceDetection!=null) {
+        faceOverlayView.setOnClickListener {
+            if (faceOverlayView.googleFaceDetection != null) {
                 val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
                 if (surface != null) {
                     faceOverlayView.googleFaceDetection.selectedSurface = surface
@@ -113,24 +130,26 @@ class FaceActivity : ActivitySuperClass() {
             faceOverlayView.isFinish = true
             val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
 
-            if(selectedPoint!=null) {
+            if (selectedPoint != null) {
                 intentBack.putExtra("selectedPoint.x", selectedPoint!!.x)
                 intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
             }
-            if(faceOverlayView.googleFaceDetection!=null) {
+            if (faceOverlayView.googleFaceDetection != null) {
                 //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
-             }
+            }
 
-            if(originalImage!=null) {
+            if (originalImage != null) {
                 intentBack.putExtra("originalImage", originalImage)
             }
             passParameters(intentBack)
 
         }
     }
+
     fun onceDrawFaceoverlay(faceOverlayView: FaceOverlayView) {
 
     }
+
     fun checkPointCordinates(a: Point): Boolean {
         val x = a.x
         val y = a.y

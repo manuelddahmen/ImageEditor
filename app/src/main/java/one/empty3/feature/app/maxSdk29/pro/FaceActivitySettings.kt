@@ -115,9 +115,15 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
-            faceOverlayView.setBitmap(currentBitmap)
+            try {
+            faceOverlayView.setImageBitmap3(currentBitmap)
 
             faceOverlayView.setActivity(this)
+
+            } catch (ex : RuntimeException) {
+                Toast.makeText(applicationContext, "Error while execute face detection",
+                Toast.LENGTH_LONG).show()
+            }
         }
 
         val back = findViewById<Button>(R.id.face_draw_settings_back)
@@ -196,7 +202,8 @@ class FaceActivitySettings : ActivitySuperClass() {
         val colorChooserDialog: ColorDialogListener = ColorDialogListener(selectedColor, this)
 
         colorChooser.setOnClickListener {
-
+            if(selectedColor==null)
+                selectedColor = Color.White
             val dialog: AmbilWarnaDialog = AmbilWarnaDialog(/* context = */ this, /* color = */
                 selectedColor.toArgb(),
                 /* listener = */
@@ -213,7 +220,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
             intent.addCategory(Intent.CATEGORY_OPENABLE)
 
-            val intent2 = Intent.createChooser(intent, "Choose a file")
+            val intent2 = Intent.createChooser(intent, getString(R.string.choose_a_file))
             System.err.println(intent2)
             startActivityForResult(
                 intent2,
@@ -229,7 +236,6 @@ class FaceActivitySettings : ActivitySuperClass() {
                 filledContours.paintIfNot(0, 0, filledContours.columns, filledContours.lines,
                     selectedImage,
                     selectedSurfaceAllPicture!!.colorTransparent)
-                println("Image painted")
             }
 
         }
@@ -395,6 +401,13 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     fun drawSurfaces() {
         faceOverlayView.fillPolygons(googleFaceDetection)
+        var currentFileTmp:File? = Utils().writePhoto(
+            this,
+            faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
+            "face_drawings-"
+        )
+        if(currentFileTmp!==null)
+            currentFile = currentFileTmp
     }
 
     override fun onRequestPermissionsResult(
@@ -415,6 +428,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             val intentChoosed = data
 

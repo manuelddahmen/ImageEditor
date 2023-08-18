@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,9 +103,12 @@ public class FaceOverlayView extends ImageViewSelection {
                 //mFaces.forEach(this::action);
             });
         } catch (Exception ignored) {
+            if(ignored instanceof com.google.mlkit.common.MlKitException) {
+                Toast.makeText(activity.getApplicationContext(), " Waiting for the face module to be downloaded. Please wait.",
+                        Toast.LENGTH_LONG).show();
+            }
             ignored.printStackTrace();
         }
-
 
         setImageBitmap3(mCopy);
     }
