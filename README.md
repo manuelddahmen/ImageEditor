@@ -188,6 +188,14 @@ In place subimages
    SettingsActivityFace for Faces parts colors and textures.
 Restore KMeans.java to 09-jun-2023.
 Error in PixM.setValues(int,int,double...) FIXED.
-Essayer de peindre (méthode drawPolygon) les polygones reconnus du visage sur l'écran dans une ImageView
-Change face's colors (#1)
-   </nl-NL></fr-FR>
+   Essayer de peindre (méthode drawPolygon) les polygones reconnus du visage sur l'écran dans une ImageView
+   Parcelable implementation: GoogleFaceDetection
+- Fixed: lateinit in FaceActivity
+  Change face's colors (#2)
+  Parcelable implementation: GoogleFaceDetection
+- Fixed: lateinit in FaceActivity
+- changes: colored face (step#3) (image mapping, color texture)
+  SettingsScrollingActivity save preferences
+- Settings Good, complete with file paths?
+  Clean front app activity.
++ Android 14

@@ -116,14 +116,18 @@ class FaceActivitySettings : ActivitySuperClass() {
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
             try {
-            faceOverlayView.setImageBitmap3(currentBitmap)
+                if (currentBitmap != null) {
+                    faceOverlayView.setBitmap(currentBitmap)
 
-            faceOverlayView.setActivity(this)
-
-            } catch (ex : RuntimeException) {
-                Toast.makeText(applicationContext, "Error while execute face detection",
-                Toast.LENGTH_LONG).show()
+                    faceOverlayView.setActivity(this)
+                }
+            } catch (ex: RuntimeException) {
+                Toast.makeText(
+                    applicationContext, "Error while execute face detection",
+                    Toast.LENGTH_LONG
+                ).show()
             }
+
         }
 
         val back = findViewById<Button>(R.id.face_draw_settings_back)
@@ -202,7 +206,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         val colorChooserDialog: ColorDialogListener = ColorDialogListener(selectedColor, this)
 
         colorChooser.setOnClickListener {
-            if(selectedColor==null)
+            if (selectedColor == null)
                 selectedColor = Color.White
             val dialog: AmbilWarnaDialog = AmbilWarnaDialog(/* context = */ this, /* color = */
                 selectedColor.toArgb(),
@@ -231,11 +235,13 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val applyImage = findViewById<Button>(R.id.applyImage)
         applyImage.setOnClickListener {
-            if (this.selectedSurfaceAllPicture != null && selectedImage!=null) {
+            if (this.selectedSurfaceAllPicture != null && selectedImage != null) {
                 val filledContours = selectedSurfaceAllPicture!!.filledContours
-                filledContours.paintIfNot(0, 0, filledContours.columns, filledContours.lines,
+                filledContours.paintIfNot(
+                    0, 0, filledContours.columns, filledContours.lines,
                     selectedImage,
-                    selectedSurfaceAllPicture!!.colorTransparent)
+                    selectedSurfaceAllPicture!!.colorTransparent
+                )
             }
 
         }
@@ -282,7 +288,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         }
     }
-    
+
 
     fun getScale(): PointF {
         val mBitmap = faceOverlayView.mBitmap
@@ -401,12 +407,12 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     fun drawSurfaces() {
         faceOverlayView.fillPolygons(googleFaceDetection)
-        var currentFileTmp:File? = Utils().writePhoto(
+        var currentFileTmp: File? = Utils().writePhoto(
             this,
             faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
             "face_drawings-"
         )
-        if(currentFileTmp!==null)
+        if (currentFileTmp !== null)
             currentFile = currentFileTmp
     }
 
@@ -428,7 +434,6 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             val intentChoosed = data
 

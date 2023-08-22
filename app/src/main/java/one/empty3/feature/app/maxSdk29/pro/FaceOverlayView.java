@@ -98,9 +98,8 @@ public class FaceOverlayView extends ImageViewSelection {
             FaceDetector client = FaceDetection.getClient(highAccuracyOpts);
             client.process(inputImage).addOnSuccessListener(faces -> {
                 mFaces = faces;
+                updateImage(mCopy);
 
-
-                //mFaces.forEach(this::action);
             });
         } catch (Exception ignored) {
             if(ignored instanceof com.google.mlkit.common.MlKitException) {

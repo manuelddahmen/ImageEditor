@@ -15,7 +15,7 @@ import one.empty3.io.ProcessFile;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ExampleUnitTest2 {
     int countTestsProcessFiles = 0;
     private int nonApplicable = 0;
     private int errors = 0;
