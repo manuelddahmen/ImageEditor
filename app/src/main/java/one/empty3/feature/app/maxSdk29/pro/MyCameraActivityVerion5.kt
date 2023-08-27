@@ -20,7 +20,6 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.os.PersistableBundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
@@ -32,7 +31,6 @@ import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.google.android.datatransport.BuildConfig
@@ -97,7 +95,9 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main, container, false)
+        val inflate = inflater.inflate(R.layout.main, container, false)
+        if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
+        return inflate
     }
 
 

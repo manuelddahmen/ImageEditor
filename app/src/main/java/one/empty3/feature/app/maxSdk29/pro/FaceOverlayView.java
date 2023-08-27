@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-;
 
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
@@ -38,6 +37,8 @@ import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
+
+;
 
 
 public class FaceOverlayView extends ImageViewSelection {
@@ -317,6 +318,19 @@ public class FaceOverlayView extends ImageViewSelection {
         }
     }
 
+    public List<GoogleFaceDetection.FaceData.Surface> getPolygons(GoogleFaceDetection googleFaceDetection) {
+        List<GoogleFaceDetection.FaceData.Surface> surfaces = new ArrayList<>();
+        if (googleFaceDetection != null) {
+            for(GoogleFaceDetection.FaceData face  :googleFaceDetection.getDataFaces()) {
+                for(GoogleFaceDetection.FaceData.Surface surface: face.getFaceSurfaces()) {
+
+                    surfaces.add(surface);
+
+                }
+            }
+        }
+        return surfaces;
+    }
 
     private void drawLine(PointF pointF, PointF pointF1) {
         mCanvas.drawLine(pointF.x, pointF.y, pointF1.x, pointF1.y, paint);

@@ -55,15 +55,15 @@ open class FragmentSuperClass : Fragment() {
     protected var currentFile: File? = null
     protected var cords = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     protected var currentBitmap: Bitmap? = null
+    public lateinit var activity2 : ActivitySuperClass
     var maxRes :Int
          get() {
             return Utils().getMaxRes(this)
         }
         set(value) {maxRes = value}
-    lateinit var activity: ActivitySuperClass
         @Throws(FileNotFoundException::class)
         fun getPathInput(uri: Uri?): InputStream? {
-            return activity.applicationContext.contentResolver.openInputStream(
+            return requireContext().contentResolver.openInputStream(
                 uri!!
             )
         }
@@ -88,8 +88,8 @@ open class FragmentSuperClass : Fragment() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            if (activity.intent != null) {
-                getParameters(activity.intent)
+            if (activity2!=null &&activity2.intent != null) {
+                getParameters(activity2.intent)
                 if (currentFile == null && savedInstanceState != null) {
                     try {
                         if (savedInstanceState.getString("currentFile") != null) {
@@ -100,12 +100,11 @@ open class FragmentSuperClass : Fragment() {
                     }
                 }
             }
-            if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
             if (currentFile != null) {
                 testIfValidBitmap()
             } else loadInstanceState()
 
-            maxRes = Utils().getMaxRes(this.activity)
+            maxRes = Utils().getMaxRes(this.requireContext())
         }
 
         override fun onSaveInstanceState(outState: Bundle) {
@@ -113,7 +112,8 @@ open class FragmentSuperClass : Fragment() {
             /*requestPermissions(new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_MEDIA_IMAGES}, ONSAVE_INSTANCE_STATE);
-*/saveInstanceState()
+*/
+            saveInstanceState()
         }
 
         override fun onRequestPermissionsResult(
@@ -139,7 +139,7 @@ open class FragmentSuperClass : Fragment() {
         }
 
         fun restoreInstanceState() {
-            Utils().loadImageState(activity, false)
+            Utils().loadImageState(activity2, false)
             val properties = Properties()
             try {
                 properties.load(FileInputStream(imageViewPersistantPropertiesFile))
@@ -170,7 +170,7 @@ open class FragmentSuperClass : Fragment() {
                     }
                 } catch (ex: RuntimeException) {
                     Toast.makeText(
-                        activity.applicationContext,
+                        activity2.applicationContext,
                         "Error restoring currentFile",
                         Toast.LENGTH_LONG
                     )
@@ -203,7 +203,7 @@ open class FragmentSuperClass : Fragment() {
 
         protected fun loadInstanceState() {
             var currentFile1: String? = null
-            Utils().loadImageState(activity, false)
+            Utils().loadImageState(activity2, false)
             val properties = Properties()
             try {
                 properties.load(FileInputStream(imageViewPersistantPropertiesFile))
@@ -252,7 +252,7 @@ open class FragmentSuperClass : Fragment() {
                 ex.printStackTrace()
             }
             if (currentFile == null) Toast.makeText(
-                activity.applicationContext,
+                activity2.applicationContext,
                 "Cannot find current file (working copy)",
                 Toast.LENGTH_SHORT
             )
@@ -316,8 +316,8 @@ open class FragmentSuperClass : Fragment() {
             println("c className = " + this.javaClass)
             println("m variableName = $variableName")
             println("m variable =     $variable")
-            println("i variableName = " + activity.intent.getStringExtra("variableName"))
-            println("i variable =     " + activity.intent.getStringExtra("variable"))
+            println("i variableName = " + activity2.intent.getStringExtra("variableName"))
+            println("i variable =     " + activity2.intent.getStringExtra("variable"))
             println("c to.className = " + to.type)
             startActivity(to)
         }
@@ -325,9 +325,9 @@ open class FragmentSuperClass : Fragment() {
         fun getParameters(from: Intent?) {
             val utils = Utils()
             currentFile = utils.getCurrentFile(from!!)
-            maxRes = utils.getMaxRes(this.activity)
-            utils.loadImageInImageView(activity)
-            utils.loadVarsMathImage(activity, activity.intent)
+            maxRes = utils.getMaxRes(requireContext())
+            utils.loadImageInImageView(activity2)
+            utils.loadVarsMathImage(activity2, activity2.intent)
         }
 
         protected fun getFilesFile(s: String): File {
@@ -365,8 +365,8 @@ open class FragmentSuperClass : Fragment() {
             saveInstanceState()
             try {
                 currentBitmap = null
-                if (imageView == null) imageView = activity.findViewById(R.id.imageViewSelection)
-                if (imageView != null && currentFile != null) Utils().setImageView(activity, activity.imageView)
+                if (imageView == null) imageView = activity2.findViewById(R.id.imageViewSelection)
+                if (imageView != null && currentFile != null) Utils().setImageView(activity2, activity2.imageView)
             } catch (ex: RuntimeException) {
                 ex.printStackTrace()
             }
@@ -385,8 +385,8 @@ open class FragmentSuperClass : Fragment() {
                 System.err.println("Get file (bitmap) : $photo")
             }
             return if (photo != null && isCurrentFile) {
-                currentFile = Utils().writePhoto(activity, photo, "loaded_image-")
-                Utils().setImageView(activity, activity.imageView)
+                currentFile = Utils().writePhoto(activity2, photo, "loaded_image-")
+                Utils().setImageView(activity2, activity2.imageView)
                 photo
             } else if (photo != null) {
                 photo

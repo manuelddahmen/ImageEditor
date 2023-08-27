@@ -1,12 +1,10 @@
  package one.empty3.feature.app.maxSdk29.pro.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProvider
 import one.empty3.feature.app.maxSdk29.pro.FragmentSuperClass
 import one.empty3.feature.app.maxSdk29.pro.R
 
@@ -29,7 +27,9 @@ import one.empty3.feature.app.maxSdk29.pro.R
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        val inflate = inflater.inflate(R.layout.fragment_main, container, false)
+        if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
+        return inflate
     }
 
 }

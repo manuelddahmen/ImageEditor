@@ -4,6 +4,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+// Add the information to the bottom of the file.
+dependencies {
+    // Add dependencies.
+    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
+}
+
+// Add the information to the bottom of the file.
+apply plugin: 'com.huawei.agconnect'
 
 if (hasProperty('buildScan')) {
     buildScan {
@@ -12,7 +20,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 315100000
+def code = 315802934
 
 java {
     toolchain {
@@ -161,6 +169,7 @@ android {
     }
 }
 
+
 dependencies {
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:32.2.2')
@@ -242,19 +251,27 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     implementation "androidx.core:core-ktx:1.10.1"
     implementation("com.jgoodies:jgoodies-common:1.8.1")
-    // Add dependencies.
-    //implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
-    //implementation 'com.squareup.okhttp3:okhttp:4.9.2'
-    //implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
+}
+
+
+Properties properties = new Properties()
+try {
+    // Other configuration here
+    File propertiesFile = new File('../../private.properties/gradle.properties')
+    propertiesFile.withInputStream {
+        properties.load(it)
+    }
+} catch (Exception ex) {
+    ex.printStackTrace()
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = "one.empty3"
-            artifactId = "android_app"
-            version = "0.9-SNAPSHOT"
+            artifactId = "featureapp"
+            version = "4.0"
         }
     }
     repositories {

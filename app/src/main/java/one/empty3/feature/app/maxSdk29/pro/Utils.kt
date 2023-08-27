@@ -22,6 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro
 
 //import com.nostra13.universalimageloader.core.ImageLoader
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -91,9 +92,9 @@ public class Utils {
         return writeFile(activity, bitmap, file1, file2, maxRes, true)
     }
 
-    fun getMaxRes(activity: ActivitySuperClass): Int {
+    fun getMaxRes(context: Context): Int {
         val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
+            PreferenceManager.getDefaultSharedPreferences(context)
 
         val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
@@ -112,23 +113,11 @@ public class Utils {
     }
 
     fun getMaxRes(fragment: FragmentSuperClass): Int {
-        val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
+        return getMaxRes(fragment.requireContext())
+    }
 
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
-
-        if(floatStr!=null) {
-            try {
-                maxRes = floatStr.toFloat().toInt()
-
-                System.out.println("maxRes = "+maxRes)
-
-                return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
-            }
-        }
-        return maxRes
+    fun getMaxRes(activitySuperClass: ActivitySuperClass): Int {
+        return getMaxRes(activitySuperClass.applicationContext)
     }
 
     public fun writeFile(
@@ -156,8 +145,8 @@ public class Utils {
                     ex.printStackTrace()
                     bitmap2 = Bitmap.createScaledBitmap(
                         bitmap,
-                        (1.0 * maxImageSize * getMaxRes(fragment.activity)).toInt(),
-                        (1.0 * maxImageSize * getMaxRes(fragment.activity)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
                         true
                     )
                 } catch (ex :  RuntimeException) {
@@ -206,7 +195,7 @@ public class Utils {
         if (written) {
             return fileWritten
         } else {
-            val f = fragment.activity.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
+            val f = fragment.activity2.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
             if (ImageIO.write(bitmap, "jpg", f)) {
                 written = true;
                 fileWritten = file2;
@@ -307,7 +296,7 @@ public class Utils {
     }
     public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
         val defaultSharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(fragment.activity.applicationContext)
+            PreferenceManager.getDefaultSharedPreferences(fragment.requireContext())
 
         val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
@@ -323,13 +312,14 @@ public class Utils {
             }
         }
 
-        maxRes = fragment.activity.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        if(fragment?.activity == null)
+            maxRes = fragment.activity!!.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
         if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
                 savedInstanceState.getInt("maxRes") != -1
             ) {
-                return getMaxRes(fragment.activity);
+                return getMaxRes(fragment);
             } else {
                 maxRes = savedInstanceState.getInt("maxRes")
 

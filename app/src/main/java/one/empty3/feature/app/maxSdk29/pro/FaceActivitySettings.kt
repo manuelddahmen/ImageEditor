@@ -22,11 +22,13 @@ import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
 import one.empty3.feature20220726.PixM
 import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
+import one.empty3.library.Point3D
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.util.function.Consumer
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -319,6 +321,33 @@ class FaceActivitySettings : ActivitySuperClass() {
         return false
     }
 
+    public fun averageByExclusiveSurface(): HashMap<Surface, Point3D> {
+        val array = HashMap<Surface, Point3D>()
+        if(currentSurfaceSize>0) {
+            val polygons = faceOverlayView.getPolygons(googleFaceDetection)
+            val sums = HashMap<Surface, Int>()
+            for (i in 0 until currentBitmap.width) {
+                for (j in 0 until currentBitmap.height) {
+                    this.selectShapeAt(Point(i,j))
+                    selectedSurfaces.forEach{
+                        val pixel = currentBitmap.getPixel(i, j)
+                        val p:Point3D  = Point3D(Lumiere.getDoubles(pixel))
+                        array[it] = array.getOrDefault(it, Point3D()).plus(p)
+                        sums[it] = sums.getOrDefault(it, 0)+1
+                    }
+
+                }
+            }
+            polygons.forEach(Consumer {
+                array[it] = array[it]!!.mult((1.0/(sums[it] ?:1)))
+            })
+        }
+        val polygons = faceOverlayView.getPolygons(googleFaceDetection)
+
+
+        return array
+    }
+
     private fun selectShapeAt(p: Point?) {
         var i: Int = 0
         selectedSurfaces = ArrayList()
@@ -434,6 +463,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             val intentChoosed = data
 

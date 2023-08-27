@@ -2,6 +2,17 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "https://mvnrepository.com/"
+        }
+        mavenLocal()
     }
 }
 dependencyResolutionManagement {
@@ -20,7 +31,17 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
         mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "https://mvnrepository.com/"
+        }
+        mavenLocal()
     }
 }
 rootProject.name = "FeatureApp"
