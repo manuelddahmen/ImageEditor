@@ -18,7 +18,6 @@ import one.empty3.feature.app.maxSdk29.pro.R
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
     }
@@ -28,7 +27,7 @@ import one.empty3.feature.app.maxSdk29.pro.R
         savedInstanceState: Bundle?
     ): View {
         val inflate = inflater.inflate(R.layout.fragment_main, container, false)
-        if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
+        if (imageView == null) imageView = activity2.findViewById(R.id.currentImageView)
         return inflate
     }
 

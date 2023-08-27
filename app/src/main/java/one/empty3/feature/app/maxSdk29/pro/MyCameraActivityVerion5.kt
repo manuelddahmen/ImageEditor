@@ -96,7 +96,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
         savedInstanceState: Bundle?
     ): View {
         val inflate = inflater.inflate(R.layout.main, container, false)
-        if (imageView == null) imageView = activity.findViewById(R.id.currentImageView)
+        if (imageView == null) imageView = activity2.findViewById(R.id.currentImageView)
         return inflate
     }
 
@@ -104,7 +104,7 @@ class MyCameraActivityVerion5 : FragmentSuperClass() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         maxRes = Utils().getMaxRes(requireActivity3())
-        imageView = activity.findViewById(R.id.currentImageView)
+        imageView = activity2.findViewById(R.id.currentImageView)
         rectfs = ArrayList()
         isLoaded = true
         currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)

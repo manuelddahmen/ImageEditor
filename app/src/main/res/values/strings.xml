@@ -216,5 +216,6 @@
     <string name="settings_of_application">Settings of application</string>
     <string name="display_place" />
     <string name="choose_a_file">Choose a file</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
 
 </resources>

@@ -87,6 +87,8 @@ open class FragmentSuperClass : Fragment() {
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {
+            activity2 = requireActivity() as ActivitySuperClass
+
             super.onCreate(savedInstanceState)
             if (activity2!=null &&activity2.intent != null) {
                 getParameters(activity2.intent)
