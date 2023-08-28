@@ -217,5 +217,9 @@
     <string name="display_place" />
     <string name="choose_a_file">Choose a file</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_main_navigation">MainActivityNavigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

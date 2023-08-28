@@ -3,7 +3,6 @@ package one.empty3.feature.app.newui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import one.empty3.feature.app.maxSdk29.pro.FragmentSuperClass
 import one.empty3.feature.app.maxSdk29.pro.R
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityScrollingBinding
 
@@ -23,7 +22,8 @@ class MainScrollingActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        supportFragmentManager.beginTransaction().add(FragmentSuperClass(), "")
+        val fragmentEffect : FragmentEffect = FragmentEffect()
+        supportFragmentManager.beginTransaction().add(fragmentEffect, "")
             .commit()
     }
 }

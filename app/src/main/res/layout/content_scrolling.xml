@@ -9,5 +9,4 @@
         android:layout_height="match_parent"
         tools:context=".SettingsScrollingActivity"
         android:id="@+id/nestedScrollView">
-    
 </androidx.core.widget.NestedScrollView>
