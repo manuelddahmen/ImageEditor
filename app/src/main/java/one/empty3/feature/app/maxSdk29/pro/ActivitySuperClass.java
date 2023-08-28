@@ -316,9 +316,9 @@ public class ActivitySuperClass extends AppCompatActivity {
         System.out.println("c className = " + this.getClass());
         System.out.println("m variableName = " + variableName);
         System.out.println("m variable =     " + variable);
-        System.out.println("i variableName = " + getIntent().getStringExtra("variableName"));
-        System.out.println("i variable =     " + getIntent().getStringExtra("variable"));
-        System.out.println("c to.className = " + to.getType());
+        System.out.println("i variableName = " + to.getStringExtra("variableName"));
+        System.out.println("i variable =     " + to.getStringExtra("variable"));
+        System.out.println("i to.className = " + to.getComponent().getClassName());
 
 
         startActivity(to);

@@ -7,15 +7,8 @@
         tools:showIn="@layout/activity_scrolling"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="one.empty3.feature.app.newui.ScrollingActivity"
+        tools:context="one.empty3.feature.app.newui.MainScrollingActivity"
+        android:id="@+id/nestedScrollView"
         >
     
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginStart="200dp"
-            android:text="@string/large_text"
-            />
 </androidx.core.widget.NestedScrollView>

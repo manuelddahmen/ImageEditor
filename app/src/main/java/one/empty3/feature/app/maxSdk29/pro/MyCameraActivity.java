@@ -441,7 +441,6 @@ public class MyCameraActivity extends ActivitySuperClass {
             public void onClick(View view) {
                 Intent settingsIntent = new Intent(getApplicationContext(), SettingsScrollingActivity.class);
                 passParameters(settingsIntent);
-
             }
         });
     }

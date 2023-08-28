@@ -3,10 +3,11 @@ package one.empty3.feature.app.newui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import one.empty3.feature.app.maxSdk29.pro.FragmentSuperClass
 import one.empty3.feature.app.maxSdk29.pro.R
 import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityScrollingBinding
 
-class ScrollingActivity : AppCompatActivity() {
+class MainScrollingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScrollingBinding
 
@@ -22,5 +23,7 @@ class ScrollingActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        supportFragmentManager.beginTransaction().add(FragmentSuperClass(), "")
+            .commit()
     }
 }

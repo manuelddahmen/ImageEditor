@@ -9,14 +9,14 @@ class MainActivityFragments : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_activity_fragments)
         if (savedInstanceState == null) {
-            val myCameraActivityVerion5 = MyCameraActivityVerion5();
-            val myCameraActivity = MyCameraActivity();
-            myCameraActivityVerion5.activity = myCameraActivity
-
+            //val myCameraActivityVerion5 = MyCameraActivityVerion5();
+            //val myCameraActivity = MyCameraActivity();
+            //myCameraActivityVerion5.activity2 = myCameraActivity
+/*
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, myCameraActivityVerion5)
                 //.replace(R.id.container, MainActivityFragmentsFragment.newInstance())
                 .commitNow()
-        }
+*/        }
     }
 }

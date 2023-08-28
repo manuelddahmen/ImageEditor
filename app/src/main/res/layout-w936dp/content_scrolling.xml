@@ -7,7 +7,8 @@
         tools:showIn="@layout/activity_scrolling"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="one.empty3.feature.app.newui.ScrollingActivity"
+        tools:context="one.empty3.feature.app.newui.MainScrollingActivity"
+        android:id="@+id/nestedScrollView"
         >
     
     <androidx.core.widget.NestedScrollView
@@ -17,12 +18,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
-        
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:text="@string/large_text"
-                />
+      
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

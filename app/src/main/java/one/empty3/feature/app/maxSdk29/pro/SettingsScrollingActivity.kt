@@ -30,19 +30,19 @@ class SettingsScrollingActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: android.view.Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
-
-
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
         var myMenuIntent : Intent
         return when (item.itemId) {
             R.id.home -> {
-                val myCameraActivityVerion5 = MyCameraActivityVerion5()
-                myCameraActivityVerion5.activity = MyCameraActivity()
+                /*val myCameraActivityVerion5 = MyCameraActivityVerion5()
+                myCameraActivityVerion5.activity2 = MyCameraActivity()
                 supportFragmentManager.beginTransaction().replace(R.id.nestedScrollView,
                     myCameraActivityVerion5).commit()
+                */
                 true
             }
             else -> super.onOptionsItemSelected(item)
