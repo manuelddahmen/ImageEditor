@@ -20,13 +20,13 @@
 
 package one.empty3.feature20220726;
 
-import javaAnd.awt.*;
-
-import javaAnd.awt.Color;
-import javaAnd.awt.image.BufferedImage;
+import android.util.Log;
 
 import java.util.PrimitiveIterator;
 import java.util.Random;
+
+import javaAnd.awt.Color;
+import javaAnd.awt.image.BufferedImage;
 
 public class M3 {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
@@ -113,7 +113,31 @@ public class M3 {
     }
 
     private void init() {
-        x = new double[columns * lines * columnsIn * linesIn * compCount];
+        try {
+            x = new double[columns * lines * columnsIn * linesIn * compCount];
+        } catch (OutOfMemoryError ex) {
+            Log.e(MBitmap.class.toString(), "OutOfMemoryException : M3.init("
+                    +columns+","+lines+")"+ex.getMessage(), ex);
+            ex.printStackTrace();
+            columns = 1200;
+            lines = 120;
+            try {
+                x = new double[columns * lines * columnsIn * linesIn * compCount];
+            } catch (OutOfMemoryError ex1) {
+                Log.e(MBitmap.class.toString(), "OutOfMemoryException : M3.init("
+                        +columns+","+lines+")"+ex.getMessage(), ex);
+                ex.printStackTrace();
+                try {
+                    columns = 200;
+                    lines = 200;
+                    x = new double[columns * lines * columnsIn * linesIn * compCount];
+                } catch (OutOfMemoryError ex2) {
+                    Log.e(MBitmap.class.toString(), "FAILED. OutOfMemoryException : M3.init("
+                            +columns+","+lines+")"+ex.getMessage(), ex);
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 
 
