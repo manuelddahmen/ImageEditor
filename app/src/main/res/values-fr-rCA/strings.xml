@@ -24,7 +24,7 @@
     <string name="switch_camera_button_alt">Changer APN</string>
     <string name="gallery_button_alt">Retour</string>
     <string name="back_button_alt">Retour</string>
-    <string name="share_button_alt">Partager</string>
+    <string name="share_button_alt">Share</string>
     <string name="share_hint">Partager avec</string>
     <string name="capture_mode_camera">Caméra</string>
     <string name="capture_mode_hdr">HDR</string>

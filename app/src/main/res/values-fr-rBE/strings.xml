@@ -24,7 +24,7 @@
     <string name="switch_camera_button_alt">Changer APN</string>
     <string name="gallery_button_alt">Retour</string>
     <string name="back_button_alt">Retour</string>
-    <string name="share_button_alt">Partager</string>
+    <string name="share_button_alt">Share</string>
     <string name="share_hint">Partager avec</string>
     <string name="capture_mode_camera">Caméra</string>
     <string name="capture_mode_hdr">HDR</string>
@@ -85,7 +85,7 @@
     </string>
     <string name="privacy_policy_and_families_policy">
         <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
-    <string name="save">Enregistrer</string>
+    <string name="save">Sauver</string>
     <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
     <string name="edit_text_to_put_on_the_image">Editer le texte à afficher</string>
     <string name="todo">TODO</string>
