@@ -197,7 +197,7 @@
     <string name="collapse">Collapse</string>
     <string name="extend">Extend</string>
     <string name="draw_face_mask">Draw face mask</string>
-    <string name="face_drawing_settings">Face drawing settings</string>
+    <string name="face_drawing_settings">Edit model</string>
     <string name="back_to_main">Back to main</string>
     <string name="choose_image">Choose image</string>
     <string name="choose_color">Choose color</string>
@@ -209,4 +209,9 @@
     <string name="settings_of_application">Settings of application</string>
     <string name="display_place" />
     <string name="choose_a_file">Choose a file</string>
+    <string name="apply_to_all">Apply all</string>
+    <string name="apply_model">Apply model</string>
+    <string name="choose_model">Choose model</string>
+    <string name="load_model">Load model</string>
+    <string name="save_model">Save model</string>
 </resources>

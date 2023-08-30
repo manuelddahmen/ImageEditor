@@ -27,14 +27,30 @@
             android:layout_width="match_parent"
             android:id="@+id/face_draw_settings"
             app:layout_constraintTop_toBottomOf="@id/face_detection"
-            app:layout_constraintBottom_toTopOf="@id/back_to_main2"
+            app:layout_constraintBottom_toTopOf="@id/load_model"
             android:text="@string/face_drawing_settings"
             />
     <Button
             android:layout_height="48dp"
             android:layout_width="match_parent"
-            android:id="@+id/back_to_main2"
+            android:id="@+id/load_model"
             app:layout_constraintTop_toBottomOf="@id/face_draw_settings"
+            app:layout_constraintBottom_toTopOf="@id/save_model"
+            android:text="@string/load_model"
+            />
+    <Button
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:id="@+id/save_model"
+            app:layout_constraintTop_toBottomOf="@id/load_model"
+            app:layout_constraintBottom_toTopOf="@id/back_to_main2"
+            android:text="@string/save_model"
+            />
+    <Button
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:id="@+id/back_to_main2"
+            app:layout_constraintTop_toBottomOf="@id/save_model"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/back_to_main"
             />
