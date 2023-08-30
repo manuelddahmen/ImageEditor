@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,7 +22,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
-public class GoogleFaceDetection implements Parcelable {
+public class GoogleFaceDetection implements Parcelable, Serializable {
     static GoogleFaceDetection instance;
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
