@@ -33,6 +33,12 @@ public class GoogleFaceDetection implements Parcelable, Serializable {
             instance = new GoogleFaceDetection();
         return instance;
     }
+    public static boolean isInstance() {
+        if(instance!=null)
+            return true;
+        else
+            return false;
+    }
 
     protected GoogleFaceDetection(Parcel in) {
         in.readTypedObject(new Creator<Object>() {

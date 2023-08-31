@@ -55,9 +55,11 @@ class FaceActivity : ActivitySuperClass() {
 
                 faceOverlayView.setActivity(this)
 
-            } catch (ex : RuntimeException) {
-                Toast.makeText(applicationContext, "Error while execute face detection",
-                    Toast.LENGTH_LONG).show()
+            } catch (ex: RuntimeException) {
+                Toast.makeText(
+                    applicationContext, "Error while execute face detection",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
@@ -91,8 +93,10 @@ class FaceActivity : ActivitySuperClass() {
                     intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
                     intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
                 }
-                if (faceOverlayView.googleFaceDetection == null) {
+                if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
                     faceOverlayView.performClick()
+                } else if(GoogleFaceDetection.isInstance()) {
+                    faceOverlayView.googleFaceDetection = GoogleFaceDetection.getInstance(false)
                 }
                 if (faceOverlayView.googleFaceDetection != null) {
                     //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
@@ -160,25 +164,25 @@ class FaceActivity : ActivitySuperClass() {
         saveModel.setOnClickListener {
             if (faceOverlayView != null && faceOverlayView.googleFaceDetection != null) {
                 var filesFile = getFilesFile("model.model")
-                var i : Int = 0
-                while(filesFile.exists()) {
+                var i: Int = 0
+                while (filesFile.exists()) {
                     filesFile = getFilesFile("model$i.model")
                     i++
                 }
                 var pickerInitialUri: Uri? = null
-                if(currentFile!=null)
+                if (currentFile != null)
                     pickerInitialUri = currentFile.parentFile.toUri()
                 else
                     pickerInitialUri = Uri.fromFile(File("./"))
 
                 val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                        addCategory(Intent.CATEGORY_OPENABLE)
-                        type = "*.model"
-                        putExtra(Intent.EXTRA_TITLE, "model.model")
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "*.model"
+                    putExtra(Intent.EXTRA_TITLE, "model.model")
 
-                        // Optionally, specify a URI for the directory that should be opened in
-                        // the system file picker before your app creates the document.
-                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+                    // Optionally, specify a URI for the directory that should be opened in
+                    // the system file picker before your app creates the document.
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
                 }
                 startActivityForResult(intent, CREATE_FILE)
 
@@ -191,13 +195,13 @@ class FaceActivity : ActivitySuperClass() {
         loadModel.setOnClickListener {
             if (faceOverlayView != null && faceOverlayView.googleFaceDetection != null) {
                 var filesFile = getFilesFile("model")
-                var i : Int = 0
-                while(filesFile.exists()) {
-                    filesFile = getFilesFile("model"+i)
+                var i: Int = 0
+                while (filesFile.exists()) {
+                    filesFile = getFilesFile("model" + i)
                     i++
                 }
                 var pickerInitialUri: Uri? = null
-                if(currentFile!=null)
+                if (currentFile != null)
                     pickerInitialUri = currentFile.parentFile.toUri()
                 else
                     pickerInitialUri = Uri.fromFile(File("./"))
@@ -206,12 +210,12 @@ class FaceActivity : ActivitySuperClass() {
                     addCategory(Intent.CATEGORY_OPENABLE)
                     type = "*.model"
 
-                        // Optionally, specify a URI for the file that should appear in the
-                        // system file picker when it loads.
-                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
-                    }
+                    // Optionally, specify a URI for the file that should appear in the
+                    // system file picker when it loads.
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+                }
 
-                    startActivityForResult(intent, OPEN_MODEL)
+                startActivityForResult(intent, OPEN_MODEL)
 
                 val fileInputStream = FileInputStream(filesFile)
                 val oos = ObjectInputStream(fileInputStream)
@@ -223,18 +227,27 @@ class FaceActivity : ActivitySuperClass() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(data!=null && data.data!=null && resultCode== RESULT_OK) {
+        if (data != null && data.data != null && resultCode == RESULT_OK) {
             if (requestCode == CREATE_FILE) {
                 val fileOutputStream = FileOutputStream(data.data!!.toFile())
                 val oos = ObjectOutputStream(fileOutputStream)
-                oos.writeUnshared(faceOverlayView.googleFaceDetection)
+                try {
+                    oos.writeUnshared(faceOverlayView.googleFaceDetection)
+                } catch (ex: RuntimeException) {
+                    ex.printStackTrace()
+                }
             } else if (requestCode == OPEN_MODEL) {
                 val fileInputStream = FileInputStream(data.data!!.toFile())
                 val oos = ObjectInputStream(fileInputStream)
-                faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
+                try {
+                    faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
+                } catch (ex: RuntimeException) {
+                    ex.printStackTrace()
+                }
             }
         }
     }
+
     fun onceDrawFaceoverlay(faceOverlayView: FaceOverlayView) {
 
     }

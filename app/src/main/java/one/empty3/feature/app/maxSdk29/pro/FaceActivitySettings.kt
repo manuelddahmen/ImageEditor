@@ -216,6 +216,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                 colorChooserDialog
             )
             dialog.show()
+
+
         }
 
         val fileChooser = findViewById<Button>(R.id.choose_image)
@@ -244,6 +246,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                     selectedImage,
                     selectedSurfaceAllPicture!!.colorTransparent
                 )
+                drawSurface()
+                drawSurfaces()
+
             }
 
         }

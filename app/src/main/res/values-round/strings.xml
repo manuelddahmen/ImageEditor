@@ -51,6 +51,6 @@
     <string name="apply_to_all">Apply all</string>
     <string name="apply_model">Apply model</string>
     <string name="choose_model">Choose model</string>
-    <string name="load_model">Load model</string>
-    <string name="save_model">Save model</string>
+    <string name="load_model">Load draw data</string>
+    <string name="save_model">Save draw data</string>
 </resources>
