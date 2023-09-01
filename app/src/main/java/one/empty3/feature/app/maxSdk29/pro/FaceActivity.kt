@@ -1,15 +1,18 @@
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
-import android.provider.DocumentsContract
+import android.os.Environment
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toFile
 import androidx.core.net.toUri
 import javaAnd.awt.image.imageio.ImageIO
@@ -19,6 +22,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.util.UUID
 
 
 class FaceActivity : ActivitySuperClass() {
@@ -161,68 +165,113 @@ class FaceActivity : ActivitySuperClass() {
         }
         val saveModel = findViewById<Button>(R.id.save_model)
         val loadModel = findViewById<Button>(R.id.load_model)
+        val startForResultSaveModel = registerForActivityResult(ActivityResultContracts.CreateDocument("*.model")) {
+            if(it!=null) {
+                val file = it.toFile()
+                val fileOutputStream = FileOutputStream(file)
+                val oos = ObjectOutputStream(fileOutputStream)
+                try {
+                    oos.writeUnshared(faceOverlayView.googleFaceDetection)
+                } catch (ex: RuntimeException) {
+                    ex.printStackTrace()
+                }
+            }
+        }
+        val startForResultLoadModel = registerForActivityResult(ActivityResultContracts.GetContent()) {
+                if (it!=null) {
+                    val fileInputStream = FileInputStream(it.toFile())
+                    val oos = ObjectInputStream(fileInputStream)
+                    try {
+                        faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
+                    } catch (ex: RuntimeException) {
+                        ex.printStackTrace()
+                    }
+                }
+        }
         saveModel.setOnClickListener {
-            if (faceOverlayView != null && faceOverlayView.googleFaceDetection != null) {
-                var filesFile = getFilesFile("model.model")
+            if (faceOverlayView.googleFaceDetection != null) {
+                var filesFile = getFileInPictureDir("model.model")
                 var i: Int = 0
-                while (filesFile.exists()) {
-                    filesFile = getFilesFile("model$i.model")
+                while (filesFile.toFile().exists()) {
+                    filesFile = getFileInPictureDir("model$i.model")
                     i++
                 }
-                var pickerInitialUri: Uri? = null
-                if (currentFile != null)
-                    pickerInitialUri = currentFile.parentFile.toUri()
-                else
-                    pickerInitialUri = Uri.fromFile(File("./"))
-
-                val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                val pickerInitialUri: Uri? = filesFile
+                val intentSave = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
-                    type = "*.model"
-                    putExtra(Intent.EXTRA_TITLE, "model.model")
-
-                    // Optionally, specify a URI for the directory that should be opened in
-                    // the system file picker before your app creates the document.
-                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+                    putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".model")
+                    type = "*.*"
+                    putExtra(Intent.EXTRA_STREAM, pickerInitialUri)
                 }
-                startActivityForResult(intent, CREATE_FILE)
+                startActivityForResult(intentSave, CREATE_FILE)
+                //startForResultSaveModel.launch(filesFile.toString())
 
-
-                val fileOutputStream = FileOutputStream(filesFile)
-                val oos = ObjectOutputStream(fileOutputStream)
-                oos.writeUnshared(faceOverlayView.googleFaceDetection)
             }
         }
         loadModel.setOnClickListener {
-            if (faceOverlayView != null && faceOverlayView.googleFaceDetection != null) {
-                var filesFile = getFilesFile("model")
+            if (faceOverlayView.googleFaceDetection != null) {
+                var filesFile = getFileInPictureDir("model")
                 var i: Int = 0
-                while (filesFile.exists()) {
-                    filesFile = getFilesFile("model" + i)
+                while (filesFile.toFile().exists()) {
+                    filesFile = getFileInPictureDir("model" + i)
                     i++
                 }
-                var pickerInitialUri: Uri? = null
-                if (currentFile != null)
-                    pickerInitialUri = currentFile.parentFile.toUri()
-                else
-                    pickerInitialUri = Uri.fromFile(File("./"))
-
-                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                val pickerInitialUri: Uri = filesFile
+                val intentLoad = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
-                    type = "*.model"
-
-                    // Optionally, specify a URI for the file that should appear in the
-                    // system file picker when it loads.
-                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+                    putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".jpg")
+                    type = "*.*"
+                    putExtra(Intent.EXTRA_STREAM, pickerInitialUri)
                 }
-
-                startActivityForResult(intent, OPEN_MODEL)
-
-                val fileInputStream = FileInputStream(filesFile)
-                val oos = ObjectInputStream(fileInputStream)
-                faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
+                startActivityForResult(intentLoad, OPEN_MODEL)
+                //startForResultLoadModel.launch(filesFile.toString())
             }
         }
+    }
 
+    fun getFileInPictureDir(s: String): Uri {
+
+        val permissionsStorage = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES
+        )
+        val requestExternalStorage = 1
+        val permission1 = ActivityCompat.checkSelfPermission(
+            applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        val permission2 = ActivityCompat.checkSelfPermission(
+            applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        val permission3 = ActivityCompat.checkSelfPermission(
+            applicationContext, Manifest.permission.READ_MEDIA_IMAGES
+        )
+        if (permission1 != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsStorage,
+                requestExternalStorage
+            )
+        }
+        if (permission2 != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsStorage,
+                requestExternalStorage
+            )
+        }
+        if (permission3 != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsStorage,
+                requestExternalStorage
+            )
+        }
+
+
+        val picturesDirectory = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString())
+        val uriDir = File(picturesDirectory.absolutePath+'/'+s).toUri()
+        //val photoURI = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", uriDir)
+        return uriDir
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

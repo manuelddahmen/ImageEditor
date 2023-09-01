@@ -237,14 +237,19 @@ public class MyCameraActivity extends ActivitySuperClass {
 
                     saveImageState(true);
 
-                    String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                    String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_MEDIA_IMAGES};
                     int requestExternalStorage = 1;
                     int permission1 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
                     int permission2 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    int permission3 = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_MEDIA_IMAGES);
                     if (permission1 != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(thisActivity, permissionsStorage, requestExternalStorage);
                     }
                     if (permission2 != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(thisActivity, permissionsStorage, requestExternalStorage);
+                    }
+                    if (permission3 != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(thisActivity, permissionsStorage, requestExternalStorage);
                     }
 
@@ -252,7 +257,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     Path target = null;
 
                     try {
-                        target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + UUID.randomUUID() + ".jpg").toPath());
+                        target = copy((currentFile).toPath(), new File(picturesDirectory.getAbsolutePath() + File.separator+UUID.randomUUID() + ".jpg").toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
 

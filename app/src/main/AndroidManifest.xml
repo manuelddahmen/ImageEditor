@@ -170,14 +170,16 @@
             android:hardwareAccelerated="true"
             android:label="Face Overpaint"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain" >
+        </activity>
         <activity
             android:name=".FaceActivitySettings"
             android:exported="false"
             android:hardwareAccelerated="true"
             android:label="Face Overpaint"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.FeatureAppmain" />
+            android:theme="@style/Theme.FeatureAppmain" >
+        </activity>
 
         <provider
             android:name=".MyFileProvider"
