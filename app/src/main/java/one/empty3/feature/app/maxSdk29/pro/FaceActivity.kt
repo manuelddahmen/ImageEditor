@@ -11,7 +11,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toFile
 import androidx.core.net.toUri
@@ -163,8 +162,11 @@ class FaceActivity : ActivitySuperClass() {
             passParameters(intentBack)
 
         }
+
         val saveModel = findViewById<Button>(R.id.save_model)
         val loadModel = findViewById<Button>(R.id.load_model)
+
+        /*
         val startForResultSaveModel = registerForActivityResult(ActivityResultContracts.CreateDocument("*.model")) {
             if(it!=null) {
                 val file = it.toFile()
@@ -188,6 +190,8 @@ class FaceActivity : ActivitySuperClass() {
                     }
                 }
         }
+
+         */
         saveModel.setOnClickListener {
             if (faceOverlayView.googleFaceDetection != null) {
                 var filesFile = getFileInPictureDir("model.model")
@@ -198,14 +202,16 @@ class FaceActivity : ActivitySuperClass() {
                 }
                 val pickerInitialUri: Uri? = filesFile
                 val intentSave = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
+                    //addCategory(Intent.CATEGORY_OPENABLE)
                     putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".model")
-                    type = "*.*"
+                    type =  "*.model"
+                    setDataAndType(pickerInitialUri, "*.model")
+                    setClass(applicationContext, FaceActivity::class.java)
                     putExtra(Intent.EXTRA_STREAM, pickerInitialUri)
                 }
-                startActivityForResult(intentSave, CREATE_FILE)
-                //startForResultSaveModel.launch(filesFile.toString())
-
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivityForResult(intentSave, CREATE_FILE)
+                }
             }
         }
         loadModel.setOnClickListener {
@@ -218,13 +224,17 @@ class FaceActivity : ActivitySuperClass() {
                 }
                 val pickerInitialUri: Uri = filesFile
                 val intentLoad = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
+                    setClass(applicationContext, FaceActivity::class.java)
+                    //addCategory(Intent.CATEGORY_OPENABLE)
+                    setDataAndType(pickerInitialUri, "*.model")
                     putExtra(Intent.EXTRA_TITLE, "photo-" + UUID.randomUUID() + ".jpg")
-                    type = "*.*"
+                    type = "*.model"
                     putExtra(Intent.EXTRA_STREAM, pickerInitialUri)
                 }
-                startActivityForResult(intentLoad, OPEN_MODEL)
-                //startForResultLoadModel.launch(filesFile.toString())
+                i
+                if (intentLoad.resolveActivity(packageManager) != null) {
+                    startActivityForResult(intent, OPEN_MODEL)
+                }
             }
         }
     }
@@ -276,9 +286,15 @@ class FaceActivity : ActivitySuperClass() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (data != null && data.data != null && resultCode == RESULT_OK) {
+        if (data != null &&((data.extras!=null &&
+            data.extras!!.get(Intent.EXTRA_STREAM) != null) ||
+            data.data!=null) && resultCode == RESULT_OK) {
+            var get : Uri? = data.data
+            if(get==null) {
+                get = data.extras!!.get(Intent.EXTRA_STREAM) as Uri
+            }
             if (requestCode == CREATE_FILE) {
-                val fileOutputStream = FileOutputStream(data.data!!.toFile())
+                val fileOutputStream = FileOutputStream(get.toFile())
                 val oos = ObjectOutputStream(fileOutputStream)
                 try {
                     oos.writeUnshared(faceOverlayView.googleFaceDetection)
@@ -286,10 +302,12 @@ class FaceActivity : ActivitySuperClass() {
                     ex.printStackTrace()
                 }
             } else if (requestCode == OPEN_MODEL) {
-                val fileInputStream = FileInputStream(data.data!!.toFile())
+                val fileInputStream = FileInputStream(get.toFile())
                 val oos = ObjectInputStream(fileInputStream)
                 try {
-                    faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
+                    val tmp = oos.readUnshared() as GoogleFaceDetection?
+                    if(tmp!=null)
+                        faceOverlayView.googleFaceDetection = tmp
                 } catch (ex: RuntimeException) {
                     ex.printStackTrace()
                 }

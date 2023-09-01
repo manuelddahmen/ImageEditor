@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/face_draw_settings"
             app:layout_constraintBottom_toTopOf="@id/save_model"
             android:text="@string/load_model"
-            android:enabled="@bool/is_kitkat"
+            android:enabled="@bool/atLeastKitKat"
             />
     <Button
             android:layout_height="48dp"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@id/load_model"
             app:layout_constraintBottom_toTopOf="@id/back_to_main2"
             android:text="@string/save_model"
-            android:enabled="@bool/is_kitkat"
+            android:enabled="@bool/atLeastKitKat"
             />
     <Button
             android:layout_height="48dp"

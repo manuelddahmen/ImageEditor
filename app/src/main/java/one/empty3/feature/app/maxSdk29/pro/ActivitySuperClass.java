@@ -283,15 +283,15 @@ public class ActivitySuperClass extends AppCompatActivity {
             properties.setProperty("maxRes", "" + maxRes);
 
             try {
-                properties.setProperty("currentFile", currentFile.getAbsolutePath());
-                File imageViewPersistantFile = currentFile;
-                if (currentFile != null)
+                if (currentFile != null) {
+                    properties.setProperty("currentFile", currentFile.getAbsolutePath());
+                    File imageViewPersistantFile = currentFile;
                     new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
                                     new FileInputStream(currentFile)),
                             Objects.requireNonNull(getImageViewPersistantFile()), getImageViewPersistantFile(),
                             maxRes, true);
-
+                }
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
