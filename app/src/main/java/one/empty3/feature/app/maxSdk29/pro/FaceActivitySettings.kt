@@ -117,6 +117,11 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
+            if(currentBitmap!=null) {
+                faceOverlayView.mCopy = currentBitmap
+                faceOverlayView.mBitmap = currentBitmap
+            }
+/*
             try {
                 if (currentBitmap != null) {
                     faceOverlayView.setBitmap(currentBitmap)
@@ -129,9 +134,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+*/
 
         }
-
         val back = findViewById<Button>(R.id.face_draw_settings_back)
 
         back.performClick()
@@ -440,14 +445,28 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     fun drawSurfaces() {
-        faceOverlayView.fillPolygons(googleFaceDetection)
-        var currentFileTmp: File? = Utils().writePhoto(
-            this,
-            faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
-            "face_drawings-"
-        )
-        if (currentFileTmp !== null)
-            currentFile = currentFileTmp
+        if(faceOverlayView.mCopy==null && faceOverlayView.mBitmap!=null) {
+            faceOverlayView.mCopy = faceOverlayView.mBitmap
+        }/* else if(currentBitmap!=null) {
+            faceOverlayView.mCopy = currentBitmap
+        }*/
+        if(faceOverlayView.mCopy!=null) {
+            faceOverlayView.fillPolygons(googleFaceDetection)
+
+            Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+
+            var currentFileTmp: File? = Utils().writePhoto(
+                this,
+                faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
+                "face_drawings-"
+            )
+
+            if (currentFileTmp != null) {
+                currentFile = currentFileTmp
+                currentBitmap = faceOverlayView.mCopy
+            }
+
+        }
     }
 
     override fun onRequestPermissionsResult(

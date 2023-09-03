@@ -103,7 +103,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
             });
         } catch (Exception ignored) {
-            if(ignored instanceof com.google.mlkit.common.MlKitException) {
+            if (ignored instanceof com.google.mlkit.common.MlKitException) {
                 Toast.makeText(activity.getApplicationContext(), " Waiting for the face module to be downloaded. Please wait.",
                         Toast.LENGTH_LONG).show();
             }
@@ -187,54 +187,54 @@ public class FaceOverlayView extends ImageViewSelection {
         drawFace(face, faceData);
     }
 
-        public void drawFace (Face face, GoogleFaceDetection.FaceData faceData){
-            int surfaceId = FaceContour.FACE;
-            FaceContour[] faceContours = {
-                    face.getContour(FaceContour.FACE), face.getContour(FaceContour.LEFT_EYE),
-                    face.getContour(FaceContour.RIGHT_EYE), face.getContour(FaceContour.NOSE_BOTTOM),
-                    face.getContour(FaceContour.NOSE_BRIDGE), face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM),
-                    face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM), face.getContour(FaceContour.LEFT_EYEBROW_TOP),
-                    face.getContour(FaceContour.RIGHT_EYEBROW_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
-                    face.getContour(FaceContour.UPPER_LIP_BOTTOM), face.getContour(FaceContour.LOWER_LIP_BOTTOM),
-                    face.getContour(FaceContour.LOWER_LIP_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
-                    face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};
+    public void drawFace(Face face, GoogleFaceDetection.FaceData faceData) {
+        int surfaceId = FaceContour.FACE;
+        FaceContour[] faceContours = {
+                face.getContour(FaceContour.FACE), face.getContour(FaceContour.LEFT_EYE),
+                face.getContour(FaceContour.RIGHT_EYE), face.getContour(FaceContour.NOSE_BOTTOM),
+                face.getContour(FaceContour.NOSE_BRIDGE), face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM),
+                face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM), face.getContour(FaceContour.LEFT_EYEBROW_TOP),
+                face.getContour(FaceContour.RIGHT_EYEBROW_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
+                face.getContour(FaceContour.UPPER_LIP_BOTTOM), face.getContour(FaceContour.LOWER_LIP_BOTTOM),
+                face.getContour(FaceContour.LOWER_LIP_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
+                face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};
 
-            surfaceId = FaceContour.FACE;
-            surfaceId = FaceContour.LEFT_EYE;
-            surfaceId = FaceContour.RIGHT_EYE;
-            surfaceId = FaceContour.NOSE_BOTTOM;
-            surfaceId = FaceContour.NOSE_BRIDGE;
-            surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
-            surfaceId = FaceContour.RIGHT_EYEBROW_BOTTOM;
-            surfaceId = FaceContour.LEFT_EYEBROW_TOP;
-            surfaceId = FaceContour.RIGHT_EYEBROW_TOP;
-            surfaceId = FaceContour.UPPER_LIP_TOP;
-            surfaceId = FaceContour.UPPER_LIP_BOTTOM;
-            surfaceId = FaceContour.LOWER_LIP_BOTTOM;
-            surfaceId = FaceContour.LOWER_LIP_TOP;
-            surfaceId = FaceContour.UPPER_LIP_TOP;
-            surfaceId = FaceContour.LEFT_CHEEK;
-            surfaceId = FaceContour.RIGHT_CHEEK;
+        surfaceId = FaceContour.FACE;
+        surfaceId = FaceContour.LEFT_EYE;
+        surfaceId = FaceContour.RIGHT_EYE;
+        surfaceId = FaceContour.NOSE_BOTTOM;
+        surfaceId = FaceContour.NOSE_BRIDGE;
+        surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
+        surfaceId = FaceContour.RIGHT_EYEBROW_BOTTOM;
+        surfaceId = FaceContour.LEFT_EYEBROW_TOP;
+        surfaceId = FaceContour.RIGHT_EYEBROW_TOP;
+        surfaceId = FaceContour.UPPER_LIP_TOP;
+        surfaceId = FaceContour.UPPER_LIP_BOTTOM;
+        surfaceId = FaceContour.LOWER_LIP_BOTTOM;
+        surfaceId = FaceContour.LOWER_LIP_TOP;
+        surfaceId = FaceContour.UPPER_LIP_TOP;
+        surfaceId = FaceContour.LEFT_CHEEK;
+        surfaceId = FaceContour.RIGHT_CHEEK;
 
-            int i = 0;
-            for (FaceContour faceContour : faceContours) {
-                if (i == 0 && faceContour != null) {
-                    faceData.getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(
-                                    surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
-                                    Color.YELLOW, Color.BLUE, Color.BLACK));
-                } else if (faceContour != null) {
-                    faceData.getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(
-                                    surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
-                                    Color.RED, Color.RED, Color.BLACK));
-                }
-                i++;
+        int i = 0;
+        for (FaceContour faceContour : faceContours) {
+            if (i == 0 && faceContour != null) {
+                faceData.getFaceSurfaces().add(
+                        new GoogleFaceDetection.FaceData.Surface(
+                                surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
+                                Color.YELLOW, Color.BLUE, Color.BLACK));
+            } else if (faceContour != null) {
+                faceData.getFaceSurfaces().add(
+                        new GoogleFaceDetection.FaceData.Surface(
+                                surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
+                                Color.RED, Color.RED, Color.BLACK));
             }
-            for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
-                fillPolygon(faceSurface, faceSurface.getPolygon(), faceSurface.getColorContours(), faceSurface.getColorFill());
-            }
+            i++;
         }
+        for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
+            fillPolygon(faceSurface, faceSurface.getPolygon(), faceSurface.getColorContours(), faceSurface.getColorFill());
+        }
+    }
 
     private Polygon getPolygon(List<PointF> polygonContour, int contourColor) {
         int size = polygonContour.size();
@@ -273,13 +273,13 @@ public class FaceOverlayView extends ImageViewSelection {
         mCanvas.drawBitmap(bitmap, 0f, 0f, paint);
 
  */
-        //paint.setColor(Color.GREEN);
-        //PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
-        //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
-   // }
+    //paint.setColor(Color.GREEN);
+    //PointF pointF = coordCanvas(new PointF(mCopy.getWidth() / 2f, mCopy.getHeight() / 2f));
+    //mCanvas.drawCircle(pointF.x, pointF.y, 20f, paint);
+    // }
 
     public void fillPolygon(GoogleFaceDetection.FaceData.Surface faceSurface, Polygon polygonContour,
-                             int contourColor, int inColor) {
+                            int contourColor, int inColor) {
         if (polygonContour != null) {
             paint.setColor(inColor);
             /*for (int i = 0; i < polygonContour.size(); i++) {
@@ -302,27 +302,32 @@ public class FaceOverlayView extends ImageViewSelection {
                 faceSurface.setContours(pixM);
                 faceSurface.setFilledContours(pixM);
 
-                }
+            }
         }
     }
 
     public void fillPolygons(GoogleFaceDetection googleFaceDetection) {
-        if (googleFaceDetection != null) {
-            for(GoogleFaceDetection.FaceData face  :googleFaceDetection.getDataFaces()) {
-                for(GoogleFaceDetection.FaceData.Surface surface: face.getFaceSurfaces()) {
-                     surface.getPolygon().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
-
-
+        if (mCopy == null)
+            mCopy = mBitmap;
+        if (mCopy != null) {
+            mCopy = mCopy.copy(Bitmap.Config.ARGB_8888, true);
+            if (googleFaceDetection != null) {
+                for (GoogleFaceDetection.FaceData face : googleFaceDetection.getDataFaces()) {
+                    for (GoogleFaceDetection.FaceData.Surface surface : face.getFaceSurfaces()) {
+                        surface.getPolygon().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
+                    }
                 }
             }
         }
+        mCopy = mCopy.copy(Bitmap.Config.ARGB_8888, true);
+
     }
 
     public List<GoogleFaceDetection.FaceData.Surface> getPolygons(GoogleFaceDetection googleFaceDetection) {
         List<GoogleFaceDetection.FaceData.Surface> surfaces = new ArrayList<>();
         if (googleFaceDetection != null) {
-            for(GoogleFaceDetection.FaceData face  :googleFaceDetection.getDataFaces()) {
-                for(GoogleFaceDetection.FaceData.Surface surface: face.getFaceSurfaces()) {
+            for (GoogleFaceDetection.FaceData face : googleFaceDetection.getDataFaces()) {
+                for (GoogleFaceDetection.FaceData.Surface surface : face.getFaceSurfaces()) {
 
                     surfaces.add(surface);
 
@@ -419,6 +424,7 @@ public class FaceOverlayView extends ImageViewSelection {
         PointF scale = new PointF((float) scaleMin, (float) scaleMin);
         return scale;
     }
+
 
     public void updateImage(Bitmap bm) {
 

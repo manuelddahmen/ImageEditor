@@ -19,7 +19,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 317302934
+def code = 317602934
 
 java {
     toolchain {
@@ -57,13 +57,13 @@ android {
         debug {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'manuel'
+            keyAlias 'upload'//manuel
             keyPassword 'faeeagrzdsd'
         }
         release {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'manuel'
+            keyAlias 'upload'//manuel
             keyPassword 'faeeagrzdsd'
         }
     }

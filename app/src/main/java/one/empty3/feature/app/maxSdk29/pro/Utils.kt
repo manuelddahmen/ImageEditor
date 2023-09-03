@@ -55,7 +55,7 @@ import java.util.UUID
 import kotlin.math.max
 
 
-public class Utils {
+class Utils {
     val appDir = "/data/data/one.empty3.feature.app.minSdk29.pro/files"
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
@@ -312,8 +312,10 @@ public class Utils {
             }
         }
 
-        if(fragment?.activity == null)
-            maxRes = fragment.activity!!.intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        if(fragment!=null && fragment.requireActivity() != null) {
+            maxRes =
+                fragment!!.requireActivity().intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+        }
         if (maxRes == -1) {
             if (savedInstanceState == null ||
                 !savedInstanceState.containsKey("maxRes") ||
@@ -324,6 +326,9 @@ public class Utils {
                 maxRes = savedInstanceState.getInt("maxRes")
 
             }
+        }
+        if (maxRes == -1) {
+            maxRes = 0
         }
         println("maxRes = $maxRes")
         return maxRes;
@@ -461,11 +466,7 @@ public class Utils {
                         mBitmap.width, mBitmap.height
                     )
                 else
-                    cb = Bitmap.createBitmap(
-                        mBitmap, 0, 0,
-                        (getImageRatio(mBitmap) * maxRes).toInt(),
-                        maxRes
-                    )
+                    cb =mBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
                 val dim: Int = getMaxRes(activity)
                 if (imageView != null)
