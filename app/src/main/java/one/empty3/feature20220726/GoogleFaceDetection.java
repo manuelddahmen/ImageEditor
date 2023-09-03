@@ -115,8 +115,8 @@ public class GoogleFaceDetection implements Parcelable, Serializable {
         }
     }
 
-    public static class FaceData {
-        public static class Surface {
+    public static class FaceData implements Serializable{
+        public static class Surface implements Serializable{
             private int colorFill;
             private int colorContours;
             private int colorTransparent;

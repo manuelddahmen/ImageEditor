@@ -236,13 +236,16 @@
                 android:authorities="${applicationId}.provider"
                 android:exported="false"
                 android:grantUriPermissions="true"
-                >
+                android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+                <data android:mimeType="model/*.model" android:scheme="file"/>
+            </intent-filter>
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths"
                     />
         </provider>
-        
         <meta-data
                 android:name="com.google.android.gms.vision.DEPENDENCIES"
                 android:value="face"

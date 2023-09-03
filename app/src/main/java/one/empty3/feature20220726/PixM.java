@@ -30,6 +30,8 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
+
 import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
@@ -37,7 +39,7 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-public class PixM extends MBitmap implements Parcelable {
+public class PixM extends MBitmap implements Parcelable, Serializable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
