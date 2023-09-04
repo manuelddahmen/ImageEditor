@@ -53,9 +53,6 @@
 package one.empty3.library;
 
 import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 
 /*__
@@ -86,9 +83,8 @@ public class TextureCol extends ITexture {
         return color.getElem();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void color(Color c) {
-        color.setElem(c.toArgb());
+    public void color(int c) {
+        color.setElem(c);
     }
 
     @Override

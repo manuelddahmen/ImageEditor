@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,11 @@ import one.empty3.library.ColorTexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
+import one.empty3.library.Serialisable;
 import one.empty3.library.StructureMatrix;
 
-public class GoogleFaceDetection implements Parcelable, Serializable {
+public class GoogleFaceDetection
+        implements Parcelable, Serializable, Serialisable {
     static GoogleFaceDetection instance;
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
@@ -115,8 +120,54 @@ public class GoogleFaceDetection implements Parcelable, Serializable {
         }
     }
 
-    public static class FaceData implements Serializable{
-        public static class Surface implements Serializable{
+
+    public static class FaceData implements Serializable {
+
+        public static class Surface implements Serializable, Serialisable{
+            public Surface() {
+
+            }
+
+            @Override
+            public Serialisable decode(DataInputStream in) {
+                try {
+                    colorFill = in.readInt();
+                    colorContours = in.readInt();
+                    colorTransparent = in.readInt();
+                    surfaceId = in.readInt();
+                    polygon.decode(in);
+                    contours.decode(in);
+                    filledContours.decode(in);
+                    actualDrawing.decode(in);
+
+                    return (Surface)this;
+                } catch (Exception exception) {
+                    return null;
+                }
+            }
+
+            @Override
+            public int encode(DataOutputStream out) {
+                try {
+                    out.write(colorFill);
+                    out.write(colorContours);
+                    out.write(colorTransparent);
+                    out.write(surfaceId);
+                    polygon.encode(out);
+                    contours.encode(out);
+                    filledContours.encode(out);
+                    actualDrawing.encode(out);
+
+                } catch (Exception exception) {
+                    return -1;
+                }
+                return 0;
+            }
+
+            @Override
+            public int type() {
+                return 5;
+            }
             private int colorFill;
             private int colorContours;
             private int colorTransparent;
@@ -290,4 +341,55 @@ public class GoogleFaceDetection implements Parcelable, Serializable {
     public Bitmap getBitmap() {
         return null;
     }
+
+    @Override
+    public Serialisable decode(DataInputStream in) {
+        try {
+            GoogleFaceDetection faceDetection =  new GoogleFaceDetection();
+            int countFaces= in.readInt();
+            int count = 0;
+            for(int c = 0; c<countFaces; c++) {
+                    FaceData faceData = new FaceData();
+                faceDetection.getDataFaces().add(faceData);
+                    int count2 = in.readInt();
+                    for (int j = 0; j < count2; j++) {
+                        Serialisable decode = new FaceData.Surface().decode(in);
+                        faceDetection.getDataFaces().get(c)
+                                .getFaceSurfaces().add((FaceData.Surface) decode);
+                    }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+    }
+        @Override
+    public int encode(DataOutputStream out) {
+        try {
+            out.writeInt(dataFaces.size());
+            dataFaces.forEach(faceData -> {
+                try {
+                    out.writeInt(faceData.getFaceSurfaces().size());
+                    faceData.faceSurfaces.forEach(surface -> {
+                        surface.encode(out);
+                    });
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        selectedSurface.encode(out);
+        return 0;
+    }
+
+    @Override
+    public int type() {
+        return 0;
+    }
+
 }

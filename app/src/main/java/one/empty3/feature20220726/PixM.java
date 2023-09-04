@@ -30,6 +30,9 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
 import javaAnd.awt.image.BufferedImage;
@@ -37,9 +40,10 @@ import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.library.Serialisable;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-public class PixM extends MBitmap implements Parcelable, Serializable {
+public class PixM extends MBitmap implements Parcelable, Serializable, Serialisable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
@@ -886,5 +890,53 @@ public class PixM extends MBitmap implements Parcelable, Serializable {
             }
         }
         return resized;
+    }
+
+    @Override
+    public Serialisable decode(DataInputStream in) {
+        try {
+            int w = in.readInt();
+            int h = in.readInt();
+            int c = in.readInt();
+            PixM pixM = new PixM(w, h);
+            for (int i = 0; i < w; i++) {
+                for (int j = 0; j < h; j++) {
+                    for (int k = 0; k < c; k++) {
+                        pixM.setCompNo(k);
+                        pixM.set(i, j, in.readDouble());
+                    }
+                }
+            }
+
+            return pixM;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int encode(DataOutputStream out) {
+        try {
+            out.writeInt(columns);
+            out.writeInt(lines);
+            out.writeInt(compCount);
+            for (int i = 0; i < columns; i++) {
+                for (int j = 0; j < lines; j++) {
+                    for (int k = 0; k < compCount; k++) {
+                        setCompNo(k);
+                        out.writeDouble(get(i, j));
+                    }
+                }
+            }
+
+            return 0;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int type() {
+        return 4;
     }
 }

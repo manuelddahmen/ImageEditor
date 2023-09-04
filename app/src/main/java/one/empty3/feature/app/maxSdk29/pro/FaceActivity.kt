@@ -388,7 +388,7 @@ class FaceActivity : ActivitySuperClass() {
 
         return fileContent
     }
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated")
     override fun onActivityResult(requestCode: Int, resultCode: Int, result: Intent?) {
         super.onActivityResult(requestCode, resultCode, result)
         if ((resultCode== RESULT_OK) && result != null && ((result.extras != null &&
@@ -446,15 +446,18 @@ class FaceActivity : ActivitySuperClass() {
                         oos.close()
                     } catch (ex: RuntimeException) {
                         ex.printStackTrace()
+                        return
+                    } catch (ex1:java.io.NotSerializableException) {
+                        return
                     }
                 }
             } else if (requestCode == OPEN_MODEL) {
-                val fileContnet1 : ByteArray? = this.getFileContent(requestCode, resultCode, result)
-                if(fileContnet1==null)
+                val fileContent1 : ByteArray? = this.getFileContent(requestCode, resultCode, result)
+                if(fileContent1==null)
                     return
                 val filesFile = getFilesFile("temp_model.model")
                 val fileOutputStream = FileOutputStream(filesFile)
-                fileOutputStream.write(fileContnet1)
+                fileOutputStream.write(fileContent1)
                 fileOutputStream.close()
                 val fileInputStream = FileInputStream(filesFile)
                 val ois = ObjectInputStream(fileInputStream)
@@ -465,6 +468,10 @@ class FaceActivity : ActivitySuperClass() {
                     ois.close()
                 } catch (ex: RuntimeException) {
                     ex.printStackTrace()
+                    return
+                } catch (ex1:java.io.NotSerializableException) {
+                    ex1.printStackTrace()
+                    return
                 }
             }
         }

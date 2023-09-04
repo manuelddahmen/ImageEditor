@@ -330,7 +330,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         //paint.setColor(colorTemp);
         //paint.setAntiAlias(true);
         //paint.setStrokeWidth(2);
-
+        int paintColor = colorTemp;
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
         for (double i = left; i < right; i++) {
@@ -360,12 +360,12 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                         leftToRightScanPixM(pixM, xMap, yMap, isDrawingOnImage)) {
 
                     if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
-                        Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
+                        //Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
                         //canvas.drawPoint((int) (double) positionOnPicture.get(0),
-                        //        (int) (double) positionOnPicture.get(1), paint);
-                        pixels++;
+                        //        (int) (double) positionOnPicture.get(1), colorTemp);
+                        //pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-                        //bitmap.setPixel((int) i, (int) j, paint.getColor());
+                        bitmap.setPixel((int) i, (int) j, colorTemp);
                         pixM.setValues(xMap, yMap, fillColorArrayPolygon);
                         pixels++;
 

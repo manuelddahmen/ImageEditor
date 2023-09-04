@@ -26,6 +26,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -47,7 +49,8 @@ import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtMatiere;
 import one.empty3.library.core.raytracer.RtRay;
 import one.empty3.library.core.testing.Path;
-public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D {
+public class Representable /*extends RepresentableT*/ implements Serializable, Comparable, XmlRepresentable, MatrixPropertiesObject, TemporalComputedObject3D
+,Serialisable{
 
     protected StructureMatrix<Point3D> vectors;
 
@@ -725,6 +728,20 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     }
 
 
+    @Override
+    public Serialisable decode(DataInputStream in) {
+        return null;
+    }
+
+    @Override
+    public int encode(DataOutputStream out) {
+        return 0;
+    }
+
+    @Override
+    public int type() {
+        return 1;
+    }
 }
 
 
