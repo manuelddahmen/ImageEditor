@@ -17,13 +17,12 @@ import androidx.core.content.FileProvider
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import java.io.ByteArrayOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileNotFoundException
-import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.io.OutputStream
 import java.util.UUID
@@ -305,7 +304,7 @@ class FaceActivity : ActivitySuperClass() {
         )
     }
 
-    fun getFileContent(requestCode: Int, resultCode: Int, result: Intent?) : ByteArray? {
+    fun getFileContent(requestCode: Int, resultCode: Int, result: Intent?) : InputStream? {
 
         val uri: Uri? = result?.data
         var fileContent: ByteArray? = null
@@ -349,7 +348,7 @@ class FaceActivity : ActivitySuperClass() {
             }
         }
 
-        return fileContent
+        return inputStream
     }
     fun createFileDocument(requestCode: Int, resultCode: Int, result: Intent?) : ByteArray? {
 
@@ -442,7 +441,14 @@ class FaceActivity : ActivitySuperClass() {
                 if(openOutputStream!=null) {
                     val oos = ObjectOutputStream(openOutputStream)
                     try {
-                        oos.writeUnshared(faceOverlayView.googleFaceDetection)
+//                        oos.writeUnshared(faceOverlayView.googleFaceDetection)
+//                        oos.close()
+
+                        val instance = faceOverlayView.googleFaceDetection
+
+                        instance.encode(DataOutputStream(openOutputStream))
+
+                        oos.flush()
                         oos.close()
                     } catch (ex: RuntimeException) {
                         ex.printStackTrace()
@@ -452,27 +458,10 @@ class FaceActivity : ActivitySuperClass() {
                     }
                 }
             } else if (requestCode == OPEN_MODEL) {
-                val fileContent1 : ByteArray? = this.getFileContent(requestCode, resultCode, result)
-                if(fileContent1==null)
-                    return
-                val filesFile = getFilesFile("temp_model.model")
-                val fileOutputStream = FileOutputStream(filesFile)
-                fileOutputStream.write(fileContent1)
-                fileOutputStream.close()
-                val fileInputStream = FileInputStream(filesFile)
-                val ois = ObjectInputStream(fileInputStream)
-                try {
-                    val tmp = ois.readUnshared() as GoogleFaceDetection?
-                    if (tmp != null)
-                        faceOverlayView.googleFaceDetection = tmp
-                    ois.close()
-                } catch (ex: RuntimeException) {
-                    ex.printStackTrace()
-                    return
-                } catch (ex1:java.io.NotSerializableException) {
-                    ex1.printStackTrace()
-                    return
-                }
+                val inputStream = this.getFileContent(requestCode, resultCode, result) ?: return
+                var dataInputStream : DataInputStream
+                    = DataInputStream(inputStream)
+                faceOverlayView.googleFaceDetection.decode(dataInputStream)
             }
         }
     }

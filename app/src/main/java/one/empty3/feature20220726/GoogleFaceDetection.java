@@ -383,7 +383,7 @@ public class GoogleFaceDetection
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        selectedSurface.encode(out);
+
         return 0;
     }
 
