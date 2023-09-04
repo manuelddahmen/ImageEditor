@@ -61,7 +61,6 @@ package one.empty3.library;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -325,12 +324,12 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
             pixM.plotCurve(curve, new ColorTexture(colorTemp));
         }
 
-        paint = new Paint();
+        //paint = new Paint();
 
         double[] fillColorArrayPolygon = Lumiere.getDoubles(colorTemp);
-        paint.setColor(colorTemp);
-        paint.setAntiAlias(true);
-        paint.setStrokeWidth(2);
+        //paint.setColor(colorTemp);
+        //paint.setAntiAlias(true);
+        //paint.setStrokeWidth(2);
 
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
@@ -362,11 +361,11 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
                     if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
                         Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
-                        canvas.drawPoint((int) (double) positionOnPicture.get(0),
-                                (int) (double) positionOnPicture.get(1), paint);
+                        //canvas.drawPoint((int) (double) positionOnPicture.get(0),
+                        //        (int) (double) positionOnPicture.get(1), paint);
                         pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-                        bitmap.setPixel((int) i, (int) j, paint.getColor());
+                        //bitmap.setPixel((int) i, (int) j, paint.getColor());
                         pixM.setValues(xMap, yMap, fillColorArrayPolygon);
                         pixels++;
 

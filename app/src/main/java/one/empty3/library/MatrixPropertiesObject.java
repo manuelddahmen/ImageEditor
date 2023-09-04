@@ -37,12 +37,13 @@
 
 package one.empty3.library;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /*__
  * Created by manue on 06-10-19.
  */
-public interface MatrixPropertiesObject {
+public interface MatrixPropertiesObject extends Serializable {
     public StructureMatrix getDeclaredProperty(String name);
 
     public void declareProperties();

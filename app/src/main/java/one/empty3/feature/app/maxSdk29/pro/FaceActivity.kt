@@ -1,24 +1,31 @@
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.OpenableColumns
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.io.OutputStream
 import java.util.UUID
 
 
@@ -250,7 +257,7 @@ class FaceActivity : ActivitySuperClass() {
     }
 
     fun getFileInPictureDir(s: String): Uri {
-        /*
+
         val permissionsStorage = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
             //, Manifest.permission.READ_MEDIA_IMAGES
@@ -287,7 +294,7 @@ class FaceActivity : ActivitySuperClass() {
                 requestExternalStorage
             )
         }
-*/
+
 
         val picturesDirectory = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString())
         val uriFile = File(picturesDirectory.absolutePath + '/' + s)
@@ -298,6 +305,89 @@ class FaceActivity : ActivitySuperClass() {
         )
     }
 
+    fun getFileContent(requestCode: Int, resultCode: Int, result: Intent?) : ByteArray? {
+
+        val uri: Uri? = result?.data
+        var fileContent: ByteArray? = null
+        var inputStream: InputStream? = null
+
+        try {
+            if(uri!=null) {
+
+        val cursor = contentResolver.query(uri, null, null, null, null)
+
+        val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+        cursor.moveToFirst()
+
+        val name = cursor.getString(nameIndex)
+        val size = cursor.getLong(sizeIndex).toString()
+                inputStream = contentResolver.openInputStream(uri)
+                if (inputStream != null) {
+                    fileContent = ByteArray(size as Int)
+                    inputStream.read(fileContent)
+                    fileContent = ByteArray(1024)
+                    val baos = ByteArrayOutputStream()
+                    var read: Int
+                    while (inputStream.read(fileContent)
+                            .also { read = it } > -1
+                    ) baos.write(fileContent, 0, read)
+                    fileContent = baos.toByteArray()
+
+
+                    baos.close()
+                }
+            }
+        } catch (e: FileNotFoundException) {
+        } catch (e: IOException) {
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close()
+                } catch (e: IOException) {
+                }
+            }
+        }
+
+        return fileContent
+    }
+    fun createFileDocument(requestCode: Int, resultCode: Int, result: Intent?) : ByteArray? {
+
+        val uri: Uri? = result?.data
+        var fileContent: ByteArray? = null
+        var outputStream: OutputStream? = null
+
+        try {
+            if(uri!=null) {
+
+                val cursor = contentResolver.query(uri, null, null, null, null)
+
+                val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                cursor.moveToFirst()
+
+                val name = cursor.getString(nameIndex)
+                val size = cursor.getLong(sizeIndex).toString()
+                outputStream = contentResolver.openOutputStream(uri)
+                if (outputStream != null) {
+                    fileContent = ByteArray(size as Int)
+                    outputStream.write(fileContent)
+                    outputStream.close()
+                }
+            }
+        } catch (e: FileNotFoundException) {
+        } catch (e: IOException) {
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close()
+                } catch (e: IOException) {
+                }
+            }
+        }
+
+        return fileContent
+    }
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, result: Intent?) {
         super.onActivityResult(requestCode, resultCode, result)
@@ -314,37 +404,65 @@ class FaceActivity : ActivitySuperClass() {
                     try {
                         get = result.data
                     } catch (ex2:RuntimeException) {
+                        try {
+                            val cursor =
+                                contentResolver.query(result.data!!, null, null, null, null)
 
+                            val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                            val sizeIndex = cursor!!.getColumnIndex(OpenableColumns.SIZE)
+                            cursor!!.moveToFirst()
+
+                            val name = cursor!!.getString(nameIndex)
+                            val size = cursor!!.getLong(sizeIndex).toString()
+                        } catch (_: RuntimeException) {
+
+                        } catch (_:java.lang.NullPointerException) {
+
+                        }
                     }
                 }
             }
 
-            if(get==null) {
-                System.err.println("Data result Uri == null")
-                return
-            }
+
             var file : File?= null
+
             try {
-                file = get.toFile()
+                //file = get.toFile()
             } catch (ex : RuntimeException) {
                 Toast.makeText(applicationContext, "FIle==null after filechooser ", Toast.LENGTH_LONG)
                     .show()
+                return
+            } catch (ex1 : NullPointerException) {
+                Toast.makeText(applicationContext, "FIle==null after filechooser ", Toast.LENGTH_LONG)
+                    .show()
+                return
             }
             if (requestCode == CREATE_FILE) {
-                val fileOutputStream = FileOutputStream(file)
-                val oos = ObjectOutputStream(fileOutputStream)
-                try {
-                    oos.writeUnshared(faceOverlayView.googleFaceDetection)
-                } catch (ex: RuntimeException) {
-                    ex.printStackTrace()
+                val openOutputStream = contentResolver.openOutputStream(result.data as Uri)
+                if(openOutputStream!=null) {
+                    val oos = ObjectOutputStream(openOutputStream)
+                    try {
+                        oos.writeUnshared(faceOverlayView.googleFaceDetection)
+                        oos.close()
+                    } catch (ex: RuntimeException) {
+                        ex.printStackTrace()
+                    }
                 }
             } else if (requestCode == OPEN_MODEL) {
-                val fileInputStream = FileInputStream(file)
-                val oos = ObjectInputStream(fileInputStream)
+                val fileContnet1 : ByteArray? = this.getFileContent(requestCode, resultCode, result)
+                if(fileContnet1==null)
+                    return
+                val filesFile = getFilesFile("temp_model.model")
+                val fileOutputStream = FileOutputStream(filesFile)
+                fileOutputStream.write(fileContnet1)
+                fileOutputStream.close()
+                val fileInputStream = FileInputStream(filesFile)
+                val ois = ObjectInputStream(fileInputStream)
                 try {
-                    val tmp = oos.readUnshared() as GoogleFaceDetection?
+                    val tmp = ois.readUnshared() as GoogleFaceDetection?
                     if (tmp != null)
                         faceOverlayView.googleFaceDetection = tmp
+                    ois.close()
                 } catch (ex: RuntimeException) {
                     ex.printStackTrace()
                 }

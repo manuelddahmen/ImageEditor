@@ -24,7 +24,6 @@ package one.empty3.library;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PointF;
 
 import java.io.File;
@@ -83,7 +82,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     private int RENDERING_DEFAULT = 0;
     private Map<String, StructureMatrix> declaredDataStructure;// = Collections.synchronizedMap(new HashMap());
     private Map<String, StructureMatrix> declaredLists;//= new HashMap<>();
-    protected Paint paint = new Paint();
+//    protected Paint paint = new Paint();
 
     public Representable() {
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
@@ -654,7 +653,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     }
 
     public void drawOnCanvas(Canvas mCanvas, Bitmap bitmap, int transparent, PointF pointF, PointF scale) {
-        paint = new Paint();
+        //paint = new Paint();
         Scene scene1 = new Scene();
 
         scene1.add(this);

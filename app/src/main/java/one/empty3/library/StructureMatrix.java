@@ -22,6 +22,7 @@ package one.empty3.library;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.function.Consumer;
 /*__
  * Created by manue on 07-09-19.
  */
-public class StructureMatrix<T> {
+public class StructureMatrix<T> implements Serializable {
     public static final int INSERT_ROW = 0;
     public static final int INSERT_COL = 1;
     private int dim;
