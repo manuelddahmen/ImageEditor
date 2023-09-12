@@ -24,5 +24,7 @@
     </external-media-path>
     <external-path path="." name="external_storage_root"/>
     <external-path name="external_files" path="."/>
+    <files-path name="my_images" path="images/" />
+    <files-path name="models" path="*.model" />
     <files-path name="files" path="."/>
 </paths>

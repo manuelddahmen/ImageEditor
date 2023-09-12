@@ -79,9 +79,11 @@ class Utils {
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
-        var file1 = File(dirName1 + File.separator + name2 + ".jpg")
+        var file1 = File(dirName1 + File.separator + name2 +"-"
+                +UUID.randomUUID()+ ".jpg")
         val dir2 = File(dirName2)
-        var file2 = File(dirName2 + File.separator + name2 + ".jpg")
+        var file2 = File(dirName2 + File.separator + name2 +"-"
+                +UUID.randomUUID()+ ".jpg")
         val uriSavedImage = Uri.fromFile(file2)
         if (!dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created \$dir1" + file1.absolutePath)

@@ -226,6 +226,32 @@ class FaceActivity : ActivitySuperClass() {
             }
         }
         loadModel.setOnClickListener {
+            var autoname: File? = getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".model")
+            if(autoname==null)
+                autoname = File("face-drawings-" + UUID.randomUUID() + ".model")
+            val photoURI = FileProvider.getUriForFile(
+                applicationContext,
+                applicationContext.packageName + ".provider",
+                autoname)
+            val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                putExtra(Intent.EXTRA_TITLE, "face-drawings-" + UUID.randomUUID() + ".model")
+                type = "model/*.model"
+                putExtra("currentFile", currentFile)
+                putExtra("maxRes", maxRes)
+            }
+            val intent2 = Intent.createChooser(intentLoad, "Choose a file")
+            try {
+                startActivityForResult(intent2, OPEN_MODEL)
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    "Error while loading model (open file dialog): " + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+/*
             val photoURI = FileProvider.getUriForFile(
                 applicationContext,
                 applicationContext.packageName + ".provider",
@@ -234,10 +260,11 @@ class FaceActivity : ActivitySuperClass() {
             val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 putExtra(Intent.EXTRA_TITLE, "face-drawings-" + UUID.randomUUID() + ".model")
-                setDataAndType(photoURI, "model/*.model")
+                setDataAndType(photoURI, "model*.model")
                 putExtra("currentFile", currentFile)
-                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("model/*.model"))
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("model*.model"))
             }
+
             val intent2 = Intent.createChooser(intentLoad, "Choose a file")
             try {
                 startActivityForResult(intent2, OPEN_MODEL)
@@ -249,7 +276,7 @@ class FaceActivity : ActivitySuperClass() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
+*/
         }
     }
 

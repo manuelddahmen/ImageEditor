@@ -197,24 +197,22 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
-            <!--
+            
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_OPEN_DOCUMENT" />
-                
                 <category android:name="android.intent.category.OPENABLE" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <data android:mimeType="application/*.model" />
+                <data android:scheme="file"/>
+                <data android:path="/*.*"/>
                 
-                <data android:mimeType="*.model" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_DOCUMENT" />
-                
                 <category android:name="android.intent.category.OPENABLE" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                
-                <data android:mimeType="*.model" />
+                <data android:mimeType="application/*.model" />
+                <data android:scheme="file"/>
+                <data android:path="/*.*"/>
             </intent-filter>
-        -->
         </activity>
         <activity
                 android:name=".FaceActivitySettings"
@@ -227,10 +225,21 @@
         
         <provider
                 android:name=".MyFileProvider"
-                android:authorities="one.empty3.fileprovider"
+                android:authorities="one.empty3.feature.app.maxSdk29.pro.MyFileProvider"
                 android:exported="false"
                 android:grantUriPermissions="true"
-                />
+                >
+        <intent-filter>
+            <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            <data android:mimeType="model/*.model" android:scheme="file"/>
+            
+        </intent-filter>
+        <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                >
+        </meta-data>
+        </provider>
         <provider android:enabled="@bool/atLeastKitKat"
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.provider"
@@ -239,7 +248,9 @@
                 android:permission="android.permission.MANAGE_DOCUMENTS">
             <intent-filter>
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-                <data android:mimeType="model/*.model" android:scheme="file"/>
+                <data android:mimeType="application/*.model" />
+                <data android:scheme="file"/>
+                <data android:path="*.*"/>
             </intent-filter>
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
@@ -250,6 +261,9 @@
                 android:name="com.google.android.gms.vision.DEPENDENCIES"
                 android:value="face"
                 />
+        <meta-data
+                android:name="firebase_performance_logcat_enabled"
+                android:value="true" />
     </application>
 
 </manifest>

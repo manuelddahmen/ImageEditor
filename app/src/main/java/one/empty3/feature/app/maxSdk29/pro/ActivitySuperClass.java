@@ -44,6 +44,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
 
+import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 
@@ -130,6 +131,15 @@ public class ActivitySuperClass extends AppCompatActivity {
             testIfValidBitmap();
         } else
             loadInstanceState();
+
+        try {
+            if (currentFile != null) {
+                currentFile = new Utils().writePhoto(
+                        this, Objects.requireNonNull(ImageIO.read(currentFile)).bitmap, "reload");
+            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
