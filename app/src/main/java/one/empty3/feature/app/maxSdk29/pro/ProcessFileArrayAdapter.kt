@@ -1,32 +1,22 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-
-import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO
-import kotlinx.coroutines.joinAll
-
 import one.empty3.Main2022
 import one.empty3.feature.app.maxSdk29.pro.databinding.RecyclerViewEffectItemBinding
 import one.empty3.feature20220726.PixM
 import one.empty3.io.ProcessFile
 import java.io.File
-import java.util.ArrayList
-import java.util.function.Predicate
 
 class ProcessFileArrayAdapter() :
     RecyclerView.Adapter<ProcessFileArrayAdapter.ViewHolder>(), Parcelable {
@@ -81,7 +71,7 @@ class ProcessFileArrayAdapter() :
         val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
         textView1.text = index//processFile.javaClass.name
         val text1 = textView1.text.toString()
-        holder.setEffectClass(text1)
+        holder.setEffectClass(Main2022.indices!![position]::class.java.simpleName)
         //val text1 = processFile.javaClass.name
         val buttonRemoveList: Button =
             holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
