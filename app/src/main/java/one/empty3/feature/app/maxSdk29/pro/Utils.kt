@@ -119,6 +119,8 @@ class Utils {
     }
 
     fun getMaxRes(activitySuperClass: ActivitySuperClass): Int {
+        if(activitySuperClass==null || activitySuperClass.applicationContext==null)
+            return ActivitySuperClass.MAXRES_DEFAULT
         return getMaxRes(activitySuperClass.applicationContext)
     }
 
