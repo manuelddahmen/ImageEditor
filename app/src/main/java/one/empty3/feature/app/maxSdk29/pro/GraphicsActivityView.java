@@ -23,34 +23,31 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
 import one.empty3.apps.tree.altree.AlgebricTree;
 import one.empty3.apps.tree.altree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
+;
+
 public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
     private PixM current;
-    private int MAX_RES = getMaxRes();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,14 +116,14 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         if (currentFile != null) {
             if (getMaxRes() > 0) {
-                current = PixM.getPixM(ImageIO.read(currentFile).bitmap, getMaxRes());
+                current = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap, getMaxRes());
             } else {
-                current = new PixM(ImageIO.read(currentFile));
+                current = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
             }
         }
         if (current == null) {
             if (getMaxRes() <= 0) {
-                current = new PixM(MAX_RES, MAX_RES);
+                current = new PixM(getMaxRes(), getMaxRes());
             } else {
                 current = new PixM(w, h);
             }

@@ -302,7 +302,7 @@
 
                     >
 
-                    <!--
+                    
                                     <Button
                                         android:id="@+id/buttonBack"
                                         android:layout_width="wrap_content"
@@ -311,7 +311,6 @@
 
 
                                         android:text="@string/back" />
-                    -->
                     <Button
                         android:id="@+id/buttonSave"
                         android:layout_width="wrap_content"

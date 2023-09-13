@@ -1,4 +1,4 @@
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.apps.test;
 
 import org.junit.Assert;
 import org.junit.Test;

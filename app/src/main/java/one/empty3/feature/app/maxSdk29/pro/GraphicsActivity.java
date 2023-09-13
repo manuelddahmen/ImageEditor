@@ -25,13 +25,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+;
 
 
 public class GraphicsActivity extends ActivitySuperClass {
@@ -105,6 +105,18 @@ public class GraphicsActivity extends ActivitySuperClass {
             }
             passParameters(graphicsViewIntent);
         });
-
+        Button buttonMain = findViewById(R.id.buttonBack);
+        buttonMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Logger.getAnonymousLogger().log(Level.INFO,
+                        "currentFile=" + getClass().toString() + " " + currentFile);
+                Intent mainIntent = new Intent(getApplicationContext(), MyCameraActivity.class);
+                for (int i1 = 0; i1 < textViews.length; i1++) {
+                    cords[i1] = textViews[i1].getText().toString();
+                }
+                passParameters(mainIntent);
+            }
+        });
     }
 }
