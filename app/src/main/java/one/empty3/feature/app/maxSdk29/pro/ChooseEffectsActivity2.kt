@@ -23,24 +23,17 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
 import one.empty3.feature20220726.Mix
 import one.empty3.io.ProcessFile
 import java.io.File
-import java.lang.RuntimeException
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
+import java.util.UUID
 
 
 class ChooseEffectsActivity2 : ActivitySuperClass() {
@@ -247,8 +240,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                             val currentOutputFile1 = File(nextFile(currentProcessInFile.parentFile!!.absolutePath, "alpha-" + UUID.randomUUID(), "jpg"))
                                             mix.progressColor = Mix.MAX_PROGRESS
                                             val pf = processFile!!.javaClass.simpleName
-                                            if(Main2022.listOfFactors()!=null && Main2022.listOfFactors().get(pf)!=null)
-                                                mix.progressColor = Main2022.listOfFactors().get(pf)!!
+                                            if(Main2022.listOfFactors()!=null && Main2022.listOfFactors()[pf] !=null)
+                                                mix.progressColor = Main2022.listOfFactors()[pf]!!
 
                                             mix.processFiles(currentOutputFile1, lastCurrentProcessFile, currentOutputFile)
 
