@@ -71,7 +71,8 @@ class ProcessFileArrayAdapter() :
         val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
         textView1.text = index//processFile.javaClass.name
         val text1 = textView1.text.toString()
-        holder.setEffectClass(text1)//val text1 = processFile.javaClass.name
+        holder.setEffectClass(text1)
+        //val text1 = processFile.javaClass.name
         val buttonRemoveList: Button =
             holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
         val buttonAddToEffect: Button =

@@ -240,8 +240,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                             val currentOutputFile1 = File(nextFile(currentProcessInFile.parentFile!!.absolutePath, "alpha-" + UUID.randomUUID(), "jpg"))
                                             mix.progressColor = Mix.MAX_PROGRESS
                                             val pf = processFile!!.javaClass.simpleName
-                                            if(Main2022.listOfFactors()!=null && Main2022.listOfFactors()[pf] !=null)
-                                                mix.progressColor = Main2022.listOfFactors()[pf]!!
+                                            if(Main2022.effectsFactors!=null && Main2022.effectsFactors[pf] !=null)
+                                                mix.progressColor = Main2022.effectsFactors[pf]!!
 
                                             mix.processFiles(currentOutputFile1, lastCurrentProcessFile, currentOutputFile)
 
