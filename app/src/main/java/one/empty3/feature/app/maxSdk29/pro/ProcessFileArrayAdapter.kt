@@ -161,7 +161,7 @@ class ProcessFileArrayAdapter() :
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val effectClass = holder.getEffectClass()
                 Main2022.effectsFactors.put(effectClass, progress)
-                //System.err.println(""+javaClass+" "+effectClass+" progress:"+progress)
+                System.err.println("$javaClass $effectClass progress:$progress")
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

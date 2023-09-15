@@ -8,7 +8,7 @@ import one.empty3.io.ProcessNFiles;
 
 public class Mix extends ProcessNFiles {
     public static final int MAX_PROGRESS = 256;
-    private int progress;
+    private int progress = MAX_PROGRESS;
 
     public void setProgressColor(int progress) {
         this.progress = progress;

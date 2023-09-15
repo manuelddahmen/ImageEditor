@@ -76,7 +76,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 Manifest.permission.READ_MEDIA_IMAGES
             ), READ_WRITE_STORAGE
         )
-        if(!hasRun()) {
+        if (!hasRun()) {
             runEffects()
         }
     }
@@ -223,7 +223,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                     if (!(processFile!!.process(
                                             currentProcessFile,
                                             currentOutputFile
-                                        ))) {
+                                        ))
+                                    ) {
 
                                         println("Error processing file.Error processing file.")
                                         println("Error in " + processFile!!.javaClass.name)
@@ -237,19 +238,30 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
                                         try {
                                             val mix = Mix()
-                                            val currentOutputFile1 = File(nextFile(currentProcessInFile.parentFile!!.absolutePath, "alpha-" + UUID.randomUUID(), "jpg"))
+                                            val currentOutputFile1 = File(
+                                                nextFile(
+                                                    currentProcessInFile.parentFile!!.absolutePath,
+                                                    "alpha-" + UUID.randomUUID(),
+                                                    "jpg"
+                                                )
+                                            )
                                             mix.progressColor = Mix.MAX_PROGRESS
                                             val pf = processFile!!.javaClass.simpleName
-                                            if(Main2022.effectsFactors!=null && Main2022.effectsFactors[pf] !=null)
+                                            if (Main2022.effectsFactors != null && Main2022.effectsFactors[pf] != null)
                                                 mix.progressColor = Main2022.effectsFactors[pf]!!
 
-                                            mix.processFiles(currentOutputFile1, lastCurrentProcessFile, currentOutputFile)
+                                            System.out.println("mix.progressColor="+mix.progressColor);
+                                            mix.processFiles(
+                                                currentOutputFile1,
+                                                lastCurrentProcessFile,
+                                                currentOutputFile
+                                            )
 
                                             //System.err.println(""+javaClass+" "+it1+" progress : "+mix.progressColor)
 
                                             currentOutputFile = currentOutputFile1
                                             totalOutput = currentOutputFile
-                                        } catch (ex : RuntimeException) {
+                                        } catch (ex: RuntimeException) {
                                             ex.printStackTrace()
                                         }
                                     }
