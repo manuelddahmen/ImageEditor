@@ -208,11 +208,11 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                 )
                             )
                             currentOutputDir.mkdirs()
-                            println("Effect class           : " + trim)
-                            println("In picture             : " + currentProcessFile)
-                            println("In picture directory   : " + currentProcessDir)
-                            println("Out  picture           : " + currentOutputFile)
-                            println("Out picture directory  : " + currentOutputDir)
+                            println("Effect class           : $trim")
+                            println("In picture             : $currentProcessFile")
+                            println("In picture directory   : $currentProcessDir")
+                            println("Out  picture           : $currentOutputFile")
+                            println("Out picture directory  : $currentOutputDir")
                             try {
                                 if (currentProcessFile.exists()
                                 // &&!currentOutputFile.exists()
@@ -250,7 +250,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                                             if (Main2022.effectsFactors != null && Main2022.effectsFactors[pf] != null)
                                                 mix.progressColor = Main2022.effectsFactors[pf]!!
 
-                                            System.out.println("mix.progressColor="+mix.progressColor);
+                                            println("mix.progressColor="+mix.progressColor);
                                             mix.processFiles(
                                                 currentOutputFile1,
                                                 lastCurrentProcessFile,

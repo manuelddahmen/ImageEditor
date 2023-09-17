@@ -131,7 +131,7 @@
                 android:theme="@style/Theme.FeatureAppmain"
                 android:progress="256"
                 android:min="0"
-                android:max="255"
+                android:max="256"
                 
                 />
         </LinearLayout>

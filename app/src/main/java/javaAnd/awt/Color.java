@@ -20,8 +20,6 @@
 
 package javaAnd.awt;
 
-import one.empty3.library.Lumiere;
-
 public class Color extends android.graphics.Color/*android.graphics.Color*/ {
 
     public static final int TRANSLUCENT = 0;
