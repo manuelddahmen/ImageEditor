@@ -1,0 +1,9 @@
+package be.ibiiztera.md.pmatrix.pushmatrix;
+
+import android.graphics.Color;
+
+public class IBasicLighter
+{
+	public Color calculerLumierePoint(Point3D point, Color couleur);
+	
+}

@@ -1,0 +1,8 @@
+public class RandomSpheres extends Animation
+{
+	private Point3D[] ran ;
+	private Point3D[] next;
+	private int n;
+	
+	
+}

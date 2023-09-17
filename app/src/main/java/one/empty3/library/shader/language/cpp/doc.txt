@@ -1,0 +1,16 @@
+parse separate token
+itere on token and build a tree
+
+a #preprocessor replace
+b enclosure with type: namespace, class, 
+method, 
+variable member,
+instruction: assignation,
+value : method call, 
+operation, variable
+c entity definition resolution. 
+
+ void a() 
+ void b() 
+c(d(3))
+deep built tree-list execution

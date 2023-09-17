@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+  - Copyright (c) 2023.
+  -
+  -
+  -  Copyright 2012-2023 Manuel Daniel Dahmen
+  -
+  -  Licensed under the Apache License, Version 2.0 (the "License");
+  -  you may not use this file except in compliance with the License.
+  -  You may obtain a copy of the License at
+  -
+  -  http://www.apache.org/licenses/LICENSE-2.0
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  -  limitations under the License.
+  -
+  -
+  -->
+
+<!DOCTYPE compute [
+
+        <!ELEMENT vec (double | vec | function)*>
+
+        <! ATTLIST vec (length)
+
+        <!ELEMENT double (#CDATA) >
+
+        <!ELEMENT function (name, args, def)>
+
+        <!ELEMENT name (#CDATA)>
+
+        <!ELEMENT args (arg)*>
+
+        <!ELEMENT arg (name, class) >
+
+        <!ELEMENT def (instructions| return| errorcase) >
+
+        <!ELEMENT class (name) >
+
+        <! ELEMENT instruction (methodinvoke|construction) >
+        <! ELEMENT construction (refobject class)
+        <! ELEMENT methodinvoke(objectinstance|methodname|parameters) >
+        <! ELEMENT parameters (parameter) *>
+
+        <! ELEMENT objectinstance
+        <! ELEMENT methodname #CDATA
+        <! ELEMENT parameter (methodinvoke|scalar|memberdata)*>
+        <! ELEMENT scalar #CDATA
+        <! ELEMENT memberdata (objectinstance|membername) >
+        <! ELEMENT membername #CDATA
+        <! ELEMENT instructions (conditions|instructions|instruction)* >
+        <! ELEMENT program (application ) *
+        <! ELEMENT application (instruction)
+        <! ELEMENT tensor (dimspace lengths tensorelements*)
+        <! ELEMENT dimspace parameter >
+        <! ELEMENT lengths parameter >
+        <! ELEMENT dim parameter >
+        <! ELEMENT tensorelements parameters >
+        ]>
