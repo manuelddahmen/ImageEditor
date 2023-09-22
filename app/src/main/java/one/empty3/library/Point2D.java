@@ -182,4 +182,9 @@ public class Point2D {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    public Point2D mult(Point2D p2) {
+        return new Point2D(x*p2.y, y*p2.x);
+    }
+
 }
