@@ -67,6 +67,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
@@ -443,5 +446,39 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
         return;
+    }
+
+    @Override
+    public Serialisable decode(DataInputStream in) {
+        Polygon p = new Polygon();
+        try {
+            int points = in.readInt();
+            for (int i = 0; i < points; i++) {
+                Point3D p1 = new Point3D();
+                for (int j = 0; j <3; j++) {
+
+                    p1.set(j ,in.readDouble());
+                }
+                getPoints().setElem(p1, i);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return p;
+    }
+
+    @Override
+    public int encode(DataOutputStream out) {
+        try {
+            out.writeInt(getPoints().data1d.size());
+            for (int i = 0; i < getPoints().data1d.size(); i++) {
+                for (int j = 0; j <3; j++) {
+                    out.writeDouble(getPoints().getElem(i).get(j));
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }
