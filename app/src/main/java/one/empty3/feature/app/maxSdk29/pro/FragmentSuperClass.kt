@@ -55,360 +55,366 @@ open class FragmentSuperClass : Fragment() {
     protected var currentFile: File? = null
     protected var cords = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     protected var currentBitmap: Bitmap? = null
-    public lateinit var activity2 : ActivitySuperClass
-    var maxRes :Int
-         get() {
+    public lateinit var activity2: ActivitySuperClass
+    var maxRes: Int
+        get() {
             return Utils().getMaxRes(this)
         }
-        set(value) {maxRes = value}
-        @Throws(FileNotFoundException::class)
-        fun getPathInput(uri: Uri?): InputStream? {
-            return requireContext().contentResolver.openInputStream(
-                uri!!
-            )
+        set(value) {
+            maxRes = value
         }
 
-        protected open fun getRealPathFromIntentData(file: Intent): InputStream? {
-            try {
-                return getPathInput(file.data)
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-            }
-            return null
+    @Throws(FileNotFoundException::class)
+    fun getPathInput(uri: Uri?): InputStream? {
+        return requireContext().contentResolver.openInputStream(
+            uri!!
+        )
+    }
+
+    protected open fun getRealPathFromIntentData(file: Intent): InputStream? {
+        try {
+            return getPathInput(file.data)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
         }
+        return null
+    }
 
-        protected fun getRealPathFromURI(uri: Uri?): InputStream? {
-            try {
-                return getPathInput(uri)
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-            }
-            return null
+    protected fun getRealPathFromURI(uri: Uri?): InputStream? {
+        try {
+            return getPathInput(uri)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
         }
+        return null
+    }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            activity2 = requireActivity() as ActivitySuperClass
+    override fun onCreate(savedInstanceState: Bundle?) {
+        activity2 = requireActivity() as ActivitySuperClass
 
-            super.onCreate(savedInstanceState)
-            if (activity2!=null &&activity2.intent != null) {
-                getParameters(activity2.intent)
-                if (currentFile == null && savedInstanceState != null) {
-                    try {
-                        if (savedInstanceState.getString("currentFile") != null) {
-                            currentFile = File(savedInstanceState.getString("currentFile"))
-                        }
-                    } catch (ex: RuntimeException) {
-                        ex.printStackTrace()
-                    }
-                }
-            }
-            if (currentFile != null) {
-                testIfValidBitmap()
-            } else loadInstanceState()
-
-            maxRes = Utils().getMaxRes(this.requireContext())
-        }
-
-        override fun onSaveInstanceState(outState: Bundle) {
-            super.onSaveInstanceState(outState)
-            /*requestPermissions(new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_MEDIA_IMAGES}, ONSAVE_INSTANCE_STATE);
-*/
-            saveInstanceState()
-        }
-
-        override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<String>,
-            grantResults: IntArray
-        ) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            if (requestCode == ONSAVE_INSTANCE_STATE && grantResults != null) {
-                var g = 0
-                for (granted in grantResults) {
-                    g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
-                }
-                if (g > 0) saveInstanceState()
-            }
-            if (requestCode == ONRESTORE_INSTANCE_STATE && grantResults != null) {
-                var g = 0
-                for (granted in grantResults) {
-                    g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
-                }
-                if (g > 0) restoreInstanceState()
-            }
-        }
-
-        fun restoreInstanceState() {
-            Utils().loadImageState(activity2, false)
-            val properties = Properties()
-            try {
-                properties.load(FileInputStream(imageViewPersistantPropertiesFile))
-                for (i in cords.indices) {
-                    cords[i] = properties.getProperty(
-                        cordsConsts.get(
-                            i
-                        ),
-                        cords[i]
-                    )
-                }
-                val maxRes1 = properties.getProperty("maxRes", "" + maxRes)
-                if (maxRes1 != null) {
-                    try {
-                        maxRes = maxRes1.toInt()
-                    } catch (ignored: NumberFormatException) {
-                    }
-                }
+        super.onCreate(savedInstanceState)
+        if (activity2 != null && activity2.intent != null) {
+            getParameters(activity2.intent)
+            if (currentFile == null && savedInstanceState != null) {
                 try {
-                    val currentFile1 =
-                        properties.getProperty("currentFile", currentFile!!.absolutePath)
-                    currentFile = File(currentFile1)
-                    if (currentFile1 == null || currentFile1.length == 0) {
-                        val imageViewPersistantFile = imageViewPersistantFile
-                        if (imageViewPersistantFile!!.exists()) {
-                            currentFile = imageViewPersistantFile
-                        }
+                    if (savedInstanceState.getString("currentFile") != null) {
+                        currentFile = File(savedInstanceState.getString("currentFile"))
                     }
                 } catch (ex: RuntimeException) {
-                    Toast.makeText(
-                        activity2.applicationContext,
-                        "Error restoring currentFile",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-            } catch (ignored: IOException) {
-            }
-        }
-
-        fun testIfValidBitmap() {
-            if (currentFile == null) loadInstanceState()
-            if (currentFile != null) {
-                if (!currentFile!!.exists()) {
-                    currentFile = null
-                    return
-                }
-                try {
-                    val fileInputStream = FileInputStream(currentFile)
-                    if (BitmapFactory.decodeStream(fileInputStream)
-                        == null
-                    ) currentFile = null
-                } catch (e: FileNotFoundException) {
-                    System.err.println("Error file:$currentFile")
-                    currentFile = null
-                } catch (exception: RuntimeException) {
-                    currentFile = null
+                    ex.printStackTrace()
                 }
             }
         }
+        if (currentFile != null) {
+            testIfValidBitmap()
+        } else loadInstanceState()
 
-        protected fun loadInstanceState() {
-            var currentFile1: String? = null
-            Utils().loadImageState(activity2, false)
-            val properties = Properties()
-            try {
-                properties.load(FileInputStream(imageViewPersistantPropertiesFile))
-            } catch (ex: RuntimeException) {
-                ex.printStackTrace()
-            } catch (ex: IOException) {
-                ex.printStackTrace()
+        maxRes = Utils().getMaxRes(this.requireContext())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        /*requestPermissions(new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES}, ONSAVE_INSTANCE_STATE);
+*/
+        saveInstanceState()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == ONSAVE_INSTANCE_STATE && grantResults != null) {
+            var g = 0
+            for (granted in grantResults) {
+                g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
             }
-            try {
-                for (i in cords.indices) {
-                    cords[i] = properties.getProperty(
-                        cordsConsts.get(
-                            i
-                        ),
-                        cords[i]
-                    )
-                }
-            } catch (ex: RuntimeException) {
-                ex.printStackTrace()
+            if (g > 0) saveInstanceState()
+        }
+        if (requestCode == ONRESTORE_INSTANCE_STATE && grantResults != null) {
+            var g = 0
+            for (granted in grantResults) {
+                g = g + if (granted == PackageManager.PERMISSION_GRANTED) 1 else 0
             }
-            try {
-                val maxRes1 = properties.getProperty(
-                    "maxRes",
-                    "" + MAXRES_DEFAULT
+            if (g > 0) restoreInstanceState()
+        }
+    }
+
+    fun restoreInstanceState() {
+        Utils().loadImageState(activity2, false)
+        val properties = Properties()
+        try {
+            properties.load(FileInputStream(imageViewPersistantPropertiesFile))
+            for (i in cords.indices) {
+                cords[i] = properties.getProperty(
+                    cordsConsts.get(
+                        i
+                    ),
+                    cords[i]
                 )
-                if (maxRes1 != null && maxRes1.length > 0) {
-                    try {
-                        maxRes = maxRes1.toDouble().toInt()
-                    } catch (ex1: RuntimeException) {
-                        ex1.printStackTrace()
+            }
+            val maxRes1 = properties.getProperty("maxRes", "" + maxRes)
+            if (maxRes1 != null) {
+                try {
+                    maxRes = maxRes1.toInt()
+                } catch (ignored: NumberFormatException) {
+                }
+            }
+            try {
+                val currentFile1 =
+                    properties.getProperty("currentFile", currentFile!!.absolutePath)
+                currentFile = File(currentFile1)
+                if (currentFile1 == null || currentFile1.length == 0) {
+                    val imageViewPersistantFile = imageViewPersistantFile
+                    if (imageViewPersistantFile!!.exists()) {
+                        currentFile = imageViewPersistantFile
                     }
                 }
-                currentFile1 = properties.getProperty("currentFile", currentFile!!.absolutePath)
-                if (currentFile1 != null) currentFile = File(currentFile1)
             } catch (ex: RuntimeException) {
-                ex.printStackTrace()
+                Toast.makeText(
+                    activity2.applicationContext,
+                    "Error restoring currentFile",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
             }
-            try {
-                var currentFile2: File? = null
-                currentFile2 =
-                    if (currentFile1 == null) imageViewPersistantFile else File(currentFile1)
-                if (currentFile2 != null && currentFile2.exists()) {
-                    currentFile = currentFile2
-                }
-            } catch (ex: RuntimeException) {
-                ex.printStackTrace()
-            }
-            if (currentFile == null) Toast.makeText(
-                activity2.applicationContext,
-                "Cannot find current file (working copy)",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+        } catch (ignored: IOException) {
         }
+    }
 
-        protected fun saveInstanceState() {
-            val properties = Properties()
+    fun testIfValidBitmap() {
+        if (currentFile == null) loadInstanceState()
+        if (currentFile != null) {
+            if (!currentFile!!.exists()) {
+                currentFile = null
+                return
+            }
             try {
-                properties.load(FileInputStream(imageViewPersistantPropertiesFile))
-                for (i in cords.indices) {
-                    properties.setProperty(
-                        cordsConsts.get(
-                            i
+                val fileInputStream = FileInputStream(currentFile)
+                if (BitmapFactory.decodeStream(fileInputStream)
+                    == null
+                ) currentFile = null
+            } catch (e: FileNotFoundException) {
+                System.err.println("Error file:$currentFile")
+                currentFile = null
+            } catch (exception: RuntimeException) {
+                currentFile = null
+            }
+        }
+    }
+
+    protected fun loadInstanceState() {
+        var currentFile1: String? = null
+        Utils().loadImageState(activity2, false)
+        val properties = Properties()
+        try {
+            properties.load(FileInputStream(imageViewPersistantPropertiesFile))
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+        try {
+            for (i in cords.indices) {
+                cords[i] = properties.getProperty(
+                    cordsConsts.get(
+                        i
+                    ),
+                    cords[i]
+                )
+            }
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        }
+        try {
+            val maxRes1 = properties.getProperty(
+                "maxRes",
+                "" + MAXRES_DEFAULT
+            )
+            if (maxRes1 != null && maxRes1.length > 0) {
+                try {
+                    maxRes = maxRes1.toDouble().toInt()
+                } catch (ex1: RuntimeException) {
+                    ex1.printStackTrace()
+                }
+            }
+            currentFile1 = properties.getProperty("currentFile", currentFile!!.absolutePath)
+            if (currentFile1 != null) currentFile = File(currentFile1)
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        }
+        try {
+            var currentFile2: File? = null
+            currentFile2 =
+                if (currentFile1 == null) imageViewPersistantFile else File(currentFile1)
+            if (currentFile2 != null && currentFile2.exists()) {
+                currentFile = currentFile2
+            }
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        }
+        if (currentFile == null) Toast.makeText(
+            activity2.applicationContext,
+            "Cannot find current file (working copy)",
+            Toast.LENGTH_SHORT
+        )
+            .show()
+    }
+
+    protected fun saveInstanceState() {
+        val properties = Properties()
+        try {
+            properties.load(FileInputStream(imageViewPersistantPropertiesFile))
+            for (i in cords.indices) {
+                properties.setProperty(
+                    cordsConsts.get(
+                        i
+                    ),
+                    cords[i]
+                )
+            }
+            properties.setProperty("maxRes", "" + maxRes)
+            try {
+                properties.setProperty("currentFile", currentFile!!.absolutePath)
+                val imageViewPersistantFile = currentFile
+                if (currentFile != null) Objects.requireNonNull(this.imageViewPersistantFile)?.let {
+                    Utils().writeFile(
+                        this,
+                        BitmapFactory.decodeStream(
+                            FileInputStream(currentFile)
                         ),
-                        cords[i]
+                        it,
+                        this.imageViewPersistantFile!!,
+                        maxRes, true
                     )
                 }
-                properties.setProperty("maxRes", "" + maxRes)
-                try {
-                    properties.setProperty("currentFile", currentFile!!.absolutePath)
-                    val imageViewPersistantFile = currentFile
-                    if (currentFile != null) Objects.requireNonNull(this.imageViewPersistantFile)?.let {
-                        Utils().writeFile(
-                            this,
-                            BitmapFactory.decodeStream(
-                                FileInputStream(currentFile)
-                            ),
-                            it,
-                            this.imageViewPersistantFile!!,
-                            maxRes, true
-                        )
-                    }
-                } catch (e: FileNotFoundException) {
-                    throw RuntimeException(e)
-                }
-            } catch (ex: RuntimeException) {
-                ex.printStackTrace()
-            } catch (ex: IOException) {
-                ex.printStackTrace()
-            }
-            try {
-                properties.store(
-                    FileOutputStream(imageViewPersistantPropertiesFile),
-                    "#" + Date().toString()
-                )
-            } catch (ignored: IOException) {
-            }
-        }
-
-        fun passParameters(to: Intent) {
-            if (currentFile != null) to.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
-            to.putExtra("maxRes", maxRes)
-            Utils().putExtra(
-                to,
-                cords,
-                cordsConsts,
-                variableName,
-                variable
-            )
-            println("c className = " + this.javaClass)
-            println("m variableName = $variableName")
-            println("m variable =     $variable")
-            println("i variableName = " + activity2.intent.getStringExtra("variableName"))
-            println("i variable =     " + activity2.intent.getStringExtra("variable"))
-            println("c to.className = " + to.type)
-            startActivity(to)
-        }
-
-        fun getParameters(from: Intent?) {
-            val utils = Utils()
-            currentFile = utils.getCurrentFile(from!!)
-            maxRes = utils.getMaxRes(requireContext())
-            utils.loadImageInImageView(activity2)
-            utils.loadVarsMathImage(activity2, activity2.intent)
-        }
-
-        protected fun getFilesFile(s: String): File {
-            return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/$s")
-        }
-
-        val imageViewPersistantFile: File?
-            get() = getFilesFile(imageViewFilename)
-        val imageViewPersistantPropertiesFile: File?
-            get() = getFilesFile(imageViewFilenameProperties)
-
-        fun saveActivityProperties(properties: Properties): Boolean {
-            val filesFile = getFilesFile(this.javaClass.canonicalName + ".txt")
-            return try {
-                val fileOutputStream = FileOutputStream(filesFile)
-                properties.store(fileOutputStream, "Properties for activity: $javaClass")
-                true
-            } catch (e: IOException) {
-                throw RuntimeException(e)
-            }
-        }
-
-        fun loadActivityProperties(properties: Properties): Properties {
-            val filesFile = getFilesFile(this.javaClass.canonicalName + ".txt")
-            return try {
-                val fileInputStream = FileInputStream(filesFile)
-                properties.load(fileInputStream)
-                properties
-            } catch (e: IOException) {
-                throw RuntimeException(e)
-            }
-        }
-
-        fun drawIfBitmap() {
-            saveInstanceState()
-            try {
-                currentBitmap = null
-                if (imageView == null) imageView = activity2.findViewById(R.id.imageViewSelection)
-                if (imageView != null && currentFile != null) Utils().setImageView(activity2, activity2.imageView)
-            } catch (ex: RuntimeException) {
-                ex.printStackTrace()
-            }
-        }
-
-        fun loadImage(choose_directoryData: InputStream, isCurrentFile: Boolean): Bitmap {
-            var photo: Bitmap? = null
-            if (maxRes > 0) {
-                System.err.println("FileInputStream$choose_directoryData")
-                photo = BitmapFactory.decodeStream(choose_directoryData)
-                photo = PixM.getPixM(photo, maxRes).image.getBitmap()
-                System.err.println("Get file (bitmap) : $photo")
-            } else {
-                System.err.println("FileInputStream$choose_directoryData")
-                photo = BitmapFactory.decodeStream(choose_directoryData)
-                System.err.println("Get file (bitmap) : $photo")
-            }
-            return if (photo != null && isCurrentFile) {
-                currentFile = Utils().writePhoto(activity2, photo, "loaded_image-")
-                Utils().setImageView(activity2, activity2.imageView)
-                photo
-            } else if (photo != null) {
-                photo
-            } else {
-                System.err.println("file == null. Error.")
-                throw NullPointerException("File==null ActivitySuperClass, loadImage")
-            }
-        }
-
-        fun loadImage(photo: Bitmap?, choose_directoryData: File?, isCurrentFile: Boolean): Bitmap {
-            return try {
-                loadImage(FileInputStream(choose_directoryData), isCurrentFile)
             } catch (e: FileNotFoundException) {
                 throw RuntimeException(e)
             }
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        } catch (ex: IOException) {
+            ex.printStackTrace()
         }
+        try {
+            properties.store(
+                FileOutputStream(imageViewPersistantPropertiesFile),
+                "#" + Date().toString()
+            )
+        } catch (ignored: IOException) {
+        }
+    }
 
-        override fun onDestroy() {
-            saveInstanceState()
-            super.onDestroy()
+    fun passParameters(to: Intent) {
+        if (currentFile != null) to.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+        to.putExtra("maxRes", maxRes)
+        Utils().putExtra(
+            to,
+            cords,
+            cordsConsts,
+            variableName,
+            variable
+        )
+        println("c className = " + this.javaClass)
+        println("m variableName = $variableName")
+        println("m variable =     $variable")
+        println("i variableName = " + activity2.intent.getStringExtra("variableName"))
+        println("i variable =     " + activity2.intent.getStringExtra("variable"))
+        println("c to.className = " + to.type)
+        startActivity(to)
+    }
+
+    fun getParameters(from: Intent?) {
+        val utils = Utils()
+        currentFile = utils.getCurrentFile(from!!)
+        maxRes = utils.getMaxRes(requireContext())
+        utils.loadImageInImageView(activity2)
+        utils.loadVarsMathImage(activity2, activity2.intent)
+    }
+
+    protected fun getFilesFile(s: String): File {
+        return File("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/files/$s")
+    }
+
+    val imageViewPersistantFile: File?
+        get() = getFilesFile(imageViewFilename)
+    val imageViewPersistantPropertiesFile: File?
+        get() = getFilesFile(imageViewFilenameProperties)
+
+    fun saveActivityProperties(properties: Properties): Boolean {
+        val filesFile = getFilesFile(this.javaClass.canonicalName + ".txt")
+        return try {
+            val fileOutputStream = FileOutputStream(filesFile)
+            properties.store(fileOutputStream, "Properties for activity: $javaClass")
+            true
+        } catch (e: IOException) {
+            throw RuntimeException(e)
         }
+    }
+
+    fun loadActivityProperties(properties: Properties): Properties {
+        val filesFile = getFilesFile(this.javaClass.canonicalName + ".txt")
+        return try {
+            val fileInputStream = FileInputStream(filesFile)
+            properties.load(fileInputStream)
+            properties
+        } catch (e: IOException) {
+            throw RuntimeException(e)
+        }
+    }
+
+    fun drawIfBitmap() {
+        saveInstanceState()
+        try {
+            currentBitmap = null
+            if (imageView == null) imageView = activity2.findViewById(R.id.imageViewSelection)
+            if (imageView != null && currentFile != null) Utils().setImageView(
+                activity2,
+                activity2.imageView
+            )
+        } catch (ex: RuntimeException) {
+            ex.printStackTrace()
+        }
+    }
+
+    fun loadImage(choose_directoryData: InputStream, isCurrentFile: Boolean): Bitmap {
+        var photo: Bitmap? = null
+        if (maxRes > 0) {
+            System.err.println("FileInputStream$choose_directoryData")
+            photo = BitmapFactory.decodeStream(choose_directoryData)
+            photo = PixM.getPixM(photo, maxRes).image.getBitmap()
+            System.err.println("Get file (bitmap) : $photo")
+        } else {
+            System.err.println("FileInputStream$choose_directoryData")
+            photo = BitmapFactory.decodeStream(choose_directoryData)
+            System.err.println("Get file (bitmap) : $photo")
+        }
+        return if (photo != null && isCurrentFile) {
+            currentFile = Utils().writePhoto(activity2, photo, "loaded_image-")
+            Utils().setImageView(activity2, activity2.imageView)
+            photo
+        } else if (photo != null) {
+            photo
+        } else {
+            System.err.println("file == null. Error.")
+            throw NullPointerException("File==null ActivitySuperClass, loadImage")
+        }
+    }
+
+    fun loadImage(photo: Bitmap?, choose_directoryData: File?, isCurrentFile: Boolean): Bitmap {
+        return try {
+            loadImage(FileInputStream(choose_directoryData), isCurrentFile)
+        } catch (e: FileNotFoundException) {
+            throw RuntimeException(e)
+        }
+    }
+
+    override fun onDestroy() {
+        saveInstanceState()
+        super.onDestroy()
+    }
 
 }

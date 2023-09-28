@@ -135,10 +135,12 @@ public class GoogleFaceDetection
                     colorContours = in.readInt();
                     colorTransparent = in.readInt();
                     surfaceId = in.readInt();
-                    polygon.decode(in);
-                    contours.decode(in);
-                    filledContours.decode(in);
-                    actualDrawing.decode(in);
+                    polygon = (Polygon) polygon.decode(in);
+                    contours = (PixM) contours.decode(in);
+                    filledContours = (PixM) filledContours.decode(in);
+                    if(actualDrawing==null)
+                        actualDrawing = contours.copy();
+                    actualDrawing = (PixM) actualDrawing.decode(in);
 
                     return (Surface)this;
                 } catch (Exception exception) {
@@ -156,6 +158,9 @@ public class GoogleFaceDetection
                     polygon.encode(out);
                     contours.encode(out);
                     filledContours.encode(out);
+                    if (actualDrawing == null) {
+                            actualDrawing = contours.copy();
+                    }
                     actualDrawing.encode(out);
 
                 } catch (Exception exception) {
@@ -354,8 +359,7 @@ public class GoogleFaceDetection
                     int count2 = in.readInt();
                     for (int j = 0; j < count2; j++) {
                         Serialisable decode = new FaceData.Surface().decode(in);
-                        faceDetection.getDataFaces().get(c)
-                                .getFaceSurfaces().add((FaceData.Surface) decode);
+                        faceDetection.getDataFaces().get(c).getFaceSurfaces().add((FaceData.Surface) decode);
                     }
             }
         } catch (IOException e) {

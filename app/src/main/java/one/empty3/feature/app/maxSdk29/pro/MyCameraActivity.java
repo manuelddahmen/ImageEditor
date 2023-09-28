@@ -89,7 +89,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     public static final String IMAGE_VIEW_ORIGINAL_JPG = "imageViewOriginal.jpg";
     public static final String IMAGE_VIEW_JPG = "imageView.jpg";
     private final String appDataPath = "/one.empty3.feature.app.maxSdk29.pro/";
-    private ActivitySuperClass thisActivity;
+    protected ActivitySuperClass thisActivity;
     private static final int REQUEST_CREATE_DOCUMENT_SAVE_IMAGE = 4072040;
     static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;

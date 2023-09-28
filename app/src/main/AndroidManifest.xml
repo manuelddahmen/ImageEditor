@@ -36,6 +36,7 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu"
             >
+        <property android:name="REQUIRE_SECURE_ENV" android:value="1" />
         <activity
                 android:name="one.empty3.feature.app.newui.MainActivityNavigation"
                 android:exported="false"
@@ -248,7 +249,7 @@
                 android:permission="android.permission.MANAGE_DOCUMENTS">
             <intent-filter>
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-                <data android:mimeType="application/*.model" />
+                <data android:mimeType="application/*.fac" />
                 <data android:scheme="file"/>
                 <data android:path="*.*"/>
             </intent-filter>
