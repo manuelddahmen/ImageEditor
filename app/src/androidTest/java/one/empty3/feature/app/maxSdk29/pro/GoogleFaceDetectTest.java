@@ -23,10 +23,10 @@ package one.empty3.feature.app.maxSdk29.pro;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javaAnd.awt.image.BufferedImage;
@@ -38,15 +38,20 @@ public class GoogleFaceDetectTest {
         BufferedImage image = new BufferedImage();
 
         try {
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
-            FileOutputStream fileOutputStream = new FileOutputStream("text.fac");
-            googleFaceDetection.encode(new DataOutputStream(fileOutputStream));
-            fileOutputStream.close();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
 
-            FileInputStream fileOutputStream1 = new FileInputStream("text.fac");
+            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+            googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
+            byteArrayOutputStream.close();
+
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
             GoogleFaceDetection googleFaceDetection1=
-                    (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(fileOutputStream1));
-            fileOutputStream1.close();
+                    (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
+            byteArrayInputStream.close();
+
+            assert(googleFaceDetection1.equals(googleFaceDetection));
 
         } catch (IOException e6) {
             e6.printStackTrace();

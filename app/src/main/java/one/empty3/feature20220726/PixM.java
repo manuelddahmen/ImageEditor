@@ -931,7 +931,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
             return 0;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return -1;
         }
     }
 

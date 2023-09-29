@@ -539,7 +539,7 @@ class FaceActivity : ActivitySuperClass() {
                         faceOverlayView.googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
                         GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
-                        faceOverlayView.googleFaceDetection.selectedSurface = faceOverlayView.googleFaceDetection.dataFaces[0].faceSurfaces[0]
+                        //faceOverlayView.googleFaceDetection.selectedSurface = faceOverlayView.googleFaceDetection.dataFaces[0].faceSurfaces[0]
                         GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
                         if(faceOverlayView.googleFaceDetection==null) {
                             Toast.makeText(

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import one.empty3.library.ColorTexture;
@@ -137,6 +138,15 @@ public class GoogleFaceDetection
     public static class FaceData implements Serializable {
 
         public static class Surface implements Serializable, Serialisable {
+            private int colorFill;
+            private int colorContours;
+            private int colorTransparent;
+            private int surfaceId;
+            private Polygon polygon;
+            private PixM contours;
+            private PixM filledContours;
+            @Nullable
+            public PixM actualDrawing;
             public Surface() {
 
             }
@@ -151,14 +161,9 @@ public class GoogleFaceDetection
                     polygon = (Polygon) new Polygon().decode(in);
                     contours = (PixM) new PixM(1, 1).decode(in);
                     filledContours = (PixM) new PixM(1, 1).decode(in);
-                    if (actualDrawing == null)
-                        actualDrawing = contours.copy();
-                    if (actualDrawing != null)
-                        actualDrawing = (PixM) new PixM(1, 1).decode(in);
-
                     return this;
                 } catch (Exception exception) {
-                    return null;
+                    throw new RuntimeException("Exception loading Surface"+exception.getLocalizedMessage());
                 }
             }
 
@@ -172,10 +177,6 @@ public class GoogleFaceDetection
                     polygon.encode(out);
                     contours.encode(out);
                     filledContours.encode(out);
-                    if (actualDrawing == null) {
-                        actualDrawing = contours.copy();
-                    }
-                    actualDrawing.encode(out);
 
                 } catch (Exception exception) {
                     return -1;
@@ -188,15 +189,6 @@ public class GoogleFaceDetection
                 return 5;
             }
 
-            private int colorFill;
-            private int colorContours;
-            private int colorTransparent;
-            private int surfaceId;
-            private Polygon polygon;
-            private PixM contours;
-            private PixM filledContours;
-            @Nullable
-            public PixM actualDrawing;
 
             public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
                 this.surfaceId = surfaceId;
@@ -296,6 +288,19 @@ public class GoogleFaceDetection
 
             public void setActualDrawing(@Nullable PixM actualDrawing) {
                 this.actualDrawing = actualDrawing;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Surface surface = (Surface) o;
+                return getColorFill() == surface.getColorFill() && getColorContours() == surface.getColorContours() && getColorTransparent() == surface.getColorTransparent() && getSurfaceId() == surface.getSurfaceId() && Objects.equals(getPolygon(), surface.getPolygon()) && Objects.equals(getContours(), surface.getContours()) && Objects.equals(getFilledContours(), surface.getFilledContours());
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(getColorFill(), getColorContours(), getColorTransparent(), getSurfaceId(), getPolygon(), getContours(), getFilledContours());
             }
         }
 
@@ -415,4 +420,16 @@ public class GoogleFaceDetection
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GoogleFaceDetection that = (GoogleFaceDetection) o;
+        return Objects.equals(getDataFaces(), that.getDataFaces());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDataFaces());
+    }
 }
