@@ -29,17 +29,19 @@ import one.empty3.library.StructureMatrix;
 public class GoogleFaceDetection
         implements Parcelable, Serializable, Serialisable {
     static GoogleFaceDetection instance;
+    private static GoogleFaceDetection instance2;
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
 
     public static GoogleFaceDetection getInstance(boolean newInstance) {
-        if(instance==null || newInstance)
+        if (instance == null || newInstance)
             instance = new GoogleFaceDetection();
         return instance;
     }
+
     public static boolean isInstance() {
-        if(instance!=null)
+        if (instance != null)
             return true;
         else
             return false;
@@ -104,7 +106,7 @@ public class GoogleFaceDetection
         for (int face = 0; face < getDataFaces().size(); face++) {
             parcel.writeInt(getDataFaces().size());
 
-            FaceData faceData =getDataFaces().get(face);
+            FaceData faceData = getDataFaces().get(face);
 
             parcel.writeInt(faceData.getFaceSurfaces().size());
 
@@ -124,10 +126,17 @@ public class GoogleFaceDetection
         instance = googleFaceDetection;
     }
 
+    public static void setInstance2(@Nullable GoogleFaceDetection googleFaceDetection) {
+        instance2 = googleFaceDetection;
+    }
+
+    public static GoogleFaceDetection getInstance2() {
+        return instance2;
+    }
 
     public static class FaceData implements Serializable {
 
-        public static class Surface implements Serializable, Serialisable{
+        public static class Surface implements Serializable, Serialisable {
             public Surface() {
 
             }
@@ -139,14 +148,15 @@ public class GoogleFaceDetection
                     colorContours = in.readInt();
                     colorTransparent = in.readInt();
                     surfaceId = in.readInt();
-                    polygon = (Polygon) polygon.decode(in);
-                    contours = (PixM) contours.decode(in);
-                    filledContours = (PixM) filledContours.decode(in);
-                    if(actualDrawing==null)
+                    polygon = (Polygon) new Polygon().decode(in);
+                    contours = (PixM) new PixM(1, 1).decode(in);
+                    filledContours = (PixM) new PixM(1, 1).decode(in);
+                    if (actualDrawing == null)
                         actualDrawing = contours.copy();
-                    actualDrawing = (PixM) actualDrawing.decode(in);
+                    if (actualDrawing != null)
+                        actualDrawing = (PixM) new PixM(1, 1).decode(in);
 
-                    return (Surface)this;
+                    return this;
                 } catch (Exception exception) {
                     return null;
                 }
@@ -163,7 +173,7 @@ public class GoogleFaceDetection
                     contours.encode(out);
                     filledContours.encode(out);
                     if (actualDrawing == null) {
-                            actualDrawing = contours.copy();
+                        actualDrawing = contours.copy();
                     }
                     actualDrawing.encode(out);
 
@@ -177,6 +187,7 @@ public class GoogleFaceDetection
             public int type() {
                 return 5;
             }
+
             private int colorFill;
             private int colorContours;
             private int colorTransparent;
@@ -300,16 +311,19 @@ public class GoogleFaceDetection
 
         public FaceData(List<Surface> faceSurfaces) {
             this.faceSurfaces = faceSurfaces;
-            if(faceSurfaces==null)
+            if (faceSurfaces == null)
                 this.faceSurfaces = new ArrayList<>();
         }
+
         public FaceData() {
             this.faceSurfaces = new ArrayList<>();
         }
     }
+
     public GoogleFaceDetection(List<FaceData> dataFaces) {
         this.dataFaces = dataFaces;
     }
+
     public GoogleFaceDetection() {
         dataFaces = new ArrayList<>();
     }
@@ -328,12 +342,12 @@ public class GoogleFaceDetection
             dataFace.getFaceSurfaces().forEach(new Consumer<FaceData.Surface>() {
                 @Override
                 public void accept(FaceData.Surface surface1) {
-                    if(surface1.isContaning(pInPicture))
+                    if (surface1.isContaning(pInPicture))
                         surface[0] = surface1;
                 }
             });
         }
-        if(surface[0]!=null)
+        if (surface[0] != null)
             return surface[0];
         else
             return null;
@@ -354,24 +368,25 @@ public class GoogleFaceDetection
     @Override
     public Serialisable decode(DataInputStream in) {
         try {
-            GoogleFaceDetection faceDetection =  new GoogleFaceDetection();
-            int countFaces= in.readInt();
-            int count = 0;
-            for(int c = 0; c<countFaces; c++) {
-                    FaceData faceData = new FaceData();
+            GoogleFaceDetection faceDetection = new GoogleFaceDetection();
+            int countFaces = in.readInt();
+            for (int c = 0; c < countFaces; c++) {
+                FaceData faceData = new FaceData();
                 faceDetection.getDataFaces().add(faceData);
-                    int count2 = in.readInt();
-                    for (int j = 0; j < count2; j++) {
-                        Serialisable decode = new FaceData.Surface().decode(in);
-                        faceDetection.getDataFaces().get(c).getFaceSurfaces().add((FaceData.Surface) decode);
-                    }
+                int count2 = in.readInt();
+                for (int j = 0; j < count2; j++) {
+                    FaceData.Surface decode = (FaceData.Surface) new FaceData.Surface().decode(in);
+                    faceDetection.getDataFaces().get(c).getFaceSurfaces().add(decode);
+                }
             }
+            return faceDetection;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return this;
+
     }
-        @Override
+
+    @Override
     public int encode(DataOutputStream out) {
         try {
             out.writeInt(dataFaces.size());

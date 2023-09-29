@@ -103,7 +103,12 @@ class FaceActivity : ActivitySuperClass() {
                         intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
                     }
                     if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
-                        faceOverlayView.performClick()
+                        if(GoogleFaceDetection.getInstance2()!=null) {
+                            faceOverlayView.googleFaceDetection = GoogleFaceDetection.getInstance2()
+                            GoogleFaceDetection.setInstance(GoogleFaceDetection.getInstance(false))
+                        } else {
+                            faceOverlayView.performClick()
+                        }
                     } else if (GoogleFaceDetection.isInstance()) {
                         faceOverlayView.googleFaceDetection = GoogleFaceDetection.getInstance(false)
                     }
@@ -534,6 +539,8 @@ class FaceActivity : ActivitySuperClass() {
                         faceOverlayView.googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
                         GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
+                        faceOverlayView.googleFaceDetection.selectedSurface = faceOverlayView.googleFaceDetection.dataFaces[0].faceSurfaces[0]
+                        GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
                         if(faceOverlayView.googleFaceDetection==null) {
                             Toast.makeText(
                                 applicationContext,
