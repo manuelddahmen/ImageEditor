@@ -8,6 +8,7 @@ import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.view.MotionEvent
 import android.view.View
@@ -15,18 +16,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
+import androidx.core.net.toUri
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
-import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.io.InputStream
 import java.io.ObjectOutputStream
-import java.io.OutputStream
 import java.util.UUID
 
 
@@ -204,17 +200,18 @@ class FaceActivity : ActivitySuperClass() {
          */
             saveModel.setOnClickListener {
                 if (faceOverlayView.googleFaceDetection != null) {
-                    var filesFile = getFileInPictureDir("model.model")
+                    var filesFile = getExternalFilesDir("model.fac")
                 var i: Int = 0
-                while (filesFile.toFile().exists()) {
-                    filesFile = getFileInPictureDir("model$i.model")
-                    i++
-                }
-                val photoURI: Uri = filesFile
+               //while (filesFile==null || filesFile!!.exists()) {
+                //    filesFile = getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
+                //    i++
+                //}
+                val photoURI: Uri = filesFile!!.toUri()
                     val permissionsStorage = arrayOf(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_MEDIA_IMAGES
+                        Manifest.permission.READ_MEDIA_IMAGES,
+                        Manifest.permission.MANAGE_DOCUMENTS
                     )
                     val requestExternalStorage = 1
                     val permission1 = ActivityCompat.checkSelfPermission(
@@ -225,6 +222,9 @@ class FaceActivity : ActivitySuperClass() {
                     )
                     val permission3 = ActivityCompat.checkSelfPermission(
                         applicationContext, Manifest.permission.READ_MEDIA_IMAGES
+                    )
+                    val permission4 = ActivityCompat.checkSelfPermission(
+                        applicationContext, Manifest.permission.MANAGE_DOCUMENTS
                     )
                     if (permission1 != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(
@@ -248,12 +248,19 @@ class FaceActivity : ActivitySuperClass() {
                         )
                     }
 
+                    if (permission4 != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(
+                            thisActivity,
+                            permissionsStorage,
+                            requestExternalStorage
+                        )
+                    }
 
                     val intentSave = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                         addCategory(Intent.CATEGORY_OPENABLE)
-                        setDataAndType(photoURI, "application/*.fac")
+                        type= "application/*.fac"
                         putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
-                        putExtra(Intent.EXTRA_TITLE, photoURI)
+                        putExtra(Intent.EXTRA_TITLE, photoURI.path)
                         putExtra("maxRes", maxRes)
                         if(currentFile!=null) {
                             putExtra("currentFile", currentFile)
@@ -275,14 +282,15 @@ class FaceActivity : ActivitySuperClass() {
             loadModel.setOnClickListener {
                 var autoname: File? =
                     getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
-                while (autoname == null)
+                while (autoname == null || autoname.exists())
                     autoname = File("face-drawings-" + UUID.randomUUID() + ".fac")
                 val autoname1 : File = autoname
 
                 val permissionsStorage = arrayOf(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_MEDIA_IMAGES
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.MANAGE_DOCUMENTS
                 )
                 val requestExternalStorage = 1
                 val permission1 = ActivityCompat.checkSelfPermission(
@@ -293,6 +301,9 @@ class FaceActivity : ActivitySuperClass() {
                 )
                 val permission3 = ActivityCompat.checkSelfPermission(
                     applicationContext, Manifest.permission.READ_MEDIA_IMAGES
+                )
+                val permission4 = ActivityCompat.checkSelfPermission(
+                    applicationContext, Manifest.permission.MANAGE_DOCUMENTS
                 )
                 if (permission1 != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
@@ -315,20 +326,28 @@ class FaceActivity : ActivitySuperClass() {
                         requestExternalStorage
                     )
                 }
+                if (permission4 != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(
+                        thisActivity,
+                        permissionsStorage,
+                        requestExternalStorage
+                    )
+                }
 
-
+/*
                 val photoURI = FileProvider.getUriForFile(
                     applicationContext,
                     applicationContext.packageName + ".provider",
                     autoname1
                 )
+*/
                 val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
                     type = "application/*.fac"
                     putExtra("currentFile", currentFile)
                     putExtra("maxRes", maxRes)
-                    putExtra(Intent.EXTRA_TITLE, photoURI)
-                    setDataAndType(photoURI, "application/*.fac")
+                    putExtra(Intent.EXTRA_TITLE, autoname1.path)
+ //                   setDataAndType(photoURI, "application/*.fac")
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
                 }
                 val intent2 = Intent.createChooser(intentLoad, "Choose a file")
@@ -347,7 +366,19 @@ class FaceActivity : ActivitySuperClass() {
         }
     }
 
-
+    fun getRealPathFromURI2(contentURI: Uri): String? {
+        val result: String?
+        val cursor = contentResolver.query(contentURI, null, null, null, null)
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
     fun getFileInPictureDir(s: String): Uri {
 
         val permissionsStorage = arrayOf(
@@ -397,90 +428,6 @@ class FaceActivity : ActivitySuperClass() {
         )
     }
 
-    private fun getFileContent(requestCode: Int, resultCode: Int, result: Intent?): InputStream? {
-
-        val uri: Uri? = result?.data
-        var fileContent: ByteArray? = null
-        var inputStream: InputStream? = null
-
-        try {
-            if (uri != null) {
-
-                val cursor = contentResolver.query(uri, null, null, null, null)
-
-                val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                cursor.moveToFirst()
-
-                val name = cursor.getString(nameIndex)
-                val size = cursor.getLong(sizeIndex).toString()
-                inputStream = contentResolver.openInputStream(uri)
-                if (inputStream != null) {
-                    fileContent = ByteArray(size as Int)
-                    inputStream.read(fileContent)
-                    val baos = ByteArrayOutputStream()
-                    var read: Int
-                    while (inputStream.read(fileContent)
-                            .also { read = it } > -1
-                    ) baos.write(fileContent, 0, read)
-                    fileContent = baos.toByteArray()
-
-
-                    baos.close()
-                }
-            }
-        } catch (e: FileNotFoundException) {
-        } catch (e: IOException) {
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close()
-                } catch (e: IOException) {
-                }
-            }
-        }
-
-        return inputStream
-    }
-
-    fun createFileDocument(requestCode: Int, resultCode: Int, result: Intent?): ByteArray? {
-
-        val uri: Uri? = result?.data
-        var fileContent: ByteArray? = null
-        var outputStream: OutputStream? = null
-
-        try {
-            if (uri != null) {
-
-                val cursor = contentResolver.query(uri, null, null, null, null)
-
-                val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                cursor.moveToFirst()
-
-                val name = cursor.getString(nameIndex)
-                val size = cursor.getLong(sizeIndex).toString()
-                outputStream = contentResolver.openOutputStream(uri)
-                if (outputStream != null) {
-                    fileContent = ByteArray(size as Int)
-                    outputStream.write(fileContent)
-                    outputStream.close()
-                }
-            }
-        } catch (e: FileNotFoundException) {
-        } catch (e: IOException) {
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close()
-                } catch (e: IOException) {
-                }
-            }
-        }
-
-        return fileContent
-    }
-
     @Deprecated("Deprecated")
     override fun onActivityResult(requestCode: Int, resultCode: Int, result: Intent?) {
         super.onActivityResult(requestCode, resultCode, result)
@@ -525,8 +472,9 @@ class FaceActivity : ActivitySuperClass() {
 
             if (get != null) {
                 try {
-                    file = get.toFile()
+                    file = get.path?.let { File(it) }!!
                 } catch (ex: RuntimeException) {
+                    ex.printStackTrace()
                     Toast.makeText(
                         applicationContext,
                         "FIle==null after filechooser " + ex.message,
@@ -535,6 +483,7 @@ class FaceActivity : ActivitySuperClass() {
                         .show()
                     return
                 } catch (ex1: NullPointerException) {
+                    ex1.printStackTrace()
                     Toast.makeText(
                         applicationContext,
                         "FIle==null after filechooser " + ex1.message,
@@ -579,8 +528,8 @@ class FaceActivity : ActivitySuperClass() {
                     }
                 } else if (requestCode == OPEN_MODEL) {
                     try {
-                        val inputStream =
-                            this.getFileContent(requestCode, resultCode, result) ?: return
+                        val inputStream = getRealPathFromIntentData(result)
+                            //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         faceOverlayView.googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
