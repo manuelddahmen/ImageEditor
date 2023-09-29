@@ -120,6 +120,10 @@ public class GoogleFaceDetection
         }
     }
 
+    public static void setInstance(@Nullable GoogleFaceDetection googleFaceDetection) {
+        instance = googleFaceDetection;
+    }
+
 
     public static class FaceData implements Serializable {
 

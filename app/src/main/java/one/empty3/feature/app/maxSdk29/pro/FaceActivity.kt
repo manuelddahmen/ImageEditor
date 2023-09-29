@@ -260,7 +260,7 @@ class FaceActivity : ActivitySuperClass() {
                         addCategory(Intent.CATEGORY_OPENABLE)
                         type= "application/*.fac"
                         putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
-                        putExtra(Intent.EXTRA_TITLE, photoURI.path)
+                        putExtra(Intent.EXTRA_TITLE, filesFile.name)
                         putExtra("maxRes", maxRes)
                         if(currentFile!=null) {
                             putExtra("currentFile", currentFile)
@@ -346,7 +346,7 @@ class FaceActivity : ActivitySuperClass() {
                     type = "application/*.fac"
                     putExtra("currentFile", currentFile)
                     putExtra("maxRes", maxRes)
-                    putExtra(Intent.EXTRA_TITLE, autoname1.path)
+                    putExtra(Intent.EXTRA_TITLE, "model.fac")
  //                   setDataAndType(photoURI, "application/*.fac")
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
                 }
@@ -533,6 +533,14 @@ class FaceActivity : ActivitySuperClass() {
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         faceOverlayView.googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
+                        GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
+                        if(faceOverlayView.googleFaceDetection==null) {
+                            Toast.makeText(
+                                applicationContext,
+                                "GoogleFaceDetection == null",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     } catch (ex: RuntimeException) {
                         ex.printStackTrace()
                         Toast.makeText(
