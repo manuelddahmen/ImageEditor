@@ -20,6 +20,14 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static androidx.appcompat.content.res.AppCompatResources.getDrawable;
+
+import android.app.Application;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
+import androidx.test.InstrumentationRegistry;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,27 +43,50 @@ import one.empty3.feature20220726.GoogleFaceDetection;
 public class GoogleFaceDetectTest {
     @Test
     public void loadSaveTest()   {
-        BufferedImage image = new BufferedImage();
+        Application app =
+                (Application) InstrumentationRegistry
+                        .getTargetContext()
+                        .getApplicationContext();
+        int imageManu = R.mipmap.imagemanu;
+        Drawable drawable = getDrawable(app.getApplicationContext(), imageManu);
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                try {
+                    BufferedImage image = new BufferedImage(bitmapDrawable.getBitmap());
 
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
+                    FaceOverlayView faceOverlayView = new FaceOverlayView(app.getApplicationContext());
 
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
-            googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
-            byteArrayOutputStream.close();
+                    faceOverlayView.updateImage(image.bitmap);
 
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
 
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
-            GoogleFaceDetection googleFaceDetection1=
-                    (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
-            byteArrayInputStream.close();
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
 
-            assert(googleFaceDetection1.equals(googleFaceDetection));
+                    googleFaceDetection = faceOverlayView.getGoogleFaceDetection();
 
-        } catch (IOException e6) {
-            e6.printStackTrace();
-            Assert.fail();
+                    googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
+                    byteArrayOutputStream.close();
+
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+                    GoogleFaceDetection googleFaceDetection1=
+                            (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
+                    byteArrayInputStream.close();
+
+                    System.err.println("Number of faces 1 : "+googleFaceDetection.getDataFaces().size());
+                    System.err.println("Number of faces 2 : "+googleFaceDetection1.getDataFaces().size());
+
+
+                    assert(googleFaceDetection1.equals(googleFaceDetection));
+
+                } catch (IOException e6) {
+                    e6.printStackTrace();
+                    Assert.fail();
+                }
+            }
         }
     }
+
 }
