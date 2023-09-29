@@ -57,14 +57,19 @@ public class GoogleFaceDetectTest {
 
                     FaceOverlayView faceOverlayView = new FaceOverlayView(app.getApplicationContext());
 
+                    faceOverlayView.setBitmap(image.bitmap);
                     faceOverlayView.updateImage(image.bitmap);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
 
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
-
+                    GoogleFaceDetection googleFaceDetection;
                     googleFaceDetection = faceOverlayView.getGoogleFaceDetection();
 
+                    if(googleFaceDetection==null) {
+                        googleFaceDetection = new GoogleFaceDetection();
+                        System.err.println("GoogleFaceDetection == null");
+                    } else {
+                    }
                     googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
                     byteArrayOutputStream.close();
 

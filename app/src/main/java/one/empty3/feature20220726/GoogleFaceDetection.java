@@ -174,12 +174,19 @@ public class GoogleFaceDetection
                     out.write(colorContours);
                     out.write(colorTransparent);
                     out.write(surfaceId);
+                    if(polygon==null)
+                        polygon = new Polygon();
                     polygon.encode(out);
+                    if(contours==null)
+                        contours = new PixM(1,1);
                     contours.encode(out);
+                    if(filledContours==null) {
+                        filledContours = new PixM(1, 1);
+                    }
                     filledContours.encode(out);
 
                 } catch (Exception exception) {
-                    return -1;
+                    exception.printStackTrace();
                 }
                 return 0;
             }
@@ -397,19 +404,19 @@ public class GoogleFaceDetection
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
-                    out.writeInt(faceData.getFaceSurfaces().size());
-                    faceData.faceSurfaces.forEach(surface -> {
-                        surface.encode(out);
-                    });
+                    if(!faceData.getFaceSurfaces().isEmpty()) {
+                        out.writeInt(faceData.getFaceSurfaces().size());
+                        faceData.faceSurfaces.forEach(surface -> {
+                            surface.encode(out);
+                        });
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
-        } catch (RuntimeException ex) {
+        } catch (RuntimeException | IOException ex) {
             ex.printStackTrace();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         return 0;
