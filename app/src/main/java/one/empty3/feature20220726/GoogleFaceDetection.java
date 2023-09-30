@@ -154,13 +154,14 @@ public class GoogleFaceDetection
             @Override
             public Serialisable decode(DataInputStream in) {
                 try {
-                    colorFill = in.readInt();
-                    colorContours = in.readInt();
-                    colorTransparent = in.readInt();
-                    surfaceId = in.readInt();
-                    polygon = (Polygon) new Polygon().decode(in);
-                    contours = (PixM) new PixM(1, 1).decode(in);
-                    filledContours = (PixM) new PixM(1, 1).decode(in);
+                    Surface surface = new Surface();
+                    surface.colorFill = in.readInt();
+                    surface.colorContours = in.readInt();
+                    surface.colorTransparent = in.readInt();
+                    surface.surfaceId = in.readInt();
+                    surface.polygon = (Polygon) new Polygon().decode(in);
+                    surface.contours = (PixM) new PixM(1, 1).decode(in);
+                    surface.filledContours = (PixM) new PixM(1, 1).decode(in);
                     return this;
                 } catch (Exception exception) {
                     throw new RuntimeException("Exception loading Surface"+exception.getLocalizedMessage());
@@ -187,6 +188,7 @@ public class GoogleFaceDetection
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                    throw new RuntimeException(exception);
                 }
                 return 0;
             }
@@ -385,8 +387,8 @@ public class GoogleFaceDetection
             for (int c = 0; c < countFaces; c++) {
                 FaceData faceData = new FaceData();
                 faceDetection.getDataFaces().add(faceData);
-                int count2 = in.readInt();
-                for (int j = 0; j < count2; j++) {
+                int countSurface = in.readInt();
+                for (int j = 0; j < countSurface; j++) {
                     FaceData.Surface decode = (FaceData.Surface) new FaceData.Surface().decode(in);
                     faceDetection.getDataFaces().get(c).getFaceSurfaces().add(decode);
                 }
@@ -401,11 +403,13 @@ public class GoogleFaceDetection
     @Override
     public int encode(DataOutputStream out) {
         try {
+            System.out.println("Number of recorded faces : " + dataFaces.size());
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
                     if(!faceData.getFaceSurfaces().isEmpty()) {
                         out.writeInt(faceData.getFaceSurfaces().size());
+                        System.out.println("Number of recorded surfaces : " + faceData.faceSurfaces.size());
                         faceData.faceSurfaces.forEach(surface -> {
                             surface.encode(out);
                         });

@@ -133,7 +133,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         currentDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-/*
+
         Button takePhoto = findViewById(R.id.takePhotoButton);
 
         takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             }
 
         });
-*/
+
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceContour;
@@ -99,8 +100,15 @@ public class FaceOverlayView extends ImageViewSelection {
             FaceDetector client = FaceDetection.getClient(highAccuracyOpts);
             client.process(inputImage).addOnSuccessListener(faces -> {
                 mFaces = faces;
+                System.out.println("Number of faces (faceOverlay::setBitmap :" + mFaces.size());
                 updateImage(mCopy);
 
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("Error in face detection : "+e.getLocalizedMessage());
+                    e.printStackTrace();
+                }
             });
         } catch (Exception ignored) {
             if (ignored instanceof com.google.mlkit.common.MlKitException) {

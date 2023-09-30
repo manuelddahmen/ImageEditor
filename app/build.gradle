@@ -156,6 +156,7 @@ android {
             useSupportLibrary true
         }
         applicationId "one.empty3.feature.app.maxSdk29.pro"
+        testApplicationId = "one.empty3.feature.app.maxSdk29.pro.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         targetSdk 34
         compileSdk 34
@@ -264,6 +265,7 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation 'com.google.android.play:integrity:1.2.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
 }
 
 

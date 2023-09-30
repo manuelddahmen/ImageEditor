@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     
     <application
+            android:installLocation="auto"
             android:name=".FeatureAppApplication"
             android:allowBackup="true"
             android:enableOnBackInvokedCallback="true"

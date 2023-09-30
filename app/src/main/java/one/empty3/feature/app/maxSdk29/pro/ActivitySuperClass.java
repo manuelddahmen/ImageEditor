@@ -259,7 +259,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
                 }
             }
-            currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
+            currentFile1 = properties.getProperty("currentFile", null);
             if(currentFile1!=null)
                 currentFile = new File(currentFile1);
         } catch (RuntimeException ex) {
