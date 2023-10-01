@@ -843,18 +843,22 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     private double[] tmpColor2 = new double[3];
-    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmaToDraw, int colorTransparent) {
+    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmapToDraw, int colorPaint,
+                           PixM filledImage) {
         double[] tmpColor3 = new double[3];
-        Lumiere.getDoubles(colorTransparent, tmpColor3);
+        double[] pixelsFilterValue = new double[3];
+        Lumiere.getDoubles(colorPaint, tmpColor3);
         for (int i = x; i < width; i++) {
             for (int j = y; j < height; j++) {
-                assert bitmaToDraw != null;
-                double xOrig = Math.min(1.0 * (i - x) / width * bitmaToDraw.getWidth(), bitmaToDraw.getWidth() - 1);
-                double yOrig = Math.min(1.0 * (j - y) / height * bitmaToDraw.getHeight(), bitmaToDraw.getHeight() - 1);
-
-                int pixel = bitmaToDraw.getPixel((int) xOrig, (int) yOrig);
-                Lumiere.getDoubles(pixel, tmpColor2);
-                if (!equalsArrays(tmpColor2, tmpColor3, 0.01)) {
+                assert bitmapToDraw != null;
+                double xOrig = Math.min(1.0 * (i - x) / width * bitmapToDraw.getWidth(), bitmapToDraw.getWidth() - 1);
+                double yOrig = Math.min(1.0 * (j - y) / height * bitmapToDraw.getHeight(), bitmapToDraw.getHeight() - 1);
+                double xFilter = Math.min(1.0 * (i - x) / width * filledImage.getColumns(), filledImage.getColumns() - 1);
+                double yFilter = Math.min(1.0 * (j - y) / height * filledImage.getLines(), filledImage.getLines() - 1);
+                int pixel = bitmapToDraw.getPixel((int) xOrig, (int) yOrig);
+                double [] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
+                Lumiere.getDoubles(pixel , tmpColor2);
+                if (!equalsArrays(pixelsFilterValue, pixelIfNot, 0.01) ) {
                     setValues(i, j, tmpColor2);
                 }
             }

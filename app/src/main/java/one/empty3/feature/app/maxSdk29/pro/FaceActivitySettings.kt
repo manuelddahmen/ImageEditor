@@ -249,8 +249,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                 filledContours.paintIfNot(
                     0, 0, filledContours.columns, filledContours.lines,
                     selectedImage,
-                    selectedSurfaceAllPicture!!.colorTransparent
-                )
+                    selectedSurfaceAllPicture!!.colorContours,
+                    selectedSurfaceAllPicture!!.contours)
                 drawSurface()
                 drawSurfaces()
 

@@ -435,7 +435,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
                 double[] color = pixM.getValues(xMap, yMap);
                 int colorToDraw = Lumiere.getInt(color);
-                if (!PixM.equalsArrays(transparent, color, 0.05))
+                if (!PixM.equalsArrays(transparent, color, 0.05)
+                   &&i>=0 && i<mCopy.getWidth() && j>=0 && j<mCopy.getHeight())
                     mCopy.setPixel((int) i, (int) j, colorToDraw);
                 pixels++;
 
