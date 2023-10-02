@@ -22,7 +22,6 @@ import one.empty3.feature20220726.GoogleFaceDetection
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.File
-import java.io.ObjectOutputStream
 import java.util.UUID
 
 
@@ -500,18 +499,9 @@ class FaceActivity : ActivitySuperClass() {
                 if (requestCode == CREATE_FILE) {
                     val openOutputStream = contentResolver.openOutputStream(get)
                     if (openOutputStream != null) {
-                        val oos = ObjectOutputStream(openOutputStream)
                         try {
-//                        oos.writeUnshared(faceOverlayView.googleFaceDetection)
-//                        oos.close()
-
-                            val instance = faceOverlayView.googleFaceDetection
-
-                            if (instance != null) {
-                                instance.encode(DataOutputStream(openOutputStream))
-                            }
-                            oos.flush()
-                            oos.close()
+                            val instance : GoogleFaceDetection = faceOverlayView.googleFaceDetection
+                            instance.encode(DataOutputStream(openOutputStream))
                         } catch (ex: RuntimeException) {
                             ex.printStackTrace()
                             ex.printStackTrace()

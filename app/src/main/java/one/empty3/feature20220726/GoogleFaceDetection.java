@@ -384,6 +384,7 @@ public class GoogleFaceDetection
         try {
             GoogleFaceDetection faceDetection = new GoogleFaceDetection();
             int countFaces = in.readInt();
+            System.out.println("Number of faces to read = " + countFaces);
             for (int c = 0; c < countFaces; c++) {
                 FaceData faceData = new FaceData();
                 faceDetection.getDataFaces().add(faceData);
@@ -403,7 +404,7 @@ public class GoogleFaceDetection
     @Override
     public int encode(DataOutputStream out) {
         try {
-            System.out.println("Number of recorded faces : " + dataFaces.size());
+            System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
@@ -420,7 +421,7 @@ public class GoogleFaceDetection
             });
         } catch (RuntimeException | IOException ex) {
             ex.printStackTrace();
-
+            return -1;
         }
 
         return 0;

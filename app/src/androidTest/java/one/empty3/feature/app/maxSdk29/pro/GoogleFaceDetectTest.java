@@ -56,9 +56,41 @@ public class GoogleFaceDetectTest {
         permission = Manifest.permission.READ_MEDIA_IMAGES;
         InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
         permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-        InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+        //InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
         permission = Manifest.permission.READ_EXTERNAL_STORAGE;
         InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+    }
+
+    @Test
+    public void testLoadSaveInt() {
+        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+        googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
+
+
+        String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + ".fac";
+        try {
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
+            googleFaceDetection.encode(dataOutputStream);
+            Assert.assertTrue(true);
+            dataOutputStream.close();
+        } catch (IOException e) {
+            Assert.fail();
+            return;
+        }
+        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection();
+
+        try {
+            DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
+            googleFaceDetection1 = (GoogleFaceDetection) googleFaceDetection1.decode(dataInputStream);
+            dataInputStream.close();
+            Assert.assertTrue(true);
+        } catch (IOException e) {
+            Assert.fail();
+            return;
+        }
+
+        Assert.assertEquals(googleFaceDetection.getDataFaces().size(), googleFaceDetection1.getDataFaces().size());
     }
     @Test
     public void loadSaveTest() {
@@ -118,7 +150,7 @@ public class GoogleFaceDetectTest {
             System.out.println("Current absolute path is: " + s);
 
             Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
-            InputStream inputStream = new FileInputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model.fac");
+            InputStream inputStream = new FileInputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model.fac (2)");
             GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
             googleFaceDetection
                     = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
