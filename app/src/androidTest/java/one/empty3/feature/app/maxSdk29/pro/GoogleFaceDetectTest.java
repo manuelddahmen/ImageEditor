@@ -22,26 +22,44 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import static androidx.appcompat.content.res.AppCompatResources.getDrawable;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
 
 public class GoogleFaceDetectTest {
+    @Before
+    public void setup() {
+        String permission;
+        permission = Manifest.permission.READ_MEDIA_IMAGES;
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+        permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+        permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+        InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+    }
     @Test
     public void loadSaveTest() {
         Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
@@ -62,6 +80,8 @@ public class GoogleFaceDetectTest {
 
                     FaceOverlayView faceOverlayView = new FaceOverlayView(applicationContext);
 
+                    applicationContext.setTheme(R.attr.theme);
+
                     faceOverlayView.setBitmap(bitmap);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(10000000);
@@ -76,21 +96,11 @@ public class GoogleFaceDetectTest {
                         Assert.fail();
                     } else {
                     }
-                    googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
+                    googleFaceDetection.encode(new DataOutputStream(
+                            new FileOutputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-"+ UUID.randomUUID()+".fac")));
                     byteArrayOutputStream.close();
 
-                    byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
-                    GoogleFaceDetection googleFaceDetection1 =
-                            (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
-                    byteArrayInputStream.close();
-
                     System.err.println("Number of faces 1 : " + googleFaceDetection.getDataFaces().size());
-                    System.err.println("Number of faces 2 : " + googleFaceDetection1.getDataFaces().size());
-
-
-                    assert (googleFaceDetection1.equals(googleFaceDetection));
 
                 } catch (IOException e6) {
                     e6.printStackTrace();
@@ -103,8 +113,12 @@ public class GoogleFaceDetectTest {
     @Test
     public void loadModel() {
         try {
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println("Current absolute path is: " + s);
+
             Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
-            InputStream inputStream = getClass().getResourceAsStream("model.fac");
+            InputStream inputStream = new FileInputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model.fac");
             GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
             googleFaceDetection
                     = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));

@@ -15,13 +15,15 @@
     
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+            android:maxSdkVersion="33"
+            tools:replace="android:maxSdkVersion"/>
     <uses-permission
             android:name="android.permission.READ_EXTERNAL_STORAGE"
-            android:maxSdkVersion="32"
+            android:maxSdkVersion="33"
             />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    
     <application
             android:installLocation="auto"
             android:name=".FeatureAppApplication"
