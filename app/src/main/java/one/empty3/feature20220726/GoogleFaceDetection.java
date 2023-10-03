@@ -69,7 +69,7 @@ public class GoogleFaceDetection
                         int colorTransparent = parcel.readInt();
 
                         faceData.getFaceSurfaces().add(new FaceData.Surface(id, polygon, contours, colorFill, colorContours,
-                                colorTransparent));
+                                colorTransparent, contours.copy()));
 
                     }
                     googleFaceDetection.getDataFaces().add(faceData);
@@ -199,13 +199,14 @@ public class GoogleFaceDetection
             }
 
 
-            public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent) {
+            public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent, PixM filledContours) {
                 this.surfaceId = surfaceId;
                 this.polygon = polygon;
                 this.contours = contours;
                 this.colorFill = colorFill;
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
+                this.filledContours = filledContours;
             }
 
             public int getSurfaceId() {
@@ -396,6 +397,7 @@ public class GoogleFaceDetection
             }
             return faceDetection;
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 

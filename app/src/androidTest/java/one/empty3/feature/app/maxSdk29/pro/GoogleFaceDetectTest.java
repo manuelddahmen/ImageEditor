@@ -49,6 +49,8 @@ import java.util.UUID;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
 import one.empty3.feature20220726.PixM;
+import one.empty3.library.Point3D;
+import one.empty3.library.Polygon;
 
 public class GoogleFaceDetectTest {
     @Before
@@ -118,6 +120,89 @@ public class GoogleFaceDetectTest {
                     Assert.assertTrue(true);
 
                     Assert.assertEquals(pixReloaded, pixM);
+
+                } catch (IOException e) {
+                    Assert.fail();
+                    return;
+                }
+            }
+        }
+    }
+    @Test
+    public void testLoadSaveGoogleFaceDetection() {
+        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        int imageManu = R.drawable.imagemanu;
+        Drawable drawable = getDrawable(applicationContext, imageManu);
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if (bitmapDrawable.getBitmap() != null) {
+                try {
+                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
+                    Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+                    bitmap.reconfigure(bitmap.getWidth()/8, bitmap.getHeight()/8, Bitmap.Config.ARGB_8888);
+                    PixM pixM = new PixM(bitmap);
+
+                    Polygon polygon = new Polygon();
+                    int pointsSize = (int) (Math.random() * 20);
+                    for(int i=0; i<pointsSize; i++) {
+                        polygon.getPoints().add(Point3D.random(400.0));
+                    }
+
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+
+                    googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
+
+                    googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
+                            new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy()));
+
+                    GoogleFaceDetection pixReloaded = new GoogleFaceDetection();
+                    DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
+                    googleFaceDetection.encode(dataOutputStream);
+                    Assert.assertTrue(true);
+                    dataOutputStream.close();
+                    DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
+                    pixReloaded = (GoogleFaceDetection) pixReloaded.decode(dataInputStream);
+                    dataInputStream.close();
+                    Assert.assertTrue(true);
+
+                    Assert.assertEquals(pixReloaded, pixM);
+
+                } catch (IOException e) {
+                    Assert.fail();
+                    return;
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testLoadSavePolygon() {
+        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        int imageManu = R.drawable.imagemanu;
+        Drawable drawable = getDrawable(applicationContext, imageManu);
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if (bitmapDrawable.getBitmap() != null) {
+                try {
+                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-polygon.fac";
+                    Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+                    bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
+                    Polygon polygon = new Polygon();
+                    int pointsSize = (int) (Math.random() * 20);
+                    for(int i=0; i<pointsSize; i++) {
+                        polygon.getPoints().add(Point3D.random(400.0));
+                    }
+                    Polygon polygonReloaded = new Polygon();
+                    DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
+                    polygon.encode(dataOutputStream);
+                    Assert.assertTrue(true);
+                    dataOutputStream.close();
+                    DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
+                    polygonReloaded = (Polygon) polygonReloaded.decode(dataInputStream);
+                    dataInputStream.close();
+                    Assert.assertTrue(true);
+
+                    Assert.assertEquals(polygon, polygonReloaded);
 
                 } catch (IOException e) {
                     Assert.fail();
