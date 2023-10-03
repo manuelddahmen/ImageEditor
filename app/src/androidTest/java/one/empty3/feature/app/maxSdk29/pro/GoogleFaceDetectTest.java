@@ -48,6 +48,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
+import one.empty3.feature20220726.PixM;
 
 public class GoogleFaceDetectTest {
     @Before
@@ -91,6 +92,39 @@ public class GoogleFaceDetectTest {
         }
 
         Assert.assertEquals(googleFaceDetection.getDataFaces().size(), googleFaceDetection1.getDataFaces().size());
+    }
+
+    @Test
+    public void testLoadSavePixM() {
+        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        int imageManu = R.drawable.imagemanu;
+        Drawable drawable = getDrawable(applicationContext, imageManu);
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if (bitmapDrawable.getBitmap() != null) {
+                try {
+                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
+                    PixM pixM = new PixM(bitmap);
+                    PixM pixMreloaded = new PixM(1, 1);
+                    DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
+                    pixM.encode(dataOutputStream);
+                    Assert.assertTrue(true);
+                    dataOutputStream.close();
+                    DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
+                    PixM pixM1 = (PixM) pixMreloaded.decode(dataInputStream);
+                    dataInputStream.close();
+                    Assert.assertTrue(true);
+
+                    Assert.assertEquals(pixMreloaded, pixM);
+
+                } catch (IOException e) {
+                    Assert.fail();
+                    return;
+                }
+            }
+        }
     }
     @Test
     public void loadSaveTest() {

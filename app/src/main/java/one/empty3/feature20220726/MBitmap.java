@@ -171,10 +171,14 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         this.lines = lines;
     }
 
-    public MBitmap plus(M m2) {
+    public MBitmap plus(MBitmap m2) {
         for (int i = 0; i < lines; i++)
             for (int j = 0; j < columns; j++) {
-                set(i, j, get(i, j));
+                for (int c = 0; c < compCount; c++) {
+                    setCompNo(c);
+                    m2.setCompNo(c);
+                    set(i, j, get(i,j)+m2.get(i, j));
+                }
             }
         return this;
     }

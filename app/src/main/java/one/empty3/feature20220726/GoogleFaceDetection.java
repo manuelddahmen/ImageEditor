@@ -388,8 +388,8 @@ public class GoogleFaceDetection
             for (int c = 0; c < countFaces; c++) {
                 FaceData faceData = new FaceData();
                 faceDetection.getDataFaces().add(faceData);
-                int countSurface = in.readInt();
-                for (int j = 0; j < countSurface; j++) {
+                int countSurfaces = in.readInt();
+                for (int j = 0; j < countSurfaces; j++) {
                     FaceData.Surface decode = (FaceData.Surface) new FaceData.Surface().decode(in);
                     faceDetection.getDataFaces().get(c).getFaceSurfaces().add(decode);
                 }
@@ -408,8 +408,8 @@ public class GoogleFaceDetection
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
+                    out.writeInt(faceData.getFaceSurfaces().size());
                     if(!faceData.getFaceSurfaces().isEmpty()) {
-                        out.writeInt(faceData.getFaceSurfaces().size());
                         System.out.println("Number of recorded surfaces : " + faceData.faceSurfaces.size());
                         faceData.faceSurfaces.forEach(surface -> {
                             surface.encode(out);
