@@ -139,7 +139,7 @@ public class GoogleFaceDetectTest {
                 try {
                     String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                    bitmap.reconfigure(bitmap.getWidth()/8, bitmap.getHeight()/8, Bitmap.Config.ARGB_8888);
+                    bitmap.reconfigure(bitmap.getWidth()/20, bitmap.getHeight()/20, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
 
                     Polygon polygon = new Polygon();

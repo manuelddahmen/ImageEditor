@@ -164,6 +164,7 @@ public class GoogleFaceDetection
                     surface.filledContours = (PixM) new PixM(1, 1).decode(in);
                     return surface;
                 } catch (Exception exception) {
+                    exception.printStackTrace();
                     throw new RuntimeException("Exception loading Surface"+exception.getLocalizedMessage());
                 }
             }
