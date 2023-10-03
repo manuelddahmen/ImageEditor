@@ -905,7 +905,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
             PixM pixM = new PixM(w, h);
             for (int i = 0; i < w; i++) {
                 for (int j = 0; j < h; j++) {
-                    for (int k = 0; k < c; k++) {
+                    for (int k = 0; k < compCount; k++) {
                         pixM.setCompNo(k);
                         pixM.set(i, j, in.readDouble());
                     }

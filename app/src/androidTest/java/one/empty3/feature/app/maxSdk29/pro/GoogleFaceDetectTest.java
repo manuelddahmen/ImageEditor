@@ -107,17 +107,17 @@ public class GoogleFaceDetectTest {
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
-                    PixM pixMreloaded = new PixM(1, 1);
+                    PixM pixReloaded = new PixM(1, 1);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     pixM.encode(dataOutputStream);
                     Assert.assertTrue(true);
                     dataOutputStream.close();
                     DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
-                    PixM pixM1 = (PixM) pixMreloaded.decode(dataInputStream);
+                    pixReloaded = (PixM) pixReloaded.decode(dataInputStream);
                     dataInputStream.close();
                     Assert.assertTrue(true);
 
-                    Assert.assertEquals(pixMreloaded, pixM);
+                    Assert.assertEquals(pixReloaded, pixM);
 
                 } catch (IOException e) {
                     Assert.fail();

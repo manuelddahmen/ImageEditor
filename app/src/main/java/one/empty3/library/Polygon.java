@@ -460,7 +460,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
                     p1.set(j ,in.readDouble());
                 }
-                getPoints().setElem(p1, i);
+                p.getPoints().setElem(p1, i);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
