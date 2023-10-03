@@ -104,7 +104,7 @@ public class GoogleFaceDetectTest {
             if (bitmapDrawable.getBitmap() != null) {
                 try {
                     String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
-                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
                     PixM pixMreloaded = new PixM(1, 1);

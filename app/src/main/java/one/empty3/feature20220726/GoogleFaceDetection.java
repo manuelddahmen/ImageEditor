@@ -162,7 +162,7 @@ public class GoogleFaceDetection
                     surface.polygon = (Polygon) new Polygon().decode(in);
                     surface.contours = (PixM) new PixM(1, 1).decode(in);
                     surface.filledContours = (PixM) new PixM(1, 1).decode(in);
-                    return this;
+                    return surface;
                 } catch (Exception exception) {
                     throw new RuntimeException("Exception loading Surface"+exception.getLocalizedMessage());
                 }
