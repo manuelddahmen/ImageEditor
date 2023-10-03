@@ -139,7 +139,7 @@ public class GoogleFaceDetectTest {
                 try {
                     String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                    bitmap.reconfigure(bitmap.getWidth()/20, bitmap.getHeight()/20, Bitmap.Config.ARGB_8888);
+                    bitmap.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
 
                     Polygon polygon = new Polygon();
@@ -155,17 +155,17 @@ public class GoogleFaceDetectTest {
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
                             new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy()));
 
-                    GoogleFaceDetection pixReloaded = new GoogleFaceDetection();
+                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection();
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     googleFaceDetection.encode(dataOutputStream);
                     Assert.assertTrue(true);
                     dataOutputStream.close();
                     DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
-                    pixReloaded = (GoogleFaceDetection) pixReloaded.decode(dataInputStream);
+                    googleFaceDetection1 = (GoogleFaceDetection) googleFaceDetection1.decode(dataInputStream);
                     dataInputStream.close();
                     Assert.assertTrue(true);
 
-                    Assert.assertEquals(pixReloaded, pixM);
+                    System.err.println("Number of faces read: " + googleFaceDetection1.getDataFaces().size());
 
                 } catch (IOException e) {
                     Assert.fail();

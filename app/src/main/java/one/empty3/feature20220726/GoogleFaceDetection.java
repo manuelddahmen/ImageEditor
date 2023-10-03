@@ -172,10 +172,10 @@ public class GoogleFaceDetection
             @Override
             public int encode(DataOutputStream out) {
                 try {
-                    out.write(colorFill);
-                    out.write(colorContours);
-                    out.write(colorTransparent);
-                    out.write(surfaceId);
+                    out.writeInt(colorFill);
+                    out.writeInt(colorContours);
+                    out.writeInt(colorTransparent);
+                    out.writeInt(surfaceId);
                     if(polygon==null)
                         polygon = new Polygon();
                     polygon.encode(out);
