@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -479,5 +480,14 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void setRegionCopy(PixM original, int iStart, int jStart, int iEnd, int jEnd,
                               M3 m3, int iPaste, int jPaste, int iiPaste, int ijPaste) {
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getCompCount(), getColumns(), getLines(), getCompNo());
+        result = 31 * result + Arrays.hashCode(x);
+        result = 31 * result + Arrays.hashCode(tmpColor);
+        return result;
     }
 }

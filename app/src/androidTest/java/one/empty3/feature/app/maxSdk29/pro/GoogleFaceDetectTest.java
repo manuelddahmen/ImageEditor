@@ -165,6 +165,7 @@ public class GoogleFaceDetectTest {
                     dataInputStream.close();
                     Assert.assertTrue(true);
 
+                    Assert.assertEquals(googleFaceDetection1, googleFaceDetection);
                     System.err.println("Number of faces read: " + googleFaceDetection1.getDataFaces().size());
 
                 } catch (IOException e) {

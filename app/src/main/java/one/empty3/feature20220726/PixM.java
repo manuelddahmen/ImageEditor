@@ -34,6 +34,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.ITexture;
@@ -570,12 +571,28 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                 }
     }
 
-    public boolean equals(Object compare) {
-        if (compare instanceof PixM)
-            //if (Arrays.equals((((PixM) compare).toGMatrix()).x, toGMatrix()))
-            return true;
-        return false;
+    public boolean equalsX(double [] x2) {
+        if(x.length==x2.length)
+            return false;
+        for(int i=0; i<x.length; i++) {
+            if(!(x[i]-DELTA(x[i])>=x2[i]&&x[i]+DELTA(x[i])<x2[i]))
+                return false;
 
+        }
+        return true;
+    }
+
+    private double DELTA(double x) {
+        return 0.01;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PixM)) return false;
+        MBitmap mBitmap = (MBitmap) o;
+        return getCompCount() == mBitmap.getCompCount() && getColumns() == mBitmap.getColumns() && getLines() == mBitmap.getLines()
+                && getCompNo() == mBitmap.getCompNo() && Arrays.equals(x, mBitmap.x) ;
     }
 
     public double luminance(int x, int y) {

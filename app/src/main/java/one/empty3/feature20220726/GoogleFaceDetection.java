@@ -306,7 +306,13 @@ public class GoogleFaceDetection
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 Surface surface = (Surface) o;
-                return getColorFill() == surface.getColorFill() && getColorContours() == surface.getColorContours() && getColorTransparent() == surface.getColorTransparent() && getSurfaceId() == surface.getSurfaceId() && Objects.equals(getPolygon(), surface.getPolygon()) && Objects.equals(getContours(), surface.getContours()) && Objects.equals(getFilledContours(), surface.getFilledContours());
+                return getColorFill() == surface.getColorFill()
+                        && getColorContours() == surface.getColorContours()
+                        && getColorTransparent() == surface.getColorTransparent()
+                        && getSurfaceId() == surface.getSurfaceId()
+                        && Objects.equals(getPolygon(), surface.getPolygon())
+                        && Objects.equals(getContours(), surface.getContours())
+                        && Objects.equals(getFilledContours(), surface.getFilledContours());
             }
 
             @Override
