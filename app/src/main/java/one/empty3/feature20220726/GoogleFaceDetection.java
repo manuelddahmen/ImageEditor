@@ -446,7 +446,15 @@ public class GoogleFaceDetection
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoogleFaceDetection that = (GoogleFaceDetection) o;
-        return Objects.equals(getDataFaces(), that.getDataFaces());
+        if(getDataFaces().size()==((GoogleFaceDetection) o).getDataFaces().size()) {
+            int size = getDataFaces().size();
+            for (int i = 0; i < size; i++) {
+                if(!getDataFaces().get(i).equals(getDataFaces().get(i)))
+                    return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
