@@ -93,37 +93,58 @@ class FaceActivity : ActivitySuperClass() {
             }
             val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
             faceDrawSettings.setOnClickListener {
-                if (faceOverlayView.googleFaceDetection != null) {
-                    faceOverlayView.isFinish = true
-                    val intentSettings =
-                        Intent(applicationContext, FaceActivitySettings::class.java)
-                    if (selectedPoint != null) {
-                        intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
-                        intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
-                    }
-                    if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
-                        if(GoogleFaceDetection.getInstance2()!=null) {
-                            faceOverlayView.googleFaceDetection = GoogleFaceDetection.getInstance2()
-                            GoogleFaceDetection.setInstance(GoogleFaceDetection.getInstance(false))
-                        } else {
-                            faceOverlayView.performClick()
-                        }
-                    } else if (GoogleFaceDetection.isInstance()) {
-                        faceOverlayView.googleFaceDetection = GoogleFaceDetection.getInstance(false)
-                    }
+                try {
                     if (faceOverlayView.googleFaceDetection != null) {
-                        //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                        faceOverlayView.isFinish = true
+                        val intentSettings =
+                            Intent(applicationContext, FaceActivitySettings::class.java)
+                        if (selectedPoint != null) {
+                            intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
+                            intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
+                        }
+                        if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
+                            if (GoogleFaceDetection.getInstance2() != null) {
+                                faceOverlayView.googleFaceDetection =
+                                    GoogleFaceDetection.getInstance2()
+                                GoogleFaceDetection.setInstance(
+                                    GoogleFaceDetection.getInstance(
+                                        false
+                                    )
+                                )
+                            } else {
+                                faceOverlayView.performClick()
+                            }
+                        } else if (faceOverlayView.googleFaceDetection != null && GoogleFaceDetection.isInstance()) {
+                            //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                            Toast.makeText(
+                                applicationContext,
+                                getString(R.string.face_le_fichier_ouvert_ou_le_visage_d_tect_existe),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else if (GoogleFaceDetection.isInstance()) {
+                            faceOverlayView.googleFaceDetection =
+                                GoogleFaceDetection.getInstance(false)
+                        }
+
+                        if (originalImage != null) {
+                            intentSettings.putExtra("originalImage", originalImage)
+                        }
+                        passParameters(intentSettings)
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            getString(R.string.face_attendez_que_la_d_tection_de_visage_soit_termin_e),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    if (originalImage != null) {
-                        intentSettings.putExtra("originalImage", originalImage)
-                    }
-                    passParameters(intentSettings)
-                } else {
+                } catch (ex : RuntimeException) {
+                    ex.printStackTrace()
                     Toast.makeText(
                         applicationContext,
-                        "Attendez que la détection de visage soit terminée.",
+                        getString(R.string.error_icon_content_description)+ ex.localizedMessage+"\n"+ex.stackTraceToString(),
                         Toast.LENGTH_LONG
                     ).show()
+
                 }
             }
 
