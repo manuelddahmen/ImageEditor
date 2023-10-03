@@ -101,13 +101,18 @@ class FaceActivitySettings : ActivitySuperClass() {
         //    googleFaceDetection = get as GoogleFaceDetection
 
         googleFaceDetection = GoogleFaceDetection.getInstance(false)
-
-
+        if(googleFaceDetection==null) {
+            googleFaceDetection = GoogleFaceDetection.getInstance2()
+        }
+        if(googleFaceDetection!=null) {
+            faceOverlayView.googleFaceDetection = googleFaceDetection
+        }
         drawIfBitmap()
 
-        if (intent.hasExtra("originalImage") != null) {
-            originalImage = intent.extras!!.get("originalImage") as File
-        }
+        if(intent.hasExtra("originalImage") && (intent!!.extras?.get("originalImage")
+                ?: null) != null
+        )
+        originalImage = intent.extras!!.get("originalImage") as File
 
         if (currentFile != null) {
             if (currentBitmap == null)

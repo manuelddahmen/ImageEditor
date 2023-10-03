@@ -115,6 +115,7 @@ public class GoogleFaceDetection
                 FaceData.Surface surface = faceData.getFaceSurfaces().get(j);
                 parcel.writeParcelable(surface.polygon, 1);
                 parcel.writeParcelable(surface.contours, 1);
+                parcel.writeParcelable(surface.actualDrawing, 1);
                 parcel.writeInt(surface.colorFill);
                 parcel.writeInt(surface.colorContours);
                 parcel.writeInt(surface.colorTransparent);

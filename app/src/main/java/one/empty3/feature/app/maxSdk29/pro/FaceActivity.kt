@@ -114,8 +114,10 @@ class FaceActivity : ActivitySuperClass() {
                             } else {
                                 faceOverlayView.performClick()
                             }
+
                         } else if (faceOverlayView.googleFaceDetection != null && GoogleFaceDetection.isInstance()) {
                             //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                            GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
                             Toast.makeText(
                                 applicationContext,
                                 getString(R.string.face_le_fichier_ouvert_ou_le_visage_d_tect_existe),
@@ -547,11 +549,11 @@ class FaceActivity : ActivitySuperClass() {
                         val inputStream = getRealPathFromIntentData(result)
                             //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
-                        faceOverlayView.googleFaceDetection =
+                        val googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
-                        GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
+                        GoogleFaceDetection.setInstance(googleFaceDetection)
                         //faceOverlayView.googleFaceDetection.selectedSurface = faceOverlayView.googleFaceDetection.dataFaces[0].faceSurfaces[0]
-                        GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
+                        GoogleFaceDetection.setInstance2(googleFaceDetection)
                         if(faceOverlayView.googleFaceDetection==null) {
                             Toast.makeText(
                                 applicationContext,
