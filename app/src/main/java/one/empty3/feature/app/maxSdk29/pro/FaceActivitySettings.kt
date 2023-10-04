@@ -50,7 +50,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var option: Int = OPTION_SELECT_ALL
     private var currentSurfaceSize: Int = 0
     var selectedSurfaceAllPicture: Surface? = null
-    private lateinit var originalImage: File
+    //private var originalImage: File = null
     private lateinit var polygonView: ImageViewSelection
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
@@ -110,15 +110,14 @@ class FaceActivitySettings : ActivitySuperClass() {
         drawIfBitmap()
 
         if(intent.hasExtra("originalImage") && (intent!!.extras?.get("originalImage")
-                ?: null) != null
-        )
-        originalImage = intent.extras!!.get("originalImage") as File
-
+                ?: null) != null) {
+        //    originalImage = intent.extras!!.get("originalImage") as File
+        }
         if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
 
-            var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
+          //  var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
@@ -161,11 +160,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection as Parcelable)
             }
 
-            originalImage = currentFile
+            //originalImage = currentFile
 
-            if (originalImage != null) {
-                intentBack.putExtra("originalImage", originalImage)
-            }
+            //if (originalImage != null) {
+            //    intentBack.putExtra("originalImage", originalImage)
+            //}
             passParameters(intentBack)
         }
 

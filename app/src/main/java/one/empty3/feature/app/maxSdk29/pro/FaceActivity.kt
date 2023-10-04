@@ -95,6 +95,8 @@ class FaceActivity : ActivitySuperClass() {
             faceDrawSettings.setOnClickListener {
                 try {
                     if (faceOverlayView.googleFaceDetection != null) {
+                        GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
+                        GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
                         faceOverlayView.isFinish = true
                         val intentSettings =
                             Intent(applicationContext, FaceActivitySettings::class.java)
@@ -111,10 +113,7 @@ class FaceActivity : ActivitySuperClass() {
                                         false
                                     )
                                 )
-                            } else {
-                                faceOverlayView.performClick()
                             }
-
                         } else if (faceOverlayView.googleFaceDetection != null && GoogleFaceDetection.isInstance()) {
                             //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
                             GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
@@ -552,7 +551,9 @@ class FaceActivity : ActivitySuperClass() {
                         val googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
                         GoogleFaceDetection.setInstance(googleFaceDetection)
-                        //faceOverlayView.googleFaceDetection.selectedSurface = faceOverlayView.googleFaceDetection.dataFaces[0].faceSurfaces[0]
+                        faceOverlayView.googleFaceDetection = googleFaceDetection
+                        if(googleFaceDetection!!.dataFaces.size>0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size>0)
+                            faceOverlayView.googleFaceDetection.selectedSurface = googleFaceDetection!!.dataFaces[0].faceSurfaces[0]
                         GoogleFaceDetection.setInstance2(googleFaceDetection)
                         if(faceOverlayView.googleFaceDetection==null) {
                             Toast.makeText(
