@@ -31,7 +31,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 */
 /**

@@ -198,11 +198,11 @@ public class FaceOverlayView extends ImageViewSelection {
     public void drawFace(Face face, GoogleFaceDetection.FaceData faceData) {
         int surfaceId = FaceContour.FACE;
         FaceContour[] faceContours = {
-                face.getContour(FaceContour.FACE), face.getContour(FaceContour.LEFT_EYE),
-                face.getContour(FaceContour.RIGHT_EYE), face.getContour(FaceContour.NOSE_BOTTOM),
-                face.getContour(FaceContour.NOSE_BRIDGE), face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM),
-                face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM), face.getContour(FaceContour.LEFT_EYEBROW_TOP),
-                face.getContour(FaceContour.RIGHT_EYEBROW_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
+                face.getContour(FaceContour.FACE),
+                face.getContour(FaceContour.LEFT_EYE), face.getContour(FaceContour.RIGHT_EYE),
+                face.getContour(FaceContour.NOSE_BOTTOM), face.getContour(FaceContour.NOSE_BRIDGE),
+                face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM), face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM),
+                face.getContour(FaceContour.RIGHT_EYEBROW_TOP), face.getContour(FaceContour.LEFT_EYEBROW_TOP),
                 face.getContour(FaceContour.UPPER_LIP_BOTTOM), face.getContour(FaceContour.LOWER_LIP_BOTTOM),
                 face.getContour(FaceContour.LOWER_LIP_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
                 face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};

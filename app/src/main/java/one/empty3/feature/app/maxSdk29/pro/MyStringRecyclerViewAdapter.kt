@@ -30,7 +30,7 @@ import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 import one.empty3.feature.app.maxSdk29.pro.databinding.FragmentItemBinding
 
 

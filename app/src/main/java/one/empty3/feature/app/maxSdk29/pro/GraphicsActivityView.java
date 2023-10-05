@@ -36,9 +36,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.altree.AlgebricTree;
-import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
 ;
@@ -165,11 +165,11 @@ public class GraphicsActivityView extends ActivitySuperClass {
                         algebricTree[j].setParameter("a", 0.0);
                     }
 
-                    double x2 = algebricTree[0].eval();
-                    double y2 = algebricTree[1].eval();
+                    double x2 = algebricTree[0].eval().getElem();
+                    double y2 = algebricTree[1].eval().getElem();
 
                     for (int c = 0; c < 4; c++) {
-                        rgba[c] = algebricTree[c + 3].eval();
+                        rgba[c] = algebricTree[c + 3].eval().getElem();
                     }
                     double[] finalColors = new double[3];
                     for (int i = 0; i < 3; i++) {

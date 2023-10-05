@@ -156,15 +156,15 @@ class FaceActivitySettings : ActivitySuperClass() {
                 intentBack.putExtra("point.x", selectedPoint.x)
                 intentBack.putExtra("point.y", selectedPoint.y)
             }
-            if (faceOverlayView.googleFaceDetection != null) {
-                intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection as Parcelable)
-            }
+            //if (faceOverlayView.googleFaceDetection != null) {
+            //    intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection as Parcelable)
+            //}
 
             //originalImage = currentFile
 
-            //if (originalImage != null) {
-            //    intentBack.putExtra("originalImage", originalImage)
-            //}
+            if (currentFile != null) {
+                intentBack.putExtra("currentFile", currentFile)
+            }
             passParameters(intentBack)
         }
 

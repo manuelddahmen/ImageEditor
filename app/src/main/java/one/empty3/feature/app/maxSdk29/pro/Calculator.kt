@@ -26,14 +26,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-
-import androidx.compose.ui.unit.max
-import one.empty3.apps.tree.altree.*
-import one.empty3.feature.app.maxSdk29.pro.ChooseFunctionDialogFragment.Companion
-import java.io.File
-import java.util.*
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
+import one.empty3.library1.tree.AlgebricTree
 
 class Calculator : ActivitySuperClass() {
     @SuppressLint("CutPasteId")
@@ -99,9 +93,16 @@ class Calculator : ActivitySuperClass() {
                     editTextId.text = editTextId.text.append(findViewById.text)
                     val tree = AlgebricTree(editTextId.text.toString())
                     tree.construct()
-                    val d: Double = tree.eval()
-                    val labelAnswer: String = d.toString()
-                    textAnswer.text = labelAnswer
+                    var d: Double = 0.0
+                    val eval = tree.eval()
+                    if(eval.dim==0)
+                        d = eval.getElem()
+                    else(eval.dim==1)
+                        d = eval.getElem(0)
+                    if(d!=null) {
+                        val labelAnswer: String = d.toString()
+                        textAnswer.text = labelAnswer
+                    }
 
                 } catch (ex: AlgebraicFormulaSyntaxException) {
                 } catch (ex: IndexOutOfBoundsException) {

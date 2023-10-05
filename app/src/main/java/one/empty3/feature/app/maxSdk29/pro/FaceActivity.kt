@@ -49,19 +49,40 @@ class FaceActivity : ActivitySuperClass() {
         }
         if (intent.extras?.getDouble("selectedPoint.y") != null) {
             selectedPoint.y = (intent.extras?.getDouble("selectedPoint.y")!!.toInt())
+        }
 
+        if (currentFile != null) {
+            if (currentBitmap == null)
+                currentBitmap = ImageIO.read(currentFile).getBitmap()
 
-            if (currentFile != null) {
-                if (currentBitmap == null)
-                    currentBitmap = ImageIO.read(currentFile).getBitmap()
+            Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
-                Utils().loadImageInImageView(currentBitmap, faceOverlayView)
+            try {
+                faceOverlayView.setImageBitmap3(currentBitmap);
 
+                faceOverlayView.setActivity(this)
+
+            } catch (ex: RuntimeException) {
+                Toast.makeText(
+                    applicationContext, "Error while execute face detection",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        val faceDetection = findViewById<Button>(R.id.face_detection)
+
+        faceDetection.setOnClickListener {
+            if (faceOverlayView.isFinish()) {
+                faceOverlayView.isDrawing = false
+                faceOverlayView.isFinish = false
                 try {
-                    faceOverlayView.setImageBitmap3(currentBitmap);
-
-                    faceOverlayView.setActivity(this)
-
+                    faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
+                    val writePhoto =
+                        Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
+                    originalImage = currentFile
+                    currentFile = writePhoto
+                    //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
                 } catch (ex: RuntimeException) {
                     Toast.makeText(
                         applicationContext, "Error while execute face detection",
@@ -69,96 +90,76 @@ class FaceActivity : ActivitySuperClass() {
                     ).show()
                 }
             }
-
-            val faceDetection = findViewById<Button>(R.id.face_detection)
-
-            faceDetection.setOnClickListener {
-                if (faceOverlayView.isFinish()) {
-                    faceOverlayView.isDrawing = false
-                    faceOverlayView.isFinish = false
-                    try {
-                        faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
-                        val writePhoto =
-                            Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
-                        originalImage = currentFile
-                        currentFile = writePhoto
-                        //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
-                    } catch (ex: RuntimeException) {
-                        Toast.makeText(
-                            applicationContext, "Error while execute face detection",
-                            Toast.LENGTH_LONG
-                        ).show()
+        }
+        val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
+        faceDrawSettings.setOnClickListener {
+            try {
+                if (faceOverlayView.googleFaceDetection != null) {
+                    GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
+                    GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
+                    faceOverlayView.isFinish = true
+                    val intentSettings =
+                        Intent(applicationContext, FaceActivitySettings::class.java)
+                    if (selectedPoint != null) {
+                        intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
+                        intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
                     }
-                }
-            }
-            val faceDrawSettings = findViewById<Button>(R.id.face_draw_settings)
-            faceDrawSettings.setOnClickListener {
-                try {
-                    if (faceOverlayView.googleFaceDetection != null) {
-                        GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
-                        GoogleFaceDetection.setInstance2(faceOverlayView.googleFaceDetection)
-                        faceOverlayView.isFinish = true
-                        val intentSettings =
-                            Intent(applicationContext, FaceActivitySettings::class.java)
-                        if (selectedPoint != null) {
-                            intentSettings.putExtra("selectedPoint.x", selectedPoint!!.x)
-                            intentSettings.putExtra("selectedPoint.y", selectedPoint!!.y)
-                        }
-                        if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
-                            if (GoogleFaceDetection.getInstance2() != null) {
-                                faceOverlayView.googleFaceDetection =
-                                    GoogleFaceDetection.getInstance2()
-                                GoogleFaceDetection.setInstance(
-                                    GoogleFaceDetection.getInstance(
-                                        false
-                                    )
-                                )
-                            }
-                        } else if (faceOverlayView.googleFaceDetection != null && GoogleFaceDetection.isInstance()) {
-                            //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
-                            GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
-                            Toast.makeText(
-                                applicationContext,
-                                getString(R.string.face_le_fichier_ouvert_ou_le_visage_d_tect_existe),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        } else if (GoogleFaceDetection.isInstance()) {
+                    if (faceOverlayView.googleFaceDetection == null && !GoogleFaceDetection.isInstance()) {
+                        if (GoogleFaceDetection.getInstance2() != null) {
                             faceOverlayView.googleFaceDetection =
-                                GoogleFaceDetection.getInstance(false)
+                                GoogleFaceDetection.getInstance2()
+                            GoogleFaceDetection.setInstance(
+                                GoogleFaceDetection.getInstance(
+                                    false
+                                )
+                            )
                         }
-
-                        if (originalImage != null) {
-                            intentSettings.putExtra("originalImage", originalImage)
-                        }
-                        passParameters(intentSettings)
-                    } else {
+                    } else if (faceOverlayView.googleFaceDetection != null && GoogleFaceDetection.isInstance()) {
+                        //intentSettings.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
+                        GoogleFaceDetection.setInstance(faceOverlayView.googleFaceDetection)
                         Toast.makeText(
                             applicationContext,
-                            getString(R.string.face_attendez_que_la_d_tection_de_visage_soit_termin_e),
+                            getString(R.string.face_le_fichier_ouvert_ou_le_visage_d_tect_existe),
                             Toast.LENGTH_LONG
                         ).show()
+                    } else if (GoogleFaceDetection.isInstance()) {
+                        faceOverlayView.googleFaceDetection =
+                            GoogleFaceDetection.getInstance(false)
                     }
-                } catch (ex : RuntimeException) {
-                    ex.printStackTrace()
+
+                    if (originalImage != null) {
+                        intentSettings.putExtra("originalImage", originalImage)
+                    }
+                    passParameters(intentSettings)
+                } else {
                     Toast.makeText(
                         applicationContext,
-                        getString(R.string.error_icon_content_description)+ ex.localizedMessage+"\n"+ex.stackTraceToString(),
+                        getString(R.string.face_attendez_que_la_d_tection_de_visage_soit_termin_e),
                         Toast.LENGTH_LONG
                     ).show()
+                }
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.error_icon_content_description) + ex.localizedMessage + "\n" + ex.stackTraceToString(),
+                    Toast.LENGTH_LONG
+                ).show()
 
+            }
+        }
+
+        faceOverlayView.setOnClickListener {
+            if (faceOverlayView.googleFaceDetection != null) {
+                val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
+                if (surface != null) {
+                    faceOverlayView.googleFaceDetection.selectedSurface = surface
                 }
             }
-
-            faceOverlayView.setOnClickListener {
-                if (faceOverlayView.googleFaceDetection != null) {
-                    val surface = faceOverlayView.googleFaceDetection.getSurface(selectedPoint);
-                    if (surface != null) {
-                        faceOverlayView.googleFaceDetection.selectedSurface = surface
-                    }
-                }
-            }
-            faceOverlayView.setOnTouchListener(object : View.OnTouchListener {
-                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        }
+        faceOverlayView.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                if (v != null && event != null) {
                     val location = IntArray(2)
                     v!!.getLocationOnScreen(location)
                     val viewX = location[0]
@@ -167,151 +168,72 @@ class FaceActivity : ActivitySuperClass() {
                     val y: Float = event!!.getRawY() - viewY
 
                     val p = Point(x.toInt(), y.toInt())
-
-                    return true
                 }
-            })
+                return true
+            }
+        })
 
-            val backToMain = findViewById<Button>(R.id.back_to_main2)
+        val backToMain = findViewById<Button>(R.id.back_to_main2)
 
-            backToMain.setOnClickListener {
-                faceOverlayView.isDrawing = false
-                faceOverlayView.isFinish = true
-                val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
+        backToMain.setOnClickListener {
+            faceOverlayView.isDrawing = false
+            faceOverlayView.isFinish = true
+            val intentBack = Intent(applicationContext, MyCameraActivity::class.java)
 
-                if (selectedPoint != null) {
-                    intentBack.putExtra("selectedPoint.x", selectedPoint!!.x)
-                    intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
-                }
-                if (faceOverlayView.googleFaceDetection != null) {
-                    //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
-                }
-
-                if (originalImage != null) {
-                    intentBack.putExtra("originalImage", originalImage)
-                }
-
-                passParameters(intentBack)
-
+            if (selectedPoint != null) {
+                intentBack.putExtra("selectedPoint.x", selectedPoint!!.x)
+                intentBack.putExtra("selectedPoint.y", selectedPoint!!.y)
+            }
+            if (faceOverlayView.googleFaceDetection != null) {
+                //intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection)
             }
 
-            val saveModel = findViewById<Button>(R.id.save_model)
-            val loadModel = findViewById<Button>(R.id.load_model)
+            if (originalImage != null) {
+                intentBack.putExtra("originalImage", originalImage)
+            }
 
-            /*
-        val startForResultSaveModel = registerForActivityResult(ActivityResultContracts.CreateDocument("*.model")) {
-            if(it!=null) {
-                val file = it.toFile()
-                val fileOutputStream = FileOutputStream(file)
-                val oos = ObjectOutputStream(fileOutputStream)
+            passParameters(intentBack)
+
+        }
+
+        val saveModel = findViewById<Button>(R.id.save_model)
+        val loadModel = findViewById<Button>(R.id.load_model)
+
+        /*
+    val startForResultSaveModel = registerForActivityResult(ActivityResultContracts.CreateDocument("*.model")) {
+        if(it!=null) {
+            val file = it.toFile()
+            val fileOutputStream = FileOutputStream(file)
+            val oos = ObjectOutputStream(fileOutputStream)
+            try {
+                oos.writeUnshared(faceOverlayView.googleFaceDetection)
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+            }
+        }
+    }
+    val startForResultLoadModel = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            if (it!=null) {
+                val fileInputStream = FileInputStream(it.toFile())
+                val oos = ObjectInputStream(fileInputStream)
                 try {
-                    oos.writeUnshared(faceOverlayView.googleFaceDetection)
+                    faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
                 } catch (ex: RuntimeException) {
                     ex.printStackTrace()
                 }
             }
-        }
-        val startForResultLoadModel = registerForActivityResult(ActivityResultContracts.GetContent()) {
-                if (it!=null) {
-                    val fileInputStream = FileInputStream(it.toFile())
-                    val oos = ObjectInputStream(fileInputStream)
-                    try {
-                        faceOverlayView.googleFaceDetection = oos.readUnshared() as GoogleFaceDetection?
-                    } catch (ex: RuntimeException) {
-                        ex.printStackTrace()
-                    }
-                }
-        }
+    }
 
-         */
-            saveModel.setOnClickListener {
-                if (faceOverlayView.googleFaceDetection != null) {
-                    var filesFile = getExternalFilesDir("model.fac")
+     */
+        saveModel.setOnClickListener {
+            if (faceOverlayView.googleFaceDetection != null) {
+                var filesFile = getExternalFilesDir("model.fac")
                 var i: Int = 0
-               //while (filesFile==null || filesFile!!.exists()) {
+                //while (filesFile==null || filesFile!!.exists()) {
                 //    filesFile = getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
                 //    i++
                 //}
                 val photoURI: Uri = filesFile!!.toUri()
-                    val permissionsStorage = arrayOf(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_MEDIA_IMAGES,
-                        Manifest.permission.MANAGE_DOCUMENTS
-                    )
-                    val requestExternalStorage = 1
-                    val permission1 = ActivityCompat.checkSelfPermission(
-                        applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    val permission2 = ActivityCompat.checkSelfPermission(
-                        applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    val permission3 = ActivityCompat.checkSelfPermission(
-                        applicationContext, Manifest.permission.READ_MEDIA_IMAGES
-                    )
-                    val permission4 = ActivityCompat.checkSelfPermission(
-                        applicationContext, Manifest.permission.MANAGE_DOCUMENTS
-                    )
-                    if (permission1 != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(
-                            thisActivity,
-                            permissionsStorage,
-                            requestExternalStorage
-                        )
-                    }
-                    if (permission2 != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(
-                            thisActivity,
-                            permissionsStorage,
-                            requestExternalStorage
-                        )
-                    }
-                    if (permission3 != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(
-                            thisActivity,
-                            permissionsStorage,
-                            requestExternalStorage
-                        )
-                    }
-
-                    if (permission4 != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(
-                            thisActivity,
-                            permissionsStorage,
-                            requestExternalStorage
-                        )
-                    }
-
-                    val intentSave = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                        addCategory(Intent.CATEGORY_OPENABLE)
-                        type= "application/*.fac"
-                        putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
-                        putExtra(Intent.EXTRA_TITLE, filesFile.name)
-                        putExtra("maxRes", maxRes)
-                        if(currentFile!=null) {
-                            putExtra("currentFile", currentFile)
-                        }
-                    }
-                    if (intent.resolveActivity(packageManager) != null) {
-                        try {
-                            startActivityForResult(intentSave, CREATE_FILE)
-                        } catch (ex: RuntimeException) {
-                            ex.printStackTrace()
-                            Toast.makeText(
-                                applicationContext, "Error while saving model : " + ex.message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                }
-            }
-            loadModel.setOnClickListener {
-                var autoname: File? =
-                    getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
-                while (autoname == null || autoname.exists())
-                    autoname = File("face-drawings-" + UUID.randomUUID() + ".fac")
-                val autoname1 : File = autoname
-
                 val permissionsStorage = arrayOf(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -352,6 +274,7 @@ class FaceActivity : ActivitySuperClass() {
                         requestExternalStorage
                     )
                 }
+
                 if (permission4 != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
                         thisActivity,
@@ -360,34 +283,111 @@ class FaceActivity : ActivitySuperClass() {
                     )
                 }
 
-/*
-                val photoURI = FileProvider.getUriForFile(
-                    applicationContext,
-                    applicationContext.packageName + ".provider",
-                    autoname1
-                )
-*/
-                val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
+                val intentSave = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
                     type = "application/*.fac"
-                    putExtra("currentFile", currentFile)
-                    putExtra("maxRes", maxRes)
-                    putExtra(Intent.EXTRA_TITLE, "model.fac")
- //                   setDataAndType(photoURI, "application/*.fac")
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
+                    putExtra(Intent.EXTRA_TITLE, filesFile.name)
+                    putExtra("maxRes", maxRes)
+                    if (currentFile != null) {
+                        putExtra("currentFile", currentFile)
+                    }
                 }
-                val intent2 = Intent.createChooser(intentLoad, "Choose a file")
-                try {
-                    intent2.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    startActivityForResult(intent2, OPEN_MODEL)
-                } catch (ex: RuntimeException) {
-                    ex.printStackTrace()
-                    Toast.makeText(
-                        applicationContext,
-                        "Error while loading model (open file dialog): " + ex.message,
-                        Toast.LENGTH_LONG
-                    ).show()
+                if (intent.resolveActivity(packageManager) != null) {
+                    try {
+                        startActivityForResult(intentSave, CREATE_FILE)
+                    } catch (ex: RuntimeException) {
+                        ex.printStackTrace()
+                        Toast.makeText(
+                            applicationContext, "Error while saving model : " + ex.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
+            }
+        }
+        loadModel.setOnClickListener {
+            var autoname: File? =
+                getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
+            while (autoname == null || autoname.exists())
+                autoname = File("face-drawings-" + UUID.randomUUID() + ".fac")
+            val autoname1: File = autoname
+
+            val permissionsStorage = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.MANAGE_DOCUMENTS
+            )
+            val requestExternalStorage = 1
+            val permission1 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            val permission2 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            val permission3 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.READ_MEDIA_IMAGES
+            )
+            val permission4 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.MANAGE_DOCUMENTS
+            )
+            if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission2 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission3 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission4 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+
+            /*
+                            val photoURI = FileProvider.getUriForFile(
+                                applicationContext,
+                                applicationContext.packageName + ".provider",
+                                autoname1
+                            )
+            */
+            val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/*.fac"
+                putExtra("currentFile", currentFile)
+                putExtra("maxRes", maxRes)
+                putExtra(Intent.EXTRA_TITLE, "model.fac")
+                //                   setDataAndType(photoURI, "application/*.fac")
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
+            }
+            val intent2 = Intent.createChooser(intentLoad, "Choose a file")
+            try {
+                intent2.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                startActivityForResult(intent2, OPEN_MODEL)
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    "Error while loading model (open file dialog): " + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -405,6 +405,7 @@ class FaceActivity : ActivitySuperClass() {
         }
         return result
     }
+
     fun getFileInPictureDir(s: String): Uri {
 
         val permissionsStorage = arrayOf(
@@ -522,7 +523,7 @@ class FaceActivity : ActivitySuperClass() {
                     val openOutputStream = contentResolver.openOutputStream(get)
                     if (openOutputStream != null) {
                         try {
-                            val instance : GoogleFaceDetection = faceOverlayView.googleFaceDetection
+                            val instance: GoogleFaceDetection = faceOverlayView.googleFaceDetection
                             instance.encode(DataOutputStream(openOutputStream))
                         } catch (ex: RuntimeException) {
                             ex.printStackTrace()
@@ -546,16 +547,17 @@ class FaceActivity : ActivitySuperClass() {
                 } else if (requestCode == OPEN_MODEL) {
                     try {
                         val inputStream = getRealPathFromIntentData(result)
-                            //this.getFileContent(requestCode, resultCode, result) ?: return
+                        //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =
                             GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
                         GoogleFaceDetection.setInstance(googleFaceDetection)
                         faceOverlayView.googleFaceDetection = googleFaceDetection
-                        if(googleFaceDetection!!.dataFaces.size>0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size>0)
-                            faceOverlayView.googleFaceDetection.selectedSurface = googleFaceDetection!!.dataFaces[0].faceSurfaces[0]
+                        if (googleFaceDetection!!.dataFaces.size > 0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size > 0)
+                            faceOverlayView.googleFaceDetection.selectedSurface =
+                                googleFaceDetection!!.dataFaces[0].faceSurfaces[0]
                         GoogleFaceDetection.setInstance2(googleFaceDetection)
-                        if(faceOverlayView.googleFaceDetection==null) {
+                        if (faceOverlayView.googleFaceDetection == null) {
                             Toast.makeText(
                                 applicationContext,
                                 "GoogleFaceDetection == null",
