@@ -110,7 +110,7 @@ class FaceActivity : ActivitySuperClass() {
                                 GoogleFaceDetection.getInstance2()
                             GoogleFaceDetection.setInstance(
                                 GoogleFaceDetection.getInstance(
-                                    false
+                                    false, currentBitmap
                                 )
                             )
                         }
@@ -124,7 +124,7 @@ class FaceActivity : ActivitySuperClass() {
                         ).show()
                     } else if (GoogleFaceDetection.isInstance()) {
                         faceOverlayView.googleFaceDetection =
-                            GoogleFaceDetection.getInstance(false)
+                            GoogleFaceDetection.getInstance(false, currentBitmap)
                     }
 
                     if (originalImage != null) {
@@ -550,7 +550,7 @@ class FaceActivity : ActivitySuperClass() {
                         //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =
-                            GoogleFaceDetection().decode(dataInputStream) as GoogleFaceDetection?
+                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
                         GoogleFaceDetection.setInstance(googleFaceDetection)
                         faceOverlayView.googleFaceDetection = googleFaceDetection
                         if (googleFaceDetection!!.dataFaces.size > 0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size > 0)

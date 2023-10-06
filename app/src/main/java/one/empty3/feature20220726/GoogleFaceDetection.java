@@ -34,10 +34,11 @@ public class GoogleFaceDetection
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
+    private Bitmap bitmap = null;
 
-    public static GoogleFaceDetection getInstance(boolean newInstance) {
+    public static GoogleFaceDetection getInstance(boolean newInstance, Bitmap bitmap) {
         if (instance == null || newInstance)
-            instance = new GoogleFaceDetection();
+            instance = new GoogleFaceDetection(bitmap);
         return instance;
     }
 
@@ -52,7 +53,11 @@ public class GoogleFaceDetection
         in.readTypedObject(new Creator<Object>() {
             @Override
             public Object createFromParcel(Parcel parcel) {
-                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(false);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    bitmap = parcel.readParcelable(ClassLoader.getSystemClassLoader());
+                }
+                GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(false,
+                        bitmap);
                 int numFaces = parcel.readInt();
                 for (int face = 0; face < numFaces; face++) {
                     int id = parcel.readInt();
@@ -69,7 +74,7 @@ public class GoogleFaceDetection
                         int colorTransparent = parcel.readInt();
 
                         faceData.getFaceSurfaces().add(new FaceData.Surface(id, polygon, contours, colorFill, colorContours,
-                                colorTransparent, contours.copy()));
+                                colorTransparent, contours.copy(), false));
 
                     }
                     googleFaceDetection.getDataFaces().add(faceData);
@@ -139,6 +144,7 @@ public class GoogleFaceDetection
     public static class FaceData implements Serializable {
 
         public static class Surface implements Serializable, Serialisable {
+            private boolean drawOriginalImageContour;
             private int colorFill;
             private int colorContours;
             private int colorTransparent;
@@ -148,6 +154,7 @@ public class GoogleFaceDetection
             private PixM filledContours;
             @Nullable
             public PixM actualDrawing;
+
             public Surface() {
 
             }
@@ -163,10 +170,11 @@ public class GoogleFaceDetection
                     surface.polygon = (Polygon) new Polygon().decode(in);
                     surface.contours = (PixM) new PixM(1, 1).decode(in);
                     surface.filledContours = (PixM) new PixM(1, 1).decode(in);
+                    surface.drawOriginalImageContour = in.readBoolean();
                     return surface;
                 } catch (Exception exception) {
                     exception.printStackTrace();
-                    throw new RuntimeException("Exception loading Surface"+exception.getLocalizedMessage());
+                    throw new RuntimeException("Exception loading Surface" + exception.getLocalizedMessage());
                 }
             }
 
@@ -177,16 +185,17 @@ public class GoogleFaceDetection
                     out.writeInt(colorContours);
                     out.writeInt(colorTransparent);
                     out.writeInt(surfaceId);
-                    if(polygon==null)
+                    if (polygon == null)
                         polygon = new Polygon();
                     polygon.encode(out);
-                    if(contours==null)
-                        contours = new PixM(1,1);
+                    if (contours == null)
+                        contours = new PixM(1, 1);
                     contours.encode(out);
-                    if(filledContours==null) {
+                    if (filledContours == null) {
                         filledContours = new PixM(1, 1);
                     }
                     filledContours.encode(out);
+                    out.writeBoolean(drawOriginalImageContour);
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -201,7 +210,9 @@ public class GoogleFaceDetection
             }
 
 
-            public Surface(int surfaceId, Polygon polygon, PixM contours, int colorFill, int colorContours, int colorTransparent, PixM filledContours) {
+            public Surface(int surfaceId, Polygon polygon, PixM contours,
+                           int colorFill, int colorContours, int colorTransparent,
+                           PixM filledContours, boolean drawOriginalImageContour) {
                 this.surfaceId = surfaceId;
                 this.polygon = polygon;
                 this.contours = contours;
@@ -209,6 +220,7 @@ public class GoogleFaceDetection
                 this.colorContours = colorContours;
                 this.colorTransparent = colorTransparent;
                 this.filledContours = filledContours;
+                this.drawOriginalImageContour = drawOriginalImageContour;
             }
 
             public int getSurfaceId() {
@@ -343,12 +355,18 @@ public class GoogleFaceDetection
         }
     }
 
-    public GoogleFaceDetection(List<FaceData> dataFaces) {
+    public GoogleFaceDetection(List<FaceData> dataFaces, Bitmap bitmap) {
+        this(bitmap);
         this.dataFaces = dataFaces;
     }
 
-    public GoogleFaceDetection() {
+    public GoogleFaceDetection(Bitmap bitmap) {
         dataFaces = new ArrayList<>();
+        this.setBitmap(bitmap);
+    }
+
+    private void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public List<FaceData> getDataFaces() {
@@ -385,13 +403,19 @@ public class GoogleFaceDetection
     }
 
     public Bitmap getBitmap() {
-        return null;
+        return bitmap;
     }
 
     @Override
     public Serialisable decode(DataInputStream in) {
         try {
-            GoogleFaceDetection faceDetection = new GoogleFaceDetection();
+            PixM decode1 = (PixM) new PixM(1, 1).decode(in);
+            bitmap = decode1.getBitmap();
+        } catch (NullPointerException e1) {
+            bitmap = new PixM(1, 1).getBitmap();
+        }
+        try {
+            GoogleFaceDetection faceDetection = new GoogleFaceDetection(bitmap);
             int countFaces = in.readInt();
             System.out.println("Number of faces to read = " + countFaces);
             for (int c = 0; c < countFaces; c++) {
@@ -414,12 +438,17 @@ public class GoogleFaceDetection
     @Override
     public int encode(DataOutputStream out) {
         try {
+            if (getBitmap() != null) {
+                new PixM(getBitmap()).encode(out);
+            } else {
+                new PixM(1, 1).encode(out);
+            }
             System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
                     out.writeInt(faceData.getFaceSurfaces().size());
-                    if(!faceData.getFaceSurfaces().isEmpty()) {
+                    if (!faceData.getFaceSurfaces().isEmpty()) {
                         System.out.println("Number of recorded surfaces : " + faceData.faceSurfaces.size());
                         faceData.faceSurfaces.forEach(surface -> {
                             surface.encode(out);
@@ -447,10 +476,10 @@ public class GoogleFaceDetection
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GoogleFaceDetection that = (GoogleFaceDetection) o;
-        if(getDataFaces().size()==((GoogleFaceDetection) o).getDataFaces().size()) {
+        if (getDataFaces().size() == ((GoogleFaceDetection) o).getDataFaces().size()) {
             int size = getDataFaces().size();
             for (int i = 0; i < size; i++) {
-                if(!getDataFaces().get(i).equals(getDataFaces().get(i)))
+                if (!getDataFaces().get(i).equals(getDataFaces().get(i)))
                     return false;
             }
             return true;

@@ -65,7 +65,7 @@ public class GoogleFaceDetectTest {
                     googleFaceDetection = faceOverlayView.getGoogleFaceDetection();
 
                     if (googleFaceDetection == null) {
-                        googleFaceDetection = new GoogleFaceDetection();
+                        googleFaceDetection = new GoogleFaceDetection(null, null);
                         System.err.println("GoogleFaceDetection == null");
                     } else {
                     }
@@ -101,12 +101,12 @@ public class GoogleFaceDetectTest {
                             .getTargetContext()
                             .getApplicationContext();
             InputStream inputStream = getClass().getResourceAsStream("one/empty3/feature/app/maxSdk29/pro/model.fac");
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
             googleFaceDetection
                     = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
 
             if (googleFaceDetection == null) {
-                googleFaceDetection = new GoogleFaceDetection();
+                googleFaceDetection = new GoogleFaceDetection(null, null);
                 System.err.println("GoogleFaceDetection == null");
             } else {
             }

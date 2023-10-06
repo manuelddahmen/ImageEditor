@@ -38,7 +38,7 @@ public class GoogleFaceDetectTest {
         BufferedImage image = new BufferedImage();
 
         try {
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(image.bitmap);
             FileInputStream fileOutputStream1 = new FileInputStream("C:\\Users\\manue\\AndroidStudioProjects\\FeatureApp3\\face-drawings.fac");
             GoogleFaceDetection decoded = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(fileOutputStream1));
             fileOutputStream1.close();

@@ -54,7 +54,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(false)
+    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(false, null)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
     private var selectedColor = Color.White
@@ -99,7 +99,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         //if (get != null)
         //    googleFaceDetection = get as GoogleFaceDetection
 
-        googleFaceDetection = GoogleFaceDetection.getInstance(false)
+        googleFaceDetection = GoogleFaceDetection.getInstance(false, null)
         if(googleFaceDetection==null) {
             googleFaceDetection = GoogleFaceDetection.getInstance2()
         }
@@ -270,6 +270,10 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
     }
 
+    fun applyOriginalPolygon()  {
+
+        return
+    }
     fun coordCanvas(p: PointF): PointF {
         val mBitmap = faceOverlayView.mBitmap
         if (faceOverlayView.mBitmap == null) return p

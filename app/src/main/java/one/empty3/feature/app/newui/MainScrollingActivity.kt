@@ -1,14 +1,10 @@
 package one.empty3.feature.app.newui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import one.empty3.feature.app.maxSdk29.pro.R
-import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityScrollingBinding
-
+//import one.empty3.feature.app.maxSdk29.pro.databinding.ActivityScrollingBinding
+/*
 class MainScrollingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityScrollingBinding
+    private lateinit var binding: MainScrollingActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,4 +22,4 @@ class MainScrollingActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(fragmentEffect, "")
             .commit()
     }
-}
+}*/

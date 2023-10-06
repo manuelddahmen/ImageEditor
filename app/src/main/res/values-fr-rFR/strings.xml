@@ -214,4 +214,5 @@
     <string name="save_model">Save draw data</string>
     <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">Le fichier ouvert ou le visage détecté existe</string>
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Attendez que la détection de visage soit terminée.</string>
+<string name="instructions">a=1</string>
 </resources>

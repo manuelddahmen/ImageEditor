@@ -67,7 +67,7 @@ public class GoogleFaceDetectTest {
     @Test
     public void testLoadSaveInt() {
         Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
-        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
         googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
 
@@ -81,7 +81,7 @@ public class GoogleFaceDetectTest {
             Assert.fail();
             return;
         }
-        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection();
+        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(null, null);
 
         try {
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
@@ -148,14 +148,14 @@ public class GoogleFaceDetectTest {
                         polygon.getPoints().add(Point3D.random(400.0));
                     }
 
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
 
                     googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy()));
+                            new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy(), false));
 
-                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection();
+                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(null, null);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     googleFaceDetection.encode(dataOutputStream);
                     Assert.assertTrue(true);
@@ -239,9 +239,9 @@ public class GoogleFaceDetectTest {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(10000000);
 
                     GoogleFaceDetection googleFaceDetection;
-                    if(faceOverlayView.getGoogleFaceDetection()==null && GoogleFaceDetection.getInstance(false)==null)
+                    if(faceOverlayView.getGoogleFaceDetection()==null && GoogleFaceDetection.getInstance(false, null)==null)
                         Assert.fail();
-                    googleFaceDetection = GoogleFaceDetection.getInstance(false);
+                    googleFaceDetection = GoogleFaceDetection.getInstance(false, null);
 
                     if (googleFaceDetection == null) {
                         System.err.println("GoogleFaceDetection == null");
@@ -271,12 +271,12 @@ public class GoogleFaceDetectTest {
 
             Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
             InputStream inputStream = new FileInputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model.fac (2)");
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection();
+            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
             googleFaceDetection
                     = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
 
             if (googleFaceDetection == null) {
-                googleFaceDetection = new GoogleFaceDetection();
+                googleFaceDetection = new GoogleFaceDetection(null, null);
                 System.err.println("GoogleFaceDetection == null");
             } else {
             }
