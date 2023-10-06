@@ -69,7 +69,7 @@ public class FaceOverlayView extends ImageViewSelection {
     }
 
     public void setGoogleFaceDetection(GoogleFaceDetection googleFaceDetection) {
-        this.googleFaceDetection = GoogleFaceDetection.getInstance(false);
+        this.googleFaceDetection = GoogleFaceDetection.getInstance(false, null);
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -440,7 +440,7 @@ public class FaceOverlayView extends ImageViewSelection {
             //Log.d("ImageViewSelection::setImageBitmap",
             //        "change image on UI thread");
             if (mFaces != null && mCanvas != null && bm != null) {
-                googleFaceDetection = GoogleFaceDetection.getInstance(false);
+                googleFaceDetection = GoogleFaceDetection.getInstance(false, null);
 
                 double scale = drawBitmap();
 

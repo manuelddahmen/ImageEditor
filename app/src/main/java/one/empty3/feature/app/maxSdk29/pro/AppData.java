@@ -38,7 +38,7 @@ public class AppData {
     public AppData() {
     }
 
-    private GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(false);
+    private GoogleFaceDetection googleFaceDetection = GoogleFaceDetection.getInstance(false, null);
 
     private void putExtra(AppCompatActivity activity, Intent calculatorIntent, String cord) {
     }
