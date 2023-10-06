@@ -13,7 +13,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import javaAnd.awt.image.imageio.ImageIO
@@ -143,7 +142,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
         val back = findViewById<Button>(R.id.face_draw_settings_back)
 
-        back.performClick()
+        //back.performClick()
 
         back.setOnClickListener {
             faceOverlayView.isFinish = true
@@ -153,18 +152,10 @@ class FaceActivitySettings : ActivitySuperClass() {
             val intentBack = Intent(applicationContext, FaceActivity::class.java)
 
             if (selectedPoint != null) {
-                intentBack.putExtra("point.x", selectedPoint.x)
-                intentBack.putExtra("point.y", selectedPoint.y)
+                intentBack.putExtra("selectedPoint.x", selectedPoint.x)
+                intentBack.putExtra("selectedPoint.y", selectedPoint.y)
             }
-            //if (faceOverlayView.googleFaceDetection != null) {
-            //    intentBack.putExtra("googleFaceDetect", faceOverlayView.googleFaceDetection as Parcelable)
-            //}
 
-            //originalImage = currentFile
-
-            if (currentFile != null) {
-                intentBack.putExtra("currentFile", currentFile)
-            }
             passParameters(intentBack)
         }
 
@@ -459,7 +450,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
 
-            var currentFileTmp: File? = Utils().writePhoto(
+            val currentFileTmp: File? = Utils().writePhoto(
                 this,
                 faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
                 "face_drawings-"
