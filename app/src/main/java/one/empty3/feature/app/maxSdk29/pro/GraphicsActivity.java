@@ -21,12 +21,16 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,8 +72,11 @@ public class GraphicsActivity extends ActivitySuperClass {
         Button[] buttons = new Button[]{x, y, z, r, g, b, a, t, u, v};
         textViews = new TextView[]{textViewX, textViewY, textViewZ, textViewR, textViewG, textViewB, textViewA, textViewT, textViewU, textViewV};
 
+         SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
         for (int i = 0; i < cords.length; i++) {
-            textViews[i].setText(cords[i]);
+            String string = prefs.getString("autoSave" + cords[i], cordsConsts[i]);
+            textViews[i].setText(string);
          }
 
         for (int k1 = 0; k1 < cordsConsts.length; k1++) {
@@ -92,7 +99,23 @@ public class GraphicsActivity extends ActivitySuperClass {
                 passParameters(calculatorIntent);
 
             });
+            int finalK = k1;
+            textValue.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            prefs.edit().putString("autoSave"+cordsConsts[finalK], charSequence.toString()).apply();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
 
         View buttonView = findViewById(R.id.buttonView);

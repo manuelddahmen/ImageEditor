@@ -44,13 +44,14 @@ class FaceActivity : ActivitySuperClass() {
         drawIfBitmap();
 
         selectedPoint = Point()
-        if (intent.extras?.getDouble("selectedPoint.x") != null) {
-            selectedPoint.x = (intent.extras?.getDouble("selectedPoint.x")!!.toInt())
+        try {
+            if (intent.extras?.getDouble("selectedPoint.x") != null && intent.extras?.getDouble("selectedPoint.y") != null) {
+                selectedPoint.x = (intent.extras?.getDouble("selectedPoint.x")!!.toInt())
+                selectedPoint.y = (intent.extras?.getDouble("selectedPoint.y")!!.toInt())
+            }
+        } catch (ex : RuntimeException) {
+            ex.printStackTrace()
         }
-        if (intent.extras?.getDouble("selectedPoint.y") != null) {
-            selectedPoint.y = (intent.extras?.getDouble("selectedPoint.y")!!.toInt())
-        }
-
         if (currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile).getBitmap()
