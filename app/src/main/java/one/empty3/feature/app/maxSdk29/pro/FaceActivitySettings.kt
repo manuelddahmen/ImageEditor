@@ -171,7 +171,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
 
         faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_WHERE_CLICKED) {
+            if (event!=null&&event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_WHERE_CLICKED) {
 
                 var p0 = coordCanvas(PointF(0f, 0f))
 
@@ -187,7 +187,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                 drawPolygon()
 
-            } else if (event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_ALL) {
+            } else if (event!=null&&event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_ALL) {
                 currentSurface++
                 if (currentSurface >= currentSurfaceSize)
                     currentSurface = 0
