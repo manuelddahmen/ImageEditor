@@ -12,6 +12,7 @@ import android.os.Parcelable
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -268,6 +269,12 @@ class FaceActivitySettings : ActivitySuperClass() {
                 drawSurfaces()
             }
         }
+        val originalColors = findViewById<Button>(R.id.originalColors)
+        originalColors.setOnClickListener {
+            if(selectedSurfaceAllPicture!=null) {
+                selectedSurfaceAllPicture!!.isDrawOriginalImageContour = originalColors.isSelected
+            }
+        }
     }
 
     fun applyOriginalPolygon()  {
@@ -440,7 +447,16 @@ class FaceActivitySettings : ActivitySuperClass() {
                         Bitmap.Config.ARGB_8888, true
                     )
             )
+            val buttonOriginalColors = findViewById<CheckBox>(R.id.originalColors)
+            val selected =
+                if (buttonOriginalColors.isSelected()) {
+                    true
+                } else {
+                    false
+                }
+            buttonOriginalColors.setSelected(selected)
         }
+
     }
 
     fun drawSurfaces() {

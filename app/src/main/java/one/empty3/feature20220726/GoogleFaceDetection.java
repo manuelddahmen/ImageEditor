@@ -314,6 +314,14 @@ public class GoogleFaceDetection
                 this.actualDrawing = actualDrawing;
             }
 
+            public boolean isDrawOriginalImageContour() {
+                return drawOriginalImageContour;
+            }
+
+            public void setDrawOriginalImageContour(boolean drawOriginalImageContour) {
+                this.drawOriginalImageContour = drawOriginalImageContour;
+            }
+
             @Override
             public boolean equals(Object o) {
                 if (this == o) return true;

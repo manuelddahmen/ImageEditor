@@ -98,9 +98,9 @@
             android:layout_height="48dp"
             android:layout_width="match_parent"
             android:layout_weight="1.0"
-            android:id="@+id/applyToAllParts"
+            android:id="@+id/originalColors"
             android:text="@string/apply_to_all"
-            android:checked="true"
+            android:checked="false"
             app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back"
             app:layout_constraintTop_toBottomOf="@id/buttonsModel"
             />

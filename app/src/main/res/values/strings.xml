@@ -221,7 +221,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="apply_to_all">Apply all</string>
+    <string name="apply_to_all">Original image</string>
     <string name="apply_model">Apply model</string>
     <string name="choose_model">Choose model</string>
     <string name="load_model">Load draw data</string>

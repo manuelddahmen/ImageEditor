@@ -209,7 +209,7 @@
     <string name="settings_of_application">Settings of application</string>
     <string name="display_place" />
     <string name="choose_a_file">Choose a file</string>
-    <string name="apply_to_all">Apply all</string>
+    <string name="apply_to_all">Original image</string>
     <string name="apply_model">Apply model</string>
     <string name="choose_model">Choose model</string>
     <string name="load_model">Load draw data</string>

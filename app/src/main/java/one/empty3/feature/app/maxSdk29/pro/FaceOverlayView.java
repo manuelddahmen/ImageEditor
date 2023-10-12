@@ -322,7 +322,7 @@ public class FaceOverlayView extends ImageViewSelection {
             if (googleFaceDetection != null) {
                 for (GoogleFaceDetection.FaceData face : googleFaceDetection.getDataFaces()) {
                     for (GoogleFaceDetection.FaceData.Surface surface : face.getFaceSurfaces()) {
-                        surface.getPolygon().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
+                        surface.getPolygon().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent(), surface.isDrawOriginalImageContour());
                     }
                 }
             }
