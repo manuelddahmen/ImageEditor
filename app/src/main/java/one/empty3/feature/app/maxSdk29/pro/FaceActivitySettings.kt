@@ -1,14 +1,17 @@
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.PointF
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.provider.OpenableColumns
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -16,6 +19,7 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.app.ActivityCompat
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
@@ -24,10 +28,13 @@ import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import one.empty3.library.Point3D
 import yuku.ambilwarna.AmbilWarnaDialog
+import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.util.UUID
 import java.util.function.Consumer
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
@@ -42,6 +49,9 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 
 
 class FaceActivitySettings : ActivitySuperClass() {
+    private val CREATE_FILE: Int = 6545846
+    private lateinit var thisActivity: FaceActivitySettings
+    private val OPEN_MODEL: Int = 5444478
     val ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER = 543451
     private val OPTION_SELECT_WHERE_CLICKED = 1
     private val OPTION_SELECT_ALL = 2
@@ -86,6 +96,8 @@ class FaceActivitySettings : ActivitySuperClass() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.face_draw_settings)
+
+        thisActivity = this
 
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
         polygonView = findViewById<ImageViewSelection>(R.id.polygon_details)
@@ -269,12 +281,140 @@ class FaceActivitySettings : ActivitySuperClass() {
                 drawSurfaces()
             }
         }
+
         val originalColors = findViewById<Button>(R.id.originalColors)
         originalColors.setOnClickListener {
             if(selectedSurfaceAllPicture!=null) {
                 selectedSurfaceAllPicture!!.isDrawOriginalImageContour = originalColors.isSelected
             }
         }
+
+
+        val fileChooserModel = findViewById<Button>(R.id.choose_model)
+
+
+        fileChooserModel.setOnClickListener {
+            var autoname: File? =
+                getExternalFilesDir("face-drawings-" + UUID.randomUUID() + ".fac")
+            while (autoname == null || autoname.exists())
+                autoname = File("face-drawings-" + UUID.randomUUID() + ".fac")
+            val autoname1: File = autoname
+
+            val permissionsStorage = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.MANAGE_DOCUMENTS
+            )
+            val requestExternalStorage = 1
+            val permission1 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            val permission2 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            val permission3 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.READ_MEDIA_IMAGES
+            )
+            val permission4 = ActivityCompat.checkSelfPermission(
+                applicationContext, Manifest.permission.MANAGE_DOCUMENTS
+            )
+            if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission2 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission3 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+            if (permission4 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    thisActivity,
+                    permissionsStorage,
+                    requestExternalStorage
+                )
+            }
+
+            /*
+                            val photoURI = FileProvider.getUriForFile(
+                                applicationContext,
+                                applicationContext.packageName + ".provider",
+                                autoname1
+                            )
+            */
+            val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/*.fac"
+                putExtra("currentFile", currentFile)
+                putExtra("maxRes", maxRes)
+                putExtra(Intent.EXTRA_TITLE, "model.fac")
+                //                   setDataAndType(photoURI, "application/*.fac")
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
+            }
+            val intent2 = Intent.createChooser(intentLoad, "Choose a file")
+            try {
+                intent2.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                startActivityForResult(intent2, OPEN_MODEL)
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    "Error while loading model (open file dialog): " + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+
+
+        val applyModel = findViewById<Button>(R.id.applyImage)
+        applyModel.setOnClickListener {
+            if (this.selectedSurfaceAllPicture != null && GoogleFaceDetection.isInstance2()
+                && selectedSurfaceAllPicture!=null) {
+                val filledContours = selectedSurfaceAllPicture!!.filledContours
+                val selectSurface2 = selectSurface2(
+                    GoogleFaceDetection.getInstance2(),
+                    selectedSurfaceAllPicture!!.surfaceId
+                )
+
+                filledContours.paintIfNot(
+                    0, 0, filledContours.columns, filledContours.lines, GoogleFaceDetection.getInstance2().bitmap
+                    ,
+                    selectedSurfaceAllPicture!!.colorContours,
+                    selectedSurfaceAllPicture!!.contours)
+                drawSurface()
+                drawSurfaces()
+
+            }
+
+        }
+
+    }
+
+    private fun selectSurface2(instance2: GoogleFaceDetection?, surfaceId:Int) : Surface? {
+        if(instance2!=null) {
+            instance2.dataFaces.forEach(action = {
+                it.faceSurfaces.forEach(action = {
+                    if(it.surfaceId==surfaceId) {
+                        return it
+                    }
+                })
+            })
+        }
+        return null
     }
 
     fun applyOriginalPolygon()  {
@@ -503,6 +643,9 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        var result: Intent? = null
+        if(data!=null)
+            result = data
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             val intentChoosed = data
 
@@ -533,6 +676,125 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
             if (photo != null) {
                 this.selectedImage = photo!!
+            }
+        }else  if ((resultCode == RESULT_OK) && result != null && ((result.extras != null &&
+                    result.extras!!.get(Intent.EXTRA_STREAM) != null) ||
+                    result.data != null)
+        ) {
+            var get: Uri? = null
+            if (result.data != null) {
+                get = result.data
+            } else {
+                try {
+                    get = result.extras!!.get("data") as Uri
+                } catch (ex: RuntimeException) {
+                    try {
+                        get = result.extras!!.get(Intent.EXTRA_STREAM) as Uri
+                    } catch (ex1: RuntimeException) {
+                        try {
+                            get = result.data
+                        } catch (ex2: RuntimeException) {
+                        }
+                    }
+                }
+                try {
+                    val cursor =
+                        contentResolver.query(result.data!!, null, null, null, null)
+
+                    val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    val sizeIndex = cursor!!.getColumnIndex(OpenableColumns.SIZE)
+                    cursor!!.moveToFirst()
+
+                    val name = cursor!!.getString(nameIndex)
+                    val size = cursor!!.getLong(sizeIndex).toString()
+                } catch (_: RuntimeException) {
+
+                } catch (_: java.lang.NullPointerException) {
+
+                }
+
+            }
+            var file: File
+
+            if (get != null) {
+                try {
+                    file = get.path?.let { File(it) }!!
+                } catch (ex: RuntimeException) {
+                    ex.printStackTrace()
+                    Toast.makeText(
+                        applicationContext,
+                        "FIle==null after filechooser " + ex.message,
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                    return
+                } catch (ex1: NullPointerException) {
+                    ex1.printStackTrace()
+                    Toast.makeText(
+                        applicationContext,
+                        "FIle==null after filechooser " + ex1.message,
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                    return
+                }
+                if (requestCode == CREATE_FILE) {
+                    val openOutputStream = contentResolver.openOutputStream(get)
+                    if (openOutputStream != null) {
+                        try {
+                            val instance: GoogleFaceDetection = faceOverlayView.googleFaceDetection
+                            instance.encode(DataOutputStream(openOutputStream))
+                        } catch (ex: RuntimeException) {
+                            ex.printStackTrace()
+                            ex.printStackTrace()
+                            Toast.makeText(
+                                applicationContext,
+                                "Error while writing file .fac (instance encoding - runtime) " + ex.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                            return
+                        } catch (ex1: java.io.NotSerializableException) {
+                            ex1.printStackTrace()
+                            Toast.makeText(
+                                applicationContext,
+                                "Error while writing file .fac (instance encoding - not serialisable)" + ex1.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                            return
+                        }
+                    }
+                } else if (requestCode == OPEN_MODEL) {
+                    try {
+                        val inputStream = getRealPathFromIntentData(result)
+                        //this.getFileContent(requestCode, resultCode, result) ?: return
+                        val dataInputStream: DataInputStream = DataInputStream(inputStream)
+                        val googleFaceDetection =
+                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
+                        GoogleFaceDetection.setInstance2(googleFaceDetection)
+                        if (!GoogleFaceDetection.isInstance2()) {
+                            Toast.makeText(
+                                applicationContext,
+                                "GoogleFaceDetection == null (instance2)",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } catch (ex: RuntimeException) {
+                        ex.printStackTrace()
+                        Toast.makeText(
+                            applicationContext,
+                            "Error while reading file .fac (1) (instance decoding - runtime) " + ex.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } catch (ex1: NullPointerException) {
+                        ex1.printStackTrace()
+                        Toast.makeText(
+                            applicationContext,
+                            "Error while reading file .fac: (2) (instance decoding - runtime) " + ex1.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                }
             }
         }
     }

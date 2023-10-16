@@ -198,7 +198,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                     File imageViewPersistantFile = getImageViewPersistantFile();
                     if (imageViewPersistantFile.exists()) {
                         currentFile = imageViewPersistantFile;
-                   }
+                    }
                 }
             } catch (RuntimeException ex) {
                 Toast.makeText(getApplicationContext(), "Error restoring currentFile", Toast.LENGTH_LONG)
@@ -259,7 +259,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
                 }
             }
-            currentFile1 = properties.getProperty("currentFile", null);
+            currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
             if(currentFile1!=null)
                 currentFile = new File(currentFile1);
         } catch (RuntimeException ex) {

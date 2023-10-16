@@ -26,47 +26,46 @@
     <activity
         android:id="@+id/myCameraActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
-        android:label="MyCameraActivity">
-        <!--
-
-        <deepLink
-            android:id="@+id/deepLink"
-            app:action="ACTION_EDIT"
-            app:mimeType="image/jpg"
-            app:uri="https://empty3.one/dl/jpg" />-->
-
+        android:label="Home Main">
     </activity>
     <activity
         app:action="@+id/open_effects"
         android:id="@+id/chooseEffectsActivity2_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.ChooseEffectsActivity2"
-        android:label="ChooseEffectsActivity2" />
+        android:label="Effects" />
     <activity
         app:action="@+id/open_text"
         android:id="@+id/textActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.TextActivity"
-        android:label="TextActivity" />
+        android:label="Text writings" />
     <activity
         app:action="@+id/graphicsActivity_nav"
         android:id="@+id/graphicsActivity_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivity"
-        android:label="GraphicsActivity" />
+        android:label="Math graphics" />
     <activity
         app:action="@+id/open_licence_info"
         android:id="@+id/licenceUserData2_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.LicenceUserData2"
-        android:label="LicenceUserData2" />
+        android:label="License Terms" />
     <activity
         app:action="@+id/open_graphics_view"
         android:id="@+id/graphicsActivityView_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.GraphicsActivityView"
-        android:label="GraphicsActivityView" />
+        android:label="View Math" />
     <activity
         app:action="@+id/open_caculator"
         android:id="@+id/calculator_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.Calculator"
         android:label="Calculator" />
-
+    <activity app:action="@+id/face_menu_actuin"
+        android:id="@+id/face_menu"
+        android:name="one.empty3.feature.app.maxSdk29.pro.FaceActivity"
+        android:label="Face Menu"/>
+    <activity app:action="@+id/face_Settings_actin"
+            android:id="@+id/face_settinfs"
+            android:name="one.empty3.feature.app.maxSdk29.pro.FaceActivity"
+            android:label="Face Settings"/>
     <action
         android:id="@+id/open_effects"
         app:destination="@id/chooseEffectsActivity2_nav" />

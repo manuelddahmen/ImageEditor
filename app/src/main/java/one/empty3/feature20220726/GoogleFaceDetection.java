@@ -141,6 +141,10 @@ public class GoogleFaceDetection
         return instance2;
     }
 
+    public static boolean isInstance2() {
+        return instance2!=null;
+    }
+
     public static class FaceData implements Serializable {
 
         public static class Surface implements Serializable, Serialisable {
