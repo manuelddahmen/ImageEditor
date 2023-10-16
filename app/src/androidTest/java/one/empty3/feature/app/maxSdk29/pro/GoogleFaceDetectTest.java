@@ -139,7 +139,8 @@ public class GoogleFaceDetectTest {
                 try {
                     String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                    bitmap.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
+                    Bitmap bitmap1 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+                    bitmap1.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
 
                     Polygon polygon = new Polygon();
@@ -148,14 +149,14 @@ public class GoogleFaceDetectTest {
                         polygon.getPoints().add(Point3D.random(400.0));
                     }
 
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap);
 
                     googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
                             new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy(), false));
 
-                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(null, null);
+                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(bitmap);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     googleFaceDetection.encode(dataOutputStream);
                     Assert.assertTrue(true);

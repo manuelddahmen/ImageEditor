@@ -391,8 +391,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                 )
 
                 filledContours.paintIfNot(
-                    0, 0, filledContours.columns, filledContours.lines, GoogleFaceDetection.getInstance2().bitmap
-                    ,
+                    0, 0, filledContours.columns, filledContours.lines,
+                    GoogleFaceDetection.getInstance2().bitmap,
                     selectedSurfaceAllPicture!!.colorContours,
                     selectedSurfaceAllPicture!!.contours)
                 drawSurface()
@@ -520,7 +520,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     boundRect2d.getElem(0).x.toInt(),
                                     boundRect2d.getElem(0).y.toInt()
                                 )
-                                var pBounds = pPolygonPoint0//Point(0,0)
+                                var pBounds = pPolygonPoint0
 
                                 if (option == OPTION_SELECT_ALL || p == null) {
                                     if (i == currentSurface)

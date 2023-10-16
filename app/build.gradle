@@ -21,7 +21,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 323102934
+def code = 323202934
 //3 sept. 2023, 14:27:03 (UTC).
 java {
     toolchain {
@@ -199,12 +199,12 @@ dependencies {
     //implementation "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     //implementation 'com.google.ar:core:1.32.0'
-    implementation 'androidx.activity:activity-compose:1.7.2'
+    implementation 'androidx.activity:activity-compose:1.8.0'
     implementation 'junit:junit:4.13.2'
     implementation "androidx.preference:preference-ktx:1.2.1"
     implementation "androidx.databinding:viewbinding:8.1.2"
@@ -215,7 +215,7 @@ dependencies {
     implementation "androidx.databinding:databinding-ktx:8.1.2"
     //implementation "com.google.android.datatransport:transport-runtime:3.1.9"
     implementation "com.google.android.material:compose-theme-adapter:1.2.1"
-    implementation "androidx.compose.ui:ui:1.5.2"
+    implementation "androidx.compose.ui:ui:1.5.3"
     implementation "androidx.compose.material:material:1.5.3"
     implementation 'androidx.room:room-common:2.5.2'
     implementation 'androidx.room:room-runtime:2.5.2'

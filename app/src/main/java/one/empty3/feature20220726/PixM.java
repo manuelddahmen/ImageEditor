@@ -859,18 +859,21 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     private double[] tmpColor2 = new double[3];
-    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmapToDraw, int colorPaint,
-                           PixM filledImage) {
+    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmapToDraw, int colorPaint, PixM filledImage) {
         double[] tmpColor3 = new double[3];
         double[] pixelsFilterValue = new double[3];
         Lumiere.getDoubles(colorPaint, tmpColor3);
         for (int i = x; i < width; i++) {
             for (int j = y; j < height; j++) {
+                double percentXtarget = 1.0*(i-x)/width;
+                double percentYtarget = 1.0*(j-y)/height;
+                double percentXsource = 1.0*(i-x)/width;
+                double percentYsource = 1.0*(j-y)/height;
                 assert bitmapToDraw != null;
-                double xOrig = Math.min(1.0 * (i - x) / width * bitmapToDraw.getWidth(), bitmapToDraw.getWidth() - 1);
-                double yOrig = Math.min(1.0 * (j - y) / height * bitmapToDraw.getHeight(), bitmapToDraw.getHeight() - 1);
-                double xFilter = Math.min(1.0 * (i - x) / width * filledImage.getColumns(), filledImage.getColumns() - 1);
-                double yFilter = Math.min(1.0 * (j - y) / height * filledImage.getLines(), filledImage.getLines() - 1);
+                double xOrig = Math.min(percentXtarget * bitmapToDraw.getWidth(), bitmapToDraw.getWidth() - 1);
+                double yOrig = Math.min(percentYtarget * bitmapToDraw.getHeight(), bitmapToDraw.getHeight() - 1);
+                double xFilter = Math.min(percentXtarget * filledImage.getColumns(), filledImage.getColumns() - 1);
+                double yFilter = Math.min(percentYtarget * filledImage.getLines(), filledImage.getLines() - 1);
                 int pixel = bitmapToDraw.getPixel((int) xOrig, (int) yOrig);
                 double [] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
                 Lumiere.getDoubles(pixel , tmpColor2);
