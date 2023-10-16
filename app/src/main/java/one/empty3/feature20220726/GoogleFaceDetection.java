@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.DataInputStream;
@@ -34,7 +35,7 @@ public class GoogleFaceDetection
     private FaceData.Surface selectedSurface;
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
-    private Bitmap bitmap = null;
+    @NotNull private Bitmap bitmap;
 
     public static GoogleFaceDetection getInstance(boolean newInstance, Bitmap bitmap) {
         if (instance == null || newInstance)
@@ -129,11 +130,11 @@ public class GoogleFaceDetection
         }
     }
 
-    public static void setInstance(@Nullable GoogleFaceDetection googleFaceDetection) {
+    public static void setInstance(@NotNull GoogleFaceDetection googleFaceDetection) {
         instance = googleFaceDetection;
     }
 
-    public static void setInstance2(@Nullable GoogleFaceDetection googleFaceDetection) {
+    public static void setInstance2(@NotNull GoogleFaceDetection googleFaceDetection) {
         instance2 = googleFaceDetection;
     }
 

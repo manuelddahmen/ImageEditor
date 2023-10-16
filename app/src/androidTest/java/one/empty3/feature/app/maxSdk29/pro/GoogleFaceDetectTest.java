@@ -53,6 +53,11 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 
 public class GoogleFaceDetectTest {
+    private String path = "/data/data/one.empty3.feature.app.maxSdk29.pro";
+    // /storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/"
+    private String[] modelsFiles = new String[]{
+        "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model-manu.v3.fac",
+            "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model_v3.fac"};
     @Before
     public void setup() {
         String permission;
@@ -66,18 +71,19 @@ public class GoogleFaceDetectTest {
 
     @Test
     public void testLoadSaveInt() {
-        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        Context applicationContext = ApplicationProvider.getApplicationContext();
         GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
         googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
 
-        String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + ".fac";
+        String filename = path+"/model-" + UUID.randomUUID() + ".fac";
         try {
             DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
             googleFaceDetection.encode(dataOutputStream);
             Assert.assertTrue(true);
             dataOutputStream.close();
         } catch (IOException e) {
+            e.printStackTrace();
             Assert.fail();
             return;
         }
@@ -89,6 +95,7 @@ public class GoogleFaceDetectTest {
             dataInputStream.close();
             Assert.assertTrue(true);
         } catch (IOException e) {
+            e.printStackTrace();
             Assert.fail();
             return;
         }
@@ -98,14 +105,14 @@ public class GoogleFaceDetectTest {
 
     @Test
     public void testLoadSavePixM() {
-        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        Context applicationContext = ApplicationProvider.getApplicationContext();
         int imageManu = R.drawable.imagemanu;
         Drawable drawable = getDrawable(applicationContext, imageManu);
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {
                 try {
-                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
+                    String filename = path+"/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
                     PixM pixM = new PixM(bitmap);
@@ -122,6 +129,7 @@ public class GoogleFaceDetectTest {
                     Assert.assertEquals(pixReloaded, pixM);
 
                 } catch (IOException e) {
+                    e.printStackTrace();
                     Assert.fail();
                     return;
                 }
@@ -130,14 +138,14 @@ public class GoogleFaceDetectTest {
     }
     @Test
     public void testLoadSaveGoogleFaceDetection() {
-        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        Context applicationContext = ApplicationProvider.getApplicationContext();
         int imageManu = R.drawable.imagemanu;
         Drawable drawable = getDrawable(applicationContext, imageManu);
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {
                 try {
-                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-pixm.fac";
+                    String filename = path+"/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     Bitmap bitmap1 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                     bitmap1.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
@@ -170,6 +178,7 @@ public class GoogleFaceDetectTest {
                     System.err.println("Number of faces read: " + googleFaceDetection1.getDataFaces().size());
 
                 } catch (IOException e) {
+                    e.printStackTrace();
                     Assert.fail();
                     return;
                 }
@@ -179,14 +188,14 @@ public class GoogleFaceDetectTest {
 
     @Test
     public void testLoadSavePolygon() {
-        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        Context applicationContext = ApplicationProvider.getApplicationContext();
         int imageManu = R.drawable.imagemanu;
         Drawable drawable = getDrawable(applicationContext, imageManu);
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {
                 try {
-                    String filename = "/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-" + UUID.randomUUID() + "-polygon.fac";
+                    String filename = path+"/model-" + UUID.randomUUID() + "-polygon.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
                     Polygon polygon = new Polygon();
@@ -207,6 +216,7 @@ public class GoogleFaceDetectTest {
                     Assert.assertEquals(polygon, polygonReloaded);
 
                 } catch (IOException e) {
+                    e.printStackTrace();
                     Assert.fail();
                     return;
                 }
@@ -215,7 +225,7 @@ public class GoogleFaceDetectTest {
     }
     @Test
     public void loadSaveTest() {
-        Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
+        Context applicationContext = ApplicationProvider.getApplicationContext();
         int imageManu = R.drawable.imagemanu;
         Drawable drawable = getDrawable(applicationContext, imageManu);
         if (drawable instanceof BitmapDrawable) {
@@ -250,7 +260,7 @@ public class GoogleFaceDetectTest {
                     } else {
                     }
                     googleFaceDetection.encode(new DataOutputStream(
-                            new FileOutputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model-"+ UUID.randomUUID()+".fac")));
+                            new FileOutputStream(path+"/model-"+ UUID.randomUUID()+".fac")));
                     byteArrayOutputStream.close();
 
                     System.err.println("Number of faces 1 : " + googleFaceDetection.getDataFaces().size());
@@ -271,7 +281,7 @@ public class GoogleFaceDetectTest {
             System.out.println("Current absolute path is: " + s);
 
             Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
-            InputStream inputStream = new FileInputStream("/storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/model.fac (2)");
+            InputStream inputStream = new FileInputStream(modelsFiles[0]);
             GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
             googleFaceDetection
                     = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));

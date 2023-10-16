@@ -207,23 +207,6 @@ public class FaceOverlayView extends ImageViewSelection {
                 face.getContour(FaceContour.LOWER_LIP_TOP), face.getContour(FaceContour.UPPER_LIP_TOP),
                 face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};
 
-        surfaceId = FaceContour.FACE;
-        surfaceId = FaceContour.LEFT_EYE;
-        surfaceId = FaceContour.RIGHT_EYE;
-        surfaceId = FaceContour.NOSE_BOTTOM;
-        surfaceId = FaceContour.NOSE_BRIDGE;
-        surfaceId = FaceContour.LEFT_EYEBROW_BOTTOM;
-        surfaceId = FaceContour.RIGHT_EYEBROW_BOTTOM;
-        surfaceId = FaceContour.LEFT_EYEBROW_TOP;
-        surfaceId = FaceContour.RIGHT_EYEBROW_TOP;
-        surfaceId = FaceContour.UPPER_LIP_TOP;
-        surfaceId = FaceContour.UPPER_LIP_BOTTOM;
-        surfaceId = FaceContour.LOWER_LIP_BOTTOM;
-        surfaceId = FaceContour.LOWER_LIP_TOP;
-        surfaceId = FaceContour.UPPER_LIP_TOP;
-        surfaceId = FaceContour.LEFT_CHEEK;
-        surfaceId = FaceContour.RIGHT_CHEEK;
-
         int i = 0;
         for (FaceContour faceContour : faceContours) {
             if (i == 0 && faceContour != null) {
