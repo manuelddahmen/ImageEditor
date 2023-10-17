@@ -28,7 +28,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -859,7 +858,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     private double[] tmpColor2 = new double[3];
-    public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmapToDraw, int colorPaint, PixM filledImage) {
+    public void paintIfNot(int x, int y, int width, int height, @NotNull Bitmap bitmapToDraw, int colorPaint, PixM filledImage) {
         double[] tmpColor3 = new double[3];
         double[] pixelsFilterValue = new double[3];
         Lumiere.getDoubles(colorPaint, tmpColor3);

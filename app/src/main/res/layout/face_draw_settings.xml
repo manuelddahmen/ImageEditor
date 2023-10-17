@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="0.5"
                 android:id="@+id/buttonsOriginalImage"
-                android:text="@string/choose_model"
+                android:text="@string/toggle_original_colors"
                 />
     </LinearLayout>
     <Button

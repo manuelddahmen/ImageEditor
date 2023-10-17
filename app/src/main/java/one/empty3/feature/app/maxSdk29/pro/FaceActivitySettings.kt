@@ -15,7 +15,6 @@ import android.provider.OpenableColumns
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -252,7 +251,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val applyImage = findViewById<Button>(R.id.applyImage)
         applyImage.setOnClickListener {
-            if (this.selectedSurfaceAllPicture != null && selectedImage != null) {
+            if (selectedSurfaceAllPicture != null && selectedImage!=null) {
                 val filledContours = selectedSurfaceAllPicture!!.filledContours
                 filledContours.paintIfNot(
                     0, 0, filledContours.columns, filledContours.lines,
@@ -282,10 +281,10 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
         }
 
-        val originalColors = findViewById<Button>(R.id.originalColors)
+        val originalColors = findViewById<Button>(R.id.buttonsOriginalImage)
         originalColors.setOnClickListener {
             if(selectedSurfaceAllPicture!=null) {
-                selectedSurfaceAllPicture!!.isDrawOriginalImageContour = originalColors.isSelected
+                selectedSurfaceAllPicture!!.isDrawOriginalImageContour = !selectedSurfaceAllPicture!!.isDrawOriginalImageContour
             }
         }
 
@@ -380,7 +379,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
 
 
-        val applyModel = findViewById<Button>(R.id.applyImage)
+        val applyModel = findViewById<Button>(R.id.applyModel)
         applyModel.setOnClickListener {
             if (this.selectedSurfaceAllPicture != null && GoogleFaceDetection.isInstance2()
                 && selectedSurfaceAllPicture!=null) {
@@ -593,20 +592,21 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     private fun drawSurface() {
         if (selectedSurfaceAllPicture != null) {
-            polygonView.setImageBitmap3(
-                selectedSurfaceAllPicture!!
-                    .filledContours.bitmap.copy(
-                        Bitmap.Config.ARGB_8888, true
-                    )
-            )
-            val buttonOriginalColors = findViewById<CheckBox>(R.id.originalColors)
-            val selected =
-                if (buttonOriginalColors.isSelected()) {
-                    true
-                } else {
-                    false
-                }
-            buttonOriginalColors.setSelected(selected)
+            if(selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
+                polygonView.setImageBitmap3(
+                    selectedSurfaceAllPicture!!
+                        .filledContours.bitmap.copy(
+                            Bitmap.Config.ARGB_8888, true
+                        )
+                )
+            } else {
+                polygonView.setImageBitmap3(
+                    selectedSurfaceAllPicture!!
+                        .filledContours.bitmap.copy(
+                            Bitmap.Config.ARGB_8888, true
+                        )
+                )
+            }
         }
 
     }
@@ -654,17 +654,10 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         var result: Intent? = null
         if(data!=null)
             result = data
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
-            val intentChoosed = data
-
-
-            //DownloadImageTask downloadImageTask = new DownloadImageTask((ImageViewSelection) findViewById(R.id.currentImageView));
-
-            //AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
             var choose_directoryData: InputStream? = null
             choose_directoryData = getRealPathFromIntentData(data)
             if (choose_directoryData == null) {
@@ -676,6 +669,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                 }
             }
             var photo: Bitmap? = null
+
+            maxRes = Utils().getMaxRes(this)
+
             if (maxRes > 0) {
                 System.err.println("FileInputStream$choose_directoryData")
                 photo = BitmapFactory.decodeStream(choose_directoryData)
@@ -689,7 +685,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (photo != null) {
                 this.selectedImage = photo!!
             }
-        }else  if ((resultCode == RESULT_OK) && result != null && ((result.extras != null &&
+        } else  if ((resultCode == RESULT_OK) && result != null && ((result.extras != null &&
                     result.extras!!.get(Intent.EXTRA_STREAM) != null) ||
                     result.data != null)
         ) {
