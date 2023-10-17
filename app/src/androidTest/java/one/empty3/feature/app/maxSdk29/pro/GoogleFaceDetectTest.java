@@ -39,12 +39,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 import one.empty3.feature20220726.GoogleFaceDetection;
@@ -54,7 +53,6 @@ import one.empty3.library.Polygon;
 
 public class GoogleFaceDetectTest {
     private String path = "/data/data/one.empty3.feature.app.maxSdk29.pro";
-    // /storage/emulated/0/Android/data/one.empty3.feature.app.maxSdk29.pro/"
     private String[] modelsFiles = new String[]{
         "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model-manu.v3.fac",
             "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model_v3.fac"};
@@ -72,7 +70,7 @@ public class GoogleFaceDetectTest {
     @Test
     public void testLoadSaveInt() {
         Context applicationContext = ApplicationProvider.getApplicationContext();
-        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
+        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888));
         googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
 
@@ -87,7 +85,7 @@ public class GoogleFaceDetectTest {
             Assert.fail();
             return;
         }
-        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(null, null);
+        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888));
 
         try {
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
@@ -149,7 +147,7 @@ public class GoogleFaceDetectTest {
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     Bitmap bitmap1 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                     bitmap1.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
-                    PixM pixM = new PixM(bitmap);
+                    PixM pixM = new PixM(bitmap1);
 
                     Polygon polygon = new Polygon();
                     int pointsSize = (int) (Math.random() * 20);
@@ -157,14 +155,14 @@ public class GoogleFaceDetectTest {
                         polygon.getPoints().add(Point3D.random(400.0));
                     }
 
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap);
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap1);
 
                     googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
                             new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy(), false));
 
-                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(bitmap);
+                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(bitmap1);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     googleFaceDetection.encode(dataOutputStream);
                     Assert.assertTrue(true);
@@ -276,44 +274,55 @@ public class GoogleFaceDetectTest {
     @Test
     public void loadModel() {
         try {
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println("Current absolute path is: " + s);
+            Context applicationContext = ApplicationProvider.getApplicationContext();
+            int imageManu = R.drawable.imagemanu;
+            Drawable drawable = getDrawable(applicationContext, imageManu);
+            if (drawable instanceof BitmapDrawable) {
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+                if (bitmapDrawable.getBitmap() != null) {
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    File currentRelativePath = new File(modelsFiles[1]);
+                    String s = currentRelativePath.toString();
+                    System.out.println("Current absolute path is: " + s);
 
-            Context applicationContext = ApplicationProvider.getApplicationContext().getApplicationContext();
-            InputStream inputStream = new FileInputStream(modelsFiles[0]);
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(null, null);
-            googleFaceDetection
-                    = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
+                    InputStream inputStream = new FileInputStream(modelsFiles[0]);
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap);
+                    googleFaceDetection
+                            = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
 
-            if (googleFaceDetection == null) {
-                googleFaceDetection = new GoogleFaceDetection(null, null);
-                System.err.println("GoogleFaceDetection == null");
-            } else {
+                    if (googleFaceDetection == null) {
+                        Assert.fail();
+                    } else {
+                    }
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(1000000);
+
+                    googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+                    byteArrayOutputStream.close();
+
+                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+                    GoogleFaceDetection googleFaceDetection1 =
+                            (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
+                    byteArrayInputStream.close();
+
+                    System.err.println("Number of faces 1 : " + googleFaceDetection.getDataFaces().size());
+                    System.err.println("Number of faces 2 : " + googleFaceDetection1.getDataFaces().size());
+
+
+                    assert (googleFaceDetection1.equals(googleFaceDetection));
+
+                }
             }
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
-
-            googleFaceDetection.encode(new DataOutputStream(byteArrayOutputStream));
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-            byteArrayOutputStream.close();
-
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
-            GoogleFaceDetection googleFaceDetection1 =
-                    (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(byteArrayInputStream));
-            byteArrayInputStream.close();
-
-            System.err.println("Number of faces 1 : " + googleFaceDetection.getDataFaces().size());
-            System.err.println("Number of faces 2 : " + googleFaceDetection1.getDataFaces().size());
-
-
-            assert (googleFaceDetection1.equals(googleFaceDetection));
-
-
         } catch (IOException e6) {
             e6.printStackTrace();
             Assert.fail();
         }
+    }
+
+    @Test
+    public void testGoogleFaceDetectCopyPart() {
+
     }
 }
 

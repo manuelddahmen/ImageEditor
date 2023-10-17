@@ -77,7 +77,7 @@
             android:layout_height="48dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/buttonsImage"
-            app:layout_constraintBottom_toTopOf="@id/originalColors">
+            app:layout_constraintBottom_toTopOf="@id/buttonsOriginalImageButtons">
         
         <Button
                 android:layout_height="48dp"
@@ -94,17 +94,22 @@
                 android:text="@string/apply_model"
                 />
     </LinearLayout>
-    <CheckBox
-            android:layout_height="48dp"
+    <LinearLayout
+            android:id="@+id/buttonsOriginalImageButtons"
             android:layout_width="match_parent"
-            android:layout_weight="1.0"
-            android:id="@+id/originalColors"
-            android:text="@string/apply_to_all"
-            android:checked="false"
-            app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back"
-            app:layout_constraintTop_toBottomOf="@id/buttonsModel"
-            />
-    <!-- real colors?-->
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/buttonsModel"
+            app:layout_constraintBottom_toTopOf="@id/face_draw_settings_back">
+        
+        <Button
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
+                android:id="@+id/buttonsOriginalImage"
+                android:text="@string/choose_model"
+                />
+    </LinearLayout>
     <Button
             android:layout_height="48dp"
             android:layout_width="match_parent"

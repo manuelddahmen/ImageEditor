@@ -552,13 +552,14 @@ class FaceActivity : ActivitySuperClass() {
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =
                             GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
-                        GoogleFaceDetection.setInstance(googleFaceDetection)
-                        faceOverlayView.googleFaceDetection = googleFaceDetection
-                        if (googleFaceDetection!!.dataFaces.size > 0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size > 0)
-                            faceOverlayView.googleFaceDetection.selectedSurface =
-                                googleFaceDetection!!.dataFaces[0].faceSurfaces[0]
-                        GoogleFaceDetection.setInstance2(googleFaceDetection)
-                        if (faceOverlayView.googleFaceDetection == null) {
+                        if(googleFaceDetection!=null) {
+                            GoogleFaceDetection.setInstance(googleFaceDetection)
+                            faceOverlayView.googleFaceDetection = googleFaceDetection
+                            if (googleFaceDetection!!.dataFaces.size > 0 && googleFaceDetection!!.dataFaces[0].faceSurfaces.size > 0)
+                                faceOverlayView.googleFaceDetection.selectedSurface =
+                                    googleFaceDetection!!.dataFaces[0].faceSurfaces[0]
+                            GoogleFaceDetection.setInstance2(googleFaceDetection)
+                        } else if (faceOverlayView.googleFaceDetection == null) {
                             Toast.makeText(
                                 applicationContext,
                                 "GoogleFaceDetection == null",

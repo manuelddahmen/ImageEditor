@@ -385,16 +385,28 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (this.selectedSurfaceAllPicture != null && GoogleFaceDetection.isInstance2()
                 && selectedSurfaceAllPicture!=null) {
                 val filledContours = selectedSurfaceAllPicture!!.filledContours
-                val selectSurface2 = selectSurface2(
-                    GoogleFaceDetection.getInstance2(),
-                    selectedSurfaceAllPicture!!.surfaceId
-                )
+                val selectSurface2 : Surface
+                    = selectSurface2(GoogleFaceDetection.getInstance2(), selectedSurfaceAllPicture!!.surfaceId)!!
 
-                filledContours.paintIfNot(
-                    0, 0, filledContours.columns, filledContours.lines,
-                    GoogleFaceDetection.getInstance2().bitmap,
-                    selectedSurfaceAllPicture!!.colorContours,
-                    selectedSurfaceAllPicture!!.contours)
+                if(selectSurface2!=null) {
+                    googleFaceDetection!!.dataFaces.forEach(action = {
+                        it.faceSurfaces.forEach(action = {
+                            if(selectedSurfaceAllPicture!!.surfaceId==selectSurface2.surfaceId) {
+                                it.filledContours = selectSurface2.filledContours
+                            }
+                        })
+                    })
+
+                    filledContours.paintIfNot(
+                        0, 0, filledContours.columns, filledContours.lines,
+                        GoogleFaceDetection.getInstance2().bitmap,
+                        selectedSurfaceAllPicture!!.colorContours,
+                        selectedSurfaceAllPicture!!.contours
+                    )
+                } else {
+                    Toast.makeText(applicationContext, "Error : selectSurface2 returns null", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
                 drawSurface()
                 drawSurfaces()
 
@@ -404,7 +416,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     }
 
-    private fun selectSurface2(instance2: GoogleFaceDetection?, surfaceId:Int) : Surface? {
+    private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId:Int) : Surface? {
         if(instance2!=null) {
             instance2.dataFaces.forEach(action = {
                 it.faceSurfaces.forEach(action = {
@@ -770,8 +782,9 @@ class FaceActivitySettings : ActivitySuperClass() {
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =
                             GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
-                        GoogleFaceDetection.setInstance2(googleFaceDetection)
-                        if (!GoogleFaceDetection.isInstance2()) {
+                        if(googleFaceDetection!=null) {
+                            GoogleFaceDetection.setInstance2(googleFaceDetection)
+                        } else if (!GoogleFaceDetection.isInstance2()) {
                             Toast.makeText(
                                 applicationContext,
                                 "GoogleFaceDetection == null (instance2)",
