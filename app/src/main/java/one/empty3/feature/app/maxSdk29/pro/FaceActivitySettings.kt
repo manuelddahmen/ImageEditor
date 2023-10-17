@@ -387,7 +387,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 val selectSurface2 : Surface
                     = selectSurface2(GoogleFaceDetection.getInstance2(), selectedSurfaceAllPicture!!.surfaceId)!!
 
-                if(selectSurface2!=null) {
+                if(selectSurface2!=null && filledContours!=null) {
                     googleFaceDetection!!.dataFaces.forEach(action = {
                         it.faceSurfaces.forEach(action = {
                             if(selectedSurfaceAllPicture!!.surfaceId==selectSurface2.surfaceId) {
@@ -396,12 +396,14 @@ class FaceActivitySettings : ActivitySuperClass() {
                         })
                     })
 
+                    selectedSurfaceAllPicture!!.filledContours = selectSurface2.filledContours
+                    /*selectedSurfaceAllPicture!!.
                     filledContours.paintIfNot(
                         0, 0, filledContours.columns, filledContours.lines,
                         GoogleFaceDetection.getInstance2().bitmap,
                         selectedSurfaceAllPicture!!.colorContours,
                         selectedSurfaceAllPicture!!.contours
-                    )
+                    )*/
                 } else {
                     Toast.makeText(applicationContext, "Error : selectSurface2 returns null", Toast.LENGTH_LONG).show()
                     return@setOnClickListener
