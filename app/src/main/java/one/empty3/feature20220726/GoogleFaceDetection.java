@@ -170,6 +170,14 @@ public class GoogleFaceDetection
             return 0;
         }
 
+        public PixM getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(PixM photo) {
+            this.photo = photo;
+        }
+
         public static class Surface implements Serializable, Serialisable {
             private boolean drawOriginalImageContour;
             private int colorFill;
@@ -395,12 +403,12 @@ public class GoogleFaceDetection
         this.dataFaces = dataFaces;
     }
 
-    public GoogleFaceDetection(Bitmap bitmap) {
+    public GoogleFaceDetection(@NotNull Bitmap bitmap) {
         dataFaces = new ArrayList<>();
         this.setBitmap(bitmap);
     }
 
-    private void setBitmap(Bitmap bitmap) {
+    public void setBitmap(@NotNull Bitmap bitmap) {
         this.bitmap = bitmap;
     }
 

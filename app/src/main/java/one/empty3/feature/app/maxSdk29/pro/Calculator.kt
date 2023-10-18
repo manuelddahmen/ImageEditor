@@ -95,10 +95,11 @@ class Calculator : ActivitySuperClass() {
                     tree.construct()
                     var d: Double = 0.0
                     val eval = tree.eval()
-                    if(eval.dim==0)
+                    if(eval.dim==0) {
                         d = eval.getElem()
-                    else(eval.dim==1)
+                    } else if(eval.dim==1) {
                         d = eval.getElem(0)
+                    }
                     if(d!=null) {
                         val labelAnswer: String = d.toString()
                         textAnswer.text = labelAnswer
@@ -138,10 +139,10 @@ class Calculator : ActivitySuperClass() {
             val intentGraphics = Intent(applicationContext, GraphicsActivity::class.java)
             for (i in cordsConsts.indices) {
                 val cordName : String = cordsConsts[i]
-                System.out.println("cordName=" + cordName)
+                System.out.println("cordName=$cordName")
                 if (cordName.equals(variableName)) {
                     val textField : EditText = findViewById(R.id.editTextCalculus)
-                    System.out.println("Calcul : " + textField.text)
+                    println("Calculi : " + textField.text)
                     val cord : String = textField.text.toString()
                     variable = cord
                     cords[i] = cord

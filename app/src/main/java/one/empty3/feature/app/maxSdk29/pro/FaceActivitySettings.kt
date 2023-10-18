@@ -778,7 +778,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                         val inputStream = getRealPathFromIntentData(result)
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection2 =
-                            GoogleFaceDetection(null).decode(dataInputStream) as GoogleFaceDetection?
+                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
                         if(googleFaceDetection2!=null) {
                             GoogleFaceDetection.setInstance2(googleFaceDetection2)
                         } else if (!GoogleFaceDetection.isInstance2()) {

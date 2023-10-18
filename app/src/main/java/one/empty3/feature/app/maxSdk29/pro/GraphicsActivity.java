@@ -74,9 +74,21 @@ public class GraphicsActivity extends ActivitySuperClass {
 
          SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
+
+        String variableName1 = "";
+        if(getIntent().hasExtra("variableName")) {
+             variableName1 = getIntent().getExtras().getString("variableName");
+         }
         for (int i = 0; i < cords.length; i++) {
-            String string = prefs.getString("autoSave" + cords[i], cordsConsts[i]);
-            textViews[i].setText(string);
+            if(variableName1.equals(cordsConsts[i])) {
+                if(getIntent().hasExtra("variable")) {
+                    cords[i] = getIntent().getExtras().getString("variable");
+                    textViews[i].setText(cords[i]);
+                }
+            } else {
+                String string = prefs.getString("autoSave" + cords[i], cordsConsts[i]);
+                textViews[i].setText(string);
+            }
          }
 
         for (int k1 = 0; k1 < cordsConsts.length; k1++) {

@@ -435,6 +435,9 @@ public class FaceOverlayView extends ImageViewSelection {
 
                 googleFaceDetection.setDataFaces(new ArrayList<>());
 
+                if(mBitmap!=null)
+                    googleFaceDetection.setBitmap(mBitmap);
+
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
                 if (activity != null) {
@@ -494,9 +497,16 @@ public class FaceOverlayView extends ImageViewSelection {
             GoogleFaceDetection.FaceData faceData = googleFaceDetection.getDataFaces().get(i);
 
             Rect rect = face.getBoundingBox();
+
+
             PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
             PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));
             //mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
+
+            if(googleFaceDetection!=null && googleFaceDetection.getBitmap()!=null) {
+                Bitmap bitmap2 = googleFaceDetection.getBitmap();
+                faceData.setPhoto(new PixM(bitmap2).copySubImage((int) a.x, (int) a.y, (int) (b.x - a.x), (int) (b.y - a.y)));
+            }
             action(face, faceData);
         }
     }

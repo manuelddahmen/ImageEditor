@@ -54,8 +54,8 @@ import one.empty3.library.Polygon;
 public class GoogleFaceDetectTest {
     private String path = "/data/data/one.empty3.feature.app.maxSdk29.pro";
     private String[] modelsFiles = new String[]{
-        "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model-manu.v3.fac",
-            "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model_v3.fac"};
+        "/data/data/one.empty3.feature.app.maxSdk29.pro/model.fac (10).fac (10).fac (10)",
+            "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model.v4.fac"};
     @Before
     public void setup() {
         String permission;
@@ -158,6 +158,8 @@ public class GoogleFaceDetectTest {
                     GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap1);
 
                     googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
+
+                    googleFaceDetection.getDataFaces().get(0).setPhoto(pixM.copy());
 
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
                             new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy(), false));
