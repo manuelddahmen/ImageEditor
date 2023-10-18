@@ -388,22 +388,21 @@ class FaceActivitySettings : ActivitySuperClass() {
                     = selectSurface2(GoogleFaceDetection.getInstance2(), selectedSurfaceAllPicture!!.surfaceId)!!
 
                 if(selectSurface2!=null && filledContours!=null) {
-                    googleFaceDetection!!.dataFaces.forEach(action = {
-                        it.faceSurfaces.forEach(action = {
-                            if(selectedSurfaceAllPicture!!.surfaceId==selectSurface2.surfaceId) {
-                                it.filledContours = selectSurface2.filledContours
-                            }
+                    if (googleFaceDetection != null) {
+                        try {
+                        googleFaceDetection!!.dataFaces.forEach(action = {
+                            it.faceSurfaces.forEach(action = {
+                                if (selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId) {
+                                    it.filledContours = selectSurface2.filledContours
+                                        .resize(it.filledContours.columns, it.filledContours.lines)
+                                }
+                            })
                         })
-                    })
-
-                    selectedSurfaceAllPicture!!.filledContours = selectSurface2.filledContours
-                    /*selectedSurfaceAllPicture!!.
-                    filledContours.paintIfNot(
-                        0, 0, filledContours.columns, filledContours.lines,
-                        GoogleFaceDetection.getInstance2().bitmap,
-                        selectedSurfaceAllPicture!!.colorContours,
-                        selectedSurfaceAllPicture!!.contours
-                    )*/
+                        } catch (ex:RuntimeException) {
+                            Toast.makeText(applicationContext, "Apply model null : " +ex.message, Toast.LENGTH_LONG).show()
+                            return@setOnClickListener
+                        }
+                    }
                 } else {
                     Toast.makeText(applicationContext, "Error : selectSurface2 returns null", Toast.LENGTH_LONG).show()
                     return@setOnClickListener
@@ -656,6 +655,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         var result: Intent? = null
         if(data!=null)
             result = data
@@ -776,12 +776,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                 } else if (requestCode == OPEN_MODEL) {
                     try {
                         val inputStream = getRealPathFromIntentData(result)
-                        //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
-                        val googleFaceDetection =
-                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
-                        if(googleFaceDetection!=null) {
-                            GoogleFaceDetection.setInstance2(googleFaceDetection)
+                        val googleFaceDetection2 =
+                            GoogleFaceDetection(null).decode(dataInputStream) as GoogleFaceDetection?
+                        if(googleFaceDetection2!=null) {
+                            GoogleFaceDetection.setInstance2(googleFaceDetection2)
                         } else if (!GoogleFaceDetection.isInstance2()) {
                             Toast.makeText(
                                 applicationContext,

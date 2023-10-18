@@ -442,8 +442,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                    &&i>=0 && i<mCopy.getWidth() && j>=0 && j<mCopy.getHeight()) {
                     if (drawOriginalImageContour) {
                         Lumiere.getDoubles(mCopy.getPixel((int)i, (int)j), color);
+                        mCopy.setPixel((int) i, (int) j, colorToDraw);
+                    } else {
+                        mCopy.setPixel((int) i, (int) j, colorToDraw);
                     }
-                    mCopy.setPixel((int) i, (int) j, colorToDraw);
                 }
                 pixels++;
 

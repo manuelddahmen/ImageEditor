@@ -36,6 +36,7 @@ public class GoogleFaceDetection
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
     @NotNull private Bitmap bitmap;
+    private int versionFile = 4;
 
     public static GoogleFaceDetection getInstance(boolean newInstance, Bitmap bitmap) {
         if (instance == null || newInstance)
@@ -146,7 +147,28 @@ public class GoogleFaceDetection
         return instance2!=null;
     }
 
-    public static class FaceData implements Serializable {
+    public static class FaceData implements Serializable, Serialisable {
+        private PixM photo = new PixM(1,1);
+        @Override
+        public Serialisable decode(DataInputStream in) {
+            FaceData faceData = new FaceData();
+            photo = (PixM) new PixM(1,1).decode(in);
+            if(photo==null)
+                photo = new PixM(1,1);
+            return faceData;
+        }
+
+        public int encode(DataOutputStream out) {
+            if(photo==null)
+                photo = new PixM(1,1);
+            photo.encode(out);
+            return 0;
+        }
+
+        @Override
+        public int type() {
+            return 0;
+        }
 
         public static class Surface implements Serializable, Serialisable {
             private boolean drawOriginalImageContour;
@@ -422,6 +444,11 @@ public class GoogleFaceDetection
     @Override
     public Serialisable decode(DataInputStream in) {
         try {
+            versionFile = in.readInt();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             PixM decode1 = (PixM) new PixM(1, 1).decode(in);
             bitmap = decode1.getBitmap();
         } catch (NullPointerException e1) {
@@ -432,7 +459,7 @@ public class GoogleFaceDetection
             int countFaces = in.readInt();
             System.out.println("Number of faces to read = " + countFaces);
             for (int c = 0; c < countFaces; c++) {
-                FaceData faceData = new FaceData();
+                FaceData faceData = (FaceData) new FaceData().decode(in);
                 faceDetection.getDataFaces().add(faceData);
                 int countSurfaces = in.readInt();
                 for (int j = 0; j < countSurfaces; j++) {
@@ -451,6 +478,11 @@ public class GoogleFaceDetection
     @Override
     public int encode(DataOutputStream out) {
         try {
+            out.write(versionFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             if (getBitmap() != null) {
                 new PixM(getBitmap()).encode(out);
             } else {
@@ -460,6 +492,7 @@ public class GoogleFaceDetection
             out.writeInt(dataFaces.size());
             dataFaces.forEach(faceData -> {
                 try {
+                    faceData.encode(out);
                     out.writeInt(faceData.getFaceSurfaces().size());
                     if (!faceData.getFaceSurfaces().isEmpty()) {
                         System.out.println("Number of recorded surfaces : " + faceData.faceSurfaces.size());
