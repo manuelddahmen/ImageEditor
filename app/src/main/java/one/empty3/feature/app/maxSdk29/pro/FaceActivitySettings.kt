@@ -393,13 +393,15 @@ class FaceActivitySettings : ActivitySuperClass() {
                     if (googleFaceDetection != null) {
                         try {
                         googleFaceDetection!!.dataFaces.forEach(action = {
-                            it.faceSurfaces.forEach(action = {
-                                if (selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId) {
-                                    it.filledContours = selectSurface2.filledContours
-                                        .resize(it.filledContours.columns, it.filledContours.lines)
-                                }
+                            if(it!=null) {
+                                it.faceSurfaces.forEach(action = {
+                                    if (it!=null &&selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
+                                        && it.actualDrawing!=null) {
+                                        it.actualDrawing = selectSurface2.actualDrawing
+                                    }
+                                })
+                            }
                             })
-                        })
                         } catch (ex:RuntimeException) {
                             Toast.makeText(applicationContext, "Apply model null : " +ex.message, Toast.LENGTH_LONG).show()
                             return@setOnClickListener

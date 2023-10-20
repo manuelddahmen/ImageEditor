@@ -209,6 +209,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
         int i = 0;
         for (FaceContour faceContour : faceContours) {
+            surfaceId = faceContour.getFaceContourType();
             if (i == 0 && faceContour != null) {
                 faceData.getFaceSurfaces().add(
                         new GoogleFaceDetection.FaceData.Surface(

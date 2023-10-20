@@ -370,8 +370,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                         //pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
                         if(faceSurface.isDrawOriginalImageContour()) {
-                            faceSurface.getActualDrawing().getColor((int) (i*faceSurface.actualDrawing.getColumns()/(right-left)),
-                                    (int) (j*faceSurface.actualDrawing.getLines()/(bottom-top)), color1);
+                            faceSurface.getActualDrawing().getColor((int) (1.0*i*faceSurface.actualDrawing.getColumns()/(right-left)),
+                                    (int) (1.0*j*faceSurface.actualDrawing.getLines()/(bottom-top)), color1);
                             bitmap.setPixel((int) i, (int) j, Lumiere.getInt(color1));
                             pixM.setValues(xMap, yMap, color1);
                         } else {
@@ -427,12 +427,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         if (!(widthBox > 0 && heightBox > 0))
             return;
-        PixM pixM;
-        if(surface.isDrawOriginalImageContour() && surface.getActualDrawing()!=null) {
-            pixM = surface.getActualDrawing();
-        } else if(surface.getFilledContours()!=null) {
-            pixM = surface.getFilledContours();
-        } else return;
+        PixM pixMfilled, pixMorig;
+
+        pixMorig = surface.getActualDrawing();
+        pixMfilled = surface.getFilledContours();
 
         int count = 0;
 
@@ -447,12 +445,14 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
-                double[] color = pixM.getValues(xMap, yMap);
+
+                double[] color = pixMfilled.getValues(xMap, yMap);
                 int colorToDraw = Lumiere.getInt(color);
                 if (!PixM.equalsArrays(transparent, color, 0.05)
                    &&i>=0 && i<mCopy.getWidth() && j>=0 && j<mCopy.getHeight()) {
                     if (drawOriginalImageContour) {
-                        Lumiere.getDoubles(mCopy.getPixel((int)i, (int)j), color);
+                        Lumiere.getDoubles(mCopy.getPixel((int)(xMap/(right-left)*mCopy.getWidth()),
+                                (int)(yMap/(bottom-top)*mCopy.getHeight())), color);
                         mCopy.setPixel((int) i, (int) j, colorToDraw);
                     } else {
                         mCopy.setPixel((int) i, (int) j, colorToDraw);
