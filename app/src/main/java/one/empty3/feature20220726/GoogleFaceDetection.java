@@ -36,7 +36,7 @@ public class GoogleFaceDetection
     public static double[] TRANSPARENT = Lumiere.getDoubles(Color.BLACK);
     private List<FaceData> dataFaces;
     @NotNull private Bitmap bitmap;
-    private int versionFile = 4;
+    private int versionFile = 5;
 
     public static GoogleFaceDetection getInstance(boolean newInstance, Bitmap bitmap) {
         if (instance == null || newInstance)
@@ -206,6 +206,7 @@ public class GoogleFaceDetection
                     surface.contours = (PixM) new PixM(1, 1).decode(in);
                     surface.filledContours = (PixM) new PixM(1, 1).decode(in);
                     surface.drawOriginalImageContour = in.readBoolean();
+                    surface.actualDrawing = (PixM) new PixM(1,1).decode(in);
                     return surface;
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -231,6 +232,9 @@ public class GoogleFaceDetection
                     }
                     filledContours.encode(out);
                     out.writeBoolean(drawOriginalImageContour);
+                    if(actualDrawing==null)
+                        actualDrawing = new PixM(1,1);
+                    actualDrawing.encode(out);
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -368,7 +372,8 @@ public class GoogleFaceDetection
                         && getSurfaceId() == surface.getSurfaceId()
                         && Objects.equals(getPolygon(), surface.getPolygon())
                         && Objects.equals(getContours(), surface.getContours())
-                        && Objects.equals(getFilledContours(), surface.getFilledContours());
+                        && Objects.equals(getFilledContours(), surface.getFilledContours())
+                        && Objects.equals(getActualDrawing(), surface.getActualDrawing());
             }
 
             @Override
@@ -486,7 +491,7 @@ public class GoogleFaceDetection
     @Override
     public int encode(DataOutputStream out) {
         try {
-            out.write(versionFile);
+            out.writeInt(versionFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -494,7 +499,9 @@ public class GoogleFaceDetection
             if (getBitmap() != null) {
                 new PixM(getBitmap()).encode(out);
             } else {
-                new PixM(1, 1).encode(out);
+                PixM pixM = new PixM(1, 1);
+                pixM.encode(out);
+                setBitmap(pixM.getBitmap());
             }
             System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());

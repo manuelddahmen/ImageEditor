@@ -939,6 +939,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
     @Override
     public int encode(DataOutputStream out) {
+        assert (columns>0 && lines>0);
         try {
             out.writeInt(columns);
             out.writeInt(lines);

@@ -45,6 +45,8 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public MBitmap(int c, int l) {
         try {
             x = new double[c * l * 3];
+            this.lines = l;
+            this.columns = c;
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
@@ -60,8 +62,6 @@ public class MBitmap /*implements InterfaceMatrix*/ {
             }
         }
         Arrays.fill(x, 0);
-        this.lines = l;
-        this.columns = c;
     }
 
     public MBitmap(Bitmap bitmap) {

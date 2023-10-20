@@ -21,7 +21,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 324102934
+def code = 324502934
 //3 sept. 2023, 14:27:03 (UTC).
 java {
     toolchain {

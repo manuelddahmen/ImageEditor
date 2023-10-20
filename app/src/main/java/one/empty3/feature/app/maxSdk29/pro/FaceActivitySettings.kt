@@ -285,6 +285,8 @@ class FaceActivitySettings : ActivitySuperClass() {
         originalColors.setOnClickListener {
             if(selectedSurfaceAllPicture!=null) {
                 selectedSurfaceAllPicture!!.isDrawOriginalImageContour = !selectedSurfaceAllPicture!!.isDrawOriginalImageContour
+                drawSurface()
+                drawSurfaces()
             }
         }
 
@@ -540,7 +542,6 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                                     drawSurface()
                                     selectedSurfaces.add(surface)
-                                    i++
                                 } else if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(
                                         1
                                     ).x
@@ -558,11 +559,13 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     ) {
                                         // point in polygon
                                         selectedSurfaces.add(surface)
+                                        return
                                         //surface.filledContours.setValues(p.x-pBounds.x as Int, p.y-pBounds.y, 1.0, 1.0, 1.0)
                                         //drawPolygon()
                                     }
                                 }
                             }
+                            i++
                         }
                     })
                 }
@@ -592,7 +595,11 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     private fun drawSurface() {
-        if (selectedSurfaceAllPicture != null) {
+        if (selectedSurfaceAllPicture != null
+                &&  selectedSurfaceAllPicture!!
+                .filledContours!=null
+            &&selectedSurfaceAllPicture!!
+                .filledContours.bitmap!=null) {
             if(selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!

@@ -281,7 +281,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
-        faceSurface.setPolygon(this);
+        faceSurface.setPolygon(this);//!!!???
 
         if (!isDrawingOnImage) {
             boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
@@ -336,6 +336,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         int paintColor = colorTemp;
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
+        double[] color1 = new double[3];
         for (double i = left; i < right; i++) {
             for (double j = top; j < bottom; j++) {
                 int xMap = (int) (i - left);
@@ -368,10 +369,16 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                         //        (int) (double) positionOnPicture.get(1), colorTemp);
                         //pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
-                        bitmap.setPixel((int) i, (int) j, colorTemp);
-                        pixM.setValues(xMap, yMap, fillColorArrayPolygon);
+                        if(faceSurface.isDrawOriginalImageContour()) {
+                            faceSurface.getActualDrawing().getColor((int) (i*faceSurface.actualDrawing.getColumns()/(right-left)),
+                                    (int) (j*faceSurface.actualDrawing.getLines()/(bottom-top)), color1);
+                            bitmap.setPixel((int) i, (int) j, Lumiere.getInt(color1));
+                            pixM.setValues(xMap, yMap, color1);
+                        } else {
+                            bitmap.setPixel((int) i, (int) j, colorTemp);
+                            pixM.setValues(xMap, yMap, fillColorArrayPolygon);
+                        }
                         pixels++;
-
                     }
                 }
 
@@ -420,12 +427,16 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         if (!(widthBox > 0 && heightBox > 0))
             return;
-
-        PixM pixM = surface.getFilledContours();
+        PixM pixM;
+        if(surface.isDrawOriginalImageContour() && surface.getActualDrawing()!=null) {
+            pixM = surface.getActualDrawing();
+        } else if(surface.getFilledContours()!=null) {
+            pixM = surface.getFilledContours();
+        } else return;
 
         int count = 0;
 
-        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
+        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")");
 
         double[] transparent = Lumiere.getDoubles(surface.getColorTransparent());
 
