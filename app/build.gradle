@@ -21,7 +21,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 325002934
+def code = 325102934
 //3 sept. 2023, 14:27:03 (UTC).
 java {
     toolchain {
@@ -163,7 +163,7 @@ android {
         minSdk 29
         JavaVersion.VERSION_11
         versionCode code
-        versionName "6.0"
+        versionName "7.0"
         kotlin {
             version "1.9.0"
         }
