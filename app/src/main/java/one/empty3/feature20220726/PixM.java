@@ -249,22 +249,24 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     public Bitmap getBitmap() {
-        Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.ARGB_8888);
+        if(columns>0 && lines>0) {
+            Bitmap image = Bitmap.createBitmap(columns,
+                    lines, Bitmap.Config.ARGB_8888);
 
 
-        double[] rgba = new double[3];
-        for (int i = 0; i < image.getWidth(); i++) {
-            for (int j = 0; j < image.getHeight(); j++) {
-                for (int c = 0; c < 3; c++) {
-                    setCompNo(c);
-                    rgba[c] = get(i, j);
+            double[] rgba = new double[3];
+            for (int i = 0; i < image.getWidth(); i++) {
+                for (int j = 0; j < image.getHeight(); j++) {
+                    for (int c = 0; c < 3; c++) {
+                        setCompNo(c);
+                        rgba[c] = get(i, j);
+                    }
+                    image.setPixel(i, j, Lumiere.getInt(rgba));
                 }
-                image.setPixel(i, j, Lumiere.getInt(rgba));
             }
+            return image;
         }
-        return image;
-
+        return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
     }
 
 

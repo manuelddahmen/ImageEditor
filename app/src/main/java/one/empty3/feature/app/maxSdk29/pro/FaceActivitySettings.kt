@@ -598,24 +598,17 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     private fun drawSurface() {
         if (selectedSurfaceAllPicture != null
-                &&  selectedSurfaceAllPicture!!
-                .filledContours!=null
-            &&selectedSurfaceAllPicture!!
-                .filledContours.bitmap!=null) {
+                && selectedSurfaceAllPicture!!.filledContours!=null
+                && selectedSurfaceAllPicture!!.filledContours.bitmap!=null
+                && polygonView!=null) {
             if(selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
-                polygonView.setImageBitmap3(
-                    selectedSurfaceAllPicture!!
+                polygonView.setImageBitmap3(selectedSurfaceAllPicture!!
                         .filledContours.bitmap.copy(
-                            Bitmap.Config.ARGB_8888, true
-                        )
-                )
+                            Bitmap.Config.ARGB_8888, true))
             } else {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(
-                            Bitmap.Config.ARGB_8888, true
-                        )
-                )
+                        .filledContours.bitmap.copy(Bitmap.Config.ARGB_8888, true))
             }
         }
 
