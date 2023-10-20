@@ -254,7 +254,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean isDrawingOnImage) {
+    public boolean leftToRightScanPixM(@NonNull PixM pixM, int x, int y, boolean isDrawingOnImage) {
+        if(pixM==null)
+            return false;
         boolean foundLeft = false;
         boolean foundRight = false;
         if (x >= 0 && x < pixM.getColumns()) {
@@ -410,7 +412,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         parcel.writeDoubleArray(pointsListXyz);
     }
 
-    public void fillPolygon2DFromData(GoogleFaceDetection.FaceData.Surface surface, Bitmap mCopy, int black, boolean drawOriginalImageContour) {
+    public void fillPolygon2DFromData(@NonNull GoogleFaceDetection.FaceData.Surface surface,
+                                      @NonNull Bitmap mCopy, int black, boolean drawOriginalImageContour) {
         int pixels = 0;
 
 
@@ -428,10 +431,10 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         if (!(widthBox > 0 && heightBox > 0))
             return;
-        PixM pixMfilled, pixMorig;
+        PixM pixMilled, pixMori;
 
-        pixMorig = surface.getActualDrawing();
-        pixMfilled = surface.getFilledContours();
+        pixMori = surface.getActualDrawing();
+        pixMilled = surface.getFilledContours();
 
         int count = 0;
 
@@ -447,26 +450,28 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                 int yMap = (int) (j - top);
 
 
-                double[] color = pixMfilled.getValues(xMap, yMap);
-                int colorToDraw = Lumiere.getInt(color);
-                if (!PixM.equalsArrays(transparent, color, 0.05)
-                   &&i>=0 && i<mCopy.getWidth() && j>=0 && j<mCopy.getHeight()) {
-                    if (drawOriginalImageContour) {
-                        int a = (int) (xMap / (right - left) * mCopy.getWidth());
-                        int b = (int) (yMap / (bottom - top) * mCopy.getHeight());
-                        if(a>=0 && b>=0 && a<pixMorig.getColumns() && a<pixMorig.getLines()
-                                &&a<mCopy.getWidth() && b<mCopy.getHeight()) {
-                            int anInt1 = Lumiere.getInt(pixMorig.getValues(a, b));
-                            mCopy.setPixel((int) i, (int) j, anInt1);
+                if (pixMilled != null && mCopy!=null) {
+                    double[] color = pixMilled.getValues(xMap, yMap);
+                    int colorToDraw = Lumiere.getInt(color);
+                    if (!PixM.equalsArrays(transparent, color, 0.05)
+                            && i >= 0 && i < mCopy.getWidth() && j >= 0 && j < mCopy.getHeight()) {
+                        if (drawOriginalImageContour) {
+                            int a = (int) (xMap / (right - left) * mCopy.getWidth());
+                            int b = (int) (yMap / (bottom - top) * mCopy.getHeight());
+                            if (a >= 0 && b >= 0 && pixMori!=null&&a < pixMori.getColumns() && a < pixMori.getLines()
+                                    && a < mCopy.getWidth() && b < mCopy.getHeight()) {
+                                    int anInt1 = Lumiere.getInt(pixMori.getValues(a, b));
+                                    mCopy.setPixel((int) i, (int) j, anInt1);
+                            }
+                        } else {
+                            mCopy.setPixel((int) i, (int) j, colorToDraw);
                         }
-                    } else {
-                        mCopy.setPixel((int) i, (int) j, colorToDraw);
                     }
+                    pixels++;
+
+
+                    count++;
                 }
-                pixels++;
-
-
-                count++;
             }
         }
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");

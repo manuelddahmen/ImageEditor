@@ -525,19 +525,22 @@ public class FaceOverlayView extends ImageViewSelection {
             int w = rect.right-rect.left;
             int h = rect.bottom-rect.top;
 
-            int[] ints = new int[w * h];
+            if(x+w>=googleFaceDetection.getBitmap().getWidth() && y+h>=googleFaceDetection.getBitmap().getHeight()
+                    && x>=0 && y>=0) {
 
-            googleFaceDetection.getBitmap().getPixels(ints, 0, w, x, y, w, h);
+                int[] ints = new int[w * h];
+
+                googleFaceDetection.getBitmap().getPixels(ints, 0, w - 1, x, y, w, h);
 
 
+                PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
+                PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));
+                //mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
 
-            PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
-            PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));
-            //mCanvas.drawRect(new RectF(a.x, a.y, b.x, b.y), paint);
-
-            if(googleFaceDetection!=null && googleFaceDetection.getBitmap()!=null) {
-                //Bitmap bitmap2 = googleFaceDetection.getBitmap();
-                //faceData.setPhoto(new PixM(bitmap2).copySubImage((int) a.x, (int) a.y, (int) (b.x - a.x), (int) (b.y - a.y)));
+                if (googleFaceDetection != null && googleFaceDetection.getBitmap() != null) {
+                    //Bitmap bitmap2 = googleFaceDetection.getBitmap();
+                    //faceData.setPhoto(new PixM(bitmap2).copySubImage((int) a.x, (int) a.y, (int) (b.x - a.x), (int) (b.y - a.y)));
+                }
             }
             action(face, faceData);
         }

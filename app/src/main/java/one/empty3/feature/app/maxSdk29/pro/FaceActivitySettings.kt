@@ -588,12 +588,14 @@ class FaceActivitySettings : ActivitySuperClass() {
     private fun drawPolygon() {
         if (selectedSurfaces.size > selectedSurface) {
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            polygonView.setImageBitmap3(
-                selectedSurfaceObject
-                    .filledContours.bitmap.copy(
-                        Bitmap.Config.ARGB_8888, true
-                    )
-            )
+            if(selectedSurfaceObject!=null) {
+                polygonView.setImageBitmap3(
+                    selectedSurfaceObject
+                        .filledContours.bitmap.copy(
+                            Bitmap.Config.ARGB_8888, true
+                        )
+                )
+            }
         }
     }
 
@@ -674,8 +676,6 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
             var photo: Bitmap? = null
 
-            maxRes = Utils().getMaxRes(this)
-
             if (maxRes > 0) {
                 System.err.println("FileInputStream$choose_directoryData")
                 photo = BitmapFactory.decodeStream(choose_directoryData)
@@ -687,7 +687,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 System.err.println("Get file (bitmap) : $photo")
             }
             if (photo != null) {
-                this.selectedImage = photo!!
+                this.selectedImage = photo
             }
         } else  if ((resultCode == RESULT_OK) && result != null && ((result.extras != null &&
                     result.extras!!.get(Intent.EXTRA_STREAM) != null) ||
