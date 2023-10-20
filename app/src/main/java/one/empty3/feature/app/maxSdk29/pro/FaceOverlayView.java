@@ -209,19 +209,21 @@ public class FaceOverlayView extends ImageViewSelection {
 
         int i = 0;
         for (FaceContour faceContour : faceContours) {
-            surfaceId = faceContour.getFaceContourType();
-            if (i == 0 && faceContour != null) {
-                faceData.getFaceSurfaces().add(
-                        new GoogleFaceDetection.FaceData.Surface(
-                                surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
-                                Color.YELLOW, Color.BLUE, Color.BLACK, null, false));
-            } else if (faceContour != null) {
-                faceData.getFaceSurfaces().add(
-                        new GoogleFaceDetection.FaceData.Surface(
-                                surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
-                                Color.RED, Color.RED, Color.BLACK, null, false));
+            if(faceContour!=null && faceContour.getPoints()!=null) {
+                surfaceId = faceContour.getFaceContourType();
+                if (i == 0) {
+                    faceData.getFaceSurfaces().add(
+                            new GoogleFaceDetection.FaceData.Surface(
+                                    surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
+                                    Color.YELLOW, Color.BLUE, Color.BLACK, null, false));
+                } else {
+                    faceData.getFaceSurfaces().add(
+                            new GoogleFaceDetection.FaceData.Surface(
+                                    surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
+                                    Color.RED, Color.RED, Color.BLACK, null, false));
+                }
+                i++;
             }
-            i++;
         }
         for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {
             StructureMatrix<Point3D> boundRect2d = faceSurface.getPolygon().getBoundRect2d();

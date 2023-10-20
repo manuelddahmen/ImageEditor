@@ -396,7 +396,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                             if(it!=null) {
                                 it.faceSurfaces.forEach(action = {
                                     if (it!=null &&selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
-                                        && it.actualDrawing!=null) {
+                                        && selectSurface2.actualDrawing!=null) {
                                         it.actualDrawing = selectSurface2.actualDrawing
                                     }
                                 })
