@@ -302,7 +302,8 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
         PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
 
         faceSurface.setContours(pixM);
-
+        if(faceSurface.getActualDrawing()==null)
+            faceSurface.setActualDrawing(pixM.copy());
         int count = 0;
 
         int[] currentColor = new int[(int) (heightBox + 1)];

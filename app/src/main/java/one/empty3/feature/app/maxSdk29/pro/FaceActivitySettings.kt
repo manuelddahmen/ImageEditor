@@ -560,6 +560,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                         )
                                     ) {
                                         // point in polygon
+                                        selectedSurfaceAllPicture = surface
                                         selectedSurfaces.add(surface)
                                         return
                                         //surface.filledContours.setValues(p.x-pBounds.x as Int, p.y-pBounds.y, 1.0, 1.0, 1.0)
@@ -617,10 +618,9 @@ class FaceActivitySettings : ActivitySuperClass() {
     fun drawSurfaces() {
         if(faceOverlayView.mCopy==null && faceOverlayView.mBitmap!=null) {
             faceOverlayView.mCopy = faceOverlayView.mBitmap
-        }/* else if(currentBitmap!=null) {
-            faceOverlayView.mCopy = currentBitmap
-        }*/
-        if(faceOverlayView.mCopy!=null) {
+        }
+
+        if(faceOverlayView.mCopy!=null && googleFaceDetection!=null) {
             faceOverlayView.fillPolygons(googleFaceDetection)
 
             Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
