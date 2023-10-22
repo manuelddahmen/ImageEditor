@@ -21,7 +21,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 325302934
+def code = 326102934
 //3 sept. 2023, 14:27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {

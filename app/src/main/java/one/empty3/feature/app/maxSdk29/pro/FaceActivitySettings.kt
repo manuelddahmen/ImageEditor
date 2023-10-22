@@ -251,16 +251,24 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val applyImage = findViewById<Button>(R.id.applyImage)
         applyImage.setOnClickListener {
-            if (selectedSurfaceAllPicture != null && selectedImage!=null) {
-                val filledContours = selectedSurfaceAllPicture!!.filledContours
-                filledContours.paintIfNot(
-                    0, 0, filledContours.columns, filledContours.lines,
-                    selectedImage,
-                    selectedSurfaceAllPicture!!.colorContours,
-                    selectedSurfaceAllPicture!!.contours)
-                drawSurface()
-                drawSurfaces()
+            try {
+                if (selectedSurfaceAllPicture != null && selectedImage != null
+                    && selectedSurfaceAllPicture!!.filledContours != null
+                    && selectedSurfaceAllPicture!!.contours != null
+                ) {
+                    val filledContours = selectedSurfaceAllPicture!!.filledContours
+                    filledContours.paintIfNot(
+                        0, 0, filledContours.columns, filledContours.lines,
+                        selectedImage,
+                        selectedSurfaceAllPicture!!.colorContours,
+                        selectedSurfaceAllPicture!!.contours
+                    )
+                    drawSurface()
+                    drawSurfaces()
 
+                }
+            } catch (ex : RuntimeException) {
+                ex.printStackTrace()
             }
 
         }
@@ -388,20 +396,26 @@ class FaceActivitySettings : ActivitySuperClass() {
                 val filledContours = selectedSurfaceAllPicture!!.filledContours
                 val selectSurface2 : Surface
                     = selectSurface2(GoogleFaceDetection.getInstance2(), selectedSurfaceAllPicture!!.surfaceId)!!
-
-                if(selectSurface2!=null && filledContours!=null) {
+                val currentSurface = selectedSurface
+                if(selectSurface2!=null && filledContours!=null
+                    &&selectSurface2.filledContours!=null
+                    && selectSurface2.actualDrawing!=null) {
                     if (googleFaceDetection != null) {
                         try {
-                        googleFaceDetection!!.dataFaces.forEach(action = {
-                            if(it!=null) {
-                                it.faceSurfaces.forEach(action = {
-                                    if (it!=null &&selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
-                                        && selectSurface2.actualDrawing!=null) {
-                                        it.actualDrawing = selectSurface2.actualDrawing
+                        googleFaceDetection!!.dataFaces.forEach { it1 ->
+                            run {
+                                it1?.faceSurfaces?.forEach(action = { it2 ->
+                                    run {
+                                        if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
+                                        ) {
+                                            selectedSurfaceAllPicture!!.actualDrawing = selectSurface2.actualDrawing
+                                        }
                                     }
                                 })
                             }
-                            })
+                        }
+                            drawSurface()
+                            drawSurfaces()
                         } catch (ex:RuntimeException) {
                             Toast.makeText(applicationContext, "Apply model null : " +ex.message, Toast.LENGTH_LONG).show()
                             return@setOnClickListener
@@ -422,12 +436,16 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId:Int) : Surface? {
         if(instance2!=null) {
-            instance2.dataFaces.forEach(action = {
-                it.faceSurfaces.forEach(action = {
-                    if(it.surfaceId==surfaceId) {
-                        return it
-                    }
-                })
+            instance2.dataFaces.forEach(action = { it1 ->
+                run {
+                    it1.faceSurfaces.forEach(action = { it2 ->
+                        run {
+                            if (it2.surfaceId == surfaceId) {
+                                return it2
+                            }
+                        }
+                    })
+                }
             })
         }
         return null
@@ -618,11 +636,9 @@ class FaceActivitySettings : ActivitySuperClass() {
     }
 
     fun drawSurfaces() {
-        if(faceOverlayView.mCopy==null && faceOverlayView.mBitmap!=null) {
-            faceOverlayView.mCopy = faceOverlayView.mBitmap
-        }
+        if(faceOverlayView.mCopy==null) return
 
-        if(faceOverlayView.mCopy!=null && googleFaceDetection!=null) {
+        if(faceOverlayView!=null && faceOverlayView.mCopy!=null && googleFaceDetection!=null ) {
             faceOverlayView.fillPolygons(googleFaceDetection)
 
             Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)

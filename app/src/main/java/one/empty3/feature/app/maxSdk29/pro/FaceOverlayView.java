@@ -196,7 +196,7 @@ public class FaceOverlayView extends ImageViewSelection {
     }
 
     public void drawFace(Face face, GoogleFaceDetection.FaceData faceData) {
-        int surfaceId = FaceContour.FACE;
+        int surfaceId = 0;
         FaceContour[] faceContours = {
                 face.getContour(FaceContour.FACE),
                 face.getContour(FaceContour.LEFT_EYE), face.getContour(FaceContour.RIGHT_EYE),
@@ -208,21 +208,24 @@ public class FaceOverlayView extends ImageViewSelection {
                 face.getContour(FaceContour.LEFT_CHEEK), face.getContour(FaceContour.RIGHT_CHEEK)};
 
         int i = 0;
-        for (FaceContour faceContour : faceContours) {
-            if(faceContour!=null && faceContour.getPoints()!=null) {
-                surfaceId = faceContour.getFaceContourType();
-                if (i == 0) {
-                    faceData.getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(
-                                    surfaceId, getPolygon(faceContour.getPoints(), Color.YELLOW), null,
-                                    Color.YELLOW, Color.BLUE, Color.BLACK, null, false));
-                } else {
-                    faceData.getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(
-                                    surfaceId, getPolygon(faceContour.getPoints(), Color.RED), null,
-                                    Color.RED, Color.RED, Color.BLACK, null, false));
+        for (FaceContour faceContour1 : faceContours) {
+            if(faceContour1!=null && faceContour1.getPoints()!=null) {
+                surfaceId = faceContour1.getFaceContourType();
+                if(surfaceId>0) {
+                    if (i == 0) {
+                        faceData.getFaceSurfaces().add(
+                                new GoogleFaceDetection.FaceData.Surface(
+                                        surfaceId, getPolygon(faceContour1.getPoints(), Color.YELLOW), null,
+                                        Color.YELLOW, Color.BLUE, Color.BLACK, null, false));
+                        i++;
+                    } else {
+                        faceData.getFaceSurfaces().add(
+                                new GoogleFaceDetection.FaceData.Surface(
+                                        surfaceId, getPolygon(faceContour1.getPoints(), Color.RED), null,
+                                        Color.RED, Color.RED, Color.BLACK, null, false));
+                        i++;
+                    }
                 }
-                i++;
             }
         }
         for (GoogleFaceDetection.FaceData.Surface faceSurface : faceData.getFaceSurfaces()) {

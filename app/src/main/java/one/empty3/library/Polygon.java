@@ -373,8 +373,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                         //pixels++;
                     } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
                         if(faceSurface.isDrawOriginalImageContour()) {
-                            faceSurface.getActualDrawing().getColor((int) (1.0*i*faceSurface.actualDrawing.getColumns()/(right-left)),
-                                    (int) (1.0*j*faceSurface.actualDrawing.getLines()/(bottom-top)), color1);
+                            int x2 = (int) (1.0 * (i-left) * faceSurface.actualDrawing.getColumns()/(right-left));
+                            int y2 = (int) (1.0 * (j-top)   * faceSurface.actualDrawing.getLines()/(bottom - top));
+                            faceSurface.getActualDrawing().getColor(x2, y2, color1);
                             bitmap.setPixel((int) i, (int) j, Lumiere.getInt(color1));
                             pixM.setValues(xMap, yMap, color1);
                         } else {
@@ -456,10 +457,9 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                     if (!PixM.equalsArrays(transparent, color, 0.05)
                             && i >= 0 && i < mCopy.getWidth() && j >= 0 && j < mCopy.getHeight()) {
                         if (drawOriginalImageContour) {
-                            int a = (int) (xMap / (right - left) * mCopy.getWidth());
-                            int b = (int) (yMap / (bottom - top) * mCopy.getHeight());
-                            if (a >= 0 && b >= 0 && pixMori!=null&&a < pixMori.getColumns() && a < pixMori.getLines()
-                                    && a < mCopy.getWidth() && b < mCopy.getHeight()) {
+                            int a = (int) (xMap / (right - left) * pixMori.getColumns());
+                            int b = (int) (yMap / (bottom - top) * pixMori.getLines());
+                            if (a >= 0 && b >= 0 && pixMori!=null&&a < pixMori.getColumns() && b < pixMori.getLines()) {
                                     int anInt1 = Lumiere.getInt(pixMori.getValues(a, b));
                                     mCopy.setPixel((int) i, (int) j, anInt1);
                             }
