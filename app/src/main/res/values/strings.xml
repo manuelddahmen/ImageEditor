@@ -21,9 +21,9 @@
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
     <string name="andex_file_selection_title">Movie</string>
-    <string name="browser_title_background_color" translatable="false">#000000</string>
-    <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
-    <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
+    <string name="browser_title_background_color" translatable="false">#000</string>
+    <string name="browser_title_foreground_color" translatable="false">#FFF</string>
+    <string name="browser_list_background_color" translatable="false">#AAA</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
     </string>
@@ -157,7 +157,7 @@
     <string name="application_of_formulas">Application of formulas</string>
     <string name="view">View</string>
     <string name="draw2">Draw</string>
-    <string name="hello_world">Hello Round World!</string>
+    <string name="hello_world">Hello Round World\!</string>
     <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
     <string name="button_current_file_is_null"><![CDATA["Pas de fichier image choisis.<br/>" +
                     "Choisisssez une image dans les fichiers de<br/>" +

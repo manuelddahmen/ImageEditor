@@ -49,7 +49,7 @@
     <string name="beta">بيتا؟</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles">بيانات المستخدمين والحساسين داخل
          تتميز صورة التطبيق بأن البيانات الوحيدة التي يتم الوصول إليها من خلال التطبيق هي ملفات الوسائط المتعددة
-         افتح زر الرؤية أو اختر ملفًا. Ceux-ci sont atérés par l\'application et
+         افتح زر الرؤية أو اختر ملفًا. Ceux-ci sont atérés par l application et
          يتم تخزين نسخ العمل في نهاية المطاف في مرجع بيانات التطبيق والشكل دونك سور
          النظام موجود في تنسيق أو آخر. في الإصدار المستقبلي، سيكون من الممكن مشاركة نتائجك معك
          مستخدمون آخرون، مستخدمون آخرون. هذه البيانات تعتبر من قبلنا، DAHMEN Manuel atempty3.one comme
@@ -154,7 +154,7 @@
     <string name="application_of_formulas">تطبيق الصيغ</string>
     <string name="view">عرض</string>
     <string name="draw2">ارسم</string>
-    <string name="hello_world">مرحبًا بالعالم المستدير!</string>
+    <string name="hello_world">مرحبًا بالعالم المستدير!\</string>
     <string name="button_current_file_is_null"><![CDATA["اختيار الصورة غير متوفر.<br/>" +
                      "اختر صورة من ملفات<br/>" +
                      "الناسخة/المجمع. لا تعمل وظيفة الرسم<br/>" +
@@ -186,14 +186,12 @@
     
     <!-- تفضيلات المزامنة -->
     <string name="title_activity_settings_scrolling" translatable="false">الإعدادات</string>
-    <string name="large_text" translatable="false">
-     </string>
+    <string name="large_text" translatable="false" />
     <string name="action_settings" translatable="false">الإعدادات</string>
     <string name="refresh">تحديث</string>
     <string name="licence">الترخيص</string>
-    <اسم السلسلة = "التراخيص" />
     <string name="settings_of_application">إعدادات التطبيق</string>
-    <اسم السلسلة = "display_place" />
+    <string name = "display_place" />
     <string name="choose_a_file">اختر ملفًا</string>
     <string name="apply_to_all">الصورة الأصلية</string>
     <string name="apply_model">تطبيق النموذج</string>

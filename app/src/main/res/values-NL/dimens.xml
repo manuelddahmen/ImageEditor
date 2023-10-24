@@ -18,4 +18,6 @@
   ~
   -->
 
-<resources />
+<resources>
+    <dimen name="image_preview_height">300dp</dimen>
+</resources>

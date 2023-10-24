@@ -48,7 +48,7 @@
     <string name="beta">Bèta?</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles" tools:ignore="StringEscaping">
     Gebruik personeels- en verstandige personen Dans
-         l\'applicatie-afbeelding met, de volgende hulpprogramma's l\'application accède sont les fichiers multimédia
+         l\'applicatie-afbeelding met, de volgende hulpprogramma\'s l\'application accède sont les fichiers multimédia
          u kunt de prijs van uw keuze of een fichier bekijken. Ceux-ci is een kenmerk van de toepassing en
          Het uitvoeren van de kopieën van het werk bevat de voorraadgegevens van de applicatie en het cijfer dat wordt weergegeven
          Het systeem is een formaat of een origineel. In een toekomstige versie kan het zijn dat u uw resultaten met elkaar deelt
@@ -63,140 +63,138 @@
     <string name="_3">3</string>
     <string name="_4">4</string>
     <string name="_5">5</string>
-    <string name="_6">6</string><string name="_7">7</string>
-<string name="_8">8</string>
-<string name="_9">9</string>
-<string name="DOT">.</string>
-<string name="_0">0</string>
-<string name="save">Save</string>
-<string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
-<string name="edit_text_to_put_on_the_image">Edit text to put on the image</string>
-<string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy</string>
-<string name="todo">TODO</string>
-<string name="ok">OK</string>
-<string name="back_without_saving">Back without saving</string>
-<string name="tools">Tools</string>
-<string name="draw">Draw</string>
-<string name="draw_color">Draw color</string>
-<string name="select_rectangle">Select</string>
-<string name="draw_activity">Draw</string>
-<string name="unselect">Zoom -</string>
-
-<string name="effect_name">Effect name</string>
-<string name="remove">Remove</string>
-<string name="apply_effects">Apply effects</string>
-<string name="effect_image_to_image">Effect image to image</string>
-<string name="title_activity_text">TextActivity</string>
-<string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
-<string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
-<string name="apply">Apply</string>
-<string name="add_text">Text</string>
-<string name="draw_button_text">Face</string>
-<string name="back_button_text_activity">Back</string>
-<string name="grid_text_00">00</string>
-<string name="grid_text_01">01</string>
-<string name="grid_text_02">02</string>
-<string name="grid_text_10">10</string>
-<string name="grid_text_11">11</string>
-<string name="grid_text_12">12</string>
-<string name="preview_of_shapes">Preview of shapes</string>
-<string name="textDp">48</string>
-<string name="title_activity_image_files">ImageFiles</string>
-<string name="title_activity_color_chooser">ColorChooser</string>
-<string name="last_saved">Load Saved</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="DOT">.</string>
+    <string name="_0">0</string>
+    <string name="save">Save</string>
+    <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
+    <string name="edit_text_to_put_on_the_image">Edit text to put on the image</string>
+    <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy</string>
+    <string name="todo">TODO</string>
+    <string name="ok">OK</string>
+    <string name="back_without_saving">Back without saving</string>
+    <string name="tools">Tools</string>
+    <string name="draw">Draw</string>
+    <string name="draw_color">Draw color</string>
+    <string name="select_rectangle">Select</string>
+    <string name="draw_activity">Draw</string>
+    <string name="unselect">Zoom -</string>
+    
+    <string name="effect_name">Effect name</string>
+    <string name="remove">Remove</string>
+    <string name="apply_effects">Apply effects</string>
+    <string name="effect_image_to_image">Effect image to image</string>
+    <string name="title_activity_text">TextActivity</string>
+    <string name="image_pour_l_ecriture_du_texte">Image pour l\'écriture du texte</string>
+    <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
+    <string name="apply">Apply</string>
+    <string name="add_text">Text</string>
+    <string name="draw_button_text">Face</string>
+    <string name="back_button_text_activity">Back</string>
+    <string name="grid_text_00">00</string>
+    <string name="grid_text_01">01</string>
+    <string name="grid_text_02">02</string>
+    <string name="grid_text_10">10</string>
+    <string name="grid_text_11">11</string>
+    <string name="grid_text_12">12</string>
+    <string name="preview_of_shapes">Preview of shapes</string>
+    <string name="textDp">48</string>
+    <string name="title_activity_image_files">ImageFiles</string>
+    <string name="title_activity_color_chooser">ColorChooser</string>
+    <string name="last_saved">Load Saved</string>
     <string name="primary_pencil_color">Primary pencil color</string>
-<string name="copy">Copy</string>
-<string name="paste">Paste</string>
-<string name="EQUALS">=</string>
-<string name="ADD">+</string>
-<string name="MUL">*</string>
-<string name="sqrt">sqrt</string>
-<string name="SUB">-</string>
-<string name="DIV">/</string>
-<string name="EXP">^</string>
-<string name="edit_text_here_or_by_push_numbers">Edit text here or by push numbers</string>
-<string name="result">Result</string>
-<string name="about_and_policies">About and privacy policy</string>
-<string name="title_activity_formula_store">FormulaStore</string>
-<string name="store_formula">Store Formula</string>
-<string name="add">Add</string>
-<string name="DEL"><![CDATA[<<<]]></string>
-<string name="back">Back</string>
-<string name="about_privacy">About privacy</string>
-<string name="dialog_message">Choisir une fonction</string>
-<string name="dialog_title">Fonctions prédéfinies</string>
-<string name="cancel_button">Cancel</string>
-<string name="ok_button">OK</string>
-<string name="open_brace">(</string>
-<string name="close_brace">)</string>
-<string name="coma">,</string>
-<string name="fragment_function_ok">OK</string>
-<string name="fragment_function_cancel">Cancel</string>
-<string name="function_string">Function String</string>
-<string name="back2">Back</string>
-<string name="name">name</string>
-<string name="expression">expression</string>
-<string name="write_formula">Write formula</string>
-<string name="buttonCodeBefore">Add code before</string>
-<string name="buttonCodeAfter">Add code after</string>
-<string name="backToGraphics">Back to Graphics view</string>
-<string name="choose_shader_like">MathForm</string>
-<string name="p_x_y_color">Type for points p(x,y) = Color(r, g, b)</string>
-<string name="go_to_previous_activity">Go to previous activity</string>
-<string name="title_activity_toolbar">toolbar</string>
-        <!--
-        This string is used for square devices and overridden by hello_world in
-        values-round/strings.xml for round devices.
-        -->
-<string name="undo">Undo</string>
-<string name="redo">Redo</string>
-<string name="preview_of_image">Preview of image</string>
-<string name="application_of_formulas">Toepassing van formules</string>
-<string name="view">Bekijk</string>
-<string name="draw2">Tekenen</string>
-<string name="hello_world">Hallo Ronde Wereld!</string>
-    <string name="button_current_file_is_null"><![CDATA["Pas de fichier image choice.<br/>" +
-                     "Kies een afbeelding in de fiches van<br/>" +
-                     "le copier/coller. De functie trekt geen functie<br/>" +
-                     "actuellement.<br/>"]]></string>
-<string name="title_activity_main">MijnCameraActivity</string>
-<string name="new_layout_app">Nieuwe app-indeling</string>
-<string name="floating_action_button_to">Zwevende actieknop naar</string>
-<string name="add_picture_file_from_directory">Toevoegen uit map</string>
-<string name="add_picture_from_camera">Toevoegen vanaf camera</string>
-<string name="main">Hoofd</string>
-<string name="capture">Capture</string>
-<string name="subimage_pasted">Subafbeelding geplakt</string>
-<string name="editProperties">Rekwisieten</string>
-<string name="ok_calc">Oké</string>
-<string name="cancel">Annuleren</string>
+    <string name="copy">Copy</string>
+    <string name="paste">Paste</string>
+    <string name="EQUALS">=</string>
+    <string name="ADD">+</string>
+    <string name="MUL">*</string>
+    <string name="sqrt">sqrt</string>
+    <string name="SUB">-</string>
+    <string name="DIV">/</string>
+    <string name="EXP">^</string>
+    <string name="edit_text_here_or_by_push_numbers">Edit text here or by push numbers</string>
+    <string name="result">Result</string>
+    <string name="about_and_policies">About and privacy policy</string>
+    <string name="title_activity_formula_store">FormulaStore</string>
+    <string name="store_formula">Store Formula</string>
+    <string name="add">Add</string>
+    <string name="DEL"><![CDATA[<<<]]></string>
+    <string name="back">Back</string>
+    <string name="about_privacy">About privacy</string>
+    <string name="dialog_message">Choisir une fonction</string>
+    <string name="dialog_title">Fonctions prédéfinies</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">OK</string>
+    <string name="open_brace">(</string>
+    <string name="close_brace">)</string>
+    <string name="coma">,</string>
+    <string name="fragment_function_ok">OK</string>
+    <string name="fragment_function_cancel">Cancel</string>
+    <string name="function_string">Function String</string>
+    <string name="back2">Back</string>
+    <string name="name">name</string>
+    <string name="expression">expression</string>
+    <string name="write_formula">Write formula</string>
+    <string name="buttonCodeBefore">Add code before</string>
+    <string name="buttonCodeAfter">Add code after</string>
+    <string name="backToGraphics">Back to Graphics view</string>
+    <string name="choose_shader_like">MathForm</string>
+    <string name="p_x_y_color">Type for points p(x,y) = Color(r, g, b)</string>
+    <string name="go_to_previous_activity">Go to previous activity</string>
+    <string name="title_activity_toolbar">toolbar</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="preview_of_image">Preview of image</string>
+    <string name="application_of_formulas">Toepassing van formules</string>
+    <string name="view">Bekijk</string>
+    <string name="draw2">Tekenen</string>
+    <string name="hello_world">Hallo Ronde Wereld!</string>
+    <string name="button_current_file_is_null"><![CDATA["Pas de fichier image choice.<br/>Kies een afbeelding in de fiches van<br/>le copier/coller. De functie trekt geen functie<br/>actuellement.<br/>"]]></string>
+    <string name="title_activity_main">MijnCameraActivity</string>
+    <string name="new_layout_app">Nieuwe app-indeling</string>
+    <string name="floating_action_button_to">Zwevende actieknop naar</string>
+    <string name="add_picture_file_from_directory">Toevoegen uit map</string>
+    <string name="add_picture_from_camera">Toevoegen vanaf camera</string>
+    <string name="main">Hoofd</string>
+    <string name="capture">Capture</string>
+    <string name="subimage_pasted">Subafbeelding geplakt</string>
+    <string name="editProperties">Rekwisieten</string>
+    <string name="ok_calc">Oké</string>
+    <string name="cancel">Annuleren</string>
     <string name="collapse">Samenvouwen</string>
-<string name="extend">Verlengen</string>
+    <string name="extend">Verlengen</string>
     
     <string name="draw_face_mask">Teken gezichtsmasker</string>
-<string name="face_drawing_settings">Model bewerken</string>
-<string name="back_to_main">Terug naar hoofd</string>
-<string name="choose_image">Kies afbeelding</string>
-<string name="choose_color">Kies kleur</string>
+    <string name="face_drawing_settings">Model bewerken</string>
+    <string name="back_to_main">Terug naar hoofd</string>
+    <string name="choose_image">Kies afbeelding</string>
+    <string name="choose_color">Kies kleur</string>
     <string name="apply_color">Kleur toepassen</string>
-<string name="apply_image">Afbeelding toepassen</string>
-        <!-- Voorkeurtitels -->
+    <string name="apply_image">Afbeelding toepassen</string>
+    <!-- Voorkeurtitels -->
     
     <!-- Berichtvoorkeuren -->
     
     <!-- Synchronisatievoorkeuren -->
     <string name="refresh">Vernieuwen</string>
-<string name="licence">Licentie</string>
-<string name="licenses" />
-<string name="settings_of_application">Instellingen van applicatie</string>
-<string name="display_place" />
-<string name="choose_a_file">Kies een bestand</string>
+    <string name="licence">Licentie</string>
+    <string name="licenses" />
+    <string name="settings_of_application">Instellingen van applicatie</string>
+    <string name="display_place" />
+    <string name="choose_a_file">Kies een bestand</string>
     <string name="apply_to_all">Originele afbeelding</string>
-<string name="apply_model">Model toepassen</string>
-<string name="choose_model">Kies model</string>
-<string name="load_model">Laad tekengegevens</string>
-<string name="save_model">Sla tekengegevens op</string>
-<string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">Het bestaande beeld of het zichtbare gezicht</string>
-<string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Let op de gezichtsdetectie op het eindpunt.</string>
+    <string name="apply_model">Model toepassen</string>
+    <string name="choose_model">Kies model</string>
+    <string name="load_model">Laad tekengegevens</string>
+    <string name="save_model">Sla tekengegevens op</string>
+    <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">Het bestaande beeld of het zichtbare gezicht</string>
+    <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Let op de gezichtsdetectie op het eindpunt.</string>
     <string name="toggle_original_colors">Originele kleuren</string>
 </resources>
