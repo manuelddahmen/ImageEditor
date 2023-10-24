@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    
     <string name="app_name">ميزات الصور (FeatureApp)</string>
     <string name="capture_button_alt">التقاط</string>
     <string name="switch_camera_button_alt">تبديل الكاميرا</string>
@@ -23,9 +22,6 @@
     <string name="capturePhoto">الكاميرا</string>
     <string name="choosePhoto">المعرض</string>
     <string name="andex_file_selection_title">فيلم</string>
-    <string name="browser_title_background_color">#000000</string>
-    <string name="browser_title_foreground_color">#FFFFFF</string>
-    <string name="browser_list_background_color">#AAAAAA</string>
     <string name="title_activity_camera_preview">معاينة الكاميرا</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
      </string>
@@ -61,7 +57,6 @@
      </string>
     <string name="privacy_policy_and_families_policy">
          <![CDATA[سياسة الخصوصية وسياسة العائلات للتطبيقات المقدمة من DaTheWolf — حاسبة one.empty3 (حساب التفاضل والتكامل البسيط) [تطبيق] عرض الصور [التطبيق] حاسبة سياسة الخصوصية (حساب التفاضل والتكامل البسيط) [التطبيق] هو تطبيق حساب التفاضل والتكامل مصمم للبالغين والأطفال وجميع العائلة. لم يتم تصميم التطبيق خصيصا للأطفال. لا يشارك تطبيق سياسة العائلات المعلومات المقدمة من المستخدم مع أطراف ثالثة؛ ولا يشارك التطبيق الموقع الفعلي للمستخدم مع مستخدمين آخرين. لا يعرض التطبيق الإعلانات، ولا يكشف التطبيق عن جمع أي معلومات شخصية وحساسة من الأطفال. يتم جمع بيانات المستخدم كبيانات مجهولة المصدر على Google Store. التطبيق لا يجمع بيانات تكميلية. اسم التطبيق: آلة حاسبة (حساب بسيط) جهة الاتصال: DAHMEN Manuel (dathewolf@gmail.com>) [عنوان الشارع]]]></string>
-    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCaculetteSimplebyEmpty3.html</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -78,7 +73,7 @@
     <string name="edit_text_to_put_on_the_image">تحرير النص لوضعه على الصورة</string>
     <string name="accept_user_data_management_policy_and_privacy">قبول سياسة إدارة بيانات المستخدم والخصوصية</string>
     <string name="todo">المهام</string>
-    <string name="ok">موافق</string>
+<!--    <string name="ok" >موافق</string>-->
     <string name="back_without_saving">الرجوع بدون حفظ</string>
     <string name="tools">الأدوات</string>
     <string name="draw">ارسم</string>
@@ -109,9 +104,8 @@
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">تم حفظ التحميل</string>
-    <string name="commentEffect" translatable="false">!!</string>
     <string name="primary_pencil_color">لون قلم الرصاص الأساسي</string>
-    <string name="copy">نسخ</string>
+<!--    <string name="copy">نسخ</string>-->
     <string name="paste">لصق</string>
     <string name="EQUALS">=</string>
     <string name="ADD">+</string>
@@ -161,7 +155,6 @@
     <string name="view">عرض</string>
     <string name="draw2">ارسم</string>
     <string name="hello_world">مرحبًا بالعالم المستدير!</string>
-    <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
     <string name="button_current_file_is_null"><![CDATA["اختيار الصورة غير متوفر.<br/>" +
                      "اختر صورة من ملفات<br/>" +
                      "الناسخة/المجمع. لا تعمل وظيفة الرسم<br/>" +
@@ -177,35 +170,21 @@
     <string name="editProperties">الدعائم</string>
     <string name="ok_calc">حسنًا</string>
     <string name="cancel">إلغاء</string>
-    <string name="title_activity_face_effect_list" translatable="false">FaceEffectListActivity</string>
     <string name="collapse">طي</string>
     <string name="extend">تمديد</string>
-    <string name="title_activity_visual_face_effects" translatable="false">تأثيرات VisualFaceEffects</string>
     
-    <string name="lorem_ipsum" translatable="false">
-     </string>
     <string name="draw_face_mask">ارسم قناع الوجه</string>
     <string name="face_drawing_settings">تحرير النموذج</string>
     <string name="back_to_main">العودة إلى الرئيسي</string>
     <string name="choose_image">اختر صورة</string>
     <string name="choose_color">اختر اللون</string>
-    <string name="title_activity_picture_data" translatable="false">PictureDataActivity</string>
     <string name="apply_color">تطبيق اللون</string>
     <string name="apply_image">تطبيق الصورة</string>
     <!--العناوين المفضلة -->
-    <string name="messages_header" translatable="false">الرسائل</string>
-    <string name="sync_header" translatable="false">المزامنة</string>
     
     <!-- تفضيلات الرسائل -->
-    <string name="signature_title" translatable="false">توقيعك</string>
-    <string name="reply_title" translatable="false">إجراء الرد الافتراضي</string>
     
     <!-- تفضيلات المزامنة -->
-    <string name="sync_title" translatable="false">مزامنة البريد الإلكتروني بشكل دوري</string>
-    <string name="attachment_title" translatable="false">تنزيل المرفقات الواردة</string>
-    <string name="attachment_summary_on" translatable="false">تنزيل المرفقات تلقائيًا لرسائل البريد الإلكتروني الواردة
-     </string>
-    <string name="attachment_summary_off" translatable="false">قم بتنزيل المرفقات عند طلبها يدويًا فقط</string>
     <string name="title_activity_settings_scrolling" translatable="false">الإعدادات</string>
     <string name="large_text" translatable="false">
      </string>
@@ -216,11 +195,6 @@
     <string name="settings_of_application">إعدادات التطبيق</string>
     <اسم السلسلة = "display_place" />
     <string name="choose_a_file">اختر ملفًا</string>
-    <string name="title_activity_scrolling" translatable="false">نشاط التمرير</string>
-    <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
-    <string name="title_home" translatable="false">الصفحة الرئيسية</string>
-    <string name="title_dashboard" translatable="false">لوحة التحكم</string>
-    <string name="title_notifications" translatable="false">الإشعارات</string>
     <string name="apply_to_all">الصورة الأصلية</string>
     <string name="apply_model">تطبيق النموذج</string>
     <string name="choose_model">اختر النموذج</string>
@@ -228,6 +202,5 @@
     <string name="save_model">حفظ بيانات الرسم</string>
     <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">الملف مفتوح أو الوجه المكتشف موجود</string>
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">انتظر حتى ينتهي اكتشاف الوجه.</string>
-    <string name="instructions">a=1</string>
     <string name="toggle_original_colors">الألوان الأصلية</string>
 </resources>

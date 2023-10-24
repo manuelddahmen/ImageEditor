@@ -218,14 +218,7 @@
                 <data android:path="/*.*"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".FaceActivitySettings"
-                android:exported="false"
-                android:hardwareAccelerated="true"
-                android:label="Face Paint"
-                android:screenOrientation="portrait"
-                android:theme="@style/Theme.FeatureAppmain"
-                />
+
         
         <provider
                 android:name=".MyFileProvider"

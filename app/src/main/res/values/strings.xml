@@ -21,9 +21,9 @@
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
     <string name="andex_file_selection_title">Movie</string>
-    <string name="browser_title_background_color">#000000</string>
-    <string name="browser_title_foreground_color">#FFFFFF</string>
-    <string name="browser_list_background_color">#AAAAAA</string>
+    <string name="browser_title_background_color" translatable="false">#000000</string>
+    <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
+    <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
     </string>
@@ -59,7 +59,7 @@
     </string>
     <string name="privacy_policy_and_families_policy">
         <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
-    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+    <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -76,7 +76,7 @@
     <string name="edit_text_to_put_on_the_image">Edit text to put on the image</string>
     <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy</string>
     <string name="todo">TODO</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="back_without_saving">Back without saving</string>
     <string name="tools">Tools</string>
     <string name="draw">Draw</string>
@@ -107,9 +107,8 @@
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
-    <string name="commentEffect" translatable="false">!!</string>
     <string name="primary_pencil_color">Primary pencil color</string>
-    <string name="copy">Copy</string>
+    <string name="copy" translatable="false">Copy</string>
     <string name="paste">Paste</string>
     <string name="EQUALS">=</string>
     <string name="ADD">+</string>
@@ -210,9 +209,9 @@
     <string name="action_settings" translatable="false">Settings</string>
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
-    <string name="licenses" />
+    <string name="licenses"  translatable="false"/>
     <string name="settings_of_application">Settings of application</string>
-    <string name="display_place" />
+    <string name="display_place"  translatable="false"/>
     <string name="choose_a_file">Choose a file</string>
     <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
     <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
@@ -226,7 +225,7 @@
     <string name="save_model">Save draw data</string>
     <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">Le fichier ouvert ou le visage détecté existe</string>
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Attendez que la détection de visage soit terminée.</string>
-    <string name="instructions">a=1</string>
+    <string name="instructions" translatable="false">a=1</string>
     <string name="toggle_original_colors">Original colors</string>
 
 </resources>

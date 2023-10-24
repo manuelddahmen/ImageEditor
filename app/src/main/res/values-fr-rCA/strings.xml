@@ -64,8 +64,6 @@
     <string name="choose_movie">Choisir un fichier</string>
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
-    <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
-    </string>
     <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion de données d\'utilisateur et de vie privée
     </string>
     <string name="about_and_policies">A propos de la vie privée</string>
@@ -204,7 +202,6 @@
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
     <string name="licenses" />
-    <string name="settings_of_application">Settings of application</string>
     <string name="display_place" />
     <string name="choose_a_file">Choose a file</string>
     <string name="apply_to_all">Original image</string>
