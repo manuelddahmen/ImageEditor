@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">ميزات الصور (FeatureApp)</string>
+    <string name="capture_button_alt">التقاط</string>
+    <string name="switch_camera_button_alt">تبديل الكاميرا</string>
+    <string name="gallery_button_alt">المعرض</string>
+    <string name="back_button_alt">الرجوع</string>
+    <string name="share_button_alt">مشاركة</string>
+    <string name="share_hint">المشاركة باستخدام</string>
+    <string name="capture_mode_camera">الكاميرا</string>
+    <string name="capture_mode_hdr">HDR</string>
+    <string name="capture_mode_night">ليلاً</string>
+    <string name="delete_button_alt">حذف</string>
+    <string name="delete_dialog">هل تريد حذف الصورة الحالية؟</string>
+    <string name="delete_title">تأكيد</string>
+    <string name="hello_blank_fragment">مرحبًا بالجزء الفارغ</string>
+    <string name="listProcess">قائمة فئات المرشحات المكتملة في الجزء العلوي من أجل الإضافة</string>
+    <string name="completeBox">اضغط على الحروف الأولى في النص الرئيسي ثم حدد التأثير</string>
+    <string name="photo">main.imageViewDefaultIcon</string>
+    <string name="effect">التأثير</string>
+    <string name="filePath">one.empty3.feature.app</string>
+    <string name="capturePhoto">الكاميرا</string>
+    <string name="choosePhoto">المعرض</string>
+    <string name="andex_file_selection_title">فيلم</string>
+    <string name="browser_title_background_color">#000000</string>
+    <string name="browser_title_foreground_color">#FFFFFF</string>
+    <string name="browser_list_background_color">#AAAAAA</string>
+    <string name="title_activity_camera_preview">معاينة الكاميرا</string>
+    <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
+     </string>
+    <string name="dummy_button">الزر الوهمي</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_choose_effect_list">ChooseEffectList</string>
+    <!-- السلاسل المستخدمة للأجزاء للتنقل -->
+    <string name="first_fragment_label">الجزء الأول</string>
+    <string name="second_fragment_label">الجزء الثاني</string>
+    <string name="next">التالي</string>
+    <string name="previous">السابق</string>
+    
+    <string name="hello_first_fragment">مرحبًا بالجزء الأول</string>
+    <string name="hello_second_fragment">مرحبًا بالجزء الثاني. الوسيطة: %1$s</string>
+    <string name="camera_video_effect">الكاميرا</string>
+    <string name="file_view_effect">فتح الملف</string>
+    <string name="choose_effects">التأثيرات</string>
+    <string name="choose_movie">اختر الفيلم</string>
+    <string name="image_preview_before_and_after_rendering_effects">معاينة الصورة قبل وبعد عرض التأثيرات
+     </string>
+    <string name="about">حول</string>
+    <string name="maxRes_1200">1200.0</string>
+    <string name="maximum_resolution">الحد الأقصى للدقة</string>
+    <string name="share">مشاركة</string>
+    <string name="beta">بيتا؟</string>
+    <string name="donn_es_utilisateur_personnelles_et_sensibles">بيانات المستخدمين والحساسين داخل
+         تتميز صورة التطبيق بأن البيانات الوحيدة التي يتم الوصول إليها من خلال التطبيق هي ملفات الوسائط المتعددة
+         افتح زر الرؤية أو اختر ملفًا. Ceux-ci sont atérés par l\'application et
+         يتم تخزين نسخ العمل في نهاية المطاف في مرجع بيانات التطبيق والشكل دونك سور
+         النظام موجود في تنسيق أو آخر. في الإصدار المستقبلي، سيكون من الممكن مشاركة نتائجك معك
+         مستخدمون آخرون، مستخدمون آخرون. هذه البيانات تعتبر من قبلنا، DAHMEN Manuel atempty3.one comme
+         Privées et ne sont pas Collectés، ولا السمات من خلال خدماتنا.
+     </string>
+    <string name="privacy_policy_and_families_policy">
+         <![CDATA[سياسة الخصوصية وسياسة العائلات للتطبيقات المقدمة من DaTheWolf — حاسبة one.empty3 (حساب التفاضل والتكامل البسيط) [تطبيق] عرض الصور [التطبيق] حاسبة سياسة الخصوصية (حساب التفاضل والتكامل البسيط) [التطبيق] هو تطبيق حساب التفاضل والتكامل مصمم للبالغين والأطفال وجميع العائلة. لم يتم تصميم التطبيق خصيصا للأطفال. لا يشارك تطبيق سياسة العائلات المعلومات المقدمة من المستخدم مع أطراف ثالثة؛ ولا يشارك التطبيق الموقع الفعلي للمستخدم مع مستخدمين آخرين. لا يعرض التطبيق الإعلانات، ولا يكشف التطبيق عن جمع أي معلومات شخصية وحساسة من الأطفال. يتم جمع بيانات المستخدم كبيانات مجهولة المصدر على Google Store. التطبيق لا يجمع بيانات تكميلية. اسم التطبيق: آلة حاسبة (حساب بسيط) جهة الاتصال: DAHMEN Manuel (dathewolf@gmail.com>) [عنوان الشارع]]]></string>
+    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCaculetteSimplebyEmpty3.html</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="DOT">.</string>
+    <string name="_0">0</string>
+    <string name="save">حفظ</string>
+    <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
+    <string name="edit_text_to_put_on_the_image">تحرير النص لوضعه على الصورة</string>
+    <string name="accept_user_data_management_policy_and_privacy">قبول سياسة إدارة بيانات المستخدم والخصوصية</string>
+    <string name="todo">المهام</string>
+    <string name="ok">موافق</string>
+    <string name="back_without_saving">الرجوع بدون حفظ</string>
+    <string name="tools">الأدوات</string>
+    <string name="draw">ارسم</string>
+    <string name="draw_color">ارسم اللون</string>
+    <string name="select_rectangle">حدد</string>
+    <string name="draw_activity">ارسم</string>
+    <string name="unselect">تكبير/تصغير -</string>
+    
+    <string name="effect_name">اسم التأثير</string>
+    <string name="remove">إزالة</string>
+    <string name="apply_effects">تطبيق التأثيرات</string>
+    <string name="effect_image_to_image">تأثير الصورة على الصورة</string>
+    <string name="title_activity_text">نشاط النص</string>
+    <string name="image_pour_l_ecriture_du_texte">صورة لكتابة النص</string>
+    <string name="ecrire_du_texte_ici">اكتب النص ici</string>
+    <string name="apply">تطبيق</string>
+    <string name="add_text">النص</string>
+    <string name="draw_button_text">الوجه</string>
+    <string name="back_button_text_activity">الرجوع</string>
+    <string name="grid_text_00">00</string>
+    <string name="grid_text_01">01</string>
+    <string name="grid_text_02">02</string>
+    <string name="grid_text_10">10</string>
+    <string name="grid_text_11">11</string>
+    <string name="grid_text_12">12</string>
+    <string name="preview_of_shapes">معاينة الأشكال</string>
+    <string name="textDp">48</string>
+    <string name="title_activity_image_files">ImageFiles</string>
+    <string name="title_activity_color_chooser">ColorChooser</string>
+    <string name="last_saved">تم حفظ التحميل</string>
+    <string name="commentEffect" translatable="false">!!</string>
+    <string name="primary_pencil_color">لون قلم الرصاص الأساسي</string>
+    <string name="copy">نسخ</string>
+    <string name="paste">لصق</string>
+    <string name="EQUALS">=</string>
+    <string name="ADD">+</string>
+    <string name="MUL">*</string>
+    <string name="sqrt">sqrt</string>
+    <string name="SUB">-</string>
+    <string name="DIV">/</string>
+    <string name="EXP">^</string>
+    <string name="edit_text_here_or_by_push_numbers">تحرير النص هنا أو عن طريق أرقام الدفع</string>
+    <string name="result">النتيجة</string>
+    <string name="about_and_policies">حول وسياسة الخصوصية</string>
+    <string name="title_activity_formula_store">FormulaStore</string>
+    <string name="store_formula">صيغة المتجر</string>
+    <string name="add">إضافة</string>
+    <string name="DEL"><![CDATA[<<<]]></string>
+    <string name="back">الرجوع</string>
+    <string name="about_privacy">حول الخصوصية</string>
+    <string name="dialog_message">اختر وظيفة</string>
+    <string name="dialog_title">الوظائف المحددة مسبقًا</string>
+    <string name="cancel_button">إلغاء</string>
+    <string name="ok_button">موافق</string>
+    <string name="open_brace">(</string>
+    <string name="close_brace">)</string>
+    <string name="coma">,</string>
+    <string name="fragment_function_ok">موافق</string>
+    <string name="fragment_function_cancel">إلغاء</string>
+    <string name="function_string">سلسلة الدالة</string>
+    <string name="back2">الرجوع</string>
+    <string name="name">الاسم</string>
+    <string name="expression">التعبير</string>
+    <string name="write_formula">اكتب الصيغة</string>
+    <string name="buttonCodeBefore">أضف الكود قبل</string>
+    <string name="buttonCodeAfter">أضف الكود بعد</string>
+    <string name="backToGraphics">الرجوع إلى عرض الرسومات</string>
+    <string name="choose_shader_like">MathForm</string>
+    <string name="p_x_y_color">اكتب النقاط p(x,y) = اللون(r, g, b)</string>
+    <string name="go_to_previous_activity">انتقل إلى النشاط السابق</string>
+    <string name="title_activity_toolbar">شريط الأدوات</string>
+    <!--
+    يتم استخدام هذه السلسلة للأجهزة المربعة ويتم تجاوزها بواسطة hello_world in
+    values-round/strings.xml للأجهزة المستديرة.
+    -->
+    <string name="undo">تراجع</string>
+    <string name="redo">إعادة</string>
+    <string name="preview_of_image">معاينة الصورة</string>
+    <string name="application_of_formulas">تطبيق الصيغ</string>
+    <string name="view">عرض</string>
+    <string name="draw2">ارسم</string>
+    <string name="hello_world">مرحبًا بالعالم المستدير!</string>
+    <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
+    <string name="button_current_file_is_null"><![CDATA["اختيار الصورة غير متوفر.<br/>" +
+                     "اختر صورة من ملفات<br/>" +
+                     "الناسخة/المجمع. لا تعمل وظيفة الرسم<br/>" +
+                     "actuellement.<br/>"]]></string>
+    <string name="title_activity_main">MyCameraActivity</string>
+    <string name="new_layout_app">تخطيط التطبيق الجديد</string>
+    <string name="floating_action_button_to">زر الإجراء العائم إلى</string>
+    <string name="add_picture_file_from_directory">إضافة من الدليل</string>
+    <string name="add_picture_from_camera">إضافة من الكاميرا</string>
+    <string name="main">الرئيسي</string>
+    <string name="capture">التقاط</string>
+    <string name="subimage_pasted">تم لصق الصورة الفرعية</string>
+    <string name="editProperties">الدعائم</string>
+    <string name="ok_calc">حسنًا</string>
+    <string name="cancel">إلغاء</string>
+    <string name="title_activity_face_effect_list" translatable="false">FaceEffectListActivity</string>
+    <string name="collapse">طي</string>
+    <string name="extend">تمديد</string>
+    <string name="title_activity_visual_face_effects" translatable="false">تأثيرات VisualFaceEffects</string>
+    
+    <string name="lorem_ipsum" translatable="false">
+     </string>
+    <string name="draw_face_mask">ارسم قناع الوجه</string>
+    <string name="face_drawing_settings">تحرير النموذج</string>
+    <string name="back_to_main">العودة إلى الرئيسي</string>
+    <string name="choose_image">اختر صورة</string>
+    <string name="choose_color">اختر اللون</string>
+    <string name="title_activity_picture_data" translatable="false">PictureDataActivity</string>
+    <string name="apply_color">تطبيق اللون</string>
+    <string name="apply_image">تطبيق الصورة</string>
+    <!--العناوين المفضلة -->
+    <string name="messages_header" translatable="false">الرسائل</string>
+    <string name="sync_header" translatable="false">المزامنة</string>
+    
+    <!-- تفضيلات الرسائل -->
+    <string name="signature_title" translatable="false">توقيعك</string>
+    <string name="reply_title" translatable="false">إجراء الرد الافتراضي</string>
+    
+    <!-- تفضيلات المزامنة -->
+    <string name="sync_title" translatable="false">مزامنة البريد الإلكتروني بشكل دوري</string>
+    <string name="attachment_title" translatable="false">تنزيل المرفقات الواردة</string>
+    <string name="attachment_summary_on" translatable="false">تنزيل المرفقات تلقائيًا لرسائل البريد الإلكتروني الواردة
+     </string>
+    <string name="attachment_summary_off" translatable="false">قم بتنزيل المرفقات عند طلبها يدويًا فقط</string>
+    <string name="title_activity_settings_scrolling" translatable="false">الإعدادات</string>
+    <string name="large_text" translatable="false">
+     </string>
+    <string name="action_settings" translatable="false">الإعدادات</string>
+    <string name="refresh">تحديث</string>
+    <string name="licence">الترخيص</string>
+    <اسم السلسلة = "التراخيص" />
+    <string name="settings_of_application">إعدادات التطبيق</string>
+    <اسم السلسلة = "display_place" />
+    <string name="choose_a_file">اختر ملفًا</string>
+    <string name="title_activity_scrolling" translatable="false">نشاط التمرير</string>
+    <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
+    <string name="title_home" translatable="false">الصفحة الرئيسية</string>
+    <string name="title_dashboard" translatable="false">لوحة التحكم</string>
+    <string name="title_notifications" translatable="false">الإشعارات</string>
+    <string name="apply_to_all">الصورة الأصلية</string>
+    <string name="apply_model">تطبيق النموذج</string>
+    <string name="choose_model">اختر النموذج</string>
+    <string name="load_model">تحميل بيانات الرسم</string>
+    <string name="save_model">حفظ بيانات الرسم</string>
+    <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">الملف مفتوح أو الوجه المكتشف موجود</string>
+    <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">انتظر حتى ينتهي اكتشاف الوجه.</string>
+    <string name="instructions">a=1</string>
+    <string name="toggle_original_colors">الألوان الأصلية</string>
+</resources>
