@@ -26,12 +26,12 @@ def code = 326102934
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("11"))
+        languageVersion.set(JavaLanguageVersion.of("17"))
     }
 }
 def compose_version = '1.5.4'
@@ -81,15 +81,15 @@ android {
     }
 // With compileOptions the warning disappears
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.2'
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
 
@@ -162,7 +162,7 @@ android {
         targetSdk 34
         compileSdk 34
         minSdk 29
-        JavaVersion.VERSION_11
+        JavaVersion.VERSION_17
         versionCode code
         versionName "7.0"
         kotlin {
@@ -315,7 +315,7 @@ publishing {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
