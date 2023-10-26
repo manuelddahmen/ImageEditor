@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">图像特征 (FeatureApp)</string>
+      
+  <string name="capture_button_alt">捕获</string>
+      
+  <string name="switch_camera_button_alt">切换相机</string>
+      
+  <string name="gallery_button_alt">画廊</string>
+      
+  <string name="back_button_alt">后退</string>
+      
+  <string name="share_button_alt">分享</string>
+      
+  <string name="share_hint">分享使用</string>
+      
+  <string name="capture_mode_camera">相机</string>
+      
+  <string name="capture_mode_hdr">高动态范围</string>
+      
+  <string name="capture_mode_night">夜晚</string>
+      
+  <string name="delete_button_alt">删除</string>
+      
+  <string name="delete_dialog">删除当前照片？</string>
+      
+  <string name="delete_title">确认</string>
+      
+  <string name="hello_blank_fragment">你好空白片段</string>
+      
+  <string name="listProcess">近期冠军过滤器类别列表</string>
+      
+  <string name="completeBox">在冠军文本中首映的歌曲，以选择效果最佳</string>
+      
+  <string name="photo">main.imageView 默认图标</string>
+      
+  <string name="effect">影响</string>
+      
+  <string name="filePath">one.empty3.feature.app</string>
+      
+  <string name="capturePhoto">相机</string>
+      
+  <string name="choosePhoto">画廊</string>
+      
+  <string name="andex_file_selection_title">电影</string>
+      
+  <string name="browser_title_background_color">#000000</string>
+      
+  <string name="browser_title_foreground_color">#FFFFFF</string>
+      
+  <string name="browser_list_background_color">#啊啊啊</string>
+      
+  <string name="title_activity_camera_preview">相机预览</string>
+      
+  <string name="title_activity_fullscreen_camera_live_effect">全屏活动相机实时效果</string>
+      
+  <string name="dummy_button">虚拟按钮</string>
+      
+  <string name="dummy_content">虚拟内容</string>
+      
+  <string name="title_activity_choose_effect_list">选择效果列表</string>
+      
+  <!-- Strings used for fragments for navigation -->
+      
+  <string name="first_fragment_label">第一个片段</string>
+      
+  <string name="second_fragment_label">第二个片段</string>
+      
+  <string name="next">下一个</string>
+      
+  <string name="previous">以前的</string>
+      
+    
+  <string name="hello_first_fragment">你好第一个片段</string>
+      
+  <string name="hello_second_fragment">你好第二个片段。参数：%1$s</string>
+      
+  <string name="camera_video_effect">相机</string>
+      
+  <string name="file_view_effect">菲齐尔·奥弗特</string>
+      
+  <string name="choose_effects">效果</string>
+      
+  <string name="choose_movie">选择电影</string>
+      
+  <string name="image_preview_before_and_after_rendering_effects">图片预览、渲染前后效果</string>
+      
+  <string name="about">关于</string>
+      
+  <string name="maxRes_1200">1200.0</string>
+      
+  <string name="maximum_resolution">最大分辨率</string>
+      
+  <string name="share">分享</string>
+      
+  <string name="beta">贝塔？</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles">如果用户使用人员和敏感人员使用应用程序图像，则用户的应用程序将获得多媒体文件或文件中的按钮奖。应用程序的特征和应用程序的所有数据以及系统中的图形或其他格式的工作库存副本的事件。在未来版本中，可能会分享用户、用户之间的结果。DAHMEN Manuel 在 empty3.one 上提供私人服务，但不提供集体服务，不提供任何服务。</string>
+      
+  <string name="privacy_policy_and_families_policy">DaTheWolf 应用程序的隐私政策和家庭政策 — one.empty3 计算器 (calculette simple) [应用程序] 图像特色 [应用程序] 隐私政策 计算器 (calculette simple) [应用程序] 是一款专为成人、儿童和所有家庭设计的微积分应用程序。应用程序并不是专门为儿童设计的。家庭政策申请不会与第三方共享用户提供的信息；并且应用程序不会与其他用户共享用户的物理位置。应用程序不显示广告应用程序不会泄露儿童的任何个人和敏感信息的收集。用户数据在 Google 商店中作为匿名数据收集。应用程序不收集补充数据。应用程序名称：计算器 (calculette simple) 联系人：DAHMEN Manuel (dathewolf\@gmail.com&gt;) [街道地址]</string>
+      
+  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">。</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="save">节省</string>
+      
+  <string name="title_activity_choose_effects_compose">选择效果组合</string>
+      
+  <string name="edit_text_to_put_on_the_image">编辑文本以放置在图像上</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">接受用户数据管理政策和隐私</string>
+      
+  <string name="todo">去做</string>
+      
+  <string name="ok">好的</string>
+      
+  <string name="back_without_saving">不保存就返回</string>
+      
+  <string name="tools">工具</string>
+      
+  <string name="draw">画</string>
+      
+  <string name="draw_color">绘制颜色</string>
+      
+  <string name="select_rectangle">选择</string>
+      
+  <string name="draw_activity">画</string>
+      
+  <string name="unselect">飞涨 -</string>
+      
+    
+  <string name="effect_name">效果名称</string>
+      
+  <string name="remove">消除</string>
+      
+  <string name="apply_effects">应用效果</string>
+      
+  <string name="effect_image_to_image">效果图像到图像</string>
+      
+  <string name="title_activity_text">文本活动</string>
+      
+  <string name="image_pour_l_ecriture_du_texte">文本写作图像</string>
+      
+  <string name="ecrire_du_texte_ici">文本电子邮件</string>
+      
+  <string name="apply">申请</string>
+      
+  <string name="add_text">文本</string>
+      
+  <string name="draw_button_text">脸</string>
+      
+  <string name="back_button_text_activity">后退</string>
+      
+  <string name="grid_text_00">00</string>
+      
+  <string name="grid_text_01">01</string>
+      
+  <string name="grid_text_02">02</string>
+      
+  <string name="grid_text_10">10</string>
+      
+  <string name="grid_text_11">11</string>
+      
+  <string name="grid_text_12">12</string>
+      
+  <string name="preview_of_shapes">形状预览</string>
+      
+  <string name="textDp">48</string>
+      
+  <string name="title_activity_image_files">图像文件</string>
+      
+  <string name="title_activity_color_chooser">颜色选择器</string>
+      
+  <string name="last_saved">加载已保存</string>
+      
+  <string name="commentEffect" translatable="false">!!</string>
+      
+  <string name="primary_pencil_color">铅笔原色</string>
+      
+  <string name="copy">复制</string>
+      
+  <string name="paste">粘贴</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">开方</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">在此处编辑文本或通过推送数字编辑文本</string>
+      
+  <string name="result">结果</string>
+      
+  <string name="about_and_policies">关于和隐私政策</string>
+      
+  <string name="title_activity_formula_store">配方商店</string>
+      
+  <string name="store_formula">储存配方</string>
+      
+  <string name="add">添加</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">后退</string>
+      
+  <string name="about_privacy">关于隐私</string>
+      
+  <string name="dialog_message">选择功能</string>
+      
+  <string name="dialog_title">预定义功能</string>
+      
+  <string name="cancel_button">取消</string>
+      
+  <string name="ok_button">好的</string>
+      
+  <string name="open_brace">（</string>
+      
+  <string name="close_brace">）</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">好的</string>
+      
+  <string name="fragment_function_cancel">取消</string>
+      
+  <string name="function_string">函数字符串</string>
+      
+  <string name="back2">后退</string>
+      
+  <string name="name">姓名</string>
+      
+  <string name="expression">表达</string>
+      
+  <string name="write_formula">写出公式</string>
+      
+  <string name="buttonCodeBefore">之前添加代码</string>
+      
+  <string name="buttonCodeAfter">之后添加代码</string>
+      
+  <string name="backToGraphics">返回图形视图</string>
+      
+  <string name="choose_shader_like">数学形式</string>
+      
+  <string name="p_x_y_color">输入点 p(x,y) = Color(r, g, b)</string>
+      
+  <string name="go_to_previous_activity">转到上一个活动</string>
+      
+  <string name="title_activity_toolbar">工具栏</string>
+      
+  <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+      
+  <string name="undo">撤消</string>
+      
+  <string name="redo">重做</string>
+      
+  <string name="preview_of_image">图像预览</string>
+      
+  <string name="application_of_formulas">公式的应用</string>
+      
+  <string name="view">看法</string>
+      
+  <string name="draw2">画</string>
+      
+  <string name="hello_world">你好环球！</string>
+      
+  <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
+      
+  <string name="button_current_file_is_null">图像选择。&lt;br/&gt; + 选择文件中的图像&lt;br/&gt; + 复印机/复印机。La fonction draw ne fonctionne pas&lt;br/&gt; + actuellement.&lt;br/&gt;</string>
+      
+  <string name="title_activity_main">我的相机活动</string>
+      
+  <string name="new_layout_app">新的应用程序布局</string>
+      
+  <string name="floating_action_button_to">浮动操作按钮</string>
+      
+  <string name="add_picture_file_from_directory">从目录添加</string>
+      
+  <string name="add_picture_from_camera">从相机添加</string>
+      
+  <string name="main">主要的</string>
+      
+  <string name="capture">捕获</string>
+      
+  <string name="subimage_pasted">子图像已粘贴</string>
+      
+  <string name="editProperties">道具</string>
+      
+  <string name="ok_calc">好的</string>
+      
+  <string name="cancel">取消</string>
+      
+  <string name="title_activity_face_effect_list" translatable="false">FaceEffectListActivity</string>
+      
+  <string name="collapse">坍塌</string>
+      
+  <string name="extend">延长</string>
+      
+  <string name="title_activity_visual_face_effects" translatable="false">VisualFaceEffects</string>
+      
+    
+  <string name="lorem_ipsum" translatable="false">
+    </string>
+      
+  <string name="draw_face_mask">画出面膜</string>
+      
+  <string name="face_drawing_settings">编辑模型</string>
+      
+  <string name="back_to_main">返回主页面</string>
+      
+  <string name="choose_image">选择图片</string>
+      
+  <string name="choose_color">选择颜色</string>
+      
+  <string name="title_activity_picture_data" translatable="false">PictureDataActivity</string>
+      
+  <string name="apply_color">涂抹颜色</string>
+      
+  <string name="apply_image">应用图像</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header" translatable="false">Messages</string>
+      
+  <string name="sync_header" translatable="false">Sync</string>
+      
+    
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title" translatable="false">Your signature</string>
+      
+  <string name="reply_title" translatable="false">Default reply action</string>
+      
+    
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title" translatable="false">Sync email periodically</string>
+      
+  <string name="attachment_title" translatable="false">Download incoming attachments</string>
+      
+  <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+      
+  <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+      
+  <string name="title_activity_settings_scrolling" translatable="false">Settings</string>
+      
+  <string name="large_text" translatable="false">
+    </string>
+      
+  <string name="action_settings" translatable="false">Settings</string>
+      
+  <string name="refresh">刷新</string>
+      
+  <string name="licence">执照</string>
+      
+  <string name="licenses"/>
+      
+  <string name="settings_of_application">应用程序的设置</string>
+      
+  <string name="display_place"/>
+      
+  <string name="choose_a_file">选择一个文件</string>
+      
+  <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
+      
+  <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
+      
+  <string name="title_home" translatable="false">Home</string>
+      
+  <string name="title_dashboard" translatable="false">Dashboard</string>
+      
+  <string name="title_notifications" translatable="false">Notifications</string>
+      
+  <string name="apply_to_all">原图</string>
+      
+  <string name="apply_model">适用型号</string>
+      
+  <string name="choose_model">选择型号</string>
+      
+  <string name="load_model">加载绘制数据</string>
+      
+  <string name="save_model">保存绘图数据</string>
+      
+  <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">发现存在的信息或发现的面容</string>
+      
+  <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">请注意面部检测。</string>
+      
+  <string name="instructions">a=1</string>
+      
+  <string name="toggle_original_colors">原色</string>
+  
+</resources>
