@@ -26,7 +26,7 @@
     <string name="back_button_alt">Retour</string>
     <string name="share_button_alt">Share</string>
     <string name="share_hint">Partager avec</string>
-    <string name="capture_mode_camera">Caméra</string>
+    <string name="capture_mode_camera">Photo</string>
     <string name="capture_mode_hdr">HDR</string>
     <string name="capture_mode_night">Nuit</string>
     <string name="delete_button_alt">Supprimer</string>
