@@ -39,6 +39,7 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu"
             >
+        <!-- Trigger Google Play services to install the backported photo picker module. -->
         <property android:name="REQUIRE_SECURE_ENV" android:value="1" />
         <activity
                 android:name="one.empty3.feature.app.newui.MainActivityNavigation"
@@ -261,6 +262,15 @@
         <meta-data
                 android:name="firebase_performance_logcat_enabled"
                 android:value="true" />
+        <service android:name="com.google.android.gms.metadata.ModuleDependencies"
+                android:enabled="false"
+                android:exported="false"
+                tools:ignore="MissingClass">
+            <intent-filter>
+                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+            </intent-filter>
+            <meta-data android:name="photopicker_activity:0:required" android:value="" />
+        </service>
     </application>
 
 </manifest>
