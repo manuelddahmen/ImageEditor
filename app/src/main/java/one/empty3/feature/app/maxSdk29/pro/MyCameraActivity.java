@@ -58,6 +58,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.datatransport.BuildConfig;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -111,7 +112,6 @@ public class MyCameraActivity extends ActivitySuperClass {
     private boolean workingResolutionOriginal = false;
     private Clipboard clipboard;
     private boolean copied;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -23,16 +23,34 @@ package one.empty3.feature.app.maxSdk29.pro;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.BeginSignInResult;
+import com.google.android.gms.auth.api.identity.Identity;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,6 +67,8 @@ import one.empty3.feature20220726.PixM;
 
 
 public class ActivitySuperClass extends AppCompatActivity {
+    private SignInClient oneTapClient;
+    private BeginSignInRequest signInRequest;
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
     public static final int MAXRES_DEFAULT = 1200;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
@@ -65,6 +85,12 @@ public class ActivitySuperClass extends AppCompatActivity {
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     protected Bitmap currentBitmap;
     protected int maxRes = R.string.maxRes_1200;
+    private String userDisplayName;
+    private String email;
+    private Uri userPhotoUrl;
+    private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
+    private boolean showOneTapUI = true;
+    private FirebaseAuth mAuth;
 
     public ImageViewSelection getImageView() {
         return imageView;
@@ -110,6 +136,21 @@ public class ActivitySuperClass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
+        oneTapClient = Identity.getSignInClient(this);
+        signInRequest = BeginSignInRequest.builder()
+                .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
+                        .setSupported(true)
+                        .build())
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        // Your server's client ID, not your Android client ID.
+                        .setServerClientId(getString(R.string.default_web_client_id))
+                        // Only show accounts previously used to sign in.
+                        .setFilterByAuthorizedAccounts(true)
+                        .build())
+                // Automatically sign in when exactly one credential is retrieved.
+                .setAutoSelectEnabled(true)
+                .build();
 //        new Utils().installReferrer(this);
 
 
@@ -139,6 +180,43 @@ public class ActivitySuperClass extends AppCompatActivity {
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();
+        }
+        oneTapClient.beginSignIn(signInRequest)
+                .addOnSuccessListener(this, new OnSuccessListener<BeginSignInResult>() {
+                    @Override
+                    public void onSuccess(BeginSignInResult result) {
+                        try {
+                            startIntentSenderForResult(
+                                    result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
+                                    null, 0, 0, 0);
+                        } catch (IntentSender.SendIntentException e) {
+                            Log.e(TAG, "Couldn't start One Tap UI: " + e.getLocalizedMessage());
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // No saved credentials found. Launch the One Tap sign-up flow, or
+                        // do nothing and continue presenting the signed-out UI.
+                        Log.d(TAG, e.getLocalizedMessage());
+                    }
+                });
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            userDisplayName = user.getDisplayName();
+            email = user.getEmail();
+            userPhotoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = user.getUid();
         }
     }
 
@@ -183,7 +261,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             for (int i = 0; i < cords.length; i++) {
                 cords[i] = properties.getProperty(cordsConsts[i], cords[i]);
             }
-            String maxRes1 = properties.getProperty("maxRes", ""+maxRes);
+            String maxRes1 = properties.getProperty("maxRes", "" + maxRes);
             if (maxRes1 != null) {
                 try {
                     maxRes = Integer.parseInt(maxRes1);
@@ -194,7 +272,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             try {
                 String currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
                 currentFile = new File(currentFile1);
-                if(currentFile1==null || currentFile1.length()==0) {
+                if (currentFile1 == null || currentFile1.length() == 0) {
                     File imageViewPersistantFile = getImageViewPersistantFile();
                     if (imageViewPersistantFile.exists()) {
                         currentFile = imageViewPersistantFile;
@@ -260,7 +338,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
             currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
-            if(currentFile1!=null)
+            if (currentFile1 != null)
                 currentFile = new File(currentFile1);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
@@ -457,5 +535,55 @@ public class ActivitySuperClass extends AppCompatActivity {
 //                Manifest.permission.READ_MEDIA_IMAGES}, ONRESTORE_INSTANCE_STATE);
         new Utils().loadImageState(this, false);
         restoreInstanceState();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        switch (requestCode) {
+            case REQ_ONE_TAP:
+
+                SignInCredential googleCredential = null;
+                try {
+                    googleCredential = oneTapClient.getSignInCredentialFromIntent(data);
+                } catch (ApiException e) {
+                    throw new RuntimeException(e);
+                }
+                String idToken = googleCredential.getGoogleIdToken();
+                if (idToken != null) {
+                    // Got an ID token from Google. Use it to authenticate
+                    // with Firebase.
+                    AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
+                    mAuth.signInWithCredential(firebaseCredential)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithCredential:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        //?????updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                        //?????updateUI(null);
+                                    }
+                                }
+                            });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //????updateUI(currentUser);
     }
 }

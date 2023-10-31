@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin:  'com.android.application'
-apply plugin:  'com.google.gms.google-services'
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: "org.jetbrains.kotlin.android"
 //apply plugin: "org.jetbrains.kotlin.kapt"
 
@@ -24,7 +24,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 326702934
+def code = 326902934
 //3 sept. 2023, 14:27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
@@ -287,7 +287,17 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
-}
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth:22.2.0")
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:20.7.0")}
 
 
 Properties properties = new Properties()

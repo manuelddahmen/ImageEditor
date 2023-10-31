@@ -123,6 +123,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
     private void action(Face face, GoogleFaceDetection.FaceData faceData) {
         Rect bounds = face.getBoundingBox();
+        float rotX = face.getHeadEulerAngleX();  // Head is rotated to the right rotY degrees
         float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
         float rotZ = face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees
 

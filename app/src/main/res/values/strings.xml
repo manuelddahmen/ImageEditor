@@ -227,5 +227,6 @@
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Attendez que la détection de visage soit terminée.</string>
     <string name="instructions" translatable="false">a=1</string>
     <string name="toggle_original_colors">Original colors</string>
-
+    <string name="commentEffect" translatable="false">!!</string>
+    <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
 </resources>

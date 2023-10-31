@@ -76,14 +76,6 @@
     <string name="maximum_resolution">Maximum resolution</string>
     <string name="share">Share</string>
     <string name="beta">Beta?</string>
-    <string name="donn_es_utilisateur_personnelles_et_sensibles">Données utilisateur personnelles et sensibles Dans
-        l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia
-        ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et
-        éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur
-        le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec
-        d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme
-        privées et ne sont pas collectées, ni traitées par nos services.
-    </string>
     <string name="privacy_policy_and_families_policy">
         <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
     <string name="save">Save</string>
@@ -122,7 +114,6 @@
     <string name="title_activity_image_files">ImageFiles</string>
     <string name="title_activity_color_chooser">ColorChooser</string>
     <string name="last_saved">Load Saved</string>
-    <string name="commentEffect" translatable="false">!!</string>
     <string name="primary_pencil_color">Primary pencil color</string>
     <string name="copy">Copy</string>
     <string name="paste">Paste</string>
@@ -146,7 +137,8 @@
     <string name="EXP">^</string>
     <string name="edit_text_here_or_by_push_numbers">Edit text here or by push numbers</string>
     <string name="result">Result</string>
-    <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+    <string name="donn_es_utilisateur_personnelles_et_sensibles">
+    Personal and sensitive user data In the image featuring application, the only data that the application accesses are the multimedia files opened by the take photo or choose a file button. These are processed by the application and possibly working copies are stored in the application\'s data directory and therefore appear on the system in one format or the other. In a future version it will be possible to share your results with other users and Internet users. This data is considered private by us, DAHMEN Manuel at empty3.one and is not collected or processed by our services.</string>
     <string name="title_activity_formula_store">FormulaStore</string>
     <string name="store_formula">Store Formula</string>
     <string name="DEL"><![CDATA[<<<]]></string>
