@@ -209,9 +209,9 @@
     <string name="action_settings" translatable="false">Settings</string>
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
-    <string name="licenses"  translatable="false"/>
+    <string name="licenses" translatable="false" />
     <string name="settings_of_application">Settings of application</string>
-    <string name="display_place"  translatable="false"/>
+    <string name="display_place" translatable="false" />
     <string name="choose_a_file">Choose a file</string>
     <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
     <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
@@ -229,4 +229,13 @@
     <string name="toggle_original_colors">Original colors</string>
     <string name="commentEffect" translatable="false">!!</string>
     <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

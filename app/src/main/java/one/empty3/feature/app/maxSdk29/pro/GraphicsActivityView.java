@@ -50,7 +50,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
     private PixM current;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.graphics_view);

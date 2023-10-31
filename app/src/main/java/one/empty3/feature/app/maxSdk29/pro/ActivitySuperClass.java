@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -66,7 +65,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 
-public class ActivitySuperClass extends AppCompatActivity {
+public class ActivitySuperClass extends EmailPasswordActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
@@ -132,7 +131,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
@@ -564,11 +563,11 @@ public class ActivitySuperClass extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithCredential:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        //?????updateUI(user);
+                                        updateUI(user);
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                                        //?????updateUI(null);
+                                        updateUI(null);
                                     }
                                 }
                             });
@@ -580,10 +579,15 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //????updateUI(currentUser);
+        updateUI(currentUser);
+    }
+
+
+    private void updateUI(FirebaseUser user) {
+        // No-op
     }
 }

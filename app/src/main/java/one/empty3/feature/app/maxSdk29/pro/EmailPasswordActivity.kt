@@ -1,15 +1,15 @@
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
-class EmailPasswordActivity : Activity() {
+open class EmailPasswordActivity : AppCompatActivity() {
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth

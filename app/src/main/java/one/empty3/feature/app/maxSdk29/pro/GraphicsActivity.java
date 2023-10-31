@@ -42,7 +42,7 @@ public class GraphicsActivity extends ActivitySuperClass {
     private TextView[] textViews;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.graphics);
