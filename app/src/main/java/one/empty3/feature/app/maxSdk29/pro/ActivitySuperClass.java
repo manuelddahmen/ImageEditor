@@ -216,6 +216,8 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
+        } else {
+
         }
     }
 

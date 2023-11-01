@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Lumiere;
+import one.empty3.library.Matrix33;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.Serialisable;
@@ -379,6 +380,61 @@ public class GoogleFaceDetection
             @Override
             public int hashCode() {
                 return Objects.hash(getColorFill(), getColorContours(), getColorTransparent(), getSurfaceId(), getPolygon(), getContours(), getFilledContours());
+            }
+
+            @NotNull
+            public Point3D getPolygonAngles() {
+                int size = polygon.getPoints().data1d.size();
+                List<Point3D> data1d = polygon.getPoints().data1d;
+                double xx = data1d.get(size / 4).getX() - data1d.get(3 * size / 4).getX();
+                double xy = data1d.get(size / 4).getY() - data1d.get(3 * size / 4).getY();
+                double yx = data1d.get(size / 2).getX() - data1d.get(0).getX();
+                double yy = data1d.get(size / 2).getY() - data1d.get(0).getY();
+                return new Point3D(Math.atan(xx/xy), Math.atan(yy/yx), 0.0);
+            }
+
+            public void rotate(Surface from) {
+                @Nullable Polygon polygonFrom = from.polygon;
+                @Nullable Polygon polygonTo = this.polygon;
+                assert from.actualDrawing != null;
+                @NotNull PixM actualDrawingFrom = from.actualDrawing;
+                assert polygonFrom != null;
+                Point3D isocentreFrom = polygonFrom.getIsocentre();
+                assert polygonTo != null;
+                Point3D isocentreTo = polygonTo.getIsocentre();
+                Point3D anglesFrom = from.getPolygonAngles();
+                Point3D anglesTo = this.getPolygonAngles();
+
+
+                Matrix33 rotation = rotatePoint(isocentreFrom, isocentreTo, anglesFrom, anglesTo);
+
+                // 1 Rotated polygon -> destination size
+
+
+                StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
+                // 2 Computed rotated PixM
+                assert actualDrawing != null;
+                for(double i=boundRect2d.getElem(0).getX(); i<boundRect2d.getElem(1).getX(); i++) {
+                    for(double j=boundRect2d.getElem(0).getY(); i<boundRect2d.getElem(1).getY(); j++) {
+                        Point3D p = new Point3D(i, j, 0.0);
+                        Point3D translated = p.plus(isocentreTo).moins(isocentreFrom);
+                        Point3D dst = rotation.mult(translated);
+                        for (int c = 0; c < 3; c++) {
+                            actualDrawing.setCompNo(c);
+                            from.actualDrawing.setCompNo(c);
+                            actualDrawing.set((int)(double)(dst.getX()), (int)(double)(dst.getY()),
+                                    from.actualDrawing.get((int) i, (int) j));
+                        }
+                        }
+                }
+
+
+            }
+
+            private Matrix33 rotatePoint(Point3D isocentreFrom, Point3D isocentreTo, Point3D anglesFrom, Point3D anglesTo) {
+                Matrix33 rotated = new Matrix33(new double[]{1.0, Math.sin(anglesFrom.getX() - anglesFrom.getX()), 0.0, 0.0,
+                        Math.sin(anglesFrom.getY() - anglesFrom.getY()), 0.0, 0.0, 0.0, 1.0});
+                return rotated;
             }
         }
 

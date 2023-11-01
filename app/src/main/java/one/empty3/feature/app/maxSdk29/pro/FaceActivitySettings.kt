@@ -408,7 +408,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     run {
                                         if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
                                         ) {
-                                            selectedSurfaceAllPicture!!.actualDrawing = selectSurface2.actualDrawing
+                                            selectedSurfaceAllPicture!!.rotate(selectSurface2);
                                         }
                                     }
                                 })
