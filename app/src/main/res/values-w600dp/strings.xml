@@ -65,4 +65,5 @@
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Attendez que la détection de visage soit terminée.</string>
 <string name="instructions" translatable="false">a=1</string>
     <string name="toggle_original_colors">Original colors</string>
+    <string name="experimental">Experimental</string>
 </resources>

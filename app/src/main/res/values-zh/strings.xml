@@ -420,5 +420,6 @@
   <string name="instructions">a=1</string>
       
   <string name="toggle_original_colors">原色</string>
-  
+    <string name="experimental">Experimental</string>
+
 </resources>

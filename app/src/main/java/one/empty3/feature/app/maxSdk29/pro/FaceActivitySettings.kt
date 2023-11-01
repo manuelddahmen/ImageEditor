@@ -48,6 +48,7 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
 
 
 class FaceActivitySettings : ActivitySuperClass() {
+    private var experimental: Boolean = false
     private val CREATE_FILE: Int = 6545846
     private lateinit var thisActivity: FaceActivitySettings
     private val OPEN_MODEL: Int = 5444478
@@ -408,7 +409,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                                     run {
                                         if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
                                         ) {
-                                            selectedSurfaceAllPicture!!.rotate(selectSurface2);
+                                            if(experimental) {
+                                                selectedSurfaceAllPicture!!.rotate(selectSurface2);
+                                            } else {
+                                                selectedSurfaceAllPicture!!.actualDrawing = selectSurface2.actualDrawing
+                                            }
                                         }
                                     }
                                 })
@@ -432,6 +437,10 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         }
 
+        val experimental = findViewById<Button>(R.id.experimental);
+        experimental.setOnClickListener({
+            this.experimental = !this.experimental
+        })
     }
 
     private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId:Int) : Surface? {

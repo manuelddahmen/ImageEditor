@@ -109,6 +109,13 @@
                 android:id="@+id/buttonsOriginalImage"
                 android:text="@string/toggle_original_colors"
                 />
+        <Button
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
+                android:id="@+id/experimental"
+                android:text="@string/experimental"
+                />
     </LinearLayout>
     <Button
             android:layout_height="48dp"
