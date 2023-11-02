@@ -24,7 +24,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 327702934
+def code = 328002934
 //3 sept. 2023, 14:27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
@@ -108,6 +108,10 @@ android {
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel = 'full'
+            }
+
         }
 
         debug {

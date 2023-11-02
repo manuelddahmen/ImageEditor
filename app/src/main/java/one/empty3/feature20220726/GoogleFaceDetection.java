@@ -393,9 +393,9 @@ public class GoogleFaceDetection
                 return new Point3D(Math.atan(xx/xy), Math.atan(yy/yx), 0.0);
             }
 
-            public void rotate(Surface from) {
-                @Nullable Polygon polygonFrom = from.polygon;
-                @Nullable Polygon polygonTo = this.polygon;
+            public void rotate(@NotNull Surface from) {
+                @NotNull Polygon polygonFrom = from.polygon;
+                @NotNull Polygon polygonTo = this.polygon;
                 @NotNull PixM actualDrawingFrom = from.actualDrawing;
                 Point3D isocentreFrom = polygonFrom.getIsocentre();
                 Point3D isocentreTo = polygonTo.getIsocentre();
@@ -419,17 +419,17 @@ public class GoogleFaceDetection
                         for (int c = 0; c < 3; c++) {
                             actualDrawing.setCompNo(c);
                             from.actualDrawing.setCompNo(c);
-                            actualDrawing.set((int)(double)(dst.getX()), (int)(double)(dst.getY()),
-                                    from.actualDrawing.get((int) i, (int) j));
+                            actualDrawing.set((int)(double)i, (int)(double)j,
+                                    from.actualDrawing.get((int)(double) dst.getX(), (int)(double) dst.getY()));
                         }
-                        }
+                    }
                 }
             }
 
             private Matrix33 rotatePoint(Point3D isocentreFrom, Point3D isocentreTo, Point3D anglesFrom, Point3D anglesTo) {
                 Matrix33 rotated = new Matrix33(new double[]{
                         Math.cos(anglesFrom.getX() - anglesTo.getX()), Math.sin(anglesFrom.getX() - anglesTo.getX()),0.0,
-                        Math.sin(anglesFrom.getY() - anglesTo.getY()), Math.cos(anglesFrom.getY() - anglesTo.getY()), 0.0,
+                        Math.sin(anglesFrom.getX() - anglesTo.getX()), Math.cos(anglesFrom.getX() - anglesTo.getX()), 0.0,
                         0.0, 0.0, 1.0});
                 return rotated;
             }
