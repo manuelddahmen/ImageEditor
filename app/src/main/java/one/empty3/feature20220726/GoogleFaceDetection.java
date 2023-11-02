@@ -396,11 +396,8 @@ public class GoogleFaceDetection
             public void rotate(Surface from) {
                 @Nullable Polygon polygonFrom = from.polygon;
                 @Nullable Polygon polygonTo = this.polygon;
-                assert from.actualDrawing != null;
                 @NotNull PixM actualDrawingFrom = from.actualDrawing;
-                assert polygonFrom != null;
                 Point3D isocentreFrom = polygonFrom.getIsocentre();
-                assert polygonTo != null;
                 Point3D isocentreTo = polygonTo.getIsocentre();
                 Point3D anglesFrom = from.getPolygonAngles();
                 Point3D anglesTo = this.getPolygonAngles();
@@ -413,11 +410,11 @@ public class GoogleFaceDetection
 
                 StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
                 // 2 Computed rotated PixM
-                assert actualDrawing != null;
                 for(double i=boundRect2d.getElem(0).getX(); i<boundRect2d.getElem(1).getX(); i++) {
-                    for(double j=boundRect2d.getElem(0).getY(); i<boundRect2d.getElem(1).getY(); j++) {
+                    for(double j=boundRect2d.getElem(0).getY(); j<boundRect2d.getElem(1).getY(); j++) {
+                        // Se replacer (i,j,0) dans le pixm d'origine, from
                         Point3D p = new Point3D(i, j, 0.0);
-                        Point3D translated = p.plus(isocentreTo).moins(isocentreFrom);
+                        Point3D translated = p.plus(isocentreFrom).moins(isocentreTo);
                         Point3D dst = rotation.mult(translated);
                         for (int c = 0; c < 3; c++) {
                             actualDrawing.setCompNo(c);
@@ -427,13 +424,13 @@ public class GoogleFaceDetection
                         }
                         }
                 }
-
-
             }
 
             private Matrix33 rotatePoint(Point3D isocentreFrom, Point3D isocentreTo, Point3D anglesFrom, Point3D anglesTo) {
-                Matrix33 rotated = new Matrix33(new double[]{1.0, Math.sin(anglesFrom.getX() - anglesFrom.getX()), 0.0, 0.0,
-                        Math.sin(anglesFrom.getY() - anglesFrom.getY()), 0.0, 0.0, 0.0, 1.0});
+                Matrix33 rotated = new Matrix33(new double[]{
+                        Math.cos(anglesFrom.getX() - anglesTo.getX()), Math.sin(anglesFrom.getX() - anglesTo.getX()),0.0,
+                        Math.sin(anglesFrom.getY() - anglesTo.getY()), Math.cos(anglesFrom.getY() - anglesTo.getY()), 0.0,
+                        0.0, 0.0, 1.0});
                 return rotated;
             }
         }

@@ -410,7 +410,14 @@ class FaceActivitySettings : ActivitySuperClass() {
                                         if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
                                         ) {
                                             if(experimental) {
-                                                selectedSurfaceAllPicture!!.rotate(selectSurface2);
+                                                try {
+                                                    selectedSurfaceAllPicture!!.rotate(
+                                                        selectSurface2
+                                                    );
+                                                } catch (ex : RuntimeException) {
+                                                    Toast.makeText(applicationContext, "Rotate image failed : " +ex.message,
+                                                        Toast.LENGTH_LONG).show()
+                                                }
                                             } else {
                                                 selectedSurfaceAllPicture!!.actualDrawing = selectSurface2.actualDrawing
                                             }
@@ -739,11 +746,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                         contentResolver.query(result.data!!, null, null, null, null)
 
                     val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    val sizeIndex = cursor!!.getColumnIndex(OpenableColumns.SIZE)
-                    cursor!!.moveToFirst()
+                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                    cursor.moveToFirst()
 
-                    val name = cursor!!.getString(nameIndex)
-                    val size = cursor!!.getLong(sizeIndex).toString()
+                    val name = cursor.getString(nameIndex)
+                    val size = cursor.getLong(sizeIndex).toString()
                 } catch (_: RuntimeException) {
 
                 } catch (_: java.lang.NullPointerException) {
