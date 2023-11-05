@@ -217,13 +217,13 @@ public class FaceOverlayView extends ImageViewSelection {
                         faceData.getFaceSurfaces().add(
                                 new GoogleFaceDetection.FaceData.Surface(
                                         surfaceId, getPolygon(faceContour1.getPoints(), Color.YELLOW), null,
-                                        Color.YELLOW, Color.BLUE, Color.BLACK, null, false));
+                                        Color.rgb(255, 204, 153), Color.BLUE, Color.BLACK, null, false));
                         i++;
                     } else {
                         faceData.getFaceSurfaces().add(
                                 new GoogleFaceDetection.FaceData.Surface(
                                         surfaceId, getPolygon(faceContour1.getPoints(), Color.RED), null,
-                                        Color.RED, Color.RED, Color.BLACK, null, false));
+                                        Color.rgb(115, 77, 38), Color.rgb(115, 77, 38), Color.BLACK, null, false));
                         i++;
                     }
                 }

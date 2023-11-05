@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Point
 import android.graphics.PointF
 import android.net.Uri
@@ -16,8 +17,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.ActivityCompat
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
@@ -68,14 +67,14 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(false, null)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
-    private var selectedColor = Color.White
-    private lateinit var selectedImage: Bitmap
+    private var selectedColor : android.graphics.Color = android.graphics.Color.valueOf(android.graphics.Color.BLUE)
+    private var selectedImage: Bitmap? = null
     private var selectedOption = SELECTED_OPTION_COLOR
 
     class ColorDialogListener(var selectedColor2: Color, var activity: FaceActivitySettings) :
         AmbilWarnaDialog.OnAmbilWarnaListener {
         override fun onOk(dialog: AmbilWarnaDialog, color: Int) {
-            activity.selectedColor = Color(color)
+            activity.selectedColor = Color.valueOf(color)
             val findViewById = activity.findViewById<Button>(R.id.choose_color)
             findViewById.setBackgroundColor(color)
             // color is the color selected by the user.
@@ -218,13 +217,13 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val colorChooser: Button = findViewById<Button>(R.id.choose_color)
 
-        val colorChooserDialog: ColorDialogListener = ColorDialogListener(selectedColor, this)
+        val colorChooserDialog: ColorDialogListener = ColorDialogListener(selectedColor!!, this)
 
         colorChooser.setOnClickListener {
             if (selectedColor == null)
-                selectedColor = Color.White
+                selectedColor = Color.valueOf(Color.WHITE)
             val dialog: AmbilWarnaDialog = AmbilWarnaDialog(/* context = */ this, /* color = */
-                selectedColor.toArgb(),
+                selectedColor!!.toArgb(),
                 /* listener = */
                 colorChooserDialog
             )
@@ -260,7 +259,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                     val filledContours = selectedSurfaceAllPicture!!.filledContours
                     filledContours.paintIfNot(
                         0, 0, filledContours.columns, filledContours.lines,
-                        selectedImage,
+                        selectedImage!!,
                         selectedSurfaceAllPicture!!.colorContours,
                         selectedSurfaceAllPicture!!.contours
                     )
@@ -278,9 +277,10 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             var sel = selectedSurfaceAllPicture
 
-            if (selectedColor != null && sel != null) {
+            if (selectedColor != null && sel != null && sel.filledContours!=null && sel.contours!=null
+                && sel.polygon!=null && sel.colorFill!=null) {
                 val oldColorFill = sel.colorFill
-                val newColorFill = selectedColor
+                val newColorFill = selectedColor!!
                 sel.filledContours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
                 sel.contours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
                 sel.polygon.texture(ColorTexture(newColorFill.toArgb()))
@@ -426,8 +426,6 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 })
                             }
                         }
-                            drawSurface()
-                            drawSurfaces()
                         } catch (ex:RuntimeException) {
                             Toast.makeText(applicationContext, "Apply model null : " +ex.message, Toast.LENGTH_LONG).show()
                             return@setOnClickListener
@@ -445,9 +443,14 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
 
         val experimental = findViewById<Button>(R.id.experimental);
-        experimental.setOnClickListener({
+        experimental.setOnClickListener {
             this.experimental = !this.experimental
-        })
+            if (this.experimental) {
+                experimental.setBackgroundColor(android.graphics.Color.RED)
+            } else {
+                experimental.setBackgroundColor(android.graphics.Color.BLUE)
+            }
+        }
     }
 
     private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId:Int) : Surface? {
@@ -573,11 +576,11 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 var pBounds = pPolygonPoint0
 
                                 if (option == OPTION_SELECT_ALL || p == null) {
-                                    if (i == currentSurface)
+                                    if (i == currentSurface) {
                                         selectedSurfaceAllPicture = surface
-
-                                    drawSurface()
-                                    selectedSurfaces.add(surface)
+                                        drawSurface()
+                                        selectedSurfaces.add(surface)
+                                    }
                                 } else if (p.x >= boundRect2d.getElem(0).x && p.x <= boundRect2d.getElem(
                                         1
                                     ).x
@@ -596,7 +599,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                         // point in polygon
                                         selectedSurfaceAllPicture = surface
                                         selectedSurfaces.add(surface)
-                                        return
+                                        if(selectedSurfaceAllPicture!=null) return@run
                                         //surface.filledContours.setValues(p.x-pBounds.x as Int, p.y-pBounds.y, 1.0, 1.0, 1.0)
                                         //drawPolygon()
                                     }
