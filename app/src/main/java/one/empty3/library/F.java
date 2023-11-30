@@ -20,7 +20,7 @@
 
 package one.empty3.library;
 
-import one.empty3.apps.tree.altree.*;
+import one.empty3.library1.tree.*;
 
 public class F {
     /*

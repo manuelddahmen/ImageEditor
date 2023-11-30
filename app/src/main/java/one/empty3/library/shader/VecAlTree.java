@@ -20,7 +20,7 @@
 
 package one.empty3.library.shader;
 
-import one.empty3.apps.tree.altree.*;
+import one.empty3.library1.tree.*;
 
 public class VecAlTree extends Vec {
     protected String formula;
@@ -53,7 +53,7 @@ public class VecAlTree extends Vec {
     public Double[] getValue() {
         try {
             return new Double[]{
-                    tree.eval()};
+                    tree.eval().getElem()};
         } catch (TreeNodeEvalException ex) {
             ex.printStackTrace();
             return new Double[]{0.0};

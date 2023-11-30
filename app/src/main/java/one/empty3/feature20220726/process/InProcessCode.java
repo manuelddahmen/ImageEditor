@@ -19,11 +19,9 @@
 
 package one.empty3.feature20220726.process;
 
-import one.empty3.apps.tree.altree.AlgebricTree;
-import one.empty3.io.ProcessFile;
-
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
+
+import one.empty3.io.ProcessFile;
 
 
 public class InProcessCode {

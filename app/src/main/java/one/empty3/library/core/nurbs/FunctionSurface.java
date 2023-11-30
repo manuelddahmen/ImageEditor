@@ -52,11 +52,13 @@
 
 package one.empty3.library.core.nurbs;
 
+import java.util.HashMap;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.apps.tree.altree.*;
-
-import java.util.HashMap;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 
 public class FunctionSurface extends ParametricSurface {
     private StructureMatrix<String> x = new StructureMatrix<>(0, String.class);
@@ -148,9 +150,9 @@ public class FunctionSurface extends ParametricSurface {
         try {
             hashMap.put("u", u);
             hashMap.put("v", v);
-            double evalX = treeX.eval();
-            double evalY = treeY.eval();
-            double evalZ = treeZ.eval();
+            double evalX = treeX.eval().getElem();
+            double evalY = treeY.eval().getElem();
+            double evalZ = treeZ.eval().getElem();
             return new Point3D(evalX, evalY, evalZ);
         } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException |
                  NullPointerException exceptione) {

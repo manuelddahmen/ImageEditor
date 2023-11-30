@@ -20,7 +20,7 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.apps.tree.altree.*;
+import one.empty3.library1.tree.*;
 
 public class DirectMaskFilter {
     PixM m1;
@@ -80,7 +80,7 @@ public class DirectMaskFilter {
 
                         tree.construct();
 
-                        double value = (double) (Double) (tree.eval());
+                        double value = (double) (Double) (tree.eval().getElem());
                         m3.setCompNo(c);
                         m3.set(i, j, value);
 

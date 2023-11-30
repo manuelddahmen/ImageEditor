@@ -30,9 +30,9 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.altree.AlgebricTree;
-import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -86,7 +86,7 @@ public class AlgebraicTreeTest {
                 System.out.println(algebricTree);
             try {
                 double result;
-                result = algebricTree.eval();
+                result = algebricTree.eval().getElem();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
@@ -121,7 +121,7 @@ public class AlgebraicTreeTest {
                 System.out.println(algebricTree);
             try {
                 double result;
-                result = algebricTree.eval();
+                result = algebricTree.eval().getElem();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)

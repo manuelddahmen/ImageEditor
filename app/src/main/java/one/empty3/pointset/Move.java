@@ -56,7 +56,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.lighting.Colors;
-import one.empty3.apps.tree.altree.*;
+import one.empty3.library1.tree.*;
 
 import java.util.HashMap;
 import java.util.function.Consumer;

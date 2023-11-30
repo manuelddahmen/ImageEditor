@@ -52,7 +52,7 @@
 
 package one.empty3.library.core.nurbs;
 
-import one.empty3.apps.tree.altree.*;
+import one.empty3.library1.tree.*;
 import one.empty3.library.StructureMatrix;
 
 /*__
@@ -88,7 +88,7 @@ public class FctXY extends Fct1D_1D {
     public double result(double input) {
         treeX.getParametersValues().put("x", input);
         try {
-            return treeX.eval();
+            return treeX.eval().getElem();
         } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
             e.printStackTrace();
         }
