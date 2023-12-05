@@ -143,8 +143,11 @@ class ProcessFileArrayAdapter() :
         buttonPropsToEffect.setOnClickListener {
             run {
                 val effectClassModele1 = holder.getEffectClass()
-                val processFile11: ProcessFile =
-                    Main2022.initListProcesses()[effectClassModele1] as ProcessFile
+                val processFile11 : ProcessFile
+                if(Main2022.listProcessClasses==null)
+                    processFile11 = Main2022.initListProcesses()[effectClassModele1] as ProcessFile
+                else
+                    processFile11 = Main2022.listProcessClasses[effectClassModele1]!!
                 val p = PixM(30, 30)
                 val runEffectsOnThumbnail: File? =
                     Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);

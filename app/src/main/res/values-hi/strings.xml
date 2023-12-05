@@ -1,4 +1,261 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
 <resources>
-    <string name="experimental">Experimental</string>
+    <string name='app_name'>चित्र विशेषता (FeatureApp)</string>
+    <string name='capture_button_alt'>कैप्चर करें</string>
+    <string name='switch_camera_button_alt'>कैमरा स्विच करें</string>
+    <string name='gallery_button_alt'>गैलरी</string>
+    <string name='back_button_alt'>वापस</string>
+    <string name='share_button_alt'>साझा करें</string>
+    <string name='share_hint'>का उपयोग करके साझा करें</string>
+    <string name='capture_mode_camera'>कैमरा</string>
+    <string name='capture_mode_hdr'>HDR</string>
+    <string name='capture_mode_night'>रात</string>
+    <string name='delete_button_alt'>हटाएं</string>
+    <string name='delete_dialog'>वर्तमान फ़ोटो हटाएं?</string>
+    <string name='delete_title'>पुष्टि करें</string>
+    <string name='hello_blank_fragment'>हैलो खाली टुकड़ा</string>
+    <string name='listProcess'>चैंप एन डेसस पोर एजाउटर को पूरा करने के लिए कक्षाओं की सूची बनाएं</string>
+    <string name='completeBox'>टेपज़ लेस प्रीमियर लेट्रेस डान्स ले चैंप टेक्स्ट पुइस सेलेक्शनर एल\'इफेट</string>
+    <string name='photo'>main.imageViewDefaultIcon</string>
+    <string name='effect'>प्रभाव</string>
+    <string name='filePath'>one.empty3.feature.app</string>
+    <string name='capturePhoto'>कैमरा</string>
+    <string name='choosePhoto'>गैलरी</string>
+    <string name='andex_file_selection_title'>मूवी</string>
+    <string name="browser_title_background_color"> अनुवाद योग्य = "झूठा">#000</string>
+    <string name="browser_title_foreground_color"> अनुवाद योग्य = "झूठा">#एफएफएफ</string>
+    <string name="browser_list_background_color"> अनुवाद योग्य = "झूठा">#एएए</string>
+    <string name='title_activity_camera_preview'>CameraPreview</string>
+    <string name='title_activity_fullscreen_camera_live_effect'>FullscreenActivityCameraLiveEffect
+     </string>
+    <string name='dummy_button'>डमी बटन</string>
+    <string name='dummy_content'>DUMMY\nCONTENT</string>
+    <string name='title_activity_choose_effect_list'>ChooseEffectList</string>
+    <!-- नेविगेशन के लिए टुकड़ों के लिए उपयोग की जाने वाली स्ट्रिंग्स -->
+    <string name='first_fragment_label'>पहला फ़्रैगमेंट</string>
+    <string name="second_fragment_label">दूसरा फ़्रैगमेंट</string>
+    <string name='next'>अगला</string>
+    <string name='previous'>पिछला</string>
+    
+    <string name='hello_first_fragment'>हैलो पहला टुकड़ा</string>
+    <string name="hello_second_fragment">हैलो दूसरा टुकड़ा। तर्क: %1$s</string>
+    <string name='camera_video_effect'>कैमरा</string>
+    <string name='file_view_effect'>Fichier ouvert</string>
+    <string name='choose_effects'>प्रभाव</string>
+    <string name='choose_movie'>मूवी चुनें</string>
+    <string name='image_preview_before_and_after_rendering_effects'>छवि पूर्वावलोकन, प्रभाव प्रस्तुत करने से पहले और बाद में
+     </string>
+    <string name='about'>के बारे में</string>
+    <string name='maxRes_1200'>1200.0</string>
+    <string name='maximum_resolution'>अधिकतम रिज़ॉल्यूशन</string>
+    <string name='share'>साझा करें</string>
+    <string name="beta">बीटा?</string>
+    <string name='donn_es_utilisateur_personnelles_et_sensibles'>डॉनीस यूटिलिसेटर पर्सनल्स और सेंसिबल्स Dans
+         एल\'एप्लिकेशन छवि विशेषता, लेस सेउल्स डोनीस ऑक्सक्वेल्स एल\'एप्लिकेशन एकेडे सोंट लेस फिचियर्स मल्टीमीडिया
+         उवर्ट पार ले बाउटन प्राइज डे व्यू या चॉइसिर अन फिचियर। आवेदन और अन्य की विशेषताएं
+         इवेंट डेस कॉपीज़ डे ट्रैवेल सोंट स्टॉकीज़ डेन्स ले रिपर्टोइर डेटा डे एल\'एप्लिकेशन एट फिगर डोनक सुर
+         ले सिस्टम डान्स अन फॉर्मेट ओउ ल\'ऑत्रे. एक भविष्य के संस्करण के साथ, आपको परिणामों के आधार पर भाग लेने की पूरी संभावना है
+         डी\'ऑट्रेस यूटिलिसेटर्स, इंटरनॉट्स। सीस डोन्नीज़ सोंट कंसिडेरेस पार नोस, डेहमेन मैनुअल एट एम्प्ली3.वन कॉम
+         निजी तौर पर कोई संग्रह नहीं है, कोई सेवा नहीं है।
+     </string>
+    <string name="privacy_policy_and_families_policy">
+        <![CDATA[DaTheWolf द्वारा ऐप्स के लिए गोपनीयता नीति और परिवार नीति - one.empty3 कैलकुलेटर (कैलकुलेट सरल) [एप्लिकेशन] छवि विशेषता [एप्लिकेशन] गोपनीयता नीति कैलकुलेटर (कैलकलेट सरल) [एप्लिकेशन] वयस्कों, बच्चों के लिए डिज़ाइन किया गया एक कैलकुलस एप्लिकेशन है और सारा परिवार. एप्लिकेशन विशेष रूप से बच्चों के लिए डिज़ाइन नहीं किया गया है। परिवार नीति एप्लिकेशन उपयोगकर्ता द्वारा प्रदान की गई जानकारी को तीसरे पक्ष के साथ साझा नहीं करता है; और एप्लिकेशन उपयोगकर्ता के भौतिक स्थान को अन्य उपयोगकर्ताओं के साथ साझा नहीं करता है। एप्लिकेशन विज्ञापन प्रदर्शित नहीं करता है एप्लिकेशन बच्चों से किसी भी व्यक्तिगत और संवेदनशील जानकारी के संग्रह का खुलासा नहीं करता है। उपयोगकर्ता डेटा को Google स्टोर पर अनाम डेटा के रूप में एकत्र किया जाता है। एप्लिकेशन पूरक डेटा एकत्र नहीं कर रहा है. ऐप का नाम: कैलकुलेटर (गणना सरल) संपर्क: DAHMEN मैनुअल (dathewolf@gmail.com>) [सड़क का पता]]]></string>
+    <string name="POLICY_URI">अनुवाद योग्य = "झूठा">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+    <string name='_1'>1</string>
+    <string name="_2">2</string>
+    <string name='_3'>3</string>
+    <string name="_4">4</string>
+    <string name='_5'>5</string>
+    <string name="_6">6</string>
+    <string name='_7'>7</string>
+    <string name='_8'>8</string>
+    <string name='_9'>9</string>
+    <string name='DOT'>.</string>
+    <string name='_0'>0</string>
+    <string name='save'>सहेजें</string>
+    <string name='title_activity_choose_effects_compose'>ChooseEffectsCompose</string>
+    <string name='edit_text_to_put_on_the_image'>छवि पर डालने के लिए टेक्स्ट संपादित करें</string>
+    <string name='accept_user_data_management_policy_and_privacy'>उपयोगकर्ता डेटा प्रबंधन नीति और गोपनीयता स्वीकार करें</string>
+    <string name='todo'>TODO</string>
+    <string name='ok'>ठीक है</string>
+    <string name='back_without_saving'>बिना सेव किए वापस</string>
+    <string name='tools'>उपकरण</string>
+    <string name='draw'>Draw</string>
+    <string name='draw_color'>रंग बनाएं</string>
+    <string name='select_rectangle'>चुनें</string>
+    <string name="draw_activity"> ड्रा</string>
+    <string name='unselect'>ज़ूम -</string>
+    
+    <string name='effect_name'>प्रभाव नाम</string>
+    <string name='remove'>निकालें</string>
+    <string name='apply_effects'>प्रभाव लागू करें</string>
+    <string name='effect_image_to_image'>छवि पर प्रभाव डालें</string>
+    <string name='title_activity_text'>TextActivity</string>
+    <string name='image_pour_l_ecriture_du_texte'>टेक्स्ट में इमेज डालें</string>
+    <string name='ecrire_du_texte_ici'></string>
+    <string name='apply'>लागू करें</string>
+    <string name='add_text'>पाठ</string>
+    <string name='draw_button_text'>चेहरा</string>
+    <string name='back_button_text_activity'>वापस</string>
+    <string name='grid_text_00'>00</string>
+    <string name='grid_text_01'>01</string>
+    <string name='grid_text_02'>02</string>
+    <string name='grid_text_10'>10</string>
+    <string name='grid_text_11'>11</string>
+    <string name='grid_text_12'>12</string>
+    <string name='preview_of_shapes'>आकृतियों का पूर्वावलोकन</string>
+    <string name='textDp'>48</string>
+    <string name='title_activity_image_files'>ImageFiles</string>
+    <string name='title_activity_color_chooser'>ColorChooser</string>
+    <string name='last_saved'>लोड सहेजा गया</string>
+    <string name="primary_pencil_color">प्राथमिक पेंसिल रंग</string>
+    <string name='copy' translatable='false'>कॉपी करें</string>
+    <string name="paste">पेस्ट करें</string>
+    <string name='EQUALS'>=</string>
+    <string name='ADD'>+</string>
+    <string name='MUL'>*</string>
+    <string name='sqrt'>sqrt</string>
+    <string name='SUB'>-</string>
+    <string name='DIV'>/</string>
+    <string name="EXP">^</string>
+    <string name='edit_text_here_or_by_push_numbers'>यहां या पुश नंबरों द्वारा टेक्स्ट संपादित करें</string>
+    <string name='result'>परिणाम</string>
+    <string name='about_and_policies'>गोपनीयता नीति के बारे में</string>
+    <string name='title_activity_formula_store'>फॉर्मूलास्टोर</string>
+    <string name='store_formula'>स्टोर फॉर्मूला</string>
+    <string name='add'>जोड़ें</string>
+    <string name='DEL'><![CDATA[<<<]]></string>
+    <string name='back'>वापस</string>
+    <string name='about_privacy'>गोपनीयता के बारे में</string>
+    <string name='dialog_message'>एक फ़ंक्शन चुनें</string>
+    <string name='dialog_title'>फ़ंक्शन पूर्वनिर्धारित</string>
+    <string name='cancel_button'>रद्द करें</string>
+    <string name='ok_button'>ठीक</string>
+    <string name='open_brace'>(</string>
+    <string name='close_brace'>)</string>
+    <string name='coma'>,</string>
+    <string name='fragment_function_ok'>ठीक</string>
+    <string name='fragment_function_cancel'>रद्द करें</string>
+    <string name='function_string'>फ़ंक्शन स्ट्रिंग</string>
+    <string name='back2'>वापस</string>
+    <string name='name'>नाम</string>
+    <string name="expression">अभिव्यक्ति</string>
+    <string name='write_formula'>सूत्र लिखें</string>
+    <string name='buttonCodeBefore'>पहले कोड जोड़ें</string>
+    <string name='buttonCodeAfter'>बाद में कोड जोड़ें</string>
+    <string name='backToGraphics'>ग्राफिक्स दृश्य पर वापस जाएं</string>
+    <string name='choose_shader_like'>मैथफॉर्म</string>
+    <string name="p_x_y_color"> बिंदुओं के लिए टाइप करें p(x,y) = Color(r, g, b)</string>
+    <string name='go_to_previous_activity'>पिछली गतिविधि पर जाएं</string>
+    <string name='title_activity_toolbar'>टूलबार</string>
+    <!--
+    इस स्ट्रिंग का उपयोग वर्गाकार उपकरणों के लिए किया जाता है और इसमें hello_world द्वारा ओवरराइड किया जाता है
+    गोल उपकरणों के लिए values-round/strings.xml।
+    -->
+    <string name='undo'>पूर्ववत करें</string>
+    <string name='redo'>फिर से करें</string>
+    <string name='preview_of_image'>छवि का पूर्वावलोकन</string>
+    <string name='application_of_formulas'>सूत्रों का अनुप्रयोग</string>
+    <string name='view'>देखें</string>
+    <string name="draw2"> ड्रा</string>
+    <string name='hello_world'>हैलो राउंड वर्ल्ड\!</string>
+    <string name='title_activity_main_compose_v2' translatable='false'>MainActivityComposeV2</string>
+    
+    <string name='button_current_file_is_null'><![CDATA[Pas de fichier image choisis.<br/>
+                     "चॉइसिससेज़ यूने इमेज डान्स लेस फिचियर्स डे<br/>" +
+                     "ले कॉपियर/कॉलर। ला फोन्क्शन ड्रॉ ने फोन्क्शनने पास<br/>" +
+                     "वास्तविकता.<br/>"]]></string>
+    <string name='title_activity_main'>MyCameraActivity</string>
+    <string name='new_layout_app'>नया ऐप लेआउट</string>
+    <string name='floating_action_button_to'>फ़्लोटिंग एक्शन बटन</string>
+    <string name='add_picture_file_from_directory'>निर्देशिका से जोड़ें</string>
+    <string name='add_picture_from_camera'>कैमरे से जोड़ें</string>
+    <string name='main'>मुख्य</string>
+    <string name='capture'>Capture</string>
+    <string name='subimage_pasted'>सबइमेज चिपकाया गया</string>
+    <string name='editProperties'>पूर्वावलोकन</string>
+    <string name='ok_calc'>ठीक है</string>
+    <string name='cancel'>रद्द करें</string>
+    <string name='title_activity_face_effect_list' translatable='false'>FaceEffectListActivity</string>
+    <string name='collapse'>संक्षिप्त करें</string>
+    <string name='extend'>विस्तार</string>
+    <string name='title_activity_visual_face_effects' translatable='false'>VisualFaceEffects</string>
+    
+    <string name="lorem_ipsum"> अनुवाद योग्य = "झूठा"</string>
+    <string name='draw_face_mask'>फेस मास्क बनाएं</string>
+    <string name='face_drawing_settings'>मॉडल संपादित करें</string>
+    <string name='back_to_main'>मुख्य पर वापस</string>
+    <string name='choose_image'>छवि चुनें</string>
+    <string name='choose_color'>रंग चुनें</string>
+    <string name="title_activity_picture_data"> अनुवाद योग्य = "झूठा"> चित्र डेटा गतिविधि</string>
+    <string name='apply_color'>रंग लागू करें</string>
+    <string name='apply_image'>छवि लागू करें</string>
+    <!--वरीयता शीर्षक -->
+    <string name='messages_header' translatable='false'>संदेश</string>
+    <string name='sync_header' translatable='false'>सिंक</string>
+    
+    <!-- संदेश प्राथमिकताएँ -->
+    <string name='signature_title' translatable='false'>आपका हस्ताक्षर</string>
+    <string name='reply_title' translatable='false'>डिफ़ॉल्ट उत्तर कार्रवाई</string>
+    
+    <!-- सिंक प्राथमिकताएँ -->
+    <string name='sync_title' translatable='false'>ईमेल को समय-समय पर सिंक करें</string>
+    <string name="attachment_title">आने वाले अटैचमेंट डाउनलोड करें</string>
+    <!--<string name=”attachment_summary_on” translatable=”false”>आने वाले ईमेल के लिए स्वचालित रूप से अटैचमेंट डाउनलोड करें</string>
+    <string name=”attachment_summary_off” translatable=”false”>केवल मैन्युअल रूप से अनुरोध करने पर ही अटैचमेंट डाउनलोड करें</string>
+    <string name="title_activity_settings_scrolling">सेटिंग्स</string>
+    -->
+    <string name="large_text"> अनुवाद योग्य = "झूठा">
+       </string>
+    <string name='action_settings' translatable='false'>सेटिंग्स</string>
+    <string name='refresh'>रीफ्रेश</string>
+    <string name='licence'>लाइसेंस</string>
+    <string name="licenses">गलत </string>
+    <string name='settings_of_application'>एप्लिकेशन की सेटिंग</string>
+    <string name="display_place">झूठा</string>
+    <string name='choose_a_file'>एक फ़ाइल चुनें</string>
+    <string name='title_activity_scrolling' translatable='false'>स्क्रॉलिंगएक्टिविटी</string>
+    <string name="title_activity_main_navigation">मुख्य गतिविधि नेविगेशन</string>
+    <string name='title_home' translatable='false'>होम</string>
+    <string name='title_dashboard' translatable='false'>डैशबोर्ड</string>
+    <string name='title_notifications' translatable='false'>सूचनाएं</string>
+    <string name='apply_to_all'>मूल छवि</string>
+    <string name='apply_model'>मॉडल लागू करें</string>
+    <string name='choose_model'>मॉडल चुनें</string>
+    <string name='load_model'>लोड ड्रॉ डेटा</string>
+    <string name='save_model'>ड्रा डेटा सहेजें</string>
+    <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">ले फिचियर ओवर्ट ओउ ले विज़ेज डिटेक्टे अस्तित्व</string>
+    <string name='face_attendez_que_la_d_tection_de_visage_soit_termin_e'>समाप्त होने वाले दृश्य की जांच में भाग लें।</string>
+    <string name='instructions'>a=1</string>
+    <string name='toggle_original_colors'>मूल रंग</string>
+    <string name='commentEffect' translatable='false'>!!</string>
+    <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
+    <string name='title_activity_login'>लॉगिनएक्टिविटी</string>
+    <string name='prompt_email'>ईमेल</string>
+    <string name='prompt_password'>पासवर्ड</string>
+    <string name='action_sign_in'>साइन इन करें या रजिस्टर करें</string>
+    <string name='action_sign_in_short'>साइन इन करें</string>
+    <string name="welcome"> "स्वागत है !"</string>
+    <string name='invalid_username'>मान्य उपयोगकर्ता नाम नहीं</string>
+    <string name='invalid_password'>पासवर्ड >5 अक्षर</string>
+    <string name='login_failed'>लॉगइन विफल</string>
+    <string name="experimental">"प्रयोग</string>
 </resources>

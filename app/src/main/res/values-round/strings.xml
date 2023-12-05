@@ -30,7 +30,7 @@
     <string name="main">Main</string>
     <string name="capture">Capture</string>
     <string name="subimage_pasted">Subimage pasted</string>
-    <string name="editProperties">Props</string>
+    <string name="editProperties">Preview</string>
     <string name="ok_calc">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="collapse">Collapse</string>
