@@ -53,12 +53,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.datatransport.BuildConfig;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -80,6 +78,8 @@ import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
+
+;
 
 public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
@@ -446,6 +446,14 @@ public class MyCameraActivity extends ActivitySuperClass {
             public void onClick(View view) {
                 Intent settingsIntent = new Intent(getApplicationContext(), SettingsScrollingActivity.class);
                 passParameters(settingsIntent);
+            }
+        });
+
+        Button crashButton = findViewById(R.id.CrashButton);
+        crashButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                throw new RuntimeException("Test Crash"); // Force a crash
             }
         });
     }

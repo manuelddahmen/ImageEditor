@@ -1,201 +1,446 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
-
-<resources>
-    <string name="app_name">הצגת תמונה (FeatureApp)</string>
-    <string name="capture_button_alt">ללכוד</string>
-    <string name="switch_camera_button_alt">שנה APN</string>
-    <string name="gallery_button_alt">הקודם</string>
-    <string name="back_button_alt">הקודם</string>
-    <string name="share_button_alt">שתף</string>
-    <string name="share_hint">שתף עם</string>
-    <string name="capture_mode_camera">תמונה</string>
-    <string name="capture_mode_hdr">HDR</string>
-    <string name="capture_mode_night">לילה</string>
-    <string name="delete_button_alt">מחק</string>
-    <string name="delete_dialog">למחוק את התמונה הנוכחית?</string>
-    <string name="delete_title">אשר</string>
-    <!-- TODO: הסר או שנה את טקסט מציין המיקום הזה -->
-    <string name="hello_blank_fragment">שלום קטע ריק</string>
-    <string name="listProcess">רשימת מחלקות סינון מלאה בשדה למטה להוספה</string>
-    <string name="completeBox">הקלד את האותיות הראשונות בשדה הטקסט ולאחר מכן בחר את האפקט</string>
-    <string name="photo">main.imageViewDefaultIcon</string>
-    <string name="effect">אפקט</string>
-    <string name="filePath">one.empty3.feature.app.maxSdk29.pro</string>
-    <string name="capturePhoto">מצלמה</string>
-    <string name="choosePhoto">גלריה</string>
-    <string name="andex_file_selection_title">סרטון</string>
-    <string name="browser_title_background_color" translatable="false">#000000</string>
-    <string name="browser_title_foreground_color" translatable="false">#FFFFFF</string>
-    <string name="browser_list_background_color" translatable="false">#AAAAAA</string>
-    <string name="title_activity_camera_preview">תצוגה מקדימה של מצלמה</string>
-    <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect</string>
-    <string name="dummy_button">לחצן דמה</string>
-    <string name="dummy_content">Beast\nתוכן</string>
-    <string name="title_activity_choose_effect_list">ChooseEffectList</string>
-    <!-- מחרוזות המשמשות לפרגמנטים לניווט -->
-    <string name="first_fragment_label">שבר ראשון</string>
-    <string name="second_fragment_label">שבר שני</string>
-    <string name="next">הבא</string>
-    <string name="previous">הקודם</string>
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">תכונות תמונה (FeatureApp)</string>
+      
+  <string name="capture_button_alt">לִצלם</string>
+      
+  <string name="switch_camera_button_alt">החלף מצלמה</string>
+      
+  <string name="gallery_button_alt">גלריה</string>
+      
+  <string name="back_button_alt">אחורה</string>
+      
+  <string name="share_button_alt">לַשתף</string>
+      
+  <string name="share_hint">שתף באמצעות</string>
+      
+  <string name="capture_mode_camera">מַצלֵמָה</string>
+      
+  <string name="capture_mode_hdr">HDR</string>
+      
+  <string name="capture_mode_night">לַיְלָה</string>
+      
+  <string name="delete_button_alt">לִמְחוֹק</string>
+      
+  <string name="delete_dialog">למחוק את התמונה הנוכחית?</string>
+      
+  <string name="delete_title">לְאַשֵׁר</string>
+      
+  <string name="hello_blank_fragment">שלום קטע ריק</string>
+      
+  <string name="listProcess">רשימה של שיעורי סינון מלאה בשדה למטה להוספה</string>
+      
+  <string name="completeBox">הקלד את האותיות הראשונות בשדה הטקסט ולאחר מכן בחר את האפקט</string>
+      
+  <string name="photo">main.imageViewDefaultIcon</string>
+      
+  <string name="effect">אפקט</string>
+      
+  <string name="filePath">one.empty3.feature.app</string>
+      
+  <string name="capturePhoto">מַצלֵמָה</string>
+      
+  <string name="choosePhoto">גלריה</string>
+      
+  <string name="andex_file_selection_title">סרט</string>
+      
+  <string name="browser_title_background_color" translatable="false">#000</string>
+      
+  <string name="browser_title_foreground_color" translatable="false">#FFF</string>
+      
+  <string name="browser_list_background_color" translatable="false">#AAA</string>
+      
+  <string name="title_activity_camera_preview">תצוגה מקדימה של מצלמה</string>
+      
+  <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect</string>
+      
+  <string name="dummy_button">כפתור דמה</string>
+      
+  <string name="dummy_content">תוכן &#13;\nדמה</string>
+      
+  <string name="title_activity_choose_effect_list">ChooseEffectList</string>
+      
+  <!-- Strings used for fragments for navigation -->
+      
+  <string name="first_fragment_label">קטע ראשון</string>
+      
+  <string name="second_fragment_label">קטע שני</string>
+      
+  <string name="next">הַבָּא</string>
+      
+  <string name="previous">קודם</string>
+      
     
-    <string name="hello_first_fragment">שלום הפרגמנט הראשון</string>
-    <string name="hello_second_fragment">שלום קטע שני. Arg: %1$s</string>
-    <string name="camera_video_effect">מצלמה</string>
-    <string name="file_view_effect">פתוח קובץ</string>
-    <string name="choose_effects">אפקטים</string>
-    <string name="choose_movie">בחר קובץ</string>
-    <string name="image_preview_before_and_after_rendering_effects">תצוגה מקדימה של תמונה, לפני ואחרי אפקטי עיבוד
-    </string>
-    <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
-    </string>
-    <string name="accept_user_data_management_policy_and_privacy">אשר את ניהול נתוני המשתמש ומדיניות הפרטיות
-    </string>
-    <string name="about_and_policies">על פרטיות</string>
-    <string name="back">הקודם</string>
-    <string name="about">אודות</string>
-    <string name="maxRes_1200">1200.0</string>>
-    <string name="maximum_resolution">רזולוציה מרבית</string>
-    <string name="share">שתף</string>
-    <string name="beta">ביטא?</string>
-    <string name="donn_es_utilisateur_personnelles_et_sensibles">נתוני משתמש אישיים ורגישים ב-
-        התמונה הכוללת את האפליקציה, הנתונים היחידים שהאפליקציה ניגשת אליהם הם קובצי מולטימדיה
-        נפתח על ידי כפתור הצילום או בחר קובץ. אלה מעובדים על ידי הבקשה ו
-        עותקי עבודה אפשריים מאוחסנים בספריית הנתונים של האפליקציה ולכן מופיעים ב-
-        המערכת בפורמט כזה או אחר. בגרסה עתידית ניתן יהיה לשתף את התוצאות שלך איתה
-        משתמשים אחרים, משתמשי אינטרנט. נתונים אלה נחשבים על ידינו, DAHMEN Manuel ב- empty3.one as
-        פרטיים ואינם נאספים או מעובדים על ידי השירותים שלנו.
-    </string>
-    <string name="privacy_policy_and_families_policy">
-        <![CDATA[מדיניות פרטיות ומדיניות משפחות עבור אפליקציות מאת DaTheWolf — מחשבון one.empty3 (מחשבון פשוט) [יישום] תמונה הכוללת [יישום] מדיניות פרטיות מחשבון (מחשבון פשוט) [יישום] הוא יישום חישוב המיועד למבוגרים, ילדים וכל המשפחה. האפליקציה אינה מיועדת במיוחד לילדים. אפליקציית מדיניות המשפחות אינה משתפת מידע שסופק על ידי המשתמש עם צדדים שלישיים; והאפליקציה אינה חולקת את המיקום הפיזי של המשתמש עם משתמשים אחרים. האפליקציה אינה מציגה מודעות האפליקציה אינה חושפת איסוף מידע אישי ורגיש כלשהו מילדים. נתוני משתמשים נאספים כנתונים אנונימיים ב-Google Store. האפליקציה לא אוספת נתונים נוספים. שם האפליקציה: מחשבון (מחשבון פשוט) איש קשר: DAHMEN Manuel (datewolf@gmail.com>) [כתובת רחוב]]]></string>
-    <string name="save">שמור</string>
-    <string name="title_activity_choose_effects_compose">ChooseEffectsCompose</string>
-    <string name="edit_text_to_put_on_the_image">ערוך את הטקסט לתצוגה</string>
-    <string name="todo">מטלה</string>
-    <string name="ok">בסדר</string>
-    <string name="back_without_saving">חזרה ללא שמירה</string>
-    <string name="tools">כלים</string>
-    <string name="draw">צייר</string>
-    <string name="draw_color">צייר צבע</string>
-    <string name="select_rectangle">בחר</string>
-    <string name="draw_activity">צייר</string>
-    <string name="unselect">זום-</string>
-    <string name="effect_name">שם המסנן</string>
-    <string name="remove">הסר</string>
-    <string name="add">הוסף</string>
-    <string name="apply_effects">החל מסננים</string>
-    <string name="effect_image_to_image">מסנן תמונה לתמונה</string>
-    <string name="title_activity_text">TextActivity</string>
-    <string name="image_pour_l_ecriture_du_texte">תמונה לכתיבת טקסט</string>
-    <string name="ecrire_du_texte_ici">כתוב כאן טקסט</string>
-    <string name="apply">החל</string>
-    <string name="add_text">טקסט</string>
-    <string name="draw_button_text">פנים</string>
-    <string name="back_button_text_activity">הקודם</string>
-    <string name="grid_text_00">00</string>
-    <string name="grid_text_01">01</string>
-    <string name="grid_text_02">02</string>
-    <string name="grid_text_10">10</string>
-    <string name="grid_text_11">11</string>
-    <string name="grid_text_12">12</string>
-    <string name="preview_of_shapes">תצוגה מקדימה של צורות</string>
-    <string name="textDp">48</string>
-    <string name="title_activity_image_files">קבצי תמונה</string>
-    <string name="title_activity_color_chooser">ColorChooser</string>
-    <string name="last_saved">טען שמורים</string>
-    <string name="primary_pencil_color">צבע מברשת</string>
-    <string name="copy">העתק</string>
-    <string name="paste">הדבק</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="DOT">.</string>
-    <string name="_0">0</string>
-    <string name="EQUALS">=</string>
-    <string name="ADD">+</string>
-    <string name="MUL">*</string>
-    <string name="sqrt">sqrt</string>
-    <string name="SUB">-</string>
-    <string name="DIV">/</string>
-    <string name="EXP">^</string>
-    <string name="edit_text_here_or_by_push_numbers">ערוך טקסט כאן או באמצעות מספרי דחיפה</string>
-    <string name="result">תוצאה</string>
-    <string name="title_activity_formula_store">FormulaStore</string>
-    <string name="store_formula">נוסחת חנות</string>
-    <string name="DEL">><![CDATA[<<<]]></string>
-    <string name="about_privacy">על פרטיות</string>
-    <string name="dialog_message">בחר פונקציה</string>
-    <string name="dialog_title">פונקציות מוגדרות מראש</string>
-    <string name="cancel_button">בטל</string>
-    <string name="ok_button">אישור</string>
-    <string name="open_brace">(</string>
-    <string name="close_brace">)</string>
-    <string name="coma">,</string>
-    <string name="fragment_function_ok">אישור</string>
-    <string name="fragment_function_cancel">בטל</string>
-    <string name="function_string">מחרוזת פונקציות</string>
-    <string name="back2">הקודם</string>
-    <string name="add_picture_file_from_directory">הוסף מהספרייה</string>
-    <string name="add_picture_from_camera">הוסף ממצלמה</string>
-    <string name="button">לחצן</string>
-    <string name="buttonCodeBfore">לחצן</string>
-    <string name="buttonCodeAfter">הוסף קוד לאחר</string>
+  <string name="hello_first_fragment">שלום קטע ראשון</string>
+      
+  <string name="hello_second_fragment">שלום קטע שני. טענה: %1$s</string>
+      
+  <string name="camera_video_effect">מַצלֵמָה</string>
+      
+  <string name="file_view_effect">קובץ פתוח</string>
+      
+  <string name="choose_effects">אפקטים</string>
+      
+  <string name="choose_movie">בחר סרט</string>
+      
+  <string name="image_preview_before_and_after_rendering_effects">תצוגה מקדימה של תמונה, לפני ואחרי שימוש באפקטים</string>
+      
+  <string name="about">אודות</string>
+      
+  <string name="maxRes_1200">1200.0</string>
+      
+  <string name="maximum_resolution">רזולוציה מקסימלית</string>
+      
+  <string name="share">לַשתף</string>
+      
+  <string name="beta">בטא?</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles">נתוני משתמש אישיים ורגישים בתמונה הכוללת את האפליקציה, הנתונים היחידים שהאפליקציה ניגשת אליהם הם קובצי המולטימדיה שנפתחו על ידי הצילום או בחר כפתור קובץ. אלה מעובדים על ידי האפליקציה ויתכן ועותקי עבודה מאוחסנים בספריית הנתונים של האפליקציה ולכן מופיעים במערכת בפורמט כזה או אחר.\n בגרסה עתידית ניתן יהיה לשתף את התוצאות שלך עם משתמשים אחרים ומשתמשי אינטרנט. נתונים אלה נחשבים פרטיים על ידינו, DAHMEN Manuel בכתובת empty3.one ואינם נאספים או מעובדים על ידי השירותים שלנו.</string>
+      
+  <string name="privacy_policy_and_families_policy">מדיניות פרטיות ומדיניות משפחות עבור אפליקציות מאת DaTheWolf — מחשבון one.empty3 (חישוב פשוט) [יישום] תמונה הכוללת [יישום] מדיניות פרטיות מחשבון (חישוב פשוט) [יישום] הוא יישום חישוב המיועד למבוגרים, לילדים ולכל המשפחה. היישום אינו מיועד במיוחד לילדים. אפליקציית מדיניות המשפחות אינה חולקת מידע שסופק על ידי המשתמש עם צדדים שלישיים; והאפליקציה אינה חולקת את המיקום הפיזי של המשתמש עם משתמשים אחרים. האפליקציה אינה מציגה מודעות האפליקציה אינה חושפת איסוף מידע אישי ורגיש כלשהו מילדים. נתוני משתמשים נאספים כנתונים אנונימיים ב-Google Store. האפליקציה אינה אוספת נתונים משלימים. שם האפליקציה: מחשבון (חישוב פשוט) איש קשר: DAHMEN Manuel (datewolf\@gmail.com&gt;) [כתובת רחוב]</string>
+      
+  <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="save">לשמור</string>
+      
+  <string name="title_activity_choose_effects_compose">בחרEffectsCompose</string>
+      
+  <string name="edit_text_to_put_on_the_image">ערוך טקסט כדי לשים על התמונה</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">קבל את מדיניות ניהול נתוני המשתמש ופרטיות</string>
+      
+  <string name="todo">TODO</string>
+      
+  <string name="ok" translatable="false">OK</string>
+      
+  <string name="back_without_saving">חזרה בלי לשמור</string>
+      
+  <string name="tools">כלים</string>
+      
+  <string name="draw">לצייר</string>
+      
+  <string name="draw_color">צייר צבע</string>
+      
+  <string name="select_rectangle">בחר</string>
+      
+  <string name="draw_activity">לצייר</string>
+      
+  <string name="unselect">תקריב -</string>
+      
     
-    <string name="backToGraphics">חזרה לתצוגת גרפיקה</string>
-    <string name="choose_shader_like">מתמטיקה</string>
-    <string name="p_x_y_color">סוג עבור נקודות p(x,y) = Color(r, g, b)</string>
-    <string name="go_to_previous_activity">עבור לפעילות קודמת</string>
-    <string name="undo">בטל</string>
-    <string name="redo">בצע מחדש</string>
-    <string name="preview_of_image">תצוגה מקדימה של תמונה</string>
-    <string name="application_of_formulas">יישום של נוסחאות</string>
-    <string name="view">מתמטיקה</string>
-    <string name="draw2">צייר</string>
-    <string name="hello_world">שלום עולם העגול!</string>
-    <string name="name">שם</string>
-    <string name="expression">ביטוי</string>
-    <string name="write_formula">כתוב נוסחה</string>
-    <string name="buttonCodeBefore">הוסף קוד לפני</string>
-    <string name="title_activity_toolbar">סרגל הכלים</string>
-    <string name="button_current_file_is_null">><![CDATA[המכשיר שלך ולאחר מכן נסה את האפקטים, הטקסט,<br/>]]></string>
-    <string name="title_activity_main">MyCameraActivity</string>
-    <string name="new_layout_app">פריסת אפליקציה חדשה</string>
-    <string name="floating_action_button_to">לחצן פעולה צף ל</string>
-    <string name="main">ראשי</string>
-    <string name="capture">ללכוד</string>
-    <string name="subimage_pasted">תת-תמונה הודבקה</string>
-    <string name="editProperties">אביזרים</string>
-    <string name="ok_calc">בסדר</string>
-    <string name="cancel">בטל</string>
-    <string name="collapse">כווץ</string>
-    <string name="extend">הארכה</string>
-    <string name="draw_face_mask">צייר מסכת פנים</string>
-    <string name="face_drawing_settings">ערוך מודל</string>
-    <string name="back_to_main">חזרה לראשי</string>
-    <string name="choose_image">בחר תמונה</string>
-    <string name="choose_color">בחר צבע</string>
-    <string name="apply_color">החל צבע</string>
-    <string name="apply_image">החל תמונה</string>
-    <string name="refresh">רענן</string>
-    <string name="licence">רישיון</string>
-    <string name="licenses" />
-    <string name="settings_of_application">הגדרות היישום</string>
-    <string name="display_place" />
-    <string name="choose_a_file">בחר קובץ</string>
-    <string name="apply_to_all">תמונה מקורית</string>
-    <string name="apply_model">החל מודל</string>
-    <string name="choose_model">בחר דגם</string>
-    <string name="load_model">טען נתוני ציור</string>
-    <string name="save_model">שמור נתוני ציור</string>
-    <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">הקובץ שנפתח או הפנים שזוהו קיימים</string>
-    <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">המתן עד להשלמת זיהוי הפנים.</string>
-    <string name="toggle_original_colors">צבעים מקוריים</string>
-    <string name="experimental">Experimental</string>
+  <string name="effect_name">שם האפקט</string>
+      
+  <string name="remove">לְהַסִיר</string>
+      
+  <string name="apply_effects">החל אפקטים</string>
+      
+  <string name="effect_image_to_image">אפקט תמונה לתמונה</string>
+      
+  <string name="title_activity_text">TextActivity</string>
+      
+  <string name="image_pour_l_ecriture_du_texte">תמונה pour l\'écriture du texte</string>
+      
+  <string name="ecrire_du_texte_ici">Ecrire du texte ici</string>
+      
+  <string name="apply">להגיש מועמדות</string>
+      
+  <string name="add_text">טֶקסט</string>
+      
+  <string name="draw_button_text">פָּנִים</string>
+      
+  <string name="back_button_text_activity">חזור</string>
+      
+  <string name="grid_text_00">00</string>
+      
+  <string name="grid_text_01">01</string>
+      
+  <string name="grid_text_02">02</string>
+      
+  <string name="grid_text_10">10</string>
+      
+  <string name="grid_text_11">11</string>
+      
+  <string name="grid_text_12">12</string>
+      
+  <string name="preview_of_shapes">תצוגה מקדימה של צורות</string>
+      
+  <string name="textDp">48</string>
+      
+  <string name="title_activity_image_files">ImageFiles</string>
+      
+  <string name="title_activity_color_chooser">ColorChooser</string>
+      
+  <string name="last_saved">הטעינה נשמרה</string>
+      
+  <string name="primary_pencil_color">צבע עיפרון ראשוני</string>
+      
+  <string name="copy" translatable="false">Copy</string>
+      
+  <string name="paste">לְהַדבִּיק</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">sqrt</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">ערוך טקסט כאן או באמצעות מספרי דחיפה</string>
+      
+  <string name="result">תוֹצָאָה</string>
+      
+  <string name="about_and_policies">אודות ומדיניות הפרטיות</string>
+      
+  <string name="title_activity_formula_store">FormulaStore</string>
+      
+  <string name="store_formula">נוסחת חנות</string>
+      
+  <string name="add">לְהוֹסִיף</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">חזור</string>
+      
+  <string name="about_privacy">לגבי פרטיות</string>
+      
+  <string name="dialog_message">בחר פונקציה</string>
+      
+  <string name="dialog_title">פונקציות מקדימות</string>
+      
+  <string name="cancel_button">לְבַטֵל</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">לְבַטֵל</string>
+      
+  <string name="function_string">מחרוזת פונקציה</string>
+      
+  <string name="back2">חזור</string>
+      
+  <string name="name">שֵׁם</string>
+      
+  <string name="expression">ביטוי</string>
+      
+  <string name="write_formula">כתוב נוסחה</string>
+      
+  <string name="buttonCodeBefore">הוסף קוד לפני</string>
+      
+  <string name="buttonCodeAfter">הוסף קוד לאחר מכן</string>
+      
+  <string name="backToGraphics">חזרה לתצוגת גרפיקה</string>
+      
+  <string name="choose_shader_like">MathForm</string>
+      
+  <string name="p_x_y_color">הקלד עבור נקודות p(x,y) = Color(r, g, b)</string>
+      
+  <string name="go_to_previous_activity">עבור לפעילות קודמת</string>
+      
+  <string name="title_activity_toolbar">סרגל כלים</string>
+      
+  <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+      
+  <string name="undo">לבטל</string>
+      
+  <string name="redo">לַעֲשׂוֹת שׁוּב</string>
+      
+  <string name="preview_of_image">תצוגה מקדימה של התמונה</string>
+      
+  <string name="application_of_formulas">יישום נוסחאות</string>
+      
+  <string name="view">נוף</string>
+      
+  <string name="draw2">לצייר</string>
+      
+  <string name="hello_world">שלום עולם עגול!</string>
+      
+  <string name="title_activity_main_compose_v2" translatable="false">MainActivityComposeV2</string>
+      
+  <string name="button_current_file_is_null">לא נבחר קובץ תמונה.&lt;br/&gt; + בחר תמונה מהקבצים + העתק/הדבק אותה..+ &lt;br/&gt;  פונקצית הציור לא עובדת&lt;br/&gt; + כרגע.&lt;br/&gt;</string>
+      
+  <string name="title_activity_main">MyCameraActivity</string>
+      
+  <string name="new_layout_app">פריסת אפליקציה חדשה</string>
+      
+  <string name="floating_action_button_to">לחצן פעולה צף ל</string>
+      
+  <string name="add_picture_file_from_directory">הוסף מהספרייה</string>
+      
+  <string name="add_picture_from_camera">הוסף מהמצלמה</string>
+      
+  <string name="main">רָאשִׁי</string>
+      
+  <string name="capture">לִצלם</string>
+      
+  <string name="subimage_pasted">תמונת משנה הודבקה</string>
+      
+  <string name="editProperties">תצוגה מקדימה</string>
+      
+  <string name="ok_calc">Ok</string>
+      
+  <string name="cancel">לְבַטֵל</string>
+      
+  <string name="title_activity_face_effect_list" translatable="false">FaceEffectListActivity</string>
+      
+  <string name="collapse">הִתמוֹטְטוּת</string>
+      
+  <string name="extend">לְהַאֲרִיך</string>
+      
+  <string name="title_activity_visual_face_effects" translatable="false">VisualFaceEffects</string>
+      
+    
+  <string name="lorem_ipsum" translatable="false">
+    </string>
+      
+  <string name="draw_face_mask">צייר מסכת פנים</string>
+      
+  <string name="face_drawing_settings">ערוך דגם</string>
+      
+  <string name="back_to_main">חזרה לראשי</string>
+      
+  <string name="choose_image">בחר תמונה</string>
+      
+  <string name="choose_color">בחרי צבע</string>
+      
+  <string name="title_activity_picture_data" translatable="false">PictureDataActivity</string>
+      
+  <string name="apply_color">להחיל צבע</string>
+      
+  <string name="apply_image">להחיל תמונה</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header" translatable="false">Messages</string>
+      
+  <string name="sync_header" translatable="false">Sync</string>
+      
+    
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title" translatable="false">Your signature</string>
+      
+  <string name="reply_title" translatable="false">Default reply action</string>
+      
+    
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title" translatable="false">Sync email periodically</string>
+      
+  <string name="attachment_title" translatable="false">Download incoming attachments</string>
+      
+  <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+      
+  <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+      
+  <string name="title_activity_settings_scrolling" translatable="false">Settings</string>
+      
+  <string name="large_text" translatable="false">
+    </string>
+      
+  <string name="action_settings" translatable="false">Settings</string>
+      
+  <string name="refresh">לְרַעֲנֵן</string>
+      
+  <string name="licence">רישיון</string>
+      
+  <string name="licenses" translatable="false"/>
+      
+  <string name="settings_of_application">הגדרות האפליקציה</string>
+      
+  <string name="display_place" translatable="false"/>
+      
+  <string name="choose_a_file">בחר קובץ</string>
+      
+  <string name="title_activity_scrolling" translatable="false">ScrollingActivity</string>
+      
+  <string name="title_activity_main_navigation" translatable="false">MainActivityNavigation</string>
+      
+  <string name="title_home" translatable="false">Home</string>
+      
+  <string name="title_dashboard" translatable="false">Dashboard</string>
+      
+  <string name="title_notifications" translatable="false">Notifications</string>
+      
+  <string name="apply_to_all">תמונה מקורית</string>
+      
+  <string name="apply_model">החל את הדגם</string>
+      
+  <string name="choose_model">בחר דגם</string>
+      
+  <string name="load_model">טען נתוני ציור</string>
+      
+  <string name="save_model">שמור נתוני ציור</string>
+      
+  <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">קיים קובץ פתוח או פנים שזוהו</string>
+      
+  <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">המתן לסיום זיהוי הפנים.</string>
+      
+  <string name="instructions" translatable="false">a=1</string>
+      
+  <string name="toggle_original_colors">צבעים מקוריים</string>
+      
+  <string name="commentEffect" translatable="false">!!</string>
+      
+  <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
+      
+  <string name="title_activity_login">LoginActivity</string>
+      
+  <string name="prompt_email">אימייל</string>
+      
+  <string name="prompt_password">סיסמה</string>
+      
+  <string name="action_sign_in">היכנס או הירשם</string>
+      
+  <string name="action_sign_in_short">להתחבר</string>
+      
+  <string name="welcome">ברוך הבא !</string>
+      
+  <string name="invalid_username">לא שם משתמש חוקי</string>
+      
+  <string name="invalid_password">הסיסמה חייבת להיות מעל 5 תווים</string>
+      
+  <string name="login_failed">ההתחברות נכשלה</string>
+      
+  <string name="experimental">נִסיוֹנִי</string>
+  
 </resources>

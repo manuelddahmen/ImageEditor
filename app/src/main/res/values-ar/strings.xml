@@ -146,7 +146,7 @@
     <string name="title_activity_toolbar">شريط الأدوات</string>
     <!--
     يتم استخدام هذه السلسلة للأجهزة المربعة ويتم تجاوزها بواسطة hello_world in
-    values-round/strings.xml للأجهزة المستديرة.
+    values-round/string_baks.xml للأجهزة المستديرة.
     -->
     <string name="undo">تراجع</string>
     <string name="redo">إعادة</string>

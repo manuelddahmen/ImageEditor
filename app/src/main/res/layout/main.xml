@@ -234,6 +234,14 @@
             android:id="@+id/About"
             android:layout_weight="0.25"
             />
+        <Button
+                android:layout_width="match_parent"
+                android:theme="@style/Theme.FeatureAppmain"
+                android:layout_height="48dp"
+                android:text="@string/licence"
+                android:id="@+id/CrashButton"
+                android:layout_weight="0.25"
+                />
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
