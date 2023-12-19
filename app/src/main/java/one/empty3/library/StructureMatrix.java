@@ -27,7 +27,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -133,14 +132,16 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
 
     public T getElem() {
 
-        if (dim == 0)
+        if (dim == 0) {
             if(data0d!=null) {
                 return this.data0d;
             } else {
-                System.out.println("null structureMatrix elem dim=0");
+                //System.out.println("null structureMatrix elem dim=0");
+                return null;
             }
+        }
         System.err.println("getElem dim= " + dim + "!=0");
-        return null;
+        throw new UnsupportedOperationException("Error");
     }
 
     public T getElem(int i) {
@@ -289,7 +290,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         result = 31 * result + data2d.hashCode();
         return result;
     }
-    @Deprecated
+
     public int getDim() {
         return dim;
     }
@@ -397,12 +398,16 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         data1d = Collections.synchronizedList(new ArrayList<>());
         switch (dim) {
             case 1:
+                data1d.clear();
+                int i=0;
                 for (T t : all) {
                     if (t != null)
-                        data1d.add(t);
+                        setElem(t, i);
                     else
                         throw new NullPointerException("setAll elem == null");
+                    i++;
                 }
+                break;
         }
     }
 
