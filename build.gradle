@@ -3,7 +3,7 @@ def kotlin_version = '1.9.21'
 
 
 buildscript {
-    ext.java_version = JavaVersion.VERSION_21
+    ext.java_version = JavaVersion.VERSION_20
     ext {
         //compose_ui_version = '1.4.3'
         roomVersion = '2.2.5'
