@@ -77,6 +77,7 @@ import java.util.UUID;
 import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.feature.app.maxSdk29.pro.ui.login.LoginActivity2;
 import one.empty3.feature20220726.PixM;
 
 ;
@@ -448,15 +449,14 @@ public class MyCameraActivity extends ActivitySuperClass {
                 passParameters(settingsIntent);
             }
         });
-/*
-        Button crashButton = findViewById(R.id.CrashButton);
-        crashButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                throw new RuntimeException("Test Crash"); // Force a crash
-            }
+
+        Button loginButton = findViewById(R.id.myButton);
+        loginButton.setOnClickListener(view -> {
+            Intent login = new Intent();
+            login.setClass(getApplicationContext(), LoginActivity2.class);
+            startActivity(login);
         });
-*/    }
+    }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
         if (currentFile != null) {
