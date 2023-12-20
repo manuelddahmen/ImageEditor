@@ -448,7 +448,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 passParameters(settingsIntent);
             }
         });
-
+/*
         Button crashButton = findViewById(R.id.CrashButton);
         crashButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -456,7 +456,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 throw new RuntimeException("Test Crash"); // Force a crash
             }
         });
-    }
+*/    }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
         if (currentFile != null) {

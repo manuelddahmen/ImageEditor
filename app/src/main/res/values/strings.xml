@@ -259,4 +259,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="experimental">Experimental</string>
     <string name="title_activity_login2">LoginActivity2</string>
+    <string name="my_button">My Button</string>
 </resources>

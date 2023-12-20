@@ -238,8 +238,8 @@
                 android:layout_width="match_parent"
                 android:theme="@style/Theme.FeatureAppmain"
                 android:layout_height="48dp"
-                android:text="@string/licence"
-                android:id="@+id/CrashButton"
+                android:text="@string/my_button"
+                android:id="@+id/myButton"
                 android:layout_weight="0.25"
                 />
 
