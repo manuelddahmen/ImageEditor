@@ -421,6 +421,6 @@
       
   <string name="toggle_original_colors">原色</string>
     <string name="experimental">Experimental</string>
-    <string name="my_button">My Button</string>
+    <string name="my_button">Login</string>
 
 </resources>

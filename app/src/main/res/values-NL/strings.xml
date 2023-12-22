@@ -197,5 +197,5 @@
     <string name="face_le_fichier_ouvert_ou_le_visage_d_tect_existe">Het bestaande beeld of het zichtbare gezicht</string>
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">Let op de gezichtsdetectie op het eindpunt.</string>
     <string name="toggle_original_colors">Originele kleuren</string>
-    <string name="my_button">My Button</string>
+    <string name="my_button">Login</string>
 </resources>

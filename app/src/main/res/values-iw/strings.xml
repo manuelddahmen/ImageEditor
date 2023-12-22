@@ -442,6 +442,6 @@
   <string name="login_failed">ההתחברות נכשלה</string>
       
   <string name="experimental">נִסיוֹנִי</string>
-  <string name="my_button">My Button</string>
+  <string name="my_button">Login</string>
 
 </resources>

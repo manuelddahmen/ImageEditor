@@ -17,7 +17,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 329702934
+def code = 329902934
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
@@ -282,6 +282,7 @@ dependencies {
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 }
 
 

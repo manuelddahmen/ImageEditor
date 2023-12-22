@@ -1,43 +1,40 @@
 package one.empty3.feature.app.maxSdk29.pro.data
 
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import one.empty3.feature.app.maxSdk29.pro.data.model.LoggedInUser
-import java.io.BufferedReader
+import one.empty3.feature.app.maxSdk29.pro.data.model.URLContentTask
 import java.io.IOException
-import java.io.InputStreamReader
-import java.net.URL
-import java.util.UUID
+
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
-
-    fun login(username: String, password: String): Result<LoggedInUser> {
-            val url: URL =
-                URL("https://empty3.app/agenda/src/android/login.pho?username=" + username + "&password=" + password)
+    fun login(username: String, password: String): Result<LoggedInUser> = runBlocking  {
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        try {
+            val url: String = "https://empty3.app/agenda/src/android/login.php?username=$username&password=$password"
             val sb = StringBuilder("")
-
-            try {
-                val `in`: BufferedReader
-                `in` = BufferedReader(
-                    InputStreamReader(
-                        url.openStream()
-                    )
-                )
-                var inputLine: String?
-                while (`in`.readLine().also { inputLine = it } != null) sb.append(inputLine)
-                `in`.close()
-                val ret = sb.toString()
-
-                if (ret.toInt().equals(1)) {
-                    val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Test User");
-                    return Result.Success(fakeUser)
-                }
-            } catch (ex: Throwable) {
-                return Result.Error(IOException("Error logging in" + ex.message))
+            val urlContentTask = URLContentTask()
+            val job = launch { // launch a new coroutine and keep a reference to its Job
+                val contentFromURL = urlContentTask.loadUrlAsString(url)
+                urlContentTask.ConvertToInt(contentFromURL)
+                println("Get HTTPS")
             }
-            return Result.Error(IOException("Error logging in"))
+            println("Job launched")
+            job.join() // wait until child coroutine completes
+            println("Job Done")
+            Result.Success(LoggedInUser.getCurrentUser())
+        } catch (ex: Throwable) {
+            System.err.println("Error logging in" + ex.message)
+            Result.Error(IOException("Error logging in" + ex.message))
         }
+        Result.Error(NullPointerException("Return null"))
+    }
 
     fun logout() {
         // TODO: revoke authentication

@@ -202,5 +202,5 @@
     <string name="face_attendez_que_la_d_tection_de_visage_soit_termin_e">انتظر حتى ينتهي اكتشاف الوجه.</string>
     <string name="toggle_original_colors">الألوان الأصلية</string>
     <string name="experimental">Experimental</string>
-    <string name="my_button">My Button</string>
+    <string name="my_button">Login</string>
 </resources>
