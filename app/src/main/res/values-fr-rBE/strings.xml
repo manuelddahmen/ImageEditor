@@ -217,4 +217,7 @@
     <string name="experimental">Experimental</string>
     <string name="my_button">Login</string>
     <string name="search_extra_var">Search extra variable</string>
+    <string name="work_with_photos">Work with photos</string>
+    <string name="wait">WAIT</string>
+    <string name="go">Go...</string>
 </resources>

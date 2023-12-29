@@ -120,6 +120,9 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         setContentView(R.layout.main);
 
+        Intent intent = getIntent();
+        String type = intent.getType();
+
         maxRes = new Utils().getMaxRes(this);
 
         imageView = this.findViewById(R.id.currentImageView);
@@ -1120,5 +1123,6 @@ public class MyCameraActivity extends ActivitySuperClass {
         if(currentFile==null)
             loadInstanceState();
     }
+
 }
 

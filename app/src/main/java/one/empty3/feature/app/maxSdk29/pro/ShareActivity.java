@@ -1,59 +1,93 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
+import android.content.ContentProviderClient;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.io.File;
+
+import javaAnd.awt.image.imageio.ImageIO;
 
 public class ShareActivity extends ActivitySuperClass {
+    private Button share;
+
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.get_share_activity);
+        share = findViewById(R.id.buttonWaitSharedImage);
         Intent intent = getIntent();
-        String action = intent.getAction();
         String type = intent.getType();
+        String action = intent.getAction();
+        if (type!=null &&type.startsWith("image/")) {
 
-        if (Intent.ACTION_SEND.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                handleSendText(intent); // Handle text being sent
-            } else if (type.startsWith("image/")) {
-                handleSendImage(intent); // Handle single image being sent
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intentMain = new Intent(getApplicationContext(), MyCameraActivity.class);
+
+                    passParameters(intentMain);
+
+                }
+            });
+            if (Intent.ACTION_SEND.equals(action)) {
+                if ("image/*".equals(type)) {
+                    // Handle received image
+                    Uri imageUri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
+                    handleSendImage(imageUri);
+                }
             }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(action) && type != null) {
-            if (type.startsWith("image/")) {
-                handleSendMultipleImages(intent); // Handle multiple images being sent
-            }
-        } else {
-            // Handle other intents, such as being started from the home screen
         }
+
     }
 
-    void handleSendText(Intent intent) {
-        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
-        if (sharedText != null) {
-            Intent text = new Intent(Intent.ACTION_PROCESS_TEXT);
-            text.setClass(this.getApplicationContext(), TextActivity.class);
-            Objects.requireNonNull(text.getExtras()).putCharArray("text", sharedText.toCharArray());
-            passParameters(text);
-        }
-    }
+    void handleSendImage(Uri imageUri) {
 
-    void handleSendImage(Intent intent) {
-        Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-        if (imageUri != null) {
-            Intent text = new Intent(Intent.ACTION_EDIT);
-            text.setClass(this.getApplicationContext(), MyCameraActivity.class);
-            passParameters(text);
-        }
-    }
+        ContentProviderClient r = getApplicationContext().getContentResolver().acquireContentProviderClient(imageUri);
 
-    void handleSendMultipleImages(Intent intent) {
-        ArrayList<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-        if (imageUris != null) {
-            Intent text = new Intent(Intent.ACTION_EDIT);
-            text.setClass(this.getApplicationContext(), MyCameraActivity.class);
-            passParameters(text);
+        Intent shareIntent = new Intent(getApplicationContext(), MyCameraActivity.class);
+
+            Bitmap bitmap = BitmapFactory.decodeStream( getRealPathFromURI(imageUri));
+
+            File imageViewPersistantFile = getImageViewPersistantFile();
+            ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
+            currentFile = imageViewPersistantFile;
+            currentBitmap = bitmap;
+            saveInstanceState();
+
+
+
+        // Create an intent to share the image
+        shareIntent.setDataAndType(imageUri, "image/jpg");
+        // Add a subject to the sharing message (optional)
+        share.setText(R.string.go);
+
+        passParameters(shareIntent);
+/*
+        startActivity(Intent.createChooser(shareIntent, "Share Image via"));
+        File currentFile1 = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
+        if (currentFile != null || currentFile1!=null) {
+            currentFile = currentFile1;
+            currentFile =
+                    new Utils().writeFile(this, BitmapFactory.decodeFile(currentFile1.getAbsolutePath()),
+                            getImageViewPersistantFile(), currentFile1, 0, true);
+
+            Intent intent2 = new Intent(getApplicationContext(), MyCameraActivity.class);
+            intent2.putExtra("currentFile", currentFile);
+            intent2.putExtra("data", currentFile );
+            intent2.putExtra(Intent.EXTRA_STREAM, currentFile.getAbsolutePath());
+            intent2.setDataAndType(Uri.fromFile(currentFile1), "image/jpg");
+            startActivity(intent2);
+
+            Toast.makeText(getApplicationContext(), "Go home and load image...", Toast.LENGTH_LONG).show();
         }
+*/
     }
 }

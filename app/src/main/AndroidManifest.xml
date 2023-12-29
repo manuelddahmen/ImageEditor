@@ -47,11 +47,8 @@
                 android:exported="false"
                 android:label="@string/title_activity_login2"
                 />
-        <activity
-                android:name=".ui.login.LoginActivity"
-                android:exported="false"
-                android:label="@string/title_activity_login"
-                /> <!-- Trigger Google Play services to install the backported photo picker module. -->
+        
+         <!-- Trigger Google Play services to install the backported photo picker module. -->
         <property
                 android:name=".REQUIRE_SECURE_ENV"
                 android:value="1"
@@ -154,8 +151,10 @@
                 >
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
-                
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <data android:mimeType="image/jpg"/>
             </intent-filter>
             <!--
               <intent-filter
@@ -238,19 +237,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShareActivity"
-                android:exported="false">
+                android:exported="true"
+                android:hardwareAccelerated="true"
+                android:label="@string/work_with_photos"
+                android:theme="@style/Theme.FeatureAppmain"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="image/*" />
             </intent-filter>

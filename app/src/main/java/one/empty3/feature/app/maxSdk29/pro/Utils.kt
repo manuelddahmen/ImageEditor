@@ -419,14 +419,15 @@ class Utils {
             return intent.extras?.get("data") as File
         if (intent.data != null && intent.data is Uri)
             return intent.data!!.getPath()?.let { File(it) }
-        if (intent.data != null && intent.data is File)
+        if (intent.data != null) {
             return intent.data as File
+        }
         if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is File))
             return (intent.extras?.get("currentFile") as File)
         if (intent.hasExtra("currentFile") && (intent.extras?.get("currentFile") is String))
             return File(intent.extras?.get("currentFile") as String)
-        if (intent.data != null && intent.data is File)
-            return intent.data as File
+        if (intent.data != null)
+            return intent.data?.toFile()
         return null
     }
 
@@ -638,44 +639,60 @@ class Utils {
         }
         return null
     }
-/*
-    private lateinit var referrerClient: InstallReferrerClient
 
-    fun installReferrer(activity: ActivitySuperClass) {
-        try {
-            this.referrerClient =
-                InstallReferrerClient.newBuilder(activity.applicationContext).build()
-            this.referrerClient.startConnection(object : InstallReferrerStateListener {
+    fun getIntentFile(intent: Intent): File? {
 
-                override fun onInstallReferrerSetupFinished(responseCode: Int) {
-                    when (responseCode) {
-                        InstallReferrerResponse.OK -> {
-                            // Connection established.
-                            System.out.println("Connection established with InstallReferrer.")
-                        }
+        if (intent.hasExtra(Intent.EXTRA_STREAM))
+            return (intent.extras!!.get(Intent.EXTRA_STREAM) as Uri).toFile()
+        if (intent.hasExtra("data") && intent.extras!!.get("data") is File)
+            return intent.extras?.get("data") as File
+        if (intent.data != null && intent.data is Uri)
+            return intent.data!!.getPath()?.let { File(it) }!!
+        if (intent.data != null) {
+            return intent.data as File
+        }
+        if (intent.data != null)
+            return intent.data?.toFile()!!
+        return null
+    }
+    /*
+        private lateinit var referrerClient: InstallReferrerClient
 
-                        InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
-                            // API not available on the current Play Store app.
-                            System.err.println("Connection not established with InstallReferrer : API not available")
-                        }
+        fun installReferrer(activity: ActivitySuperClass) {
+            try {
+                this.referrerClient =
+                    InstallReferrerClient.newBuilder(activity.applicationContext).build()
+                this.referrerClient.startConnection(object : InstallReferrerStateListener {
 
-                        InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
-                            // Connection couldn't be established.
-                            System.err.println("Connection not established with InstallReferrer : Service Unavailable")
+                    override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                        when (responseCode) {
+                            InstallReferrerResponse.OK -> {
+                                // Connection established.
+                                System.out.println("Connection established with InstallReferrer.")
+                            }
+
+                            InstallReferrerResponse.FEATURE_NOT_SUPPORTED -> {
+                                // API not available on the current Play Store app.
+                                System.err.println("Connection not established with InstallReferrer : API not available")
+                            }
+
+                            InstallReferrerResponse.SERVICE_UNAVAILABLE -> {
+                                // Connection couldn't be established.
+                                System.err.println("Connection not established with InstallReferrer : Service Unavailable")
+                            }
                         }
                     }
-                }
 
-                override fun onInstallReferrerServiceDisconnected() {
-                    // Try to restart the connection on the next request to
-                    // Google Play by calling the startConnection() method.
-                }
-            })
+                    override fun onInstallReferrerServiceDisconnected() {
+                        // Try to restart the connection on the next request to
+                        // Google Play by calling the startConnection() method.
+                    }
+                })
 
-        } catch (re : RuntimeException) {
-            re.printStackTrace()
+            } catch (re : RuntimeException) {
+                re.printStackTrace()
+            }
         }
-    }
-*/
+    */
 }
 
