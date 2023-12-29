@@ -99,7 +99,7 @@
       
   <string name="privacy_policy_and_families_policy">DaTheWolf 应用程序的隐私政策和家庭政策 — one.empty3 计算器 (calculette simple) [应用程序] 图像特色 [应用程序] 隐私政策 计算器 (calculette simple) [应用程序] 是一款专为成人、儿童和所有家庭设计的微积分应用程序。应用程序并不是专门为儿童设计的。家庭政策申请不会与第三方共享用户提供的信息；并且应用程序不会与其他用户共享用户的物理位置。应用程序不显示广告应用程序不会泄露儿童的任何个人和敏感信息的收集。用户数据在 Google 商店中作为匿名数据收集。应用程序不收集补充数据。应用程序名称：计算器 (calculette simple) 联系人：DAHMEN Manuel (dathewolf\@gmail.com&gt;) [街道地址]</string>
       
-  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="_1">1</string>
       
@@ -422,5 +422,6 @@
   <string name="toggle_original_colors">原色</string>
     <string name="experimental">Experimental</string>
     <string name="my_button">Login</string>
+    <string name="search_extra_var">Search extra variable</string>
 
 </resources>

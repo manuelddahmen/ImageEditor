@@ -237,7 +237,24 @@
                 <data android:path="/*.*" />
             </intent-filter>
         </activity>
-        
+        <activity android:name=".ShareActivity"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
         <provider
                 android:name=".MyFileProvider"
                 android:authorities="one.empty3.feature.app.maxSdk29.pro.MyFileProvider"

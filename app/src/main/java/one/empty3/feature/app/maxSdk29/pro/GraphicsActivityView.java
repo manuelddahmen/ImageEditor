@@ -53,6 +53,8 @@ public class GraphicsActivityView extends ActivitySuperClass {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getParameters(getIntent());
+
         setContentView(R.layout.graphics_view);
 
         stringDoubleHashMap = new HashMap<>();

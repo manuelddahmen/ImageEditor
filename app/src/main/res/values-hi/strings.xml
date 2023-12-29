@@ -78,7 +78,7 @@
      </string>
     <string name="privacy_policy_and_families_policy">
         <![CDATA[DaTheWolf द्वारा ऐप्स के लिए गोपनीयता नीति और परिवार नीति - one.empty3 कैलकुलेटर (कैलकुलेट सरल) [एप्लिकेशन] छवि विशेषता [एप्लिकेशन] गोपनीयता नीति कैलकुलेटर (कैलकलेट सरल) [एप्लिकेशन] वयस्कों, बच्चों के लिए डिज़ाइन किया गया एक कैलकुलस एप्लिकेशन है और सारा परिवार. एप्लिकेशन विशेष रूप से बच्चों के लिए डिज़ाइन नहीं किया गया है। परिवार नीति एप्लिकेशन उपयोगकर्ता द्वारा प्रदान की गई जानकारी को तीसरे पक्ष के साथ साझा नहीं करता है; और एप्लिकेशन उपयोगकर्ता के भौतिक स्थान को अन्य उपयोगकर्ताओं के साथ साझा नहीं करता है। एप्लिकेशन विज्ञापन प्रदर्शित नहीं करता है एप्लिकेशन बच्चों से किसी भी व्यक्तिगत और संवेदनशील जानकारी के संग्रह का खुलासा नहीं करता है। उपयोगकर्ता डेटा को Google स्टोर पर अनाम डेटा के रूप में एकत्र किया जाता है। एप्लिकेशन पूरक डेटा एकत्र नहीं कर रहा है. ऐप का नाम: कैलकुलेटर (गणना सरल) संपर्क: DAHMEN मैनुअल (dathewolf@gmail.com>) [सड़क का पता]]]></string>
-    <string name="POLICY_URI">अनुवाद योग्य = "झूठा">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+    <string name="POLICY_URI">अनुवाद योग्य = "झूठा">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
     <string name='_1'>1</string>
     <string name="_2">2</string>
     <string name='_3'>3</string>
@@ -259,4 +259,5 @@
     <string name='login_failed'>लॉगइन विफल</string>
     <string name="experimental">"प्रयोग</string>
     <string name="my_button">Login</string>
+    <string name="search_extra_var">Search extra variable</string>
 </resources>

@@ -99,7 +99,7 @@
       
   <string name="privacy_policy_and_families_policy">מדיניות פרטיות ומדיניות משפחות עבור אפליקציות מאת DaTheWolf — מחשבון one.empty3 (חישוב פשוט) [יישום] תמונה הכוללת [יישום] מדיניות פרטיות מחשבון (חישוב פשוט) [יישום] הוא יישום חישוב המיועד למבוגרים, לילדים ולכל המשפחה. היישום אינו מיועד במיוחד לילדים. אפליקציית מדיניות המשפחות אינה חולקת מידע שסופק על ידי המשתמש עם צדדים שלישיים; והאפליקציה אינה חולקת את המיקום הפיזי של המשתמש עם משתמשים אחרים. האפליקציה אינה מציגה מודעות האפליקציה אינה חושפת איסוף מידע אישי ורגיש כלשהו מילדים. נתוני משתמשים נאספים כנתונים אנונימיים ב-Google Store. האפליקציה אינה אוספת נתונים משלימים. שם האפליקציה: מחשבון (חישוב פשוט) איש קשר: DAHMEN Manuel (datewolf\@gmail.com&gt;) [כתובת רחוב]</string>
       
-  <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+  <string name="POLICY_URI" translatable="false">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="_1">1</string>
       
@@ -443,5 +443,6 @@
       
   <string name="experimental">נִסיוֹנִי</string>
   <string name="my_button">Login</string>
+    <string name="search_extra_var">Search extra variable</string>
 
 </resources>

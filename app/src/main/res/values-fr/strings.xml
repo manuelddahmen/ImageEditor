@@ -64,7 +64,7 @@
     <string name="choose_movie">Choisir un fichier</string>
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
-    <string name="POLICY_URI" translatable="false">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html
+    <string name="POLICY_URI" translatable="false">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html
     </string>
     <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion de données d\'utilisateur et de vie privée
     </string>
@@ -216,4 +216,5 @@
     <string name="toggle_original_colors">Original colors</string>
     <string name="experimental">Experimental</string>
     <string name="my_button">Login</string>
+    <string name="search_extra_var">Search extra variable</string>
 </resources>

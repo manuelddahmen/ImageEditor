@@ -59,4 +59,5 @@
     <string name="toggle_original_colors">Original colors</string>
     <string name="experimental">Experimental</string>
     <string name="my_button">Login</string>
+    <string name="search_extra_var">Search extra variable</string>
 </resources>

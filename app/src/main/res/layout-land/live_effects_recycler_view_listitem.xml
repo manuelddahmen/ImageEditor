@@ -24,45 +24,40 @@
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="0.3">
         <androidx.appcompat.widget.AppCompatButton
-                android:autofillHints=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/effectPreview" android:layout_weight="0.3"
                 />
         <androidx.appcompat.widget.AppCompatButton
-                android:autofillHints=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/effectDetails" android:layout_weight="0.3"
                 />
     
 </LinearLayout>
-   <LinearLayout android:orientation="horizontal"
-           android:layout_width="match_parent"
-           android:layout_height="48dp">
+   <androidx.appcompat.widget.LinearLayoutCompat android:orientation="horizontal"
+           android:layout_width="wrap_content"
+           android:layout_height="48dp"
+           android:layout_weight="1.0">
        <androidx.appcompat.widget.AppCompatButton
                android:id="@+id/nextVariable"
                android:layout_width="wrap_content"
-               android:autofillHints=""
                android:layout_height="wrap_content"
-               android:layout_weight="0.4"
-               android:labelFor="@id/filterVariable"
            android:text="@string/search_extra_var">
            
        </androidx.appcompat.widget.AppCompatButton>
-      <EditText android:id="@+id/filterVariable"
+      <androidx.appcompat.widget.AppCompatEditText android:id="@+id/filterVariable"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0.6"
               android:text="@string/maxRes_1200"
-              android:labelFor="@id/effectDetails"
               android:autofillHints="Enter a value for this variable"
-              android:inputType="text"
+              android:inputType=""
               />
-   </LinearLayout>
+   </androidx.appcompat.widget.LinearLayoutCompat>
     <include layout="@layout/apply_effect_view" />
 </androidx.appcompat.widget.LinearLayoutCompat>
