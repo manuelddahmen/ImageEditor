@@ -50,6 +50,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
+import java.io.InputStream
 import java.io.OutputStream
 import java.util.UUID
 import kotlin.math.max
@@ -79,11 +80,15 @@ class Utils {
 
         activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath.toString()
         val dir1 = File(dirName1)
-        var file1 = File(dirName1 + File.separator + name2 +"-"
-                +UUID.randomUUID()+ ".jpg")
+        var file1 = File(
+            dirName1 + File.separator + name2 + "-"
+                    + UUID.randomUUID() + ".jpg"
+        )
         val dir2 = File(dirName2)
-        var file2 = File(dirName2 + File.separator + name2 +"-"
-                +UUID.randomUUID()+ ".jpg")
+        var file2 = File(
+            dirName2 + File.separator + name2 + "-"
+                    + UUID.randomUUID() + ".jpg"
+        )
         val uriSavedImage = Uri.fromFile(file2)
         if (!dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created \$dir1" + file1.absolutePath)
@@ -98,17 +103,17 @@ class Utils {
         val defaultSharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
 
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
+        val floatStr: String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
-        if(floatStr!=null) {
+        if (floatStr != null) {
             try {
                 maxRes = floatStr.toFloat().toInt()
 
-                System.out.println("maxRes = "+maxRes)
+                System.out.println("maxRes = " + maxRes)
 
                 return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
+            } catch (e: java.lang.RuntimeException) {
+                println("Error casting maxRes" + floatStr.javaClass)
             }
         }
         return maxRes
@@ -119,7 +124,7 @@ class Utils {
     }
 
     fun getMaxRes(activitySuperClass: ActivitySuperClass): Int {
-        if(activitySuperClass==null || activitySuperClass.applicationContext==null)
+        if (activitySuperClass == null || activitySuperClass.applicationContext == null)
             return ActivitySuperClass.MAXRES_DEFAULT
         return getMaxRes(activitySuperClass.applicationContext)
     }
@@ -144,7 +149,7 @@ class Utils {
                     (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
                     true
                 )
-            } catch (ex :  RuntimeException) {
+            } catch (ex: RuntimeException) {
                 try {
                     ex.printStackTrace()
                     bitmap2 = Bitmap.createScaledBitmap(
@@ -153,9 +158,10 @@ class Utils {
                         (1.0 * maxImageSize * getMaxRes(fragment)).toInt(),
                         true
                     )
-                } catch (ex :  RuntimeException) {
+                } catch (ex: RuntimeException) {
                     ex.printStackTrace()
-                    bitmap2 = Bitmap.createScaledBitmap(bitmap, 400, 400, true
+                    bitmap2 = Bitmap.createScaledBitmap(
+                        bitmap, 400, 400, true
                     )
 
                 }
@@ -232,7 +238,7 @@ class Utils {
                     (1.0 * maxImageSize / scaledBy * bitmap.height).toInt(),
                     true
                 )
-            } catch (ex :  RuntimeException) {
+            } catch (ex: RuntimeException) {
                 try {
                     ex.printStackTrace()
                     bitmap2 = Bitmap.createScaledBitmap(
@@ -241,9 +247,10 @@ class Utils {
                         (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
                         true
                     )
-                } catch (ex :  RuntimeException) {
+                } catch (ex: RuntimeException) {
                     ex.printStackTrace()
-                    bitmap2 = Bitmap.createScaledBitmap(bitmap, 400, 400, true
+                    bitmap2 = Bitmap.createScaledBitmap(
+                        bitmap, 400, 400, true
                     )
 
                 }
@@ -298,27 +305,31 @@ class Utils {
             throw NullPointerException("No file written, Utils.writePhoto");
         }
     }
+
     public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
         val defaultSharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(fragment.requireContext())
 
-        val floatStr : String? = defaultSharedPreferences.getString("maxRes", "0.0")
+        val floatStr: String? = defaultSharedPreferences.getString("maxRes", "0.0")
 
-        if(floatStr!=null) {
+        if (floatStr != null) {
             try {
                 maxRes = floatStr.toFloat().toInt()
 
-                System.out.println("maxRes = "+maxRes)
+                System.out.println("maxRes = " + maxRes)
 
                 return maxRes
-            } catch (e : java.lang.RuntimeException) {
-                println("Error casting maxRes"+floatStr.javaClass)
+            } catch (e: java.lang.RuntimeException) {
+                println("Error casting maxRes" + floatStr.javaClass)
             }
         }
 
-        if(fragment!=null && fragment.requireActivity() != null) {
+        if (fragment != null && fragment.requireActivity() != null) {
             maxRes =
-                fragment!!.requireActivity().intent.getIntExtra("maxRes", ActivitySuperClass.MAXRES_DEFAULT)
+                fragment!!.requireActivity().intent.getIntExtra(
+                    "maxRes",
+                    ActivitySuperClass.MAXRES_DEFAULT
+                )
         }
         if (maxRes == -1) {
             if (savedInstanceState == null ||
@@ -337,13 +348,14 @@ class Utils {
         println("maxRes = $maxRes")
         return maxRes;
     }
+
     public fun setImageView(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
         var currentFile: File? = null
         val intent: Intent = activity.intent
         val data = intent?.data
         currentFile = data?.toFile()
         if (data == null) {
-            currentFile = getCurrentFile(intent = intent)
+            currentFile = getCurrentFile(intent = intent, activity)
         }
         if (currentFile == null) {
             currentFile = activity.getCurrentFile()
@@ -361,6 +373,42 @@ class Utils {
             }
         }
 
+        return currentFile
+    }
+
+    public fun setImageView2(activity: ActivitySuperClass, imageView: ImageViewSelection): File? {
+        var currentFile: File? = getCurrentFile(intent = activity.intent, activity)
+        val intent: Intent = activity.intent
+        val extras = intent.extras
+        if(extras!=null) {
+            val data: Uri = extras.get (Intent.EXTRA_STREAM) as Uri
+            if(data!=null) {
+                var inputStream: InputStream? = null
+                inputStream = activity.getRealPathFromURI(data)
+                val bitmapDecodeStream: Bitmap = BitmapFactory.decodeStream(inputStream)
+                currentFile = getFilesFile("imported-")
+                bitmapDecodeStream.compress(
+                    Bitmap.CompressFormat.JPEG, 100, FileOutputStream(currentFile)
+                )
+            }
+            if (data == null) {
+                    currentFile = getCurrentFile(intent = intent, activity)
+            }
+            if (currentFile == null) {
+                currentFile = activity.getCurrentFile()
+            }
+            System.err.println("set ImageView from  = $currentFile")
+
+            if (currentFile != null) {
+                val bi = ImageIO.read(currentFile)
+                if (bi != null) {
+                    val bitmap = bi.getBitmap()
+                    if (bitmap != null) {
+                        imageView.setImageBitmap2(bitmap)
+                    }
+                }
+            }
+        }
         return currentFile
     }
 
@@ -413,7 +461,7 @@ class Utils {
         }
     }
 
-    fun getCurrentFile(intent: Intent): File? {
+    fun getCurrentFile(intent: Intent, activity: ActivitySuperClass): File? {
 
         if (intent.hasExtra("data") && intent.extras!!.get("data") is File)
             return intent.extras?.get("data") as File
@@ -428,6 +476,24 @@ class Utils {
             return File(intent.extras?.get("currentFile") as String)
         if (intent.data != null)
             return intent.data?.toFile()
+        if (intent.extras?.get(Intent.EXTRA_STREAM) != null) {
+            try {
+                val file = File(intent.extras!!.get(Intent.EXTRA_STREAM)?.toString())
+                val realPathFromIntentData: InputStream = FileInputStream(file)
+                val writeFile = writeFile(
+                    activity,
+                    BitmapFactory.decodeStream(realPathFromIntentData),
+                    getFilesFile("imported-"),
+                    getFilesFile("imported-"),
+                    0,
+                    false
+                )
+                return writeFile
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                return null
+            }
+        }
         return null
     }
 
@@ -471,7 +537,7 @@ class Utils {
                         mBitmap.width, mBitmap.height
                     )
                 else
-                    cb =mBitmap.copy(Bitmap.Config.ARGB_8888, true)
+                    cb = mBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
                 val dim: Int = getMaxRes(activity)
                 if (imageView != null)

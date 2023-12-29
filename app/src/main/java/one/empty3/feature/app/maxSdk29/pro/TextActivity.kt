@@ -67,7 +67,7 @@ class TextActivity() : ActivitySuperClass() {
 
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
 
-        val currentFile1 = Utils().getCurrentFile(intent)
+        val currentFile1 = Utils().getCurrentFile(intent, this)
         if (currentFile1 != null && imageView!=null && currentFile1.exists()) {
             currentFile = currentFile1
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))

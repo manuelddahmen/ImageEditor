@@ -329,7 +329,7 @@ open class FragmentSuperClass : Fragment() {
 
     fun getParameters(from: Intent?) {
         val utils = Utils()
-        currentFile = utils.getCurrentFile(from!!)
+        currentFile = utils.getCurrentFile(from!!, this.activity2)
         maxRes = utils.getMaxRes(requireContext())
         utils.loadImageInImageView(activity2)
         utils.loadVarsMathImage(activity2, activity2.intent)

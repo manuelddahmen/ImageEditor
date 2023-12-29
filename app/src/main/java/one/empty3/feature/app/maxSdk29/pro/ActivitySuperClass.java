@@ -61,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.UUID;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
@@ -139,18 +140,23 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         String action = intent.getAction();
         String type = intent.getType();
 
-        if (Intent.ACTION_SEND.equals(action) && type != null) {
-            if ("text/plain".equals(type)) {
-                handleSendText(intent); // Handle text being sent
-            } else if (type.startsWith("image/")) {
-                handleSendImage(intent); // Handle single image being sent
+        getParameters(intent);
+
+
+        if(currentFile==null) {
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                if ("text/plain".equals(type)) {
+                    handleSendText(intent); // Handle text being sent
+                } else if (type.startsWith("image/")) {
+                    handleSendImage(intent); // Handle single image being sent
+                }
+            } else if (Intent.ACTION_SEND_MULTIPLE.equals(action) && type != null) {
+                if (type.startsWith("image/")) {
+                    handleSendMultipleImages(intent); // Handle multiple images being sent
+                }
+            } else {
+                // Handle other intents, such as being started from the home screen
             }
-        } else if (Intent.ACTION_SEND_MULTIPLE.equals(action) && type != null) {
-            if (type.startsWith("image/")) {
-                handleSendMultipleImages(intent); // Handle multiple images being sent
-            }
-        } else {
-            // Handle other intents, such as being started from the home screen
         }
         oneTapClient = Identity.getSignInClient(this);
         signInRequest = BeginSignInRequest.builder()
@@ -191,11 +197,15 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
         try {
             if (currentFile != null) {
+                Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile)).bitmap;
                 currentFile = new Utils().writePhoto(
-                        this, Objects.requireNonNull(ImageIO.read(currentFile)).bitmap, "reload");
+                        this, bitmap, "reload");
+                loadImage(new FileInputStream(currentFile), true);
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
         oneTapClient.beginSignIn(signInRequest)
                 .addOnSuccessListener(this, new OnSuccessListener<BeginSignInResult>() {
@@ -355,9 +365,12 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
                 }
             }
-            currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
+            currentFile1 = properties.getProperty("currentFile", (currentFile==null?null
+                    :currentFile.getAbsolutePath()));
             if (currentFile1 != null)
                 currentFile = new File(currentFile1);
+            else
+                currentFile = getImageViewPersistantFile();
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
@@ -392,11 +405,12 @@ public class ActivitySuperClass extends EmailPasswordActivity {
                 if (currentFile != null) {
                     properties.setProperty("currentFile", currentFile.getAbsolutePath());
                     File imageViewPersistantFile = currentFile;
-                    new Utils().writeFile(this,
+                    File file = new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
                                     new FileInputStream(currentFile)),
-                            Objects.requireNonNull(getImageViewPersistantFile()), getImageViewPersistantFile(),
+                            getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
+                    currentFile = file;
                 }
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -432,7 +446,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
     public void getParameters(Intent from) {
         Utils utils = new Utils();
-        currentFile = utils.getCurrentFile(from);
+        currentFile = utils.getCurrentFile(from, this);
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
@@ -481,9 +495,9 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         try {
             currentBitmap = null;
             if (imageView == null)
-                imageView = findViewById(R.id.imageViewSelection);
+                imageView = findViewById(R.id.currentImageView);
             if (imageView != null && currentFile != null)
-                new Utils().setImageView(this, imageView);
+                new Utils().setImageView2(this, imageView);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
@@ -499,6 +513,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
 
     public Bitmap loadImage(InputStream choose_directoryData, boolean isCurrentFile) {
+        imageView = findViewById(R.id.currentImageView);
         Bitmap photo = null;
         if (maxRes > 0) {
             System.err.println("FileInputStream" + choose_directoryData);
@@ -512,7 +527,8 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         }
         if (photo != null && isCurrentFile) {
             currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
-            new Utils().setImageView(this, imageView);
+            if(imageView!=null)
+                new Utils().setImageView(this, imageView);
             return photo;
         } else if (photo != null) {
             return photo;
@@ -619,11 +635,16 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
     void handleSendImage(Intent intent) {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-        if (imageUri != null) {
+ //       InputStream realPathFromURI = getRealPathFromURI(imageUri);
+        InputStream realPathFromURI = getRealPathFromURI(imageUri);
+        Bitmap bitmap = BitmapFactory.decodeStream(realPathFromURI);
+        File file = new Utils().writePhoto(this, bitmap, "imported-"+ UUID.randomUUID()+"--");
+        if (file != null && file.exists()) {
             // Update UI to reflect image being shared
-            setCurrentFile(new File(imageUri.toString()));
+            setCurrentFile(file);
             try {
-                loadImage(new FileInputStream(new File(imageUri.toString())), true);
+                InputStream realPathFromURIFile2 = new FileInputStream(file);
+                loadImage(realPathFromURIFile2, true);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
