@@ -406,7 +406,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             public void onClick(View v) {
                 if (currentFile != null) {
                     BufferedImage read = ImageIO.read(currentFile);
-                    if(read.getBitmap()!=null) {
+                    if(read!=null && read.getBitmap()!=null) {
                         new Utils().setImageView(imageView, read.getBitmap());
                     }
                     drawPointA = null;
@@ -533,15 +533,17 @@ public class MyCameraActivity extends ActivitySuperClass {
         return output;
     }
 
-
-    protected InputStream getRealPathFromIntentData(Intent file) {
-        try {
-            return getPathInput(file.getData());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//
+//    protected InputStream getRealPathFromIntentData(Intent file) {
+//        try {
+//            String realPathFromURIString = getRealPathFromURIString(file.getData());
+//            File file1 = new File(realPathFromURIString);
+//            return new FileInputStream(file1);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     public void toastButtonDisabled(View button) {
         if (currentFile == null) {
@@ -902,7 +904,11 @@ public class MyCameraActivity extends ActivitySuperClass {
         }
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_VIDEO_CHOOSER && resultCode == Activity.RESULT_OK) {
             InputStream choose_directoryData = null;
-            choose_directoryData = getRealPathFromIntentData(data);
+            try {
+                choose_directoryData = new FileInputStream(getRealPathFromURIString(data.getData()));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
 
             Drawable fromStream = AnimatedImageDrawable.createFromStream(choose_directoryData, "file" + UUID.randomUUID());
 
@@ -945,10 +951,11 @@ public class MyCameraActivity extends ActivitySuperClass {
             //AsyncTask<String, Void, Bitmap> execute = downloadImageTask.execute(getRealPathFromURI(data).toString());
 
             InputStream choose_directoryData = null;
-            choose_directoryData = getRealPathFromIntentData(data);
+            choose_directoryData = getRealPathFromIntentData2(data);
             if (choose_directoryData == null) {
                 try {
-                    choose_directoryData = new FileInputStream(data.getDataString());
+                    String choose_directoryDataFile = getRealPathFromURIString(data.getData());
+                    choose_directoryData = new FileInputStream(choose_directoryDataFile);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     return;

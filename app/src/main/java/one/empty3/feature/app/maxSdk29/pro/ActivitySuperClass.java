@@ -24,11 +24,13 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -114,7 +116,13 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         return input;
     }
 
-    protected InputStream getRealPathFromIntentData(Intent file) {
+    protected File getRealPathFromIntentData(Intent file) {
+        String realPathFromURIString = getRealPathFromURIString(file.getData());
+        if(realPathFromURIString==null)
+            realPathFromURIString = getRealPathFromURIString(file.getExtras().getParcelable(Intent.EXTRA_STREAM));
+        return new File(realPathFromURIString);
+    }
+    protected InputStream getRealPathFromIntentData2(Intent file) {
         try {
             return getPathInput(file.getData());
         } catch (FileNotFoundException e) {
@@ -122,7 +130,6 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         }
         return null;
     }
-
     protected InputStream getRealPathFromURI(Uri uri) {
         try {
             return getPathInput(uri);
@@ -404,13 +411,13 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             try {
                 if (currentFile != null) {
                     properties.setProperty("currentFile", currentFile.getAbsolutePath());
-                    File imageViewPersistantFile = currentFile;
                     File file = new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
                                     new FileInputStream(currentFile)),
                             getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
-                    currentFile = file;
+                    if(file!=null)
+                        currentFile = file;
                 }
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -668,5 +675,30 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             // Update UI to reflect multiple images being shared
 
         }
+    }
+    public String getRealPathFromURIString(Uri contentURI) {
+        String result;
+        Cursor cursor = getApplicationContext().getContentResolver().query(contentURI, null,
+                null, null, null);
+
+        if (cursor == null) { // Source is Dropbox or other similar local file
+            // path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            try {
+                int idx = cursor
+                        .getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                result = cursor.getString(idx);
+            } catch (Exception e) {
+               /* AppLog.handleException(ImageHelper.class.getName(), e);
+                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(
+                        R.string.error_get_image), Toast.LENGTH_SHORT).show();
+*/
+                result = "";
+            }
+            cursor.close();
+        }
+        return result;
     }
 }

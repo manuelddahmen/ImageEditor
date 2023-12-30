@@ -478,17 +478,21 @@ class Utils {
             return intent.data?.toFile()
         if (intent.extras?.get(Intent.EXTRA_STREAM) != null) {
             try {
-                val file = File(intent.extras!!.get(Intent.EXTRA_STREAM)?.toString())
-                val realPathFromIntentData: InputStream = FileInputStream(file)
-                val writeFile = writeFile(
-                    activity,
-                    BitmapFactory.decodeStream(realPathFromIntentData),
-                    getFilesFile("imported-"),
-                    getFilesFile("imported-"),
-                    0,
-                    false
-                )
+                val uri = intent.extras!!.get(Intent.EXTRA_STREAM) as Uri
+                val file = activity.getRealPathFromURIString(uri)
+                if(file!=null) {
+                    val realPathFromIntentData: InputStream = FileInputStream(file)
+                    val writeFile = writeFile(
+                        activity,
+                        BitmapFactory.decodeStream(realPathFromIntentData),
+                        getFilesFile("imported-"),
+                        getFilesFile("imported-"),
+                        0,
+                        false
+                    )
                 return writeFile
+                }
+
             } catch (ex: RuntimeException) {
                 ex.printStackTrace()
                 return null

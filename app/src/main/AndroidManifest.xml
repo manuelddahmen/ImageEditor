@@ -256,6 +256,26 @@
           
         </activity>
         <provider
+                android:name=".MyImageFileProvider"
+                android:authorities="one.empty3.feature.app.maxSdk29.pro.MyImageFileProvider"
+                android:exported="false"
+                android:grantUriPermissions="true"
+                >
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+                
+                <data
+                        android:mimeType="image/*"
+                        android:scheme="file"
+                        />
+            </intent-filter>
+            
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths_pictures"
+                    />
+        </provider>
+        <provider
                 android:name=".MyFileProvider"
                 android:authorities="one.empty3.feature.app.maxSdk29.pro.MyFileProvider"
                 android:exported="false"

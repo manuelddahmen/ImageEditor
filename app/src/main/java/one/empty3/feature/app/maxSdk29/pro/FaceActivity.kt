@@ -547,7 +547,7 @@ class FaceActivity : ActivitySuperClass() {
                     }
                 } else if (requestCode == OPEN_MODEL) {
                     try {
-                        val inputStream = getRealPathFromIntentData(result)
+                        val inputStream = getRealPathFromIntentData2(result)
                         //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =

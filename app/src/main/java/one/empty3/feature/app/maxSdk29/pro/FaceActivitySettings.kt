@@ -700,7 +700,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             result = data
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
             var choose_directoryData: InputStream? = null
-            choose_directoryData = getRealPathFromIntentData(data)
+            choose_directoryData = getRealPathFromIntentData2(data)
             if (choose_directoryData == null) {
                 choose_directoryData = try {
                     FileInputStream(data!!.dataString)
@@ -812,7 +812,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                     }
                 } else if (requestCode == OPEN_MODEL) {
                     try {
-                        val inputStream = getRealPathFromIntentData(result)
+                        val inputStream = getRealPathFromIntentData2(result)
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection2 =
                             GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
