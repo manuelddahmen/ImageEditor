@@ -50,7 +50,11 @@ public class ImageIO {
     }
 
     private static BufferedImage read(FileInputStream fileInputStream) {
-        return new BufferedImage(BitmapFactory.decodeStream(fileInputStream));
+        Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
+        if(bitmap!=null)
+            return new BufferedImage(bitmap);
+        else
+            return null;
     }
 
     public static boolean write(@NotNull BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {

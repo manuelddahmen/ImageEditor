@@ -218,4 +218,5 @@
     <string name="work_with_photos">Work with photos</string>
     <string name="wait">WAIT</string>
     <string name="go">Go...</string>
+    <string name="reference_to_file_that_does_t_exist_create_dummy_file">Reference to file that does\'t exist. Create dummy file</string>
 </resources>

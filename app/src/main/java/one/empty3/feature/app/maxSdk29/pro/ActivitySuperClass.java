@@ -27,6 +27,8 @@ import android.content.IntentSender;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -36,6 +38,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -457,6 +460,22 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
+        if(currentFile!=null && !currentFile.exists()) {
+            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                    R.drawable.apn512x512);
+            if(drawable instanceof BitmapDrawable) {
+                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                try {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
+                            new FileOutputStream(currentFile));
+                    Toast.makeText(getApplicationContext(),
+                            R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                            Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     protected File getFilesFile(String s) {
