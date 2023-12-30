@@ -153,14 +153,11 @@ public class MyCameraActivity extends ActivitySuperClass {
         });
 
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
-        effectsButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentFile != null) {
-                    imageView = findViewById(R.id.currentImageView);
-                    Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
-                    passParameters(intent1);
-                }
+        effectsButton2.setOnClickListener(v -> {
+            if (currentFile != null) {
+                imageView = findViewById(R.id.currentImageView);
+                Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
+                passParameters(intent1);
             }
         });
         View fromFiles = findViewById(R.id.choosePhotoButton);

@@ -1,3 +1,5 @@
+<?xml version="1.0"?>
+<bugs>
 <en-US>
 Some artistic effects.
 FIX: Résolution d'une gros bug: bloquage après choix d'effets
@@ -77,13 +79,13 @@ Try to fill polygons with colors #9 WORK
 Dependencies updates.
 Try with InstallReferrer
 SettingsActivityFace for Faces parts colors and textures.
-
+</en-US>
+<nl-NL>
 Restore KMeans.java to 09-jun-2023.
 Error in PixM.setValues(int,int,double...) FIXED.
 Essayer de peindre (méthode drawPolygon) les polygones reconnus du visage sur l'écran dans une ImageView
 Change face's colors (#1)
 </nl-NL>
-</en-US>
 <fr-FR>
 Quelques effets artistiques
 BUG: fixer des problèmes et préparer la version avec peinture et sélection de régions (IN PROGRESS)
@@ -199,3 +201,12 @@ Error in PixM.setValues(int,int,double...) FIXED.
 - Settings Good, complete with file paths?
   Clean front app activity.
 + Android 14
+  Try to make a login.
+  Add delete link
+  #1 Get login success/error.
+  Repaired math graphics display error
+  Share image and texts with Image Featuring (FeatureApp)
+  Share from other apps #1 , imageView not loaded when restarted
+  First Robo automatic test: without failure
+</fr-FR>
+</bugs>

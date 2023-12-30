@@ -47,6 +47,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getParameters(intent)
+
         classnames = ArrayList()
 
         Main2022.effects = classnames
@@ -54,7 +56,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         Main2022.listOfFactors()
         setContentView(R.layout.recycler_view_effect_activity)
 
-        maxRes = Utils().getMaxRes(this)
+        //maxRes = Utils().getMaxRes(this)
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()
@@ -127,11 +129,16 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         var index = 0
         effectApply.setOnClickListener {
 
-            currentFile = Utils().writePhoto(
-                this, ImageIO.read(currentFile).getBitmap(),
-                "before-effect"
-            )
-
+            if(currentFile==null)
+                return@setOnClickListener
+            try {
+                currentFile = Utils().writePhoto(
+                    this, ImageIO.read(currentFile).getBitmap(),
+                    "before-effect"
+                )
+            } catch (ex:RuntimeException ) {
+                return@setOnClickListener
+            }
             classnames = Main2022.effects
 
             classnames.forEachIndexed { index1, it1 ->
