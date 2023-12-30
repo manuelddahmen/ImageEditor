@@ -1,4 +1,3 @@
-
 package one.empty3.feature.app.maxSdk29.pro
 
 import android.os.Build
@@ -66,43 +65,43 @@ class ProcessFileArrayAdapter() :
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val index: String = Main2022.indices!![position]
-        val processFile: ProcessFile = arrayClasses[index]!!
-        val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
-        textView1.text = index//processFile.javaClass.name
-        val text1 = textView1.text.toString()
-        holder.setEffectClass(text1)
-        //val text1 = processFile.javaClass.name
-        val buttonRemoveList: Button =
-            holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
-        val buttonAddToEffect: Button =
-            holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
-        val buttonPropsToEffect: Button =
-            holder.itemView.findViewById(R.id.commentEffect) as Button
-        val seekBar: SeekBar =
-            holder.itemView.findViewById(R.id.effectPower) as SeekBar
+        if (position < Main2022.indices.size) {
+            val index: String = Main2022.indices!![position]
+            val processFile: ProcessFile = arrayClasses[index]!!
+            val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
+            textView1.text = index//processFile.javaClass.name
+            val text1 = textView1.text.toString()
+            holder.setEffectClass(text1)
+            //val text1 = processFile.javaClass.name
+            val buttonRemoveList: Button =
+                holder.itemView.findViewById(R.id.buttonRemoveFromList) as Button
+            val buttonAddToEffect: Button =
+                holder.itemView.findViewById(R.id.buttonAddTOEffect) as Button
+            val buttonPropsToEffect: Button =
+                holder.itemView.findViewById(R.id.commentEffect) as Button
+            val seekBar: SeekBar =
+                holder.itemView.findViewById(R.id.effectPower) as SeekBar
 //val imageViewEffectPreview : ImageView = holder.itemView.findViewById(R.id.imageViewEffectPreview)
-        System.out.printf(
-            "Layout class is : %s Button1 = %s Button 2 = %s\n",
-            text1,
-            buttonAddToEffect,
-            buttonRemoveList
-        )
-        if(Main2022.effectsFactors!=null && Main2022.effectsFactors.get(text1)!=null)
-            seekBar.setProgress(Main2022.effectsFactors.get(text1)!!, true);
+            System.out.printf(
+                "Layout class is : %s Button1 = %s Button 2 = %s\n",
+                text1,
+                buttonAddToEffect,
+                buttonRemoveList
+            )
+            if (Main2022.effectsFactors != null && Main2022.effectsFactors.get(text1) != null)
+                seekBar.setProgress(Main2022.effectsFactors.get(text1)!!, true);
 
-        if (Main2022.effects.contains(holder.getEffectClass())) {
-            buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
-        } else {
-            buttonAddToEffect.setBackgroundColor(0xffaaaaaa.toInt())
-        }
+            if (Main2022.effects.contains(holder.getEffectClass())) {
+                buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
+            } else {
+                buttonAddToEffect.setBackgroundColor(0xffaaaaaa.toInt())
+            }
+            buttonAddToEffect.setOnClickListener {
+                val effectClass = holder.getEffectClass()
+                val b1 = Main2022.effects.add(effectClass)
 
-        buttonAddToEffect.setOnClickListener {
-            val effectClass = holder.getEffectClass()
-            val b1 = Main2022.effects.add(effectClass)
-
-            it.setBackgroundColor(0xaaaa0000.toInt())
-            /*
+                it.setBackgroundColor(0xaaaa0000.toInt())
+                /*
                 val textView: Unit =
                     ((it as Button).parent as LinearLayout).children.iterator().forEachRemaining {
                         if (it.id.equals(R.id.textEffectName)) {
@@ -116,16 +115,16 @@ class ProcessFileArrayAdapter() :
                         }
                     }
     */
-        }
-
-        buttonRemoveList.setOnClickListener {
-            val effectClass = holder.getEffectClass()
-            val b1 = Main2022.effects.remove(effectClass)
-
-
-            if (!b1) {
-                buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
             }
+
+            buttonRemoveList.setOnClickListener {
+                val effectClass = holder.getEffectClass()
+                val b1 = Main2022.effects.remove(effectClass)
+
+
+                if (!b1) {
+                    buttonAddToEffect.setBackgroundColor(0xaaaaaaaa.toInt())
+                }
 
 //            val textView: Unit =
 //                ((it as Button).parent as LinearLayout).children.iterator().forEachRemaining {
@@ -139,43 +138,47 @@ class ProcessFileArrayAdapter() :
 //
 //                    }
 //                }
-        }
-        buttonPropsToEffect.setOnClickListener {
-            run {
-                val effectClassModele1 = holder.getEffectClass()
-                val processFile11 : ProcessFile
-                if(Main2022.listProcessClasses==null)
-                    processFile11 = Main2022.initListProcesses()[effectClassModele1] as ProcessFile
-                else
-                    processFile11 = Main2022.listProcessClasses[effectClassModele1]!!
-                val p = PixM(30, 30)
-                val runEffectsOnThumbnail: File? =
-                    Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
-                val imageViewEffectPreview: ImageViewSelection =
-                    holder.itemView.findViewById(R.id.imageViewEffectPreview)
-                if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
-                    Utils().setImageView(
-                        imageViewEffectPreview,
-                        ImageIO.read(runEffectsOnThumbnail).getBitmap()
-                    )
-            }
-        }
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                val effectClass = holder.getEffectClass()
-                Main2022.effectsFactors.put(effectClass, progress)
-                System.err.println("$javaClass $effectClass progress:$progress")
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-                // you can probably leave this empty
+            buttonPropsToEffect.setOnClickListener {
+                run {
+                    val effectClassModele1 = holder.getEffectClass()
+                    val processFile11: ProcessFile
+                    if (Main2022.listProcessClasses == null)
+                        processFile11 =
+                            Main2022.initListProcesses()[effectClassModele1] as ProcessFile
+                    else
+                        processFile11 = Main2022.listProcessClasses[effectClassModele1]!!
+                    val p = PixM(30, 30)
+                    val runEffectsOnThumbnail: File? =
+                        Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
+                    val imageViewEffectPreview: ImageViewSelection =
+                        holder.itemView.findViewById(R.id.imageViewEffectPreview)
+                    if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
+                        Utils().setImageView(
+                            imageViewEffectPreview,
+                            ImageIO.read(runEffectsOnThumbnail).getBitmap()
+                        )
+                }
             }
+            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    val effectClass = holder.getEffectClass()
+                    Main2022.effectsFactors.put(effectClass, progress)
+                    System.err.println("$javaClass $effectClass progress:$progress")
+                }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                // you can probably leave this empty
-            }
-        })
+                override fun onStartTrackingTouch(seekBar: SeekBar) {
+                    // you can probably leave this empty
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar) {
+                    // you can probably leave this empty
+                }
+            })
+        }
     }
+
 
     override fun getItemCount(): Int {
         return arrayClasses.size

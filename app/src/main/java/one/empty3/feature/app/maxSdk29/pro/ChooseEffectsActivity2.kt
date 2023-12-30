@@ -39,7 +39,7 @@ import java.util.UUID
 class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var unauthorized: Boolean = false
     private val READ_WRITE_STORAGE: Int = 15165516
-    private var listEffects: HashMap<String, ProcessFile>? = null
+    var listEffects: HashMap<String, ProcessFile>? = null
     private lateinit var classnames: ArrayList<String>
     private lateinit var effectApply: Button
     private lateinit var recyclerView: RecyclerView
@@ -78,23 +78,10 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 Manifest.permission.READ_MEDIA_IMAGES
             ), READ_WRITE_STORAGE
         )
-        if (!hasRun()) {
-            runEffects()
+        if (!hasRun) {
+            applyEffects()
         }
     }
-
-    private fun runEffects() {
-
-        initAuthorized()
-
-        hasRun = true
-
-    }
-
-    private fun hasRun(): Boolean {
-        return hasRun
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -112,8 +99,10 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
                 unauthorized = false
 
-                initAuthorized()
 
+
+                //applyEffects()
+                initAuthorized()
                 hasRun = true
 
             } catch (ex: RuntimeException) {
@@ -124,7 +113,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
         }
     }
-
     private fun initAuthorized() {
         var index = 0
         effectApply.setOnClickListener {
@@ -358,5 +346,22 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         Log.i("effects#logging", "destroy Effect Activity")
         super.onDestroy()
     }
+
+    private fun applyEffects() {
+
+        val effectViewModel = EffectViewModel(application)
+        effectViewModel.passVariables(this);
+        effectViewModel.applyBlur(0)
+
+//        System.out.println(effectViewModel.outputUri);
+//        currentFile =
+//            Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
+//
+//        val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
+//        passParameters(intent2)
+    }
+
+
 }
+
 

@@ -22,6 +22,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
@@ -79,6 +80,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
     public static final int MAXRES_DEFAULT = 1200;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private static final int ONSAVE_INSTANCE_STATE = 21516;
+    private static final int ONRETRIEVE_DEFAULT_CURRENTFILE = 242426;
     private static final int ONRESTORE_INSTANCE_STATE = 51521;
     public final String filenameSaveState = "state.properties";
     public final String imageViewFilename = "imageView.jpg";
@@ -289,6 +291,36 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             if (g > 0)
                 restoreInstanceState();
         }
+
+        if (requestCode == ONRETRIEVE_DEFAULT_CURRENTFILE && grantResults != null) {
+            int g = 0;
+            for (int granted : grantResults) {
+                g = g + ((granted == PERMISSION_GRANTED) ? 1 : 0);
+            }
+
+            if (g > 0)
+                retrieveCurrentFile();
+        }
+    }
+
+    private void retrieveCurrentFile() {
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                R.drawable.apn512x512);
+        if (drawable instanceof BitmapDrawable) {
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            try {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
+                        new FileOutputStream(currentFile));
+                Toast.makeText(getApplicationContext(),
+                        R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                        Toast.LENGTH_LONG).show();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException( "Cannot access file: "
+                        +currentFile.getAbsolutePath(), e);
+            }
+        }
+
+
     }
 
     void restoreInstanceState() {
@@ -465,15 +497,10 @@ public class ActivitySuperClass extends EmailPasswordActivity {
                     R.drawable.apn512x512);
             if(drawable instanceof BitmapDrawable) {
                 Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                try {
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
-                            new FileOutputStream(currentFile));
-                    Toast.makeText(getApplicationContext(),
-                            R.string.reference_to_file_that_does_t_exist_create_dummy_file,
-                            Toast.LENGTH_LONG).show();
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+                    requestPermissions(new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                    }, ONRETRIEVE_DEFAULT_CURRENTFILE);
             }
         }
     }
