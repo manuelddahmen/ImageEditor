@@ -97,7 +97,7 @@
     <string name="draw_color">Draw color</string>
     <string name="select_rectangle">Selectionner</string>
     <string name="draw_activity">Dessiner</string>
-    <string name="unselect">Zoom-</string>
+    <string name="unselect">Fresh_+Zoom-</string>
     <string name="effect_name">Nom du filtre</string>
     <string name="remove">Retirer</string>
     <string name="add">Ajouter</string>

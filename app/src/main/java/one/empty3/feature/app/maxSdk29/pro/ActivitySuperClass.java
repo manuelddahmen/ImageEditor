@@ -297,27 +297,37 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             for (int granted : grantResults) {
                 g = g + ((granted == PERMISSION_GRANTED) ? 1 : 0);
             }
-
-            if (g > 0)
-                retrieveCurrentFile();
+            retrieveCurrentFile();
         }
     }
 
     private void retrieveCurrentFile() {
-        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
-                R.drawable.apn512x512);
-        if (drawable instanceof BitmapDrawable) {
-            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            try {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
-                        new FileOutputStream(currentFile));
-                Toast.makeText(getApplicationContext(),
-                        R.string.reference_to_file_that_does_t_exist_create_dummy_file,
-                        Toast.LENGTH_LONG).show();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException( "Cannot access file: "
-                        +currentFile.getAbsolutePath(), e);
+        if(currentFile!=null && !currentFile.exists()) {
+            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                    R.drawable.apn512x512);
+            if(drawable instanceof BitmapDrawable) {
+                currentBitmap= ((BitmapDrawable) drawable).getBitmap();
             }
+        }
+        try {
+            currentFile = getImageViewPersistantFile();
+        } catch (RuntimeException zx){
+
+            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                    R.drawable.apn512x512);
+            if (drawable instanceof BitmapDrawable) {
+                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                try {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
+                            new FileOutputStream(currentFile));
+                    Toast.makeText(getApplicationContext(),
+                            R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                            Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException ignored) {
+
+                }
+            }
+
         }
 
 
@@ -492,17 +502,10 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
-        if(currentFile!=null && !currentFile.exists()) {
-            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
-                    R.drawable.apn512x512);
-            if(drawable instanceof BitmapDrawable) {
-                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                    requestPermissions(new String[] {
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                    }, ONRETRIEVE_DEFAULT_CURRENTFILE);
-            }
-        }
+        requestPermissions(new String[] {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        }, ONRETRIEVE_DEFAULT_CURRENTFILE);
     }
 
     protected File getFilesFile(String s) {
