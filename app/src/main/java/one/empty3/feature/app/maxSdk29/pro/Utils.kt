@@ -381,7 +381,10 @@ class Utils {
         val intent: Intent = activity.intent
         val extras = intent.extras
         if(extras!=null) {
-            val data: Uri = extras.get (Intent.EXTRA_STREAM) as Uri
+            val data0 = extras.get(Intent.EXTRA_STREAM)
+            var data: Uri? = null
+            if(data0!=null)
+                    data = data0 as Uri
             if(data!=null) {
                 var inputStream: InputStream? = null
                 inputStream = activity.getRealPathFromURI(data)
@@ -392,7 +395,7 @@ class Utils {
                 )
             }
             if (data == null) {
-                    currentFile = getCurrentFile(intent = intent, activity)
+                    //currentFile = getCurrentFile(intent = intent, activity)
             }
             if (currentFile == null) {
                 currentFile = activity.getCurrentFile()

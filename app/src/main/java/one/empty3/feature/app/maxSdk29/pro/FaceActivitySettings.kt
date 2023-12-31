@@ -812,8 +812,8 @@ class FaceActivitySettings : ActivitySuperClass() {
                     }
                 } else if (requestCode == OPEN_MODEL) {
                     try {
-                        val inputStream = getRealPathFromIntentData2(result)
-                        val dataInputStream: DataInputStream = DataInputStream(inputStream)
+                        val inputStream : String = getRealPathFromURIString(result.data)
+                        val dataInputStream: DataInputStream = DataInputStream(FileInputStream(File(inputStream)))
                         val googleFaceDetection2 =
                             GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
                         if(googleFaceDetection2!=null) {

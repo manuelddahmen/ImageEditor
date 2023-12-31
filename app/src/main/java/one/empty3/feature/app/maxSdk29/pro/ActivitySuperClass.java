@@ -28,8 +28,6 @@ import android.content.IntentSender;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -39,7 +37,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -123,10 +120,11 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
     protected File getRealPathFromIntentData(Intent file) {
         String realPathFromURIString = getRealPathFromURIString(file.getData());
-        if(realPathFromURIString==null)
+        if (realPathFromURIString == null)
             realPathFromURIString = getRealPathFromURIString(file.getExtras().getParcelable(Intent.EXTRA_STREAM));
         return new File(realPathFromURIString);
     }
+
     protected InputStream getRealPathFromIntentData2(Intent file) {
         try {
             return getPathInput(file.getData());
@@ -135,6 +133,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         }
         return null;
     }
+
     protected InputStream getRealPathFromURI(Uri uri) {
         try {
             return getPathInput(uri);
@@ -155,7 +154,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         getParameters(intent);
 
 
-        if(currentFile==null) {
+        if (currentFile == null) {
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 if ("text/plain".equals(type)) {
                     handleSendText(intent); // Handle text being sent
@@ -188,16 +187,13 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 //        new Utils().installReferrer(this);
 
 
-        if (getIntent() != null) {
-            getParameters(getIntent());
-            if (currentFile == null && savedInstanceState != null) {
-                try {
-                    if (savedInstanceState.getString("currentFile") != null) {
-                        currentFile = new File(savedInstanceState.getString("currentFile"));
-                    }
-                } catch (RuntimeException ex) {
-                    ex.printStackTrace();
+        if (currentFile == null && savedInstanceState != null) {
+            try {
+                if (savedInstanceState.getString("currentFile") != null) {
+                    currentFile = new File(savedInstanceState.getString("currentFile"));
                 }
+            } catch (RuntimeException ex) {
+                ex.printStackTrace();
             }
         }
         if (imageView == null)
@@ -297,39 +293,51 @@ public class ActivitySuperClass extends EmailPasswordActivity {
             for (int granted : grantResults) {
                 g = g + ((granted == PERMISSION_GRANTED) ? 1 : 0);
             }
+            if (g > 0) ;
+
             retrieveCurrentFile();
         }
     }
 
     private void retrieveCurrentFile() {
-        if(currentFile!=null && !currentFile.exists()) {
-            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+        if (currentFile != null && !currentFile.exists()) {
+            currentFile = null;
+            /*Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
                     R.drawable.apn512x512);
             if(drawable instanceof BitmapDrawable) {
                 currentBitmap= ((BitmapDrawable) drawable).getBitmap();
-            }
+            }*/
         }
-        try {
+        /*try {
             currentFile = getImageViewPersistantFile();
         } catch (RuntimeException zx){
-
-            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
-                    R.drawable.apn512x512);
-            if (drawable instanceof BitmapDrawable) {
-                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                try {
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
-                            new FileOutputStream(currentFile));
-                    Toast.makeText(getApplicationContext(),
-                            R.string.reference_to_file_that_does_t_exist_create_dummy_file,
-                            Toast.LENGTH_LONG).show();
-                } catch (FileNotFoundException ignored) {
-
+            try {
+                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                        R.drawable.apn512x512);
+                if (drawable instanceof BitmapDrawable) {
+                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    try {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90,
+                                new FileOutputStream(currentFile));
+                        Toast.makeText(getApplicationContext(),
+                                R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                                Toast.LENGTH_LONG).show();
+                    } catch (FileNotFoundException ignored) {
+                        System.out.println("Error in retrieveCurrentfile cannot rewrite imageView.jpg");
+                        Toast.makeText(getApplicationContext(),
+                                R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
+            } catch (RuntimeException exception) {
+                System.out.println("Error in retrieveCurrentfile cannot rewrite imageView.jpg");
+                Toast.makeText(getApplicationContext(),
+                        R.string.reference_to_file_that_does_t_exist_create_dummy_file,
+                        Toast.LENGTH_LONG).show();
             }
 
         }
-
+*/
 
     }
 
@@ -417,8 +425,8 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
                 }
             }
-            currentFile1 = properties.getProperty("currentFile", (currentFile==null?null
-                    :currentFile.getAbsolutePath()));
+            currentFile1 = properties.getProperty("currentFile", (currentFile == null ? null
+                    : currentFile.getAbsolutePath()));
             if (currentFile1 != null)
                 currentFile = new File(currentFile1);
             else
@@ -461,7 +469,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
                                     new FileInputStream(currentFile)),
                             getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
-                    if(file!=null)
+                    if (file != null)
                         currentFile = file;
                 }
             } catch (FileNotFoundException e) {
@@ -502,9 +510,10 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
-        requestPermissions(new String[] {
+        requestPermissions(new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES
         }, ONRETRIEVE_DEFAULT_CURRENTFILE);
     }
 
@@ -583,7 +592,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
         }
         if (photo != null && isCurrentFile) {
             currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
-            if(imageView!=null)
+            if (imageView != null)
                 new Utils().setImageView(this, imageView);
             return photo;
         } else if (photo != null) {
@@ -691,10 +700,10 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
     void handleSendImage(Intent intent) {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
- //       InputStream realPathFromURI = getRealPathFromURI(imageUri);
+        //       InputStream realPathFromURI = getRealPathFromURI(imageUri);
         InputStream realPathFromURI = getRealPathFromURI(imageUri);
         Bitmap bitmap = BitmapFactory.decodeStream(realPathFromURI);
-        File file = new Utils().writePhoto(this, bitmap, "imported-"+ UUID.randomUUID()+"--");
+        File file = new Utils().writePhoto(this, bitmap, "imported-" + UUID.randomUUID() + "--");
         if (file != null && file.exists()) {
             // Update UI to reflect image being shared
             setCurrentFile(file);
@@ -725,6 +734,7 @@ public class ActivitySuperClass extends EmailPasswordActivity {
 
         }
     }
+
     public String getRealPathFromURIString(Uri contentURI) {
         String result;
         Cursor cursor = getApplicationContext().getContentResolver().query(contentURI, null,

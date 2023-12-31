@@ -1,6 +1,5 @@
 package one.empty3.feature.app.maxSdk29.pro
 
-import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
@@ -63,9 +61,7 @@ class ProcessFileArrayAdapter() :
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position < Main2022.indices.size) {
             val index: String = Main2022.indices!![position]
             val processFile: ProcessFile = arrayClasses[index]!!
             val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
@@ -176,7 +172,6 @@ class ProcessFileArrayAdapter() :
                     // you can probably leave this empty
                 }
             })
-        }
     }
 
 

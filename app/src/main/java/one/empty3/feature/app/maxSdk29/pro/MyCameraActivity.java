@@ -437,13 +437,13 @@ public class MyCameraActivity extends ActivitySuperClass {
 //                ViewGroup.LayoutParams.MATCH_PARENT,
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
 
-
+/*
         if(currentFile!=null) {
             drawIfBitmap();
         } else {
             restoreInstanceState();
         }
-
+*/
         View settings = findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
