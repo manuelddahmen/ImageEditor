@@ -219,7 +219,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null) {
+                if (currentFile != null && currentFile.exists()) {
                     Uri uri = Uri.fromFile(currentFile);
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile);
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -237,9 +237,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null) {
-
-                    saveImageState(true);
+                if (currentFile != null && currentFile.exists()) {
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_MEDIA_IMAGES};
@@ -283,6 +281,8 @@ public class MyCameraActivity extends ActivitySuperClass {
                     intentSave.setDataAndType(photoURI, "image/jpeg");
                     //createDocument.parseResult(new ²);
                     startActivityForResult(intentSave, REQUEST_CREATE_DOCUMENT_SAVE_IMAGE);
+
+                    saveImageState(true);
 
 
                 } else toastButtonDisabled(v);
@@ -404,14 +404,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         unselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null) {
-                    BufferedImage read = ImageIO.read(currentFile);
-                    if(read!=null && read.getBitmap()!=null) {
-                        new Utils().setImageView(imageView, read.getBitmap());
-                    }
-                    drawPointA = null;
-                    drawPointB = null;
-                } else toastButtonDisabled(v);
+                unselectReloadCurrentFile();
             }
         });
 
@@ -459,6 +452,9 @@ public class MyCameraActivity extends ActivitySuperClass {
             login.setClass(getApplicationContext(), LoginActivity2.class);
             startActivity(login);
         });
+
+
+        unselectReloadCurrentFile();
     }
 
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
@@ -1131,5 +1127,17 @@ public class MyCameraActivity extends ActivitySuperClass {
             loadInstanceState();
     }
 
+
+    private void unselectReloadCurrentFile() {
+        if (currentFile != null) {
+            BufferedImage read = ImageIO.read(currentFile);
+            if(read!=null && read.getBitmap()!=null) {
+                new Utils().setImageView(imageView, read.getBitmap());
+            }
+            drawPointA = null;
+            drawPointB = null;
+        } else toastButtonDisabled(null);
+    }
 }
+
 

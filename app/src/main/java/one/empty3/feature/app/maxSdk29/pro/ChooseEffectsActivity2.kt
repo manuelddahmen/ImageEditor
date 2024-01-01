@@ -47,8 +47,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getParameters(intent)
-
         classnames = ArrayList()
 
         Main2022.effects = classnames

@@ -148,9 +148,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         double t = 0;
         int progress = 0;
-        for (int y = 0; y < h; y++) {
+        try {
+            for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                try {
                     double[] v = current.getValues(x, y);
                     for (int j = 0; j < algebricTree.length; j++) {
                         algebricTree[j].setParameter("r", v[0]);
@@ -180,18 +180,20 @@ public class GraphicsActivityView extends ActivitySuperClass {
                     current.setValues((int) Math.round(x2), (int) Math.round(y2),
                             finalColors[0], finalColors[1], finalColors[2]);
 
-                } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException e) {
-                    //printValues();
-                    //throw new RuntimeException(e);
-                }
             }
             progress = (int) (100. * y / h);
         }
         progress = 100;
 
-        Bitmap bitmap = current.normalize(0, 1).getBitmap();
-        File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
-        this.currentFile = graphics_math;
-        new Utils().setImageView(image, bitmap);
+            if(current!=null) {
+                Bitmap bitmap = current.normalize(0, 1).getBitmap();
+                File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
+                this.currentFile = graphics_math;
+                new Utils().setImageView(image, bitmap);
+            }
+        } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException|RuntimeException e) {
+            //printValues();
+            //throw new RuntimeException(e);
+        }
     }
 }

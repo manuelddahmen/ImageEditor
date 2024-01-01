@@ -52,7 +52,7 @@ import java.util.UUID
 class TextActivity() : ActivitySuperClass() {
     private val INT_WRITE_STORAGE: Int = 9247492
     private var text: String = ""
-    private lateinit var currentImage: Bitmap
+    private var currentImage: Bitmap? = null
     private lateinit var rect: RectF
     private var drawTextPointA: Point? = null
 
@@ -68,11 +68,14 @@ class TextActivity() : ActivitySuperClass() {
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
 
         val currentFile1 = Utils().getCurrentFile(intent, this)
-        if (currentFile1 != null && imageView!=null && currentFile1.exists()) {
+        if (currentFile1 != null && currentFile1.exists()) {
             currentFile = currentFile1
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
-            Utils().setImageView(imageView, this.currentImage)
-
+            if(currentImage!=null) {
+                Utils().setImageView(imageView, currentImage!!)
+            }
+        } else {
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
         }
         val backButton = findViewById<Button>(R.id.buttonTextToMain)
         backButton.setOnClickListener {
@@ -111,13 +114,14 @@ class TextActivity() : ActivitySuperClass() {
                     val viewY = location[1]
                     val outRect = Rect()
                     imageView.getDrawable().copyBounds(outRect)
-                    //location = intArrayOf(0, 0)
-                    val x =
-                        (event.rawX - viewX - outRect.left) / imageView.width * currentImage.width
-                    val y =
-                        (event.rawY - viewY - outRect.top) / imageView.height * currentImage.height
-                    drawTextPointA = Point(x.toInt(), y.toInt())
-                    return true
+                    if(currentImage!=null) {
+                        val x =
+                            (event.rawX - viewX - outRect.left) / imageView.width * currentImage!!.width
+                        val y =
+                            (event.rawY - viewY - outRect.top) / imageView.height * currentImage!!.height
+                        drawTextPointA = Point(x.toInt(), y.toInt())
+                        return true
+                    }
                 }
                 return false
             }
@@ -181,10 +185,10 @@ class TextActivity() : ActivitySuperClass() {
 
         currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
         val drawTextToBitmap: File? = drawTextToBitmap(textString)
-        if (drawTextToBitmap != null) {
+        if (drawTextToBitmap != null && currentImage!=null) {
             currentFile = drawTextToBitmap
             imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
-            Utils().setImageView(imageView, this.currentImage)
+            Utils().setImageView(imageView, currentImage!!)
             System.out.println("ImageView Text UPDATED")
         }
         return true
@@ -199,43 +203,45 @@ class TextActivity() : ActivitySuperClass() {
             val scale: Float = resources.displayMetrics.density
             // resource bitmaps are immutable,
             // so we need to convert it to mutable one
-            val currentImage2 = currentImage.copy(currentImage.config, true)
-            val canvas = Canvas(currentImage2)
-            // new antialised Paint
-            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-            // text color - #3D3D3D
-            paint.color = Color.rgb(110, 110, 110)
+            if(currentImage!=null) {
+                val currentImage2 = currentImage!!.copy(currentImage!!.config, true)
+                val canvas = Canvas(currentImage2)
+                // new antialised Paint
+                val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+                // text color - #3D3D3D
+                paint.color = Color.rgb(110, 110, 110)
 
 
-            val dpText: EditText = findViewById(R.id.font_size)
+                val dpText: EditText = findViewById(R.id.font_size)
 
-            val fontSize: Float = java.lang.Float.parseFloat(dpText.text.toString()) / 4
-            // text size in pixels
-            paint.textSize = (fontSize * scale).toInt().toFloat()
-            // text shadow
-            paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+                val fontSize: Float = java.lang.Float.parseFloat(dpText.text.toString()) / 4
+                // text size in pixels
+                paint.textSize = (fontSize * scale).toInt().toFloat()
+                // text shadow
+                paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
 
-            // draw text to the Canvas center
-            val bounds = Rect()
-            paint.getTextBounds(textToPrint, 0, textToPrint.length, bounds)
+                // draw text to the Canvas center
+                val bounds = Rect()
+                paint.getTextBounds(textToPrint, 0, textToPrint.length, bounds)
 
-            var x = 0
-            var y = 0
+                var x = 0
+                var y = 0
 
 
-            if (drawTextPointA != null) {
-                x = drawTextPointA!!.x.toInt() - bounds.width() / 2
-                y = drawTextPointA!!.y.toInt() + bounds.height() / 2
+                if (drawTextPointA != null) {
+                    x = drawTextPointA!!.x.toInt() - bounds.width() / 2
+                    y = drawTextPointA!!.y.toInt() + bounds.height() / 2
 
-            } else {
-                // Default : center
-                x = (-bounds.width()) / 2
-                y = (+bounds.height()) / 2
+                } else {
+                    // Default : center
+                    x = (-bounds.width()) / 2
+                    y = (+bounds.height()) / 2
+                }
+                //canvas.drawText(textToPrint, x * scale, y * scale, paint)
+                canvas.drawText(textToPrint, x.toFloat(), y.toFloat(), paint)
+                currentImage = currentImage2
+                return Utils().writePhoto(this, currentImage2, "drawtext-")
             }
-            //canvas.drawText(textToPrint, x * scale, y * scale, paint)
-            canvas.drawText(textToPrint, x.toFloat(), y.toFloat(), paint)
-            currentImage = currentImage2
-            return Utils().writePhoto(this, currentImage2, "drawtext-")
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(applicationContext, e.toString(), Toast.LENGTH_LONG).show()

@@ -146,15 +146,17 @@ class ProcessFileArrayAdapter() :
                     else
                         processFile11 = Main2022.listProcessClasses[effectClassModele1]!!
                     val p = PixM(30, 30)
-                    val runEffectsOnThumbnail: File? =
-                        Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
-                    val imageViewEffectPreview: ImageViewSelection =
-                        holder.itemView.findViewById(R.id.imageViewEffectPreview)
-                    if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
-                        Utils().setImageView(
-                            imageViewEffectPreview,
-                            ImageIO.read(runEffectsOnThumbnail).getBitmap()
-                        )
+
+                    if (activity.currentFile != null) {
+                        val runEffectsOnThumbnail: File? =
+                            Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
+                        val imageViewEffectPreview: ImageViewSelection =
+                            holder.itemView.findViewById(R.id.imageViewEffectPreview)
+                        if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
+                            Utils().setImageView(
+                                imageViewEffectPreview,
+                                ImageIO.read(runEffectsOnThumbnail).getBitmap())
+                    }
                 }
             }
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
