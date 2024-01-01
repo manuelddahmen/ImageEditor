@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -70,7 +71,7 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 
-public class ActivitySuperClass extends EmailPasswordActivity {
+public class ActivitySuperClass extends AppCompatActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";

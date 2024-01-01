@@ -292,4 +292,9 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="wait">WAIT</string>
     <string name="go">Go...</string>
     <string name="reference_to_file_that_does_t_exist_create_dummy_file">Reference to file that does\'t exist. Create dummy file</string>
+    <string name="see_file" translatable="false">See File</string>
+    
+    <string name="set_permissions_in_settings" translatable="false">Go to Settings -> Apps and Notifications ->
+        WorkManager Demo -> App Permissions and grant access to Storage.</string>
+    <string name="cancel_work">Cancel</string>
 </resources>

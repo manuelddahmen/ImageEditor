@@ -20,6 +20,9 @@
 
 package one.empty3;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +57,7 @@ public class Main2022 {
     public static HashMap<String, Integer> effectsFactors;
 
     public static ArrayList<String> indices;
+    private static HashMap<String, ProcessFile> listEffects;
 
     public static HashMap<String, ProcessFile> initListProcesses() {
         if(listProcessClasses==null) {
@@ -130,6 +134,14 @@ public class Main2022 {
         return effectsFactors;
     }
 
+    public static void setListEffects(@Nullable HashMap<String, ProcessFile> listEffects) {
+        Main2022.listEffects = listEffects;
+    }
+
+    @NotNull
+    public static HashMap<String, ProcessFile> getListEffects() {
+        return listEffects;
+    }
 }
 
 
