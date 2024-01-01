@@ -37,9 +37,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import javaAnd.awt.Point
@@ -66,7 +64,7 @@ class TextActivity() : ActivitySuperClass() {
 
 
         imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
-
+/*
         val currentFile1 = Utils().getCurrentFile(intent, this)
         if (currentFile1 != null && currentFile1.exists()) {
             currentFile = currentFile1
@@ -76,6 +74,12 @@ class TextActivity() : ActivitySuperClass() {
             }
         } else {
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+        }*/
+        if(currentFile!=null&&currentFile.exists()) {
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+            if(currentImage!=null) {
+                Utils().setImageView(imageView, currentImage!!)
+            }
         }
         val backButton = findViewById<Button>(R.id.buttonTextToMain)
         backButton.setOnClickListener {
@@ -181,7 +185,7 @@ class TextActivity() : ActivitySuperClass() {
     private fun applyTextNext(): Boolean {
 
         val textString: String =
-            (findViewById<TextView>(R.id.textViewOnImage).text.toString())
+            (findViewById<EditText>(R.id.textViewOnImage).text.toString())
 
         currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
         val drawTextToBitmap: File? = drawTextToBitmap(textString)
@@ -214,7 +218,13 @@ class TextActivity() : ActivitySuperClass() {
 
                 val dpText: EditText = findViewById(R.id.font_size)
 
-                val fontSize: Float = java.lang.Float.parseFloat(dpText.text.toString()) / 4
+                var fontSize : Float = 24f
+                try {
+                    fontSize = java.lang.Float.parseFloat(dpText.text.toString()) / 4
+                } catch (_:RuntimeException) {
+                    return null
+                }
+
                 // text size in pixels
                 paint.textSize = (fontSize * scale).toInt().toFloat()
                 // text shadow

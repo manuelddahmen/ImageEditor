@@ -1,6 +1,10 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -27,5 +31,8 @@ public class MyCameraActivityTest {
 
     @Test
     public void myCameraActivityTest() {
+        // When the Continue button is clicked
+        Espresso.onView(withText("Text"))
+                .perform(click());
     }
 }

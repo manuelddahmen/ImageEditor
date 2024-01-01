@@ -579,7 +579,9 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (isWorkingResolutionOriginal()) {
                     bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
                 }
-                bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
+                if(bitmap!=null) {
+                    bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
+                }
             }
 
             Canvas canvas = new Canvas(bitmap);
@@ -598,7 +600,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             String encoded = Base64.encodeToString(b, Base64.DEFAULT);
             OutputStream fos = null;
             try {
-                File filesFile = getFilesFile(IMAGE_VIEW_JPG);
+                File filesFile = getImageViewPersistantFile();
                 fos = new FileOutputStream(filesFile);
                 bm.compress(Bitmap.CompressFormat.JPEG, 90, fos);
 
@@ -1087,7 +1089,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     public void addText(View view) {
-        if (currentFile != null && imageView!=null) {
+        if (currentFile != null && imageView!=null && currentFile.exists() ) {
             Intent textIntent = new Intent(Intent.ACTION_VIEW);
             textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
             textIntent.setClass(getApplicationContext(), TextActivity.class);
@@ -1129,14 +1131,18 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     private void unselectReloadCurrentFile() {
-        if (currentFile != null) {
-            BufferedImage read = ImageIO.read(currentFile);
-            if(read!=null && read.getBitmap()!=null) {
-                new Utils().setImageView(imageView, read.getBitmap());
-            }
-            drawPointA = null;
-            drawPointB = null;
-        } else toastButtonDisabled(null);
+        try {
+            if (currentFile != null) {
+                BufferedImage read = ImageIO.read(currentFile);
+                if (read != null && read.getBitmap() != null) {
+                    new Utils().setImageView(imageView, read.getBitmap());
+                }
+                drawPointA = null;
+                drawPointB = null;
+            } else toastButtonDisabled(null);
+        } catch (RuntimeException ex) {
+            currentFile = null;
+        }
     }
 }
 
