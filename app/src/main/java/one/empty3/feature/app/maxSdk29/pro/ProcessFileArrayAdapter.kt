@@ -62,7 +62,9 @@ class ProcessFileArrayAdapter() :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val index: String = Main2022.indices!![position]
+        var index = ""
+        if(position<Main2022.indices.size) {
+             index = Main2022.indices!![position]
             val processFile: ProcessFile = arrayClasses[index]!!
             val textView1 = (holder.itemView.findViewById(R.id.textEffectName)) as TextView
             textView1.text = index//processFile.javaClass.name
@@ -174,6 +176,8 @@ class ProcessFileArrayAdapter() :
                     // you can probably leave this empty
                 }
             })
+        }
+
     }
 
 
