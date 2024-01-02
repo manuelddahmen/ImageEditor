@@ -767,5 +767,9 @@ class Utils {
             }
         }
     */
+
+    fun createCurrentUniqueFile(applicationContext: Context, filename:String): File? {
+        return applicationContext.getExternalFilesDir(filename)
+    }
 }
 

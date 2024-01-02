@@ -17,15 +17,10 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import static one.empty3.feature.app.maxSdk29.pro.Constants.IMAGE_MANIPULATION_WORK_NAME;
-import static one.empty3.feature.app.maxSdk29.pro.Constants.KEY_IMAGE_URI;
 import static one.empty3.feature.app.maxSdk29.pro.Constants.TAG_OUTPUT;
 
 import android.app.Application;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -44,16 +39,17 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import one.empty3.Main2022;
 import one.empty3.feature.app.maxSdk29.pro.workers.EffectWorker;
 import one.empty3.feature.app.maxSdk29.pro.workers.SaveImageToFileWorker;
 import one.empty3.io.ProcessFile;
 
 public class EffectsViewModel extends ViewModel {
 
-    private Uri mImageUri;
+    private File mImageUri;
     private WorkManager mWorkManager;
     private LiveData<List<WorkInfo>> mSavedWorkInfo;
-    private Uri mOutputUri;
+    private File mOutputUri;
     private File currentFile;
     private HashMap<String, ProcessFile> listEffects;
 
@@ -86,7 +82,7 @@ public class EffectsViewModel extends ViewModel {
     /**
      * Getter method for mOutputUri
      */
-    Uri getOutputUri() {
+    File getOutputUri() {
         return mOutputUri;
     }
 
@@ -109,8 +105,6 @@ public class EffectsViewModel extends ViewModel {
             // After the first blur operation the input will be the output of previous
             // blur operations.
         effectsBuilder.setInputData(createInputDataForUri());
-
-
 
         continuation = continuation.then(effectsBuilder.build());
 
@@ -146,16 +140,15 @@ public class EffectsViewModel extends ViewModel {
     private Data createInputDataForUri() {
         Data.Builder builder = new Data.Builder();
         if (currentFile != null) {
-            builder.putString(KEY_IMAGE_URI, currentFile.getAbsolutePath());
+            builder.putString(Constants.KEY_IMAGE_URI, currentFile.getAbsolutePath());
+        } else {
+            throw new RuntimeException("createInputDataForUri() : currentFIle==null");
         }
         return builder.build();
     }
 
-    private Uri uriOrNull(String uriString) {
-        if (!TextUtils.isEmpty(uriString)) {
-            return Uri.parse(uriString);
-        }
-        return null;
+    private File uriOrNull(String uriString) {
+        return new File(uriString);
     }
 
     /**
@@ -163,19 +156,13 @@ public class EffectsViewModel extends ViewModel {
      */
     void setImageUri(String uri) {
         mImageUri = uriOrNull(uri);
+        currentFile = uriOrNull(uri);
+        Main2022.setCurrentFile(currentFile);
     }
 
-    private Uri getImageUri(Context context) {
-        Resources resources = context.getResources();
+    private File getImageUri(Context context) {
 
-        Uri imageUri = new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                .authority(resources.getResourcePackageName(R.drawable.android_cupcake))
-                .appendPath(resources.getResourceTypeName(R.drawable.android_cupcake))
-                .appendPath(resources.getResourceEntryName(R.drawable.android_cupcake))
-                .build();
-
-        return imageUri;
+        return currentFile;
     }
 
     public void setListEffects(@Nullable HashMap<String, ProcessFile> listEffects) {

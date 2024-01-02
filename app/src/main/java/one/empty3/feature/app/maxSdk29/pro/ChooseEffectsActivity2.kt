@@ -23,7 +23,6 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -75,8 +74,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         recyclerView.adapter = processFileArrayAdapter
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
-        effectApply = findViewById(R.id.applyEffects)
-        init(savedInstanceState)
+        //effectApply = findViewById(R.id.applyEffects)
 
 
 
@@ -88,10 +86,12 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         goButton = findViewById<Button>(R.id.go_button)
         seeFileButton = findViewById<Button>(R.id.see_file_button)
         cancelButton = findViewById<Button>(R.id.cancel_button)
-        
+        progressBar = findViewById<ProgressBar>(R.id.progress_bar)
+
         goButton!!.setOnClickListener { _ ->
             run {
                 Main2022.setListEffects(listEffects)
+                mViewModel!!.setImageUri(currentFile.absolutePath)
                 mViewModel!!.applyEffect(currentFile)
             }
         }
@@ -125,16 +125,16 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         }
 
         seeFileButton!!.setOnClickListener { view ->
-            val currentUri: Uri = mViewModel!!.getOutputUri()
-            if (currentUri != null) {
-                val actionView = Intent(Intent.ACTION_VIEW, currentUri)
-                if (actionView.resolveActivity(packageManager) != null) {
-                    startActivity(actionView)
-                }
-            }
+            val currentUri: File = mViewModel!!.getOutputUri()
+            currentFile = currentUri
+            val actionView = Intent(applicationContext, MyCameraActivity::class.java)
+            passParameters(actionView)
         }
 
         cancelButton!!.setOnClickListener { view -> mViewModel!!.cancelWork() }
+
+        init(savedInstanceState)
+
     }
 
 
@@ -147,7 +147,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             ), READ_WRITE_STORAGE
         )
         if (!hasRun) {
-            applyEffects()
+            ;//;applyEffects()
         }
     }
     override fun onRequestPermissionsResult(
@@ -169,8 +169,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
 
 
-                Main2022.setListEffects(listEffects)
-                initAuthorized()
+                //Main2022.setListEffects(listEffects)
+                //initAuthorized()
                 hasRun = true
 
             } catch (ex: RuntimeException) {

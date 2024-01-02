@@ -23,18 +23,22 @@ class EffectWorker
  */
     (appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     override fun doWork(): Result {
-        val applicationContext = applicationContext
-
+        var currentOutputFileFinal : File? = null
         // Makes a notification when the work starts and slows down the work so that it's easier to
         // see each WorkRequest start, even on emulated devices
         WorkerUtils.makeStatusNotification("Applying effects", applicationContext)
         WorkerUtils.sleep()
+
         val currentFileStr = inputData.getString(Constants.KEY_IMAGE_URI)
-        val currentFile = File(currentFileStr)
+
+        val currentFile: File = Main2022.getCurrentFile()
+            ?: throw java.lang.RuntimeException("filters : original file is null.")
+
+        //currentFile = File(currentFileStr)
 
         try {
             var index = 0
-            if(currentFile==null) {
+            if (currentFile == null) {
                 return Result.failure()
             }
             run {
@@ -205,17 +209,15 @@ class EffectWorker
 
                     }
                     if (processFile != null && totalOutput != null) {
-                        Toast.makeText(
+                        /*Toast.makeText(
                             applicationContext,
                             ("Applied effect:" + (processFile!!.javaClass.name)),
                             Toast.LENGTH_LONG
                         ).show()
+*/
 
-                        val outputData = Data.Builder()
-                            .putString(Constants.KEY_IMAGE_URI, totalOutput.toString())
-                            .build()
-
-                        return Result.success(outputData)
+                        currentOutputFile = totalOutput
+                        currentOutputFileFinal = totalOutput
                     }
                 }
             }
@@ -228,8 +230,16 @@ class EffectWorker
             Log.e(TAG, "Error applying blur", throwable)
             return Result.failure()
         }
-        Log.e(TAG, "End of method")
-        return Result.failure()
+        Log.i(TAG, "End of method")
+        if(currentOutputFileFinal!=null) {
+            val outputData = Data.Builder()
+                .putString(Constants.KEY_IMAGE_URI, currentOutputFileFinal.toString())
+                .build()
+
+            return Result.success(outputData)
+        } else {
+            return Result.failure()
+        }
     }
 
     private fun nextFile(directory: String, filenameBase: String, extension: String): String {
