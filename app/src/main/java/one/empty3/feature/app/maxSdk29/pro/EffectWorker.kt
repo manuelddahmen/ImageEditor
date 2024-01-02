@@ -1,4 +1,4 @@
-package one.empty3.feature.app.maxSdk29.pro
+/*package one.empty3.feature.app.maxSdk29.pro
 
 import android.content.Context
 import android.util.Log
@@ -229,4 +229,4 @@ class EffectWorker(
         return directory + File.separator + filenameBase + "--" + UUID.randomUUID() + "." + extension
     }
 
-}
+}*/
