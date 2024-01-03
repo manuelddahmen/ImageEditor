@@ -24,17 +24,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkInfo
-import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
-import one.empty3.feature20220726.Mix
 import one.empty3.io.ProcessFile
 import java.io.File
 import java.util.UUID
@@ -127,8 +125,11 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         seeFileButton!!.setOnClickListener { view ->
             val currentUri: File = mViewModel!!.getOutputUri()
             currentFile = currentUri
-            val actionView = Intent(applicationContext, MyCameraActivity::class.java)
-            passParameters(actionView)
+            Looper.getMainLooper().queue.run {
+                val actionView = Intent(applicationContext, MyCameraActivity::class.java)
+                passParameters(actionView)
+            }
+            println("After apply effects, seeFileButton OnClick thread")
         }
 
         cancelButton!!.setOnClickListener { view -> mViewModel!!.cancelWork() }
@@ -181,6 +182,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
         }
     }
+    /*
     private fun initAuthorized() {
         var index = 0
         effectApply.setOnClickListener {
@@ -376,7 +378,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             }
         }
     }
-
+*/
     fun comaStringList(str: String): String {
         return "";
     }
@@ -417,11 +419,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
     private fun applyEffects() {
 
-        val effectViewModel = EffectViewModel(application)
-        effectViewModel.passVariables(this);
-        effectViewModel.applyBlur(0)
 
-//        System.out.println(effectViewModel.outputUri);
 //        currentFile =
 //            Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
 //

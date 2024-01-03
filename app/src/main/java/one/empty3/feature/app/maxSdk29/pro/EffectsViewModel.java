@@ -41,7 +41,6 @@ import java.util.List;
 
 import one.empty3.Main2022;
 import one.empty3.feature.app.maxSdk29.pro.workers.EffectWorker;
-import one.empty3.feature.app.maxSdk29.pro.workers.SaveImageToFileWorker;
 import one.empty3.io.ProcessFile;
 
 public class EffectsViewModel extends ViewModel {
@@ -106,13 +105,13 @@ public class EffectsViewModel extends ViewModel {
             // blur operations.
         effectsBuilder.setInputData(createInputDataForUri());
 
-        continuation = continuation.then(effectsBuilder.build());
+        //continuation = continuation.then(effectsBuilder.build());
 
         // Create charging constraint
         Constraints constraints = new Constraints.Builder()
                 .setRequiresCharging(true)
                 .build();
-
+/*
         // Add WorkRequest to save the image to the filesystem
         OneTimeWorkRequest save = new OneTimeWorkRequest.Builder(SaveImageToFileWorker.class)
                 .setConstraints(constraints) // This adds the Constraints
@@ -120,7 +119,7 @@ public class EffectsViewModel extends ViewModel {
                 .build();
 
         continuation = continuation.then(save);
-
+*/
         // Actually start the work
         continuation.enqueue();
     }
