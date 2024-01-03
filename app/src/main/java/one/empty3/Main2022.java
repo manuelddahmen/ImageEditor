@@ -60,9 +60,10 @@ public class Main2022 {
     public static ArrayList<String> indices;
     private static HashMap<String, ProcessFile> listEffects;
     private static File currentFile;
+    private static File outputFIle;
 
     public static HashMap<String, ProcessFile> initListProcesses() {
-        if(listProcessClasses==null) {
+        //if(listProcessClasses==null) {
             listProcessClasses = new HashMap<>();
             try {
 
@@ -120,7 +121,7 @@ public class Main2022 {
                 e.printStackTrace();
             }
 
-        }
+        //}
         return listProcessClasses;
     }
 
@@ -151,6 +152,14 @@ public class Main2022 {
 
     public static File getCurrentFile() {
         return currentFile;
+    }
+
+    public static void setOutputFile(File currentOutputFileFinal) {
+        Main2022.outputFIle = currentOutputFileFinal;
+    }
+
+    public static File getOutputFIle() {
+        return outputFIle;
     }
 }
 

@@ -24,6 +24,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
@@ -39,13 +40,11 @@ import java.util.UUID
 
 
 class ChooseEffectsActivity2 : ActivitySuperClass() {
-    private var progressBar:ProgressBar?= null
+    private var progressBar: ProgressBar? = null
     private var cancelButton: Button? = null
     private var seeFileButton: Button? = null
     private var goButton: Button? = null
     private var mViewModel: EffectsViewModel? = null
-    private var binding: ChooseEffectsActivity2? = null
-
     private var unauthorized: Boolean = false
     private val READ_WRITE_STORAGE: Int = 15165516
     var listEffects: HashMap<String, ProcessFile>? = null
@@ -72,9 +71,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         recyclerView.adapter = processFileArrayAdapter
         listEffects = Main2022.initListProcesses()
         Log.i("effects#logging", "create Effect Activity")
-        //effectApply = findViewById(R.id.applyEffects)
-
-
 
         // Get the ViewModel
         mViewModel = EffectsViewModel(application)
@@ -94,40 +90,43 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             }
         }
 
-        mViewModel!!.getOutputWorkInfo().observe(this) { listOfWorkInfo ->
+        mViewModel!!.outputWorkInfo.observe(this) { listOfWorkInfo ->
 
             // If there are no matching work info, do nothing
             if (listOfWorkInfo == null || listOfWorkInfo.isEmpty()) {
-                return@observe
-            }
 
-            // We only care about the first output status.
-            // Every continuation has only one worker tagged TAG_OUTPUT
-            val workInfo: WorkInfo = listOfWorkInfo.get(0)
-
-            val finished = workInfo.state.isFinished
-            if (!finished) {
-                showWorkInProgress()
             } else {
-                showWorkFinished()
-                val outputData = workInfo.outputData
 
-                val outputImageUri = outputData.getString(Constants.KEY_IMAGE_URI)
+                // We only care about the first output status.
+                // Every continuation has only one worker tagged TAG_OUTPUT
+                val workInfo: WorkInfo = listOfWorkInfo.get(0)
 
-                // If there is an output file show "See File" button
-                if (!TextUtils.isEmpty(outputImageUri)) {
-                    mViewModel!!.setOutputUri(outputImageUri)
-                    seeFileButton!!.setVisibility(View.VISIBLE)
+                val finished = workInfo.state.isFinished
+                if (!finished) {
+                    showWorkInProgress()
+                } else {
+                    showWorkFinished()
+                    val outputData = workInfo.outputData
+
+                    val outputImageUri = outputData.getString(Constants.KEY_IMAGE_URI)
+
+                    // If there is an output file show "See File" button
+                    if (!TextUtils.isEmpty(outputImageUri)) {
+                        mViewModel!!.setOutputUri(outputImageUri)
+                        seeFileButton!!.setVisibility(View.VISIBLE)
+                    }
                 }
             }
         }
 
         seeFileButton!!.setOnClickListener { view ->
-            val currentUri: File = mViewModel!!.getOutputUri()
-            currentFile = currentUri
-            Looper.getMainLooper().queue.run {
-                val actionView = Intent(applicationContext, MyCameraActivity::class.java)
-                passParameters(actionView)
+            val currentUri: File = Main2022.getOutputFIle()  //= mViewModel!!.getOutputUri()
+            if (currentUri != null) {
+                currentFile = currentUri
+                Handler(Looper.getMainLooper()).post {
+                    val actionView = Intent(applicationContext, MyCameraActivity::class.java)
+                    passParameters(actionView)
+                }
             }
             println("After apply effects, seeFileButton OnClick thread")
         }
@@ -151,6 +150,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             ;//;applyEffects()
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -169,7 +169,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 unauthorized = false
 
 
-
                 //Main2022.setListEffects(listEffects)
                 //initAuthorized()
                 hasRun = true
@@ -182,6 +181,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
         }
     }
+
     /*
     private fun initAuthorized() {
         var index = 0
@@ -444,14 +444,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         progressBar!!.setVisibility(View.GONE)
         cancelButton!!.setVisibility(View.GONE)
         goButton!!.setVisibility(View.VISIBLE)
-    }
-
-    /**
-     * Get the blur level from the radio button as an integer
-     * @return Integer representing the amount of times to blur the image
-     */
-    private fun getBlurLevel(): Int {
-        return 1
     }
 
 }

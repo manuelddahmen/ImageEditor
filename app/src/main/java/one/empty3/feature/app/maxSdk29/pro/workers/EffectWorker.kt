@@ -95,6 +95,7 @@ class EffectWorker
                     //dir = "appDir"
                     if (classnames.size == 0) {
 
+                        Main2022.setOutputFile(null)
                         return Result.failure()
                     }
 
@@ -143,6 +144,7 @@ class EffectWorker
                                                 ("Error while applying filter" + (processFile!!.javaClass.name)),
                                                 Toast.LENGTH_LONG
                                             ).show()
+                                            Main2022.setOutputFile(null)
                                             return Result.failure()
                                         } else {
 
@@ -190,6 +192,7 @@ class EffectWorker
                                             ("Source file doesn't exist" + (processFile!!.javaClass.name)),
                                             Toast.LENGTH_LONG
                                         ).show()
+                                        Main2022.setOutputFile(null)
                                         return Result.failure()
                                     }
                                 } catch (ex: Exception) {
@@ -197,6 +200,7 @@ class EffectWorker
                                     println(errMessage)
                                     ex.printStackTrace()
 
+                                    Main2022.setOutputFile(null)
                                     return Result.failure()
                                 }
                                 currentProcessFile = currentOutputFile
@@ -235,9 +239,10 @@ class EffectWorker
             val outputData = Data.Builder()
                 .putString(Constants.KEY_IMAGE_URI, currentOutputFileFinal.toString())
                 .build()
-
+            Main2022.setOutputFile(currentOutputFileFinal!!)
             return Result.success(outputData)
         } else {
+            Main2022.setOutputFile(null)
             return Result.failure()
         }
     }
