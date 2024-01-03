@@ -20,7 +20,6 @@ import static one.empty3.feature.app.maxSdk29.pro.Constants.IMAGE_MANIPULATION_W
 import static one.empty3.feature.app.maxSdk29.pro.Constants.TAG_OUTPUT;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -58,7 +57,7 @@ public class EffectsViewModel extends ViewModel {
         super();
         mWorkManager = WorkManager.getInstance(application);
 
-        mImageUri = getImageUri(application.getApplicationContext());
+        mImageUri = getImageUri();
 
         // This transformation makes sure that whenever the current work Id changes the WorkInfo
         // the UI is listening to changes
@@ -150,7 +149,10 @@ public class EffectsViewModel extends ViewModel {
     }
 
     private File uriOrNull(String uriString) {
-        return new File(uriString);
+        if(uriString!=null)
+            return new File(uriString);
+        else
+            return null;
     }
 
     /**
@@ -162,10 +164,11 @@ public class EffectsViewModel extends ViewModel {
         Main2022.setCurrentFile(currentFile);
     }
 
-    private File getImageUri(Context context) {
+    public File getImageUri() {
 
         return currentFile;
     }
+
 
     public void setListEffects(@Nullable HashMap<String, ProcessFile> listEffects) {
         this.listEffects = listEffects;

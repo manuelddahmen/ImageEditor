@@ -83,25 +83,24 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         progressBar = findViewById<ProgressBar>(R.id.progress_bar)
 
         goButton!!.setOnClickListener { _ ->
-            run {
                 Main2022.setListEffects(listEffects)
                 mViewModel!!.setImageUri(currentFile.absolutePath)
                 mViewModel!!.applyEffect(currentFile)
-            }
         }
 
         mViewModel!!.outputWorkInfo.observe(this) { listOfWorkInfo ->
 
             // If there are no matching work info, do nothing
-            if (listOfWorkInfo == null || listOfWorkInfo.isEmpty()) {
+            if (listOfWorkInfo == null || listOfWorkInfo.isEmpty()
+                || listOfWorkInfo.get(0).state == WorkInfo.State.ENQUEUED) {
 
-            } else {
+            } else  {
 
                 // We only care about the first output status.
                 // Every continuation has only one worker tagged TAG_OUTPUT
                 val workInfo: WorkInfo = listOfWorkInfo.get(0)
 
-                val finished = workInfo.state.isFinished
+                val finished = workInfo.state.isFinished && !workInfo.state.equals(WorkInfo.State.RUNNING)
                 if (!finished) {
                     showWorkInProgress()
                 } else {
@@ -131,7 +130,10 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
             println("After apply effects, seeFileButton OnClick thread")
         }
 
-        cancelButton!!.setOnClickListener { view -> mViewModel!!.cancelWork() }
+        cancelButton!!.setOnClickListener {
+            view -> mViewModel!!.cancelWork()
+            mViewModel!!.setImageUri(null)
+        }
 
         init(savedInstanceState)
 
