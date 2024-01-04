@@ -98,9 +98,9 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
                 // We only care about the first output status.
                 // Every continuation has only one worker tagged TAG_OUTPUT
-                val workInfo: WorkInfo = listOfWorkInfo.get(0)
+                val workInfo: WorkInfo = listOfWorkInfo[0]
 
-                val finished = workInfo.state.isFinished && !workInfo.state.equals(WorkInfo.State.RUNNING)
+                val finished = workInfo.state.isFinished // || listOfWorkInfo[0].state != WorkInfo.State.RUNNING
                 if (!finished) {
                     showWorkInProgress()
                 } else {

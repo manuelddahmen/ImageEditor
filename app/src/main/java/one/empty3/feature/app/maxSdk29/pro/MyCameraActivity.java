@@ -53,6 +53,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -267,7 +268,10 @@ public class MyCameraActivity extends ActivitySuperClass {
                     }
 
 
-                    Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
+                    Uri photoURI = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", (target == null) ? currentFile : target.toFile());
+                    }
 
 
                     //ActivityResultContracts.CreateDocument createDocument = new ActivityResultContracts.CreateDocument("image/jpeg");
@@ -632,7 +636,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     }
 
-    int getImageRatio(Bitmap bitmap) {
+    int getImageRatio(@NonNull Bitmap bitmap) {
         return bitmap.getWidth() / bitmap.getHeight();
     }
 
@@ -681,13 +685,18 @@ public class MyCameraActivity extends ActivitySuperClass {
     }
 
 
+    @Nullable
     private PixM getSelectedZone(RectF selectedCords) {
         if (currentFile != null) {
-            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
+            try {
+                PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
 
-            return pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
-                    (int)(selectedCords.right-selectedCords.left),
-                    (int)(selectedCords.bottom- selectedCords.top));
+                return pixM.copySubImage((int) (selectedCords.left), (int) (selectedCords.top),
+                        (int) (selectedCords.right - selectedCords.left),
+                        (int) (selectedCords.bottom - selectedCords.top));
+            } catch (RuntimeException ex) {
+                ex.printStackTrace();
+            }
         }
         return null;
     }
@@ -724,7 +733,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     private void save(Bitmap toSave) {
     }
 
-    private void openUserData(View view) {
+    private void openUserData(@NonNull View view) {
         //saveImageState(isWorkingResolutionOriginal());
         Intent intent = new Intent(view.getContext(), LicenceUserData.class);
         passParameters(intent);
@@ -956,6 +965,9 @@ public class MyCameraActivity extends ActivitySuperClass {
                     choose_directoryData = new FileInputStream(choose_directoryDataFile);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                    return;
+                } catch (RuntimeException ex) {
+                    ex.printStackTrace();
                     return;
                 }
             }
