@@ -46,22 +46,20 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@string/p_x_y_color" />
-
+        
         <EditText
-            android:id="@+id/x"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:autofillHints="X line">
-
-        </EditText>
-
+                android:id="@+id/x"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="X line"
+                />
+        
         <EditText
-            android:id="@+id/y"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:autofillHints="Y column">
-
-        </EditText>
+                android:id="@+id/y"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:autofillHints="Y column"
+                />
 
         <EditText
             android:id="@+id/z"

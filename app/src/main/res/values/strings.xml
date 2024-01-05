@@ -297,4 +297,6 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="set_permissions_in_settings" translatable="false">Go to Settings -> Apps and Notifications ->
         WorkManager Demo -> App Permissions and grant access to Storage.</string>
     <string name="cancel_work">Cancel</string>
-</resources>
+    <string name="button" translatable="false">Button</string>
+    <string name="buttonCodeBfore" translatable="false">Button</string>
+    buttonCodeBfore</resources>
