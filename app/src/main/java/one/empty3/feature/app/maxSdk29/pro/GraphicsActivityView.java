@@ -86,11 +86,12 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
     private void printValues() {
 
-        stringDoubleHashMap.forEach((s, aDouble) -> System.out.println(s + ":=" + aDouble));
-        for (int i = 0; i < cords.length; i++) {
-            System.out.println(cordsConsts[i] + ":=" + cords[i]);
+        if(stringDoubleHashMap!=null) {
+            stringDoubleHashMap.forEach((s, aDouble) -> System.out.println(s + ":=" + aDouble));
+            for (int i = 0; i < cords.length; i++) {
+                System.out.println(cordsConsts[i] + ":=" + cords[i]);
+            }
         }
-
     }
 
 
@@ -104,6 +105,10 @@ public class GraphicsActivityView extends ActivitySuperClass {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(stringDoubleHashMap==null) {
+            stringDoubleHashMap = new HashMap<>();
+        }
 
         Logger.getAnonymousLogger().log(Level.INFO,
                 "currentFile=" + getClass().toString() + " " + currentFile);

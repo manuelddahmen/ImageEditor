@@ -43,6 +43,7 @@ import java.util.UUID
 
 
 class ChooseEffectsActivity2 : ActivitySuperClass() {
+    private var started: Boolean = false
     private lateinit var applyEffects1: Button
     private var progressBar: ProgressBar? = null
     private var cancelButton: Button? = null
@@ -88,16 +89,20 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         applyEffects1 = findViewById<Button>(R.id.applyEffects)
 
         goButton!!.setOnClickListener { _ ->
+            if(currentFile!=null) {
                 Main2022.setListEffects(listEffects)
                 mViewModel!!.setImageUri(currentFile.absolutePath)
+                started = true
                 mViewModel!!.applyEffect(currentFile)
+            }
         }
 
         mViewModel!!.outputWorkInfo.observe(this) { listOfWorkInfo ->
 
             // If there are no matching work info, do nothing
-            if (listOfWorkInfo == null || listOfWorkInfo.isEmpty()
-                || listOfWorkInfo.get(0).state == WorkInfo.State.ENQUEUED) {
+            if (listOfWorkInfo == null || listOfWorkInfo.isEmpty()|| !started
+                /*|| listOfWorkInfo.get(0).state == WorkInfo.State.ENQUEUED*/) {
+                println("Not started")
 
             } else  {
 
@@ -106,19 +111,24 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 val workInfo: WorkInfo = listOfWorkInfo[0]
 
                 val finished = workInfo.state.isFinished // || listOfWorkInfo[0].state != WorkInfo.State.RUNNING
-                if (!finished) {
+                if (!finished && Main2022.getOutputFIle()==null) {
                     showWorkInProgress()
+                    println("In Progress")
                 } else {
                     showWorkFinished()
+                    println("Finished")
                     val outputData = workInfo.outputData
 
                     val outputImageUri = outputData.getString(Constants.KEY_IMAGE_URI)
 
                     // If there is an output file show "See File" button
                     if (!TextUtils.isEmpty(outputImageUri)) {
-                        mViewModel!!.setOutputUri(outputImageUri)
                         seeFileButton!!.setVisibility(View.VISIBLE)
                     }
+                    started = false
+                    this.currentFile = Main2022.getOutputFIle()
+                    val actionView = Intent(applicationContext, MyCameraActivity::class.java)
+                    passParameters(actionView)
                 }
             }
         }
@@ -137,7 +147,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
         cancelButton!!.setOnClickListener {
             view -> mViewModel!!.cancelWork()
-            mViewModel!!.setImageUri(null)
+            //mViewModel!!.setImageUri(null)
         }
 
         // set OnClick
