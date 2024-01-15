@@ -377,6 +377,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public void testIfValidBitmap() {
+        try {
         if (currentFile.getCurrentFile() == null)
             loadInstanceState();
         if (currentFile != null) {
@@ -384,19 +385,18 @@ public class ActivitySuperClass extends AppCompatActivity {
                 currentFile.addNull(null);
                 return;
             }
-            try {
                 FileInputStream fileInputStream = new FileInputStream(currentFile.getCurrentFile());
                 if (BitmapFactory.decodeStream(fileInputStream)
                         == null)
                     currentFile.addNull(null);
 
+        }
 
-            } catch (FileNotFoundException e) {
-                System.err.println("Error file:" + currentFile.getCurrentFile());
-                //currentFile.addAtCurrentPlace(); = null;
-            } catch (RuntimeException exception) {
-                //currentFile.addNull(null)
-            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error file:" + currentFile.getCurrentFile());
+            //currentFile.addAtCurrentPlace(); = null;
+        } catch (RuntimeException exception) {
+            //currentFile.addNull(null)
         }
     }
 

@@ -220,7 +220,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null && currentFile.getCurrentFile().exists()) {
+                if (currentFile != null && currentFile.getCurrentFile()!=null && currentFile.getCurrentFile().exists()) {
                     Uri uri = Uri.fromFile(currentFile.getCurrentFile());
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile.getCurrentFile());
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -238,7 +238,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null && currentFile.getCurrentFile().exists()) {
+                if (currentFile != null && currentFile.getCurrentFile()!=null && currentFile.getCurrentFile().exists()) {
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_MEDIA_IMAGES};
@@ -513,13 +513,15 @@ public class MyCameraActivity extends ActivitySuperClass {
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
-                System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
-                new Utils().setImageView(imageView, photo);
-                //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
-                System.err.println("Image main intent loaded");
-                //saveImageState();
-                var maxRes = resolution;
+                if(file!=null) {
+                    Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
+                    System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
+                    new Utils().setImageView(imageView, photo);
+                    //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
+                    System.err.println("Image main intent loaded");
+                    //saveImageState();
+                    var maxRes = resolution;
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -657,7 +659,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         File imageFile = getFilesFile("imageViewOriginal.jpg");
         File imageFileLow = getFilesFile(IMAGE_VIEW_JPG);
 
-        if (file && imageFile.exists()) {
+        if (file && imageFile!=null && imageFile.exists()) {
             try {
                 Bitmap imageViewBitmap = null;
                 if (isWorkingResolutionOriginal()) {
@@ -826,14 +828,14 @@ public class MyCameraActivity extends ActivitySuperClass {
         Uri uriSavedImage = Uri.fromFile(file2);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
-        if (!dir1.exists()) if (!dir1.mkdirs()) {
+        if (dir1!=null && !dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created $dir1");
         }
-        if (!dir2.exists()) if (!dir2.mkdirs()) {
+        if (dir2!=null && !dir2.exists()) if (!dir2.mkdirs()) {
             System.err.println("Dir not created $dir2");
         }
         try {
-            if (!file1.exists()) {
+            if (file1!=null && !file1.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file1, shouldOverwrite);
                 System.err.print("Image written 1/2 " + file1 + " return");
                 saveImageState(isWorkingResolutionOriginal());
@@ -844,7 +846,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             Log.e("SAVE FILE", "writePhoto: erreur file 1/2");
         }
         try {
-            if (!file2.exists()) {
+            if (file2!=null && !file2.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file2, shouldOverwrite);
                 System.err.print("Image written 2/2 " + file2 + " return");
                 //System.err.println("File (photo) " + file2.getAbsolutePath());
@@ -1023,14 +1025,14 @@ public class MyCameraActivity extends ActivitySuperClass {
                 FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.APPLICATION_ID + ".provider", currentFile.getCurrentFile());
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getCurrentFile().getName());
                 String fileStr = currentFile.getCurrentFile().getName();
-                if (myPath.toFile().exists()) {
+                if (myPath.toFile()!=null && myPath.toFile().exists()) {
 
 
                 } else {
                     File dir = new File(currentDir + File.separator + "FeatureApp" + File.separator);
                     File file = new File(currentDir + File.separator + "FeatureApp" + File.separator + fileStr);
 
-                    if (myPath.toFile().exists() && myPath.toFile().isDirectory()) {
+                    if (myPath.toFile()!=null && myPath.toFile().exists() && myPath.toFile().isDirectory()) {
 
                     }
                     if (new File(myPath.toFile().getParent()).isDirectory() && !new File(myPath.toFile().getParent()).exists()) {
@@ -1103,7 +1105,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     public void addText(View view) {
-        if (currentFile != null && imageView!=null && currentFile.getCurrentFile().exists() ) {
+        if (currentFile != null && imageView!=null && currentFile.getCurrentFile()!=null &&currentFile.getCurrentFile().exists() ) {
             Intent textIntent = new Intent(Intent.ACTION_VIEW);
             textIntent.setDataAndType(Uri.fromFile(currentFile.getCurrentFile()), "image/jpg");
             textIntent.setClass(getApplicationContext(), TextActivity.class);

@@ -723,7 +723,7 @@ class Utils {
         if (intent.data != null && intent.data is Uri)
             return intent.data!!.getPath()?.let { File(it) }!!
         if (intent.data != null) {
-            return intent.data as File
+            //return intent.data as File
         }
         if (intent.data != null)
             return intent.data?.toFile()!!
