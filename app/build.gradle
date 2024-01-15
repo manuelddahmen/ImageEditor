@@ -6,10 +6,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "org.jetbrains.kotlin.android"
 
-
-// Add the information to the bottom of the file.
-//apply plugin: 'com.huawei.agconnect'
-
 if (hasProperty('buildScan')) {
     buildScan {
         termsOfServiceUrl = 'https://gradle.com/terms-of-service'
@@ -17,7 +13,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 334702934
+def code = 335402934
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
