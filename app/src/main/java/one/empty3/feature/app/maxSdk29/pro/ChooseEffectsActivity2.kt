@@ -89,11 +89,11 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         applyEffects1 = findViewById<Button>(R.id.applyEffects)
 
         goButton!!.setOnClickListener { _ ->
-            if(currentFile!=null) {
+            if(currentFile.currentFile!=null) {
                 Main2022.setListEffects(listEffects)
-                mViewModel!!.setImageUri(currentFile.absolutePath)
+                mViewModel!!.setImageUri(currentFile.currentFile.absolutePath)
                 started = true
-                mViewModel!!.applyEffect(currentFile)
+                mViewModel!!.applyEffect(currentFile.currentFile)
             }
         }
 
@@ -126,7 +126,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         seeFileButton!!.setVisibility(View.VISIBLE)
                     }
                     started = false
-                    this.currentFile = Main2022.getOutputFIle()
+                    this.currentFile.addAtCurrentPlace(DataApp(Main2022.getOutputFIle()))
                     val actionView = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(actionView)
                 }
@@ -136,7 +136,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         seeFileButton!!.setOnClickListener { view ->
             val currentUri: File = Main2022.getOutputFIle()  //= mViewModel!!.getOutputUri()
             if (currentUri != null) {
-                currentFile = currentUri
+                currentFile.addAtCurrentPlace(DataApp( currentUri))
                 Handler(Looper.getMainLooper()).post {
                     val actionView = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(actionView)
@@ -207,13 +207,13 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         var index = 0
         applyEffects1.setOnClickListener {
 
-            if(currentFile==null)
+            if(currentFile.currentFile==null)
                 return@setOnClickListener
             try {
-                currentFile = Utils().writePhoto(
-                    this, ImageIO.read(currentFile).getBitmap(),
+                currentFile.addAtCurrentPlace(DataApp(Utils().writePhoto(
+                    this, ImageIO.read(currentFile.currentFile).getBitmap(),
                     "before-effect"
-                )
+                )))
             } catch (ex:RuntimeException ) {
                 return@setOnClickListener
             }
@@ -225,10 +225,10 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
 
             run {
-                var totalOutput: File = currentFile
+                var totalOutput: File = currentFile.currentFile
 
                 println("Clicked on Effect button, running effects")
-                val fileIn: File = File(currentFile.toString())
+                val fileIn: File = File(currentFile.currentFile.toString())
 
                 Log.d("Initial input file", fileIn.toString())
                 Log.d(
@@ -243,7 +243,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 /*uri = FileProvider.getUriForFile(
             this@MyCameraActivity,
             BuildConfig.APPLICATION_ID + ".provider",
-            currentFile
+            currentFile.currentFile
         )
         dirRoot =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
@@ -253,8 +253,8 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 var dir = ""
 
                 dir = "photoDir"
-                dirRoot = currentFile.toString()
-                    .substring(0, currentFile.toString().lastIndexOf(File.separator))
+                dirRoot = currentFile.currentFile.toString()
+                    .substring(0, currentFile.currentFile.toString().lastIndexOf(File.separator))
 
                 var currentProcessFile: File = fileIn
                 val currentProcessDir = File(
@@ -263,7 +263,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         fileIn.absolutePath.lastIndexOf("/")
                     )
                 )
-                var currentOutputFile: File = currentFile
+                var currentOutputFile: File = currentFile.currentFile
                 val currentOutputDir: File = currentProcessDir
                 index = -1
                 val name = currentProcessFile.name
@@ -275,7 +275,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
 
                 var processFile: ProcessFile? = null
 
-                var currentProcessInFile: File = currentFile
+                var currentProcessInFile: File = currentFile.currentFile
                 classnames.forEach { it1 ->
                     if (it1 == null || it1.isBlank()) {
                         return@forEach
@@ -389,8 +389,9 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    currentFile =
-                        Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
+                    currentFile.addAtCurrentPlace(DataApp(
+                        Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-")
+                    ))
 
                     val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(intent2)
@@ -439,7 +440,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private fun applyEffects() {
         initAuthorized()
 
-//        currentFile =
+//        currentFile.currentFile =
 //            Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
 //
 //        val intent2 = Intent(applicationContext, MyCameraActivity::class.java)

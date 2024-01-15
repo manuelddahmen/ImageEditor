@@ -468,7 +468,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 if (activity != null) {
                     File file = new Utils().writePhoto(activity, mCopy.copy(Bitmap.Config.ARGB_8888,
                             false), "face-");
-                    this.activity.currentFile = file;
+                    this.activity.currentFile.addAtCurrentPlace(new DataApp(file));
                 }
                 super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
             }

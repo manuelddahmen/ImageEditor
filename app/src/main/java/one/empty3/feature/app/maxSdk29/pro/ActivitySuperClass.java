@@ -87,7 +87,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public String variableName;
     public String variable;
     protected ImageViewSelection imageView;
-    protected File currentFile;
+    protected Undo currentFile = Undo.getUndo();
     protected String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     protected Bitmap currentBitmap;
     protected int maxRes = R.string.maxRes_1200;
@@ -107,11 +107,11 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public File getCurrentFile() {
-        return currentFile;
+        return currentFile.getCurrentFile();
     }
 
     public void setCurrentFile(File currentFile) {
-        this.currentFile = currentFile;
+        this.currentFile.addAtCurrentPlace(new DataApp(currentFile));
     }
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
@@ -155,7 +155,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         getParameters(intent);
 
 
-        if (currentFile == null) {
+        if (currentFile.getCurrentFile() == null) {
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 if ("text/plain".equals(type)) {
                     handleSendText(intent); // Handle text being sent
@@ -188,10 +188,10 @@ public class ActivitySuperClass extends AppCompatActivity {
 //        new Utils().installReferrer(this);
 
 
-        if (currentFile == null && savedInstanceState != null) {
+        if (currentFile.getCurrentFile() == null && savedInstanceState != null) {
             try {
                 if (savedInstanceState.getString("currentFile") != null) {
-                    currentFile = new File(savedInstanceState.getString("currentFile"));
+                    currentFile.addAtCurrentPlace(new DataApp(new File(savedInstanceState.getString("currentFile"))));
                 }
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
@@ -206,10 +206,10 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         try {
             if (currentFile != null) {
-                Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile)).bitmap;
-                currentFile = new Utils().writePhoto(
-                        this, bitmap, "reload");
-                loadImage(new FileInputStream(currentFile), true);
+                Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap;
+                currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(
+                        this, bitmap, "reload")));
+                loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();
@@ -301,8 +301,8 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     private void retrieveCurrentFile() {
-        if (currentFile != null && !currentFile.exists()) {
-            currentFile = null;
+        if (currentFile != null && !currentFile.getCurrentFile().exists()) {
+            //currentFile.addNull(null)
             /*Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
                     R.drawable.apn512x512);
             if(drawable instanceof BitmapDrawable) {
@@ -359,12 +359,12 @@ public class ActivitySuperClass extends AppCompatActivity {
                 }
             }
             try {
-                String currentFile1 = properties.getProperty("currentFile", currentFile.getAbsolutePath());
-                currentFile = new File(currentFile1);
+                String currentFile1 = properties.getProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
+                currentFile.addAtCurrentPlace(new DataApp(new File(currentFile1)));
                 if (currentFile1 == null || currentFile1.length() == 0) {
                     File imageViewPersistantFile = getImageViewPersistantFile();
                     if (imageViewPersistantFile.exists()) {
-                        currentFile = imageViewPersistantFile;
+                        currentFile.addAtCurrentPlace(new DataApp(imageViewPersistantFile));
                     }
                 }
             } catch (RuntimeException ex) {
@@ -377,25 +377,25 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public void testIfValidBitmap() {
-        if (currentFile == null)
+        if (currentFile.getCurrentFile() == null)
             loadInstanceState();
         if (currentFile != null) {
-            if (!currentFile.exists()) {
-                currentFile = null;
+            if (!currentFile.getCurrentFile().exists()) {
+                currentFile.addNull(null);
                 return;
             }
             try {
-                FileInputStream fileInputStream = new FileInputStream(currentFile);
+                FileInputStream fileInputStream = new FileInputStream(currentFile.getCurrentFile());
                 if (BitmapFactory.decodeStream(fileInputStream)
                         == null)
-                    currentFile = null;
+                    currentFile.addNull(null);
 
 
             } catch (FileNotFoundException e) {
-                System.err.println("Error file:" + currentFile);
-                currentFile = null;
+                System.err.println("Error file:" + currentFile.getCurrentFile());
+                //currentFile.addAtCurrentPlace(); = null;
             } catch (RuntimeException exception) {
-                currentFile = null;
+                //currentFile.addNull(null)
             }
         }
     }
@@ -426,12 +426,12 @@ public class ActivitySuperClass extends AppCompatActivity {
 
                 }
             }
-            currentFile1 = properties.getProperty("currentFile", (currentFile == null ? null
-                    : currentFile.getAbsolutePath()));
+            currentFile1 = properties.getProperty("currentFile", (currentFile.getCurrentFile() == null ? null
+                    : currentFile.getCurrentFile().getAbsolutePath()));
             if (currentFile1 != null)
-                currentFile = new File(currentFile1);
+                currentFile.addAtCurrentPlace(new DataApp(new File(currentFile1)));
             else
-                currentFile = getImageViewPersistantFile();
+                currentFile.addAtCurrentPlace(new DataApp( getImageViewPersistantFile()));
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
@@ -443,12 +443,12 @@ public class ActivitySuperClass extends AppCompatActivity {
             else
                 currentFile2 = new File(currentFile1);
             if (currentFile2 != null && currentFile2.exists()) {
-                currentFile = currentFile2;
+                currentFile.addAtCurrentPlace(new DataApp( currentFile2));
             }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
-        if (currentFile == null)
+        if (currentFile.getCurrentFile() == null)
             Toast.makeText(getApplicationContext(), "Cannot find current file (working copy)", Toast.LENGTH_SHORT)
                     .show();
     }
@@ -464,14 +464,14 @@ public class ActivitySuperClass extends AppCompatActivity {
 
             try {
                 if (currentFile != null) {
-                    properties.setProperty("currentFile", currentFile.getAbsolutePath());
+                    properties.setProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
                     File file = new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
-                                    new FileInputStream(currentFile)),
+                                    new FileInputStream(currentFile.getCurrentFile())),
                             getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
                     if (file != null)
-                        currentFile = file;
+                        currentFile.addAtCurrentPlace(new DataApp(file));
                 }
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -490,7 +490,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     public void passParameters(Intent to) {
 
         if (currentFile != null)
-            to.setDataAndType(Uri.fromFile(currentFile), "image/jpg");
+            to.setDataAndType(Uri.fromFile(currentFile.getCurrentFile()), "image/jpg");
         to.putExtra("maxRes", getMaxRes());
         new Utils().putExtra(to, cords, cordsConsts, variableName, variable);
 
@@ -507,7 +507,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     public void getParameters(Intent from) {
         Utils utils = new Utils();
-        currentFile = utils.getCurrentFile(from, this);
+        currentFile.addAtCurrentPlace(new DataApp(utils.getCurrentFile(from, this)));
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
@@ -592,7 +592,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             System.err.println("Get file (bitmap) : " + photo);
         }
         if (photo != null && isCurrentFile) {
-            currentFile = new Utils().writePhoto(this, photo, "loaded_image-");
+            currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(this, photo, "loaded_image-")));
             if (imageView != null)
                 new Utils().setImageView(this, imageView);
             return photo;

@@ -151,7 +151,7 @@ class ProcessFileArrayAdapter() :
 
                     if (activity.currentFile != null) {
                         val runEffectsOnThumbnail: File? =
-                            Utils().runEffectsOnThumbnail(activity.currentFile, p, processFile11);
+                            Utils().runEffectsOnThumbnail(activity.currentFile.currentFile, p, processFile11);
                         val imageViewEffectPreview: ImageViewSelection =
                             holder.itemView.findViewById(R.id.imageViewEffectPreview)
                         if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())

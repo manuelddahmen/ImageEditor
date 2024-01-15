@@ -75,8 +75,8 @@ class TextActivity() : ActivitySuperClass() {
         } else {
             currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
         }*/
-        if(currentFile!=null&&currentFile.exists()) {
-            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+        if(currentFile!=null&&currentFile.currentFile.exists()) {
+            currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile.currentFile))
             if(currentImage!=null) {
                 Utils().setImageView(imageView, currentImage!!)
             }
@@ -88,7 +88,7 @@ class TextActivity() : ActivitySuperClass() {
                 val name: String = ("" + UUID.randomUUID())
 //android:enableOnBackInvokedCallback="true"
 
-                textIntent.setDataAndType(Uri.fromFile(currentFile), "image/jpg")
+                textIntent.setDataAndType(Uri.fromFile(currentFile.currentFile), "image/jpg")
                 passParameters(textIntent);
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
@@ -187,10 +187,10 @@ class TextActivity() : ActivitySuperClass() {
         val textString: String =
             (findViewById<EditText>(R.id.textViewOnImage).text.toString())
 
-        currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile))
+        currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile.currentFile))
         val drawTextToBitmap: File? = drawTextToBitmap(textString)
         if (drawTextToBitmap != null && currentImage!=null) {
-            currentFile = drawTextToBitmap
+            currentFile.addAtCurrentPlace(DataApp(drawTextToBitmap))
             imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
             Utils().setImageView(imageView, currentImage!!)
             System.out.println("ImageView Text UPDATED")

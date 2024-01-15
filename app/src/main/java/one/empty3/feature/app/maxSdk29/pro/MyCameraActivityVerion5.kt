@@ -498,7 +498,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //    }
 //
 //    fun toastButtonDisabled(button: View?) {
-//        if (currentFile == null) {
+//        if (currentFile.getCurrentFile() == null) {
 //            val text = getString(R.string.button_current_file_is_null)
 //            val duration = Toast.LENGTH_LONG
 //            val toast = Toast.makeText(requireActivity3().applicationContext, text, duration)
@@ -1020,7 +1020,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //
 //    override fun onResume() {
 //        super.onResume()
-//        if (currentFile == null) loadInstanceState()
+//        if (currentFile.getCurrentFile() == null) loadInstanceState()
 //    }
 //
 //    companion object {

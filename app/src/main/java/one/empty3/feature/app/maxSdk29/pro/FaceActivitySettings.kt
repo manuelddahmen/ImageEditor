@@ -126,7 +126,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
         if (currentFile != null) {
             if (currentBitmap == null)
-                currentBitmap = ImageIO.read(currentFile).getBitmap()
+                currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
 
           //  var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
 
@@ -368,7 +368,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 type = "application/*.fac"
-                putExtra("currentFile", currentFile)
+                putExtra("currentFile", currentFile.currentFile)
                 putExtra("maxRes", maxRes)
                 putExtra(Intent.EXTRA_TITLE, "model.fac")
                 //                   setDataAndType(photoURI, "application/*.fac")
@@ -669,7 +669,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             )
 
             if (currentFileTmp != null) {
-                currentFile = currentFileTmp
+                currentFile.addAtCurrentPlace(DataApp(currentFileTmp))
                 currentBitmap = faceOverlayView.mCopy
             }
 

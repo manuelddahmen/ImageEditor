@@ -505,17 +505,17 @@ class Utils {
     }
 
     fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
-        if (activity.currentFile == null) {
-            activity.currentFile = activity.imageViewPersistantFile
+        if (activity.currentFile.getCurrentFile() == null) {
+            activity.currentFile!!.addAtCurrentPlace(DataApp(activity.imageViewPersistantFile))
         }
         var imageView: ImageViewSelection? = activity.imageView
         if (imageView == null) {
             activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
             imageView = activity.imageView
         }
-        if (activity.currentFile != null && activity.currentFile.exists()) {
+        if (activity.currentFile.currentFile != null && activity.currentFile.currentFile.exists()) {
             try {
-                val fileInputStream = FileInputStream(activity.currentFile) ?: return false
+                val fileInputStream = FileInputStream(activity.currentFile.currentFile) ?: return false
                 var mBitmap: Bitmap
                 try {
                     mBitmap =
@@ -532,7 +532,7 @@ class Utils {
                     options.outHeight = maxRes
                     options.outWidth = maxRes
 
-                    mBitmap = BitmapFactory.decodeFile(activity.currentFile.absolutePath, options)
+                    mBitmap = BitmapFactory.decodeFile(activity.currentFile.currentFile.absolutePath, options)
                 }
 
                 val maxRes = getMaxRes(activity)
@@ -639,7 +639,7 @@ class Utils {
                     if (activity.imageView != null) {
                         Utils().setImageView(activity.imageView, bitmap);
                     }
-                    activity.currentFile = imageFile
+                    activity.currentFile.addAtCurrentPlace(DataApp(imageFile))
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")
 
@@ -653,12 +653,13 @@ class Utils {
 
     public fun createCurrentUniqueFile(activity: ActivitySuperClass): File? {
         try {
-            if (activity.currentFile != null) {
-                val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile))
+            if (activity.currentFile.currentFile != null) {
+                val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                activity.currentFile =
-                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())
-                return activity.currentFile
+                activity.currentFile.addAtCurrentPlace(
+                    DataApp(
+                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())))
+                return activity.currentFile.currentFile
             }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()

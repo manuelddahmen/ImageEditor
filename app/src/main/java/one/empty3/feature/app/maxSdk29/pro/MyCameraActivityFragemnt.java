@@ -545,7 +545,7 @@
 //    }
 //
 //    public void toastButtonDisabled(View button) {
-//        if (currentFile == null) {
+//        if (currentFile.getCurrentFile() == null) {
 //            String text = getString(R.string.button_current_file_is_null);
 //            Integer duration = Toast.LENGTH_LONG;
 //

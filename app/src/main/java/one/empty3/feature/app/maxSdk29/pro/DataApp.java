@@ -28,11 +28,8 @@ class DataApp {
     private File originalSizeImage;
     private boolean isOriginalSize;
 
-    public DataApp(int maxRes, File image, File originalSizeImage, boolean isOriginalSize) {
-        this.maxRes = maxRes;
+    public DataApp(File image) {
         this.image = image;
-        this.originalSizeImage = originalSizeImage;
-        this.isOriginalSize = isOriginalSize;
     }
 
     public int getMaxRes() {

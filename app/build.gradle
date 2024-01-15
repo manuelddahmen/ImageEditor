@@ -17,7 +17,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 334302934
+def code = 334602934
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
@@ -164,7 +164,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         targetSdk 34
         compileSdk 34
-        minSdk 24
+        minSdk 26
         JavaVersion.VERSION_20
         versionCode code
         versionName "8.0"

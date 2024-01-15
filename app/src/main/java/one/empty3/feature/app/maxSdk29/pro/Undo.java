@@ -26,8 +26,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -35,15 +33,17 @@ import javaAnd.awt.image.imageio.ImageIO;
 
 public class Undo {
     private static int current = -1;
-    private static Undo currentUndo = null;
-
     private List<DataApp> data = new ArrayList<DataApp>();
+    private static Undo currentUndo;
 
-    public static Undo getUndo() {
-        if (currentUndo == null) {
+    public static Undo getUndo () {
+        if(currentUndo==null) {
             currentUndo = new Undo();
         }
         return currentUndo;
+    }
+    private Undo() {
+
     }
 
     private List<DataApp> getData() {
@@ -67,14 +67,7 @@ public class Undo {
         throw new UnsupportedOperationException("Not implemented");
     }
 
-    public void onClickRedo() {
-        current++;
-        if (current >= data.size()) {
-            current--;
-        }
-    }
-
-    public void doStep(DataApp dataApp) {
+    public void addAtCurrentPlace(DataApp dataApp) {
         if (data.size() > current + 1) {
             data.subList(current + 1, data.size()).clear();
         }
@@ -104,13 +97,33 @@ public class Undo {
         return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).bitmap;
     }
 
-    private Undo() {
-    }
-
     @NotNull
     public static Object isUndoInitialized() {
         if (currentUndo == null)
             return false;
         return true;
+    }
+
+    public DataApp back() {
+        if(current>0 && data.size()>0) {
+            current--;
+            return getDataApp();
+        }
+        return getDataApp();
+    }
+    public DataApp next() {
+        if(current<data.size()-1 && data.size()>1) {
+            current++;
+            return getDataApp();
+        }
+        return getDataApp();
+    }
+
+    private DataApp getCurrentData() {
+        return data.get(current);
+    }
+
+    public void addNull(Object o) {
+        addAtCurrentPlace(new DataApp(null));
     }
 }

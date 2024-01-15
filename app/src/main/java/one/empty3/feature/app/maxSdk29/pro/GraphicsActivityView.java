@@ -123,9 +123,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         if (currentFile != null) {
             if (getMaxRes() > 0) {
-                current = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap, getMaxRes());
+                current = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap, getMaxRes());
             } else {
-                current = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
+                current = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())));
             }
         }
         if (current == null) {
@@ -193,7 +193,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
             if(current!=null) {
                 Bitmap bitmap = current.normalize(0, 1).getBitmap();
                 File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
-                this.currentFile = graphics_math;
+                this.currentFile.addAtCurrentPlace(new DataApp( graphics_math));
                 new Utils().setImageView(image, bitmap);
             }
         } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException|RuntimeException e) {

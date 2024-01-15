@@ -54,7 +54,7 @@ class FaceActivity : ActivitySuperClass() {
         }
         if (currentFile != null) {
             if (currentBitmap == null)
-                currentBitmap = ImageIO.read(currentFile).getBitmap()
+                currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
@@ -78,11 +78,11 @@ class FaceActivity : ActivitySuperClass() {
                 faceOverlayView.isDrawing = false
                 faceOverlayView.isFinish = false
                 try {
-                    faceOverlayView.setBitmap(ImageIO.read(currentFile).getBitmap());
+                    faceOverlayView.setBitmap(ImageIO.read(currentFile.currentFile).getBitmap());
                     val writePhoto =
                         Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
-                    originalImage = currentFile
-                    currentFile = writePhoto
+                    originalImage = currentFile.currentFile
+                    currentFile.addAtCurrentPlace(DataApp(writePhoto))
                     //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
                 } catch (ex: RuntimeException) {
                     Toast.makeText(
@@ -290,8 +290,8 @@ class FaceActivity : ActivitySuperClass() {
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/*.fac"))
                     putExtra(Intent.EXTRA_TITLE, filesFile.name)
                     putExtra("maxRes", maxRes)
-                    if (currentFile != null) {
-                        putExtra("currentFile", currentFile)
+                    if (currentFile.currentFile != null) {
+                        putExtra("currentFile", currentFile.currentFile)
                     }
                 }
                 if (intent.resolveActivity(packageManager) != null) {
@@ -372,7 +372,7 @@ class FaceActivity : ActivitySuperClass() {
             val intentLoad = Intent(Intent.ACTION_GET_CONTENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 type = "application/*.fac"
-                putExtra("currentFile", currentFile)
+                putExtra("currentFile", currentFile.currentFile)
                 putExtra("maxRes", maxRes)
                 putExtra(Intent.EXTRA_TITLE, "model.fac")
                 //                   setDataAndType(photoURI, "application/*.fac")

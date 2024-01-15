@@ -96,7 +96,7 @@
                 tools:visibility="visible" />
     
     </LinearLayout>
-    <Button
+ <!--   <Button
         android:layout_width="match_parent"
         android:layout_height="48dp"
             android:id="@+id/applyEffects"
@@ -105,5 +105,5 @@
         android:theme="@style/Theme.FeatureAppmain"
 
         />
-
+-->
 </LinearLayout>
