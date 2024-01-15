@@ -10,7 +10,7 @@ class FaceEffectListActivity : ActivitySuperClass() {
         setContentView(R.layout.live_effects_recycler_view)
 
 
-        if (currentFile != null) {
+        if (currentFile.currentFile != null) {
             drawIfBitmap()
         } else {
             restoreInstanceState()

@@ -505,53 +505,62 @@ class Utils {
     }
 
     fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
-        if (activity.currentFile.getCurrentFile() == null) {
-            activity.currentFile!!.addAtCurrentPlace(DataApp(activity.imageViewPersistantFile))
-        }
-        var imageView: ImageViewSelection? = activity.imageView
-        if (imageView == null) {
-            activity.imageView = activity.findViewById<ImageViewSelection>(R.id.currentImageView)
-            imageView = activity.imageView
-        }
-        if (activity.currentFile.currentFile != null && activity.currentFile.currentFile.exists()) {
-            try {
-                val fileInputStream = FileInputStream(activity.currentFile.currentFile) ?: return false
-                var mBitmap: Bitmap
-                try {
-                    mBitmap =
-                        BitmapFactory.decodeStream(fileInputStream) ?: return false
-                } catch (ex: OutOfMemoryError) {
-                    Toast.makeText(
-                        activity.applicationContext,
-                        "No memory, will try smaller image",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                    ex.printStackTrace()
-                    val options = Options()
-                    options.outHeight = maxRes
-                    options.outWidth = maxRes
-
-                    mBitmap = BitmapFactory.decodeFile(activity.currentFile.currentFile.absolutePath, options)
-                }
-
-                val maxRes = getMaxRes(activity)
-
-                val cb: Bitmap
-                if (maxRes > 0)
-                    cb = Bitmap.createBitmap(
-                        mBitmap, 0, 0,
-                        mBitmap.width, mBitmap.height
-                    )
-                else
-                    cb = mBitmap.copy(Bitmap.Config.ARGB_8888, true)
-
-                val dim: Int = getMaxRes(activity)
-                if (imageView != null)
-                    Utils().setImageView(imageView, cb)
-                return true
-            } catch (e: FileNotFoundException) {
+        try {
+            if (activity.currentFile.getCurrentFile() == null) {
+                activity.currentFile!!.addAtCurrentPlace(DataApp(activity.imageViewPersistantFile))
             }
+            var imageView: ImageViewSelection? = activity.imageView
+            if (imageView == null) {
+                activity.imageView =
+                    activity.findViewById<ImageViewSelection>(R.id.currentImageView)
+                imageView = activity.imageView
+            }
+            if (activity.currentFile.currentFile != null && activity.currentFile.currentFile.exists()) {
+                try {
+                    val fileInputStream =
+                        FileInputStream(activity.currentFile.currentFile) ?: return false
+                    var mBitmap: Bitmap
+                    try {
+                        mBitmap =
+                            BitmapFactory.decodeStream(fileInputStream) ?: return false
+                    } catch (ex: OutOfMemoryError) {
+                        Toast.makeText(
+                            activity.applicationContext,
+                            "No memory, will try smaller image",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                        ex.printStackTrace()
+                        val options = Options()
+                        options.outHeight = maxRes
+                        options.outWidth = maxRes
+
+                        mBitmap = BitmapFactory.decodeFile(
+                            activity.currentFile.currentFile.absolutePath,
+                            options
+                        )
+                    }
+
+                    val maxRes = getMaxRes(activity)
+
+                    val cb: Bitmap
+                    if (maxRes > 0)
+                        cb = Bitmap.createBitmap(
+                            mBitmap, 0, 0,
+                            mBitmap.width, mBitmap.height
+                        )
+                    else
+                        cb = mBitmap.copy(Bitmap.Config.ARGB_8888, true)
+
+                    val dim: Int = getMaxRes(activity)
+                    if (imageView != null)
+                        Utils().setImageView(imageView, cb)
+                    return true
+                } catch (e: FileNotFoundException) {
+                }
+            }
+        } catch (ex:NullPointerException) {
+            return false
         }
         return false
     }

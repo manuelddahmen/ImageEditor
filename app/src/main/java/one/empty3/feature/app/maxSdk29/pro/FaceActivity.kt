@@ -52,10 +52,10 @@ class FaceActivity : ActivitySuperClass() {
         } catch (ex : RuntimeException) {
             ex.printStackTrace()
         }
-        if (currentFile != null) {
-            if (currentBitmap == null)
+        if (currentFile.currentFile != null) {
+            if (currentBitmap == null) {
                 currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
-
+            }
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
             try {

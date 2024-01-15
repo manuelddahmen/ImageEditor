@@ -149,7 +149,7 @@ class ProcessFileArrayAdapter() :
                         processFile11 = Main2022.listProcessClasses[effectClassModele1]!!
                     val p = PixM(30, 30)
 
-                    if (activity.currentFile != null) {
+                    if (activity.currentFile.currentFile != null) {
                         val runEffectsOnThumbnail: File? =
                             Utils().runEffectsOnThumbnail(activity.currentFile.currentFile, p, processFile11);
                         val imageViewEffectPreview: ImageViewSelection =

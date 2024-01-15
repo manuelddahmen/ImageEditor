@@ -121,7 +121,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         current = null;
 
-        if (currentFile != null) {
+        if (currentFile.getCurrentFile() != null) {
             if (getMaxRes() > 0) {
                 current = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap, getMaxRes());
             } else {

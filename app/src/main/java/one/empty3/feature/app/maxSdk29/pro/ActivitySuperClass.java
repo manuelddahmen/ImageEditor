@@ -199,13 +199,13 @@ public class ActivitySuperClass extends AppCompatActivity {
         }
         if (imageView == null)
             imageView = findViewById(R.id.currentImageView);
-        if (currentFile != null) {
+        if (currentFile.getCurrentFile() != null) {
             testIfValidBitmap();
         } else
             loadInstanceState();
 
         try {
-            if (currentFile != null) {
+            if (currentFile.getCurrentFile() != null) {
                 Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap;
                 currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(
                         this, bitmap, "reload")));
@@ -301,7 +301,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     private void retrieveCurrentFile() {
-        if (currentFile != null && !currentFile.getCurrentFile().exists()) {
+        if (currentFile != null && currentFile.getCurrentFile()!=null && !currentFile.getCurrentFile().exists()) {
             //currentFile.addNull(null)
             /*Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
                     R.drawable.apn512x512);
@@ -382,13 +382,12 @@ public class ActivitySuperClass extends AppCompatActivity {
             loadInstanceState();
         if (currentFile != null) {
             if (!currentFile.getCurrentFile().exists()) {
-                currentFile.addNull(null);
                 return;
             }
                 FileInputStream fileInputStream = new FileInputStream(currentFile.getCurrentFile());
                 if (BitmapFactory.decodeStream(fileInputStream)
                         == null)
-                    currentFile.addNull(null);
+                    ;
 
         }
 
@@ -463,7 +462,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             properties.setProperty("maxRes", "" + maxRes);
 
             try {
-                if (currentFile != null) {
+                if (currentFile.getCurrentFile() != null) {
                     properties.setProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
                     File file = new Utils().writeFile(this,
                             BitmapFactory.decodeStream(
@@ -489,7 +488,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     public void passParameters(Intent to) {
 
-        if (currentFile != null)
+        if (currentFile.getCurrentFile() != null)
             to.setDataAndType(Uri.fromFile(currentFile.getCurrentFile()), "image/jpg");
         to.putExtra("maxRes", getMaxRes());
         new Utils().putExtra(to, cords, cordsConsts, variableName, variable);
@@ -562,7 +561,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             currentBitmap = null;
             if (imageView == null)
                 imageView = findViewById(R.id.currentImageView);
-            if (imageView != null && currentFile != null)
+            if (imageView != null && currentFile.getCurrentFile() != null)
                 new Utils().setImageView2(this, imageView);
         } catch (RuntimeException ex) {
             ex.printStackTrace();

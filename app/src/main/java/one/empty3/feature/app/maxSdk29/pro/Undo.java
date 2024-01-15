@@ -71,7 +71,8 @@ public class Undo {
         if (data.size() > current + 1) {
             data.subList(current + 1, data.size()).clear();
         }
-        data.add(dataApp);
+        current++;
+        data.add(current, dataApp);
     }
 
     public DataApp getDataApp() {
@@ -82,7 +83,9 @@ public class Undo {
     }
 
     public File getCurrentFile() {
-        return data.get(data.size() - 1).getImage();
+        if(data.isEmpty() || data.get(current)==null || data.get(current).getImage()==null)
+            return null;
+        return data.get(current).getImage();
     }
 
     public File getCurrentOriginalFile() {

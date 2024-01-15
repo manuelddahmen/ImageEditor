@@ -124,7 +124,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 ?: null) != null) {
         //    originalImage = intent.extras!!.get("originalImage") as File
         }
-        if (currentFile != null) {
+        if (currentFile.currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
 
