@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.feature20220726.GoogleFaceDetection
 import java.io.DataInputStream
@@ -53,24 +54,39 @@ class FaceActivity : ActivitySuperClass() {
             ex.printStackTrace()
         }
         if (currentFile.currentFile != null) {
-            if (currentBitmap == null) {
-                currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
-            }
-            Utils().loadImageInImageView(currentBitmap, faceOverlayView)
-
             try {
-                faceOverlayView.setImageBitmap3(currentBitmap);
+                if (currentBitmap == null) {
+                val currentBitmapRef: BufferedImage = ImageIO.read(currentFile.currentFile)
+                if (currentBitmapRef != null && currentBitmapRef.bitmap != null) {
+                    currentBitmap = currentBitmapRef.bitmap
+                    Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
-                faceOverlayView.setActivity(this)
+                    try {
+                        faceOverlayView.setImageBitmap3(currentBitmap);
 
-            } catch (ex: RuntimeException) {
+                        faceOverlayView.setActivity(this)
+
+                    } catch (ex: RuntimeException) {
+                        Toast.makeText(
+                            applicationContext, "Error while execute face detection",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } else {
                 Toast.makeText(
                     applicationContext, "Error while execute face detection",
                     Toast.LENGTH_LONG
                 ).show()
             }
+        } catch (ex:RuntimeException) {
         }
-
+        } else {
+            Toast.makeText(
+                applicationContext, "Error while execute face detection",
+                Toast.LENGTH_LONG
+            ).show()
+        }
         val faceDetection = findViewById<Button>(R.id.face_detection)
 
         faceDetection.setOnClickListener {

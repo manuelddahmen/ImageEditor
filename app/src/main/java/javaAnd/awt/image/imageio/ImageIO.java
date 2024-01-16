@@ -54,7 +54,7 @@ public class ImageIO {
         if(bitmap!=null)
             return new BufferedImage(bitmap);
         else
-            return null;
+            throw new NullPointerException("my::ImageIO read fileInputStream");
     }
 
     public static boolean write(@NotNull BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {

@@ -35,6 +35,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebricTree;
@@ -122,10 +123,16 @@ public class GraphicsActivityView extends ActivitySuperClass {
         current = null;
 
         if (currentFile.getCurrentFile() != null) {
-            if (getMaxRes() > 0) {
-                current = PixM.getPixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap, getMaxRes());
-            } else {
-                current = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())));
+            File currentFile1 = currentFile.getCurrentFile();
+            try {
+                BufferedImage read = ImageIO.read(currentFile1);
+                if (getMaxRes() > 0 && read!=null) {
+                    current = PixM.getPixM(Objects.requireNonNull(read).bitmap, getMaxRes());
+                } else if(read!=null){
+                    current = new PixM(Objects.requireNonNull(read));
+                }
+            } catch (NullPointerException ignored) {
+
             }
         }
         if (current == null) {
