@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
 
@@ -46,7 +46,7 @@ import one.empty3.feature20220726.PixM;
 
 public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    final AlgebricTree[] algebricTree = new AlgebricTree[cords.length];
+    final AlgebraicTree[] AlgebraicTree = new AlgebraicTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
     private PixM current;
 
@@ -146,9 +146,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
         h = current.getLines();
 
         for (int i = 0; i < cordsConsts.length; i++) {
-            algebricTree[i] = new AlgebricTree(cords[i], stringDoubleHashMap);
+            AlgebraicTree[i] = new AlgebraicTree(cords[i], stringDoubleHashMap);
             try {
-                algebricTree[i].construct();
+                AlgebraicTree[i].construct();
             } catch (AlgebraicFormulaSyntaxException e) {
                 printValues();
                 e.printStackTrace();
@@ -164,26 +164,26 @@ public class GraphicsActivityView extends ActivitySuperClass {
             for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                     double[] v = current.getValues(x, y);
-                    for (int j = 0; j < algebricTree.length; j++) {
-                        algebricTree[j].setParameter("r", v[0]);
-                        algebricTree[j].setParameter("g", v[1]);
-                        algebricTree[j].setParameter("b", v[2]);
-                        algebricTree[j].setParameter("u", 1.0 * x / w);
-                        algebricTree[j].setParameter("v", 1.0 * y / h);
-                        algebricTree[j].setParameter("w", (double) w);
-                        algebricTree[j].setParameter("h", (double) h);
-                        algebricTree[j].setParameter("x", (double) x);
-                        algebricTree[j].setParameter("y", (double) y);
-                        algebricTree[j].setParameter("z", (double) 0.0);
-                        algebricTree[j].setParameter("t", (double) t);
-                        algebricTree[j].setParameter("a", 0.0);
+                    for (int j = 0; j < AlgebraicTree.length; j++) {
+                        AlgebraicTree[j].setParameter("r", v[0]);
+                        AlgebraicTree[j].setParameter("g", v[1]);
+                        AlgebraicTree[j].setParameter("b", v[2]);
+                        AlgebraicTree[j].setParameter("u", 1.0 * x / w);
+                        AlgebraicTree[j].setParameter("v", 1.0 * y / h);
+                        AlgebraicTree[j].setParameter("w", (double) w);
+                        AlgebraicTree[j].setParameter("h", (double) h);
+                        AlgebraicTree[j].setParameter("x", (double) x);
+                        AlgebraicTree[j].setParameter("y", (double) y);
+                        AlgebraicTree[j].setParameter("z", (double) 0.0);
+                        AlgebraicTree[j].setParameter("t", (double) t);
+                        AlgebraicTree[j].setParameter("a", 0.0);
                     }
 
-                    double x2 = algebricTree[0].eval().getElem();
-                    double y2 = algebricTree[1].eval().getElem();
+                    double x2 = AlgebraicTree[0].eval().getElem();
+                    double y2 = AlgebraicTree[1].eval().getElem();
 
                     for (int c = 0; c < 4; c++) {
-                        rgba[c] = algebricTree[c + 3].eval().getElem();
+                        rgba[c] = AlgebraicTree[c + 3].eval().getElem();
                     }
                     double[] finalColors = new double[3];
                     for (int i = 0; i < 3; i++) {

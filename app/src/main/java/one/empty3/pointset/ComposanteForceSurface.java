@@ -55,7 +55,7 @@ package one.empty3.pointset;
 import java.util.HashMap;
 
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
 
 /*__
@@ -69,12 +69,12 @@ import one.empty3.library1.tree.TreeNodeEvalException;
 public class ComposanteForceSurface {
 
 
-    private AlgebricTree x;
+    private AlgebraicTree x;
     private HashMap<String, Double> map;
     public HashMap<String, Double> map2 = new HashMap<>();
     private int itereAxes;
 
-    public ComposanteForceSurface(AlgebricTree x, double dv) {
+    public ComposanteForceSurface(AlgebraicTree x, double dv) {
         setItereAxes(1);
         this.x = x;
         declareVar("dv", dv);

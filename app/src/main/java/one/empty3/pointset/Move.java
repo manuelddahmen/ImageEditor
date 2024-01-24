@@ -69,7 +69,7 @@ public class Move {
     private int itereFrame = 1;
     private static final double G = 1;
     protected final PCont<Gravity> container;
-    private AlgebricTree x;
+    private AlgebraicTree x;
     private HashMap<Gravity, ComposanteForceSurface> composanteForceSurface;
     private ComposanteForceAttraction composanteForceAttraction;
     private HashMap<String, Double> map;
@@ -108,7 +108,7 @@ public class Move {
     }
 
     public void initMoveSurface(String formula, HashMap<String, Double> map) throws AlgebraicFormulaSyntaxException {
-        x = new AlgebricTree(formula, map).construct();
+        x = new AlgebraicTree(formula, map).construct();
     }
 
     public void computeMoveSurface(Gravity t1) {

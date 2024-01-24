@@ -25,7 +25,7 @@ import one.empty3.library.StructureMatrix
 import one.empty3.library1.shader.Vec
 import one.empty3.library1.*
 import one.empty3.library1.tree.*
-import one.empty3.library1.tree.AlgebricTree
+import one.empty3.library1.tree.AlgebraicTree
 import one.empty3.library1.tree.TreeNodeEvalException
 import org.junit.Assert
 import org.junit.Test
@@ -45,23 +45,23 @@ class AlgebraicTreeCalTest() {
         map: Map<String, Double>,
         echo: Boolean
     ) {
-        var algebricTree: AlgebricTree? = null
+        var AlgebraicTree: AlgebraicTree? = null
         try {
             println("Expression string : $expr")
-            algebricTree = AlgebricTree(expr)
-            algebricTree.parametersValues = map
-            algebricTree.construct()
-            if (echo) println(algebricTree)
+            AlgebraicTree = AlgebraicTree(expr)
+            AlgebraicTree.parametersValues = map
+            AlgebraicTree.construct()
+            if (echo) println(AlgebraicTree)
             try {
                 var result: Double = 0.0
-                val eval = algebricTree.eval()
+                val eval = AlgebraicTree.eval()
                 println("eval dims:" + eval.dim+" ")
                 if(eval.dim==1)
                     println("eval vector size : " +eval.data1d.size)
                 if(eval.dim==1 && eval.data1d.size>0) {
-                    result = algebricTree.eval().getElem(0)
+                    result = AlgebraicTree.eval().getElem(0)
                 } else if(eval.dim==0 || eval.data0d!=null) {
-                    result = algebricTree.eval().getElem()
+                    result = AlgebraicTree.eval().getElem()
                 } else {
                     throw AlgebraicFormulaSyntaxException("Cannot evaluate")
                 }
@@ -89,15 +89,15 @@ class AlgebraicTreeCalTest() {
     }
 
     protected fun testResult(expr: String, expectedResult: Double, echo: Boolean): Boolean {
-        var algebricTree: AlgebricTree? = null
+        var AlgebraicTree: AlgebraicTree? = null
         try {
             println("Expression string : $expr")
-            algebricTree = AlgebricTree(expr)
-            algebricTree.construct()
-            if (echo) println(algebricTree)
+            AlgebraicTree = AlgebraicTree(expr)
+            AlgebraicTree.construct()
+            if (echo) println(AlgebraicTree)
             try {
                 val result: Double
-                result = algebricTree.eval().getElem()
+                result = AlgebraicTree.eval().getElem()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(((result < expectedResult + DELTA(expectedResult)
@@ -122,15 +122,15 @@ class AlgebraicTreeCalTest() {
         expectedResult: Double,
         echo: Boolean
     ): Boolean {
-        var algebricTree: AlgebricTree? = null
+        var AlgebraicTree: AlgebraicTree? = null
         try {
             println("Expression string : $expr")
-            algebricTree = AlgebricTree(expr)
-            algebricTree.construct()
-            if (echo) println(algebricTree)
+            AlgebraicTree = AlgebraicTree(expr)
+            AlgebraicTree.construct()
+            if (echo) println(AlgebraicTree)
             try {
                 val result: Any
-                result = algebricTree.eval()
+                result = AlgebraicTree.eval()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.fail()
@@ -495,10 +495,10 @@ class AlgebraicTreeCalTest() {
         map: java.util.HashMap<String, Double>,
         echo: Boolean
     ) {
-        var algebraicTree: AlgebricTree? = null
+        var algebraicTree: AlgebraicTree? = null
         try {
             println("Expression string : $expr")
-            algebraicTree = AlgebricTree(expr)
+            algebraicTree = AlgebraicTree(expr)
             algebraicTree.parametersValues = map
             algebraicTree.construct()
             if (echo) println(algebraicTree)

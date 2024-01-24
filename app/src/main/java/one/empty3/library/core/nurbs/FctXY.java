@@ -60,7 +60,7 @@ import one.empty3.library.StructureMatrix;
  */
 public class FctXY extends Fct1D_1D {
     private StructureMatrix<String> formulaX = new StructureMatrix<>(0, String.class);
-    private AlgebricTree treeX;
+    private AlgebraicTree treeX;
 
     public FctXY() {
 
@@ -73,7 +73,7 @@ public class FctXY extends Fct1D_1D {
         this.formulaX.setElem(formulaX);
 
         try {
-            treeX = new AlgebricTree(formulaX);
+            treeX = new AlgebraicTree(formulaX);
             treeX.getParametersValues().put("x", 0.0);
             treeX.construct();
         } catch (AlgebraicFormulaSyntaxException e) {

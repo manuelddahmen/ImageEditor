@@ -59,7 +59,7 @@ public class F {
     /*__
      * Created by md 2020 4 8 */
     private int dima, dimb;
-    private AlgebricTree treeF;
+    private AlgebraicTree treeF;
 
     /*__
      * input x(n:int) : formula
@@ -88,11 +88,7 @@ public class F {
             dima = Integer.parseInt(splits[1]);
             dimb = Integer.parseInt(splits[2]);
         }
-        try {
-            treeF = new AlgebricTree(formula);
-        } catch (AlgebraicFormulaSyntaxException ex) {
-            ex.printStackTrace();
-        }
+        treeF = new AlgebraicTree(formula);
 
     }
 

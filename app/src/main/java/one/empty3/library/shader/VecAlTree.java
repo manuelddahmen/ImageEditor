@@ -24,7 +24,7 @@ import one.empty3.library1.tree.*;
 
 public class VecAlTree extends Vec {
     protected String formula;
-    AlgebricTree tree;
+    AlgebraicTree tree;
     private boolean invalidTree = true;
 
     public VecAlTree(String formula, int dim) {
@@ -35,7 +35,7 @@ public class VecAlTree extends Vec {
         this.formula = formula;
 
         try {
-            tree = new AlgebricTree(formula)
+            tree = new AlgebraicTree(formula)
             ;
             tree.construct();
             invalidTree = false;

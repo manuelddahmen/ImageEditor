@@ -27,7 +27,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
-import one.empty3.library1.tree.AlgebricTree
+import one.empty3.library1.tree.AlgebraicTree
 
 class Calculator : ActivitySuperClass() {
     @SuppressLint("CutPasteId")
@@ -91,7 +91,7 @@ class Calculator : ActivitySuperClass() {
 
                 try {
                     editTextId.text = editTextId.text.append(findViewById.text)
-                    val tree = AlgebricTree(editTextId.text.toString())
+                    val tree = AlgebraicTree(editTextId.text.toString())
                     tree.construct()
                     var d: Double = 0.0
                     val eval = tree.eval()

@@ -37,7 +37,7 @@ public class E3ja {
     }
 
     /***
-     *  example: setFormulaFunctionA(AlgebricTree al) { ... }
+     *  example: setFormulaFunctionA(AlgebraicTree al) { ... }
      *           setFormulaFunctionB(...
      * @param o Pojo Object. set{PropertyName} get{PropertyName}
      * @param propertyFunction {propertyName}=propertyValue
@@ -50,7 +50,7 @@ public class E3ja {
             String propertyName = pair[0];
             String formula = pair[1];
             try {
-                AlgebricTree tree = new AlgebricTree(formula);
+                AlgebraicTree tree = new AlgebraicTree(formula);
                 tree.construct();
                 Pojo.setProperty(o, propertyName, (Object) tree, tree.getClass());
             } catch (Exception | AlgebraicFormulaSyntaxException ex) {

@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library1.tree.AlgebricTree;
+import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
 
 /*__
@@ -76,17 +76,17 @@ public class AlgebraicTreeTest {
     }
 
     private void testResultVariable(String expr, double expectedResult, Map<String, Double> map, boolean echo) {
-        AlgebricTree algebricTree = null;
+        AlgebraicTree AlgebraicTree = null;
         try {
             System.out.println("Expression string : " + expr);
-            algebricTree = new AlgebricTree(expr);
-            algebricTree.setParametersValues(map);
-            algebricTree.construct();
+            AlgebraicTree = new AlgebraicTree(expr);
+            AlgebraicTree.setParametersValues(map);
+            AlgebraicTree.construct();
             if (echo)
-                System.out.println(algebricTree);
+                System.out.println(AlgebraicTree);
             try {
                 double result;
-                result = algebricTree.eval().getElem();
+                result = AlgebraicTree.eval().getElem();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
@@ -112,16 +112,16 @@ public class AlgebraicTreeTest {
     }
 
     protected boolean testResult(String expr, double expectedResult, boolean echo) {
-        AlgebricTree algebricTree = null;
+        AlgebraicTree AlgebraicTree = null;
         try {
             System.out.println("Expression string : " + expr);
-            algebricTree = new AlgebricTree(expr);
-            algebricTree.construct();
+            AlgebraicTree = new AlgebraicTree(expr);
+            AlgebraicTree.construct();
             if (echo)
-                System.out.println(algebricTree);
+                System.out.println(AlgebraicTree);
             try {
                 double result;
-                result = algebricTree.eval().getElem();
+                result = AlgebraicTree.eval().getElem();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
@@ -141,16 +141,16 @@ public class AlgebraicTreeTest {
     }
 
     protected boolean testConstructOrEvalFails(String expr, double expectedResult, boolean echo) {
-        AlgebricTree algebricTree = null;
+        AlgebraicTree AlgebraicTree = null;
         try {
             System.out.println("Expression string : " + expr);
-            algebricTree = new AlgebricTree(expr);
-            algebricTree.construct();
+            AlgebraicTree = new AlgebraicTree(expr);
+            AlgebraicTree.construct();
             if (echo)
-                System.out.println(algebricTree);
+                System.out.println(AlgebraicTree);
             try {
                 Object result;
-                result = algebricTree.eval();
+                result = AlgebraicTree.eval();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
