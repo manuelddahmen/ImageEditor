@@ -457,6 +457,21 @@ public class MyCameraActivity extends ActivitySuperClass {
             startActivity(login);
         });
 
+        Button undo = findViewById(R.id.undo);
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Undo.getUndo().back();
+            }
+        });
+        Button redo = findViewById(R.id.redo);
+        redo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Undo.getUndo().next();
+            }
+        });
+
 
         unselectReloadCurrentFile();
     }

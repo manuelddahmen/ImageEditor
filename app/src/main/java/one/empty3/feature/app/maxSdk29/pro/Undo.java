@@ -76,10 +76,12 @@ public class Undo {
     }
 
     public DataApp getDataApp() {
-        if (data.size() >= current && data.get(current) != null) {
+        if (data.size() > current && current>=0 && data.get(current) != null) {
             return data.get(current);
-        } else
-            return null;
+        } else {
+            //return new DataApp();
+        }
+        return null;
     }
 
     public File getCurrentFile() {

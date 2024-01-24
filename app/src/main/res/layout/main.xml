@@ -24,7 +24,7 @@
 
 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
     <!--
     Buttons in button bars should be borderless; use `style="?android:attr/buttonBarButtonStyle"` (and `?android:attr/buttonBarStyle` on the parent)
@@ -210,7 +210,7 @@
         android:orientation="horizontal"
         android:id="@+id/bottom_buttons"
         app:layout_constraintTop_toBottomOf="@id/effectButtons"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/undoredo"
         >
     <Button
         android:layout_width="match_parent"
@@ -244,4 +244,27 @@
                 />
 
 </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:id="@+id/undoredo"
+            app:layout_constraintTop_toBottomOf="@id/bottom_buttons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+    <Button
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:text="@string/undo"
+            android:id="@+id/undo"
+            android:layout_weight="0.50"/>
+    <Button
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.FeatureAppmain"
+            android:layout_height="48dp"
+            android:text="@string/redo"
+            android:id="@+id/redo"
+            android:layout_weight="0.50" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
