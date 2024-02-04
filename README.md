@@ -79,7 +79,17 @@ Try to fill polygons with colors #9 WORK
 Dependencies updates.
 Try with InstallReferrer
 SettingsActivityFace for Faces parts colors and textures.
-</en-US>
+Try to make a login.
+Add delete link
+#1 Get login success/error.
+Repaired math graphics display error
+Share image and texts with Image Featuring (FeatureApp)
+Share ftom other apps #1 , imageView not loaded when restarted
+First Robo automatic test: without failure
+Repair lost of current file error 1/2
+Repair button "hide face part" on activity  "edit face mask"
+test ROBO passed. (API Level 33)
+Next steps : 2/5 # Do a history with image files,  Add "undo" "redo" </en-US>
 <nl-NL>
 Restore KMeans.java to 09-jun-2023.
 Error in PixM.setValues(int,int,double...) FIXED.

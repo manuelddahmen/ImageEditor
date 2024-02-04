@@ -20,18 +20,16 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
+import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-
-import one.empty3.library1.tree.functions.ListMathDoubleFunction
+import androidx.recyclerview.widget.RecyclerView
 import one.empty3.feature.app.maxSdk29.pro.databinding.FragmentItemBinding
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 
 class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDoubleFunction.getList()) :
@@ -77,17 +75,17 @@ class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDo
         holder.text = item
         holder.itemView.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            holder.itemView.setBackgroundColor(Color.Blue.toArgb())
+            holder.itemView.setBackgroundColor(Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv1.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            tv1.setBackgroundColor(Color.Blue.toArgb())
+            tv1.setBackgroundColor(Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv2.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            tv2.setBackgroundColor(Color.Blue.toArgb())
+            tv2.setBackgroundColor(Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
     }

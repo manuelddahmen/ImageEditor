@@ -59,15 +59,18 @@ class FaceActivitySettings : ActivitySuperClass() {
     private var option: Int = OPTION_SELECT_ALL
     private var currentSurfaceSize: Int = 0
     var selectedSurfaceAllPicture: Surface? = null
+
     //private var originalImage: File = null
     private lateinit var polygonView: ImageViewSelection
     private var selectedSurface: Int = 0
     private lateinit var selectedPoint: Point
     private lateinit var faceOverlayView: FaceOverlayView
-    private var googleFaceDetection: GoogleFaceDetection? = GoogleFaceDetection.getInstance(false, null)
+    private var googleFaceDetection: GoogleFaceDetection? =
+        GoogleFaceDetection.getInstance(false, null)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
-    private var selectedColor : android.graphics.Color = android.graphics.Color.valueOf(android.graphics.Color.BLUE)
+    private var selectedColor: android.graphics.Color =
+        android.graphics.Color.valueOf(android.graphics.Color.BLUE)
     private var selectedImage: Bitmap? = null
     private var selectedOption = SELECTED_OPTION_COLOR
 
@@ -112,44 +115,45 @@ class FaceActivitySettings : ActivitySuperClass() {
         //    googleFaceDetection = get as GoogleFaceDetection
 
         googleFaceDetection = GoogleFaceDetection.getInstance(false, null)
-        if(googleFaceDetection==null) {
+        if (googleFaceDetection == null) {
             googleFaceDetection = GoogleFaceDetection.getInstance2()
         }
-        if(googleFaceDetection!=null) {
+        if (googleFaceDetection != null) {
             faceOverlayView.googleFaceDetection = googleFaceDetection
         }
         drawIfBitmap()
 
-        if(intent.hasExtra("originalImage") && (intent!!.extras?.get("originalImage")
-                ?: null) != null) {
-        //    originalImage = intent.extras!!.get("originalImage") as File
+        if (intent.hasExtra("originalImage") && (intent!!.extras?.get("originalImage")
+                ?: null) != null
+        ) {
+            //    originalImage = intent.extras!!.get("originalImage") as File
         }
         if (currentFile.currentFile != null) {
             if (currentBitmap == null)
                 currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
 
-          //  var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
+            //  var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
-            if(currentBitmap!=null) {
+            if (currentBitmap != null) {
                 faceOverlayView.mCopy = currentBitmap
                 faceOverlayView.mBitmap = currentBitmap
             }
-/*
-            try {
-                if (currentBitmap != null) {
-                    faceOverlayView.setBitmap(currentBitmap)
+            /*
+                        try {
+                            if (currentBitmap != null) {
+                                faceOverlayView.setBitmap(currentBitmap)
 
-                    faceOverlayView.setActivity(this)
-                }
-            } catch (ex: RuntimeException) {
-                Toast.makeText(
-                    applicationContext, "Error while execute face detection",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-*/
+                                faceOverlayView.setActivity(this)
+                            }
+                        } catch (ex: RuntimeException) {
+                            Toast.makeText(
+                                applicationContext, "Error while execute face detection",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+            */
 
         }
         val back = findViewById<Button>(R.id.face_draw_settings_back)
@@ -183,7 +187,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
 
         faceOverlayView.setOnTouchListener { v: View, event: MotionEvent ->
-            if (event!=null&&event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_WHERE_CLICKED) {
+            if (event != null && event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_WHERE_CLICKED) {
 
                 var p0 = coordCanvas(PointF(0f, 0f))
 
@@ -199,7 +203,7 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                 drawPolygon()
 
-            } else if (event!=null&&event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_ALL) {
+            } else if (event != null && event.actionMasked == MotionEvent.ACTION_UP && option == OPTION_SELECT_ALL) {
                 currentSurface++
                 if (currentSurface >= currentSurfaceSize)
                     currentSurface = 0
@@ -267,7 +271,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                     drawSurfaces()
 
                 }
-            } catch (ex : RuntimeException) {
+            } catch (ex: RuntimeException) {
                 ex.printStackTrace()
             }
 
@@ -277,8 +281,9 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             var sel = selectedSurfaceAllPicture
 
-            if (selectedColor != null && sel != null && sel.filledContours!=null && sel.contours!=null
-                && sel.polygon!=null && sel.colorFill!=null) {
+            if (selectedColor != null && sel != null && sel.filledContours != null && sel.contours != null
+                && sel.polygon != null && sel.colorFill != null
+            ) {
                 val oldColorFill = sel.colorFill
                 val newColorFill = selectedColor!!
                 sel.filledContours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
@@ -292,8 +297,9 @@ class FaceActivitySettings : ActivitySuperClass() {
 
         val originalColors = findViewById<Button>(R.id.buttonsOriginalImage)
         originalColors.setOnClickListener {
-            if(selectedSurfaceAllPicture!=null) {
-                selectedSurfaceAllPicture!!.isDrawOriginalImageContour = !selectedSurfaceAllPicture!!.isDrawOriginalImageContour
+            if (selectedSurfaceAllPicture != null) {
+                selectedSurfaceAllPicture!!.isDrawOriginalImageContour =
+                    !selectedSurfaceAllPicture!!.isDrawOriginalImageContour
                 drawSurface()
                 drawSurfaces()
             }
@@ -389,50 +395,72 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
 
 
-
         val applyModel = findViewById<Button>(R.id.applyModel)
         applyModel.setOnClickListener {
             if (this.selectedSurfaceAllPicture != null && GoogleFaceDetection.isInstance2()
-                && selectedSurfaceAllPicture!=null) {
+                && selectedSurfaceAllPicture != null
+            ) {
                 val filledContours = selectedSurfaceAllPicture!!.filledContours
-                val selectSurface2 : Surface
-                    = selectSurface2(GoogleFaceDetection.getInstance2(), selectedSurfaceAllPicture!!.surfaceId)!!
+                val selectSurface2: Surface = selectSurface2(
+                    GoogleFaceDetection.getInstance2(),
+                    selectedSurfaceAllPicture!!.surfaceId
+                )!!
                 val currentSurface = selectedSurface
-                if(selectSurface2!=null && filledContours!=null
-                    &&selectSurface2.filledContours!=null
-                    && selectSurface2.actualDrawing!=null) {
+                if (selectSurface2 != null && filledContours != null
+                    && selectSurface2.filledContours != null
+                    && selectSurface2.actualDrawing != null
+                ) {
                     if (googleFaceDetection != null) {
                         try {
-                        googleFaceDetection!!.dataFaces.forEach { it1 ->
-                            run {
-                                it1?.faceSurfaces?.forEach(action = { it2 ->
-                                    run {
-                                        if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
-                                        ) {
-                                            if(experimental) {
+                            googleFaceDetection!!.dataFaces.forEach { it1 ->
+                                run {
+                                    it1?.faceSurfaces?.forEach(action = { it2 ->
+                                        run {
+                                            if (it2 != null && selectedSurfaceAllPicture!!.surfaceId == selectSurface2.surfaceId
+                                            ) {
                                                 try {
-                                                    selectedSurfaceAllPicture!!.rotate(
-                                                        selectSurface2
-                                                    );
-                                                } catch (ex : RuntimeException) {
-                                                    Toast.makeText(applicationContext, "Rotate image failed : " +ex.message,
-                                                        Toast.LENGTH_LONG).show()
+                                                    if (experimental) {
+                                                        selectedSurfaceAllPicture!!.rotate(
+                                                            selectSurface2
+                                                        )
+                                                    } else {
+                                                        selectedSurfaceAllPicture!!.actualDrawing =
+                                                            selectSurface2.actualDrawing
+                                                    }
+                                                } catch (ex: RuntimeException) {
+                                                    Toast.makeText(
+                                                        applicationContext,
+                                                        "Rotate image failed : " + ex.message,
+                                                        Toast.LENGTH_LONG
+                                                    ).show()
+                                                } catch (ex:java.lang.NullPointerException) {
+                                                    Toast.makeText(
+                                                        applicationContext,
+                                                        "Rotate image failed : NullPointerException " + ex.message,
+                                                        Toast.LENGTH_LONG
+                                                    ).show()
+
                                                 }
-                                            } else {
-                                                selectedSurfaceAllPicture!!.actualDrawing = selectSurface2.actualDrawing
                                             }
                                         }
-                                    }
-                                })
+                                    })
+                                }
                             }
-                        }
-                        } catch (ex:RuntimeException) {
-                            Toast.makeText(applicationContext, "Apply model null : " +ex.message, Toast.LENGTH_LONG).show()
+                        } catch (ex: RuntimeException) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Apply model null : " + ex.message,
+                                Toast.LENGTH_LONG
+                            ).show()
                             return@setOnClickListener
                         }
                     }
                 } else {
-                    Toast.makeText(applicationContext, "Error : selectSurface2 returns null", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Error : selectSurface2 returns null",
+                        Toast.LENGTH_LONG
+                    ).show()
                     return@setOnClickListener
                 }
                 drawSurface()
@@ -453,8 +481,8 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
     }
 
-    private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId:Int) : Surface? {
-        if(instance2!=null) {
+    private fun selectSurface2(instance2: GoogleFaceDetection, surfaceId: Int): Surface? {
+        if (instance2 != null) {
             instance2.dataFaces.forEach(action = { it1 ->
                 run {
                     it1.faceSurfaces.forEach(action = { it2 ->
@@ -470,10 +498,11 @@ class FaceActivitySettings : ActivitySuperClass() {
         return null
     }
 
-    fun applyOriginalPolygon()  {
+    fun applyOriginalPolygon() {
 
         return
     }
+
     fun coordCanvas(p: PointF): PointF {
         val mBitmap = faceOverlayView.mBitmap
         if (faceOverlayView.mBitmap == null) return p
@@ -532,23 +561,23 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     public fun averageByExclusiveSurface(): HashMap<Surface, Point3D> {
         val array = HashMap<Surface, Point3D>()
-        if(currentSurfaceSize>0) {
+        if (currentSurfaceSize > 0) {
             val polygons = faceOverlayView.getPolygons(googleFaceDetection)
             val sums = HashMap<Surface, Int>()
             for (i in 0 until currentBitmap.width) {
                 for (j in 0 until currentBitmap.height) {
-                    this.selectShapeAt(Point(i,j))
-                    selectedSurfaces.forEach{
+                    this.selectShapeAt(Point(i, j))
+                    selectedSurfaces.forEach {
                         val pixel = currentBitmap.getPixel(i, j)
-                        val p:Point3D  = Point3D(Lumiere.getDoubles(pixel))
+                        val p: Point3D = Point3D(Lumiere.getDoubles(pixel))
                         array[it] = array.getOrDefault(it, Point3D()).plus(p)
-                        sums[it] = sums.getOrDefault(it, 0)+1
+                        sums[it] = sums.getOrDefault(it, 0) + 1
                     }
 
                 }
             }
             polygons.forEach(Consumer {
-                array[it] = array[it]!!.mult((1.0/(sums[it] ?:1)))
+                array[it] = array[it]!!.mult((1.0 / (sums[it] ?: 1)))
             })
         }
         val polygons = faceOverlayView.getPolygons(googleFaceDetection)
@@ -599,7 +628,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                                         // point in polygon
                                         selectedSurfaceAllPicture = surface
                                         selectedSurfaces.add(surface)
-                                        if(selectedSurfaceAllPicture!=null) return@run
+                                        if (selectedSurfaceAllPicture != null) return@run
                                         //surface.filledContours.setValues(p.x-pBounds.x as Int, p.y-pBounds.y, 1.0, 1.0, 1.0)
                                         //drawPolygon()
                                     }
@@ -625,7 +654,7 @@ class FaceActivitySettings : ActivitySuperClass() {
     private fun drawPolygon() {
         if (selectedSurfaces.size > selectedSurface) {
             val selectedSurfaceObject = selectedSurfaces[selectedSurface]
-            if(selectedSurfaceObject!=null) {
+            if (selectedSurfaceObject != null) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceObject
                         .filledContours.bitmap.copy(
@@ -638,26 +667,31 @@ class FaceActivitySettings : ActivitySuperClass() {
 
     private fun drawSurface() {
         if (selectedSurfaceAllPicture != null
-                && selectedSurfaceAllPicture!!.filledContours!=null
-                && selectedSurfaceAllPicture!!.filledContours.bitmap!=null
-                && polygonView!=null) {
-            if(selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
-                polygonView.setImageBitmap3(selectedSurfaceAllPicture!!
+            && selectedSurfaceAllPicture!!.filledContours != null
+            && selectedSurfaceAllPicture!!.filledContours.bitmap != null
+            && polygonView != null
+        ) {
+            if (selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
+                polygonView.setImageBitmap3(
+                    selectedSurfaceAllPicture!!
                         .filledContours.bitmap.copy(
-                            Bitmap.Config.ARGB_8888, true))
+                            Bitmap.Config.ARGB_8888, true
+                        )
+                )
             } else {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(Bitmap.Config.ARGB_8888, true))
+                        .filledContours.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                )
             }
         }
 
     }
 
     fun drawSurfaces() {
-        if(faceOverlayView.mCopy==null) return
+        if (faceOverlayView.mCopy == null) return
 
-        if(faceOverlayView!=null && faceOverlayView.mCopy!=null && googleFaceDetection!=null ) {
+        if (faceOverlayView != null && faceOverlayView.mCopy != null && googleFaceDetection != null) {
             faceOverlayView.fillPolygons(googleFaceDetection)
 
             Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
@@ -693,113 +727,193 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    @Deprecated(message = "Deprecated, see next version for deletion")
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         var result: Intent? = null
-        if(data!=null)
+        if (data != null)
             result = data
         if (requestCode == ONCLICK_STARTACTIVITY_CODE_TEXTURE_CHOOSER && resultCode == RESULT_OK) {
-            var choose_directoryData: InputStream? = null
-            choose_directoryData = getRealPathFromIntentData2(data)
-            if (choose_directoryData == null) {
-                choose_directoryData = try {
-                    FileInputStream(data!!.dataString)
-                } catch (e: FileNotFoundException) {
-                    e.printStackTrace()
-                    return
+            var chosenData: InputStream? = null
+            try {
+                chosenData = getRealPathFromIntentData2(data)
+                if (chosenData == null) {
+                    chosenData = try {
+                        FileInputStream(data!!.dataString)
+                    } catch (e: FileNotFoundException) {
+                        e.printStackTrace()
+                        Toast.makeText(
+                            applicationContext,
+                            "Erreur chargement : (FileNotFound)" + e.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        getRealPathFromURI(data!!.data)
+                    }
                 }
-            }
-            var photo: Bitmap? = null
+                var photo: Bitmap? = null
 
-            if (maxRes > 0) {
-                System.err.println("FileInputStream$choose_directoryData")
-                photo = BitmapFactory.decodeStream(choose_directoryData)
-                photo = PixM.getPixM(photo, maxRes).image.getBitmap()
-                System.err.println("Get file (bitmap) : $photo")
-            } else {
-                System.err.println("FileInputStream$choose_directoryData")
-                photo = BitmapFactory.decodeStream(choose_directoryData)
-                System.err.println("Get file (bitmap) : $photo")
+                if (maxRes > 0) {
+                    System.err.println("FileInputStream$chosenData")
+                    photo = BitmapFactory.decodeStream(chosenData)
+                    photo = PixM.getPixM(photo, maxRes).image.getBitmap()
+                    System.err.println("Get file (bitmap) : $photo")
+                } else {
+                    System.err.println("FileInputStream$chosenData")
+                    photo = BitmapFactory.decodeStream(chosenData)
+                    System.err.println("Get file (bitmap) : $photo")
+                }
+                if (photo != null) {
+                    this.selectedImage = photo
+                }
+            } catch (ex: RuntimeException) {
+                Toast.makeText(
+                    applicationContext,
+                    "Erreur chargement : " + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            if (photo != null) {
-                this.selectedImage = photo
-            }
-        } else  if ((resultCode == RESULT_OK) && result != null && ((result.extras != null &&
+        } else if ((resultCode == RESULT_OK) && (requestCode==OPEN_MODEL || requestCode==CREATE_FILE)
+            && result != null && ((result.extras != null &&
                     result.extras!!.get(Intent.EXTRA_STREAM) != null) ||
                     result.data != null)
         ) {
-            var get: Uri? = null
-            if (result.data != null) {
-                get = result.data
-            } else {
-                try {
-                    get = result.extras!!.get("data") as Uri
-                } catch (ex: RuntimeException) {
+            try {
+
+                var get: Uri? = null
+                if (result.data != null) {
+                    get = result.data
+                } else {
                     try {
-                        get = result.extras!!.get(Intent.EXTRA_STREAM) as Uri
-                    } catch (ex1: RuntimeException) {
+                        get = result.extras!!.get("data") as Uri
+                    } catch (ex: RuntimeException) {
                         try {
-                            get = result.data
-                        } catch (ex2: RuntimeException) {
+                            get = result.extras!!.get(Intent.EXTRA_STREAM) as Uri
+                        } catch (ex1: RuntimeException) {
+                            try {
+                                get = result.data
+                            } catch (ex2: RuntimeException) {
+                            }
                         }
                     }
+                    try {
+                        val cursor =
+                            contentResolver.query(result.data!!, null, null, null, null)
+
+                        val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                        val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                        cursor.moveToFirst()
+
+                        val name = cursor.getString(nameIndex)
+                        val size = cursor.getLong(sizeIndex).toString()
+                    } catch (_: RuntimeException) {
+
+                    } catch (_: java.lang.NullPointerException) {
+
+                    }
+
                 }
-                try {
-                    val cursor =
-                        contentResolver.query(result.data!!, null, null, null, null)
+                var file: File
 
-                    val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                    cursor.moveToFirst()
+                if (get != null) {
+                    try {
+                        if(get.path!=null)
+                            file = File(get.path!!)
+                    } catch (ex: RuntimeException) {
+                        ex.printStackTrace()
+                        Toast.makeText(
+                            applicationContext,
+                            "File==null after filechooser " + ex.message,
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    } catch (ex1: NullPointerException) {
+                        ex1.printStackTrace()
+                        Toast.makeText(
+                            applicationContext,
+                            "FIle==null after filechooser " + ex1.message,
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
 
-                    val name = cursor.getString(nameIndex)
-                    val size = cursor.getLong(sizeIndex).toString()
-                } catch (_: RuntimeException) {
+                    if (requestCode == CREATE_FILE) {
+                        val openOutputStream = contentResolver.openOutputStream(get)
+                        if (openOutputStream != null) {
+                            try {
+                                val instance: GoogleFaceDetection =
+                                    faceOverlayView.googleFaceDetection
+                                instance.encode(DataOutputStream(openOutputStream))
+                            } catch (ex: RuntimeException) {
+                                ex.printStackTrace()
+                                ex.printStackTrace()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Error while writing file .fac (instance encoding - runtime) " + ex.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } catch (ex1: java.io.NotSerializableException) {
+                                ex1.printStackTrace()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Error while writing file .fac (instance encoding - not serialisable)" + ex1.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } catch (ex: java.lang.NullPointerException) {
+                                ex.printStackTrace()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Error while writing file .fac (instance encoding - not serialisable)" + ex.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
 
-                } catch (_: java.lang.NullPointerException) {
-
-                }
-
-            }
-            var file: File
-
-            if (get != null) {
-                try {
-                    file = get.path?.let { File(it) }!!
-                } catch (ex: RuntimeException) {
-                    ex.printStackTrace()
-                    Toast.makeText(
-                        applicationContext,
-                        "FIle==null after filechooser " + ex.message,
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                    return
-                } catch (ex1: NullPointerException) {
-                    ex1.printStackTrace()
-                    Toast.makeText(
-                        applicationContext,
-                        "FIle==null after filechooser " + ex1.message,
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                    return
-                }
-                if (requestCode == CREATE_FILE) {
-                    val openOutputStream = contentResolver.openOutputStream(get)
-                    if (openOutputStream != null) {
+                            }
+                        }
+                    } else {//if (requestCode == OPEN_MODEL)
                         try {
-                            val instance: GoogleFaceDetection = faceOverlayView.googleFaceDetection
-                            instance.encode(DataOutputStream(openOutputStream))
+//                            val inputStream: String = getRealPathFromURIString(result.data)
+//
+                            var chosenData = getRealPathFromIntentData2(data)
+                            if (chosenData == null) {
+                                chosenData = try {
+                                    FileInputStream(data!!.dataString)
+                                } catch (e: FileNotFoundException) {
+                                    e.printStackTrace()
+                                    getRealPathFromURI(data!!.data)
+                                }
+                            }
+
+                            val dataInputStream: DataInputStream =
+                                DataInputStream(chosenData)
+                            val googleFaceDetection2 =
+                                GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
+                            if (googleFaceDetection2 != null) {
+                                GoogleFaceDetection.setInstance2(googleFaceDetection2)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Chosen face model. Loaded OK",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else if (!GoogleFaceDetection.isInstance2()) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "GoogleFaceDetection == null (instance2)",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         } catch (ex: RuntimeException) {
-                            ex.printStackTrace()
                             ex.printStackTrace()
                             Toast.makeText(
                                 applicationContext,
-                                "Error while writing file .fac (instance encoding - runtime) " + ex.message,
+                                "Error while reading file .fac (1) (instance decoding - runtime) " + ex.message,
                                 Toast.LENGTH_LONG
                             ).show()
-                            return
+                        } catch (ex1: NullPointerException) {
+                            ex1.printStackTrace()
+                            Toast.makeText(
+                                applicationContext,
+                                "Error while reading file .fac: (2) (instance decoding - runtime) " + ex1.message,
+                                Toast.LENGTH_LONG
+                            ).show()
                         } catch (ex1: java.io.NotSerializableException) {
                             ex1.printStackTrace()
                             Toast.makeText(
@@ -807,41 +921,31 @@ class FaceActivitySettings : ActivitySuperClass() {
                                 "Error while writing file .fac (instance encoding - not serialisable)" + ex1.message,
                                 Toast.LENGTH_LONG
                             ).show()
-                            return
-                        }
-                    }
-                } else if (requestCode == OPEN_MODEL) {
-                    try {
-                        val inputStream : String = getRealPathFromURIString(result.data)
-                        val dataInputStream: DataInputStream = DataInputStream(FileInputStream(File(inputStream)))
-                        val googleFaceDetection2 =
-                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
-                        if(googleFaceDetection2!=null) {
-                            GoogleFaceDetection.setInstance2(googleFaceDetection2)
-                        } else if (!GoogleFaceDetection.isInstance2()) {
+                        } catch (ex: java.io.FileNotFoundException) {
+                            ex.printStackTrace()
                             Toast.makeText(
                                 applicationContext,
-                                "GoogleFaceDetection == null (instance2)",
+                                "Error while reading file: FileNotFound" + ex.message,
                                 Toast.LENGTH_LONG
                             ).show()
-                        }
-                    } catch (ex: RuntimeException) {
-                        ex.printStackTrace()
-                        Toast.makeText(
-                            applicationContext,
-                            "Error while reading file .fac (1) (instance decoding - runtime) " + ex.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } catch (ex1: NullPointerException) {
-                        ex1.printStackTrace()
-                        Toast.makeText(
-                            applicationContext,
-                            "Error while reading file .fac: (2) (instance decoding - runtime) " + ex1.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
 
+                        }
+                    }
                 }
+            } catch (ex: RuntimeException) {
+                Toast.makeText(
+                    applicationContext,
+                    "Erreur chargement : " + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+                Toast.makeText(
+                    applicationContext,
+                    "Error while writing file .fac (instance encoding - not serialisable)" + ex.message,
+                    Toast.LENGTH_LONG
+                ).show()
+                return
             }
         }
     }

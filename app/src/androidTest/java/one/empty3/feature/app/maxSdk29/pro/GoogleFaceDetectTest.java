@@ -54,8 +54,10 @@ import one.empty3.library.Polygon;
 public class GoogleFaceDetectTest {
     private String path = "/data/data/one.empty3.feature.app.maxSdk29.pro";
     private String[] modelsFiles = new String[]{
-        "/data/data/one.empty3.feature.app.maxSdk29.pro/model.fac (10).fac (10).fac (10)",
+        "/data/data/one.empty3.feature.app.maxSdk29.pro/model.fac (10)",
             "/data/data/one.empty3.feature.app.maxSdk29.pro.test/model.v4.fac"};
+    private String instantFile;
+
     @Before
     public void setup() {
         String permission;
@@ -65,6 +67,7 @@ public class GoogleFaceDetectTest {
         //InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
         permission = Manifest.permission.READ_EXTERNAL_STORAGE;
         InstrumentationRegistry.getInstrumentation().getUiAutomation().grantRuntimePermission(BuildConfig.APPLICATION_ID, permission);
+        instantFile = path+"/model-1.fac";
     }
 
     @Test
@@ -260,7 +263,7 @@ public class GoogleFaceDetectTest {
                     } else {
                     }
                     googleFaceDetection.encode(new DataOutputStream(
-                            new FileOutputStream(path+"/model-"+ UUID.randomUUID()+".fac")));
+                            new FileOutputStream(instantFile)));
                     byteArrayOutputStream.close();
 
                     System.err.println("Number of faces 1 : " + googleFaceDetection.getDataFaces().size());
@@ -283,11 +286,26 @@ public class GoogleFaceDetectTest {
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
                 if (bitmapDrawable.getBitmap() != null) {
                     Bitmap bitmap = bitmapDrawable.getBitmap();
-                    File currentRelativePath = new File(modelsFiles[1]);
+                    File currentRelativePath = new File(instantFile);
                     String s = currentRelativePath.toString();
                     System.out.println("Current absolute path is: " + s);
 
-                    InputStream inputStream = new FileInputStream(modelsFiles[0]);
+                    while(instantFile==null){
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    File file = new File(instantFile);
+                    while(!file.exists()) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    InputStream inputStream = new FileInputStream(instantFile);
                     GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap);
                     googleFaceDetection
                             = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));

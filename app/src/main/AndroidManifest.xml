@@ -18,11 +18,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
             android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-            android:maxSdkVersion="32"
+            android:maxSdkVersion="34"
             />
     <uses-permission
             android:name="android.permission.READ_EXTERNAL_STORAGE"
-            android:maxSdkVersion="32"
+            android:maxSdkVersion="34"
             />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -54,11 +54,6 @@
                 android:value="1"
                 />
         
-        <activity
-                android:name="one.empty3.feature.app.newui.MainActivityNavigation"
-                android:exported="false"
-                android:label="@string/title_activity_main_navigation"
-                />
         <activity
                 android:name=".FaceActivitySettings"
                 android:exported="false"
@@ -341,6 +336,7 @@
                     android:value=""
                     />
         </service>
+        
     </application>
 
 </manifest>
