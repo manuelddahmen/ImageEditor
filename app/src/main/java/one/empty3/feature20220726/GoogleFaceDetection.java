@@ -28,6 +28,9 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.Serialisable;
 import one.empty3.library.StructureMatrix;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebraicTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 
 public class GoogleFaceDetection
         implements Parcelable, Serializable, Serialisable {
@@ -583,6 +586,48 @@ public class GoogleFaceDetection
     @Override
     public int type() {
         return 0;
+    }
+
+    public PixM getFunctionResult(String functionAbij, int idSurface) {
+        if(functionAbij==null || functionAbij.isEmpty()) {
+            functionAbij = "";
+        }
+        PixM a ;
+        List<FaceData.Surface> surfaces = new ArrayList<>();
+        getDataFaces().forEach(new Consumer<FaceData>() {
+            @Override
+            public void accept(FaceData faceData) {
+                faceData.getFaceSurfaces().forEach(new Consumer<FaceData.Surface>() {
+                    @Override
+                    public void accept(FaceData.Surface surface) {
+                        if(surface.getSurfaceId()==idSurface) {
+                            surfaces.add(surface);
+                        }
+                    }
+                });
+            }
+        });
+        FaceData.Surface surface = surfaces.get(0);
+        if(surface!=null) {
+            AlgebraicTree algebraicTree = new AlgebraicTree(functionAbij);
+            try {
+                algebraicTree.construct();
+                for(int i=0; i<surface.getFilledContours().columns; i++) {
+                    for(int j=0; i<surface.getFilledContours().lines; j++) {
+                        algebraicTree.setParameter("i", (double)i);
+                        algebraicTree.setParameter("j", (double)j);
+                        StructureMatrix<Double> eval = algebraicTree.eval();
+                        surface.actualDrawing.set(i, j, eval.getElem(0),eval.getElem(1),eval.getElem(2));
+                    }
+                }
+            } catch (AlgebraicFormulaSyntaxException e) {
+                throw new RuntimeException(e);
+            } catch (TreeNodeEvalException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        return null;
     }
 
     @Override
