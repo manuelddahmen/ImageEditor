@@ -370,11 +370,11 @@ open class FragmentSuperClass : Fragment() {
         saveInstanceState()
         try {
             currentBitmap = null
-            if (imageView == null) imageView = activity2.findViewById(R.id.imageViewSelection)
+            /*£if (imageView == null) imageView = activity2.findViewById(R.id.imageViewSelection)
             if (imageView != null && currentFile != null) Utils().setImageView(
                 activity2,
                 activity2.imageView
-            )
+            )*/
         } catch (ex: RuntimeException) {
             ex.printStackTrace()
         }

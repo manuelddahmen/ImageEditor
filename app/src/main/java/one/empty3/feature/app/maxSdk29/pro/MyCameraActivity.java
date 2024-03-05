@@ -29,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.AnimatedImageDrawable;
@@ -45,6 +44,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -56,6 +56,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.datatransport.BuildConfig;
 
@@ -75,6 +76,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
 
+import javaAnd.awt.Color;
 import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
@@ -114,6 +116,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     private boolean workingResolutionOriginal = false;
     private Clipboard clipboard;
     private boolean copied;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,8 +124,8 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         setContentView(R.layout.main);
 
-        Intent intent = getIntent();
-        String type = intent.getType();
+
+        String type = getIntent().getType();
 
         maxRes = new Utils().getMaxRes(this);
 
@@ -152,7 +155,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             }
 
         });
-
+/*
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +167,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 }
             }
         });
+  */// Put in menu
         View fromFiles = findViewById(R.id.choosePhotoButton);
 
         fromFiles.setOnClickListener(v -> {
@@ -188,26 +192,27 @@ public class MyCameraActivity extends ActivitySuperClass {
                         && clipboard.getSource() != null) {
                     PixM dest = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap);
 
-                    int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
+                    int x = (int) Math.min(clipboard.getDestination().right, clipboard.getDestination().left);
                     int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
                     int w = (int) Math.abs(clipboard.getDestination().right - clipboard.getDestination().left);
                     int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     Bitmap bitmap = dest.getBitmap();
-                    currentFile.addAtCurrentPlace(new DataApp( new Utils().writePhoto(this, bitmap, "copy_paste")));
+                    currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(this, bitmap, "copy_paste")));
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
                     Toast.makeText(getApplicationContext(), R.string.subimage_pasted, Toast.LENGTH_SHORT)
                             .show();
 
-                    System.err.println("Image copiée: "+clipboard.getSource().getColumns()+" "+ clipboard.getSource().getLines());
-                    System.err.println("Zone de collage: "+"x:"+x+", y:"+y+" w:"+w+" h:"+h);
+                    System.err.println("Image copiée: " + clipboard.getSource().getColumns() + " " + clipboard.getSource().getLines());
+                    System.err.println("Zone de collage: " + "x:" + x + ", y:" + y + " w:" + w + " h:" + h);
 
 
                 }
             } else toastButtonDisabled(v);
         });
+        /*
         View about = findViewById(R.id.About);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,12 +220,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                 openUserData(v);
             }
         });
-
+*///Put in menu
         View shareView = findViewById(R.id.share);
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null && currentFile.getCurrentFile()!=null && currentFile.getCurrentFile().exists()) {
+                if (currentFile != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
                     Uri uri = Uri.fromFile(currentFile.getCurrentFile());
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile.getCurrentFile());
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -238,7 +243,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentFile != null && currentFile.getCurrentFile()!=null && currentFile.getCurrentFile().exists()) {
+                if (currentFile != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
 
                     String[] permissionsStorage = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_MEDIA_IMAGES};
@@ -260,7 +265,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     Path target = null;
 
                     try {
-                        target = copy((currentFile.getCurrentFile()).toPath(), new File(picturesDirectory.getAbsolutePath() + File.separator+UUID.randomUUID() + ".jpg").toPath());
+                        target = copy((currentFile.getCurrentFile()).toPath(), new File(picturesDirectory.getAbsolutePath() + File.separator + UUID.randomUUID() + ".jpg").toPath());
                     } catch (IOException e) {
                         e.printStackTrace();
 
@@ -297,18 +302,17 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         });
 
-
         //Draw activity (pass: rectangle, image, image view size.
         View face = findViewById(R.id.buttonFace);
 
         face.setOnClickListener(view -> {
-            if(currentFile!=null) {
+            if (currentFile != null) {
 
                 Intent faceIntent = new Intent(Intent.ACTION_VIEW);
 
                 faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 
-                if(currentPixM!=null) {
+                if (currentPixM != null) {
                     faceIntent.putExtra("zoom", currentPixM.getBitmap());
                 }
 
@@ -316,7 +320,6 @@ public class MyCameraActivity extends ActivitySuperClass {
 
             }
         });
-
         Button computePixels = findViewById(R.id.activity_compute_pixels);
         computePixels.setOnClickListener(v -> {
             if (currentFile.getCurrentFile() != null) {
@@ -328,6 +331,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 passParameters(intentDraw);
             } else toastButtonDisabled(v);
         });
+
         imageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -411,36 +415,8 @@ public class MyCameraActivity extends ActivitySuperClass {
                 unselectReloadCurrentFile();
             }
         });
-
         View addText = findViewById(R.id.buttonAddText);
         addText.setOnClickListener(view -> addText(view));
-/*
-        View openNewUI = findViewById(R.id.new_layout_app);
-        openNewUI.setOnClickListener(view -> {
-            Intent intent2 = new Intent();
-            intent2.setClass(getApplicationContext(), MyCameraActivity.class);
-            passParameters(intent2);
-        });
-*/
-//        Button crashButton = new Button(this);
-//        crashButton.setText("Test Crash");
-//        crashButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                throw new RuntimeException("Test Crash"); // Force a crash
-//            }
-//        });
-//
-//        addContentView(crashButton, new ViewGroup.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT));
-
-/*
-        if(currentFile!=null) {
-            drawIfBitmap();
-        } else {
-            restoreInstanceState();
-        }
-*/
         View settings = findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -449,14 +425,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                 passParameters(settingsIntent);
             }
         });
-
         Button loginButton = findViewById(R.id.myButton);
         loginButton.setOnClickListener(view -> {
             Intent login = new Intent();
             login.setClass(getApplicationContext(), LoginActivity2.class);
             startActivity(login);
         });
-
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -476,6 +450,19 @@ public class MyCameraActivity extends ActivitySuperClass {
         unselectReloadCurrentFile();
     }
 
+    // override the onOptionsItemSelected()
+    // function to implement
+    // the item click listener callback
+    // to open and close the navigation
+    // drawer when the icon is clicked
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
         if (currentFile != null) {
             PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap);
@@ -487,16 +474,17 @@ public class MyCameraActivity extends ActivitySuperClass {
             double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
             double yr = 1.0 / imageView.getHeight() * pixM.getLines();
 
-            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
-            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
-            int y1 = (int) Math.min(drawPointA.getY()*yr, drawPointB.getY()*yr);
-            int y2 = (int) Math.max(drawPointA.getY()*yr, drawPointB.getY()*yr);
+            int x1 = (int) Math.min(drawPointA.getX() * xr, drawPointB.getX() * xr);
+            int x2 = (int) Math.max(drawPointA.getX() * xr, drawPointB.getX() * xr);
+            int y1 = (int) Math.min(drawPointA.getY() * yr, drawPointB.getY() * yr);
+            int y2 = (int) Math.max(drawPointA.getY() * yr, drawPointB.getY() * yr);
 
             return new RectF(x1, y1, x2, y2);
 
         }
         return null;
     }
+
     private RectF getSelectedCordsViewToImg(ImageView imageView, RectF rectF) {
         if (currentFile.getCurrentFile() != null) {
             int x1 = (int) Math.min(rectF.left, rectF.right);
@@ -504,8 +492,8 @@ public class MyCameraActivity extends ActivitySuperClass {
             int y1 = (int) Math.min(rectF.bottom, rectF.top);
             int y2 = (int) Math.max(rectF.bottom, rectF.top);
 
-            double xr =1.0/( 1.0 * imageView.getWidth() / (x2-x1));
-            double yr = 1.0/(1.0 * imageView.getHeight() / y2-y1);
+            double xr = 1.0 / (1.0 * imageView.getWidth() / (x2 - x1));
+            double yr = 1.0 / (1.0 * imageView.getHeight() / y2 - y1);
 
 
             return new RectF(x1, y1, x2 - x1, y2 - y1);
@@ -528,7 +516,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                if(file!=null) {
+                if (file != null) {
                     Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
                     System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
                     new Utils().setImageView(imageView, photo);
@@ -600,7 +588,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (isWorkingResolutionOriginal()) {
                     bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
                 }
-                if(bitmap!=null) {
+                if (bitmap != null) {
                     bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
                 }
             }
@@ -674,7 +662,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         File imageFile = getFilesFile("imageViewOriginal.jpg");
         File imageFileLow = getFilesFile(IMAGE_VIEW_JPG);
 
-        if (file && imageFile!=null && imageFile.exists()) {
+        if (file && imageFile != null && imageFile.exists()) {
             try {
                 Bitmap imageViewBitmap = null;
                 if (isWorkingResolutionOriginal()) {
@@ -821,7 +809,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
         boolean shouldOverwrite = true;
-        
+
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         int n = 1;
         //Folder is already created
@@ -843,14 +831,14 @@ public class MyCameraActivity extends ActivitySuperClass {
         Uri uriSavedImage = Uri.fromFile(file2);
         camera.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
-        if (dir1!=null && !dir1.exists()) if (!dir1.mkdirs()) {
+        if (dir1 != null && !dir1.exists()) if (!dir1.mkdirs()) {
             System.err.print("Dir not created $dir1");
         }
-        if (dir2!=null && !dir2.exists()) if (!dir2.mkdirs()) {
+        if (dir2 != null && !dir2.exists()) if (!dir2.mkdirs()) {
             System.err.println("Dir not created $dir2");
         }
         try {
-            if (file1!=null && !file1.exists()) {
+            if (file1 != null && !file1.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file1, shouldOverwrite);
                 System.err.print("Image written 1/2 " + file1 + " return");
                 saveImageState(isWorkingResolutionOriginal());
@@ -861,7 +849,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             Log.e("SAVE FILE", "writePhoto: erreur file 1/2");
         }
         try {
-            if (file2!=null && !file2.exists()) {
+            if (file2 != null && !file2.exists()) {
                 ImageIO.write(new BufferedImage(bitmap), "jpg", file2, shouldOverwrite);
                 System.err.print("Image written 2/2 " + file2 + " return");
                 //System.err.println("File (photo) " + file2.getAbsolutePath());
@@ -1040,14 +1028,14 @@ public class MyCameraActivity extends ActivitySuperClass {
                 FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.APPLICATION_ID + ".provider", currentFile.getCurrentFile());
                 Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getCurrentFile().getName());
                 String fileStr = currentFile.getCurrentFile().getName();
-                if (myPath.toFile()!=null && myPath.toFile().exists()) {
+                if (myPath.toFile() != null && myPath.toFile().exists()) {
 
 
                 } else {
                     File dir = new File(currentDir + File.separator + "FeatureApp" + File.separator);
                     File file = new File(currentDir + File.separator + "FeatureApp" + File.separator + fileStr);
 
-                    if (myPath.toFile()!=null && myPath.toFile().exists() && myPath.toFile().isDirectory()) {
+                    if (myPath.toFile() != null && myPath.toFile().exists() && myPath.toFile().isDirectory()) {
 
                     }
                     if (new File(myPath.toFile().getParent()).isDirectory() && !new File(myPath.toFile().getParent()).exists()) {
@@ -1118,9 +1106,8 @@ public class MyCameraActivity extends ActivitySuperClass {
     }
 
 
-
     public void addText(View view) {
-        if (currentFile != null && imageView!=null && currentFile.getCurrentFile()!=null &&currentFile.getCurrentFile().exists() ) {
+        if (currentFile != null && imageView != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
             Intent textIntent = new Intent(Intent.ACTION_VIEW);
             textIntent.setDataAndType(Uri.fromFile(currentFile.getCurrentFile()), "image/jpg");
             textIntent.setClass(getApplicationContext(), TextActivity.class);
@@ -1149,21 +1136,21 @@ public class MyCameraActivity extends ActivitySuperClass {
     @Override
     protected void onPause() {
         super.onPause();
-        if(currentFile!=null)
+        if (currentFile != null)
             saveInstanceState();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(currentFile==null)
+        if (currentFile == null)
             loadInstanceState();
     }
 
 
     private void unselectReloadCurrentFile() {
         try {
-            if (currentFile.getCurrentFile() != null) {
+            if (currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
                 BufferedImage read = ImageIO.read(currentFile.getCurrentFile());
                 if (read != null && read.getBitmap() != null) {
                     new Utils().setImageView(imageView, read.getBitmap());

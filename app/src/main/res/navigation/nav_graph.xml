@@ -22,9 +22,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_nav"
-    app:startDestination="@id/myCameraActivity_nav">
+    app:startDestination="@id/nav_main">
     <activity
-        android:id="@+id/myCameraActivity_nav"
+        android:id="@+id/nav_main"
         android:name="one.empty3.feature.app.maxSdk29.pro.MyCameraActivity"
         android:label="Home Main">
     </activity>
@@ -89,17 +89,15 @@
     <activity
         android:id="@+id/activity_main1_nav"
         tools:layout="@layout/main" />
-    <activity
-        android:id="@+id/activity_main2_nav"
-        tools:layout="@layout/activity_main2" />
     <fragment
         android:id="@+id/image_preview_fragment_nav"
         android:name="one.empty3.feature.app.maxSdk29.pro.ImagePreviewFragment"
         tools:layout="@layout/image_preview">
-
+<!--
         <action
-            android:id="@id/myCameraActivity_nav"
-            app:destination="@id/myCameraActivity_nav" />
+            android:id="@id/nav_main"
+            app:destination="@id/nav_main" />
+            -->
         <action
             android:id="@id/graphicsActivity_nav"
             app:destination="@id/graphicsActivity_nav" />

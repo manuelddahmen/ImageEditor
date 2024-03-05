@@ -37,7 +37,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -63,15 +66,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.UUID;
 
+import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
 
 
 public class ActivitySuperClass extends AppCompatActivity {
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
+
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
@@ -206,10 +212,16 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         try {
             if (currentFile.getCurrentFile() != null) {
-                Bitmap bitmap = Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).bitmap;
-                currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(
-                        this, bitmap, "reload")));
-                loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
+                File currentFile1 = currentFile.getCurrentFile();
+                if(currentFile1!=null && currentFile1.exists()) {
+                    BufferedImage read = ImageIO.read(currentFile1);
+                    if (read != null && read.bitmap != null) {
+                        Bitmap bitmap = read.bitmap;
+                        currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(
+                                this, bitmap, "reload")));
+                        loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
+                    }
+                }
             }
         } catch (NullPointerException ex) {
             ex.printStackTrace();
@@ -454,13 +466,21 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     protected void saveInstanceState() {
         Properties properties = new Properties();
+        File imageViewPersistantPropertiesFile = getImageViewPersistantPropertiesFile();
         try {
-            properties.load(new FileInputStream(getImageViewPersistantPropertiesFile()));
+            properties.setProperty("maxRes", "" + maxRes);
+            if (imageViewPersistantPropertiesFile.exists()) {
+                try {
+                    properties.load(new FileInputStream(imageViewPersistantPropertiesFile));
+                } catch (IOException | RuntimeException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+            }
+
             for (int i = 0; i < cords.length; i++) {
                 properties.setProperty(cordsConsts[i], cords[i]);
             }
-            properties.setProperty("maxRes", "" + maxRes);
-
             try {
                 if (currentFile.getCurrentFile() != null) {
                     properties.setProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
@@ -472,16 +492,17 @@ public class ActivitySuperClass extends AppCompatActivity {
                     if (file != null)
                         currentFile.addAtCurrentPlace(new DataApp(file));
                 }
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (FileNotFoundException ignored) {
             }
-        } catch (RuntimeException | IOException ex) {
+        } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
+
 
         try {
             properties.store(new FileOutputStream(getImageViewPersistantPropertiesFile()), "#" + new Date().toString());
         } catch (IOException ignored) {
+
         }
     }
 

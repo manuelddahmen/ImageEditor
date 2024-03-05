@@ -27,6 +27,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
             android:name=".FeatureAppApplication"
             android:allowBackup="true"
@@ -43,12 +44,16 @@
             tools:targetApi="tiramisu"
             >
         <activity
+                android:name=".MainActivity2"
+                android:exported="false"
+                android:label="@string/title_activity_main2"
+                android:theme="@style/Theme.FeatureAppmain.NoActionBar"
+                />
+        <activity
                 android:name=".ui.login.LoginActivity2"
                 android:exported="false"
                 android:label="@string/title_activity_login2"
-                />
-        
-         <!-- Trigger Google Play services to install the backported photo picker module. -->
+                /> <!-- Trigger Google Play services to install the backported photo picker module. -->
         <property
                 android:name=".REQUIRE_SECURE_ENV"
                 android:value="1"
@@ -139,27 +144,35 @@
                 android:name=".MyCameraActivity"
                 android:enabled="true"
                 android:exported="true"
-                  android:theme="@style/Theme.FeatureAppmain">
+                android:theme="@style/Theme.FeatureAppmain"
+                >
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
-                <data android:mimeType="image/jpg"/>
+                <data android:mimeType="image/jpg" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+                
                 <category android:name="android.intent.category.DEFAULT" />
+                
                 <data android:mimeType="image/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+                
                 <category android:name="android.intent.category.DEFAULT" />
+                
                 <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
+                
                 <category android:name="android.intent.category.DEFAULT" />
+                
                 <data android:mimeType="image/*" />
             </intent-filter>
             <!--
@@ -242,14 +255,14 @@
                 <data android:path="/*.*" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShareActivity"
+        <activity
+                android:name=".ShareActivity"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="@string/work_with_photos"
                 android:theme="@style/Theme.FeatureAppmain"
-                >
-          
-        </activity>
+                ></activity>
+        
         <provider
                 android:name=".MyImageFileProvider"
                 android:authorities="one.empty3.feature.app.maxSdk29.pro.MyImageFileProvider"
@@ -336,7 +349,6 @@
                     android:value=""
                     />
         </service>
-        
     </application>
 
 </manifest>

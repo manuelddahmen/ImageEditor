@@ -1,5 +1,5 @@
 //def compose_version = '1.5.2'
-def kotlin_version = '1.9.21'
+def kotlin_version = '1.9.22'
 
 
 buildscript {

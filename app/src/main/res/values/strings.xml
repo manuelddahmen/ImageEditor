@@ -299,4 +299,17 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="cancel_work">Cancel</string>
     <string name="button" translatable="false">Button</string>
     <string name="buttonCodeBfore" translatable="false">Button</string>
-    buttonCodeBfore</resources>
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="open" translatable="false">Open</string>
+    <string name="close" translatable="false">Close</string>
+    <string name="nav_header_title">12</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
