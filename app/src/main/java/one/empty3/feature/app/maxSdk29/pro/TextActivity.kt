@@ -33,6 +33,8 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -40,6 +42,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import javaAnd.awt.Point
 import java.io.File
 import java.io.FileInputStream
@@ -57,6 +60,10 @@ class TextActivity() : ActivitySuperClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_view)
+
+
+        val prefs = PreferenceManager
+            .getDefaultSharedPreferences(this)
 
         System.err.println("CurrentFile="+currentFile);
 
@@ -99,7 +106,28 @@ class TextActivity() : ActivitySuperClass() {
             applyText()
         }
 
+        val editText: EditText =
+            findViewById<EditText>(R.id.textViewOnImage)
 
+        var string: String? = prefs.getString("autoSaveEditTextTextApply", "")
+        if(string!=null)
+            editText.setText(string)
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                var toString = editText.text?.toString()
+                if(toString==null)
+                    toString = ""
+                prefs.edit().putString("autoSaveEditTextTextApply", toString).apply();
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
         initImageView()
     }
 
