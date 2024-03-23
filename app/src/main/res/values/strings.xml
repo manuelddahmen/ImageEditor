@@ -64,7 +64,7 @@
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
     <string name="about">About</string>
-    <string name="maxRes_1200">1200.0</string>
+    <string name="maxRes_1200">400.0</string>
     <string name="maximum_resolution">Maximum resolution</string>
     <string name="share">Share</string>
     <string name="beta">Beta?</string>
@@ -275,7 +275,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="toggle_original_colors">Original colors</string>
     <string name="commentEffect" translatable="false">!!</string>
     <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login page</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

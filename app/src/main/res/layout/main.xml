@@ -249,18 +249,19 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:id="@+id/undoredo"
+            android:weightSum="1.0"
             app:layout_constraintTop_toBottomOf="@+id/bottom_buttons">
         
         <Button
                 android:id="@+id/undo"
                 android:text="@string/undo"
-                android:layout_width="50dp"
-                android:layout_height="40dp" />
+                android:layout_weight="0.5"
+                android:layout_height="40dp"  android:layout_width="wrap_content"/>
         
         <Button
                 android:id="@+id/redo"
                 android:text="@string/redo"
-                android:layout_width="50dp"
+                android:layout_weight="0.5" android:layout_width="wrap_content"
                 android:layout_height="40dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

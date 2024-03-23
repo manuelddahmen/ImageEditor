@@ -87,7 +87,7 @@
       
   <string name="about">אודות</string>
       
-  <string name="maxRes_1200">1200.0</string>
+  <string name="maxRes_1200">400.0</string>
       
   <string name="maximum_resolution">רזולוציה מקסימלית</string>
       
@@ -423,7 +423,7 @@
       
   <string name="default_web_client_id">167958349345-ji6pdud0s27fdj3m48mnek013499bl19.apps.googleusercontent.com</string>
       
-  <string name="title_activity_login">LoginActivity</string>
+  <string name="title_activity_login">Login Page</string>
       
   <string name="prompt_email">אימייל</string>
       

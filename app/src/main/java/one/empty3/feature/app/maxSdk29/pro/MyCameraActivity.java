@@ -150,12 +150,15 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
                 }
+                if (checkSelfPermission(Manifest.permission.USE_FULL_SCREEN_INTENT) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
 
         });
-/*
+
         Button effectsButton2 = this.findViewById(R.id.effectsButtonNew);
         effectsButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +170,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 }
             }
         });
-  */// Put in menu
+// Put in menu
         View fromFiles = findViewById(R.id.choosePhotoButton);
 
         fromFiles.setOnClickListener(v -> {
