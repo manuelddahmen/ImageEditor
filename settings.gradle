@@ -59,6 +59,6 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 }
-rootProject.name = "Image Featuring (FeatureApp)"
+rootProject.name = "Image Editor"
 include ':app'
 

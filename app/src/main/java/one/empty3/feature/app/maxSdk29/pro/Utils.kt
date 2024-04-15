@@ -2,7 +2,7 @@
  * Copyright (c) 2023.
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import android.graphics.BitmapFactory.Options
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.media.MediaFormat
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -37,8 +38,16 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.net.toFile
+import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
+import com.linkedin.android.litr.MediaTransformer
+import com.linkedin.android.litr.TransformationListener
+import com.linkedin.android.litr.TransformationOptions
+import com.linkedin.android.litr.analytics.TrackTransformationInfo
+import com.linkedin.android.litr.filter.GlFilter
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -127,6 +136,70 @@ class Utils {
         if (activitySuperClass == null || activitySuperClass.applicationContext == null)
             return ActivitySuperClass.MAXRES_DEFAULT
         return getMaxRes(activitySuperClass.applicationContext)
+    }
+    fun applyOnMedia(applicationContext: Context, inFile:File,
+                     outFile : File, numFrames: Int =-1, apf : AndroidProcessFile) {
+        var isImage = false
+        val mediaTransformer = MediaTransformer(applicationContext)
+        val filters :List<GlFilter> = ArrayList()
+        var numFrames1 = numFrames
+        if(inFile.name.toLowerCase(Locale.current).endsWith("jpg")) {
+            isImage = true
+            if(numFrames==-1) {
+                numFrames1 = 150
+            } else {
+
+            }
+        }
+        else
+            isImage = false
+        class TransformationListenerExt() : TransformationListener {
+            override fun onStarted(id: String) {
+                if(isImage) {
+
+                } else {
+
+                }
+            }
+
+            override fun onProgress(id: String, progress: Float) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCompleted(
+                id: String,
+                trackTransformationInfos: MutableList<TrackTransformationInfo>?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(
+                id: String,
+                trackTransformationInfos: MutableList<TrackTransformationInfo>?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(
+                id: String,
+                cause: Throwable?,
+                trackTransformationInfos: MutableList<TrackTransformationInfo>?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        val transformer : TransformationListener = TransformationListenerExt()
+
+
+        mediaTransformer.transform(""+UUID.randomUUID(),
+            inFile.toUri(), outFile.toUri(),
+            MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_MPEG4,
+                maxRes, maxRes), MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC,
+            3000, 1),
+            transformer,
+            TransformationOptions.Builder().setVideoFilters(filters).build()
+        )
     }
 
     public fun writeFile(

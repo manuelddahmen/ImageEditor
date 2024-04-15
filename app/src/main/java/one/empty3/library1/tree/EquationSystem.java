@@ -64,7 +64,7 @@ public class EquationSystem extends TreeNode {
     private HashMap<String, Double> constantes;
 
     public EquationSystem(TreeNode src, String expStr, String[] inconnue, HashMap<String, Double> values) {
-        super(src.algebraicTree, expStr);
+        super(null, expStr);
         this.inconnues = inconnue;
         this.constantes = values;
         // Fonctions...

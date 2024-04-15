@@ -2,7 +2,7 @@
  * Copyright (c) 2023.
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -231,7 +231,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (currentFile != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
                     Uri uri = Uri.fromFile(currentFile.getCurrentFile());
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile.getCurrentFile());
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND).setClassName(/* TODO: provide the application ID. For example: */ getPackageName(), "one.empty3.feature.app.maxSdk29.pro.VisualFaceEffects");
                     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
                     shareIntent.setDataAndType(photoURI, "image/jpeg");
@@ -344,6 +344,8 @@ public class MyCameraActivity extends ActivitySuperClass {
         });
         imageView.setOnTouchListener((View v, MotionEvent event) -> {
             imageView = findViewById(R.id.currentImageView);
+            if(imageView==null)
+                return false;
             if (currentFile != null) {
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
@@ -373,7 +375,14 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
                     System.err.println("2 points sélectionnés A et B");
                     ImageViewSelection viewById = findViewById(R.id.currentImageView);
-                    Bitmap bitmap = ImageIO.read(currentFile.getCurrentFile()).bitmap;
+                    if(viewById==null)
+                        return false;
+                    File currentFile1 = currentFile.getCurrentFile();
+                    if(currentFile1==null)
+                        return false;
+                    Bitmap bitmap = ImageIO.read(currentFile1).bitmap;
+                    if(bitmap==null)
+                        return false;
                     RectF rectF = getSelectedCordsImgToView(bitmap, viewById);
                     viewById.setDrawingRect(rectF);
                     viewById.setDrawingRectState(true);
@@ -419,7 +428,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             }
         });
         View addText = findViewById(R.id.buttonAddText);
-        addText.setOnClickListener(view -> addText(view));
+        addText.setOnClickListener(this::addText);
         View settings = findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -619,6 +628,8 @@ public class MyCameraActivity extends ActivitySuperClass {
                 System.err.println("Image updated");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            } catch (RuntimeException e) {
+                e.printStackTrace();
             }
         }
 
@@ -670,9 +681,10 @@ public class MyCameraActivity extends ActivitySuperClass {
                 Bitmap imageViewBitmap = null;
                 if (isWorkingResolutionOriginal()) {
                     imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
-                } else {
+                } else if(imageFileLow!=null && imageFileLow.exists()){
                     imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFileLow));
-                }
+                } else
+                    return;
 
                 if (imageViewBitmap != null) {
                     if (imageView != null) {
@@ -792,7 +804,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults!=null && grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
@@ -1053,7 +1065,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                         copy(currentFile.getCurrentFile().toPath(), myPath);
                         Uri uri = Uri.fromFile(file);
                         uri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", file);
-                        Intent intent1 = new Intent(Intent.ACTION_SEND, uri);
+                        Intent intent1 = new Intent(Intent.ACTION_SEND, uri).setClassName(/* TODO: provide the application ID. For example: */ getPackageName(), "one.empty3.feature.app.maxSdk29.pro.VisualFaceEffects");
                         startActivity(intent1);
                         //MediaStore.EXTRA_OUTPUT
                     } catch (Exception ex) {

@@ -2,7 +2,7 @@
  * Copyright (c) 2023.
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -49,6 +49,7 @@ import one.empty3.feature20220726.histograms.Hist1Votes;
 import one.empty3.feature20220726.histograms.Hist4Contour;
 import one.empty3.feature20220726.histograms.Hist4Contour2;
 import one.empty3.feature20220726.histograms.Hist4Contour3;
+import one.empty3.feature20220726.histograms.Hist4Contour4colors;
 import one.empty3.feature20220726.histograms.Histogram1;
 import one.empty3.io.ProcessFile;
 
@@ -104,6 +105,7 @@ public class Main2022 {
                 //listProcessClasses.put("MagnitudeProcess", MagnitudeProcess.class.newInstance());
                 listProcessClasses.put("TrueHarrisProcess", TrueHarrisProcess.class.newInstance());
                 listProcessClasses.put("LocalExtremaProcess", LocalExtremaProcess.class.newInstance());
+                listProcessClasses.put("Hist4Contour4colors", Hist4Contour4colors.class.newInstance());
 
 
             /*

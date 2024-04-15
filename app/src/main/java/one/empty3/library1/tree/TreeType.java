@@ -56,14 +56,12 @@ package one.empty3.library1.tree;
 
 import java.util.HashMap;
 
-import one.empty3.library1.tree.DoubleTreeType;
-
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class TreeType {
-    public final HashMap<String, Class>
-            types = new HashMap<String, Class>();
+    public final HashMap<String, java.lang.Class<DoubleTreeType>>
+            types = new HashMap<>();
 
     public TreeType() {
         types.put("reel", DoubleTreeType.class);

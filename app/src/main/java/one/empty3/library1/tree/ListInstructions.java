@@ -40,7 +40,7 @@ public class ListInstructions {
         return "";
     }
 
-    public class Instruction {
+    public static class Instruction {
         private int id;
         private String leftHand;
         private String expression;
@@ -73,6 +73,11 @@ public class ListInstructions {
 
         public void setExpression(String expression) {
             this.expression = expression;
+        }
+
+        @Override
+        public String toString() {
+            return (leftHand != null ? leftHand : "") + ((expression != null && leftHand != null) ? " = " + expression : (expression != null ? expression : ""));
         }
     }
 
@@ -140,6 +145,8 @@ public class ListInstructions {
                     }
                 }
             }
+        } else {
+            assignations = new ArrayList<>();
         }
     }
 
@@ -172,7 +179,7 @@ public class ListInstructions {
                 tree.construct();
 
                 resultVec = tree.eval();
-                
+
                 if (resultVec != null) {
                     System.out.println("key: " + key + " value: " + value + " computed: " + resultVec);
                     if (resultVec.getDim() == 1) {

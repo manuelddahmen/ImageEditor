@@ -54,11 +54,9 @@
 
 package one.empty3.library1.tree;
 
-import one.empty3.library1.tree.TreeType;
-
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class DoubleTreeType extends TreeType {
-    private final Class doubleClass = Double.class;
+    private final java.lang.Class<Double> doubleClass = Double.class;
 }

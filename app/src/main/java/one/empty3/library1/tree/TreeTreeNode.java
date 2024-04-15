@@ -27,10 +27,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
+import org.jcodec.api.NotImplementedException;
 
 public class TreeTreeNode extends TreeNode {
-    private final AlgebraicTree tree;
+    private AlgebraicTree tree;
+    private String functionName;
     private Method method = null;
+    private boolean mathType = true;
 
     public TreeTreeNode(TreeNode t, Object[] objects, TreeNodeType type) {
         super(t, objects, type);
@@ -39,11 +42,18 @@ public class TreeTreeNode extends TreeNode {
             tree.construct();
             if (objects[2] instanceof String && !((String) objects[2]).isEmpty()) {
                 String call = (String) objects[2];
-                if (call.length() > 1)
-                    method = Math.class.getMethod(call, double.class);
+                if (call.length() > 1) {
+                    if ((objects.length < 4) || (objects[3].equals(true))) {
+                        method = Math.class.getMethod(call, double.class);
+                    } else {
+                        mathType = false;
+                        functionName = call;
+                        //throw new NotImplementedException("Custom functions not implemented yet");
+                    }
+                }
             }
         } catch (AlgebraicFormulaSyntaxException | NoSuchMethodException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -64,5 +74,29 @@ public class TreeTreeNode extends TreeNode {
         }
         return res.setElem(r);
 
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
+    public boolean isMathType() {
+        return mathType;
+    }
+
+    public void setMathType(boolean mathType) {
+        this.mathType = mathType;
     }
 }

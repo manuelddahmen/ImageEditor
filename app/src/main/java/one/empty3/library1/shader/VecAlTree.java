@@ -56,7 +56,8 @@ public class VecAlTree extends Vec {
 
     public Double[] getValue() {
         try {
-            return new Double[]{tree.eval().getElem()};
+            return new Double[]{
+                    tree.eval().getElem()};
         } catch (TreeNodeEvalException ex) {
             ex.printStackTrace();
             return new Double[]{0.0};

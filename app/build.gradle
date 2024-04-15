@@ -13,7 +13,7 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def code = 336903004
+def code = 336903007
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 21:41:00 (UTC)
 java {
@@ -180,9 +180,9 @@ dependencies {
     def versions_work = "2.9.0"
     implementation "androidx.work:work-runtime:2.9.0"
     implementation "androidx.work:work-runtime-ktx:2.9.0"
-    implementation 'com.google.firebase:firebase-analytics:21.5.1'
+    implementation 'com.google.firebase:firebase-analytics:21.6.1'
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-crashlytics")
@@ -208,17 +208,17 @@ dependencies {
     //implementation 'com.google.ar:core:1.32.0'
     implementation 'junit:junit:4.13.2'
     implementation "androidx.preference:preference-ktx:1.2.1"
-    implementation "androidx.databinding:viewbinding:8.2.2"
-    implementation "androidx.databinding:databinding-common:8.2.2"
-    implementation "androidx.databinding:databinding-runtime:8.2.2"
-    implementation "androidx.databinding:databinding-adapters:8.2.2"
+    implementation "androidx.databinding:viewbinding:8.3.1"
+    implementation "androidx.databinding:databinding-common:8.3.1"
+    implementation "androidx.databinding:databinding-runtime:8.3.1"
+    implementation "androidx.databinding:databinding-adapters:8.3.1"
     implementation 'androidx.annotation:annotation:1.7.1'
-    annotationProcessor "androidx.databinding:databinding-compiler:8.2.2"
-    implementation "androidx.databinding:databinding-ktx:8.2.2"
+    annotationProcessor "androidx.databinding:databinding-compiler:8.3.1"
+    implementation "androidx.databinding:databinding-ktx:8.3.1"
     //implementation "com.google.android.datatransport:transport-runtime:3.1.9"
-    implementation 'androidx.camera:camera-video:1.3.1'
-    implementation 'androidx.camera:camera-lifecycle:1.3.1'
-    implementation 'androidx.camera:camera-camera2:1.3.1'
+    implementation 'androidx.camera:camera-video:1.3.2'
+    implementation 'androidx.camera:camera-lifecycle:1.3.2'
+    implementation 'androidx.camera:camera-camera2:1.3.2'
     implementation "com.google.guava:guava:32.0.1-jre"
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
     implementation "com.google.mlkit:face-detection:16.1.6"
@@ -241,7 +241,7 @@ dependencies {
     implementation("com.jgoodies:jgoodies-common:1.8.1")
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
 
     // Add the dependency for the Performance Monitoring library
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -271,7 +271,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
@@ -290,6 +290,8 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation 'com.linkedin.android.litr:litr:1.5.5'
+    implementation 'com.linkedin.android.litr:litr-filters:1.5.5'
 }
 
 

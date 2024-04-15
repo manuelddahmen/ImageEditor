@@ -2,7 +2,7 @@
  * Copyright (c) 2023.
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -40,7 +40,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -81,7 +80,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     public static final String TAG = "one.empty3.feature.app.maxSdk29.pro";
-    public static final int MAXRES_DEFAULT = 1200;
+    public static final int MAXRES_DEFAULT = 400;
     protected static final String[] cordsConsts = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};
     private static final int ONSAVE_INSTANCE_STATE = 21516;
     private static final int ONRETRIEVE_DEFAULT_CURRENTFILE = 242426;
