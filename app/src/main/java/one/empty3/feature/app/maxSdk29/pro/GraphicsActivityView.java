@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen
@@ -41,8 +41,6 @@ import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
 import one.empty3.feature20220726.PixM;
-
-;
 
 public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

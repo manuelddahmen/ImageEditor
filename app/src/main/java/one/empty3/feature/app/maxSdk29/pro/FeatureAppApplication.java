@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen
@@ -26,6 +26,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.work.Configuration;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
+import com.google.firebase.vertexai.FirebaseVertexAI;
+import com.google.firebase.vertexai.GenerativeModel;
+
 public class FeatureAppApplication extends Application implements Configuration.Provider {
 
     @NonNull
@@ -35,10 +41,20 @@ public class FeatureAppApplication extends Application implements Configuration.
                 .build();
         return configuration;
     }
+
     private int maxRes = R.string.maxRes_1200;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        FirebaseApp.initializeApp(/*context=*/ this);
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+        firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance());
+        // Initialize the Vertex AI service and the generative model
+// Specify a model that supports your use case
+// Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
+        GenerativeModel generativeModel = FirebaseVertexAI.getInstance().generativeModel("gemini-1.5-pro-preview-0409");
     }
 
     public int getMaxRes() {

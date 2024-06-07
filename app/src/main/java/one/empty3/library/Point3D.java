@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2024. Manuel Daniel Dahmen
  *
  *
  *    Copyright 2012-2023 Manuel Daniel Dahmen
@@ -29,7 +29,7 @@ import one.empty3.library.StructureMatrix;
 import java.util.List;
 
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2024. Manuel Daniel Dahmen
  *
  *
  *    Copyright 2012-2023 Manuel Daniel Dahmen

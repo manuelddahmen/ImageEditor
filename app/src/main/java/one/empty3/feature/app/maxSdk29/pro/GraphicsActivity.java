@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen
@@ -35,7 +35,6 @@ import androidx.preference.PreferenceManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-;
 
 
 public class GraphicsActivity extends ActivitySuperClass {

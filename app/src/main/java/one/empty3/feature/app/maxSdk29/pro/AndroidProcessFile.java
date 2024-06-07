@@ -1,25 +1,8 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaFormat;
-import android.net.Uri;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.linkedin.android.litr.MediaTransformer;
-import com.linkedin.android.litr.TransformationListener;
-import com.linkedin.android.litr.TransformationOptions;
-import com.linkedin.android.litr.analytics.TrackTransformationInfo;
-import com.linkedin.android.litr.filter.GlFilter;
-import com.linkedin.android.litr.render.GlSingleFrameRenderer;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 import one.empty3.io.ProcessFile;
 
@@ -38,6 +21,9 @@ public class AndroidProcessFile extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+        return false;
+    }
+    /*
         class TransformationListenerExt implements TransformationListener {
             @Override
             public void onStarted(@NonNull String id) {
@@ -106,5 +92,5 @@ public class AndroidProcessFile extends ProcessFile {
             );
         }
         return false;
-    }
+    }*/
 }

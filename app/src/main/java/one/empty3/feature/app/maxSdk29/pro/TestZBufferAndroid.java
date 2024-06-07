@@ -2,8 +2,6 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.Bitmap;
 
-;
-
 import org.junit.Test;
 
 import javaAnd.awt.Color;

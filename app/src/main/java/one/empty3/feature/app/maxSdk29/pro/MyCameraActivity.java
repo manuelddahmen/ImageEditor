@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen
@@ -82,8 +82,6 @@ import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature.app.maxSdk29.pro.ui.login.LoginActivity2;
 import one.empty3.feature20220726.PixM;
-
-;
 
 public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
@@ -231,11 +229,15 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (currentFile != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
                     Uri uri = Uri.fromFile(currentFile.getCurrentFile());
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", currentFile.getCurrentFile());
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND).setClassName(/* TODO: provide the application ID. For example: */ getPackageName(), "one.empty3.feature.app.maxSdk29.pro.VisualFaceEffects");
-                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
-                    shareIntent.setDataAndType(photoURI, "image/jpeg");
-                    shareIntent.putExtra("data", photoURI);
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                    sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    sendIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
+                    sendIntent.setDataAndType(photoURI, "image/jpeg");
+                    sendIntent.putExtra("data", photoURI);
+
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
                     startActivity(shareIntent);
                 } else toastButtonDisabled(v);
             }
@@ -378,7 +380,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     if(viewById==null)
                         return false;
                     File currentFile1 = currentFile.getCurrentFile();
-                    if(currentFile1==null)
+                    if(currentFile1==null || currentFile1.exists())
                         return false;
                     Bitmap bitmap = ImageIO.read(currentFile1).bitmap;
                     if(bitmap==null)

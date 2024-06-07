@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-;
 
 public class PolygonDetailsImageView extends FaceOverlayView{
     public PolygonDetailsImageView(@NonNull Context context) {

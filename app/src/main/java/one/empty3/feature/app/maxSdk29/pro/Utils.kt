@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen
@@ -43,11 +43,11 @@ import androidx.compose.ui.text.toLowerCase
 import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
-import com.linkedin.android.litr.MediaTransformer
-import com.linkedin.android.litr.TransformationListener
-import com.linkedin.android.litr.TransformationOptions
-import com.linkedin.android.litr.analytics.TrackTransformationInfo
-import com.linkedin.android.litr.filter.GlFilter
+//import com.linkedin.android.litr.MediaTransformer
+//import com.linkedin.android.litr.TransformationListener
+//import com.linkedin.android.litr.TransformationOptions
+//import com.linkedin.android.litr.analytics.TrackTransformationInfo
+//import com.linkedin.android.litr.filter.GlFilter
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
@@ -137,6 +137,7 @@ class Utils {
             return ActivitySuperClass.MAXRES_DEFAULT
         return getMaxRes(activitySuperClass.applicationContext)
     }
+    /*
     fun applyOnMedia(applicationContext: Context, inFile:File,
                      outFile : File, numFrames: Int =-1, apf : AndroidProcessFile) {
         var isImage = false
@@ -201,7 +202,7 @@ class Utils {
             TransformationOptions.Builder().setVideoFilters(filters).build()
         )
     }
-
+*/
     public fun writeFile(
         fragment: FragmentSuperClass,
         bitmap: Bitmap,

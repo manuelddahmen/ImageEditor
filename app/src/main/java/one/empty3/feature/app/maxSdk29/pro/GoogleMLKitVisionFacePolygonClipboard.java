@@ -1,7 +1,5 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
-;
-
 import one.empty3.feature20220726.GoogleFaceDetection;
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;

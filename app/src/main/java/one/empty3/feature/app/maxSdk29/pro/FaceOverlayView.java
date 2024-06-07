@@ -39,8 +39,6 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
 
-;
-
 
 public class FaceOverlayView extends ImageViewSelection {
     private GoogleFaceDetection googleFaceDetection;

@@ -1,6 +1,6 @@
 package one.empty3.feature20220726.histograms;
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen

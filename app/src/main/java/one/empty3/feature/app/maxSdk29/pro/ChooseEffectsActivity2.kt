@@ -1,7 +1,7 @@
 package one.empty3.feature.app.maxSdk29.pro;
 
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2024.
  *
  *
  *  Copyright 2023 Manuel Daniel Dahmen

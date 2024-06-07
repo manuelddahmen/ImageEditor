@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * The StringAnalyzer3 class is responsible for analyzing string inputs and performing parsing operations.
@@ -54,7 +55,7 @@ public class StringAnalyzer3 {
     @NotNull
     protected Construct getConstruct() {
         if (construct == null && !constructs.isEmpty())
-            construct = constructs.getLast();
+            construct = constructs.get(constructs.size()-1);
         if (construct == null)
             construct = new Construct();
         return construct;
@@ -96,7 +97,7 @@ public class StringAnalyzer3 {
 
         private Token nextToken() {
             if (!nextTokens.getData1d().isEmpty()) {
-                return nextTokens.getData1d().getFirst();
+                return nextTokens.getData1d().get(0);
             }
             return null;
         }
@@ -247,7 +248,7 @@ public class StringAnalyzer3 {
         }
 
         public Construct getFirstConstructVersion() {
-            return clones().getFirst();
+            return clones().get(0);
         }
     }
 
@@ -1540,10 +1541,10 @@ public class StringAnalyzer3 {
                 currentInstructions = new ArrayList<>();
                 currentInstructions.add(new InstructionBlock());
             }
-            if (currentInstructions.isEmpty() || currentInstructions.getLast() == null) {
+            if (currentInstructions.isEmpty() || currentInstructions.get(currentInstructions.size()-1) == null) {
                 currentInstructions.add(new InstructionBlock());
             }
-            return currentInstructions.getLast();
+            return currentInstructions.get(currentInstructions.size()-1);
         }
 
         public void setCurrentInstructions(InstructionBlock instructionBlock) {

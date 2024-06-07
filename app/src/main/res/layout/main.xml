@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2023.
+  ~ Copyright (c) 2024.
   ~
   ~
   ~  Copyright 2012-2023 Manuel Daniel Dahmen
@@ -52,7 +52,7 @@
                     android:layout_height="48dp"
                     android:autofillHints="@string/capturePhoto"
                     android:contentDescription="@string/capturePhoto"
-                    android:drawableStart="@drawable/apn"
+                    android:drawableStart="@drawable/ediitor_image"
                     android:text="@string/capturePhoto"
                     
                     android:layout_width="wrap_content"

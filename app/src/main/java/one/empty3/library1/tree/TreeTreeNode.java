@@ -27,7 +27,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
-import org.jcodec.api.NotImplementedException;
 
 public class TreeTreeNode extends TreeNode {
     private AlgebraicTree tree;
