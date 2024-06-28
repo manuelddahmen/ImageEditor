@@ -41,6 +41,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
@@ -65,6 +70,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -74,8 +80,13 @@ import one.empty3.feature20220726.PixM;
 
 
 public class ActivitySuperClass extends AppCompatActivity {
+    private PurchasesUpdatedListener purchasesUpdatedListener;
+
+    private BillingClient billingClient;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
+
 
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
@@ -159,7 +170,32 @@ public class ActivitySuperClass extends AppCompatActivity {
 
         getParameters(intent);
 
+        purchasesUpdatedListener = new PurchasesUpdatedListener() {
+            @Override
+            public void onPurchasesUpdated(BillingResult billingResult, List<Purchase> purchases) {
+                // To be implemented in a later section.
+            }
+        };
 
+        billingClient = BillingClient.newBuilder(getApplicationContext())
+                .setListener(purchasesUpdatedListener)
+                // Configure other settings.
+                .enablePendingPurchases()
+                .build();
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                }
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        });
         if (currentFile.getCurrentFile() == null) {
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 if ("text/plain".equals(type)) {
@@ -780,4 +816,5 @@ public class ActivitySuperClass extends AppCompatActivity {
         }
         return result;
     }
+
 }

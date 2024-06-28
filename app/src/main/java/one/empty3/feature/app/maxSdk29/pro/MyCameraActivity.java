@@ -120,7 +120,9 @@ public class MyCameraActivity extends ActivitySuperClass {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.main);
+
 
 
         String type = getIntent().getType();
