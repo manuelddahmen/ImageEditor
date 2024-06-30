@@ -81,7 +81,7 @@ import javaAnd.awt.Point;
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature.app.maxSdk29.pro.ui.login.LoginActivity2;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature0.PixM;
 
 public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;

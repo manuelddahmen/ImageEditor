@@ -126,8 +126,8 @@ public class TreeNode {
         if (cType instanceof IdentTreeNodeType) {
             return getChildren().get(0).eval();
         } else if (cType instanceof EquationTreeNodeType) {
-            //System.out.println(cType);
-            //System.out.println(getChildren().get(0));
+            //Logger.getAnonymousLogger().log(Level.INFO, cType);
+            //Logger.getAnonymousLogger().log(Level.INFO, getChildren().get(0));
             switch (getChildren().get(0).getChildren().get(0).eval().getDim()) {
                 case 0:
                     evalRes = new StructureMatrix<>(0, Double.class);

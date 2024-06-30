@@ -31,7 +31,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,8 +40,8 @@ import java.util.Objects;
 
 import javaAnd.awt.Color;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.kmeans.Distance;
+import one.empty3.feature0.PixM;
+import one.empty3.feature0.kmeans.Distance;
 
 public class K_ClusterMultiImages /*extends ReadDataset*/ {
 

@@ -25,8 +25,8 @@ import java.util.List;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.ProcessBean;
+import one.empty3.feature0.PixM;
+import one.empty3.feature0.ProcessBean;
 
 public abstract class ProcessFile extends ProcessNFiles {
     public boolean shouldOverwrite = false;

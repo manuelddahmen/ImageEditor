@@ -20,9 +20,8 @@
 
 package one.empty3.feature.app.maxSdk29.pro
 
-import one.empty3.feature20220726.KMeans
-import one.empty3.feature20220726.kmeans.K_Clusterer
-import one.empty3.feature20220726.kmeans.MakeDataset
+import one.empty3.feature0.kmeans.K_Clusterer
+import one.empty3.feature0.kmeans.MakeDataset
 import one.empty3.io.ProcessFile
 import java.io.File
 

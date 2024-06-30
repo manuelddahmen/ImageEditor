@@ -19,9 +19,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature20220726.GoogleFaceDetection
-import one.empty3.feature20220726.GoogleFaceDetection.FaceData.Surface
-import one.empty3.feature20220726.PixM
+import one.empty3.feature0.GoogleFaceDetection
+import one.empty3.feature0.GoogleFaceDetection.FaceData.Surface
+import one.empty3.feature0.PixM
 import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import one.empty3.library.Point3D

@@ -26,6 +26,9 @@ import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class VecAlTree extends Vec {
     protected String formula;
     AlgebraicTree tree;
@@ -44,7 +47,7 @@ public class VecAlTree extends Vec {
             tree.construct();
             invalidTree = false;
         } catch (AlgebraicFormulaSyntaxException t) {
-            System.out.println("error vecaltreecondtruct\n" + tree);
+            Logger.getAnonymousLogger().log(Level.INFO, "error vecaltreecondtruct\n" + tree);
             invalidTree = true;
         }
 

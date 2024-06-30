@@ -42,8 +42,7 @@ import java.util.logging.Logger;
 
 import javaAnd.awt.Color;
 import javaAnd.awt.Point;
-import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.shape.Rectangle;
+import one.empty3.feature0.shape.Rectangle;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;

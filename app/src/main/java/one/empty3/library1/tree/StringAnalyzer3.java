@@ -22,13 +22,21 @@
 
 package one.empty3.library1.tree;
 
-import one.empty3.library.StructureMatrix;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
+
+import one.empty3.library.StructureMatrix;
 
 /**
  * The StringAnalyzer3 class is responsible for analyzing string inputs and performing parsing operations.
@@ -36,6 +44,7 @@ import java.util.stream.Collectors;
  *
  * @see AlgebraicTree
  */
+@RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 public class StringAnalyzer3 {
     protected HashMap<Integer, Token> definitions = new HashMap<>();
     protected int mPosition;
@@ -46,6 +55,8 @@ public class StringAnalyzer3 {
     public List<Construct> getConstructs() {
         return constructs;
     }
+
+    public final boolean isDebug = false;
 
     /**
      * Retrieves the Construct object from the current instance.
@@ -215,6 +226,10 @@ public class StringAnalyzer3 {
 
         public StructureMatrix<Token> getNextToken() {
             return nextTokens;
+        }
+
+        protected boolean hasNextToken() {
+            return (getNextToken() != null && (!getNextToken().data1d.isEmpty()) && getNextToken().getElem(0) != null);
         }
 
         /**
@@ -397,7 +412,8 @@ public class StringAnalyzer3 {
             if (position >= input.length() || input.substring(position).trim().isEmpty()) {
                 mPosition = position;
                 setSuccessful(false);
-                throw new RuntimeException(getClass() + " : position>=input.length()");
+                return position;
+                //throw new RuntimeException(getClass() + " : position>=input.length()");
             }
             position = super.skipBlanks(input, position);
             int position1 = position;
@@ -829,9 +845,7 @@ public class StringAnalyzer3 {
 
         @Override
         public String toString() {
-            return getClass().getName() + "<=TokenString{" +
-                    "name='" + name + '\'' + ", sucessful=" + isSuccessful() +
-                    "}\n";
+            return name;
         }
 
         @Override
@@ -958,7 +972,7 @@ public class StringAnalyzer3 {
             if (position >= input.length() || input.substring(position).trim().isEmpty()) {
                 mPosition = position;
                 setSuccessful(true);
-                throw new RuntimeException(getClass() + " : position>=input.length()");
+                return position;
             }
             position = super.skipBlanks(input, position);
             int position1 = position;
@@ -1144,6 +1158,7 @@ public class StringAnalyzer3 {
         public TokenMethodMemberDefinition() {
             super();
         }
+
     }
 
     class TokenVariableMemberDefinition extends TokenName {
@@ -1157,7 +1172,7 @@ public class StringAnalyzer3 {
      * Represents a token that identifies a name in a parsing process.
      */
     class TokenName extends Token {
-        private String name;
+        protected String name;
 
         public TokenName() {
             super();
@@ -1201,12 +1216,6 @@ public class StringAnalyzer3 {
             return name;
         }
 
-        @Override
-        public String toString() {
-            return getClass().getName() + "{" +
-                    "name='" + name + '\'' +
-                    "}\n";
-        }
 
         @Override
         public Token copy(Token token) {
@@ -1214,6 +1223,10 @@ public class StringAnalyzer3 {
             TokenName tokenName = new TokenName();
             tokenName.name = name;
             return tokenName;
+        }
+
+        public String toString() {
+            return name;
         }
     }
 
@@ -1305,14 +1318,14 @@ public class StringAnalyzer3 {
                         this.algebraicTree = algebraicTree;
                         algebraicTree.construct();
                     } catch (AlgebraicFormulaSyntaxException e) {
-                        System.err.println("Error constructing : " + expression);
+                        //System.err.println("Error constructing : " + expression);
                     }
                     setSuccessful(true);
-                    //      System.out.println("(TokenExpression1)current expression: " + expression + "\n(TokenExpression1)Char at next position:" + "***" + input.substring(i, i + 10) + "***");
+                    //      Logger.getAnonymousLogger().log(Level.INFO, "(TokenExpression1)current expression: " + expression + "\n(TokenExpression1)Char at next position:" + "***" + input.substring(i, i + 10) + "***");
                     return processNext(input, i);
                 }
             }
-            //System.out.println("FAILED(TokenExpression1)current expression: " + expression + "\nFAILED(TokenExpression1)Char at next position:" + input.substring(i, i + 10) + "***");
+            //Logger.getAnonymousLogger().log(Level.INFO, "FAILED(TokenExpression1)current expression: " + expression + "\nFAILED(TokenExpression1)Char at next position:" + input.substring(i, i + 10) + "***");
             setSuccessful(false);
             return position;
         }
@@ -1576,7 +1589,7 @@ public class StringAnalyzer3 {
             return string[0];
         }
 
-        private String debugString(boolean isDebug, String tokenLangString) {
+        protected String debugString(boolean isDebug, String tokenLangString) {
             return isDebug ? "{" + tokenLangString + "}" : tokenLangString;
         }
 
@@ -1878,12 +1891,12 @@ public class StringAnalyzer3 {
                 if (position1 < input.length() && countParenthesis == 0) {
                     expression = input.substring(position2, position1);
                     setSuccessful(true);
-                    //System.out.println("SUCCEEDED(TokenLogicalExpression)current expression: " + expression + "\nSUCCEEDED(TokenExpression1)Char at next position:" + input.charAt(position2));
+                    //Logger.getAnonymousLogger().log(Level.INFO, "SUCCEEDED(TokenLogicalExpression)current expression: " + expression + "\nSUCCEEDED(TokenExpression1)Char at next position:" + input.charAt(position2));
                     return processNext(input, position1);
                 }
             }
             setSuccessful(false);
-            //System.out.println("FAILED(TokenLogicalExpression)current expression: " + expression + "\nFAILED(TokenExpression1)Char at next position:" + input.charAt(position));
+            //Logger.getAnonymousLogger().log(Level.INFO, "FAILED(TokenLogicalExpression)current expression: " + expression + "\nFAILED(TokenExpression1)Char at next position:" + input.charAt(position));
             return position;
         }
 
@@ -1938,11 +1951,11 @@ public class StringAnalyzer3 {
             if (position1 < input.length() && countParenthesis == 0 && position1 - position2 > 0) {
                 expression = input.substring(position2, position1);
                 setSuccessful(true);
-                //System.out.println("SUCCEEDED(TokenLogicalExpression1)current expression: " + expression + "\n(TokenLogicalExpression1)Char at next position:" + input.charAt(position1));
+                //Logger.getAnonymousLogger().log(Level.INFO, "SUCCEEDED(TokenLogicalExpression1)current expression: " + expression + "\n(TokenLogicalExpression1)Char at next position:" + input.charAt(position1));
                 return processNext(input, position1);
             }
             setSuccessful(false);
-            //System.out.println("FAILED(TokenLogicalExpression1)current expression: " + expression + "\nFAILED(TokenLogicalExpression1)Char at next position:" + input.charAt(position));
+            //Logger.getAnonymousLogger().log(Level.INFO, "FAILED(TokenLogicalExpression1)current expression: " + expression + "\nFAILED(TokenLogicalExpression1)Char at next position:" + input.charAt(position));
             return position;
         }
 

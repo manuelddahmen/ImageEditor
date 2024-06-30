@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import one.empty3.feature20220726.GoogleFaceDetection;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature0.GoogleFaceDetection;
+import one.empty3.feature0.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Polygon;

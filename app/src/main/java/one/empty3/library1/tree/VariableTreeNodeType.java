@@ -56,6 +56,8 @@ package one.empty3.library1.tree;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 import one.empty3.library.StructureMatrix;
 
@@ -65,8 +67,8 @@ import one.empty3.library.StructureMatrix;
 public class VariableTreeNodeType extends TreeNodeType {
     String varName;
     Map<String, String> parametersValueVec;
-    Map<String, Double> parametersValuesDouble;
-    private HashMap<String, StructureMatrix<Double>> parametersValuesComputed;
+    private Map<String, Double> parametersValues;
+    private HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed;
 
     public VariableTreeNodeType(AlgebraicTree tree) {
         this.algebraicTree = tree;
@@ -78,8 +80,8 @@ public class VariableTreeNodeType extends TreeNodeType {
         varName = (String) values[0];
         if (values.length >= 4) {
             parametersValueVec = algebraicTree.getParametersValuesVec();
-            parametersValuesDouble = algebraicTree.getParametersValues();
-            parametersValuesComputed = algebraicTree.getParametersValuesVecComputed();
+            parametersValues = algebraicTree.getParametersValues();
+            parametersValuesVecComputed = algebraicTree.getParametersValuesVecComputed();
         }
     }
 
@@ -87,30 +89,33 @@ public class VariableTreeNodeType extends TreeNodeType {
     public StructureMatrix<Double> eval() {
         StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
         try {
-            if (parametersValueVec != null && parametersValuesDouble != null && parametersValuesComputed != null) {
-                if (parametersValueVec.get(varName) != null) {
-                    doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
-                } else if (parametersValuesDouble.get(varName) != null) {
-                    Double d = parametersValuesDouble.get(varName);
+            if (parametersValues != null)
+                if (parametersValues.get(varName) != null) {
+                    doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+                    Double d = parametersValues.get(varName);
                     doubleStructureMatrix.setElem(d);
-                } else if (algebraicTree.getParametersValuesVecComputed().containsKey(varName)) {
-                    doubleStructureMatrix = algebraicTree.getParametersValuesVecComputed().get(varName);
+                } else if (parametersValuesVecComputed.containsKey(varName)) {
+                    doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+                    StructureMatrix<Double> finalDoubleStructureMatrix = doubleStructureMatrix;
+                    switch (parametersValuesVecComputed.get(varName).getDim()) {
+                        case 0 -> {
+                            double d = parametersValuesVecComputed.get(varName).getElem();
+                            doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+                            doubleStructureMatrix.setElem(d, 0);
+                        }
+                        case 1 -> {
+                            doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
+                            for (int i = 0; i < parametersValuesVecComputed.get(varName).data1d.size(); i++) {
+                                doubleStructureMatrix.setElem(parametersValuesVecComputed.get(varName).data1d.get(i), i);
+                            }
+                        }
+                    }
+                    return doubleStructureMatrix;
                 }
-            } else {
-                throw new TreeNodeEvalException("Eval: dictionary not attributed/initialized");
-            }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             return doubleStructureMatrix;
-        } catch (TreeNodeEvalException e) {
-            throw new RuntimeException(e);
         }
         return doubleStructureMatrix;
     }
 }
-/*
-x=(1,2,3)
-y=(5,6,7)
-z=x+y
-
- */

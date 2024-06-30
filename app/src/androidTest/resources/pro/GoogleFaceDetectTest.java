@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javaAnd.awt.image.BufferedImage;
-import one.empty3.feature20220726.GoogleFaceDetection;
+import one.empty3.feature0.GoogleFaceDetection;
 public class GoogleFaceDetectTest {
     @Test
     public void loadSaveTest() {

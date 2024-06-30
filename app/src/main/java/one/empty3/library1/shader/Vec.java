@@ -22,11 +22,11 @@
 
 package one.empty3.library1.shader;
 
-import java.util.Objects;
-
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class Vec {
     private int dims;
@@ -48,7 +48,7 @@ public class Vec {
     }
 
     public Vec(int d) {
-        for (int i = 0; i < d; d++)
+        for (int i = 0; i < d; i++)
             vecVal.getData1d().add(0.0);
     }
 
@@ -57,6 +57,7 @@ public class Vec {
             vecVal.add(1, d);
         }
     }
+
     public Vec(double[] comps) {
         for (Double d : comps) {
             vecVal.add(1, d);
@@ -64,14 +65,15 @@ public class Vec {
     }
 
     public Vec(Vec... comps) {
+        int i = 0;
         for (Vec comp : comps) {
             vec.add(comp);
 
             for (int j = 0; j < comp.size(); j++) {
 
-                vecVal.add(1, comp.get(j));
+                vecVal.setElem(comp.get(j), i);
+                i++;
             }
-
         }
     }
 
@@ -188,5 +190,28 @@ public class Vec {
 
     public StructureMatrix<Vec> getVec() {
         return vec;
+    }
+
+    public void setValues(Double... values) {
+        for (int i = 0; i < values.length; i++) {
+            Double v = values[i];
+            vecVal.setElem(v, i);
+        }
+    }
+
+    public Vec add(Vec v) {
+        Vec ret = new Vec(this);
+        for (int i = 0; i < ret.vecVal.getData1d().size(); i++) {
+            ret.set(i, ret.get(i) + v.get(i));
+        }
+        return ret;
+    }
+
+    public Vec multiply(Double d) {
+        Vec ret = new Vec(this);
+        for (int i = 0; i < ret.vecVal.getData1d().size(); i++) {
+            ret.set(i, ret.get(i) * d);
+        }
+        return ret;
     }
 }

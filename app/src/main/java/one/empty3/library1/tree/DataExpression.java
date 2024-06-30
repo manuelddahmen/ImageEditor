@@ -23,11 +23,10 @@
 package one.empty3.library1.tree;
 
 public record DataExpression(int type, String expression) {
+
     public DataExpression(int type, String expression) {
         this.type = type;
         this.expression = expression;
     }
 
-    public static int typeText;
-    public static String expressionText;
 }

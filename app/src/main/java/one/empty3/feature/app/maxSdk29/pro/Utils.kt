@@ -30,7 +30,6 @@ import android.graphics.BitmapFactory.Options
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.media.MediaFormat
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -38,10 +37,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.toLowerCase
 import androidx.core.net.toFile
-import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 //import com.linkedin.android.litr.MediaTransformer
 //import com.linkedin.android.litr.TransformationListener
@@ -51,8 +47,8 @@ import androidx.preference.PreferenceManager
 import javaAnd.awt.Point
 import javaAnd.awt.image.BufferedImage
 import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature20220726.MBitmap.maxRes
-import one.empty3.feature20220726.PixM
+import one.empty3.feature0.MBitmap.maxRes
+import one.empty3.feature0.PixM
 import one.empty3.io.ProcessFile
 import java.io.ByteArrayOutputStream
 import java.io.File
