@@ -85,6 +85,7 @@ import one.empty3.feature0.PixM;
 
 public class MyCameraActivity extends ActivitySuperClass {
     private static final int INT_READ_MEDIA_IMAGES = 445165;
+    public static final int TRANSPARENT = -1;
     Properties properties = new Properties();
 
     private static final String TAG = "one.empty3.feature.app.maxSdk29.pro.MyCameraActivity";
@@ -201,7 +202,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
                     Bitmap bitmap = dest.getBitmap();
-                    currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(this, bitmap, "copy_paste")));
+                    currentFile.add(new DataApp(new Utils().writePhoto(this, bitmap, "copy_paste")));
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
                     copy.setBackgroundColor(Color.rgb(40, 255, 40));
@@ -382,9 +383,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                     if(viewById==null)
                         return false;
                     File currentFile1 = currentFile.getCurrentFile();
-                    if(currentFile1==null || currentFile1.exists())
+                    if (currentFile1 == null || !currentFile1.exists())
                         return false;
-                    Bitmap bitmap = ImageIO.read(currentFile1).bitmap;
+                    BufferedImage read = ImageIO.read(currentFile1);
+                    if (read == null)
+                        return false;
+                    Bitmap bitmap = read.bitmap;
                     if(bitmap==null)
                         return false;
                     RectF rectF = getSelectedCordsImgToView(bitmap, viewById);
@@ -694,10 +698,10 @@ public class MyCameraActivity extends ActivitySuperClass {
                     if (imageView != null) {
 
                         new Utils().setImageView(imageView, imageViewBitmap);
-                        currentFile.addAtCurrentPlace(new DataApp(imageFile));
+                        currentFile.add(new DataApp(imageFile));
                         System.err.println("Image reloaded");
 
-                        currentFile.addAtCurrentPlace(new DataApp(new Utils().createCurrentUniqueFile(this)));
+                        currentFile.add(new DataApp(new Utils().createCurrentUniqueFile(this)));
                     }
                 }
             } catch (FileNotFoundException | NullPointerException e) {
@@ -926,7 +930,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     System.err.printf("Image set 4/4");
 
 
-                    currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(this, photo, "camera-")));
+                    currentFile.add(new DataApp(new Utils().writePhoto(this, photo, "camera-")));
 
                 }
             }
@@ -1105,7 +1109,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 fillGallery(photo, new FileInputStream(myPhotoV2022));
                 System.err.println("Set in ImageView : " + myPhotoV2022.getAbsolutePath());
 
-                currentFile.addAtCurrentPlace(new DataApp(myPhotoV2022));
+                currentFile.add(new DataApp(myPhotoV2022));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

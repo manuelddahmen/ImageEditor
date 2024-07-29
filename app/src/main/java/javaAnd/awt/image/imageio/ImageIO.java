@@ -39,12 +39,16 @@ import javaAnd.awt.image.BufferedImage;
 public class ImageIO {
     public static BufferedImage read(File file) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            BufferedImage bitmap2 = ImageIO.read(fileInputStream);
-            fileInputStream.close();
-            return bitmap2;
+            if (file.exists()) {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                BufferedImage bitmap2 = ImageIO.read(fileInputStream);
+                fileInputStream.close();
+                return bitmap2;
+            } else {
+                // Handle file not found
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            // Handle file access errors
         }
         return null;
     }
@@ -54,7 +58,7 @@ public class ImageIO {
         if(bitmap!=null)
             return new BufferedImage(bitmap);
         else
-            throw new NullPointerException("my::ImageIO read fileInputStream");
+            return null;
     }
 
     public static boolean write(@NotNull BufferedImage imageOut, String jpg, File out, boolean shouldOverwrite) throws IOException {

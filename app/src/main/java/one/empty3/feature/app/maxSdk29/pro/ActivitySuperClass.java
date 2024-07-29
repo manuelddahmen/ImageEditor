@@ -127,7 +127,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public void setCurrentFile(File currentFile) {
-        this.currentFile.addAtCurrentPlace(new DataApp(currentFile));
+        this.currentFile.add(new DataApp(currentFile));
     }
 
     public InputStream getPathInput(Uri uri) throws FileNotFoundException {
@@ -232,7 +232,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (currentFile.getCurrentFile() == null && savedInstanceState != null) {
             try {
                 if (savedInstanceState.getString("currentFile") != null) {
-                    currentFile.addAtCurrentPlace(new DataApp(new File(savedInstanceState.getString("currentFile"))));
+                    currentFile.add(new DataApp(new File(savedInstanceState.getString("currentFile"))));
                 }
             } catch (RuntimeException ex) {
                 ex.printStackTrace();
@@ -252,7 +252,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                     BufferedImage read = ImageIO.read(currentFile1);
                     if (read != null && read.bitmap != null) {
                         Bitmap bitmap = read.bitmap;
-                        currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(
+                        currentFile.add(new DataApp(new Utils().writePhoto(
                                 this, bitmap, "reload")));
                         loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
                     }
@@ -407,11 +407,11 @@ public class ActivitySuperClass extends AppCompatActivity {
             }
             try {
                 String currentFile1 = properties.getProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
-                currentFile.addAtCurrentPlace(new DataApp(new File(currentFile1)));
+                currentFile.add(new DataApp(new File(currentFile1)));
                 if (currentFile1 == null || currentFile1.length() == 0) {
                     File imageViewPersistantFile = getImageViewPersistantFile();
                     if (imageViewPersistantFile.exists()) {
-                        currentFile.addAtCurrentPlace(new DataApp(imageViewPersistantFile));
+                        currentFile.add(new DataApp(imageViewPersistantFile));
                     }
                 }
             } catch (RuntimeException ex) {
@@ -475,9 +475,9 @@ public class ActivitySuperClass extends AppCompatActivity {
             currentFile1 = properties.getProperty("currentFile", (currentFile.getCurrentFile() == null ? null
                     : currentFile.getCurrentFile().getAbsolutePath()));
             if (currentFile1 != null)
-                currentFile.addAtCurrentPlace(new DataApp(new File(currentFile1)));
+                currentFile.add(new DataApp(new File(currentFile1)));
             else
-                currentFile.addAtCurrentPlace(new DataApp( getImageViewPersistantFile()));
+                currentFile.add(new DataApp(getImageViewPersistantFile()));
         } catch (RuntimeException ex) {
             ex.printStackTrace();
         }
@@ -489,7 +489,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             else
                 currentFile2 = new File(currentFile1);
             if (currentFile2 != null && currentFile2.exists()) {
-                currentFile.addAtCurrentPlace(new DataApp( currentFile2));
+                currentFile.add(new DataApp(currentFile2));
             }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
@@ -525,7 +525,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                             getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
                     if (file != null)
-                        currentFile.addAtCurrentPlace(new DataApp(file));
+                        currentFile.add(new DataApp(file));
                 }
             } catch (FileNotFoundException ignored) {
             }
@@ -562,7 +562,7 @@ public class ActivitySuperClass extends AppCompatActivity {
 
     public void getParameters(Intent from) {
         Utils utils = new Utils();
-        currentFile.addAtCurrentPlace(new DataApp(utils.getCurrentFile(from, this)));
+        currentFile.add(new DataApp(utils.getCurrentFile(from, this)));
         maxRes = utils.getMaxRes(this);
         utils.loadImageInImageView(this);
         utils.loadVarsMathImage(this, getIntent());
@@ -647,7 +647,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             System.err.println("Get file (bitmap) : " + photo);
         }
         if (photo != null && isCurrentFile) {
-            currentFile.addAtCurrentPlace(new DataApp(new Utils().writePhoto(this, photo, "loaded_image-")));
+            currentFile.add(new DataApp(new Utils().writePhoto(this, photo, "loaded_image-")));
             if (imageView != null)
                 new Utils().setImageView(this, imageView);
             return photo;

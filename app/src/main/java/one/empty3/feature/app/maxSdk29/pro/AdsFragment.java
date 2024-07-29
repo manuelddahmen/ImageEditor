@@ -35,11 +35,11 @@ public class AdsFragment extends Fragment {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                             loadBanner();
                         }
-                        getLayoutInflater().inflate(R.layout.ads, container.findViewById(R.id.adsFragment));
                     });
                 })
                 .start();
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View inflate = inflater.inflate(R.layout.ads, container);
+        return inflate.getRootView();
     }
 
    @RequiresApi(api = Build.VERSION_CODES.R)
@@ -68,7 +68,7 @@ public class AdsFragment extends Fragment {
         // Create a new ad view.
         AdView adView = new AdView(requireContext());
         adView.setAdSize(getAdSize());
-        adView.setAdUnitId("ca-app-pub-3940256099942544/9214589741");
+        adView.setAdUnitId("ca-app-pub-7902161960217484~9989091842");
 
         // Replace ad container with new ad view.
         adContainerView.removeAllViews();

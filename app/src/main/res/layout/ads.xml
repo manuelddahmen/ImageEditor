@@ -5,11 +5,12 @@
         android:layout_height="wrap_content"
         android:minHeight="50dp"
         android:name="one.empty3.feature.app.maxSdk29.pro.AdsFragment">
+    
     <com.google.android.gms.ads.AdView
             android:id="@+id/ads"
             android:layout_width="match_parent"
-            
-            android:layout_height="wrap_content"
-            android:minHeight="40dp"></com.google.android.gms.ads.AdView>
+            android:layout_height="match_parent"
+            android:minHeight="40dp"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -98,7 +98,7 @@ class FaceActivity : ActivitySuperClass() {
                     val writePhoto =
                         Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
                     originalImage = currentFile.currentFile
-                    currentFile.addAtCurrentPlace(DataApp(writePhoto))
+                    currentFile.add(DataApp(writePhoto))
                     //Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
                 } catch (ex: RuntimeException) {
                     Toast.makeText(

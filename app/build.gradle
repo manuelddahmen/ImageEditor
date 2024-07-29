@@ -21,10 +21,10 @@ if (hasProperty('buildScan')) {
     }
 }
 
-def kotlin_version = '1.9.23'
+def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903016
+def code = 336903037
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
@@ -50,15 +50,15 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\manue\\keystore')
+            storeFile file('C:\\Users\\manue\\keystore')//keystore_android_apps.jks')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'upload'//manuel////upload//featureapp4
             keyPassword 'faeeagrzdsd'
         }
         release {
-            storeFile file('C:\\Users\\manue\\keystore')
+            storeFile file('C:\\Users\\manue\\keystore')//keystore_android_apps.jks')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'upload'//manuel//// upload//featureapp4
             keyPassword 'faeeagrzdsd'
         }
     }
@@ -112,7 +112,26 @@ android {
             }
         }
     }
-
+    lintOptions {
+        // Turns off checks for the issue IDs you specify.
+        disable("TypographyFractions")
+        disable("TypographyQuotes")
+        // Turns on checks for the issue IDs you specify. These checks are in
+        // addition to the default lint checks.
+        enable("RtlHardcoded")
+        enable("RtlCompat")
+        enable("RtlEnabled")
+        // To enable checks for only a subset of issue IDs and ignore all others,
+        // list the issue IDs with the 'check' property instead. This property overrides
+        // any issue IDs you enable or disable using the properties above.
+        checkOnly("NewApi", "InlinedApi")
+        // If set to true, turns off analysis progress reporting by lint.
+        quiet = true
+        // if set to true (default), stops the build if errors are found.
+        abortOnError = false
+        // if true, only report errors.
+        ignoreWarnings = true
+    }
     configurations {
         all*.exclude group: 'xpp3', module: 'xpp3'
         all*.exclude group: 'xml-apis', module: 'xml-apis'
@@ -170,6 +189,35 @@ android {
 
 
 dependencies {
+    // This dependency is downloaded from the Google’s Maven repository.
+    // So, make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:asset-delivery:2.2.2'
+
+    // For Kotlin users also add the Kotlin extensions library for Play Asset Delivery:
+    implementation 'com.google.android.play:asset-delivery-ktx:2.2.2'
+
+    // This dependency is downloaded from the Google’s Maven repository.
+    // So, make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:feature-delivery:2.1.0'
+
+    // For Kotlin users, also add the Kotlin extensions library for Play Feature Delivery:
+    implementation 'com.google.android.play:feature-delivery-ktx:2.1.0'
+
+    // This dependency is downloaded from the Google’s Maven repository.
+    // Make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:review:2.0.1'
+
+    // For Kotlin users, also add the Kotlin extensions library for Play In-App Review:
+    implementation 'com.google.android.play:review-ktx:2.0.1'
+
+
+    // This dependency is downloaded from the Google’s Maven repository.
+    // Make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:app-update:2.1.0'
+
+    // For Kotlin users, also add the Kotlin extensions library for Play In-App Update:
+    implementation 'com.google.android.play:app-update-ktx:2.1.0'
+
     implementation 'com.google.android.gms:play-services-ads:23.2.0'
     implementation 'com.google.firebase:firebase-appcheck:18.0.0'
     def versions_work = "2.9.0"
@@ -200,8 +248,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.2'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     //implementation 'com.google.ar:core:1.32.0'
     implementation 'junit:junit:4.13.2'
@@ -221,7 +269,7 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
     implementation "com.google.mlkit:face-detection:16.1.6"
     implementation 'com.google.mlkit:object-detection:17.0.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.3'
     // Unit testing
     testImplementation 'androidx.test.ext:junit:1.2.1'
     testImplementation 'androidx.test:rules:1.6.1'

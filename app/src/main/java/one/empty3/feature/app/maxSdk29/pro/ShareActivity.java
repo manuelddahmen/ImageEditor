@@ -58,7 +58,7 @@ public class ShareActivity extends ActivitySuperClass {
             File imageViewPersistantFile = getImageViewPersistantFile();
             ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
 
-            currentFile.addAtCurrentPlace(new DataApp(imageViewPersistantFile));
+            currentFile.add(new DataApp(imageViewPersistantFile));
             currentBitmap = bitmap;
             ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
             saveInstanceState();

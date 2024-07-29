@@ -577,7 +577,7 @@ class Utils {
     fun loadImageInImageView(activity: ActivitySuperClass): Boolean {
         try {
             if (activity.currentFile.getCurrentFile() == null) {
-                activity.currentFile!!.addAtCurrentPlace(DataApp(activity.imageViewPersistantFile))
+                activity.currentFile!!.add(DataApp(activity.imageViewPersistantFile))
             }
             var imageView: ImageViewSelection? = activity.imageView
             if (imageView == null) {
@@ -718,7 +718,7 @@ class Utils {
                     if (activity.imageView != null) {
                         Utils().setImageView(activity.imageView, bitmap);
                     }
-                    activity.currentFile.addAtCurrentPlace(DataApp(imageFile))
+                    activity.currentFile.add(DataApp(imageFile))
                     //activity.currentBitmap = imageFile
                     System.err.println("Image reloaded")
 
@@ -735,7 +735,7 @@ class Utils {
             if (activity.currentFile.currentFile != null) {
                 val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
-                activity.currentFile.addAtCurrentPlace(
+                activity.currentFile.add(
                     DataApp(
                     this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())))
                 return activity.currentFile.currentFile

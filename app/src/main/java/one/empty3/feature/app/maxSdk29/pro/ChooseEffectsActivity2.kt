@@ -123,7 +123,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         seeFileButton!!.setVisibility(View.VISIBLE)
                     }
                     started = false
-                    this.currentFile.addAtCurrentPlace(DataApp(Main2022.getOutputFIle()))
+                    this.currentFile.add(DataApp(Main2022.getOutputFIle()))
                     val actionView = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(actionView)
                 }
@@ -133,7 +133,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         seeFileButton!!.setOnClickListener { view ->
             val currentUri: File = Main2022.getOutputFIle()  //= mViewModel!!.getOutputUri()
             if (currentUri != null) {
-                currentFile.addAtCurrentPlace(DataApp( currentUri))
+                currentFile.add(DataApp(currentUri))
                 Handler(Looper.getMainLooper()).post {
                     val actionView = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(actionView)

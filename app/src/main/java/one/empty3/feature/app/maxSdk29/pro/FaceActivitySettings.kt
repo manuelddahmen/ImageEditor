@@ -703,7 +703,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             )
 
             if (currentFileTmp != null) {
-                currentFile.addAtCurrentPlace(DataApp(currentFileTmp))
+                currentFile.add(DataApp(currentFileTmp))
                 currentBitmap = faceOverlayView.mCopy
             }
 

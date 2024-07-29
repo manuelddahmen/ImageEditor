@@ -32,7 +32,7 @@ import java.util.Objects;
 import javaAnd.awt.image.imageio.ImageIO;
 
 public class Undo {
-    private static int current = -1;
+    private static int current = 0;
     private List<DataApp> data = new ArrayList<DataApp>();
     private static Undo currentUndo;
 
@@ -57,22 +57,22 @@ public class Undo {
     public void onClickUndo() {
         if (data.size() > 0) {
             current--;
-            if (current < 0) {
-                current++;
-            }
-        }
+        } else current = 0;
     }
 
     private void invalidate() {
         throw new UnsupportedOperationException("Not implemented");
     }
 
-    public void addAtCurrentPlace(DataApp dataApp) {
-        if (data.size() > current + 1) {
-            data.subList(current + 1, data.size()).clear();
+    public void add(DataApp dataApp) {
+        if (current < 0) {
+            data.add(0, dataApp);
+        } else if (current + 1 > data.size()) {
+            data.add(dataApp);
+        } else {
+            data.add(current + 1, dataApp);
         }
-        current++;
-        data.add(current, dataApp);
+        current = data.indexOf(dataApp);
     }
 
     public DataApp getDataApp() {
@@ -129,6 +129,6 @@ public class Undo {
     }
 
     public void addNull(Object o) {
-        addAtCurrentPlace(new DataApp(null));
+        add(new DataApp(null));
     }
 }

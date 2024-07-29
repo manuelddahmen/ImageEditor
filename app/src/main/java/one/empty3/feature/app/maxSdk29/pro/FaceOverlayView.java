@@ -311,7 +311,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
             polygonContour.texture(new ColorTexture(inColor));
 
-            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, Color.BLACK, 0.0, point0, scale.x);//ùCopy!
+            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, -1, 0.0, point0, scale.x);//ùCopy!
             if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
                 faceSurface.setContours(pixM);
                 faceSurface.setFilledContours(pixM);
@@ -466,7 +466,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 if (activity != null) {
                     File file = new Utils().writePhoto(activity, mCopy.copy(Bitmap.Config.ARGB_8888,
                             false), "face-");
-                    this.activity.currentFile.addAtCurrentPlace(new DataApp(file));
+                    this.activity.currentFile.add(new DataApp(file));
                 }
                 super.setImageBitmap3(mCopy.copy(Bitmap.Config.ARGB_8888, true));
             }

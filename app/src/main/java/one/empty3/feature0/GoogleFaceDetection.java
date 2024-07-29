@@ -186,7 +186,7 @@ public class GoogleFaceDetection
             private boolean drawOriginalImageContour;
             private int colorFill;
             private int colorContours;
-            private int colorTransparent;
+            private int colorTransparent = -1;
             private int surfaceId;
             private Polygon polygon;
             private PixM contours;

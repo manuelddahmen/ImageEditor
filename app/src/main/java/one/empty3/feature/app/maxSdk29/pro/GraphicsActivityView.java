@@ -198,7 +198,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
             if(current!=null) {
                 Bitmap bitmap = current.normalize(0, 1).getBitmap();
                 File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
-                this.currentFile.addAtCurrentPlace(new DataApp( graphics_math));
+                this.currentFile.add(new DataApp(graphics_math));
                 new Utils().setImageView(image, bitmap);
             }
         } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException|RuntimeException e) {

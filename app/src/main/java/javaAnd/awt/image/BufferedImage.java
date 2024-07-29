@@ -40,6 +40,11 @@ public class BufferedImage {
     public BufferedImage(int columns, int lines, int typeIntRgb) {
         this();
         this.bitmap = Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888);
+        for (int i = 0; i < bitmap.getWidth(); i++) {
+            for (int j = 0; j < bitmap.getHeight(); j++) {
+                bitmap.setPixel(i, j, -1);
+            }
+        }
     }
 
     public BufferedImage(Bitmap decodedStream) {

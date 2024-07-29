@@ -275,6 +275,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
     }
 
     public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double deep, PointF position, double scale) {
+        int TRANSPARENT = -1;
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
@@ -441,7 +442,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")");
 
-        double[] transparent = Lumiere.getDoubles(surface.getColorTransparent());
+        int transparent = surface.getColorTransparent();
 
 
         final double[] floats = new double[3];
@@ -454,7 +455,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
                 if (pixMilled != null && mCopy!=null) {
                     double[] color = pixMilled.getValues(xMap, yMap);
                     int colorToDraw = Lumiere.getInt(color);
-                    if (!PixM.equalsArrays(transparent, color, 0.05)
+                    if (transparent != colorToDraw
                             && i >= 0 && i < mCopy.getWidth() && j >= 0 && j < mCopy.getHeight()) {
                         if (drawOriginalImageContour) {
                             int a = (int) (xMap / (right - left) * pixMori.getColumns());

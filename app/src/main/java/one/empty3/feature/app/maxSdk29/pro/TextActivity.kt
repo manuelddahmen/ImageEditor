@@ -218,7 +218,7 @@ class TextActivity() : ActivitySuperClass() {
         currentImage = BitmapFactory.decodeStream(FileInputStream(currentFile.currentFile))
         val drawTextToBitmap: File? = drawTextToBitmap(textString)
         if (drawTextToBitmap != null && currentImage!=null) {
-            currentFile.addAtCurrentPlace(DataApp(drawTextToBitmap))
+            currentFile.add(DataApp(drawTextToBitmap))
             imageView = findViewById<ImageViewSelection>(R.id.currentImageView)
             Utils().setImageView(imageView, currentImage!!)
             System.out.println("ImageView Text UPDATED")
