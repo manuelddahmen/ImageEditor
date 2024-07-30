@@ -54,7 +54,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -148,11 +150,15 @@ public class MyCameraActivity extends ActivitySuperClass {
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int i = ContextCompat.checkSelfPermission(thisActivity.getApplicationContext(),
+                        Manifest.permission.CAMERA);
                 if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                    return;
+                    //requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
                 }
                 if (checkSelfPermission(Manifest.permission.USE_FULL_SCREEN_INTENT) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                    return;
+                    //requestPermissions(new String[]{Manifest.permission.USE_FULL_SCREEN_INTENT}, MY_CAMERA_PERMISSION_CODE);
                 }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
@@ -249,6 +255,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         shareView.setEnabled(true);
         View save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 if (currentFile != null && currentFile.getCurrentFile() != null && currentFile.getCurrentFile().exists()) {
@@ -456,6 +463,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             @Override
             public void onClick(View view) {
                 Undo.getUndo().back();
+                unselectReloadCurrentFile();
             }
         });
         Button redo = findViewById(R.id.redo);
@@ -463,6 +471,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             @Override
             public void onClick(View view) {
                 Undo.getUndo().next();
+                unselectReloadCurrentFile();
             }
         });
 
@@ -912,6 +921,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             } else return true;
         }
     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1049,9 +1059,12 @@ public class MyCameraActivity extends ActivitySuperClass {
             if (currentFile.getCurrentFile() != null) {
                 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
                 FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), BuildConfig.APPLICATION_ID + ".provider", currentFile.getCurrentFile());
-                Path myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getCurrentFile().getName());
+                Path myPath = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    myPath = Paths.get(path, "" + UUID.randomUUID() + currentFile.getCurrentFile().getName());
+                }
                 String fileStr = currentFile.getCurrentFile().getName();
-                if (myPath.toFile() != null && myPath.toFile().exists()) {
+                if (myPath != null && myPath.toFile() != null && myPath.toFile().exists()) {
 
 
                 } else {

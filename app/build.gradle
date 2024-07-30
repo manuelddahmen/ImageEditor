@@ -24,7 +24,7 @@ if (hasProperty('buildScan')) {
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903037
+def code = 336903041
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
@@ -178,7 +178,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         targetSdk 34
         compileSdk 34
-        minSdk 26
+        minSdk 23
         javaVersionEnum
         versionCode code
         versionName "8.0"

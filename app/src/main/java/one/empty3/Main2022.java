@@ -61,7 +61,7 @@ public class Main2022 {
     public static ArrayList<String> indices;
     private static HashMap<String, ProcessFile> listEffects;
     private static File currentFile;
-    private static File outputFIle;
+    private static File outputFile;
 
     public static HashMap<String, ProcessFile> initListProcesses() {
         //if(listProcessClasses==null) {
@@ -157,11 +157,11 @@ public class Main2022 {
     }
 
     public static void setOutputFile(File currentOutputFileFinal) {
-        Main2022.outputFIle = currentOutputFileFinal;
+        Main2022.outputFile = currentOutputFileFinal;
     }
 
-    public static File getOutputFIle() {
-        return outputFIle;
+    public static File getOutputFile() {
+        return outputFile;
     }
 }
 

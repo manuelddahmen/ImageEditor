@@ -31,12 +31,14 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.net.toFile
 import androidx.preference.PreferenceManager
 //import com.linkedin.android.litr.MediaTransformer
@@ -73,6 +75,7 @@ class Utils {
      * @param name
      * @return file
      */
+    @RequiresApi(Build.VERSION_CODES.FROYO)
     fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
         val maxRes = getMaxRes(activity)
         var written = false;
@@ -433,11 +436,11 @@ class Utils {
 
         System.err.println("set ImageView from  = $currentFile")
 
-        if (currentFile != null) {
+        if (currentFile != null && currentFile.exists()) {
             val bi = ImageIO.read(currentFile)
             if (bi != null) {
                 val bitmap = bi.getBitmap()
-                if (bitmap != null && imageView != null) {
+                if (bitmap != null) {
                     imageView.setImageBitmap2(bitmap)
                 }
             }

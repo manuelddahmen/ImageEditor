@@ -121,6 +121,7 @@ public class Undo {
             current++;
             return getDataApp();
         }
+        // idée créer une nouvelle image si current au dernier élément. Donc new BufferesImage()
         return getDataApp();
     }
 

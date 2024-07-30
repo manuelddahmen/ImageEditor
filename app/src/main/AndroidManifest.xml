@@ -41,7 +41,6 @@
             android:supportsRtl="true"
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu"
-            
             >
         <property
                 android:name="android.adservices.AD_SERVICES_CONFIG"

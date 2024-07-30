@@ -108,7 +108,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 val workInfo: WorkInfo = listOfWorkInfo[0]
 
                 val finished = workInfo.state.isFinished // || listOfWorkInfo[0].state != WorkInfo.State.RUNNING
-                if (!finished && Main2022.getOutputFIle()==null) {
+                if (!finished && Main2022.getOutputFile() == null) {
                     showWorkInProgress()
                     println("In Progress")
                 } else {
@@ -123,7 +123,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                         seeFileButton!!.setVisibility(View.VISIBLE)
                     }
                     started = false
-                    this.currentFile.add(DataApp(Main2022.getOutputFIle()))
+                    this.currentFile.add(DataApp(Main2022.getOutputFile()))
                     val actionView = Intent(applicationContext, MyCameraActivity::class.java)
                     passParameters(actionView)
                 }
@@ -131,7 +131,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         }
 
         seeFileButton!!.setOnClickListener { view ->
-            val currentUri: File = Main2022.getOutputFIle()  //= mViewModel!!.getOutputUri()
+            val currentUri: File = Main2022.getOutputFile()  //= mViewModel!!.getOutputUri()
             if (currentUri != null) {
                 currentFile.add(DataApp(currentUri))
                 Handler(Looper.getMainLooper()).post {
