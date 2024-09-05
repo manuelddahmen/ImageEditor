@@ -24,7 +24,7 @@ if (hasProperty('buildScan')) {
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903041
+def code = 336903043
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
@@ -64,6 +64,12 @@ android {
     }
     lint {
         baseline = file("lint-baseline.xml")
+        abortOnError false
+        checkOnly 'NewApi', 'InlinedApi'
+        disable 'TypographyFractions', 'TypographyQuotes'
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
+        ignoreWarnings true
+        quiet true
     }
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
@@ -112,26 +118,6 @@ android {
             }
         }
     }
-    lintOptions {
-        // Turns off checks for the issue IDs you specify.
-        disable("TypographyFractions")
-        disable("TypographyQuotes")
-        // Turns on checks for the issue IDs you specify. These checks are in
-        // addition to the default lint checks.
-        enable("RtlHardcoded")
-        enable("RtlCompat")
-        enable("RtlEnabled")
-        // To enable checks for only a subset of issue IDs and ignore all others,
-        // list the issue IDs with the 'check' property instead. This property overrides
-        // any issue IDs you enable or disable using the properties above.
-        checkOnly("NewApi", "InlinedApi")
-        // If set to true, turns off analysis progress reporting by lint.
-        quiet = true
-        // if set to true (default), stops the build if errors are found.
-        abortOnError = false
-        // if true, only report errors.
-        ignoreWarnings = true
-    }
     configurations {
         all*.exclude group: 'xpp3', module: 'xpp3'
         all*.exclude group: 'xml-apis', module: 'xml-apis'
@@ -176,8 +162,8 @@ android {
         applicationId "one.empty3.feature.app.maxSdk29.pro"
         testApplicationId = "one.empty3.feature.app.maxSdk29.pro.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        targetSdk 34
-        compileSdk 34
+        targetSdk 35
+        compileSdk 35
         minSdk 23
         javaVersionEnum
         versionCode code

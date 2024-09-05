@@ -236,7 +236,7 @@ class TextActivity() : ActivitySuperClass() {
             // resource bitmaps are immutable,
             // so we need to convert it to mutable one
             if(currentImage!=null) {
-                val currentImage2 = currentImage!!.copy(currentImage!!.config, true)
+                val currentImage2 = currentImage!!.copy(currentImage!!.config!!, true)
                 val canvas = Canvas(currentImage2)
                 // new antialised Paint
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG)

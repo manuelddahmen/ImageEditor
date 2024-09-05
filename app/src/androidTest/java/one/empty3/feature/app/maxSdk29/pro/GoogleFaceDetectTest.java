@@ -31,6 +31,8 @@ import android.graphics.drawable.Drawable;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.google.android.datatransport.BuildConfig;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
