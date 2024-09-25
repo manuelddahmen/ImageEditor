@@ -456,7 +456,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         loginButton.setOnClickListener(view -> {
             Intent login = new Intent();
             login.setClass(getApplicationContext(), LoginActivity2.class);
-            startActivity(login);
+            //startActivity(login);
         });
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {

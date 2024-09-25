@@ -83,7 +83,7 @@ public class Colors {
         }
     }
     */
-    public static Color TRANSPARENT = Color.valueOf(1f, 0f, 0f, .5f);
+    public static Color TRANSPARENT = Color.valueOf(-1);
     private static final Random random = new Random();
 
     public static Color random() {

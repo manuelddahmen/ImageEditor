@@ -95,13 +95,13 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     private int displayType = SURFACE_DISPLAY_TEXT_QUADS;
 
     private boolean FORCE_POSITIVE_NORMALS = true;
-    private int transparent = Color.BLACK;
+    private int transparent = -1;
     private Paint paint = new Paint();
 
     public ZBufferImpl() {
         that = this;
         scene = new Scene();
-        texture(new TextureCol(Color.BLACK));
+        texture(new TextureCol(-1));
     }
 
     public ZBufferImpl(int l, int h) {

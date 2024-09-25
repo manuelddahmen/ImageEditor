@@ -34,7 +34,7 @@ public class TestZBufferAndroid {
         ZBufferImpl zBuffer = new ZBufferImpl((int)width, (int) height);
         Scene scene1 = new Scene();
 
-        int transparent = Color.BLACK;
+        int transparent = -1;
 
 
         Point3D middle = Point3D.n(left + width / 2., top + height / 2., 0);
