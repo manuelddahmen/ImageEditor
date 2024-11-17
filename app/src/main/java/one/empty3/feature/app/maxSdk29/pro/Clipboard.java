@@ -23,7 +23,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.RectF;
 
-import one.empty3.feature0.PixM;
+import one.empty3.featureAndroid.PixM;
 
 class Clipboard {
     public static Clipboard defaultClipboard;

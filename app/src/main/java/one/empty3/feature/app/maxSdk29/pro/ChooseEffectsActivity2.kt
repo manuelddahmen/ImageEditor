@@ -208,7 +208,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                 return@setOnClickListener
             try {
                 currentFile.addAtCurrentPlace(DataApp(Utils().writePhoto(
-                    this, ImageIO.read(currentFile.currentFile).getBitmap(),
+                    this, one.empty3.ImageIO.read(currentFile.currentFile).getBitmap(),
                     "before-effect"
                 )))
             } catch (ex:RuntimeException ) {
@@ -387,7 +387,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
                     ).show()
 
                     currentFile.addAtCurrentPlace(DataApp(
-                        Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-")
+                        Utils().writePhoto(this, one.empty3.ImageIO.read(totalOutput).bitmap, "effect-")
                     ))
 
                     val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
@@ -440,7 +440,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         initAuthorized()
 
 //        currentFile.currentFile =
-//            Utils().writePhoto(this, ImageIO.read(totalOutput).bitmap, "effect-");
+//            Utils().writePhoto(this, one.empty3.ImageIO.read(totalOutput).bitmap, "effect-");
 //
 //        val intent2 = Intent(applicationContext, MyCameraActivity::class.java)
 //        passParameters(intent2)

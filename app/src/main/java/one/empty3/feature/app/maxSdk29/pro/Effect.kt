@@ -56,7 +56,7 @@ class Effect() : Parcelable, Serializable {
             var process : ProcessFile = forName as? Class extends ProcessFile
             process.setMaxRes(200)
             process.process(fileJpg, fileJpg2)
-            val read = ImageIO.read(fileJpg2)
+            val read = one.empty3.ImageIO.read(fileJpg2)
             this.preview = read
         }
     */

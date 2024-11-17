@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import one.empty3.libs.Image;
+
 public class PolygonDetailsImageView extends FaceOverlayView{
     public PolygonDetailsImageView(@NonNull Context context) {
         super(context);
@@ -38,8 +40,8 @@ public class PolygonDetailsImageView extends FaceOverlayView{
     }
 
 
-    public void updateImage(Bitmap bm) {
-
+    public void updateImage(Image ibm) {
+        Bitmap bm = ibm.getBitmap();
         new Handler(Looper.getMainLooper()).post(() -> {
                 super.setImageBitmap3(bm.copy(Bitmap.Config.ARGB_8888, true));
 

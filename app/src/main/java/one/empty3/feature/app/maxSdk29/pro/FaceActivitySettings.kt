@@ -18,13 +18,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature0.GoogleFaceDetection
-import one.empty3.feature0.GoogleFaceDetection.FaceData.Surface
-import one.empty3.feature0.PixM
+import one.empty3.androidFeature.GoogleFaceDetection
+import one.empty3.androidFeature.GoogleFaceDetection.FaceData.Surface
+import one.empty3.featureAndroid.PixM
 import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import one.empty3.library.Point3D
+import one.empty3.libs.Image
 import yuku.ambilwarna.AmbilWarnaDialog
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -130,15 +130,15 @@ class FaceActivitySettings : ActivitySuperClass() {
         }
         if (currentFile.currentFile != null) {
             if (currentBitmap == null)
-                currentBitmap = ImageIO.read(currentFile.currentFile).getBitmap()
+                currentBitmap = one.empty3.ImageIO.read(currentFile.currentFile).getBitmap()
 
-            //  var originalBitmap: Bitmap = ImageIO.read(originalImage).getBitmap()
+            //  var originalBitmap: Bitmap = one.empty3.ImageIO.read(originalImage).getBitmap()
 
             Utils().loadImageInImageView(currentBitmap, faceOverlayView)
 
             if (currentBitmap != null) {
-                faceOverlayView.mCopy = currentBitmap
-                faceOverlayView.mBitmap = currentBitmap
+                faceOverlayView.mCopy = Image(currentBitmap)
+                faceOverlayView.mBitmap = Image(currentBitmap)
             }
             /*
                         try {
@@ -282,13 +282,13 @@ class FaceActivitySettings : ActivitySuperClass() {
             var sel = selectedSurfaceAllPicture
 
             if (selectedColor != null && sel != null && sel.filledContours != null && sel.contours != null
-                && sel.polygon != null && sel.colorFill != null
+                && sel.polygon1 != null && sel.colorFill != null
             ) {
                 val oldColorFill = sel.colorFill
                 val newColorFill = selectedColor!!
                 sel.filledContours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
                 sel.contours.replaceColor(oldColorFill, newColorFill.toArgb(), 0.1)
-                sel.polygon.texture(ColorTexture(newColorFill.toArgb()))
+                sel.polygon1.texture(ColorTexture(newColorFill.toArgb()))
                 sel.colorFill = newColorFill.toArgb()
                 drawSurface()
                 drawSurfaces()
@@ -594,7 +594,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 run {
                     faceData.faceSurfaces?.forEach(action = { surface ->
                         run {
-                            val polygon = surface.polygon
+                            val polygon = surface.polygon1
                             if (polygon != null) {
                                 val doubles = Lumiere.getDoubles(surface.colorFill)
                                 val boundRect2d = polygon.boundRect2d
@@ -657,7 +657,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceObject != null) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceObject
-                        .filledContours.bitmap.copy(
+                        .filledContours.bitmap.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
@@ -674,14 +674,14 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(
+                        .filledContours.bitmap.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
             } else {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        .filledContours.bitmap.bitmap.copy(Bitmap.Config.ARGB_8888, true)
                 )
             }
         }
@@ -694,17 +694,17 @@ class FaceActivitySettings : ActivitySuperClass() {
         if (faceOverlayView != null && faceOverlayView.mCopy != null && googleFaceDetection != null) {
             faceOverlayView.fillPolygons(googleFaceDetection)
 
-            Utils().loadImageInImageView(faceOverlayView.mCopy, faceOverlayView)
+            Utils().loadImageInImageView(faceOverlayView.mCopy.bitmap, faceOverlayView)
 
             val currentFileTmp: File? = Utils().writePhoto(
                 this,
-                faceOverlayView.mCopy.copy(Bitmap.Config.ARGB_8888, true),
+                Image(faceOverlayView.mCopy.bitmap.copy(Bitmap.Config.ARGB_8888, true)),
                 "face_drawings-"
             )
 
             if (currentFileTmp != null) {
                 currentFile.add(DataApp(currentFileTmp))
-                currentBitmap = faceOverlayView.mCopy
+                currentBitmap = faceOverlayView.mCopy.bitmap
             }
 
         }
@@ -730,6 +730,8 @@ class FaceActivitySettings : ActivitySuperClass() {
     @Deprecated(message = "Deprecated, see next version for deletion")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        var photo0: Bitmap
+        var photo1: PixM
         var result: Intent? = null
         if (data != null)
             result = data
@@ -754,12 +756,13 @@ class FaceActivitySettings : ActivitySuperClass() {
 
                 if (maxRes > 0) {
                     System.err.println("FileInputStream$chosenData")
-                    photo = BitmapFactory.decodeStream(chosenData)
-                    photo = PixM.getPixM(photo, maxRes).image.getBitmap()
+                    photo0 = BitmapFactory.decodeStream(chosenData)
+                    photo1 = PixM.getPixM(Image(photo0), maxRes.toDouble())
                     System.err.println("Get file (bitmap) : $photo")
                 } else {
                     System.err.println("FileInputStream$chosenData")
                     photo = BitmapFactory.decodeStream(chosenData)
+                    photo1 = PixM.getPixM(Image(photo), maxRes.toDouble())
                     System.err.println("Get file (bitmap) : $photo")
                 }
                 if (photo != null) {
@@ -885,7 +888,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                             val dataInputStream: DataInputStream =
                                 DataInputStream(chosenData)
                             val googleFaceDetection2 =
-                                GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
+                                GoogleFaceDetection(Image(currentBitmap)).decode(dataInputStream) as GoogleFaceDetection?
                             if (googleFaceDetection2 != null) {
                                 GoogleFaceDetection.setInstance2(googleFaceDetection2)
                                 Toast.makeText(

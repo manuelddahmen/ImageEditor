@@ -7,9 +7,9 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import javaAnd.awt.Color;
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.libs.Color;
+import one.empty3.libs.Image;
+import one.empty3.ImageIO;
 import one.empty3.library.Axe;
 import one.empty3.library.Camera;
 import one.empty3.library.ColorTexture;
@@ -23,7 +23,7 @@ public class TestZBufferAndroid {
     @Test
     public void testSphere() {
         Sphere sphere = new Sphere(new Axe(new Point3D(10d, 10d, 1d), new Point3D(10d, 10d, -1d)), 10.);
-        StructureMatrix<Point3D> boundingRect = sphere.getBoundRect2d();
+        StructureMatrix<Point3D> boundingRect = null;
         double left = boundingRect.getElem(0).get(0);
         double top = boundingRect.getElem(0).get(1);
         double right = boundingRect.getElem(1).get(0);
@@ -49,25 +49,21 @@ public class TestZBufferAndroid {
 
         scene1.add(sphere);
 
-        zBuffer.setTransparent(transparent);
+        //zBuffer.setTransparent(transparent);
         zBuffer.texture(new ColorTexture(transparent));
         zBuffer.couleurDeFond(new ColorTexture(transparent));
 
         zBuffer.draw();
 
 
-        Bitmap bitmap = zBuffer.image();
+        Bitmap bitmap = zBuffer.image().getBitmap();
 
         assert bitmap!=null;
 
         File file = new File(new Utils().getAppDir() + "/testSphere.jpg");
-        try {
-            ImageIO.write(
-                    new BufferedImage(bitmap), "jpg", file, true);
-            System.out.println(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ImageIO.write(
+                new Image(bitmap), "jpg", file, true);
+        System.out.println(file);
 
     }
 }

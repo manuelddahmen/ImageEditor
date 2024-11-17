@@ -35,12 +35,11 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Image;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebraicTree;
 import one.empty3.library1.tree.TreeNodeEvalException;
-import one.empty3.feature0.PixM;
 
 public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -123,9 +122,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
         if (currentFile.getCurrentFile() != null) {
             File currentFile1 = currentFile.getCurrentFile();
             try {
-                BufferedImage read = ImageIO.read(currentFile1);
+                Image read = one.empty3.ImageIO.read(currentFile1);
                 if (getMaxRes() > 0 && read!=null) {
-                    current = PixM.getPixM(Objects.requireNonNull(read).bitmap, getMaxRes());
+                    current = PixM.getPixM(Objects.requireNonNull(read).getBitmap(), getMaxRes());
                 } else if(read!=null){
                     current = new PixM(Objects.requireNonNull(read));
                 }
@@ -196,8 +195,8 @@ public class GraphicsActivityView extends ActivitySuperClass {
         progress = 100;
 
             if(current!=null) {
-                Bitmap bitmap = current.normalize(0, 1).getBitmap();
-                File graphics_math = new Utils().writePhoto(this, bitmap, "graphics_math");
+                Bitmap bitmap = current.normalize(0, 1).getBitmap().getBitmap();
+                File graphics_math = new Utils().writePhoto(this, new Image(bitmap), "graphics_math");
                 this.currentFile.add(new DataApp(graphics_math));
                 new Utils().setImageView(image, bitmap);
             }

@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 public class ShareActivity extends ActivitySuperClass {
     private Button share;
@@ -56,11 +56,11 @@ public class ShareActivity extends ActivitySuperClass {
                     getContentResolver().openInputStream(imageUri);
             bitmap = BitmapFactory.decodeStream(inputStream);
             File imageViewPersistantFile = getImageViewPersistantFile();
-            ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
+            one.empty3.ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
 
             currentFile.add(new DataApp(imageViewPersistantFile));
             currentBitmap = bitmap;
-            ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
+            one.empty3.ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
             saveInstanceState();
             Intent shareIntent = new Intent(getApplicationContext(), MyCameraActivity.class);
             passParameters(shareIntent);

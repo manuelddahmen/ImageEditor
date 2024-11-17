@@ -74,9 +74,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature0.PixM;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Image;
 
 
 public class ActivitySuperClass extends AppCompatActivity {
@@ -249,11 +248,11 @@ public class ActivitySuperClass extends AppCompatActivity {
             if (currentFile.getCurrentFile() != null) {
                 File currentFile1 = currentFile.getCurrentFile();
                 if(currentFile1!=null && currentFile1.exists()) {
-                    BufferedImage read = ImageIO.read(currentFile1);
-                    if (read != null && read.bitmap != null) {
-                        Bitmap bitmap = read.bitmap;
+                    Image read = one.empty3.ImageIO.read(currentFile1);
+                    if (read != null && read.getBitmap() != null) {
+                        Bitmap bitmap = read.getBitmap();
                         currentFile.add(new DataApp(new Utils().writePhoto(
-                                this, bitmap, "reload")));
+                                this, new Image(bitmap), "reload")));
                         loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
                     }
                 }
@@ -647,7 +646,7 @@ public class ActivitySuperClass extends AppCompatActivity {
             System.err.println("Get file (bitmap) : " + photo);
         }
         if (photo != null && isCurrentFile) {
-            currentFile.add(new DataApp(new Utils().writePhoto(this, photo, "loaded_image-")));
+            currentFile.add(new DataApp(new Utils().writePhoto(this, new Image(photo), "loaded_image-")));
             if (imageView != null)
                 new Utils().setImageView(this, imageView);
             return photo;
@@ -759,7 +758,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         //       InputStream realPathFromURI = getRealPathFromURI(imageUri);
         InputStream realPathFromURI = getRealPathFromURI(imageUri);
         Bitmap bitmap = BitmapFactory.decodeStream(realPathFromURI);
-        File file = new Utils().writePhoto(this, bitmap, "imported-" + UUID.randomUUID() + "--");
+        File file = new Utils().writePhoto(this, new Image(bitmap), "imported-" + UUID.randomUUID() + "--");
         if (file != null && file.exists()) {
             // Update UI to reflect image being shared
             setCurrentFile(file);
