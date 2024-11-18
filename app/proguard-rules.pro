@@ -20,3 +20,19 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn aQute.bnd.annotation.spi.ServiceProvider
+-dontwarn io.micrometer.context.ThreadLocalAccessor
+-dontwarn jakarta.servlet.ServletContainerInitializer
+-dontwarn java.awt.Color
+-dontwarn java.awt.image.BufferedImage
+-dontwarn java.lang.Module
+-dontwarn java.lang.module.ModuleDescriptor
+-dontwarn javax.xml.stream.XMLEventFactory
+-dontwarn javax.xml.stream.XMLInputFactory
+-dontwarn javax.xml.stream.XMLOutputFactory
+-dontwarn javax.xml.stream.XMLResolver
+-dontwarn javax.xml.stream.util.XMLEventAllocator
+-dontwarn org.apiguardian.api.API
+-dontwarn reactor.blockhound.integration.BlockHoundIntegration

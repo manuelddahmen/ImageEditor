@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 public class Undo {
     private static int current = 0;
@@ -95,11 +95,11 @@ public class Undo {
     }
 
     public Bitmap getCurrentPhoto() {
-        return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getImage())).bitmap;
+        return Objects.requireNonNull(one.empty3.ImageIO.read(data.get(data.size() - 1).getImage())).getBitmap();
     }
 
     public Bitmap getCurrentOriginalPhoto() {
-        return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).bitmap;
+        return Objects.requireNonNull(one.empty3.ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).getBitmap();
     }
 
     @NotNull

@@ -47,10 +47,9 @@ import androidx.preference.PreferenceManager
 //import com.linkedin.android.litr.analytics.TrackTransformationInfo
 //import com.linkedin.android.litr.filter.GlFilter
 import javaAnd.awt.Point
-import javaAnd.awt.image.BufferedImage
-import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature0.MBitmap.maxRes
-import one.empty3.feature0.PixM
+import one.empty3.libs.Image
+import matrix.MBitmap
+import one.empty3.featureAndroid.PixM
 import one.empty3.io.ProcessFile
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -68,7 +67,7 @@ class Utils {
     val cords: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
-
+    public var maxRes: Int = 500
     /***
      * Write copy of original file in data folder
      * @param bitmap
@@ -76,7 +75,7 @@ class Utils {
      * @return file
      */
     @RequiresApi(Build.VERSION_CODES.FROYO)
-    fun writePhoto(activity: ActivitySuperClass, bitmap: Bitmap, name: String): File? {
+    fun writePhoto(activity: ActivitySuperClass, bitmap: Image, name: String): File? {
         val maxRes = getMaxRes(activity)
         var written = false;
         var fileWritten: File? = null;
@@ -104,7 +103,7 @@ class Utils {
         if (!dir2.exists()) if (!dir2.mkdirs()) {
             System.err.println("Dir not created \$dir2" + file2.absolutePath)
         }
-        return writeFile(activity, bitmap, file1, file2, maxRes, true)
+        return writeFile(activity, bitmap.bitmap, file1, file2, maxRes, true)
     }
 
     fun getMaxRes(context: Context): Int {
@@ -136,6 +135,7 @@ class Utils {
             return ActivitySuperClass.MAXRES_DEFAULT
         return getMaxRes(activitySuperClass.applicationContext)
     }
+
     /*
     fun applyOnMedia(applicationContext: Context, inFile:File,
                      outFile : File, numFrames: Int =-1, apf : AndroidProcessFile) {
@@ -242,14 +242,11 @@ class Utils {
         } else bitmap2 = bitmap
         try {
             if (!file1.exists() || shouldOverwrite) {
-                if (ImageIO.write(bitmap2, "jpg", file1)) {
-                    fileWritten = file1;
-                    written = true
-                    System.out.println("File written1: $file1")
-                    return file1
-                }
-            } else {
-                System.err.println("File exists: $file1")
+                one.empty3.ImageIO.write(bitmap2, "jpg", file1)
+                fileWritten = file1;
+                written = true
+                System.out.println("File written1: $file1")
+                return file1
             }
         } catch (ex: android.system.ErrnoException) {
             ex.printStackTrace()
@@ -260,7 +257,7 @@ class Utils {
         }
         try {
             if (!file2.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file2, shouldOverwrite)) {
+                if (one.empty3.ImageIO.write(Image(bitmap2), "jpg", file2, shouldOverwrite)) {
                     written = true;
                     fileWritten = file2;
                     System.out.println("File written2: $file2")
@@ -279,17 +276,15 @@ class Utils {
             return fileWritten
         } else {
             val f = fragment.activity2.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
-            if (ImageIO.write(bitmap, "jpg", f)) {
-                written = true;
-                fileWritten = file2;
-                return f
-            }
-
-            Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
-            throw NullPointerException("No file written, Utils.writePhoto");
+            one.empty3.ImageIO.write(bitmap, "jpg", f)
+            written = true;
+            fileWritten = file2;
+            return f
         }
-    }
 
+        Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
+        throw NullPointerException("No file written, Utils.writePhoto");
+    }
 
     public fun writeFile(
         activity: ActivitySuperClass,
@@ -316,8 +311,8 @@ class Utils {
                     ex.printStackTrace()
                     bitmap2 = Bitmap.createScaledBitmap(
                         bitmap,
-                        (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
-                        (1.0 * maxImageSize * getMaxRes(activity)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(activity, null)).toInt(),
+                        (1.0 * maxImageSize * getMaxRes(activity, null)).toInt(),
                         true
                     )
                 } catch (ex: RuntimeException) {
@@ -331,25 +326,21 @@ class Utils {
         } else bitmap2 = bitmap
         try {
             if (!file1.exists() || shouldOverwrite) {
-                if (ImageIO.write(bitmap2, "jpg", file1)) {
-                    fileWritten = file1;
-                    written = true
-                    System.out.println("File written1: $file1")
-                    return file1
-                }
+                one.empty3.ImageIO.write(bitmap2, "jpg", file1)
+                fileWritten = file1;
+                written = true
+                System.out.println("File written1: $file1")
+                return file1
             } else {
                 System.err.println("File exists: $file1")
             }
         } catch (ex: android.system.ErrnoException) {
-            ex.printStackTrace()
-        } catch (ex: NullPointerException) {
-            ex.printStackTrace()
-        } catch (ex: Exception) {
-            ex.printStackTrace()
+
         }
+
         try {
             if (!file2.exists()) {
-                if (ImageIO.write(BufferedImage(bitmap2), "jpg", file2, shouldOverwrite)) {
+                if (one.empty3.ImageIO.write(Image(bitmap2), "jpg", file2, shouldOverwrite)) {
                     written = true;
                     fileWritten = file2;
                     System.out.println("File written2: $file2")
@@ -368,16 +359,17 @@ class Utils {
             return fileWritten
         } else {
             val f = activity.getFilesFile("from_error-" + UUID.randomUUID() + ".jpg")
-            if (ImageIO.write(bitmap, "jpg", f)) {
-                written = true;
-                fileWritten = file2;
-                return f
-            }
-
-            Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
-            throw NullPointerException("No file written, Utils.writePhoto");
+            one.empty3.ImageIO.write(bitmap, "jpg", f)
+            written = true;
+            fileWritten = file2;
+            return f
         }
+
+        Log.e("SAVE FILE ERRORS", "writePhoto: error file 2/2")
+        throw NullPointerException("No file written, Utils.writePhoto");
+        return null
     }
+
 
     public fun getMaxRes(fragment: FragmentSuperClass, savedInstanceState: Bundle?): Int {
         val defaultSharedPreferences =
@@ -409,7 +401,33 @@ class Utils {
                 !savedInstanceState.containsKey("maxRes") ||
                 savedInstanceState.getInt("maxRes") != -1
             ) {
-                return getMaxRes(fragment);
+
+            } else {
+                maxRes = savedInstanceState.getInt("maxRes")
+
+            }
+        }
+        if (maxRes == -1) {
+            maxRes = 0
+        }
+        println("maxRes = $maxRes")
+        return maxRes;
+    }
+
+    public fun getMaxRes(activity: ActivitySuperClass, savedInstanceState: Bundle?): Int {
+
+        if (activity != null) {
+            maxRes =
+                activity.intent.getIntExtra(
+                    "maxRes",
+                    ActivitySuperClass.MAXRES_DEFAULT
+                )
+        }
+        if (maxRes == -1) {
+            if (savedInstanceState == null ||
+                !savedInstanceState.containsKey("maxRes") ||
+                savedInstanceState.getInt("maxRes") != -1
+            ) {
             } else {
                 maxRes = savedInstanceState.getInt("maxRes")
 
@@ -437,7 +455,7 @@ class Utils {
         System.err.println("set ImageView from  = $currentFile")
 
         if (currentFile != null && currentFile.exists()) {
-            val bi = ImageIO.read(currentFile)
+            val bi = one.empty3.ImageIO.read(currentFile)
             if (bi != null) {
                 val bitmap = bi.getBitmap()
                 if (bitmap != null) {
@@ -453,12 +471,12 @@ class Utils {
         var currentFile: File? = getCurrentFile(intent = activity.intent, activity)
         val intent: Intent = activity.intent
         val extras = intent.extras
-        if(extras!=null) {
+        if (extras != null) {
             val data0 = extras.get(Intent.EXTRA_STREAM)
             var data: Uri? = null
-            if(data0!=null)
-                    data = data0 as Uri
-            if(data!=null) {
+            if (data0 != null)
+                data = data0 as Uri
+            if (data != null) {
                 var inputStream: InputStream? = null
                 inputStream = activity.getRealPathFromURI(data)
                 val bitmapDecodeStream: Bitmap = BitmapFactory.decodeStream(inputStream)
@@ -466,9 +484,10 @@ class Utils {
                 bitmapDecodeStream.compress(
                     Bitmap.CompressFormat.JPEG, 100, FileOutputStream(currentFile)
                 )
+                return currentFile
             }
             if (data == null) {
-                    //currentFile = getCurrentFile(intent = intent, activity)
+                //currentFile = getCurrentFile(intent = intent, activity)
             }
             if (currentFile == null) {
                 currentFile = activity.getCurrentFile()
@@ -476,7 +495,7 @@ class Utils {
             System.err.println("set ImageView from  = $currentFile")
 
             if (currentFile != null) {
-                val bi = ImageIO.read(currentFile)
+                val bi = one.empty3.ImageIO.read(currentFile)
                 if (bi != null) {
                     val bitmap = bi.getBitmap()
                     if (bitmap != null) {
@@ -556,7 +575,7 @@ class Utils {
             try {
                 val uri = intent.extras!!.get(Intent.EXTRA_STREAM) as Uri
                 val file = activity.getRealPathFromURIString(uri)
-                if(file!=null) {
+                if (file != null) {
                     val realPathFromIntentData: InputStream = FileInputStream(file)
                     val writeFile = writeFile(
                         activity,
@@ -566,7 +585,7 @@ class Utils {
                         0,
                         false
                     )
-                return writeFile
+                    return writeFile
                 }
 
             } catch (ex: RuntimeException) {
@@ -614,7 +633,7 @@ class Utils {
                         )
                     }
 
-                    val maxRes = getMaxRes(activity)
+                    val maxRes = getMaxRes(activity, null)
 
                     val cb: Bitmap
                     if (maxRes > 0)
@@ -625,14 +644,14 @@ class Utils {
                     else
                         cb = mBitmap.copy(Bitmap.Config.ARGB_8888, true)
 
-                    val dim: Int = getMaxRes(activity)
+                    val dim: Int = getMaxRes(activity, null)
                     if (imageView != null)
                         Utils().setImageView(imageView, cb)
                     return true
                 } catch (e: FileNotFoundException) {
                 }
             }
-        } catch (ex:NullPointerException) {
+        } catch (ex: NullPointerException) {
             return false
         }
         return false
@@ -667,8 +686,8 @@ class Utils {
             return;
         val canvas = Canvas(bitmap)
         drawable.setBounds(
-            0, 0, if (getMaxRes(activity) == 0) canvas.width else getMaxRes(activity),
-            if (getMaxRes(activity) == 0) canvas.height else getMaxRes(activity)
+            0, 0, if (getMaxRes(activity, null) == 0) canvas.width else getMaxRes(activity, null),
+            if (getMaxRes(activity, null) == 0) canvas.height else getMaxRes(activity, null)
         )
         drawable.draw(canvas)
         var bm: Bitmap? = null
@@ -700,8 +719,8 @@ class Utils {
     fun setMaxResImage(activity: ActivitySuperClass, bitmap: Bitmap): Point? {
         val imageRatio = getImageRatio(bitmap)
         return Point(
-            (getMaxRes(activity) / imageRatio).toInt(),
-            (getMaxRes(activity) * imageRatio).toInt()
+            (getMaxRes(activity, null) / imageRatio).toInt(),
+            (getMaxRes(activity, null) * imageRatio).toInt()
         )
     }
 
@@ -736,11 +755,14 @@ class Utils {
     public fun createCurrentUniqueFile(activity: ActivitySuperClass): File? {
         try {
             if (activity.currentFile.currentFile != null) {
-                val photo = BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile))
+                val photo =
+                    BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile))
                 System.err.println("Get file (bitmap) : $photo")
                 activity.currentFile.add(
                     DataApp(
-                    this.writePhoto(activity, photo, "create-unique" + UUID.randomUUID())))
+                        this.writePhoto(activity, Image(photo), "create-unique" + UUID.randomUUID())
+                    )
+                )
                 return activity.currentFile.currentFile
             }
         } catch (e: FileNotFoundException) {
@@ -756,7 +778,9 @@ class Utils {
     public fun setImageView(imageView: ImageViewSelection, bitmap: Bitmap) {
         //imageLoader.displayImage(bitmap, imageView);
         imageView.setImageBitmap2(bitmap)
-        imageView.setPixels(PixM(bitmap))
+        var p: PixM = PixM(bitmap)
+        imageView.setPixels(p)
+
 
     }
 
@@ -781,11 +805,11 @@ class Utils {
         if (effect != null && fileIn.exists()) {
             var randomUUID = UUID.randomUUID()
             val fileInThumb = getFilesFile("thumbIn-" + effect + randomUUID + "-jpg")
-            ImageIO.write(
+            one.empty3.ImageIO.write(
                 PixM.getPixM(
-                    ImageIO.read(fileIn).getBitmap(),
+                    one.empty3.ImageIO.read(fileIn).getBitmap(),
                     Math.max(p.getColumns(), p.getLines())
-                ).bitmap, "jpg", fileInThumb
+                ).bitmap.bitmap, "jpg", fileInThumb
             )
             val fileOut = getFilesFile("thumbOut-" + effect + randomUUID + "-jpg")
             effect.setMaxRes(30)
@@ -851,7 +875,7 @@ class Utils {
         }
     */
 
-    fun createCurrentUniqueFile(applicationContext: Context, filename:String): File? {
+    fun createCurrentUniqueFile(applicationContext: Context, filename: String): File? {
         return applicationContext.getExternalFilesDir(filename)
     }
 }

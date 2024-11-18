@@ -25,7 +25,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.shapes.Shape;
 
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.Polygon;
 import one.empty3.library.core.nurbs.ParametricSurface;
 

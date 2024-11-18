@@ -9,15 +9,16 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import one.empty3.Polygon1;
 import one.empty3.library.Polygon;
 
 public class VectorDataPicture implements Parcelable {
-    List<Polygon> polygons = new ArrayList<>();
+    List<Polygon1> polygons = new ArrayList<>();
 
     protected VectorDataPicture(Parcel in) {
         Parcelable[] polygons1 = in.readParcelableArray(new MyClassLoaderCreator());
         for (int i = 0; i < polygons1.length; i++) {
-            polygons.add((Polygon) polygons1[i]);
+            polygons.add((Polygon1) polygons1[i]);
         }
     }
 
@@ -40,7 +41,7 @@ public class VectorDataPicture implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        Polygon [] polygons1 = new Polygon[polygons.size()];
+        Polygon1[] polygons1 = new Polygon1[polygons.size()];
         for (int j = 0, polygonsSize = polygons.size(); j < polygonsSize; j++) {
             polygons1[j] =polygons.get(i);
         }

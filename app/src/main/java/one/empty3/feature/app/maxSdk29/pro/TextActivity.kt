@@ -44,6 +44,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import javaAnd.awt.Point
+import one.empty3.libs.Image
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
@@ -278,7 +279,7 @@ class TextActivity() : ActivitySuperClass() {
                 //canvas.drawText(textToPrint, x * scale, y * scale, paint)
                 canvas.drawText(textToPrint, x.toFloat(), y.toFloat(), paint)
                 currentImage = currentImage2
-                return Utils().writePhoto(this, currentImage2, "drawtext-")
+                return Utils().writePhoto(this, Image(currentImage2), "drawtext-")
             }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -8,7 +8,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import one.empty3.feature0.PixM
+import one.empty3.featureAndroid.PixM
+import one.empty3.libs.Image
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
@@ -393,7 +394,7 @@ open class FragmentSuperClass : Fragment() {
             System.err.println("Get file (bitmap) : $photo")
         }
         return if (photo != null && isCurrentFile) {
-            currentFile = Utils().writePhoto(activity2, photo, "loaded_image-")
+            currentFile = Utils().writePhoto(activity2, Image(photo), "loaded_image-")
             Utils().setImageView(activity2, activity2.imageView)
             photo
         } else if (photo != null) {

@@ -35,8 +35,8 @@ package one.empty3.feature.app.maxSdk29.pro
 //import androidx.core.content.FileProvider
 //import com.google.android.datatransport.BuildConfig
 //import javaAnd.awt.Point
-//import javaAnd.awt.image.BufferedImage
-//import javaAnd.awt.image.imageio.ImageIO
+//import one.empty3.libs.Image
+//import one.empty3.ImageIO
 //import one.empty3.feature20220726.PixM
 //import java.io.ByteArrayOutputStream
 //import java.io.File
@@ -152,7 +152,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //                ) {
 //                    val dest = PixM(
 //                        Objects.requireNonNull(
-//                            ImageIO.read(
+//                            one.empty3.ImageIO.read(
 //                                currentFile
 //                            )
 //                        ).bitmap
@@ -333,7 +333,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //                    val viewById =
 //                        requireActivity3().findViewById<ImageViewSelection>(R.id.currentImageView)
 //                    val bitmap =
-//                        ImageIO.read(currentFile).bitmap
+//                        one.empty3.ImageIO.read(currentFile).bitmap
 //                    val rectF = getSelectedCordsImgToView(bitmap, viewById)
 //                    viewById.drawingRect = rectF
 //                    viewById.setDrawingRectState(true)
@@ -373,7 +373,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //        val unselect = requireActivity3().findViewById<View>(R.id.unselect_rect)
 //        unselect.setOnClickListener { v ->
 //            if (currentFile != null) {
-//                val read = ImageIO.read(currentFile)
+//                val read = one.empty3.ImageIO.read(currentFile)
 //                if (read.getBitmap() != null) {
 //                    Utils()
 //                        .setImageView(requireActivity3().imageView, read.getBitmap())
@@ -426,7 +426,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //
 //    private fun getSelectedCordsImgToView(bitmap: Bitmap, imageView: ImageView): RectF? {
 //        if (requireActivity3().currentFile != null) {
-//            val pixM = PixM(Objects.requireNonNull(ImageIO.read(requireActivity3().currentFile)).bitmap)
+//            val pixM = PixM(Objects.requireNonNull(one.empty3.ImageIO.read(requireActivity3().currentFile)).bitmap)
 //            if (requireActivity3().drawPointA == null || requireActivity3().drawPointB == null) {
 //                return null
 //            }
@@ -621,7 +621,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //
 //    private fun getSelectedZone(selectedCords: RectF?): PixM? {
 //        if (currentFile != null) {
-//            val pixM = PixM(Objects.requireNonNull(ImageIO.read(currentFile)))
+//            val pixM = PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)))
 //            return pixM.copySubImage(
 //                selectedCords!!.left.toInt(),
 //                selectedCords.top.toInt(),
@@ -637,7 +637,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //        val originalComponentView =
 //            RectF(0f, 0f, imageView!!.width.toFloat(), requireActivity3().imageView.height.toFloat())
 //        //RectF destinationComponentView = originalComponentView;
-//        val read = ImageIO.read(currentFile)
+//        val read = one.empty3.ImageIO.read(currentFile)
 //        if (rectfs.size == 0) return current
 //        var i = 0
 //        current = originalComponentView
@@ -758,7 +758,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //        }
 //        try {
 //            if (!file1.exists()) {
-//                ImageIO.write(BufferedImage(bitmap), "jpg", file1, shouldOverwrite)
+//                one.empty3.ImageIO.write(Image(bitmap), "jpg", file1, shouldOverwrite)
 //                System.err.print("Image written 1/2 $file1 return")
 //                saveImageState(isWorkingResolutionOriginal)
 //                //System.err.println("File (photo) " + file1.getAbsolutePath());
@@ -769,7 +769,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //        }
 //        try {
 //            if (!file2.exists()) {
-//                ImageIO.write(BufferedImage(bitmap), "jpg", file2, shouldOverwrite)
+//                one.empty3.ImageIO.write(Image(bitmap), "jpg", file2, shouldOverwrite)
 //                System.err.print("Image written 2/2 $file2 return")
 //                //System.err.println("File (photo) " + file2.getAbsolutePath());
 //                saveImageState(isWorkingResolutionOriginal)

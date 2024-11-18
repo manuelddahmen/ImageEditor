@@ -48,10 +48,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import one.empty3.feature0.GoogleFaceDetection;
-import one.empty3.feature0.PixM;
+import one.empty3.Polygon1;
+import one.empty3.androidFeature.GoogleFaceDetection;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
-import one.empty3.library.Polygon;
+import one.empty3.libs.Image;
 
 public class GoogleFaceDetectTest {
     private String path = "/data/data/one.empty3.feature.app.maxSdk29.pro";
@@ -75,7 +76,7 @@ public class GoogleFaceDetectTest {
     @Test
     public void testLoadSaveInt() {
         Context applicationContext = ApplicationProvider.getApplicationContext();
-        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888));
+        GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(new Image(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)));
         googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
 
@@ -90,7 +91,7 @@ public class GoogleFaceDetectTest {
             Assert.fail();
             return;
         }
-        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888));
+        GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(new Image(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)));
 
         try {
             DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
@@ -118,7 +119,7 @@ public class GoogleFaceDetectTest {
                     String filename = path+"/model-" + UUID.randomUUID() + "-pixm.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
-                    PixM pixM = new PixM(bitmap);
+                    PixM pixM = new PixM(new Image(bitmap));
                     PixM pixReloaded = new PixM(1, 1);
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     pixM.encode(dataOutputStream);
@@ -152,24 +153,24 @@ public class GoogleFaceDetectTest {
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     Bitmap bitmap1 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                     bitmap1.reconfigure(200, 200, Bitmap.Config.ARGB_8888);
-                    PixM pixM = new PixM(bitmap1);
+                    PixM pixM = PixM.getPixM(new Image(bitmap1), 0.0);
 
-                    Polygon polygon = new Polygon();
+                    Polygon1 polygon1 = new Polygon1();
                     int pointsSize = (int) (Math.random() * 20);
                     for(int i=0; i<pointsSize; i++) {
-                        polygon.getPoints().add(Point3D.random(400.0));
+                        polygon1.getPoints().add(Point3D.random(400.0));
                     }
 
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap1);
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(new Image(bitmap1));
 
                     googleFaceDetection.getDataFaces().add(new GoogleFaceDetection.FaceData());
 
                     googleFaceDetection.getDataFaces().get(0).setPhoto(pixM.copy());
 
                     googleFaceDetection.getDataFaces().get(0).getFaceSurfaces().add(
-                            new GoogleFaceDetection.FaceData.Surface(0, polygon, pixM, 10, 111, 838, pixM.copy(), false));
+                            new GoogleFaceDetection.FaceData.Surface(0, polygon1, pixM, 10, 111, 838, pixM.copy(), false));
 
-                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(bitmap1);
+                    GoogleFaceDetection googleFaceDetection1 = new GoogleFaceDetection(new Image(bitmap1));
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     googleFaceDetection.encode(dataOutputStream);
                     Assert.assertTrue(true);
@@ -203,18 +204,18 @@ public class GoogleFaceDetectTest {
                     String filename = path+"/model-" + UUID.randomUUID() + "-polygon.fac";
                     Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
                     bitmap.reconfigure(bitmap.getWidth()/4, bitmap.getHeight()/4, Bitmap.Config.ARGB_8888);
-                    Polygon polygon = new Polygon();
+                    Polygon1 polygon = new Polygon1();
                     int pointsSize = (int) (Math.random() * 20);
                     for(int i=0; i<pointsSize; i++) {
                         polygon.getPoints().add(Point3D.random(400.0));
                     }
-                    Polygon polygonReloaded = new Polygon();
+                    Polygon1 polygonReloaded = new Polygon1();
                     DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(filename));
                     polygon.encode(dataOutputStream);
                     Assert.assertTrue(true);
                     dataOutputStream.close();
                     DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filename));
-                    polygonReloaded = (Polygon) polygonReloaded.decode(dataInputStream);
+                    polygonReloaded = (Polygon1) polygonReloaded.decode(dataInputStream);
                     dataInputStream.close();
                     Assert.assertTrue(true);
 
@@ -308,7 +309,7 @@ public class GoogleFaceDetectTest {
                         }
                     }
                     InputStream inputStream = new FileInputStream(instantFile);
-                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(bitmap);
+                    GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(new Image(bitmap));
                     googleFaceDetection
                             = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(inputStream));
 

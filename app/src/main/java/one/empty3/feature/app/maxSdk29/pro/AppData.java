@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 
-import one.empty3.feature0.GoogleFaceDetection;
+import one.empty3.androidFeature.GoogleFaceDetection;
 
 public class AppData {
     private static final String[] cords = new String[]{"x", "y", "z", "r", "g", "b", "a", "t", "u", "v"};

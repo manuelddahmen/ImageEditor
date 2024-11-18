@@ -29,16 +29,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javaAnd.awt.image.BufferedImage;
-import one.empty3.feature0.GoogleFaceDetection;
+import one.empty3.libs.Image;
+import one.empty3.androidFeature.GoogleFaceDetection;
 
 public class GoogleFaceDetectTest {
     @Test
     public void loadSaveTest()   {
-        BufferedImage image = new BufferedImage();
+        Image image = new Image(1000, 1000);
 
         try {
-            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(image.bitmap);
+            GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(image);
             FileInputStream fileOutputStream1 = new FileInputStream("C:\\Users\\manue\\AndroidStudioProjects\\FeatureApp3\\face-drawings.fac");
             GoogleFaceDetection decoded = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(fileOutputStream1));
             fileOutputStream1.close();

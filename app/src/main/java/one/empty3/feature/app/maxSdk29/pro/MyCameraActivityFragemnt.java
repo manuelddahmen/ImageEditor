@@ -77,8 +77,8 @@
 //import java.util.UUID;
 //
 //import javaAnd.awt.Point;
-//import javaAnd.awt.image.BufferedImage;
-//import javaAnd.awt.image.imageio.ImageIO;
+//import one.empty3.libs.Image;
+//import one.empty3.ImageIO;
 //import one.empty3.feature20220726.PixM;
 //
 //class ExampleActivity : AppCompatActivity(R.layout.main) {
@@ -193,7 +193,7 @@
 //            if (currentFile != null) {
 //                if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
 //                        && clipboard.getSource() != null) {
-//                    PixM dest = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+//                    PixM dest = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //                    int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
 //                    int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
@@ -370,7 +370,7 @@
 //                if (drawPointA != null && drawPointB != null && drawPointA.getX() != drawPointB.getX() && drawPointA.getY() != drawPointB.getY()) {
 //                    System.err.println("2 points sélectionnés A et B");
 //                    ImageViewSelection viewById = findViewById(R.id.currentImageView);
-//                    Bitmap bitmap = ImageIO.read(currentFile).bitmap;
+//                    Bitmap bitmap = one.empty3.ImageIO.read(currentFile).getBitmap();
 //                    RectF rectF = getSelectedCordsImgToView(bitmap, viewById);
 //                    viewById.setDrawingRect(rectF);
 //                    viewById.setDrawingRectState(true);
@@ -380,7 +380,7 @@
 //
 //                        if (currentPixM != null) {
 //                            System.err.println("Draw Selection");
-//                            new Utils().setImageView(imageView, currentPixM.getImage().bitmap);
+//                            new Utils().setImageView(imageView, currentPixM.getImage().getBitmap().getBitmap());
 //                            if (clipboard == null && Clipboard.defaultClipboard == null) {
 //                                clipboard = Clipboard.defaultClipboard
 //                                        = new Clipboard(currentPixM);
@@ -413,7 +413,7 @@
 //            @Override
 //            public void onClick(View v) {
 //                if (currentFile != null) {
-//                    BufferedImage read = ImageIO.read(currentFile);
+//                    Image read = one.empty3.ImageIO.read(currentFile);
 //                    if(read.getBitmap()!=null) {
 //                        new Utils().setImageView(imageView, read.getBitmap());
 //                    }
@@ -464,7 +464,7 @@
 //
 //    private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
 //        if (currentFile != null) {
-//            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)).bitmap);
+//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //            if (drawPointA == null || drawPointB == null) {
 //                return null;
@@ -684,7 +684,7 @@
 //
 //    private PixM getSelectedZone(RectF selectedCords) {
 //        if (currentFile != null) {
-//            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile)));
+//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)));
 //
 //            return pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
 //                    (int)(selectedCords.right-selectedCords.left),
@@ -696,7 +696,7 @@
 //    public RectF getLocalRectIn(RectF current) {
 //        RectF originalComponentView = new RectF(0, 0, imageView.getWidth(), imageView.getHeight());
 //        //RectF destinationComponentView = originalComponentView;
-//        BufferedImage read = ImageIO.read(currentFile);
+//        Image read = one.empty3.ImageIO.read(currentFile);
 //        if (rectfs.size() == 0) return current;
 //        int i = 0;
 //
@@ -826,7 +826,7 @@
 //        }
 //        try {
 //            if (!file1.exists()) {
-//                ImageIO.write(new BufferedImage(bitmap), "jpg", file1, shouldOverwrite);
+//                one.empty3.ImageIO.write(new Image(bitmap), "jpg", file1, shouldOverwrite);
 //                System.err.print("Image written 1/2 " + file1 + " return");
 //                saveImageState(isWorkingResolutionOriginal());
 //                //System.err.println("File (photo) " + file1.getAbsolutePath());
@@ -837,7 +837,7 @@
 //        }
 //        try {
 //            if (!file2.exists()) {
-//                ImageIO.write(new BufferedImage(bitmap), "jpg", file2, shouldOverwrite);
+//                one.empty3.ImageIO.write(new Image(bitmap), "jpg", file2, shouldOverwrite);
 //                System.err.print("Image written 2/2 " + file2 + " return");
 //                //System.err.println("File (photo) " + file2.getAbsolutePath());
 //                saveImageState(isWorkingResolutionOriginal());

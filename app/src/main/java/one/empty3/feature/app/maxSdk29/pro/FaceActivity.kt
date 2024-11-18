@@ -17,9 +17,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
-import javaAnd.awt.image.BufferedImage
-import javaAnd.awt.image.imageio.ImageIO
-import one.empty3.feature0.GoogleFaceDetection
+import one.empty3.libs.Image
+import one.empty3.androidFeature.GoogleFaceDetection
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.File
@@ -56,7 +55,7 @@ class FaceActivity : ActivitySuperClass() {
         if (currentFile.currentFile != null) {
             try {
                 if (currentBitmap == null) {
-                val currentBitmapRef: BufferedImage = ImageIO.read(currentFile.currentFile)
+                    val currentBitmapRef: Image = one.empty3.ImageIO.read(currentFile.currentFile)
                 if (currentBitmapRef != null && currentBitmapRef.bitmap != null) {
                     currentBitmap = currentBitmapRef.bitmap
                     Utils().loadImageInImageView(currentBitmap, faceOverlayView)
@@ -94,7 +93,9 @@ class FaceActivity : ActivitySuperClass() {
                 faceOverlayView.isDrawing = false
                 faceOverlayView.isFinish = false
                 try {
-                    faceOverlayView.setBitmap(ImageIO.read(currentFile.currentFile).getBitmap());
+                    faceOverlayView.setBitmap(
+                        one.empty3.ImageIO.read(currentFile.currentFile).getBitmap()
+                    );
                     val writePhoto =
                         Utils().writePhoto(this, faceOverlayView.mCopy, "face-contours")
                     originalImage = currentFile.currentFile
@@ -567,7 +568,7 @@ class FaceActivity : ActivitySuperClass() {
                         //this.getFileContent(requestCode, resultCode, result) ?: return
                         val dataInputStream: DataInputStream = DataInputStream(inputStream)
                         val googleFaceDetection =
-                            GoogleFaceDetection(currentBitmap).decode(dataInputStream) as GoogleFaceDetection?
+                            GoogleFaceDetection(Image(currentBitmap)).decode(dataInputStream) as GoogleFaceDetection?
                         if(googleFaceDetection!=null) {
                             GoogleFaceDetection.setInstance(googleFaceDetection)
                             faceOverlayView.googleFaceDetection = googleFaceDetection

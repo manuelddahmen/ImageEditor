@@ -38,8 +38,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javaAnd.awt.image.BufferedImage;
-import one.empty3.feature0.GoogleFaceDetection;
+import one.empty3.libs.Image;
+import one.empty3.androidFeature.GoogleFaceDetection;
 public class GoogleFaceDetectTest {
     @Test
     public void loadSaveTest() {
@@ -53,11 +53,11 @@ public class GoogleFaceDetectTest {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             if (bitmapDrawable.getBitmap() != null) {
                 try {
-                    BufferedImage image = new BufferedImage(bitmapDrawable.getBitmap());
+                    Image image = new Image(bitmapDrawable.getBitmap());
 
                     FaceOverlayView faceOverlayView = new FaceOverlayView(app.getApplicationContext());
 
-                    faceOverlayView.setBitmap(image.bitmap);
+                    faceOverlayView.setBitmap(image.getBitmap());
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100000000);
 

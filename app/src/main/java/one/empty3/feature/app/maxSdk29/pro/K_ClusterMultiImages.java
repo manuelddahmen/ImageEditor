@@ -38,10 +38,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import javaAnd.awt.Color;
-import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature0.PixM;
-import one.empty3.feature0.kmeans.Distance;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.library.core.lighting.Colors;
+import one.empty3.ImageIO;
+import one.empty3.androidFeature.kmeans.Distance;
 
 public class K_ClusterMultiImages /*extends ReadDataset*/ {
 
@@ -109,9 +109,9 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
         PixM pix;
         try {
             if (res > 0)
-                pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
+                pix = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
             else
-                pix = new PixM(Objects.requireNonNull(ImageIO.read(in)));
+                pix = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
             PixM pix2 = new PixM(
                     pix.getColumns(),
                     pix.getLines()
@@ -195,7 +195,7 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
 
             android.graphics.Color[] colors = new android.graphics.Color[k];
             for (int i = 0; i < k; i++)
-                colors[i] = Color.random();
+                colors[i] = Colors.random();
             clustersPrint = clusters;
 
             centroids.forEach((integer1, db1) -> clustersPrint.forEach((doubles, integer2) -> {
@@ -205,7 +205,7 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
 
             }));
 
-            ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out, true);
+            ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out, true);
 
         } catch (Exception ex1) {
             ex1.printStackTrace();

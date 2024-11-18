@@ -18,3 +18,5 @@ app/release/
 app/debug/
 app/google-services.json
 app/google-services (1).json
+/gradle/
+/images/

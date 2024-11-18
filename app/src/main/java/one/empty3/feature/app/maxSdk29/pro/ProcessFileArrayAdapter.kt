@@ -8,10 +8,9 @@ import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import javaAnd.awt.image.imageio.ImageIO
 import one.empty3.Main2022
+import one.empty3.featureAndroid.PixM
 import one.empty3.feature.app.maxSdk29.pro.databinding.RecyclerViewEffectItemBinding
-import one.empty3.feature0.PixM
 import one.empty3.io.ProcessFile
 import java.io.File
 
@@ -157,7 +156,8 @@ class ProcessFileArrayAdapter() :
                         if ((runEffectsOnThumbnail != null) && runEffectsOnThumbnail.exists())
                             Utils().setImageView(
                                 imageViewEffectPreview,
-                                ImageIO.read(runEffectsOnThumbnail).getBitmap())
+                                one.empty3.ImageIO.read(runEffectsOnThumbnail).getBitmap()
+                            )
                     }
                 }
             }
