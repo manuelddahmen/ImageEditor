@@ -159,7 +159,7 @@ final class WorkerUtils {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(outputFile);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         } finally {
             if (out != null) {
                 try {

@@ -24,17 +24,15 @@ public class Color extends android.graphics.Color implements IColorMp {
 
     }
 
-    public static Color newCol(int v, int v1, int v2) {
-        return new Color(android.graphics.Color.valueOf(v, v1, v2).toArgb());
+    public float[] getColorComponents() {
+        return colorObject.getComponents();
     }
-
-
     public static float[] getColorComponents(Color color) {
-        return new float[]{color.red(), color.green(), color.blue(), color.alpha()};
+        return new float[]{color.getRed(), color.getGreen(), color.getBlue(), color.alpha()};
     }
 
     public static float[] getColorComponents(android.graphics.Color color) {
-        return null;
+        return new float[]{color.red(), color.green(), color.blue(), color.alpha()};
     }
 
     @Override
@@ -59,7 +57,8 @@ public class Color extends android.graphics.Color implements IColorMp {
     }
 
     public void setRGB(int r, int g, int b) {
-        this.colorObject = android.graphics.Color.valueOf(r, g, b);
+        this.colorObject = android.graphics.Color.valueOf(
+                android.graphics.Color.argb(0, r, g, b));
     }
 
     public void setRgb(int rgb) {
@@ -70,19 +69,22 @@ public class Color extends android.graphics.Color implements IColorMp {
         return colorObject.toArgb();
     }
 
+    public int getRgb() {
+        return colorObject.toArgb();
+    }
     public int getRed() {
-        return (int) (colorObject.red());
+        return (int) (colorObject.red() * 255f);
     }
 
     public int getGreen() {
-        return (int) (colorObject.green());
+        return (int) (colorObject.green() * 255f);
     }
 
     public int getBlue() {
-        return (int) (colorObject.blue());
+        return (int) (colorObject.blue() * 255f);
     }
 
     public int getAlpha() {
-        return (int) (colorObject.alpha());
+        return (int) (colorObject.alpha() * 255f);
     }
 }

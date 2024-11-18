@@ -601,13 +601,14 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         Bitmap bitmapOriginal = null;
         Bitmap bitmap = null;
-        if (drawable instanceof BitmapDrawable)
+        if (drawable instanceof BitmapDrawable) {
             bitmapOriginal = ((BitmapDrawable) drawable).getBitmap();
-        else if (drawable.getCurrent() instanceof BitmapDrawable) {
+            bitmap = bitmapOriginal;
+        } else if (drawable.getCurrent() instanceof BitmapDrawable) {
             if (isWorkingResolutionOriginal()) {
                 bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
+                bitmap = PixM.getPixM(bitmapOriginal, getMaxRes()).getBitmap().getBitmap();
             }
-            bitmap = PixM.getPixM(bitmap, getMaxRes()).getBitmap().getBitmap();
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
                 bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel

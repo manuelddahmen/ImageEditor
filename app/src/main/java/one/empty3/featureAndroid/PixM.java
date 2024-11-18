@@ -150,7 +150,7 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
         if (image.getBitmap() == null) {
             return null;
         } else {
-            return getPixM(image.getBitmap(), (int) maxRes);
+            return getPixM(image.getImage(), (int) maxRes);
         }
     }
 
