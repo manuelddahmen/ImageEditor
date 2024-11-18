@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,15 +18,27 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/HighlightFeatures.java
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.selection;
+
+
+import java.io.File;
+import java.util.List;
+
+import one.empty3.ImageIO;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/HighlightFeatures.java
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 import one.empty3.library.Scene;
 import one.empty3.library.core.nurbs.ParametricCurve;
+<<<<<<<< HEAD:feature0/selection/HighlightFeatures.java
 
 import one.empty3.ImageIO;
 import one.empty3.libs.Image;
@@ -34,6 +46,9 @@ import one.empty3.libs.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+========
+import one.empty3.libs.Image;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/HighlightFeatures.java
 
 public class HighlightFeatures extends ProcessFile {
 
@@ -146,7 +161,11 @@ public class HighlightFeatures extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/selection/HighlightFeatures.java
         Image read = one.empty3.ImageIO.read(in);
+========
+        Image read = ImageIO.read(in);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/HighlightFeatures.java
         PixM pixM = PixM.getPixM(read.getBitmap());
         File stackItem = getStackItem(1);
         PixM original = new PixM(one.empty3.ImageIO.read(stackItem));
@@ -162,12 +181,16 @@ public class HighlightFeatures extends ProcessFile {
                         }
                 }
             }
+<<<<<<<< HEAD:feature0/selection/HighlightFeatures.java
         try {
             one.empty3.ImageIO.write(original.normalize(0., 1., 0., 1.).getImage().getBitmap(), "jpg", out, shouldOverwrite);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+========
+        ImageIO.write(original.normalize(0., 1., 0., 1.).getImage(), "jpg", out, shouldOverwrite);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/HighlightFeatures.java
 
         return true;
     }

@@ -18,10 +18,18 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
 package one.empty3.feature;
 
 import one.empty3.libs.Color;
 import one.empty3.feature.shape.Rectangle;
+========
+package one.empty3.androidFeature;
+
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Color;
+import one.empty3.androidFeature.shape.Rectangle;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Axe;
 import one.empty3.library.Circle;
@@ -33,7 +41,6 @@ import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Arrays;
@@ -241,76 +248,102 @@ public class CurveFitting extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/CurveFitting.java
         try {
             pix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
+========
+        pix = PixM.getPixM(ImageIO.read(in), maxRes);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
 
-            init();
+        init();
 
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             inPix = new PixM(pix.getImage().getBitmap());
             outPix = new PixM(pix.getImage().getBitmap());
+========
+        inPix = new PixM(pix.getImage().getBitmap());
+        outPix = new PixM(pix.getImage().getBitmap());
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
-            curveInitial = new CourbeN11();
+        curveInitial = new CourbeN11();
 
 
-            int imgX1;
-            int imgY1;
-            int imgX2;
-            int imgY2;
-            int moy = (pix.getColumns() + pix.getLines()) / 2;
-            int square;
-            if (pix.getColumns() > pix.getLines()) {
-                square = pix.getLines();
-                imgX1 = pix.getColumns() / 2 - square / 2;
-                imgY1 = 0;
-                imgX2 = pix.getColumns() / 2 + square / 2;
-                imgY2 = pix.getLines() - 1;
-            } else {
-                square = pix.getColumns();
-                imgX1 = 0;
-                imgY1 = pix.getLines() / 2 - square / 2;
-                imgX2 = pix.getColumns() - 1;
-                imgY2 = pix.getLines() / 2 + square / 2;
-            }
+        int imgX1;
+        int imgY1;
+        int imgX2;
+        int imgY2;
+        int moy = (pix.getColumns() + pix.getLines()) / 2;
+        int square;
+        if (pix.getColumns() > pix.getLines()) {
+            square = pix.getLines();
+            imgX1 = pix.getColumns() / 2 - square / 2;
+            imgY1 = 0;
+            imgX2 = pix.getColumns() / 2 + square / 2;
+            imgY2 = pix.getLines() - 1;
+        } else {
+            square = pix.getColumns();
+            imgX1 = 0;
+            imgY1 = pix.getLines() / 2 - square / 2;
+            imgX2 = pix.getColumns() - 1;
+            imgY2 = pix.getLines() / 2 + square / 2;
+        }
 
-            int N = 12;
-            for (int i = 0; i < N; i++) {
-                curveInitial.getCoefficients().getData1d().add(
-                        new Point3D(pix.getColumns() / 2
-                                + square / 2. * Math.cos(i * 2 * Math.PI / N),
-                                pix.getLines() / 2
-                                        + square / 2. * Math.sin(i * 2 * Math.PI / N),
-                                0.0));
-            }
-            Point3D center = new Point3D(pix.getColumns() / 2., pix.getLines() / 2., 0.0);
-            Circle circle = new Circle(new Axe(center.plus(Point3D.Z), center.plus(Point3D.Z.mult(-1))), square / 2.);
-            //System.out.printf("%s", curveInitial.toString());
+        int N = 12;
+        for (int i = 0; i < N; i++) {
+            curveInitial.getCoefficients().getData1d().add(
+                    new Point3D(pix.getColumns() / 2
+                            + square / 2. * Math.cos(i * 2 * Math.PI / N),
+                            pix.getLines() / 2
+                                    + square / 2. * Math.sin(i * 2 * Math.PI / N),
+                            0.0));
+        }
+        Point3D center = new Point3D(pix.getColumns() / 2., pix.getLines() / 2., 0.0);
+        Circle circle = new Circle(new Axe(center.plus(Point3D.Z), center.plus(Point3D.Z.mult(-1))), square / 2.);
+        //System.out.printf("%s", curveInitial.toString());
 
-            //curveInitial = new Circle(new Axe(Point3D.Z.plus(Point3D.n(pix.getColumns()/2,
-            //        pix.getLines()/2, 0)), Point3D.Z.mult(-1)), (imgX2-imgX1)/3.*2);
+        //curveInitial = new Circle(new Axe(Point3D.Z.plus(Point3D.n(pix.getColumns()/2,
+        //        pix.getLines()/2, 0)), Point3D.Z.mult(-1)), (imgX2-imgX1)/3.*2);
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             inPix.paintAll(new double[]{0, 0, 0});
             inPix.fillIn(curveInitial, new ColorTexture(Color.valueOf(Color.WHITE)), new ColorTexture(new Color(Color.RED)));
             outPix.paintAll(new double[]{1, 1, 1});
             outPix.fillIn(curveInitial, new ColorTexture(new Color(Color.BLACK)), new ColorTexture(new Color(Color.RED)));
+========
+        inPix.paintAll(new double[]{0, 0, 0});
+        inPix.fillIn(curveInitial, new ColorTexture(new Color(Color.WHITE)), new ColorTexture(new Color(Color.RED)));
+        outPix.paintAll(new double[]{1, 1, 1});
+        outPix.fillIn(curveInitial, new ColorTexture(new Color(Color.BLACK)), new ColorTexture(new Color(Color.RED)));
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
-            curvePoints = approx();
+        curvePoints = approx();
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             curvePoints.getClosed().setElem(false);
             //double[][] distances = distances();
             //inPix.paintAll(new double[]{0, 0, 0});
             //outPix.paintAll(new double[]{1, 1, 1});
             inPix.fillIn(curvePoints, new ColorTexture(new Color((Color.WHITE))), new ColorTexture(new Color(Color.WHITE)));
             outPix.fillIn(curvePoints, new ColorTexture(new Color(Color.BLACK)), new ColorTexture(new Color(Color.BLACK)));
+========
+        curvePoints.getClosed().setElem(false);
+        //double[][] distances = distances();
+        //inPix.paintAll(new double[]{0, 0, 0});
+        //outPix.paintAll(new double[]{1, 1, 1});
+        inPix.fillIn(curvePoints, new ColorTexture(new Color((Color.WHITE))), new ColorTexture(new Color(Color.WHITE)));
+        outPix.fillIn(curvePoints, new ColorTexture(new Color(Color.BLACK)), new ColorTexture(new Color(Color.BLACK)));
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
-            double e = E();
-            //curveResult = modify();
+        double e = E();
+        //curveResult = modify();
 
-            PixM p = new PixM(pix.getColumns(), pix.getLines());
+        PixM p = new PixM(pix.getColumns(), pix.getLines());
 
-            curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
+        curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             System.out.println("Courbe 4/5");
             p.plotCurve(curvePoints, new ColorTexture(new Color(Color.WHITE)));
             System.out.println("Courbe 5/5");
@@ -319,28 +352,42 @@ public class CurveFitting extends ProcessFile {
                 Rectangle rectangle = new Rectangle(c.getX() - 3, c.getY() - 3, 6, 6);
                 rectangle.setIncrU(0.1);
             }
+========
+        System.out.println("Courbe 4/5");
+        p.plotCurve(curvePoints, new ColorTexture(new Color(Color.WHITE)));
+        System.out.println("Courbe 5/5");
+        p.plotCurve(circle, new ColorTexture(new Color(Color.BLUE)));
+        for (Point3D c : curvePoints.getCoefficients().getData1d()) {
+            Rectangle rectangle = new Rectangle(c.getX() - 3, c.getY() - 3, 6, 6);
+            rectangle.setIncrU(0.1);
+        }
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
-            PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
+        PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
 
-            // E = Sout + Sin + Scourbe :
-            // Convergence vers ?
-            // Changer l1,l2,l3
-            // Convergence de courbe . Modification de la courbe.
-            //normalize.plotCurve(courbeParametriquePolynomialeBezier, Color.GREEN);
-            //normalize.plotCurve(curvePoints, Color.BLUE);
+        // E = Sout + Sin + Scourbe :
+        // Convergence vers ?
+        // Changer l1,l2,l3
+        // Convergence de courbe . Modification de la courbe.
+        //normalize.plotCurve(courbeParametriquePolynomialeBezier, Color.GREEN);
+        //normalize.plotCurve(curvePoints, Color.BLUE);
 
-            //normalize.fillIn(courbeParametriquePolynomialeBezier, Color.BLACK, Color.WHITE);
+        //normalize.fillIn(courbeParametriquePolynomialeBezier, Color.BLACK, Color.WHITE);
 
-            System.out.printf("curveResult  %d\n", curveResult.getCoefficients().getData1d().size());
-            System.out.printf("curveInitial %d\n", ((CourbeParametriquePolynomialeBezier) curveInitial)
-                    .getCoefficients().getData1d().size());
-            System.out.printf("curvePoints  %d\n", curvePoints.getCoefficients().getData1d().size());
-            System.out.printf("Energy       %f\n", e);
+        System.out.printf("curveResult  %d\n", curveResult.getCoefficients().getData1d().size());
+        System.out.printf("curveInitial %d\n", ((CourbeParametriquePolynomialeBezier) curveInitial)
+                .getCoefficients().getData1d().size());
+        System.out.printf("curvePoints  %d\n", curvePoints.getCoefficients().getData1d().size());
+        System.out.printf("Energy       %f\n", e);
 
 
-            System.out.println(curvePoints);
+        System.out.println(curvePoints);
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             Image image = normalize.getImage().getBitmap();
+========
+        Image image = normalize.getImage();
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 //
 //            Graphics graphics = image.getGraphics();
 //
@@ -349,6 +396,7 @@ public class CurveFitting extends ProcessFile {
 //            graphics.drawArc(image.getWidth() / 2 - square / 2, image.getHeight() / 2 - square / 2,
 //                    square, square, 0, 360);
 
+<<<<<<<< HEAD:feature0/CurveFitting.java
             String absolutePath = out.getAbsolutePath();
             absolutePath = absolutePath.substring(0, absolutePath.length() - 4);
             one.empty3.ImageIO.write(image, "jpg", new File(absolutePath + ".jpg"), shouldOverwrite);
@@ -356,13 +404,18 @@ public class CurveFitting extends ProcessFile {
                     absolutePath + "-outPixels.jpg"), shouldOverwrite);
             one.empty3.ImageIO.write(inPix.normalize(0.0, 1.0, 0., 1.).getImage().getBitmap(), "jpg", new File(
                     absolutePath + "-inPixels.jpg"), shouldOverwrite);
+========
+        String absolutePath = out.getAbsolutePath();
+        absolutePath = absolutePath.substring(0, absolutePath.length() - 4);
+        ImageIO.write(image, "jpg", new File(absolutePath + ".jpg"), shouldOverwrite);
+        ImageIO.write(outPix.normalize(0.0, 1.0, 0., 1.).getImage().getBitmap(), "jpg", new File(
+                absolutePath + "-outPixels.jpg"), shouldOverwrite);
+        ImageIO.write(inPix.normalize(0.0, 1.0, 0., 1.).getImage().getBitmap(), "jpg", new File(
+                absolutePath + "-inPixels.jpg"), shouldOverwrite);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java
 
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return true;
 
-        return false;
     }
 
     private CourbeParametriquePolynomialeBezier modify() {

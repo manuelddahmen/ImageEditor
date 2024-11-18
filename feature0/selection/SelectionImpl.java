@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,15 +18,22 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/SelectionImpl.java
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+========
+package one.empty3.androidFeature.selection;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/SelectionImpl.java
 
 import java.util.ArrayList;
-
 import java.util.List;
+
+import one.empty3.library.Lumiere;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.library.Point3D;
 
 public class SelectionImpl extends Selection {
     public List<Point3D> select(List<Point3D> preSelection, PixM pix, int rgb, double threshold) {

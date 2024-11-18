@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/Paste.java
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
@@ -27,10 +28,24 @@ import one.empty3.library.core.nurbs.ParametricCurve;
 
 import one.empty3.ImageIO;
 import one.empty3.libs.Image;
+========
+package one.empty3.androidFeature.selection;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/Paste.java
 
 import java.io.File;
 import java.util.List;
 import java.util.function.Consumer;
+
+import one.empty3.ImageIO;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.io.ProcessFile;
+import one.empty3.library.ITexture;
+import one.empty3.library.Lumiere;
+import one.empty3.library.Point3D;
+import one.empty3.library.Representable;
+import one.empty3.library.Scene;
+import one.empty3.library.core.nurbs.ParametricCurve;
+import one.empty3.libs.Image;
 
 public class Paste extends ProcessFile {
 
@@ -93,7 +108,11 @@ public class Paste extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/selection/Paste.java
         Image read = one.empty3.ImageIO.read(in);
+========
+        Image read = ImageIO.read(in);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/Paste.java
         PixM pixM = PixM.getPixM(read, maxRes);
         return true;
     }

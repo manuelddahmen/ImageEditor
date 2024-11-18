@@ -18,15 +18,20 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/opsNto1/ComposeNto1.java
 package one.empty3.feature.opsNto1;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.opsNto1;
+
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/opsNto1/ComposeNto1.java
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ComposeNto1 extends ProcessFile {
     public boolean addEntry(Composer composer, ProcessFile... processFiles) {
@@ -35,6 +40,7 @@ public class ComposeNto1 extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/opsNto1/ComposeNto1.java
         try {
             boolean success = false;
             PixM inpix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
@@ -46,6 +52,14 @@ public class ComposeNto1 extends ProcessFile {
             e.printStackTrace();
         }
         return false;
+========
+        boolean success = false;
+        PixM inpix = PixM.getPixM(ImageIO.read(in), maxRes);
+        PixM outpix = PixM.getPixM(ImageIO.read(in), maxRes);
+        //success = processMem(inpix, outpix);
+        ImageIO.write(outpix.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        return success;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/opsNto1/ComposeNto1.java
     }
 
 }

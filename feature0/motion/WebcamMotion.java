@@ -18,14 +18,25 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/motion/WebcamMotion.java
 package one.empty3.feature.motion;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.motion;
+
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Image;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/WebcamMotion.java
 
 public class WebcamMotion extends Motion {
 
     @Override
+<<<<<<<< HEAD:feature0/motion/WebcamMotion.java
     public one.empty3.libs.Color process(PixM frame1, PixM frame2) {
+========
+    public Image process(PixM frame1, PixM frame2) {
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/WebcamMotion.java
         return null;
     }
 }

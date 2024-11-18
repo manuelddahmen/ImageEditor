@@ -18,16 +18,21 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/histograms/Histogram.java
 package one.empty3.feature.histograms;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.histograms;
+
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Histogram.java
 import one.empty3.io.ProcessFile;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 /*
@@ -126,6 +131,7 @@ public class Histogram extends ProcessFile {
         }
 
 
+<<<<<<<< HEAD:feature0/histograms/Histogram.java
         try {
             one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
             return true;
@@ -134,6 +140,10 @@ public class Histogram extends ProcessFile {
         }
 
         return false;
+========
+        ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        return true;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Histogram.java
 
     }
 

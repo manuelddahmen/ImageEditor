@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,15 +18,30 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/PasteBlank.java
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.selection;
+
+
+import android.graphics.Color;
+
+import java.io.File;
+import java.util.Arrays;
+
+import one.empty3.ImageIO;
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteBlank.java
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.libs.Image;
 
+<<<<<<<< HEAD:feature0/selection/PasteBlank.java
 import one.empty3.ImageIO;
 import one.empty3.libs.*;
 import one.empty3.libs.Image;
@@ -34,6 +49,8 @@ import one.empty3.libs.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteBlank.java
 
 public class PasteBlank extends ProcessFile {
 
@@ -125,6 +142,7 @@ public class PasteBlank extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/selection/PasteBlank.java
         try {
             if (!in.getAbsolutePath().endsWith("jpg"))
                 return false;
@@ -135,8 +153,15 @@ public class PasteBlank extends ProcessFile {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
+========
+        if (!in.getAbsolutePath().endsWith("jpg"))
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteBlank.java
             return false;
-        }
+        Image read = ImageIO.read(in);
+        PixM pixM = PixM.getPixM(read, maxRes);
+        PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
+        ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+        return true;
     }
 
 }

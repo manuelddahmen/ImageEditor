@@ -55,7 +55,11 @@
  Vous êtes libre de :
 
  */
+<<<<<<<< HEAD:feature0/snakes/Matrix.java
 package one.empty3.feature.snakes;
+========
+package one.empty3.androidFeature.snakes;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/snakes/Matrix.java
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;

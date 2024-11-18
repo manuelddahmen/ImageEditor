@@ -18,16 +18,21 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/histograms/Histogram1.java
 package one.empty3.feature.histograms;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.histograms;
+
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Histogram1.java
 import one.empty3.io.ProcessFile;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
 
 import java.io.File;
-import java.io.IOException;
 
 /*
  * radial density of region (x, y, r)
@@ -176,6 +181,7 @@ public class Histogram1 extends ProcessFile {
 // Colorier en fonction des pixels voisins
 //        Circle c2 = getLevel(cc, inP, cc.r/2);
 
+<<<<<<<< HEAD:feature0/histograms/Histogram1.java
         try {
             one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
             return true;
@@ -184,6 +190,10 @@ public class Histogram1 extends ProcessFile {
         }
 
         return false;
+========
+        ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        return true;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Histogram1.java
 
     }
 

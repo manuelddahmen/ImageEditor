@@ -18,12 +18,17 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/pio/PI.java
 package one.empty3.feature.pio;
 
 import one.empty3.feature.PixM;
+========
+package one.empty3.androidFeature.pio;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/pio/PI.java
 
 import java.io.File;
 
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 /*

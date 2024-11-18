@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour4colors.java
 package one.empty3.feature.histograms;
+========
+package one.empty3.androidFeature.histograms;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour4colors.java
 /*
  * Copyright (c) 2024.
  *
@@ -18,16 +22,21 @@ package one.empty3.feature.histograms;
  *
  *
  */
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
 
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour4colors.java
 import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour4colors.java
 import one.empty3.io.ProcessFile;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
-public class Hist4Contour4colors extends ProcessFile{
+public class Hist4Contour4colors extends ProcessFile {
     private int kMax = 3;
     private double fractMax = 0.05;//0.05;
     @NonNull
@@ -38,7 +47,7 @@ public class Hist4Contour4colors extends ProcessFile{
         public double i = 0.0;
         public Point3D maxColor = Point3D.O0;
         public double count = 0.0;
-        public Point3D mincolor = Point3D.n(1,1,1);
+        public Point3D mincolor = Point3D.n(1, 1, 1);
 
         public Circle(double x, double y, double r) {
             this.x = x;
@@ -140,7 +149,7 @@ public class Hist4Contour4colors extends ProcessFile{
                     }
                 }
                 Point3D n = outP.getP(i, j);
-                if(!n.equals(Point3D.O0)) {
+                if (!n.equals(Point3D.O0)) {
                     for (int l = 0; l < 3; l++) {
                         if (maxP.get(l) < n.get(l)) {
                             maxP.set(l, n.get(l));
@@ -154,7 +163,7 @@ public class Hist4Contour4colors extends ProcessFile{
                 for (int l = 0; l < 3; l++) {
                     inP.setCompNo(l);
                     outP.setCompNo(l);
-                    outP.set(i, j, outP.get(i, j) / maxP.get(l)*inP.get(i,j));
+                    outP.set(i, j, outP.get(i, j) / maxP.get(l) * inP.get(i, j));
                 }
             }
         }
@@ -162,7 +171,11 @@ public class Hist4Contour4colors extends ProcessFile{
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour4colors.java
             one.empty3.ImageIO.write(outP.normalize(0,1,0,1).getBitmap(), "jpg", out);
+========
+            one.empty3.ImageIO.write(outP.normalize(0, 1, 0, 1).getBitmap().getBitmap(), "jpg", out);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour4colors.java
             //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             return true;
 

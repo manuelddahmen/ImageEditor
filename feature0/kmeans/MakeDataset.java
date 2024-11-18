@@ -18,16 +18,26 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/kmeans/MakeDataset.java
 package one.empty3.feature.kmeans;
+========
+package one.empty3.androidFeature.kmeans;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/MakeDataset.java
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+<<<<<<<< HEAD:feature0/kmeans/MakeDataset.java
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
+========
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Image;
+import one.empty3.ImageIO;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/MakeDataset.java
 
 /*
  line : l, c, r, g, b
@@ -36,7 +46,11 @@ public class MakeDataset {
     public MakeDataset(File image,
                        File outputCsv, int res) {
         try {
+<<<<<<<< HEAD:feature0/kmeans/MakeDataset.java
             Image img = one.empty3.ImageIO.read(image);
+========
+            Image img = ImageIO.read(image);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/MakeDataset.java
             PixM pix;
             if (res > 0)
 
@@ -44,7 +58,7 @@ public class MakeDataset {
             else
                 pix = new PixM(img);
 
-            System.out.println("size out : " + pix.getColumns()+", "+pix.getLines());
+            System.out.println("size out : " + pix.getColumns() + ", " + pix.getLines());
 
             int i = 0;
 
@@ -61,7 +75,7 @@ public class MakeDataset {
                     pix.setCompNo(2);
                     double b = pix.get(c, l);
 
-                     pw.println("" + c + " " + l + " " +
+                    pw.println("" + c + " " + l + " " +
                             r + " " + g + " " + b);
                     //}
                     i++;

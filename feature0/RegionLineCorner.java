@@ -18,17 +18,21 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/RegionLineCorner.java
 package one.empty3.feature;
+========
+package one.empty3.androidFeature;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/RegionLineCorner.java
 
 import android.graphics.Color;
 
+import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -41,7 +45,7 @@ import one.empty3.library.core.lighting.Colors;
  */
 public class RegionLineCorner extends ProcessFile {
     public final int numLevels = 5;
-    private PixM m = null;
+    private one.empty3.featureAndroid.PixM m = null;
     private double[] max;
     private double[] min;
 
@@ -80,7 +84,7 @@ public class RegionLineCorner extends ProcessFile {
     }
 
     //private final int[][][] levels;
-    public void setM(PixM m2) {
+    public void setM(one.empty3.featureAndroid.PixM m2) {
         this.m = m2;
     }
 
@@ -135,8 +139,8 @@ public class RegionLineCorner extends ProcessFile {
         return 0.0;
     }
 
-    public PixM reconstruct(List<List<Circle>> circle) {
-        PixM rec = m.copy();
+    public one.empty3.featureAndroid.PixM reconstruct(List<List<Circle>> circle) {
+        one.empty3.featureAndroid.PixM rec = m.copy();
         return rec;
     }
 
@@ -268,17 +272,25 @@ public class RegionLineCorner extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/RegionLineCorner.java
         try {
             File directory = new File(out.getParent());
             PixM imageCoutours = PixM.getPixM(one.empty3.ImageIO.read(in), 500.0);
             this.m = imageCoutours;
             Image file = m.getImage().getBitmap();
+========
+        File directory = new File(out.getParent());
+        one.empty3.featureAndroid.PixM imageCoutours = PixM.getPixM(ImageIO.read(in), 500.0);
+        this.m = imageCoutours;
+        Image file = m.getImage();
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/RegionLineCorner.java
 
-            int levels = 10;
-            double min = 0.0;
-            double radiusIncr = 2;
-            for (int i = 0; i < levels; i++) {
+        int levels = 10;
+        double min = 0.0;
+        double radiusIncr = 2;
+        for (int i = 0; i < levels; i++) {
 
+<<<<<<<< HEAD:feature0/RegionLineCorner.java
                 Image img = file;
                 Image img2 = new one.empty3.libs.Color(img.getWidth(), img.getHeight(), one.empty3.libs.Color.TYPE_INT_RGB);
                 Image img3 = new one.empty3.libs.Color(img.getWidth(), img.getHeight(), one.empty3.libs.Color.TYPE_INT_RGB);
@@ -322,10 +334,30 @@ public class RegionLineCorner extends ProcessFile {
                 for (List<Circle> lc : circles) {
                     Color color = Colors.random();
                     for (Circle c : lc) {
+========
+            Image img = file;
+            Image img2 = new Image(img.getWidth(), img.getHeight());
+            Image img3 = new Image(img.getWidth(), img.getHeight());
+            Image img4 = new Image(img.getWidth(), img.getHeight());
 
-                        img4.setRGB((int) (c.x), (int) (c.y), color.toArgb());
-                    }
+            int finalI = i;
+            List<Circle> pointsOfInterest = getPointsOfInterest(levels);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/RegionLineCorner.java
+
+        /*
+
+        pointsOfInterest.stream().forEach(circle -> {
+                if (circle.i >= min && circle.r>0) {
+                    Graphics graphics = img.getGraphics();
+                    graphics.setColor(Color.WHITE);
+                    graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
+                    graphics = img2.getGraphics();
+                    Color color = new Color((float) circle.i, 0f, (float) (circle.i / circle.r));
+                    graphics.setColor(color);
+                    graphics.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
+                    img3.setRGB((int) (circle.x), (int) (circle.y), color.getRGB());
                 }
+<<<<<<<< HEAD:feature0/RegionLineCorner.java
                 File fileToWrite = new File(directory.getAbsolutePath()
                         + "level" + finalI + ".jpg");
                 File fileToWrite2 = new File(directory.getAbsolutePath()
@@ -340,11 +372,49 @@ public class RegionLineCorner extends ProcessFile {
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite3);
 */
             }
+========
+            });*/
+            // grands;cercles = grandes iles les separer
+            // verifier les distances et constantes i
+            // petits cercles successifs entoures
+            // de grands ou plus grands cercles =
+            // coins, corners et possibles features.
+           /* pointsOfInterest.sort(new Comparator<Circle>() {
+                @Override
+                public int compare(Circle o1, Circle o2) {
+                    double v = o2.r - o1.r;
+                    if(v<0)
+                         return -1;
+                    if(v>0)
+                         return 1;
+                    return 0;
+                }
+            });*/
+            // grouper les points par similarites et distances
+            List<List<Circle>> circles = group(pointsOfInterest);
+            for (List<Circle> lc : circles) {
+                Color color = Colors.random();
+                for (Circle c : lc) {
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/RegionLineCorner.java
 
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            return false;
+                    img4.setRgb((int) (c.x), (int) (c.y), color.toArgb());
+                }
+            }
+            File fileToWrite = new File(directory.getAbsolutePath()
+                    + "level" + finalI + ".jpg");
+            File fileToWrite2 = new File(directory.getAbsolutePath()
+                    + "level" + finalI + "_NEW.jpg");
+            File fileToWrite3 = new File(directory.getAbsolutePath()
+                    + "level" + finalI + "_NEW_RGB.jpg");
+            //fileToWrite.mkdirs();
+            ImageIO.write(img4, "JPEG", out, shouldOverwrite);
+            /*
+            one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
+            one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);
+            one.empty3.ImageIO.write(img, "JPEG", fileToWrite3);
+*/
         }
+
         return true;
     }
 }

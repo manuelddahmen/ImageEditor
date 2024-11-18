@@ -18,10 +18,16 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/motion/Motion.java
 package one.empty3.feature.motion;
 
 import one.empty3.feature.PixM;
 
+========
+package one.empty3.androidFeature.motion;
+
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/Motion.java
 import one.empty3.libs.Image;
 
 import java.util.ArrayList;
@@ -43,7 +49,11 @@ public abstract class Motion /*extends ProcessFile */ {
         return frames.size() > BUFFER_MAX_FRAMES;
     }
 
+<<<<<<<< HEAD:feature0/motion/Motion.java
     public one.empty3.libs.Color processFrame() {
+========
+    public Image processFrame() {
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/Motion.java
         PixM frame1 = null;
         PixM frame2 = null;
         if (frames.size() == 0 || frames.get(0) == null)
@@ -64,6 +74,10 @@ public abstract class Motion /*extends ProcessFile */ {
         return process(frame1, frame2);
     }
 
+<<<<<<<< HEAD:feature0/motion/Motion.java
     public abstract one.empty3.libs.Color process(PixM frame1, PixM frame2);
+========
+    public abstract Image process(PixM frame1, PixM frame2);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/Motion.java
 
 }

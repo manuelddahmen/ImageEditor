@@ -18,30 +18,38 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/DericheFilterProcess.java
 package one.empty3.feature;
+========
+package one.empty3.androidFeature;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/DericheFilterProcess.java
 
+import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
 
 import java.io.File;
-import java.io.IOException;
 
 public class DericheFilterProcess extends ProcessFile {
 
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/DericheFilterProcess.java
         try {
             PixM pixM = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
 
             one.empty3.ImageIO.write(pixM.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+========
+        one.empty3.featureAndroid.PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageIO.write(pixM.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/DericheFilterProcess.java
+
+
         return false;
     }
 }

@@ -18,7 +18,11 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/opsNto1/Composer.java
 package one.empty3.feature.opsNto1;
+========
+package one.empty3.androidFeature.opsNto1;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/opsNto1/Composer.java
 
 public class Composer {
 

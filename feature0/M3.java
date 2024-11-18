@@ -18,17 +18,27 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/M3.java
 package one.empty3.feature;
+========
+package one.empty3.feature.app.pro;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/feature/app/pro/M3.java
 
 import android.util.Log;
 
 import java.util.PrimitiveIterator;
 import java.util.Random;
 
+<<<<<<<< HEAD:feature0/M3.java
+========
+import matrix.MBitmap;
+import one.empty3.androidFeature.FilterPixM;
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/feature/app/pro/M3.java
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 
-public class M3 {
+public class M3 extends one.empty3.feature.M3 {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = r.next();
     private double[] x;
@@ -37,7 +47,11 @@ public class M3 {
     protected int columnsIn;
     protected int linesIn;
     protected int compNo;
+<<<<<<<< HEAD:feature0/M3.java
     protected one.empty3.libs.Color image;
+========
+    protected Image image;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/feature/app/pro/M3.java
     private final int compCount = 3;
     private int currentX;
     private int currentY;
@@ -47,11 +61,7 @@ public class M3 {
     int incrOK = 0;
 
     public M3(int columns, int lines, int columnsIn, int linesIn) {
-        this.lines = lines;
-        this.columns = columns;
-        this.linesIn = linesIn;
-        this.columnsIn = columnsIn;
-        init();
+        super(columns, lines, columnsIn, linesIn);
     }
 
     public M3(M3 original) {
@@ -117,7 +127,7 @@ public class M3 {
             x = new double[columns * lines * columnsIn * linesIn * compCount];
         } catch (OutOfMemoryError ex) {
             Log.e(MBitmap.class.toString(), "OutOfMemoryException : M3.init("
-                    +columns+","+lines+")"+ex.getMessage(), ex);
+                    + columns + "," + lines + ")" + ex.getMessage(), ex);
             ex.printStackTrace();
             columns = 1200;
             lines = 120;
@@ -125,7 +135,7 @@ public class M3 {
                 x = new double[columns * lines * columnsIn * linesIn * compCount];
             } catch (OutOfMemoryError ex1) {
                 Log.e(MBitmap.class.toString(), "OutOfMemoryException : M3.init("
-                        +columns+","+lines+")"+ex.getMessage(), ex);
+                        + columns + "," + lines + ")" + ex.getMessage(), ex);
                 ex.printStackTrace();
                 try {
                     columns = 200;
@@ -133,7 +143,7 @@ public class M3 {
                     x = new double[columns * lines * columnsIn * linesIn * compCount];
                 } catch (OutOfMemoryError ex2) {
                     Log.e(MBitmap.class.toString(), "FAILED. OutOfMemoryException : M3.init("
-                            +columns+","+lines+")"+ex.getMessage(), ex);
+                            + columns + "," + lines + ")" + ex.getMessage(), ex);
                     ex.printStackTrace();
                 }
             }
@@ -146,7 +156,7 @@ public class M3 {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
-                int rgb = image.getRGB((int) (1.0 * i / columns * image.getWidth()), (int) (1.0 * j / lines * image.getHeight()));
+                int rgb = image.getRgb((int) (1.0 * i / columns * image.getWidth()), (int) (1.0 * j / lines * image.getHeight()));
                 colorComponents = Color.getColorComponents(Color.valueOf(rgb));
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
@@ -167,7 +177,7 @@ public class M3 {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
-                int rgb = image.getRGB(i, j);
+                int rgb = image.getBitmap().getPixel(i, j);
                 colorComponents = Color.getColorComponents(Color.valueOf(rgb));
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {

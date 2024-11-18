@@ -18,12 +18,20 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/IdentNullProcess.java
 package one.empty3.feature;
+========
+package one.empty3.androidFeature;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
 
+import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
 
+<<<<<<<< HEAD:feature0/IdentNullProcess.java
 import one.empty3.ImageIO;
 
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
 import java.io.File;
 import java.util.Objects;
 
@@ -31,14 +39,24 @@ public class IdentNullProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/IdentNullProcess.java
         PixM pixM = null;
         if(maxRes>0) {
             pixM = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+========
+        one.empty3.featureAndroid.PixM pixM = null;
+        if (maxRes > 0) {
+            pixM = one.empty3.featureAndroid.PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
         } else {
             pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
         }
         assert pixM != null;
+<<<<<<<< HEAD:feature0/IdentNullProcess.java
         one.empty3.ImageIO.write(pixM.getBitmap(), "jpg", out);
+========
+        one.empty3.ImageIO.write(pixM.getBitmap().getBitmap(), "jpg", out);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
         addSource(out);
         return true;
 

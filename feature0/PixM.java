@@ -18,7 +18,11 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/PixM.java
 package one.empty3.feature;
+========
+package one.empty3.featureAndroid;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/featureAndroid/PixM.java
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -32,17 +36,23 @@ import org.jetbrains.annotations.NotNull;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
+<<<<<<<< HEAD:feature0/PixM.java
 import one.empty3.libs.Image;
+========
+import one.empty3.androidFeature.FilterPixM;
+import matrix.MBitmap;
+import one.empty3.feature.V;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/featureAndroid/PixM.java
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.Serialisable;
 import one.empty3.library.core.nurbs.ParametricCurve;
+import one.empty3.libs.Image;
 
-public class PixM extends MBitmap implements Parcelable, Serializable, Serialisable {
+public class PixM extends one.empty3.feature.PixM implements Serialisable, Parcelable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
@@ -56,7 +66,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     public PixM(Bitmap image) {
-        super(image);
+        super(new Image(image));
         /*
         this(image.getWidth(), image.getHeight());
         double [] colorComponents = new double[4];
@@ -73,7 +83,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     public PixM(Bitmap image, boolean isBitmap) {
-        super(image);
+        super(new Image(image));
         /*double[] colorComponents = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
@@ -96,8 +106,13 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
     public PixM(@NotNull Image read) {
         this(read.getBitmap());
+<<<<<<<< HEAD:feature0/PixM.java
         if(read.getBitmap()==null)
             throw new NullPointerException("public PixM(@NotNull Image read) || bitmap is null");
+========
+        if (read.getBitmap() == null)
+            throw new NullPointerException("public PixM(@NotNull BufferedImage read) || bitmap is null");
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/featureAndroid/PixM.java
     }
 
     protected PixM(Parcel in) {
@@ -114,7 +129,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         MAX_DISTANCE_ITERATIONS = in.readInt();
     }
 
-    public static final Creator<PixM> CREATOR = new Creator<PixM>() {
+    public static final Parcelable.Creator<PixM> CREATOR = new Parcelable.Creator<PixM>() {
         @Override
         public PixM createFromParcel(Parcel in) {
             return new PixM(in);
@@ -174,7 +189,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                 int rgb = image.getPixel(
                         (int) (1.0 * i / columns2 * image.getWidth()), (int) (1.0 * j / lines2 * image.getHeight()));
                 double[] colorComponents = new double[3];
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < pixM.getCompCount(); com++) {
                     pixM.setCompNo(com);
                     pixM.set(i, j, colorComponents[com]);
@@ -248,8 +263,8 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         return originValue;
     }
 
-    public Bitmap getBitmap() {
-        if(columns>0 && lines>0) {
+    public Image getBitmap() {
+        if (columns > 0 && lines > 0) {
             Bitmap image = Bitmap.createBitmap(columns,
                     lines, Bitmap.Config.ARGB_8888);
 
@@ -264,14 +279,18 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                     image.setPixel(i, j, Lumiere.getInt(rgba));
                 }
             }
-            return image;
+            return new Image(image);
         }
-        return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        return new Image(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888));
     }
 
 
     public Image getImage() {
+<<<<<<<< HEAD:feature0/PixM.java
         return new Image(getBitmap());
+========
+        return getBitmap();
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/featureAndroid/PixM.java
     }
 /*
 
@@ -571,11 +590,11 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                 }
     }
 
-    public boolean equalsX(double [] x2) {
-        if(x.length!=x2.length)
+    public boolean equalsX(double[] x2) {
+        if (getX().length != x2.length)
             return false;
-        for(int i=0; i<x.length; i++) {
-            if(!(x[i]-DELTA(x[i])<=x2[i]&&x[i]+DELTA(x[i])>=x2[i]))
+        for (int i = 0; i < x.length; i++) {
+            if (!(x[i] - DELTA(x[i]) <= x2[i] && x[i] + DELTA(x[i]) >= x2[i]))
                 return false;
 
         }
@@ -592,7 +611,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         if (!(o instanceof PixM)) return false;
         MBitmap mBitmap = (MBitmap) o;
         return getCompCount() == mBitmap.getCompCount() && getColumns() == mBitmap.getColumns() && getLines() == mBitmap.getLines()
-                && getCompNo() == mBitmap.getCompNo() && equalsX(mBitmap.x) ;
+                && getCompNo() == mBitmap.getCompNo() && equalsX(mBitmap.x);
     }
 
     public double luminance(int x, int y) {
@@ -644,23 +663,23 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         double[] rgba = new double[getCompCount()];
         double t;
         for (t = curve.getStartU(); t < curve.getEndU(); t += curve.getIncrU().getElem()) {
-            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+            rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
             double t1;
-            for (t1 = t; t1 < t+curve.getIncrU().getElem(); t1+= 0.001) {
+            for (t1 = t; t1 < t + curve.getIncrU().getElem(); t1 += 0.001) {
                 Point3D p = curve.calculerPoint3D(t1);
                 for (int c = 0; c < 3; c++) {
                     setCompNo(c);
                     set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
                 }
             }
-            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
-            Point3D p = curve.calculerPoint3D(t+curve.getIncrU().getElem());
+            rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
+            Point3D p = curve.calculerPoint3D(t + curve.getIncrU().getElem());
             for (int c = 0; c < 3; c++) {
                 setCompNo(c);
                 set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
             }
         }
-        Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+        rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
         Point3D p = curve.calculerPoint3D(curve.getEndU());
         for (int c = 0; c < 3; c++) {
             setCompNo(c);
@@ -674,7 +693,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         double[] rgba = new double[getCompCount()];
         for (double t = 0; t < 1.0; t += 0.001) {
             for (int c = 0; c < 3; c++) {
-                Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+                rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
                 Point3D p = curve.calculerPoint3D(t);
                 setCompNo(c);
                 set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
@@ -744,38 +763,38 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
     }
 
-/*
-    public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
-        if (w > 0 && h > 0)
-            for (int i = 0; i < copy.getColumns(); i++) {
-                for (int j = 0; j < copy.getLines(); j++) {
-                    int xx = (int) (x + ((1.0 * i) / copy.getColumns()) * w);
-                    int yy = (int) (y + ((1.0 * j) / copy.getLines()) * h);
+    /*
+        public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
+            if (w > 0 && h > 0)
+                for (int i = 0; i < copy.getColumns(); i++) {
+                    for (int j = 0; j < copy.getLines(); j++) {
+                        int xx = (int) (x + ((1.0 * i) / copy.getColumns()) * w);
+                        int yy = (int) (y + ((1.0 * j) / copy.getLines()) * h);
 
-                    double dx = (1.0 / copy.getColumns()) * w;
-                    double dy = (1.0 / copy.getLines()) * h;
+                        double dx = (1.0 / copy.getColumns()) * w;
+                        double dy = (1.0 / copy.getLines()) * h;
 
-                    if(dx>=0 && dy>=0) {
-                        for (double i2 = xx; i2 <= xx + dx; i2++) {
-                            for (double j2 = yy; j2 <= yy + dy; j2++) {
-                                for (int c = 0; c < 3; c++) {
-                                    copy.setCompNo(c);
-                                    setCompNo(c);
-                                    set((int)i2, (int)j2, copy.get(i, j));
+                        if(dx>=0 && dy>=0) {
+                            for (double i2 = xx; i2 <= xx + dx; i2++) {
+                                for (double j2 = yy; j2 <= yy + dy; j2++) {
+                                    for (int c = 0; c < 3; c++) {
+                                        copy.setCompNo(c);
+                                        setCompNo(c);
+                                        set((int)i2, (int)j2, copy.get(i, j));
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-    }
-    */
+        }
+        */
     public void pasteSubImage(final PixM copy, final int x, final int y, final int w, final int h) {
         if (w > 0 && h > 0)
             for (int i = x; i < x + w; i++) {
                 for (int j = y; j < y + h; j++) {
-                    int xx = (int)((1.0 * (i - x) / w) * copy.getColumns());
-                    int yy = (int)((1.0 * (j - y) / h) * copy.getLines());
+                    int xx = (int) ((1.0 * (i - x) / w) * copy.getColumns());
+                    int yy = (int) ((1.0 * (j - y) / h) * copy.getLines());
 
                     for (int c = 0; c < 3; c++) {
                         copy.setCompNo(c);
@@ -813,12 +832,10 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         return p2;
     }
 
-    @Override
     public int describeContents() {
         return 0;
     }
 
-    @Override
     public void writeToParcel(@NonNull Parcel parcel, int k) {
         parcel.writeInt(getColumns());
         parcel.writeInt(getLines());
@@ -839,7 +856,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         Point3D p0 = new Point3D(doublesOld);
         for (int i = 0; i < getColumns(); i++) {
             for (int j = 0; j < getLines(); j++) {
-                if(getP(i, j).moins(p0).norme()<d) {
+                if (getP(i, j).moins(p0).norme() < d) {
                     setValues(i, j, doublesNew);
                 }
             }
@@ -860,25 +877,26 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     }
 
     private double[] tmpColor2 = new double[3];
+
     public void paintIfNot(int x, int y, int width, int height, @NotNull Bitmap bitmapToDraw, int colorPaint, PixM filledImage) {
         double[] tmpColor3 = new double[3];
         double[] pixelsFilterValue = new double[3];
-        Lumiere.getDoubles(colorPaint, tmpColor3);
+        tmpColor3 = Lumiere.getDoubles(colorPaint);
         for (int i = x; i < width; i++) {
             for (int j = y; j < height; j++) {
-                double percentXtarget = 1.0*(i-x)/width;
-                double percentYtarget = 1.0*(j-y)/height;
-                double percentXsource = 1.0*(i-x)/width;
-                double percentYsource = 1.0*(j-y)/height;
+                double percentXtarget = 1.0 * (i - x) / width;
+                double percentYtarget = 1.0 * (j - y) / height;
+                double percentXsource = 1.0 * (i - x) / width;
+                double percentYsource = 1.0 * (j - y) / height;
                 assert bitmapToDraw != null;
                 double xOrig = Math.min(percentXtarget * bitmapToDraw.getWidth(), bitmapToDraw.getWidth() - 1);
                 double yOrig = Math.min(percentYtarget * bitmapToDraw.getHeight(), bitmapToDraw.getHeight() - 1);
                 double xFilter = Math.min(percentXtarget * filledImage.getColumns(), filledImage.getColumns() - 1);
                 double yFilter = Math.min(percentYtarget * filledImage.getLines(), filledImage.getLines() - 1);
                 int pixel = bitmapToDraw.getPixel((int) xOrig, (int) yOrig);
-                double [] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
-                Lumiere.getDoubles(pixel , tmpColor2);
-                if (!equalsArrays(pixelsFilterValue, pixelIfNot, 0.01) ) {
+                double[] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
+                tmpColor2 = Lumiere.getDoubles(pixel);
+                if (!equalsArrays(pixelsFilterValue, pixelIfNot, 0.01)) {
                     setValues(i, j, tmpColor2);
                 }
             }
@@ -907,9 +925,9 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
                             resized.setValues((int) i, (int) j, getValues((int) iOrig, (int) jOrig));
                         }
-                        jOrig += 1/incrY;
+                        jOrig += 1 / incrY;
                     }
-                    iOrig += 1/incrX;
+                    iOrig += 1 / incrX;
                 }
             }
         }
@@ -922,7 +940,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
             int w = in.readInt();
             int h = in.readInt();
             int c = in.readInt();
-            assert (w>0 && h>0);
+            assert (w > 0 && h > 0);
             PixM pixM = new PixM(w, h);
             for (int i = 0; i < w; i++) {
                 for (int j = 0; j < h; j++) {
@@ -941,7 +959,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
     @Override
     public int encode(DataOutputStream out) {
-        assert (columns>0 && lines>0);
+        assert (columns > 0 && lines > 0);
         try {
             out.writeInt(columns);
             out.writeInt(lines);

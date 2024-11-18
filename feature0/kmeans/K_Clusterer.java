@@ -18,7 +18,11 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
 package one.empty3.feature.kmeans;
+========
+package one.empty3.androidFeature.kmeans;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 /*
  * Programmed by Shephalika Shekhar
  * Class for Kmeans Clustering implemetation
@@ -36,7 +40,11 @@ import java.util.Map;
 import java.util.Objects;
 
 import one.empty3.ImageIO;
+<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
 import one.empty3.feature.PixM;
+========
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {
@@ -204,16 +212,16 @@ public class K_Clusterer /*extends ReadDataset*/ {
             });
 
 
-            for(int i2=0; i2<K; i2++) {
+            for (int i2 = 0; i2 < K; i2++) {
                 for (int j = 2; j < 5; j++) {
                     realValues[i2][j] /= realValues[i2][5];
                 }
             }
             centroids.forEach((i, doubles) -> {
                 clustersPrint.forEach((d1, i2) -> {
-                    if(random) {
+                    if (random) {
                         pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                        colors[i2].red(), colors[i2].green(), colors[i2].blue());
+                                colors[i2].red(), colors[i2].green(), colors[i2].blue());
                     } else {
                         pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
                                 realValues[i2][2], realValues[i2][3], realValues[i2][4]);
@@ -221,7 +229,11 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 });
             });
 
+<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
             one.empty3.ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out);//.getImage().getBitmap()
+========
+            ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out);//.getImage().getBitmap()
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 
         } catch (Exception ex1) {
             System.err.println(ex1.getMessage());

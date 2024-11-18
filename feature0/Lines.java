@@ -18,16 +18,21 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/Lines.java
 package one.empty3.feature;
+========
+package one.empty3.androidFeature;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Lines.java
 
 import one.empty3.io.ProcessFile;
+import one.empty3.library.Point;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
 import one.empty3.libs.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -147,71 +152,76 @@ public class Lines extends ProcessFile {
         listTmpX = new ArrayList<Double>();
         listTmpY = new ArrayList<Double>();
         listTmpZ = new ArrayList<Double>();
+<<<<<<<< HEAD:feature0/Lines.java
         try {
             pixM = new PixM(one.empty3.ImageIO.read(in));
             PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+========
+        pixM = new PixM(ImageIO.read(in));
+        PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Lines.java
 
-            p = new int[pixM.getColumns()][pixM.getLines()];
-            mapPoints = new Point3D[pixM.getColumns()][pixM.getLines()];
+        p = new int[pixM.getColumns()][pixM.getLines()];
+        mapPoints = new Point3D[pixM.getColumns()][pixM.getLines()];
 
-            for (int x = 0; x < pixM.getColumns(); x++)
-                for (int y = 0; y < pixM.getLines(); y++)
-                    p[x][y] = 0;
+        for (int x = 0; x < pixM.getColumns(); x++)
+            for (int y = 0; y < pixM.getLines(); y++)
+                p[x][y] = 0;
 
-            for (int i = 0; i < pixM.getColumns(); i++) {
-                for (int j = 0; j < pixM.getLines(); j++) {
-                    double valueMin = 0.4;
+        for (int i = 0; i < pixM.getColumns(); i++) {
+            for (int j = 0; j < pixM.getLines(); j++) {
+                double valueMin = 0.4;
 
-                    double valueDiff = 0.2;
+                double valueDiff = 0.2;
 
 
-                    int x = i;
-                    int y = j;
+                int x = i;
+                int y = j;
 
-                    double valueAvg = pixM.luminance(x, y);
+                double valueAvg = pixM.luminance(x, y);
 
-                    while (valueAvg >= valueMin) {
+                while (valueAvg >= valueMin) {
 
-                        neighborhood((int) (double) x, (int) (double) y, valueAvg, valueDiff, valueMin);
-                        x = (int) px;
-                        y = (int) py;
+                    neighborhood((int) (double) x, (int) (double) y, valueAvg, valueDiff, valueMin);
+                    x = (int) px;
+                    y = (int) py;
 
-                        Point3D p0 = null;
-                        if (listTmpCurve.size() > 0) {
-                            getTmp(0);
-                            if (!(x >= 0 && x < pixM.getColumns() && y >= 0 && y < pixM.getLines()) && p[x][y] == 0) {
+                    Point3D p0 = null;
+                    if (listTmpCurve.size() > 0) {
+                        getTmp(0);
+                        if (!(x >= 0 && x < pixM.getColumns() && y >= 0 && y < pixM.getLines()) && p[x][y] == 0) {
 
-                                p0 = new Point3D(px, px, pz);
-                                listTmpCurve.add(p0);
-                                lists.get(0).add(p0);
-                            }
-                        } else
-                            break;
+                            p0 = new Point3D(px, px, pz);
+                            listTmpCurve.add(p0);
+                            lists.get(0).add(p0);
+                        }
+                    } else
+                        break;
 
-                        p[x][y] = 1;
+                    p[x][y] = 1;
 
-                        valueAvg = pixM.luminance(x, y);
+                    valueAvg = pixM.luminance(x, y);
 
-                    }
+                }
 
-                    if (listTmpCurve.size() == 1) {
-                        lists.get(0).add(listTmpCurve.get(0));
-                    } else if (listTmpCurve.size() > 1) {
-                        lists.add(listTmpCurve);
-                    }
+                if (listTmpCurve.size() == 1) {
+                    lists.get(0).add(listTmpCurve.get(0));
+                } else if (listTmpCurve.size() > 1) {
+                    lists.add(listTmpCurve);
+                }
 
 
 /*
-                    for (List<Point3D> ps : lists)
-                        for (Point3D p0 : ps)
-                            for (int c = 0; c < listTmpCurve.size(); c++)
-                                if (listTmpCurve.get(c).equals(p0)) {
-                                    listTmpCurve.remove(c);
-                                }
+                for (List<Point3D> ps : lists)
+                    for (Point3D p0 : ps)
+                        for (int c = 0; c < listTmpCurve.size(); c++)
+                            if (listTmpCurve.get(c).equals(p0)) {
+                                listTmpCurve.remove(c);
+                            }
 */
 
-                }
             }
+<<<<<<<< HEAD:feature0/Lines.java
 
 
             List<List<Point3D>> lists2 = new ArrayList<>();
@@ -233,7 +243,27 @@ public class Lines extends ProcessFile {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Lines.java
         }
+
+
+        List<List<Point3D>> lists2 = new ArrayList<>();
+
+        //lists2 = relierPointsList();
+
+        for (List<Point3D> list : lists) {
+            Color r = Color.newCol((float) r(), (float) r(), (float) r());
+            list.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.));
+
+        }
+
+        lists2.forEach(p3s -> {
+            Color r = Color.newCol((float) r(), (float) r(), (float) r());
+            p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.));
+        });
+        ImageIO.write(o.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        return true;
     }
 
     ArrayList<Point3D> listTmpCurve = new ArrayList<Point3D>();

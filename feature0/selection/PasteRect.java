@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,16 +18,32 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/PasteRect.java
 package one.empty3.feature.selection;
 
 import one.empty3.feature.PixM;
 import one.empty3.feature.shape.Rectangle;
+========
+package one.empty3.androidFeature.selection;
+
+
+import android.graphics.Color;
+
+import java.io.File;
+import java.util.Arrays;
+
+import one.empty3.ImageIO;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.androidFeature.shape.Rectangle;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteRect.java
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
+import one.empty3.libs.Image;
 
+<<<<<<<< HEAD:feature0/selection/PasteRect.java
 import one.empty3.ImageIO;
 import one.empty3.libs.*;
 import one.empty3.libs.Image;
@@ -35,6 +51,8 @@ import one.empty3.libs.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteRect.java
 
 // Détourer les objets (coule urs) par un pinceau, une mesure circulaire??
 public class PasteRect extends ProcessFile {
@@ -148,6 +166,7 @@ public class PasteRect extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
+<<<<<<<< HEAD:feature0/selection/PasteRect.java
         try {
             if (!in.getAbsolutePath().endsWith("jpg"))
                 return false;
@@ -159,8 +178,16 @@ public class PasteRect extends ProcessFile {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
+========
+        if (!in.getAbsolutePath().endsWith("jpg"))
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteRect.java
             return false;
-        }
+        Image read = ImageIO.read(in);
+        PixM pixM = PixM.getPixM(read, maxRes);
+        getSource("paste");
+        PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
+        ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+        return true;
     }
 
 

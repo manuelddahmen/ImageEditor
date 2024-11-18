@@ -18,16 +18,25 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/Histogram3.java
 package one.empty3.feature;
 
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
 import one.empty3.libs.*;
+========
+package one.empty3.androidFeature;
+
+import one.empty3.io.ProcessFile;
+
+import one.empty3.library.Lumiere;
+import one.empty3.featureAndroid.PixM;
+import one.empty3.libs.Color;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
 import one.empty3.libs.Image;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -157,14 +166,20 @@ public class Histogram3 extends ProcessFile {
 
         init();
 
+<<<<<<<< HEAD:feature0/Histogram3.java
         try {
             PixM m = new PixM(one.empty3.ImageIO.read(in));
             Image image = m.getImage().getBitmap();
+========
+        PixM m = new PixM(one.empty3.ImageIO.read(in));
+        Image image = m.getImage();
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
 
 
-            final double radiusIncr = 1;
+        final double radiusIncr = 1;
 
 
+<<<<<<<< HEAD:feature0/Histogram3.java
             Image img2 = new one.empty3.libs.Color(image.getWidth(), image.getHeight(), one.empty3.libs.Color.TYPE_INT_RGB);
             List<Circle> pointsOfInterest;
             pointsOfInterest = getPointsOfInterest(m, radiusIncr, 0.5);
@@ -173,21 +188,31 @@ public class Histogram3 extends ProcessFile {
             // petits cercles successifs entoures 
             // de grands ou plus grands cercles = 
             // coins, corners et possibles features.
+========
+        Image img2 = new Image(image.getWidth(), image.getHeight());
+        List<Circle> pointsOfInterest;
+        pointsOfInterest = getPointsOfInterest(m, radiusIncr, 0.5);
+        // grands;cercles = grandes iles les separer
+        // verifier les distances et constantes i
+        // petits cercles successifs entoures
+        // de grands ou plus grands cercles =
+        // coins, corners et possibles features.
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
 
-            System.out.println("getPointsOfInterest ");
+        System.out.println("getPointsOfInterest ");
 
 
-            double[] i_ir = new double[]{0, 0};
-            for (int i = 0; i < pointsOfInterest.size(); i++) {
-                Circle c1 = pointsOfInterest.get(i);
-                //if (c1.r <= 0 || c1.i <= 0)
-                //    pointsOfInterest.remove(i);
-                if (i_ir[0] < c1.i)
-                    i_ir[0] = c1.i;
-                if (i_ir[1] < c1.i / c1.r)
-                    i_ir[1] = c1.i / c1.r;
+        double[] i_ir = new double[]{0, 0};
+        for (int i = 0; i < pointsOfInterest.size(); i++) {
+            Circle c1 = pointsOfInterest.get(i);
+            //if (c1.r <= 0 || c1.i <= 0)
+            //    pointsOfInterest.remove(i);
+            if (i_ir[0] < c1.i)
+                i_ir[0] = c1.i;
+            if (i_ir[1] < c1.i / c1.r)
+                i_ir[1] = c1.i / c1.r;
 
-            }
+        }
 /*            pointsOfInterest.sort((o1, o2) -> {
                 double v = (o2.i/o2.r - o1.i/o1.r)/i_ir[1];
                 if (v < 0)
@@ -197,8 +222,9 @@ public class Histogram3 extends ProcessFile {
                 return (int) Math.signum((o2.i - o1.i) / Math.abs(o2.r - o1.r));
             });
 */
-            System.out.println("draw ");
+        System.out.println("draw ");
 
+<<<<<<<< HEAD:feature0/Histogram3.java
             for (int i = 0; i < pointsOfInterest.size(); i++) {
                 Circle circle = pointsOfInterest.get(i);
                 double v = circle.i / circle.r / i_ir[1];
@@ -206,6 +232,15 @@ public class Histogram3 extends ProcessFile {
                 img2.setRGB((int) (circle.x), (int) (circle.y), color.toArgb());
             }
             // grouper les points par similarités et distances
+========
+        for (int i = 0; i < pointsOfInterest.size(); i++) {
+            Circle circle = pointsOfInterest.get(i);
+            double v = circle.i / circle.r / i_ir[1];
+            Color color = new Color(Lumiere.getInt(new double[]{(float) (v), (float) (v), (float) (v)}));
+            img2.setRgb((int) (circle.x), (int) (circle.y), color.getRGB());
+        }
+        // grouper les points par similarités et distances
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
               /*  group(pointsOfInterest);
                 File fileToWrite = new File(directory.getAbsolutePath()
                         + "level" + ".jpg");
@@ -214,7 +249,11 @@ public class Histogram3 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
+<<<<<<<< HEAD:feature0/Histogram3.java
             one.empty3.ImageIO.write(new PixM(img2).normalize(0., 1.).getImage().getBitmap(), "JPEG", out, shouldOverwrite);
+========
+        one.empty3.ImageIO.write(new PixM(img2).normalize(0., 1.).getImage().getBitmap(), "JPEG", out, shouldOverwrite);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
                 /*
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);
@@ -222,10 +261,6 @@ public class Histogram3 extends ProcessFile {
 */
 
 
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            return false;
-        }
         return true;
     }
 }

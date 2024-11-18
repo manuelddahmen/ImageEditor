@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,7 +18,11 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/selection/RectColor.java
 package one.empty3.feature.selection;
+========
+package one.empty3.androidFeature.selection;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/RectColor.java
 
 import one.empty3.library.Point3D;
 

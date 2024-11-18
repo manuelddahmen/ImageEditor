@@ -18,15 +18,22 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour.java
 package one.empty3.feature.histograms;
+========
+package one.empty3.androidFeature.histograms;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour.java
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 import one.empty3.ImageIO;
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour.java
 import one.empty3.feature.PixM;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour.java
 import one.empty3.io.ProcessFile;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 public class Hist4Contour extends ProcessFile {
@@ -153,6 +160,7 @@ public class Hist4Contour extends ProcessFile {
         }
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
+<<<<<<<< HEAD:feature0/histograms/Hist4Contour.java
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             one.empty3.ImageIO.write(outP.getImage().getBitmap(), "jpg", out, shouldOverwrite);
@@ -163,6 +171,12 @@ public class Hist4Contour extends ProcessFile {
         }
 
         return false;
+========
+        //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+        ImageIO.write(outP.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+        return true;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour.java
 
     }
 

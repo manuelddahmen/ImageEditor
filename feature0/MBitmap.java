@@ -16,9 +16,14 @@
  *  limitations under the License.
  *
  *
- */
+ *//*
 
+<<<<<<<< HEAD:feature0/MBitmap.java
 package one.empty3.feature;
+========
+
+package one.empty3.feature.app.pro;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/feature/app/pro/MBitmap.java
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -29,10 +34,15 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import one.empty3.feature.M;
+import one.empty3.feature.MatrixFormatException;
 import one.empty3.library.Lumiere;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
-public class MBitmap /*implements InterfaceMatrix*/ {
+public class MBitmap */
+/*implements InterfaceMatrix*//*
+ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = 0.0;
@@ -40,7 +50,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     protected int columns;
     protected int lines;
     protected int compNo;
-    double[] x;
+    public double[] x;
 
     public MBitmap(int c, int l) {
         try {
@@ -73,7 +83,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
                 int rgb = bitmap.getPixel(
                         (int) (1.0 * i / bitmap.getWidth() * columns),
                         (int) (1.0 * j / bitmap.getHeight() * lines));
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -148,13 +158,15 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return matrix;
     }
 
-    /*public static GMatrix diag(GMatrix square) {
+    */
+/*public static GMatrix diag(GMatrix square) {
         GMatrix matrix = new GMatrix(square.getColumns());
         for (int i = 0; i < matrix.getColumns(); i++)
             matrix.set(i, i, square.get(i, i));
 
         return matrix;
-    }*/
+    }*//*
+
 
     public int getColumns() {
         return columns;
@@ -227,10 +239,10 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         });
     }
 
-    final double [] tmpColor = new double[compCount];
+    double [] tmpColor = new double[compCount];
     public void setValues(int i, int j, int color) {
 
-        Lumiere.getDoubles(color, tmpColor);
+        tmpColor = Lumiere.getDoubles(color);
         IntStream.range(0, getCompCount()).forEach(c -> {
             setCompNo(c);
             set(i, j, tmpColor[c]);
@@ -331,9 +343,11 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return res;
     }
 
-    /*
+    */
+/*
         Recursive definition of determinate using expansion by minors.
-                */
+                *//*
+
     public double determinant() {
         if (!isSquare())
             throw new MatrixFormatException("determinant: not square matrix");
@@ -341,9 +355,13 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         double det = 0;
         MBitmap m = null;
 
-        if (lines < 1) { /* Error */
+        if (lines < 1) { */
+/* Error *//*
+
             throw new MatrixFormatException("<1 determinant");
-        } else if (lines == 1) { /* Shouldn't get used */
+        } else if (lines == 1) { */
+/* Shouldn't get used *//*
+
             det = get(0, 0);
         } else if (lines == 2) {
             det = get(0, 0) * get(1, 1) - get(1, 0) * get(0, 1);
@@ -370,9 +388,11 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return lines == columns;
     }
 
-    /*
-       Find the cofactor matrix of a square matrix
     */
+/*
+       Find the cofactor matrix of a square matrix
+    *//*
+
     public MBitmap CoFactor() {
         if (!isSquare())
             throw new MatrixFormatException("determinant: not square matrix");
@@ -390,7 +410,9 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         for (j = 0; j < n; j++) {
             for (i = 0; i < n; i++) {
 
-                /* Form the adjoint a_ij */
+                */
+/* Form the adjoint a_ij *//*
+
                 i1 = 0;
                 for (ii = 0; ii < n; ii++) {
                     if (ii == i)
@@ -405,23 +427,29 @@ public class MBitmap /*implements InterfaceMatrix*/ {
                     i1++;
                 }
 
-                /* Calculate the determinate */
+                */
+/* Calculate the determinate *//*
+
                 det = c.determinant();
 
-                /* Fill in the elements of the cofactor */
+                */
+/* Fill in the elements of the cofactor *//*
+
                 b.set(i, j, Math.pow(-1.0, i + j + 2.0) * det);
             }
         }
         return b;
     }
 
-    /*
-     * pa: mesure de l'erreur dans la fenêtre
-     * en W(0, 1, 2, 3)
-     * par rapport à W(4, 5, 2, 3)
-     * @param w12 x0, y0, w.w, w.h, x1, y1
-     * @return E  errors sum of differences. compNo
-     */
+    */
+/*
+ * pa: mesure de l'erreur dans la fenêtre
+ * en W(0, 1, 2, 3)
+ * par rapport à W(4, 5, 2, 3)
+ * @param w12 x0, y0, w.w, w.h, x1, y1
+ * @return E  errors sum of differences. compNo
+ *//*
+
     public double error(double... w12) {
         double E = 0.0;
         for (double i = 0; i < w12[2]; i++)
@@ -454,7 +482,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     }
 
-    public void setRegionCopy(M3 original, int ii, int ij, int iStart, int jStart, int iEnd, int jEnd,
+    public void setRegionCopy(one.empty3.feature.app.pro.M3 original, int ii, int ij, int iStart, int jStart, int iEnd, int jEnd,
                               PixM pixM, int iPaste, int jPaste) {
         for (int c = 0; c < getCompCount(); c++) {
             original.setCompNo(c);
@@ -491,3 +519,4 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         return result;
     }
 }
+*/

@@ -18,7 +18,11 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/shape/Rectangle.java
 package one.empty3.feature.shape;
+========
+package one.empty3.androidFeature.shape;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/shape/Rectangle.java
 
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.ParametricCurve;

@@ -1,13 +1,21 @@
+<<<<<<<< HEAD:feature0/histograms/Hist1Votes.java
 package one.empty3.feature.histograms;
+========
+package one.empty3.androidFeature.histograms;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist1Votes.java
 
 import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.util.Objects;
 
+<<<<<<<< HEAD:feature0/histograms/Hist1Votes.java
 import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
+========
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist1Votes.java
 import one.empty3.io.ProcessFile;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
 
 public class Hist1Votes extends ProcessFile {
@@ -21,7 +29,7 @@ public class Hist1Votes extends ProcessFile {
         public double x = 0.0, y = 0.0, r = 0.0;
         public double i = 0.0;
         public Point3D maxColor = Point3D.O0;
-        public Point3D mincolor = Point3D.n(1,1,1);
+        public Point3D mincolor = Point3D.n(1, 1, 1);
         public double count = 0.0;
 
         public Circle(double x, double y, double r) {
@@ -59,7 +67,7 @@ public class Hist1Votes extends ProcessFile {
         double sum = 0;
         int count = 0;
         c.maxColor = Point3D.O0;
-        c.mincolor = Point3D.n(1,1,1);
+        c.mincolor = Point3D.n(1, 1, 1);
         double intensity = 0.0;
         for (double i = c.x - c.r; i <= c.x + c.r; i++) {
             for (double j = c.y - c.r; j <= c.y + c.r; j++) {
@@ -96,7 +104,11 @@ public class Hist1Votes extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         PixM inP = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+<<<<<<<< HEAD:feature0/histograms/Hist1Votes.java
         PixM outP= new PixM(inP.getColumns(), inP.getLines());
+========
+        PixM outP = new PixM(inP.getColumns(), inP.getLines());
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist1Votes.java
 
         int[] ints = new int[inP.getLines() * inP.getColumns() * 3];
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
@@ -111,9 +123,10 @@ public class Hist1Votes extends ProcessFile {
                             Circle c1 = getLevel(new Circle(i, j, maxR), inP);
                             if (c1.i > 0.0) {
                                 //Point3D n = new Point3D(c.i, c.r, c.count);
-                                Point3D n = new Point3D(0.0,0.0,0.0);
-                                n.set(c, c1.maxColor.mult(c1.i).moins(c1.mincolor.mult(c1.r)).get(c));;
-                                outP.set(i, j, n.get(c)+outP.get(i,j));
+                                Point3D n = new Point3D(0.0, 0.0, 0.0);
+                                n.set(c, c1.maxColor.mult(c1.i).moins(c1.mincolor.mult(c1.r)).get(c));
+                                ;
+                                outP.set(i, j, n.get(c) + outP.get(i, j));
                             }
                         }
                     }
@@ -122,7 +135,11 @@ public class Hist1Votes extends ProcessFile {
         }
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+<<<<<<<< HEAD:feature0/histograms/Hist1Votes.java
             one.empty3.ImageIO.write(outP.normalize(0,1).getBitmap(), "jpg", out);
+========
+            one.empty3.ImageIO.write(outP.normalize(0, 1).getBitmap().getBitmap(), "jpg", out);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist1Votes.java
             //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             return true;
 

@@ -75,7 +75,7 @@
 //        }
 //
 //    }
-///*
+/// *
 //    public static void superimposeCircles(List<CircleHit> hits, double[][] sobelTotal, File out) throws Exception {
 //        Image totalCircles = new one.empty3.libs.Color(imgWidth, imgHeight, one.empty3.libs.Color.TYPE_INT_ARGB);
 //

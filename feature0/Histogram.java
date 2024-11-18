@@ -18,14 +18,20 @@
  *
  */
 
+<<<<<<<< HEAD:feature0/Histogram.java
 package one.empty3.feature;
 
 import one.empty3.ImageIO;
+========
+package one.empty3.androidFeature;
+
+import one.empty3.ImageIO;
+import one.empty3.featureAndroid.PixM;
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram.java
 import one.empty3.libs.*;
 import one.empty3.libs.Image;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -40,7 +46,7 @@ public class Histogram {
     private double min;
     private List<Circle> circles
             = new ArrayList<>();
-    private PixM m = null;
+    private one.empty3.featureAndroid.PixM m = null;
     private double levelMin;
 
     public class Circle {
@@ -67,7 +73,7 @@ public class Histogram {
     //private final int[][][] levels;
 
 
-    public Histogram(PixM image, int levels, double min, double radiusIncr, double levelMin) {
+    public Histogram(one.empty3.featureAndroid.PixM image, int levels, double min, double radiusIncr, double levelMin) {
         this.diffLevel = 1.0 / levels;
         this.min = min;
         //this.levels = new int[levels][image.getColumns()][image.getLines()];
@@ -144,6 +150,7 @@ public class Histogram {
 
     public static void testCircleSelect(Image file, File directory, int levels, double min, double radiusIncr) {
         for (int i = 0; i < levels; i++) {
+<<<<<<<< HEAD:feature0/Histogram.java
             try {
                 Image img = file;
                 Image img2 = new one.empty3.libs.Color(img.getWidth(), img.getHeight(), one.empty3.libs.Color.TYPE_INT_RGB);
@@ -164,22 +171,44 @@ public class Histogram {
                     public int compare(Circle o1, Circle o2) {
                         double v = o1.y - o1.y;
                         if (v < 0)
+========
+            Image img = file;
+            Image img2 = new Image(img.getWidth(), img.getHeight());
+            Image img3 = new Image(img.getWidth(), img.getHeight());
+            Histogram histogram = new Histogram(new PixM(img), levels, min, radiusIncr, 0.1);
+            int finalI = i;
+            List<Circle> pointsOfInterest = histogram.getPointsOfInterest(0.1);
+            pointsOfInterest.stream().forEach(circle -> {
+                if (circle.i >= min /*<histogram.diffLevel* finalI*/) {
+                    //img.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
+                    Color color = Color.newCol((float) circle.i, 0f, (float) (circle.i / circle.r));
+                    //img3.drawOval((int) (circle.x - circle.r), (int) (circle.y - circle.r), (int) (circle.r * 2), (int) (circle.r * 2));
+                    //img3.setRGB((int) (circle.x), (int) (circle.y), color.toArgb());
+                }
+            });
+            pointsOfInterest.sort(new Comparator<Circle>() {
+                @Override
+                public int compare(Circle o1, Circle o2) {
+                    double v = o1.y - o1.y;
+                    if (v < 0)
+                        return -1;
+                    if (v > 0)
+                        return 1;
+                    if (v == 0) {
+                        double v1 = o1.x - o1.x;
+                        if (v1 < 0)
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram.java
                             return -1;
-                        if (v > 0)
+                        if (v1 > 0)
                             return 1;
-                        if (v == 0) {
-                            double v1 = o1.x - o1.x;
-                            if (v1 < 0)
-                                return -1;
-                            if (v1 > 0)
-                                return 1;
-                            if (v1 == 0)
-                                return 0;
-                        }
-                        return 0;
+                        if (v1 == 0)
+                            return 0;
                     }
-                });
+                    return 0;
+                }
+            });
 
+<<<<<<<< HEAD:feature0/Histogram.java
                 File fileToWrite = new File(directory.getAbsolutePath()
                         + "level" + finalI + ".jpg");
                 File fileToWrite2 = new File(directory.getAbsolutePath()
@@ -190,10 +219,19 @@ public class Histogram {
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite, shouldOverwrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite2, shouldOverwrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite3, shouldOverwrite);
+========
+            File fileToWrite = new File(directory.getAbsolutePath()
+                    + "level" + finalI + ".jpg");
+            File fileToWrite2 = new File(directory.getAbsolutePath()
+                    + "level" + finalI + "_NEW.jpg");
+            File fileToWrite3 = new File(directory.getAbsolutePath()
+                    + "level" + finalI + "_NEW_RGB.jpg");
+            fileToWrite.mkdirs();
+            ImageIO.write(img, "JPEG", fileToWrite, shouldOverwrite);
+            ImageIO.write(img, "JPEG", fileToWrite2, shouldOverwrite);
+            ImageIO.write(img, "JPEG", fileToWrite3, shouldOverwrite);
+>>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram.java
 
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
         }
     }
 
