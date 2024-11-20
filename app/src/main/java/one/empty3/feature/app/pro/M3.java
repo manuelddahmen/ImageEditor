@@ -166,7 +166,7 @@ public class M3 extends one.empty3.feature.M3 {
         float[] colorComponents = new float[getCompCount()];
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
-                int rgb = image.getBitmap().getPixel(i, j);
+                int rgb = image.getImage().getPixel(i, j);
                 colorComponents = Color.getColorComponents(Color.valueOf(rgb));
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {

@@ -247,8 +247,8 @@ public class CurveFitting extends ProcessFile {
         init();
 
 
-        inPix = new PixM(pix.getImage().getBitmap());
-        outPix = new PixM(pix.getImage().getBitmap());
+        inPix = new PixM(pix.getImage().getImage());
+        outPix = new PixM(pix.getImage().getImage());
 
         curveInitial = new CourbeN11();
 
@@ -351,9 +351,9 @@ public class CurveFitting extends ProcessFile {
         String absolutePath = out.getAbsolutePath();
         absolutePath = absolutePath.substring(0, absolutePath.length() - 4);
         ImageIO.write(image, "jpg", new File(absolutePath + ".jpg"), shouldOverwrite);
-        ImageIO.write(outPix.normalize(0.0, 1.0, 0., 1.).getImage().getBitmap(), "jpg", new File(
+        ImageIO.write(outPix.normalize(0.0, 1.0, 0., 1.).getImage().getImage(), "jpg", new File(
                 absolutePath + "-outPixels.jpg"), shouldOverwrite);
-        ImageIO.write(inPix.normalize(0.0, 1.0, 0., 1.).getImage().getBitmap(), "jpg", new File(
+        ImageIO.write(inPix.normalize(0.0, 1.0, 0., 1.).getImage().getImage(), "jpg", new File(
                 absolutePath + "-inPixels.jpg"), shouldOverwrite);
 
         return true;

@@ -27,6 +27,8 @@ import one.empty3.io.ProcessFile;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GradAddProcess extends ProcessFile {
 
@@ -39,8 +41,9 @@ public class GradAddProcess extends ProcessFile {
             return false;
         one.empty3.featureAndroid.PixM pix;
         try {
-            pix = one.empty3.featureAndroid.PixM.getPixM(
-                    Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            pix = one.empty3.featureAndroid.PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
+            if(pix==null)
+                Logger.getAnonymousLogger().log(Level.SEVERE, "Error in ProcessFile GradAddProcess. Can't create PixM");
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             one.empty3.featureAndroid.PixM[][] imagesMatrix = gf.filter(
@@ -55,7 +58,7 @@ public class GradAddProcess extends ProcessFile {
 
             PixM image = linear.getImages()[2];
 
-            one.empty3.ImageIO.write(image.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+            one.empty3.ImageIO.write(image.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
 
 
             addSource(out);

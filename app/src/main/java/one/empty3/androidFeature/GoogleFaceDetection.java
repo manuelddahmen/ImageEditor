@@ -320,7 +320,7 @@ public class GoogleFaceDetection
 
             public void computeFilledSurface(PointF position, double scale) {
                 polygon.texture(new ColorTexture(colorFill));
-                filledContours = polygon.fillPolygon2D(this, null, contours.getBitmap(),
+                filledContours = polygon.fillPolygon2D(this, null, contours.getImage(),
                         colorTransparent, 0, position, scale);
             }
 
@@ -470,7 +470,7 @@ public class GoogleFaceDetection
 
     public GoogleFaceDetection(@NotNull Image bitmap) {
         dataFaces = new ArrayList<>();
-        this.setBitmap(bitmap.getBitmap());
+        this.setBitmap(bitmap.getImage());
     }
 
     public void setBitmap(@NotNull Bitmap bitmap) {
@@ -523,9 +523,9 @@ public class GoogleFaceDetection
         }
         try {
             PixM decode1 = (PixM) new PixM(1, 1).decode(in);
-            bitmap = decode1.getBitmap().getBitmap();
+            bitmap = decode1.getBitmap().getImage();
         } catch (NullPointerException e1) {
-            bitmap = new PixM(1, 1).getBitmap().getBitmap();
+            bitmap = new PixM(1, 1).getBitmap().getImage();
         }
         try {
             GoogleFaceDetection faceDetection = new GoogleFaceDetection(new Image(bitmap));
@@ -561,7 +561,7 @@ public class GoogleFaceDetection
             } else {
                 PixM pixM = new PixM(1, 1);
                 pixM.encode(out);
-                setBitmap(pixM.getBitmap().getBitmap());
+                setBitmap(pixM.getBitmap().getImage());
             }
             System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());

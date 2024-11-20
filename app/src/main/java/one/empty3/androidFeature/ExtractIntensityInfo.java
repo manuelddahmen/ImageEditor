@@ -132,7 +132,7 @@ public class ExtractIntensityInfo extends
 
 
         try {
-            one.empty3.ImageIO.write(pix.getImage().getBitmap(),
+            one.empty3.ImageIO.write(pix.getImage().getImage(),
                     "JPEG", out, shouldOverwrite);
         } catch (Exception ex) {
         }

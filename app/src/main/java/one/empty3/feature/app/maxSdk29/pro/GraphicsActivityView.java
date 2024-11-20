@@ -124,7 +124,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
             try {
                 Image read = one.empty3.ImageIO.read(currentFile1);
                 if (getMaxRes() > 0 && read!=null) {
-                    current = PixM.getPixM(Objects.requireNonNull(read).getBitmap(), getMaxRes());
+                    current = PixM.getPixM(Objects.requireNonNull(read).getImage(), getMaxRes());
                 } else if(read!=null){
                     current = new PixM(Objects.requireNonNull(read));
                 }
@@ -195,7 +195,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
         progress = 100;
 
             if(current!=null) {
-                Bitmap bitmap = current.normalize(0, 1).getBitmap().getBitmap();
+                Bitmap bitmap = current.normalize(0, 1).getBitmap().getImage();
                 File graphics_math = new Utils().writePhoto(this, new Image(bitmap), "graphics_math");
                 this.currentFile.add(new DataApp(graphics_math));
                 new Utils().setImageView(image, bitmap);

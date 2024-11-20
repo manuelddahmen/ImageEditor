@@ -153,7 +153,7 @@ public class Hist4Contour extends ProcessFile {
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-        ImageIO.write(outP.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(outP.getImage().getImage(), "jpg", out, shouldOverwrite);
         //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
         return true;
 

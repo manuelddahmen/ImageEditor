@@ -42,7 +42,7 @@ public class TransformColor extends ProcessFile {
             }
         }
 
-        ImageIO.write(pix.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(pix.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
 
         return true;
     }

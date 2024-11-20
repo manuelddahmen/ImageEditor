@@ -53,7 +53,7 @@ public class TestZBufferAndroid {
         zBuffer.draw();
 
 
-        Bitmap bitmap = zBuffer.image().getBitmap();
+        Bitmap bitmap = zBuffer.image().getImage();
 
         assert bitmap!=null;
         if (!new File("temp").exists())

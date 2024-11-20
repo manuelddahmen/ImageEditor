@@ -66,10 +66,14 @@ public class Color extends android.graphics.Color implements IColorMp {
     }
 
     public int getRGB() {
+        if(colorObject == null)
+            return super.toArgb();
         return colorObject.toArgb();
     }
 
     public int getRgb() {
+        if(colorObject == null)
+            return super.toArgb();
         return colorObject.toArgb();
     }
     public int getRed() {

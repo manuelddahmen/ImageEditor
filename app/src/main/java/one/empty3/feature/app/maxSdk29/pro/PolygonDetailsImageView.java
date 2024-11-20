@@ -41,7 +41,7 @@ public class PolygonDetailsImageView extends FaceOverlayView{
 
 
     public void updateImage(Image ibm) {
-        Bitmap bm = ibm.getBitmap();
+        Bitmap bm = ibm.getImage();
         new Handler(Looper.getMainLooper()).post(() -> {
                 super.setImageBitmap3(bm.copy(Bitmap.Config.ARGB_8888, true));
 

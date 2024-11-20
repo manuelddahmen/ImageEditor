@@ -227,8 +227,8 @@ private int sizeElement = 20, elementSize=20;
 
                             }
             //one.empty3.ImageIO.write(pi.getImage().getBitmap(), "JPEG", out);
-            one.empty3.ImageIO.write(moutA.normalize(0., 1.).getImage().getBitmap(), "JPEG", new File(out.getParent() + "a" + "jpg"), shouldOverwrite);
-            one.empty3.ImageIO.write(moutB.normalize(0., 1.).getImage().getBitmap(), "JPEG", new File(out.getParent() + "b" + "jpg"), shouldOverwrite);
+            one.empty3.ImageIO.write(moutA.normalize(0., 1.).getImage().getImage(), "JPEG", new File(out.getParent() + "a" + "jpg"), shouldOverwrite);
+            one.empty3.ImageIO.write(moutB.normalize(0., 1.).getImage().getImage(), "JPEG", new File(out.getParent() + "b" + "jpg"), shouldOverwrite);
 
             //one.empty3.ImageIO.write(m2g, "JPEG", new File(out.getParent()+5+"jpg"));
             return true;

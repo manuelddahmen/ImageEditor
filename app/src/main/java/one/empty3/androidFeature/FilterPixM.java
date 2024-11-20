@@ -51,7 +51,7 @@ public abstract class FilterPixM extends one.empty3.featureAndroid.PixM {
     }
 
     public FilterPixM(PixM image) {
-        super(image.getImage().getBitmap());
+        super(image.getImage().getImage());
     }
 
     public abstract double filter(double i, double i1);

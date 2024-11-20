@@ -35,7 +35,7 @@ public class DericheFilterProcess extends ProcessFile {
         one.empty3.featureAndroid.PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
-        ImageIO.write(pixM.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(pixM.getImage().getImage(), "jpg", out, shouldOverwrite);
 
 
         return false;

@@ -88,7 +88,7 @@ public class SobelDerivative extends ProcessFile {
                 }
             }
         }
-        ImageIO.write(pOut.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(pOut.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

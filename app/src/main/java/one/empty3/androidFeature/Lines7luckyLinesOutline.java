@@ -328,7 +328,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
                 }
             }
 */
-        ImageIO.write(img3.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(img3.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
 
         return true;
 

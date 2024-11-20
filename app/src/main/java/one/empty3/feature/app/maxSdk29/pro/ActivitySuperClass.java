@@ -249,8 +249,8 @@ public class ActivitySuperClass extends AppCompatActivity {
                 File currentFile1 = currentFile.getCurrentFile();
                 if(currentFile1!=null && currentFile1.exists()) {
                     Image read = one.empty3.ImageIO.read(currentFile1);
-                    if (read != null && read.getBitmap() != null) {
-                        Bitmap bitmap = read.getBitmap();
+                    if (read != null && read.getImage() != null) {
+                        Bitmap bitmap = read.getImage();
                         currentFile.add(new DataApp(new Utils().writePhoto(
                                 this, new Image(bitmap), "reload")));
                         loadImage(new FileInputStream(currentFile.getCurrentFile()), true);
@@ -638,7 +638,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (maxRes > 0) {
             System.err.println("FileInputStream" + choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData);
-            photo = PixM.getPixM(photo, maxRes).getImage().getBitmap();
+            photo = PixM.getPixM(photo, maxRes).getImage().getImage();
             System.err.println("Get file (bitmap) : " + photo);
         } else {
             System.err.println("FileInputStream" + choose_directoryData);

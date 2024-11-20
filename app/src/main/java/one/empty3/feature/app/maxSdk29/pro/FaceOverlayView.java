@@ -94,13 +94,13 @@ public class FaceOverlayView extends ImageViewSelection {
 
             InputImage inputImage = InputImage.fromBitmap(bitmap, 0);
 
-            mCanvas = new Canvas(mCopy.getBitmap());
+            mCanvas = new Canvas(mCopy.getImage());
 
             FaceDetector client = FaceDetection.getClient(highAccuracyOpts);
             client.process(inputImage).addOnSuccessListener(faces -> {
                 mFaces = faces;
                 System.out.println("Number of faces (faceOverlay::setBitmap :" + mFaces.size());
-                updateImage(mCopy.getBitmap());
+                updateImage(mCopy.getImage());
 
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -117,7 +117,7 @@ public class FaceOverlayView extends ImageViewSelection {
             ignored.printStackTrace();
         }
 
-        setImageBitmap3(mCopy.getBitmap());
+        setImageBitmap3(mCopy.getImage());
     }
 
     private void action(Face face, GoogleFaceDetection.FaceData faceData) {
@@ -325,7 +325,7 @@ public class FaceOverlayView extends ImageViewSelection {
         if (mCopy == null)
             mCopy = mBitmap;
         if (mCopy != null) {
-            mCopy = new Image(mCopy.getBitmap().copy(Bitmap.Config.ARGB_8888, true));
+            mCopy = new Image(mCopy.getImage().copy(Bitmap.Config.ARGB_8888, true));
             if (googleFaceDetection != null) {
                 for (GoogleFaceDetection.FaceData face : googleFaceDetection.getDataFaces()) {
                     for (GoogleFaceDetection.FaceData.Surface surface : face.getFaceSurfaces()) {
@@ -334,7 +334,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 }
             }
         }
-        mCopy = new Image(mCopy.getBitmap().copy(Bitmap.Config.ARGB_8888, true));
+        mCopy = new Image(mCopy.getImage().copy(Bitmap.Config.ARGB_8888, true));
 
     }
 
@@ -364,7 +364,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 isDrawing = true;
                 this.mCanvas = canvas;
                 if (mCopy != null)
-                    updateImage(mCopy.getBitmap());
+                    updateImage(mCopy.getImage());
 
                 isFinish = true;
                 isDrawing = false;
@@ -460,16 +460,16 @@ public class FaceOverlayView extends ImageViewSelection {
                 googleFaceDetection.setDataFaces(new ArrayList<>());
 
                 if(mBitmap!=null)
-                    googleFaceDetection.setBitmap(mBitmap.getBitmap());
+                    googleFaceDetection.setBitmap(mBitmap.getImage());
 
                 Objects.requireNonNull(mFaces).forEach(face -> drawFaceBoxes(mCanvas, scale));
 
                 if (activity != null) {
-                    File file = new Utils().writePhoto(activity, new Image(mCopy.getBitmap().copy(Bitmap.Config.ARGB_8888,
+                    File file = new Utils().writePhoto(activity, new Image(mCopy.getImage().copy(Bitmap.Config.ARGB_8888,
                             false)), "face-");
                     this.activity.currentFile.add(new DataApp(file));
                 }
-                super.setImageBitmap3(mCopy.getBitmap().copy(Bitmap.Config.ARGB_8888, true));
+                super.setImageBitmap3(mCopy.getImage().copy(Bitmap.Config.ARGB_8888, true));
             }
         });
     }
@@ -528,7 +528,7 @@ public class FaceOverlayView extends ImageViewSelection {
             int w = rect.right-rect.left;
             int h = rect.bottom-rect.top;
 
-            if(x+w>=googleFaceDetection.getBitmap().getWidth() && y+h>=googleFaceDetection.getBitmap().getHeight()
+            if(x+w>= googleFaceDetection.getBitmap().getWidth() && y+h>= googleFaceDetection.getBitmap().getHeight()
                     && x>=0 && y>=0) {
 
                 int[] ints = new int[w * h];

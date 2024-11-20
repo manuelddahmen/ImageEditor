@@ -66,6 +66,7 @@ public class Main2022 {
     public static HashMap<String, ProcessFile> initListProcesses() {
         //if(listProcessClasses==null) {
             listProcessClasses = new HashMap<>();
+            indices = new ArrayList<>();
             try {
 
                 //listProcessClasses.put("", CornerDetectProcess.class.newInstance());

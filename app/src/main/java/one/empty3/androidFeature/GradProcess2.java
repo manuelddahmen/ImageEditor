@@ -46,7 +46,7 @@ public class GradProcess2 extends ProcessFile {
                             + 4 * pixMout.get(x, y + 1));
                 }
 
-        ImageIO.write(pixMout.normalize(0, 1).getImage().getBitmap(), "jpg", out, shouldOverwrite);
+        ImageIO.write(pixMout.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

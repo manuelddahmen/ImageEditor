@@ -135,7 +135,7 @@ public class Transform1 extends ProcessFile {
      WriteFile.writeNext("radial grad"+file.getName(), rad.normalize(0.,1.).getImage().getBitmap());
      */
         try {
-            one.empty3.ImageIO.write(plext3.getImage().getBitmap(), "jpg", out, shouldOverwrite);
+            one.empty3.ImageIO.write(plext3.getImage().getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             return false;
         }

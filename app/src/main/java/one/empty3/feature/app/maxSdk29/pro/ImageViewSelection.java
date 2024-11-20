@@ -92,7 +92,7 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
             polyLine.getPoints().add(new Point3D((double) rect.right, (double) rect.bottom, 0.0));
             polyLine.getPoints().add(new Point3D((double) rect.left, (double) rect.bottom, 0.0));
             pixels.plotCurve(polyLine, new ColorTexture(Color.YELLOW));
-            setImageBitmap2(pixels.getImage().getBitmap());
+            setImageBitmap2(pixels.getImage().getImage());
         }
     }
 

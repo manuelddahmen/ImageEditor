@@ -1,5 +1,7 @@
 package one.empty3.apps.test;
 
+import android.os.Build;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,13 +33,8 @@ public class ExampleUnitTest2 {
         try {
             processFile.setMaxRes(maxRes);
             processFile.shouldOverwrite = true;
-            if (processFile.isImage(in)) {
                 Assert.assertTrue(processFile.process(in, out));
                 countTestsProcessFiles++;
-            } else {
-                System.err.println("ProcessFile returns false\nor in.isImage==false\nor in not exist\nor in is not a file\n" + processFile.getClass());
-                nonApplicable++;
-            }
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             System.err.println("ProcessFile throws exception\n" + processFile.getClass());
@@ -48,36 +45,36 @@ public class ExampleUnitTest2 {
 
     @Test
     public void testAllTestInMain2022() {
-        Main2022.initListProcesses().forEach((s, processFile) -> {
-            File ins = new File("C:\\Users\\manue\\EmptyCanvasTest\\images\\m\\");
-            File[] files = ins.listFiles();
-            if(files != null) {
-                for (File in : files) {
-                     if( ProcessFile.isImage(in)) {
-                        File dir = new File(ins.getParent() + File.separator + "imagesOut");
-                        boolean mkdirs = true;
-                        if (!dir.exists()) {
-                            mkdirs = dir.mkdirs();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Main2022.initListProcesses().forEach((s, processFile) -> {
+                File ins = new File("D:\\Current\\EmptyCanvasTest\\images\\m\\");
+                File[] files = ins.listFiles();
+                if (files != null) {
+                    for (File in : files) {
+                        if (in.exists()) {
+                            File dir = new File(ins.getParent() + File.separator + "imagesOut");
+                            boolean mkdirs = true;
+                            if (!dir.exists()) {
+                                mkdirs = dir.mkdirs();
+                            }
+                            File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
+                            if (mkdirs) {
+                                String inFilename = in.getName();
+                                effect(processFile, in,
+                                        out);
+                            }
                         }
-                        File out =new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
-                        if (mkdirs) {
-                            String inFilename = in.getName();
-                            effect(processFile, in,
-                                    out);
-                        }
-                    } else {
-                        System.err.println("Not an image, skip :"+in.getAbsolutePath());
                     }
-                }
-            } else
-                System.err.println("Error : files==null");
+                } else
+                    System.err.println("Error : files==null");
 
-        });
+            });
 
 
-        System.out.println("Count success=" + countTestsProcessFiles);
-        System.out.println("Count non applicable = " + nonApplicable);
-        System.out.println("Count errors = " + errors);
+            System.out.println("Count success=" + countTestsProcessFiles);
+            System.out.println("Count non applicable = " + nonApplicable);
+            System.out.println("Count errors = " + errors);
+        }
     }
 
 }

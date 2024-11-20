@@ -43,7 +43,7 @@ public class Mix extends ProcessNFiles {
                     }
                 }
             }
-            ImageIO.write(outPixM.getBitmap().getBitmap(), "jpg", out);
+            ImageIO.write(outPixM.getBitmap().getImage(), "jpg", out);
         }
         return false;
     }

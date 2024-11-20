@@ -39,7 +39,7 @@ public class GoogleFaceDetectTest {
 
         try {
             GoogleFaceDetection googleFaceDetection = new GoogleFaceDetection(image);
-            FileInputStream fileOutputStream1 = new FileInputStream("C:\\Users\\manue\\AndroidStudioProjects\\FeatureApp3\\face-drawings.fac");
+            FileInputStream fileOutputStream1 = new FileInputStream("D:\\Current\\AndroidStudioProjects\\FeatureApp4-with-module\\app\\text.fac");
             GoogleFaceDetection decoded = (GoogleFaceDetection) googleFaceDetection.decode(new DataInputStream(fileOutputStream1));
             fileOutputStream1.close();
 
@@ -52,7 +52,7 @@ public class GoogleFaceDetectTest {
             Assert.assertTrue(true);
         } catch (IOException e6) {
             e6.printStackTrace();
-            Assert.fail();
+            Assert.assertTrue(false);
         }
     }
 }

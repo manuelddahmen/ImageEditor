@@ -97,8 +97,8 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
     }
 
     public PixM(@NotNull Image read) {
-        this(read.getBitmap());
-        if (read.getBitmap() == null)
+        this(read.getImage());
+        if (read.getImage() == null)
             throw new NullPointerException("public PixM(@NotNull BufferedImage read) || bitmap is null");
     }
 
@@ -147,11 +147,7 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
     }
 
     public static PixM getPixM(@NotNull Image image, double maxRes) {
-        if (image.getBitmap() == null) {
-            return null;
-        } else {
-            return getPixM(image.getImage(), (int) maxRes);
-        }
+        return getPixM(image.getImage(), (int) maxRes);
     }
 
     public static PixM getPixM(@NotNull Bitmap image, int maxRes) {

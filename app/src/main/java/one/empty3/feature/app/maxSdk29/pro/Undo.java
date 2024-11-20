@@ -95,11 +95,11 @@ public class Undo {
     }
 
     public Bitmap getCurrentPhoto() {
-        return Objects.requireNonNull(one.empty3.ImageIO.read(data.get(data.size() - 1).getImage())).getBitmap();
+        return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getImage())).getImage();
     }
 
     public Bitmap getCurrentOriginalPhoto() {
-        return Objects.requireNonNull(one.empty3.ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).getBitmap();
+        return Objects.requireNonNull(ImageIO.read(data.get(data.size() - 1).getOriginalSizeImage())).getImage();
     }
 
     @NotNull
