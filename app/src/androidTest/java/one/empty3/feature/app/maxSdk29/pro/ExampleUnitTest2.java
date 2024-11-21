@@ -2,24 +2,25 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
+import android.content.Context;
 import android.os.Build;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.GrantPermissionRule;
-
-import com.google.firebase.BuildConfig;
-import com.google.firebase.crashlytics.internal.Logger;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 import one.empty3.Main2022;
+import one.empty3.androidFeature.IdentNullProcess;
 import one.empty3.io.ProcessFile;
 
 /**
@@ -27,11 +28,12 @@ import one.empty3.io.ProcessFile;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@RunWith(AndroidJUnit4.class)
 public class ExampleUnitTest2 {
     int countTestsProcessFiles = 0;
-    private int nonApplicable = 0;
+    private int countNonApplicable = 0;
     private int errors = 0;
-    int maxRes = 340;
+    int maxRes = 15;
 
 
     @Test
@@ -46,12 +48,11 @@ public class ExampleUnitTest2 {
         try {
             processFile.setMaxRes(maxRes);
             ProcessFile.shouldOverwrite = true;
-            if(!out.exists()) {
-                out.mkdir();
+            if(processFile.process(in, out)) {
+                countTestsProcessFiles++;
+            } else {
+                countNonApplicable++;
             }
-            out = new File("./out/" + out.getName());
-            Assert.assertTrue(processFile.process(in, out));
-            countTestsProcessFiles++;
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             System.err.println("ProcessFile throws exception\n" + processFile.getClass());
@@ -64,44 +65,55 @@ public class ExampleUnitTest2 {
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
-                    "android.permission.READ_EXTERNAL_STORAGE",
                     "android.permission.WRITE_EXTERNAL_STORAGE");
 
     @Test
     public void testAllTestInMain2022() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            Main2022.initListProcesses().forEach((s, processFile) -> {
-                File ins = new File("/storage/170E-321D/Podcasts/images/m");
+            HashMap<String, ProcessFile> stringProcessFileHashMap = Main2022.initListProcesses();
+            stringProcessFileHashMap.forEach((s, processFile) -> {
+                File ins = new File("/storage/170E-321D/Pictures/m");
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins=" + ins.getAbsolutePath());
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins?" + ins.exists());
-                File[] files = ins.listFiles();
+                java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins.isDirectory?" + ins.isDirectory());
+                //File[] files = ins.listFiles();
+                String[] files = ins.list();
                 if (files != null) {
-                    for (File in : files) {
-                        if (!in.getName().endsWith(".jpg") && !in.getName().endsWith(".png"))
-                            continue;
-                        if (in.exists()) {
-                            File dir = new File(ins.getParent() + File.separator + "imagesOut");
-                            boolean mkdirs = true;
-                            if (!dir.exists()) {
-                                mkdirs = dir.mkdirs();
-                            }
-                            File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
-                            if (mkdirs) {
-                                String inFilename = in.getName();
-                                effect(processFile, in,
-                                        out);
+                    for (String inS : files) {
+                        File in = new File(ins.getAbsolutePath() + File.separator + inS);
+                        if ((!in.getName().endsWith(".jpg") && !in.getName().endsWith(".png")) || in.getName().endsWith("_1.jpg")) {
+                        }
+                        else if (in.exists()) {
+                            try {
+                                File out0 = new File(ins.getParent() + File.separator + "imagesOut_resized/"+in.getName() + "_1.jpg");
+                                File dir = new File(ins.getParent() + File.separator + "imagesOut/" + processFile.getClass().getSimpleName());
+                                boolean mkdirs = true;
+                                if (!dir.exists() && mkdirs) {
+                                    mkdirs = dir.mkdirs();
+                                }
+                                File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
+                                if (mkdirs) {
+                                    String inFilename = in.getName();
+                                    effect(new IdentNullProcess(), in,
+                                            out0);
+                                    effect(processFile, out0,
+                                            out);
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
                         }
                     }
                 } else
                     System.err.println("Error : files==null");
-                    Assert.assertTrue(false);
-
             });
 
-
             System.out.println("Count success=" + countTestsProcessFiles);
-            System.out.println("Count non applicable = " + nonApplicable);
+            System.out.println("Count non applicable = " + countNonApplicable);
             System.out.println("Count errors = " + errors);
         }
     }

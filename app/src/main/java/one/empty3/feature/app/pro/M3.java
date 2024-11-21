@@ -34,14 +34,13 @@ import one.empty3.libs.Image;
 public class M3 extends one.empty3.feature.M3 {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = r.next();
-    private double[] x;
+    protected double[] x;
     public int columns;
     public int lines;
     protected int columnsIn;
     protected int linesIn;
     protected int compNo;
     protected Image image;
-    private final int compCount = 3;
     private int currentX;
     private int currentY;
     private int savedY;
@@ -167,7 +166,7 @@ public class M3 extends one.empty3.feature.M3 {
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 int rgb = image.getImage().getPixel(i, j);
-                colorComponents = Color.getColorComponents(Color.valueOf(rgb));
+                colorComponents = Color.getColorComponents(Color.valueOf(rgb& 0x00ffffff));
                 for (int ii = 0; ii < columnsIn; ii++)
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int com = 0; com < getCompCount(); com++) {

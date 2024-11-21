@@ -98,7 +98,7 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
 
     public PixM(@NotNull Image read) {
         this(read.getImage());
-        if (read.getImage() == null)
+        if (read.getImage() == null || read.getImage().getWidth() == 0 || read.getImage().getHeight() == 0)
             throw new NullPointerException("public PixM(@NotNull BufferedImage read) || bitmap is null");
     }
 

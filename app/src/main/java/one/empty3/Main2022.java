@@ -78,7 +78,7 @@ public class Main2022 {
                 listProcessClasses.put("ExtremaProcess", ExtremaProcess.class.newInstance());
                 listProcessClasses.put("GaussFilterProcess", GaussFilterProcess.class.newInstance());
                 listProcessClasses.put("GradProcess", GradProcess.class.newInstance());
-                listProcessClasses.put("GradAddProcess", GradAddProcess.class.newInstance());
+////                listProcessClasses.put("GradAddProcess", GradAddProcess.class.newInstance());
                 listProcessClasses.put("GradMultProcess", GradMultProcess.class.newInstance());
                 listProcessClasses.put("HarrisProcess", HarrisProcess.class.newInstance());
                 listProcessClasses.put("Histogram0", Histogram0.class.newInstance());

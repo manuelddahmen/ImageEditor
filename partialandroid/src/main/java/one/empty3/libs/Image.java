@@ -20,10 +20,7 @@ public class Image extends BitmapDrawable implements IImageMp {
         setImage(image);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
-        } else {
-
         }
-
     }
 
     private void setImage(Bitmap image) {
@@ -74,11 +71,15 @@ public class Image extends BitmapDrawable implements IImageMp {
 
     @Override
     public int getWidth() {
+        if(image==null)
+            return getBitmap().getWidth();
         return image.getWidth();
     }
 
     @Override
     public int getHeight() {
+        if(image==null)
+            return getBitmap().getHeight();
         return image.getHeight();
     }
 
@@ -95,20 +96,23 @@ public class Image extends BitmapDrawable implements IImageMp {
     }
 
     public boolean saveFile(File path) {
-        try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                return true;
-            } else {
-                image.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                return true;
+                try {
+                    if (image != null) {
+                        image.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
+                        return true;
+                    } else {
+                        getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
+                        return true;
+                    }
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        } catch (FileNotFoundException e) {
-            return false;
-        }
+        return false;
     }
 
     public @NotNull Bitmap getImage() {
-        return image;
+        return image==null?getBitmap():image;
     }
 }
