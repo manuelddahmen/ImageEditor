@@ -3,6 +3,8 @@ package one.empty3.feature.app.maxSdk29.pro;
 import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -16,12 +18,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 
 import one.empty3.Main2022;
 import one.empty3.androidFeature.IdentNullProcess;
+import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
+import one.empty3.libs.Color;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -34,6 +41,63 @@ public class ExampleUnitTest2 {
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
+
+    @Test
+    public void testBitmapPixMColors( ) {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Color color = new Color(0xFFFF0000);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                bitmap.setPixel(i, j, color.getRGB());
+            }
+        }
+        PixM pixM = new PixM(bitmap);
+        try {
+            File outputimage = new File("/storage/170E-321D/Pictures/testBitmapPixMColorRed100x100.jpg");
+            if(outputimage.exists())
+                outputimage.delete();
+            outputimage = new File(outputimage.getAbsolutePath());
+            FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+            pixM.getBitmap().getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testBitmapColors( ) {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Color color = new Color(0xFFFF0000);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                bitmap.setPixel(i, j, color.getRGB());
+            }
+        }
+        try {
+            File outputimage = new File("/storage/170E-321D/Pictures/testBitmapColorRed100x100.jpg");
+            if(outputimage.exists())
+                outputimage.delete();
+            outputimage = new File(outputimage.getAbsolutePath());
+            FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     @Test
@@ -60,22 +124,22 @@ public class ExampleUnitTest2 {
         }
 
     }
-
+/*
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
                     "android.permission.WRITE_EXTERNAL_STORAGE");
-
+*/
     @Test
     public void testAllTestInMain2022() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getPackageName());
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             HashMap<String, ProcessFile> stringProcessFileHashMap = Main2022.initListProcesses();
             stringProcessFileHashMap.forEach((s, processFile) -> {
+                boolean mkdirs = true;
                 File ins = new File("/storage/170E-321D/Pictures/m");
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins=" + ins.getAbsolutePath());
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins?" + ins.exists());
@@ -89,9 +153,11 @@ public class ExampleUnitTest2 {
                         }
                         else if (in.exists()) {
                             try {
-                                File out0 = new File(ins.getParent() + File.separator + "imagesOut_resized/"+in.getName() + "_1.jpg");
+                                File dir0 =new File( ins.getParent() + File.separator + "imagesOut_resized/");
+                                if(!dir0.exists() && mkdirs)
+                                    dir0.mkdirs();
+                                File out0 = new File(dir0.getAbsolutePath() + File.separator +in.getName() + "_1.jpg");
                                 File dir = new File(ins.getParent() + File.separator + "imagesOut/" + processFile.getClass().getSimpleName());
-                                boolean mkdirs = true;
                                 if (!dir.exists() && mkdirs) {
                                     mkdirs = dir.mkdirs();
                                 }

@@ -63,5 +63,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Image Editor"
 include ':app'
-
 include ':partialandroid'
