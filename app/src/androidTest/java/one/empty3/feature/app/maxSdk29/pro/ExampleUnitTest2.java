@@ -38,6 +38,7 @@ import one.empty3.libs.Color;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleUnitTest2 {
+    boolean mkdirs = true;
     int countTestsProcessFiles = 0;
     private int countNonApplicable = 0;
     private int errors = 0;
@@ -159,8 +160,6 @@ public class ExampleUnitTest2 {
         System.out.println(appContext.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             HashMap<String, ProcessFile> stringProcessFileHashMap = Main2022.initListProcesses();
-            stringProcessFileHashMap.forEach((s, processFile) -> {
-                boolean mkdirs = true;
                 File ins = new File("/storage/170E-321D/Pictures/m");
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins=" + ins.getAbsolutePath());
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins?" + ins.exists());
@@ -169,35 +168,37 @@ public class ExampleUnitTest2 {
                 String[] files = ins.list();
                 if (files != null) {
                     for (String inS : files) {
-                        File in = new File(ins.getAbsolutePath() + File.separator + inS);
-                        if ((!in.getName().endsWith(".jpg") && !in.getName().endsWith(".png")) || in.getName().endsWith("_1.jpg")) {
-                        }
-                        else if (in.exists()) {
-                            try {
-                                File dir0 =new File( ins.getParent() + File.separator + "imagesOut_resized/");
-                                if(!dir0.exists() && mkdirs)
-                                    dir0.mkdirs();
-                                File out0 = new File(dir0.getAbsolutePath() + File.separator +in.getName() + "_1.jpg");
-                                File dir = new File(ins.getParent() + File.separator + "imagesOut/" + processFile.getClass().getSimpleName());
-                                if (!dir.exists() && mkdirs) {
-                                    mkdirs = dir.mkdirs();
+                        stringProcessFileHashMap.forEach((s, processFile) -> {
+                            File in = new File(ins.getAbsolutePath() + File.separator + inS);
+                            if ((!in.getName().endsWith(".jpg") && !in.getName().endsWith(".png")) || in.getName().endsWith("_1.jpg")) {
+                            } else if (in.exists()) {
+                                try {
+                                    File dir0 = new File(ins.getParent() + File.separator + "imagesOut_resized/");
+                                    if (!dir0.exists() && mkdirs)
+                                        dir0.mkdirs();
+                                    File out0 = new File(dir0.getAbsolutePath() + File.separator + in.getName() + "_1.jpg");
+                                    File dir = new File(ins.getParent() + File.separator + "imagesOut/" + processFile.getClass().getSimpleName());
+                                    if (!dir.exists() && mkdirs) {
+                                        mkdirs = dir.mkdirs();
+                                    }
+                                    File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
+                                    if (mkdirs) {
+                                        String inFilename = in.getName();
+                                        effect(new IdentNullProcess(), in,
+                                                out0);
+                                        effect(processFile, out0,
+                                                out);
+                                    }
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+
                                 }
-                                File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
-                                if (mkdirs) {
-                                    String inFilename = in.getName();
-                                    effect(new IdentNullProcess(), in,
-                                            out0);
-                                    effect(processFile, out0,
-                                            out);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
                             }
-                        }
+
+                        });
                     }
                 } else
                     System.err.println("Error : files==null");
-            });
 
             System.out.println("Count success=" + countTestsProcessFiles);
             System.out.println("Count non applicable = " + countNonApplicable);
