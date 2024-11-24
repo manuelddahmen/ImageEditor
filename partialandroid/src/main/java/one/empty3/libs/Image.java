@@ -12,14 +12,14 @@ import one.empty3.libs.commons.IImageMp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.nio.Buffer;
 
 public class Image extends BitmapDrawable implements IImageMp {
     private Bitmap image;
 
     public Image(Bitmap image) {
-        setImage(image);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setBitmap(image);
+        if(image!=null) {
+            setImage(image);
         }
     }
 
@@ -31,7 +31,7 @@ public class Image extends BitmapDrawable implements IImageMp {
     }
 
     public Image(int width, int height) {
-        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
+        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }

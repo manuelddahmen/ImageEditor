@@ -31,7 +31,7 @@ import one.empty3.featureAndroid.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 
-public class M3 extends one.empty3.feature.M3 {
+public class M3 extends MBitmap{
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = r.next();
     protected double[] x;
@@ -49,7 +49,9 @@ public class M3 extends one.empty3.feature.M3 {
     int incrOK = 0;
 
     public M3(int columns, int lines, int columnsIn, int linesIn) {
-        super(columns, lines, columnsIn, linesIn);
+        super(columns*lines*columnsIn*linesIn);
+        int i = columns * lines * columnsIn * linesIn;
+        x =new double[i];
     }
 
     public M3(M3 original) {
@@ -228,7 +230,7 @@ public class M3 extends one.empty3.feature.M3 {
         return compCount;
     }
 
-    protected double get(int ii, int ij) {
+    public double get(int ii, int ij) {
         return get(currentX(), currentY(), ii, ij);
     }
 

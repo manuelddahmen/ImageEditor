@@ -28,6 +28,7 @@ import one.empty3.Main2022;
 import one.empty3.androidFeature.IdentNullProcess;
 import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
+import one.empty3.library.Lumiere;
 import one.empty3.libs.Color;
 
 /**
@@ -62,7 +63,7 @@ public class ExampleUnitTest2 {
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
             FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-            pixM.getBitmap().getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            pixM.getBitmap().saveFile(outputimage);
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -99,7 +100,27 @@ public class ExampleUnitTest2 {
         }
     }
 
-
+    @Test
+    public void testPixMColors( ) {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        PixM pixM = new PixM(1000, 1000);
+        Color color = new Color(0xFFFF0000);
+        int width = pixM.getColumns();
+        int height = pixM.getLines();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                pixM.set(pixM.index(i, j), color.getRGB());
+            }
+        }
+        File outputimage = new File("/storage/170E-321D/Pictures/testPixMColorRed1000x1000.jpg");
+        if (outputimage.exists())
+            outputimage.delete();
+        outputimage = new File(outputimage.getAbsolutePath());
+        //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+        pixM.getBitmap().saveFile(outputimage);
+        //fileOutputStream.close();
+    }
     @Test
     public void addition_isCorrect() {
         Assert.assertEquals(4, 2 + 2);

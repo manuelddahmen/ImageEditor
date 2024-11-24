@@ -35,6 +35,7 @@ import java.io.IOException;
 
 import one.empty3.androidFeature.FilterPixM;
 import matrix.MBitmap;
+import one.empty3.feature.M;
 import one.empty3.feature.V;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
@@ -44,7 +45,7 @@ import one.empty3.library.Serialisable;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.libs.Image;
 
-public class PixM extends one.empty3.feature.PixM implements Serialisable, Parcelable {
+public class PixM extends M implements Serialisable, Parcelable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
@@ -56,37 +57,108 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
 
         super(l, c);
     }
+    /***
+     * Must be correct drawing
+     * @param i column
+     * @param j line
+     * @param d value 0..1
+     * @param compNoP r,g,b,a
+     */
+    public void writeComp(int i, int j, double d, int compNoP) {
+        int index = index(i, j);
+        setCompNo(compNoP);
+        if(compNoP<3) {
+            int pixelValue = x[index];
+            int mask1 = 0xffffffff - (0xff <<((2 - compNoP) * 8));
+            pixelValue = (pixelValue & mask1) | ((int) (d * 255) << ((2 - compNoP) * 8));
+            x[index] = pixelValue;
+        }
+    }
+
+    public void writeComps(int i, int j, int color) {
+        int index = index(i, j);
+        x[index] = color;
+
+    }
+
+    public double[] readCompsA(int i, int j) {
+        int d = x[index(i, j)];
+        int a = ((d & 0xFF000000) >> 24);
+        int r = ((d & 0x00FF0000) >> 16);
+        int g = ((d & 0x0000FF00) >> 8);
+        int b = ((d & 0x000000FF));
+        return new double[]{r / 255.99, g / 255.99, b / 255.99, a / 255.99};
+    }
+
+    public double[] readComps(int x, int y) {
+        int[] c = new int[4];
+        int res = 0xff000000;
+        int value = this.x[index(x, y)];
+        for (int i = 0; i < 3; i++) {
+            c[i] = (((int) (float) (value)) >> ((2 - i) * 8)) & 0xFF;
+            if (c[i] < 0)
+                c[i] = 0;
+            if (c[i] > 255)
+                c[i] = 255;
+            res |= c[i];
+        }
+        return new double[]{(double) c[0] / 255f, (double) c[1] / 255f, (double) c[2] / 255f};
+    }
+
+    public int getInt(int i, int j) {
+        return x[index(i, j)];
+    }
+
+    public int[] readCompsInts(int x, int y) {
+        int[] c = new int[4];
+        int res = 0xff000000;
+        int value = this.x[index(x, y)];
+        for (int i = 0; i < 4; i++) {
+            c[i] = (((int) (float) (value)) >> ((3 - i) * 8)) & 0xFF;
+            if (c[i] < 0)
+                c[i] = 0;
+            if (c[i] > 255)
+                c[i] = 255;
+            res += c[i];
+        }
+        return new int[]{c[0], c[1], c[2]/*, c[3] / 255.9999*/};
+    }
+
+    public void set(int column, int line, double d) {
+        if (column >= 0 && column < columns && line >= 0 && line < lines) {
+            writeComp(column, line, d, compNo);
+        }
+
+    }
 
     public PixM(Bitmap image) {
-        super(new Image(image));
-        /*
         this(image.getWidth(), image.getHeight());
-        double [] colorComponents = new double[4];
+        double [] colorComponents;
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < 3; com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
                 }
             }
-        }*/
+        }
     }
 
     public PixM(Bitmap image, boolean isBitmap) {
-        super(new Image(image));
-        /*double[] colorComponents = new double[3];
+        super(image.getWidth(), image.getHeight());
+        double[] colorComponents = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
                 }
             }
-        }*/
+        }
     }
 
     public PixM(double[][] distances) {
@@ -259,7 +331,9 @@ public class PixM extends one.empty3.feature.PixM implements Serialisable, Parce
                         setCompNo(c);
                         rgba[c] = get(i, j);
                     }
-                    image.setPixel(i, j, Lumiere.getInt(rgba));
+
+                    int pixel = 0xFF000000 | (int) (rgba[0] * 255) << 16 | (int) (rgba[1] * 255) << 8 | (int) (rgba[2] * 255);
+                    image.setPixel(i, j, pixel);
                 }
             }
             return new Image(image);
