@@ -49,7 +49,7 @@ public class LocalExtrema extends FilterMatPixM {
     public LocalExtrema(int width, int height, int neighbourSize, int pointsCount) {
         this.neighbourSize = neighbourSize;
         this.pointsCount = pointsCount;
-        //sub = new double[4*lines*columns];
+        sub = new double[4*height*width];
     }
 
 

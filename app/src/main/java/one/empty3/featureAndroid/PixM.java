@@ -82,28 +82,35 @@ public class PixM extends M implements Serialisable, Parcelable {
     }
 
     public double[] readCompsA(int i, int j) {
-        int d = x[index(i, j)];
-        int a = ((d & 0xFF000000) >> 24);
-        int r = ((d & 0x00FF0000) >> 16);
-        int g = ((d & 0x0000FF00) >> 8);
-        int b = ((d & 0x000000FF));
-        return new double[]{r / 255.99, g / 255.99, b / 255.99, a / 255.99};
+        if(i>=0&&i<columns&&j>=0&&j<lines) {
+            int d = x[index(i, j)];
+            int a = ((d & 0xFF000000) >> 24);
+            int r = ((d & 0x00FF0000) >> 16);
+            int g = ((d & 0x0000FF00) >> 8);
+            int b = ((d & 0x000000FF));
+            return new double[]{r / 255.99, g / 255.99, b / 255.99, a / 255.99};
+        }
+        return new double[] {0,0,0,0};
     }
 
-    public double[] readComps(int x, int y) {
-        int[] c = new int[4];
-        int res = 0xff000000;
-        int value = this.x[index(x, y)];
-        for (int i = 0; i < 3; i++) {
-            c[i] = (((int) (float) (value)) >> ((2 - i) * 8)) & 0xFF;
-            if (c[i] < 0)
-                c[i] = 0;
-            if (c[i] > 255)
-                c[i] = 255;
-            res |= c[i];
+    public double[] readComps(int i, int j) {
+        int[] c = new int[] {0,0,0,0};
+        if(i>=0&&i<columns&&j>=0&&j<lines&&index(i,j)<x.length&&index(i,j)>=0) {
+            int res = 0xff000000;
+            int value = this.x[index(i, j)];
+            for (int k = 0; k < 3; k++) {
+                c[k] = (((int) (float) (value)) >> ((2 - k) * 8)) & 0xFF;
+                if (c[k] < 0)
+                    c[k] = 0;
+                if (c[k] > 255)
+                    c[k] = 255;
+                c[k] |= res;
+            }
         }
         return new double[]{(double) c[0] / 255f, (double) c[1] / 255f, (double) c[2] / 255f};
     }
+
+
 
     public int getInt(int i, int j) {
         return x[index(i, j)];

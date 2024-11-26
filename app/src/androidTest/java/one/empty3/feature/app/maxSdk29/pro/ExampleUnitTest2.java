@@ -146,21 +146,21 @@ public class ExampleUnitTest2 {
         }
 
     }
-/*
+
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
                     "android.permission.WRITE_EXTERNAL_STORAGE");
-*/
+
     @Test
     public void testAllTestInMain2022() {
         // Context of the app under test.
+        File ins = new File("/storage/170E-321D/Pictures/m");
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             HashMap<String, ProcessFile> stringProcessFileHashMap = Main2022.initListProcesses();
-                File ins = new File("/storage/170E-321D/Pictures/m");
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins=" + ins.getAbsolutePath());
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins?" + ins.exists());
                 java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "ins.isDirectory?" + ins.isDirectory());

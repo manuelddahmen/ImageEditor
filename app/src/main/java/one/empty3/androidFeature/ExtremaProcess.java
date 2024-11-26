@@ -56,7 +56,10 @@ public class ExtremaProcess extends ProcessFile {
                 neighbourSize, pointsCount);
 
 
-        PixM m = le.filter(new M3(pix, 1, 1)).getImagesMatrix()[0][0];
+        M3 filter = le.filter(new M3(pix, 1, 1));
+        if(filter==null || filter.getImagesMatrix()== null || filter.getImagesMatrix().length==0 || filter.getImagesMatrix()[0]==null || filter.getImagesMatrix()[0].length==0)
+            return false;
+        PixM m =filter.getImagesMatrix()[0][0];
 
         try {
             one.empty3.ImageIO.write(m.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
