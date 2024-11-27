@@ -49,8 +49,14 @@ public class M3 extends MBitmap{
     int incrOK = 0;
 
     public M3(int columns, int lines, int columnsIn, int linesIn) {
-        super(columns*lines*columnsIn*linesIn);
-        int i = columns * lines * columnsIn * linesIn;
+        super(columns*columnsIn,lines*linesIn);
+        this.compCount = 3;
+        this.columnsIn = columnsIn;
+        this.linesIn = linesIn;
+        this.columns = columns;
+        this.lines = lines;
+        init();
+        int i = columns * lines * columnsIn * linesIn * compCount;
         x =new double[i];
     }
 

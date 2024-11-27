@@ -43,7 +43,7 @@ public class ExampleUnitTest2 {
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
-
+    String emulatorPhotosDirPath = "/storage/170E-321D/Pictures/m";
     @Test
     public void testBitmapPixMColors( ) {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -59,7 +59,7 @@ public class ExampleUnitTest2 {
         }
         PixM pixM = new PixM(bitmap);
         try {
-            File outputimage = new File("/storage/170E-321D/Pictures/testBitmapPixMColorRed100x100.jpg");
+            File outputimage = new File(emulatorPhotosDirPath + "/testBitmapPixMColorRed100x100.jpg");
             if(outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
@@ -87,7 +87,7 @@ public class ExampleUnitTest2 {
             }
         }
         try {
-            File outputimage = new File("/storage/170E-321D/Pictures/testBitmapColorRed100x100.jpg");
+            File outputimage = new File(emulatorPhotosDirPath+"/testBitmapColorRed100x100.jpg");
             if(outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
@@ -114,7 +114,7 @@ public class ExampleUnitTest2 {
                 pixM.set(pixM.index(i, j), color.getRGB());
             }
         }
-        File outputimage = new File("/storage/170E-321D/Pictures/testPixMColorRed1000x1000.jpg");
+        File outputimage = new File(emulatorPhotosDirPath+"/testPixMColorRed1000x1000.jpg");
         if (outputimage.exists())
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
@@ -156,7 +156,7 @@ public class ExampleUnitTest2 {
     @Test
     public void testAllTestInMain2022() {
         // Context of the app under test.
-        File ins = new File("/storage/170E-321D/Pictures/m");
+        File ins = new File(emulatorPhotosDirPath);
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

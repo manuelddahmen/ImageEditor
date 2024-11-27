@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import one.empty3.ImageIO;
 import one.empty3.featureAndroid.PixM;
@@ -58,6 +60,10 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void read(File s) throws NumberFormatException, IOException {
 
         try {
+            if(!(s.exists())) {
+                Logger.getAnonymousLogger().log(Level.SEVERE, "Pas de fichier d'entrée");
+                return;
+            }
             BufferedReader readFile = new BufferedReader(new FileReader(s));
             int j = 0;
             String line;
@@ -132,12 +138,14 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 double[] x1 = new double[numberOfFeatures];
                 int r = 0;
                 for (int i = 0; i < k; i++) {
-                    int r1 = (int) (Math.random() * features.size());
-                    r1 = (r1 >= features.size() ? features.size() - 1 : r1);
+                    if (!features.isEmpty()) {
+                        int r1 = (int) (Math.random() * features.size());
+                        r1 = (r1 >= features.size() ? features.size() - 1 : r1);
 
-                    x1 = features.get(r1);
-                    centroids.put(i, x1);
 
+                        x1 = features.get(r1);
+                        centroids.put(i, x1);
+                    }
                 }
                 //Hashmap for finding cluster indexes
                 clusters = kmeans(distance, centroids, k);

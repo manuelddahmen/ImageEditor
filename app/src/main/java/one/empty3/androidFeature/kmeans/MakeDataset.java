@@ -48,7 +48,12 @@ public class MakeDataset {
 
             int i = 0;
 
+            if(!outputCsv.getParentFile().exists())
+                outputCsv.getParentFile().mkdirs();
+
             PrintWriter pw = new PrintWriter(outputCsv);
+
+
             for (int l = 0; l < pix.getLines(); l++)
                 for (int c = 0; c < pix.getColumns(); c++) {
                     //if (pix.luminance(c, l) > 0.1) { // ADDED

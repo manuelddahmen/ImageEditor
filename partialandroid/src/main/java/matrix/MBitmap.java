@@ -36,7 +36,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public static int maxRes;
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = 0.0;
-    protected final int compCount = 3;
+    protected int compCount = 3;
     protected int columns;
     protected int lines;
     protected int compNo;

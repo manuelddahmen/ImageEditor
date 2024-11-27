@@ -168,7 +168,8 @@ public class Histogram1 extends ProcessFile {
 
                 Point3D intensityColor = Point3D.n(maxIJ, maxIJ, maxIJ).mult(maxIJ * maxR / rIJ).multDot(
                         inP.getP(i, j));
-                outP.setP(i, j, cc.maxColor);
+                if(cc!=null)
+                    outP.setP(i, j, cc.maxColor);
             }
         }
 

@@ -250,18 +250,9 @@ public class PixM extends M implements Serialisable, Parcelable {
 
                 int rgb = image.getPixel(
                         (int) (1.0 * i / columns2 * image.getWidth()), (int) (1.0 * j / lines2 * image.getHeight()));
-                double[] colorComponents = new double[3];
-                colorComponents = Lumiere.getDoubles(rgb);
-                for (int com = 0; com < pixM.getCompCount(); com++) {
-                    pixM.setCompNo(com);
-                    pixM.set(i, j, colorComponents[com]);
-
-                    //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
-                    //        (int) (cli2 * div));
-                    //pixM.set(i, j, );
-                }
+                pixM.set(pixM.index(i, j), rgb);
+                pixM.set(i, j, rgb);
             }
-
         }
         return pixM;
 

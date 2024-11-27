@@ -36,7 +36,11 @@ public class KMeans extends ProcessFile {
         // init centroids with random colored
         // points.
         try {
-            File inCsv = new File(out.getAbsolutePath() + ".csv");
+            File dir = new File(out.getParentFile().getAbsolutePath()+File.separator+"subKMeans");
+            if(!dir.exists())
+                dir.mkdir();
+
+            File inCsv = new File(dir.getAbsolutePath()+File.separator+"kMeans"+in.getName()+".csv");;
             if (inCsv.exists()) {
                 boolean deleted = inCsv.delete();
                 if (deleted)
