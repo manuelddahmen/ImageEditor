@@ -54,7 +54,7 @@ public class FeatureAppApplication extends Application implements Configuration.
         // Initialize the Vertex AI service and the generative model
 // Specify a model that supports your use case
 // Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
-        GenerativeModel generativeModel = FirebaseVertexAI.getInstance().generativeModel("gemini-1.5-pro-preview-0409");
+        //GenerativeModel generativeModel = FirebaseVertexAI.getInstance().generativeModel("gemini-1.5-pro-preview-0409");
     }
 
     public int getMaxRes() {

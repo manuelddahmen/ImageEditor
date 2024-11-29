@@ -37,12 +37,6 @@ public class KMeansRandom extends ProcessFile {
         // points.
         try {
             File inCsv = new File(out.getAbsolutePath() + ".csv");
-            if (inCsv.exists()) {
-                boolean deleted = inCsv.delete();
-                if (deleted)
-                    System.out.println("Fichier csv supprimé");
-            }
-
 
             new MakeDataset(in, inCsv, maxRes);
 

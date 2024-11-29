@@ -27,6 +27,7 @@ import java.io.File;
 import one.empty3.io.ProcessFile;
 import one.empty3.featureAndroid.PixM;
 import one.empty3.library.Point3D;
+import one.empty3.libs.Image;
 
 public class Hist4Contour3 extends ProcessFile {
     private int kMax = 3;
@@ -117,7 +118,7 @@ public class Hist4Contour3 extends ProcessFile {
             return false;
         }
         PixM inP;
-        inP = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
+        inP = PixM.getPixM(Image.loadFile(in), maxRes);
 
 
         double max = 0.0;

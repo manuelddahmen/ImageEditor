@@ -528,7 +528,7 @@ public class FaceOverlayView extends ImageViewSelection {
             int w = rect.right-rect.left;
             int h = rect.bottom-rect.top;
 
-            if(x+w>= googleFaceDetection.getBitmap().getWidth() && y+h>= googleFaceDetection.getBitmap().getHeight()
+            if(x+w< googleFaceDetection.getBitmap().getWidth() && y+h< googleFaceDetection.getBitmap().getHeight()
                     && x>=0 && y>=0) {
 
                 int[] ints = new int[w * h];

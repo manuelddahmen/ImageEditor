@@ -41,12 +41,6 @@ public class KMeans extends ProcessFile {
                 dir.mkdir();
 
             File inCsv = new File(dir.getAbsolutePath()+File.separator+"kMeans"+in.getName()+".csv");;
-            if (inCsv.exists()) {
-                boolean deleted = inCsv.delete();
-                if (deleted)
-                    System.out.println("Fichier csv supprimé");
-            }
-
 
             new MakeDataset(in, inCsv, maxRes);
 

@@ -20,7 +20,7 @@ public class Color extends android.graphics.Color implements IColorMp {
 
 
     public Color newCol(float r, float g, float b, float a) {
-        return new Color(android.graphics.Color.valueOf(r, g, b).toArgb()| 0xff000000);
+        return new Color(android.graphics.Color.valueOf(r, g, b, a).toArgb());
 
     }
 
@@ -78,18 +78,29 @@ public class Color extends android.graphics.Color implements IColorMp {
         return colorObject.toArgb() | 0xff000000;
     }
     public int getRed() {
+        if(colorObject == null)
+            return (int) (super.getComponents()[0]*255);
         return (int) (colorObject.red() * 255f);
     }
 
     public int getGreen() {
+
+        if(colorObject == null)
+            return (int) (super.getComponents()[1]*255);
         return (int) (colorObject.green() * 255f);
     }
 
     public int getBlue() {
+        if(colorObject == null)
+            return (int) (super.getComponents()[2]*255);
+
         return (int) (colorObject.blue() * 255f);
     }
 
     public int getAlpha() {
+        if(colorObject == null)
+            return (int) (super.getComponents()[3]*255);
+
         return (int) (colorObject.alpha() * 255f);
     }
 }

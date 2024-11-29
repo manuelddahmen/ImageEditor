@@ -31,11 +31,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
 import one.empty3.libs.Color;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class ExampleUnitTest2 {
     boolean mkdirs = true;
@@ -59,7 +54,7 @@ public class ExampleUnitTest2 {
         }
         PixM pixM = new PixM(bitmap);
         try {
-            File outputimage = new File(emulatorPhotosDirPath + "/testBitmapPixMColorRed100x100.jpg");
+            File outputimage = new File(emulatorPhotosDirPath + "/../testBitmapPixMColorRed100x100.jpg");
             if(outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
@@ -87,7 +82,7 @@ public class ExampleUnitTest2 {
             }
         }
         try {
-            File outputimage = new File(emulatorPhotosDirPath+"/testBitmapColorRed100x100.jpg");
+            File outputimage = new File(emulatorPhotosDirPath+"/../testBitmapColorRed100x100.jpg");
             if(outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
@@ -114,7 +109,7 @@ public class ExampleUnitTest2 {
                 pixM.set(pixM.index(i, j), color.getRGB());
             }
         }
-        File outputimage = new File(emulatorPhotosDirPath+"/testPixMColorRed1000x1000.jpg");
+        File outputimage = new File(emulatorPhotosDirPath+"/../testPixMColorRed1000x1000.jpg");
         if (outputimage.exists())
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
@@ -122,6 +117,52 @@ public class ExampleUnitTest2 {
         pixM.getBitmap().saveFile(outputimage);
         //fileOutputStream.close();
     }
+
+    @Test
+    public void testPixMColorsAndroidColorValueOf1() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        PixM pixM = new PixM(1000, 1000);
+        Color color = new Color(Color.valueOf(0xFFFF0000));
+        int width = pixM.getColumns();
+        int height = pixM.getLines();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                pixM.set(pixM.index(i,j), color.getRGB());
+            }
+        }
+        File outputimage = new File(emulatorPhotosDirPath+"/../testPixMColorsAndroidColorValueOf1.jpg");
+        if (outputimage.exists())
+            outputimage.delete();
+        outputimage = new File(outputimage.getAbsolutePath());
+        //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+        pixM.getBitmap().saveFile(outputimage);
+        //fileOutputStream.close();
+    }
+    @Test
+    public void testPixMColorsAndroidColorValueOf2( ) {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        PixM pixM = new PixM(1000, 1000);
+        Color color = new Color(0xFFFF0000);
+        int width = pixM.getColumns();
+        int height = pixM.getLines();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                double[] d1 = new double[5];
+                pixM.setValues(i,j,
+                        color.getRed(), color.getGreen(), color.getBlue());
+            }
+        }
+        File outputimage = new File(emulatorPhotosDirPath+"/../testPixMColorsAndroidColorValueOf2.jpg");
+        if (outputimage.exists())
+            outputimage.delete();
+        outputimage = new File(outputimage.getAbsolutePath());
+        //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+        pixM.getBitmap().saveFile(outputimage);
+        //fileOutputStream.close();
+    }
+
     @Test
     public void addition_isCorrect() {
         Assert.assertEquals(4, 2 + 2);
