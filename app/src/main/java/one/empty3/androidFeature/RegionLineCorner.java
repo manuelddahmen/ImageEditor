@@ -20,12 +20,11 @@
 
 package one.empty3.androidFeature;
 
-import android.graphics.Color;
-
 import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
+import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -322,7 +321,7 @@ public class RegionLineCorner extends ProcessFile {
                 Color color = Colors.random();
                 for (Circle c : lc) {
 
-                    img4.setRgb((int) (c.x), (int) (c.y), color.toArgb());
+                    img4.setRgb((int) (c.x), (int) (c.y), color.getRGB());
                 }
             }
             File fileToWrite = new File(directory.getAbsolutePath()

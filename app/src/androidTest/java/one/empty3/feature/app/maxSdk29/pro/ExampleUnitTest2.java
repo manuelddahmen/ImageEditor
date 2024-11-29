@@ -147,11 +147,11 @@ public class ExampleUnitTest2 {
         Color color = new Color(0xFFFF0000);
         int width = pixM.getColumns();
         int height = pixM.getLines();
+        System.out.println(color.getRed() + " " + color.getGreen() + " " + color.getBlue());
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 double[] d1 = new double[5];
-                pixM.setValues(i,j,
-                        color.getRed(), color.getGreen(), color.getBlue());
+                pixM.setValues(i, j, color.getRed()/255d, color.getGreen()/255d, color.getBlue()/255d);
             }
         }
         File outputimage = new File(emulatorPhotosDirPath+"/../testPixMColorsAndroidColorValueOf2.jpg");

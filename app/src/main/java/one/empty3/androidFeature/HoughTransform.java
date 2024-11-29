@@ -290,7 +290,7 @@ public class HoughTransform extends ProcessFile {
             for (int r = 0; r < doubleHeight; r++) {
                 double value = 255 * ((double) houghArray[t][r]) / max;
                 int v = 255 - (int) value;
-                int c = Color.newCol(v, v, v).toArgb();
+                int c = Color.newCol(v, v, v).getRGB();
                 image.setRgb(t, r, c);
             }
         }

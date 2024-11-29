@@ -357,7 +357,7 @@ public class Lines3 extends ProcessFile {
 
         Image bLines = new Image(o.getColumns(), o.getLines());
         for (LineSegment line : lines) {
-            int c = Colors.random().toArgb();
+            int c = Colors.random().getRGB();
             if (line.getLength() >= 2) {
                 /*for (double c = 0.0; c <= 1.0; c += 1 / line.getLength()) {
                     Point3D pDraw = line.getOrigine().plus(

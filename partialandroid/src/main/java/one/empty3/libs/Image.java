@@ -7,6 +7,7 @@ import android.os.Build;
 
 import org.jetbrains.annotations.NotNull;
 
+import one.empty3.library.core.nurbs.F;
 import one.empty3.libs.commons.IImageMp;
 
 import java.io.File;
@@ -56,7 +57,7 @@ public class Image extends BitmapDrawable implements IImageMp {
 
     @Override
     public boolean saveToFile(String path) {
-        return saveToFile(path);
+        return saveFile(new File(path));
     }
 
     @Override
