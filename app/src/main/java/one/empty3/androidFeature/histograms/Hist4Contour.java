@@ -1,19 +1,21 @@
 /*
- * Copyright (c) 2024.
  *
- *
- *  Copyright 2023 Manuel Daniel Dahmen
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  * Copyright (c) 2024. Manuel Daniel Dahmen
+ *  *
+ *  *
+ *  *    Copyright 2024 Manuel Daniel Dahmen
+ *  *
+ *  *    Licensed under the Apache License, Version 2.0 (the "License");
+ *  *    you may not use this file except in compliance with the License.
+ *  *    You may obtain a copy of the License at
+ *  *
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  *    Unless required by applicable law or agreed to in writing, software
+ *  *    distributed under the License is distributed on an "AS IS" BASIS,
+ *  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  *    See the License for the specific language governing permissions and
+ *  *    limitations under the License.
  *
  *
  */
@@ -21,14 +23,31 @@
 package one.empty3.androidFeature.histograms;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
-
-import one.empty3.ImageIO;
+import one.empty3.io.ObjectWithProperties;
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import one.empty3.io.ProcessNFiles;
 import one.empty3.library.Point3D;
+import one.empty3.feature.PixM;
+import one.empty3.libs.Image;
 
 public class Hist4Contour extends ProcessFile {
+
+    public Hist4Contour() {
+        super();
+        initProperties(this);
+    }
+
+    @Override
+    public void initProperties(ProcessNFiles processFile) {
+        super.initProperties(processFile);
+        getProperties().addProperty("kMax", ObjectWithProperties.ClassTypes.AtomicInt,
+                kMax);
+        getProperties().addProperty("fractMax", ObjectWithProperties.ClassTypes.AtomicDouble,
+                fractMax);
+
+    }
 
     private int kMax = 3;
     private double fractMax = 0.05;
@@ -105,9 +124,8 @@ public class Hist4Contour extends ProcessFile {
     }
 
 
-    @Override
     public boolean process(File in, File out) {
-        if (isImage(in)) {
+        if (!isImage(in)) {
             return false;
         }
         PixM inP;
@@ -120,7 +138,7 @@ public class Hist4Contour extends ProcessFile {
         PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
-        Point3D maxP = Point3D.O0.mult(1);
+        Point3D maxP = Point3D.X.mult(1);
         for (int i = 0; i < inP.getColumns(); i++) {
             for (int j = 0; j < inP.getLines(); j++) {
                 for (int k = 1; k < maxR; k += 1) {
@@ -152,19 +170,20 @@ public class Hist4Contour extends ProcessFile {
         }
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
-        //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-        ImageIO.write(outP.getImage().getImage(), "jpg", out, shouldOverwrite);
-        //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-        return true;
+            //new Image(1,1,4).saveToFile(outP.normalize(0, 1).getImage(), "jpg", out);
+        outP.getImage().saveFile(out);
+            //new Image(1,1,4).saveToFile(outP0.normalize(0, 1).getImage(), "jpg", out);
+            return true;
+
 
     }
 
     private PixM loadIn(File in) {
         PixM inP = null;
         if (maxRes == 0) {
-            inP = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+            inP = new PixM(Objects.requireNonNull(Image.loadFile(in)));
         } else {
-            inP = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            inP = PixM.getPixM(Objects.requireNonNull(Image.loadFile(in)), maxRes);
         }
         return inP;
     }

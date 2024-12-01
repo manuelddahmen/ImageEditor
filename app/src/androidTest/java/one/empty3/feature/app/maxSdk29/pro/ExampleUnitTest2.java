@@ -29,6 +29,7 @@ import one.empty3.androidFeature.IdentNullProcess;
 import one.empty3.featureAndroid.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
+import one.empty3.library.Point3D;
 import one.empty3.libs.Color;
 
 @RunWith(AndroidJUnit4.class)
@@ -162,7 +163,32 @@ public class ExampleUnitTest2 {
         pixM.getBitmap().saveFile(outputimage);
         //fileOutputStream.close();
     }
+    @Test
+    public void testPixMColorsAndroidGetPsetP( ) {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+        PixM pixM = new PixM(1000, 1000);
+        Color color = new Color(0xFFFF0000);
+        int width = pixM.getColumns();
+        int height = pixM.getLines();
+        System.out.println(color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+        pixM.setP(0, 0, new Point3D(Lumiere.getDoubles(color.getColor())));
 
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                double[] d1 = new double[5];
+                Point3D p = pixM.getP(0, 0);
+                pixM.setP(i, j, p);
+            }
+        }
+        File outputimage = new File(emulatorPhotosDirPath+"/../testPixMColorsAndroidGetPsetP.jpg");
+        if (outputimage.exists())
+            outputimage.delete();
+        outputimage = new File(outputimage.getAbsolutePath());
+        //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+        pixM.getBitmap().saveFile(outputimage);
+        //fileOutputStream.close();
+    }
     @Test
     public void addition_isCorrect() {
         Assert.assertEquals(4, 2 + 2);

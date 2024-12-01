@@ -37,7 +37,7 @@ public class IdentNullProcess extends ProcessFile {
             pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
         }
         assert pixM != null;
-        one.empty3.ImageIO.write(pixM.getBitmap().getImage(), "jpg", out);
+        pixM.getImage().saveFile(out);
         addSource(out);
         return true;
 

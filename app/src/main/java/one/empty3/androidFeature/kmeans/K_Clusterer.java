@@ -209,13 +209,13 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 centroids.forEach((integer1, db1) -> {
                     clustersPrint.forEach((doubles, integer2) -> {
                         if (Objects.equals(integer1, integer2)) {
-                            for (int i1 = 0; i1 < numberOfFeatures; i1++) {
+                            for (int i1 = 2; i1 < numberOfFeatures; i1++) {
                                 sums[integer2][i1] += doubles[i1];
                                 count[integer2]++;
                             }
                         }
                     });
-                    for (int i1 = 0; i1 < numberOfFeatures; i1++) {
+                    for (int i1 = 2; i1 < numberOfFeatures; i1++) {
                         sums[integer1][i1] = sums[integer1][i1] / count[i1];
                         colors[integer1] = Color.newCol(sums[integer1][i1], sums[integer1][i1], sums[integer1][i1]);
                     }
