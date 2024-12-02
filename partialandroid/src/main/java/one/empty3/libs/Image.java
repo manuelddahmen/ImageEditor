@@ -19,7 +19,7 @@ public class Image extends BitmapDrawable implements IImageMp {
     private Bitmap image;
 
     public Image(Bitmap image) {
-        if(image!=null) {
+        if (image != null) {
             setImage(image);
         }
     }
@@ -32,7 +32,8 @@ public class Image extends BitmapDrawable implements IImageMp {
     }
 
     public Image(int width, int height) {
-        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));;
+        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
+        ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }
@@ -72,14 +73,14 @@ public class Image extends BitmapDrawable implements IImageMp {
 
     @Override
     public int getWidth() {
-        if(image==null)
+        if (image == null)
             return getBitmap().getWidth();
         return image.getWidth();
     }
 
     @Override
     public int getHeight() {
-        if(image==null)
+        if (image == null)
             return getBitmap().getHeight();
         return image.getHeight();
     }
@@ -90,30 +91,24 @@ public class Image extends BitmapDrawable implements IImageMp {
 
     public static Image loadFile(File path) {
         Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(path));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            return new Image(bitmap);
-        }
         return new Image(bitmap);
     }
 
     public boolean saveFile(File path) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                try {
-                    if (image != null) {
-                        image.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                        return true;
-                    } else {
-                        getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                        return true;
-                    }
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+        try {
+            if (image != null) {
+                image.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
+                return true;
+            } else {
+                getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
+                return true;
             }
-        return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public @NotNull Bitmap getImage() {
-        return image==null?getBitmap():image;
+        return image == null ? getBitmap() : image;
     }
 }
