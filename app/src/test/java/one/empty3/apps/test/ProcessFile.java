@@ -20,7 +20,7 @@ package one.empty3.apps.test;/*
  *
  */
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.feature.ProcessBean;
 
 import one.empty3.io.ObjectWithProperties;

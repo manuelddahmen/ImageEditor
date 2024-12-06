@@ -25,7 +25,7 @@ de lumierrs filtrers.
 
 package one.empty3.androidFeature.pio;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.*;

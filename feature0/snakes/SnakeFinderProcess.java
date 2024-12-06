@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/snakes/SnakeFinderProcess.java
 package one.empty3.feature.snakes;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.snakes;
 

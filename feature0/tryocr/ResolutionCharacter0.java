@@ -35,7 +35,7 @@ import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 import one.empty3.feature.Linear;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.feature.shape.Rectangle;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;

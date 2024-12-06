@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.library.Lumiere;

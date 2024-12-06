@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/opsNto1/ComposeNto1.java
 package one.empty3.feature.opsNto1;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.opsNto1;
 

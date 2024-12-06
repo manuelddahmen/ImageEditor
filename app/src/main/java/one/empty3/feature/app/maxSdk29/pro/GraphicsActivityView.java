@@ -35,7 +35,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebraicTree;

@@ -32,7 +32,7 @@ import java.util.HashMap;
 <<<<<<<< HEAD:feature0/kmeans/MakeDataset.java
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 import matrix.PixM;
 import one.empty3.libs.Image;

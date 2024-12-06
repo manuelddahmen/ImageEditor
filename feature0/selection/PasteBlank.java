@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/selection/PasteBlank.java
 package one.empty3.feature.selection;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.selection;
 

@@ -24,7 +24,7 @@ package one.empty3.androidFeature;
 import java.io.File;
 
 import one.empty3.feature.app.pro.M3;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 public class GradSubstractProcess extends ProcessFile {

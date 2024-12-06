@@ -49,7 +49,7 @@ import androidx.preference.PreferenceManager
 import javaAnd.awt.Point
 import one.empty3.libs.Image
 import matrix.MBitmap
-import one.empty3.featureAndroid.PixM
+import matrix.PixM
 import one.empty3.io.ProcessFile
 import java.io.ByteArrayOutputStream
 import java.io.File

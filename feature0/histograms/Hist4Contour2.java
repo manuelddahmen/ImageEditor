@@ -24,7 +24,7 @@ package one.empty3.feature.histograms;
 import java.io.File;
 
 import one.empty3.ImageIO;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.histograms;
 

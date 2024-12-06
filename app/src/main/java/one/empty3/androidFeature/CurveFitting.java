@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.androidFeature.shape.Rectangle;
 import one.empty3.io.ProcessFile;

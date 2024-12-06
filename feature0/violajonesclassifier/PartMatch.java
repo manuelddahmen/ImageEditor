@@ -20,7 +20,7 @@
 
 package one.empty3.feature.violajonesclassifier;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 

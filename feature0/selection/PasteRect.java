@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/selection/PasteRect.java
 package one.empty3.feature.selection;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.feature.shape.Rectangle;
 ========
 package one.empty3.androidFeature.selection;

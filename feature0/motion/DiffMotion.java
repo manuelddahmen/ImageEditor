@@ -22,7 +22,7 @@
 package one.empty3.feature.motion;
 
 import one.empty3.feature.Linear;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 
 public class DiffMotion extends Motion {
     @Override

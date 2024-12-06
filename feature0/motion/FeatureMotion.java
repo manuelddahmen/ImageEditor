@@ -24,7 +24,7 @@ package one.empty3.feature.motion;
 import android.graphics.Color;
 
 import one.empty3.feature.FeatureMatch;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.motion;
 

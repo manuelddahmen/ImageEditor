@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;

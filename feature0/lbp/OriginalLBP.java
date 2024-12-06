@@ -20,7 +20,7 @@
 
 package one.empty3.feature.lbp;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.libs.*;

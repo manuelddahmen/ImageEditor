@@ -23,7 +23,7 @@
 //
 //import android.graphics.Bitmap;
 //
-//import matrix.matrix.PixM;
+//import matrix.PixM;
 //import one.empty3.library.Point3D;
 //
 //import java.util.PrimitiveIterator;

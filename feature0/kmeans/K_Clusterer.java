@@ -41,7 +41,7 @@ import java.util.Objects;
 
 import one.empty3.ImageIO;
 <<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java

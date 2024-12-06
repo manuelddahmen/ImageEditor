@@ -9,7 +9,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.Main2022
-import one.empty3.featureAndroid.PixM
+import matrix.PixM
 import one.empty3.feature.app.maxSdk29.pro.databinding.RecyclerViewEffectItemBinding
 import one.empty3.io.ProcessFile
 import java.io.File

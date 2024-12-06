@@ -112,7 +112,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import one.empty3.androidFeature.GoogleFaceDetection;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.ClosedCurve;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;

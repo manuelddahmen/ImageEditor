@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/motion/WebcamMotion.java
 package one.empty3.feature.motion;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.motion;
 

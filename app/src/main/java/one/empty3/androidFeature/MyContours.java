@@ -24,7 +24,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;

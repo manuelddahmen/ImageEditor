@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 
 public class GaussFiltermatrix.PixM extends Filtermatrix.PixM {
     private final one.empty3.featureAndroid.matrix.PixM in;

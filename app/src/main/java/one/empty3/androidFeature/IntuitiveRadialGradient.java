@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.*;
 
 public class IntuitiveRadialGradient extends Filtermatrix.PixM {

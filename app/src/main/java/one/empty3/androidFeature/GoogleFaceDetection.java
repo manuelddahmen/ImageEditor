@@ -25,7 +25,7 @@ import one.empty3.Polygon1;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Matrix33;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 import one.empty3.library.Serialisable;
 import one.empty3.library.StructureMatrix;
@@ -286,11 +286,11 @@ public class GoogleFaceDetection
                 this.polygon = polygon;
             }
 
-            public matrix.PixM getContours() {
+            public PixM getContours() {
                 return contours;
             }
 
-            public void setContours(matrix.PixM contours) {
+            public void setContours(PixM contours) {
                 this.contours = contours;
             }
 
@@ -348,12 +348,12 @@ public class GoogleFaceDetection
                 this.filledContours = filledContours;
             }
 
-            public matrix.PixM getFilledContours() {
+            public PixM getFilledContours() {
                 return filledContours;
             }
 
             @Nullable
-            public matrix.PixM getActualDrawing() {
+            public PixM getActualDrawing() {
                 return actualDrawing;
             }
 
@@ -523,9 +523,9 @@ public class GoogleFaceDetection
         }
         try {
             matrix.PixM decode1 = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
-            bitmap = decode1.getBitmap().getImage();
+            bitmap = decode1.getBitmap();
         } catch (NullPointerException e1) {
-            bitmap = new matrix.PixM(1, 1).getBitmap().getImage();
+            bitmap = new matrix.PixM(1, 1).getBitmap();
         }
         try {
             GoogleFaceDetection faceDetection = new GoogleFaceDetection(new Image(bitmap));
@@ -559,9 +559,9 @@ public class GoogleFaceDetection
             if (getBitmap() != null) {
                 new matrix.PixM(getBitmap()).encode(out);
             } else {
-                matrix.PixM matrix.PixM = new matrix.PixM(1, 1);
-                matrix.PixM.encode(out);
-                setBitmap(matrix.PixM.getBitmap().getImage());
+                PixM pixM = new PixM(1, 1);
+                pixM.encode(out);
+                setBitmap(pixM.getBitmap());
             }
             System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());

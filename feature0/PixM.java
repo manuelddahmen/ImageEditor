@@ -52,7 +52,7 @@ import one.empty3.library.Serialisable;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.libs.Image;
 
-public class PixM extends one.empty3.feature.PixM implements Serialisable, Parcelable {
+public class PixM extends matrix.PixM implements Serialisable, Parcelable {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;

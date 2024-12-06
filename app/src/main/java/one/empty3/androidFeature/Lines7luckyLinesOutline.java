@@ -31,7 +31,7 @@ import javaAnd.awt.Point;
 import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class Lines7luckyLinesOutline extends ProcessFile {

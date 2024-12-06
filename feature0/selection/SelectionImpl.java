@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/selection/SelectionImpl.java
 package one.empty3.feature.selection;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 ========

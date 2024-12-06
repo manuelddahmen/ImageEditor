@@ -24,7 +24,7 @@ import android.graphics.Color;
 
 import one.empty3.androidFeature.kmeans.MakeDataset;
 import one.empty3.androidFeature.kmeans.ReadDataset;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.core.lighting.Colors;
 

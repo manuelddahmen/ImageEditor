@@ -26,7 +26,7 @@ import java.util.List;
 
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 /*

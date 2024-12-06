@@ -22,7 +22,7 @@ package one.empty3.feature.tryocr;
 
 import one.empty3.libs.Color;
 import one.empty3.ImageIO;
-import one.empty3.feature.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;

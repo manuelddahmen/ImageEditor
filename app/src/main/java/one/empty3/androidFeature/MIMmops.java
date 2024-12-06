@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 import one.empty3.feature.M;
 import one.empty3.feature.app.pro.M3;
-import matrix.matrix.PixM;
+import matrix.PixM;
 
 /*
  * Multi-Image Matching using Multi-Scale Oriented Patches

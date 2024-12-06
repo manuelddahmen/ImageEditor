@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import one.empty3.io.ProcessFile;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class DBScanProcess extends ProcessFile {

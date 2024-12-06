@@ -21,7 +21,7 @@
 package one.empty3.androidFeature.motion;
 
 import one.empty3.androidFeature.Linear;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Image;
 
 public abstract class DiffMotion extends Motion {

@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 
 public class IsleFiltermatrix.PixM
         extends Filtermatrix.PixM {

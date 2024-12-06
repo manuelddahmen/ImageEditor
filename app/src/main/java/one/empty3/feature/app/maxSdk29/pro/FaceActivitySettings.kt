@@ -20,7 +20,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import one.empty3.androidFeature.GoogleFaceDetection
 import one.empty3.androidFeature.GoogleFaceDetection.FaceData.Surface
-import one.empty3.featureAndroid.PixM
+import matrix.PixM
 import one.empty3.library.ColorTexture
 import one.empty3.library.Lumiere
 import one.empty3.library.Point3D
@@ -657,7 +657,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceObject != null) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceObject
-                        .filledContours.bitmap.bitmap.copy(
+                        .filledContours.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
@@ -674,14 +674,14 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.bitmap.copy(
+                        .filledContours.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
             } else {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        .filledContours.copy(Bitmap.Config.ARGB_8888, true)
                 )
             }
         }

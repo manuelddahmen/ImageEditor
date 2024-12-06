@@ -25,7 +25,7 @@ import java.io.File;
 import java.util.Objects;
 
 import one.empty3.feature.app.pro.M3;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 public class GradProcess extends ProcessFile {

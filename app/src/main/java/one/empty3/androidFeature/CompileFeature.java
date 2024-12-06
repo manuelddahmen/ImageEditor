@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 
 public class CompileFeature {
     one.empty3.featureAndroid.matrix.PixM pix;

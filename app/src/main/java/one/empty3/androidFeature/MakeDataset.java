@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 

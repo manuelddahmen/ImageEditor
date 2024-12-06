@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import one.empty3.ImageIO;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {

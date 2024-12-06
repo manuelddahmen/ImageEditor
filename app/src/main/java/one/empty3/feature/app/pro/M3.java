@@ -27,7 +27,7 @@ import java.util.Random;
 
 import matrix.MBitmap;
 import one.empty3.androidFeature.Filtermatrix.PixM;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 

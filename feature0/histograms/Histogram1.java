@@ -21,7 +21,7 @@
 <<<<<<<< HEAD:feature0/histograms/Histogram1.java
 package one.empty3.feature.histograms;
 
-import one.empty3.feature.PixM;
+import matrix.PixM;
 ========
 package one.empty3.androidFeature.histograms;
 

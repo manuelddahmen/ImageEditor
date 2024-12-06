@@ -78,7 +78,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 import one.empty3.ImageIO;
-import matrix.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 import javaAnd.awt.Point;
 import one.empty3.libs.Image;

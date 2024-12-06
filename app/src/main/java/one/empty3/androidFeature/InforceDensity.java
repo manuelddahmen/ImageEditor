@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 
-import matrix.matrix.PixM;
+import matrix.PixM;
 
 /*
  * Prendre pour points d'intérêt les zones denses en intensité
