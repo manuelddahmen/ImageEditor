@@ -276,7 +276,7 @@ public class RegionLineCorner extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        matrix.PixM imageCoutours = matrix.PixM.getmatrix.PixM(new Image(in), 500.0);
+        matrix.PixM imageCoutours = PixM.getPixM(new Image(in), 500.0);
         this.m = imageCoutours;
         Image file = m.getImage();
 

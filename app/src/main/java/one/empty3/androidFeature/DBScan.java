@@ -123,7 +123,7 @@ public class DBScan extends ProcessFile {
             String s = in.getAbsoluteFile() + ".csv";
             MakeDataset makeDataset = new MakeDataset(in, new File(s), maxRes);
 
-            one.empty3.featureAndroid.matrix.PixM p = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            matrix.PixM p = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
             init(maxRes, minPoints);
             ReadDataset readDataset = new ReadDataset();
             readDataset.read(new File(s));

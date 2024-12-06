@@ -648,7 +648,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (maxRes > 0) {
         System.err.println("FileInputStream" + choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData, null, options);
-            photo = matrix.PixM.getmatrix.PixM(photo, maxRes).getImage().getImage();
+            photo = PixM.getPixM(photo, maxRes).getImage().getImage();
             System.err.println("Get file (bitmap) : " + photo);
         } else {
             System.err.println("FileInputStream" + choose_directoryData);

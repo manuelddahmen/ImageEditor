@@ -51,12 +51,12 @@ public abstract class Motion /*extends ProcessFile */ {
             return null;
         if (frames.size() >= 2 && frames.size() < BUFFER_MAX_FRAMES) {
 
-            frame1 = new matrix.PixM(frames.get(0).bufferedImage);
-            frame2 = new matrix.PixM(frames.get(1).bufferedImage);
+            frame1 = new PixM(frames.get(0).bufferedImage);
+            frame2 = new PixM(frames.get(1).bufferedImage);
             frames.remove(0);
         } else if (frames.size() >= BUFFER_MAX_FRAMES) {
-            frame1 = new matrix.PixM(frames.get(0).bufferedImage);
-            frame2 = new matrix.PixM(frames.get(1).bufferedImage);
+            frame1 = new PixM(frames.get(0).bufferedImage);
+            frame2 = new PixM(frames.get(1).bufferedImage);
             frames.remove(0);
         } else {
             return null;

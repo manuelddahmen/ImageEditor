@@ -20,9 +20,10 @@
 
 package one.empty3.androidFeature;
 
+import matrix.FilterPixM;
 import matrix.PixM;
 
-public class TrueHarris extends Filtermatrix.PixM {
+public class TrueHarris extends FilterPixM {
 
     public TrueHarris(matrix.PixM pix) {
         super(pix);

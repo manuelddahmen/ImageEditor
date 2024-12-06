@@ -40,7 +40,7 @@ public class FeatureDescriptor extends matrix.PixM {
         return true;
     }
 
-    public void setmatrix.PixM(matrix.PixM m) {
+    public void setPixM(matrix.PixM m) {
         this.m = m;
         HarrisToPointInterest h = new HarrisToPointInterest(
                 m.getColumns(), m.getLines());
@@ -56,9 +56,9 @@ public class FeatureDescriptor extends matrix.PixM {
 
         for (File file : set) {
             try {
-                matrix.PixM pm = new matrix.PixM(one.empty3.ImageIO.read(file));
+                matrix.PixM pm = new PixM(one.empty3.ImageIO.read(file));
                 for (FeatureDescriptor f : fd) {
-                    f.setmatrix.PixM(pm);
+                    f.setPixM(pm);
                     for (int i = 0; i < poi.size(); i++) {
                         double de = f.deltaEnergy((int) (double) (poi.get(i).getX()), (int) (double) (poi.get(i).getY()));
                         if (de < 0.5) {

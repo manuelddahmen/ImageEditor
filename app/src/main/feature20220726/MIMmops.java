@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  * Multi-Image Matching using Multi-Scale Oriented Patches
  */
 public class MIMmops {
-    public static matrix.PixM applyMultipleFilters(matrix.PixM matrix.PixM, int level, Filtermatrix.PixM... filter) {
+    public static matrix.PixM applyMultipleFilters(PixM pixM, int level, FilterpixM... filter) {
 
         final matrix.PixM[] res = {matrix.PixM};
         for (int i = 0; i < level; i++) {
@@ -44,9 +44,9 @@ public class MIMmops {
 
             // La dérivée et le filtre ne sont pas les mêmes. sommeMatrice(e-..)   et
             // (get(x+1)-2*get(x)+get(x-1) + get(y+1)+2*get(y)-get(y))/4/4 ou /1/1 ??
-            Arrays.stream(filter).sequential().forEach(new Consumer<Filtermatrix.PixM>() {
+            Arrays.stream(filter).sequential().forEach(new Consumer<FilterPixM>() {
                 @Override
-                public void accept(Filtermatrix.PixM filtermatrix.PixM) {
+                public void accept(FilterPixM filtermatrix.PixM) {
                     res[0] = res[0].applyFilter(filtermatrix.PixM);
 
 

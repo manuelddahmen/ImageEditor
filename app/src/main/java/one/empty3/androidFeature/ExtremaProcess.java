@@ -38,12 +38,12 @@ public class ExtremaProcess extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.matrix.PixM pix = null;
+        matrix.PixM pix = null;
         if (!isImage(in))
             return false;
 
         try {
-            pix = new one.empty3.featureAndroid.matrix.PixM(one.empty3.ImageIO.read(in));
+            pix = new PixM(one.empty3.ImageIO.read(in));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

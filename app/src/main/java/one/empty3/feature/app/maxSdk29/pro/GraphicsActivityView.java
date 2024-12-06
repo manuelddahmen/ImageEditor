@@ -124,9 +124,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
             try {
                 Image read = one.empty3.ImageIO.read(currentFile1);
                 if (getMaxRes() > 0 && read!=null) {
-                    current = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(read).getImage(), getMaxRes());
+                    current = PixM.getPixM(Objects.requireNonNull(read).getImage(), getMaxRes());
                 } else if(read!=null){
-                    current = new matrix.PixM(Objects.requireNonNull(read));
+                    current = new PixM(Objects.requireNonNull(read));
                 }
             } catch (NullPointerException ignored) {
 
@@ -134,9 +134,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
         }
         if (current == null) {
             if (getMaxRes() <= 0) {
-                current = new matrix.PixM(getMaxRes(), getMaxRes());
+                current = new PixM(getMaxRes(), getMaxRes());
             } else {
-                current = new matrix.PixM(w, h);
+                current = new PixM(w, h);
             }
         }
         w = current.getColumns();
@@ -195,7 +195,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
         progress = 100;
 
             if(current!=null) {
-                Bitmap bitmap = current.normalize(0, 1).getBitmap().getImage();
+                Bitmap bitmap = current.normalize(0, 1).getBitmap();
                 File graphics_math = new Utils().writePhoto(this, new Image(bitmap), "graphics_math");
                 this.currentFile.add(new DataApp(graphics_math));
                 new Utils().setImageView(image, bitmap);

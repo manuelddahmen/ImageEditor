@@ -94,8 +94,8 @@ public class Hist1Votes extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM inP = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
-        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM inP = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+        matrix.PixM outP = new PixM(inP.getColumns(), inP.getLines());
 
         int[] ints = new int[inP.getLines() * inP.getColumns() * 3];
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
@@ -122,7 +122,7 @@ public class Hist1Votes extends ProcessFile {
         }
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-            one.empty3.ImageIO.write(outP.normalize(0, 1).getBitmap().getImage(), "jpg", out);
+            one.empty3.ImageIO.write(outP.normalize(0, 1).getBitmap(), "jpg", out);
             //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             return true;
 

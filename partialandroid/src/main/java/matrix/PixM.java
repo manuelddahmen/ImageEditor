@@ -35,7 +35,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-import one.empty3.feature.FilterPixM;
 import one.empty3.feature.V;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;

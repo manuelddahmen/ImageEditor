@@ -31,7 +31,7 @@ public class TransformColor extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
 
-        one.empty3.featureAndroid.matrix.PixM pix = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
+        matrix.PixM pix = PixM.getPixM(ImageIO.read(in), maxRes);
 
         for (int i = 0; i < pix.getColumns(); i++) {
             for (int j = 0; j < pix.getLines(); j++) {

@@ -50,7 +50,7 @@ public class PasteRect extends ProcessFile {
      */
     public matrix.PixM pasteList(matrix.PixM img, ITexture col) {
 
-        final matrix.PixM res = new matrix.PixM(img.getColumns(), img.getLines());
+        final matrix.PixM res = new PixM(img.getColumns(), img.getLines());
         for (int i = 0; i < img.getColumns() * img.getLines(); i++) {
 
             int ix = (i % img.getColumns());
@@ -155,9 +155,9 @@ public class PasteRect extends ProcessFile {
         if (!in.getAbsolutePath().endsWith("jpg"))
             return false;
         Image read = new Image(new Image(in));
-        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read, maxRes);
+        PixM pixM = PixM.getPixM(read, maxRes);
         getSource("paste");
-        matrix.PixM matrix.PixM1 = pasteList(matrix.PixM, new ColorTexture(new Color(Color.BLACK.getRGB())));
+        PixM pixM1 = pasteList(matrix.PixM, new ColorTexture(new Color(Color.BLACK.getRGB())));
         new Image(1,1,4).saveToFile(matrix.PixM1.normalize(0, 1).getImage(), "jpg", out);
         return true;
     }

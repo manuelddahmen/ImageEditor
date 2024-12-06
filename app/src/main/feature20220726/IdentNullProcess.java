@@ -35,9 +35,9 @@ public class IdentNullProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM matrix.PixM = null;
-        matrix.PixM = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(in)), maxRes);
-        new Image(1,1,4).saveToFile(matrix.PixM.getImage(), "jpg", out);
+        PixM pixM = null;
+        matrix.PixM = PixM.getPixM(Objects.requireNonNull(new Image(in)), maxRes);
+        new Image(1,1,4).saveToFile(pixM.getImage(), "jpg", out);
         addSource(out);
         return true;
 

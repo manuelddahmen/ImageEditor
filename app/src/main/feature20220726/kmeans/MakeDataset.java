@@ -44,9 +44,9 @@ public class MakeDataset {
             matrix.PixM pix;
             if (res > 0)
 
-                pix = matrix.PixM.getmatrix.PixM(img, res);
+                pix = PixM.getPixM(img, res);
             else
-                pix = new matrix.PixM(img);
+                pix = new PixM(img);
 
             PrintWriter pw = new PrintWriter(outputCsv);
             for (int l = 0; l < pix.getLines(); l++)

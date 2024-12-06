@@ -24,7 +24,7 @@ package one.empty3.feature20220726;
 
 import java.util.ArrayList;
 
-public class LocalExtrema extends FilterMatmatrix.PixM {
+public class LocalExtrema extends FilterMatPixM {
     private boolean setMin = false;
     private final int pointsCount;
     private final int neighbourSize;
@@ -115,9 +115,9 @@ public class LocalExtrema extends FilterMatmatrix.PixM {
     }
 
     private double lambda1dot2div1sum2(M3 original, int compNo, int i, int j) {
-        matrix.PixM matrix.PixM = new matrix.PixM(3, 3);
-        matrix.PixM.setRegionCopy(original, 0, 0, i - 1, j - 1, i + 1, j + 1, matrix.PixM, 0, 0);
-        return matrix.PixM.determinant() / matrix.PixM.diagonalSum();
+        PixM pixM = new PixM(3, 3);
+        pixM.setRegionCopy(original, 0, 0, i - 1, j - 1, i + 1, j + 1, matrix.PixM, 0, 0);
+        return pixM.determinant() / pixM.diagonalSum();
     }
 
     @Override

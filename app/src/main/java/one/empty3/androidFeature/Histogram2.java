@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class Histogram2 extends ProcessFile {
     private int numLevels = 10;
-    private one.empty3.featureAndroid.matrix.PixM m = null;
+    private matrix.PixM m = null;
     private double[] max;
     private double[] min;
 
@@ -65,7 +65,7 @@ public class Histogram2 extends ProcessFile {
     }
 
     //private final int[][][] levels;
-    public void setM(one.empty3.featureAndroid.matrix.PixM m2) {
+    public void setM(matrix.PixM m2) {
         this.m = m2;
     }
 
@@ -180,7 +180,7 @@ public class Histogram2 extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        one.empty3.featureAndroid.matrix.PixM imageCoutours = new one.empty3.featureAndroid.matrix.PixM(one.empty3.ImageIO.read(in));
+        matrix.PixM imageCoutours = new PixM(one.empty3.ImageIO.read(in));
         this.m = imageCoutours;
         Image file = m.getImage();
 
@@ -234,7 +234,7 @@ public class Histogram2 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        one.empty3.ImageIO.write(new matrix.PixM(img3).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
+        one.empty3.ImageIO.write(new PixM(img3).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
                 /*
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);

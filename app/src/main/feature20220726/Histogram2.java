@@ -185,7 +185,7 @@ public class Histogram2 extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        matrix.PixM imageCoutours = new matrix.PixM(new Image(in));
+        matrix.PixM imageCoutours = new PixM(new Image(in));
         this.m = imageCoutours;
         Image file = m.getImage();
 
@@ -240,7 +240,7 @@ public class Histogram2 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        new Image(1,1,4).saveToFile(new matrix.PixM(img3.Image).normalize(0., 1.).getImage(), "JPEG", out);
+        new Image(1,1,4).saveToFile(new PixM(img3.Image).normalize(0., 1.).getImage(), "JPEG", out);
                 /*
                 new Image(1,1,4).saveToFile(img, "JPEG", fileToWrite);
                 new Image(1,1,4).saveToFile(img, "JPEG", fileToWrite2);

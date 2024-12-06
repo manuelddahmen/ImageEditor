@@ -43,7 +43,7 @@ public class SnakeFinderProcess extends ProcessFile {
     public boolean process(File in, File out) {
         DipSnake snake = new DipSnake();
         try {
-            matrix.PixM image = matrix.PixM.getmatrix.PixM(new one.empty3.libs.Image(new Image(in)), maxRes);
+            matrix.PixM image = PixM.getPixM(new one.empty3.libs.Image(new Image(in)), maxRes);
             for (int i = 0; i < 6; i++) {
                 snake.add(i, new Point3D(image.getColumns() / 2 + 0.6 * image.getColumns() / 2 * Math.cos(2 * 3.1416),
                         image.getLines() / 2 - 0.6 * image.getLines() / 2 * Math.sin(2 * 3.1416),

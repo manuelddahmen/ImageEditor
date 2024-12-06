@@ -54,7 +54,7 @@ public class PartMatch extends ProcessFile {
         for (int n = 4; n <= N; n *= 2) {
             for (double a = 0; a < 1.; a += 1 / 16.) {
 
-                matrix.PixM matrix.PixM = new matrix.PixM(n, n);
+                PixM pixM = new PixM(n, n);
 
                 double lineAx = (Math.cos(Math.PI * 2 * a) + 0.5) * n;
                 double lineAy = (Math.sin(Math.PI * 2 * a) + 0.5) * n;
@@ -68,9 +68,9 @@ public class PartMatch extends ProcessFile {
                     for (int j = 0; j < n; j++) {
                         Point2D p = new Point2D(i, j);
                         double sign = Math.signum(prod2(pb.moins(pa), pb.moins(p)));
-                        matrix.PixM.setValues(i, j, sign, sign, sign);
+                        pixM.setValues(i, j, sign, sign, sign);
                     }
-                new Image(1,1,4).saveToFile(matrix.PixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
+                new Image(1,1,4).saveToFile(pixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
                         + n + "_angle_" + a + ".jpg"));
 
                 featuresDescriptors.add(matrix.PixM);
@@ -117,7 +117,7 @@ public class PartMatch extends ProcessFile {
     public boolean process(File in, File out) {
         featuresDescriptors = new ArrayList<>();
 
-        matrix.PixM pix = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+        matrix.PixM pix = PixM.getPixM(new Image(in), maxRes);
 
         Image outImg = pix.getImage();
 
@@ -152,11 +152,11 @@ public class PartMatch extends ProcessFile {
         return true;
     }
 
-    private void classify(double m, matrix.PixM matrix.PixM) {
+    private void classify(double m, PixM pixM) {
 
     }
 
-    private double matchScore(matrix.PixM pix, int i, int j, int n, matrix.PixM matrix.PixM) {
+    private double matchScore(matrix.PixM pix, int i, int j, int n, PixM pixM) {
         return 0;
     }
 

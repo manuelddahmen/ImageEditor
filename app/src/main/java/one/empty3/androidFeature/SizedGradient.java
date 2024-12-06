@@ -20,6 +20,7 @@
 
 package one.empty3.androidFeature;
 
+import matrix.FilterPixM;
 import one.empty3.library.*;
 
 /*
@@ -35,7 +36,7 @@ sobel. 3×3 ou plus. 1*2+1
 = M3 cols, lines, sigmas
  Map of vectors. 
 */
-public class SizedGradient extends Filtermatrix.PixM {
+public class SizedGradient extends FilterPixM {
     private double dist = 2.0;
 
     public SizedGradient(double dist) {

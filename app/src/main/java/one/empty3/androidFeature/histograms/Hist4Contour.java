@@ -29,7 +29,7 @@ import one.empty3.io.ObjectWithProperties;
 import one.empty3.io.ProcessFile;
 import one.empty3.io.ProcessNFiles;
 import one.empty3.library.Point3D;
-import one.empty3.feature.matrix.PixM;
+import matrix.PixM;
 import one.empty3.libs.Image;
 
 public class Hist4Contour extends ProcessFile {
@@ -87,7 +87,7 @@ public class Hist4Contour extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, matrix.PixM m) {
+    public Circle getLevel(Circle c, PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -128,14 +128,14 @@ public class Hist4Contour extends ProcessFile {
         if (!isImage(in)) {
             return false;
         }
-        matrix.PixM inP;
+        PixM inP;
 
         inP = loadIn(in);
 
 
         double max = 0.0;
-        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
-        matrix.PixM outP0 = new matrix.PixM(inP.getColumns(), inP.getLines());
+        PixM outP = new PixM(inP.getColumns(), inP.getLines());
+        PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.X.mult(1);
@@ -178,12 +178,12 @@ public class Hist4Contour extends ProcessFile {
 
     }
 
-    private matrix.PixM loadIn(File in) {
-        matrix.PixM inP = null;
+    private PixM loadIn(File in) {
+        PixM inP = null;
         if (maxRes == 0) {
-            inP = new matrix.PixM(Objects.requireNonNull(Image.loadFile(in)));
+            inP = new PixM(Objects.requireNonNull(Image.loadFile(in)));
         } else {
-            inP = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(Image.loadFile(in)), maxRes);
+            inP = PixM.getPixM(Objects.requireNonNull(Image.loadFile(in)), maxRes);
         }
         return inP;
     }

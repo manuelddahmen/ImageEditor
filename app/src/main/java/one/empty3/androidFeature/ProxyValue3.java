@@ -36,7 +36,7 @@ public class ProxyValue3 extends ProcessFile {
         matrix.PixM original = null;
 
         try {
-            original = matrix.PixM.getmatrix.PixM(one.empty3.ImageIO.read(in), maxRes);
+            original = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

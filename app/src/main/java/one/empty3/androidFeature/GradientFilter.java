@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
 
-public class GradientFilter extends FilterMatmatrix.PixM {
+public class GradientFilter extends FilterMatPixM {
 
     protected int columnsIn = 2;
     protected int linesIn = 2;

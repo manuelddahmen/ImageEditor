@@ -52,7 +52,7 @@ public class MFactory {
 //        } else {
 //            Image read = one.empty3.ImageIO.read(in);
 //            assert read != null;
-//            return new matrix.PixM(read);
+//            return new PixM(read);
 //        }
 //    }
 }

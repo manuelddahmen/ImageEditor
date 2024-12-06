@@ -25,14 +25,14 @@ package one.empty3.feature20220726;
 import one.empty3.libs.*;
 
 public class IsleFiltermatrix.PixM
-        extends Filtermatrix.PixM {
+        extends FilterPixM {
     private Color selColor;
     private Color oppositeColor;
     private double threshold;
     private float selComps[] = new float[4];
     private float oppComps[] = new float[4];
 
-    public IsleFiltermatrix.PixM(matrix.PixM pix) {
+    public IsleFilterPixM(matrix.PixM pix) {
         super(pix);
     }
 

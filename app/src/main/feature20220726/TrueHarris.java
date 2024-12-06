@@ -24,7 +24,7 @@ package one.empty3.feature20220726;
 
 import one.empty3.libs.Image;
 
-public class TrueHarris extends Filtermatrix.PixM {
+public class TrueHarris extends FilterPixM {
 
     public TrueHarris(matrix.PixM pix) {
         super(pix);

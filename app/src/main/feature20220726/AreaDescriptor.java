@@ -51,7 +51,7 @@ public abstract class AreaDescriptor {
         });
     }
 
-    public abstract Filtermatrix.PixM getFilter();
+    public abstract FilterPixM getFilter();
 
     public abstract double match();
 }

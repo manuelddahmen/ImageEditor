@@ -216,7 +216,7 @@ private int sizeElement = 20, elementSize=20;
 
             if (!in.getName().endsWith(".jpg"))
                 return false;
-            matrix.PixM pi = new matrix.PixM(new Image(in));
+            matrix.PixM pi = new PixM(new Image(in));
             moutA = pi;
             moutB = pi;
             // work on featutes

@@ -27,7 +27,6 @@ import android.util.Log;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 
-import one.empty3.feature.FilterPixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 

@@ -68,7 +68,7 @@ public class Classification extends ProcessFile {
         matrix.PixM selectPointColorMassAglo = null;
         Image read = null;
         read = Objects.requireNonNull(new Image(in));
-        selectPointColorMassAglo = matrix.PixM.getmatrix.PixM(read, maxRes);
+        selectPointColorMassAglo = PixM.getPixM(read, maxRes);
         imageOut = new Image(in);
         SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read);
         int color = Color.WHITE.getRGB();

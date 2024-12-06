@@ -153,7 +153,7 @@ public class Histogram {
             Image img = file;
             Image img2 = new Image(img.getWidth(), img.getHeight(), Image.TYPE_INT_RGB);
             Image img3 = new Image(img.getWidth(), img.getHeight(), Image.TYPE_INT_RGB);
-            Histogram histogram = new Histogram(new matrix.PixM(img), levels, min, radiusIncr, 0.1);
+            Histogram histogram = new Histogram(new PixM(img), levels, min, radiusIncr, 0.1);
             int finalI = i;
             List<Circle> pointsOfInterest = histogram.getPointsOfInterest(0.1);
             pointsOfInterest.stream().forEach(circle -> {

@@ -49,7 +49,7 @@ public class GradAddProcess extends ProcessFile {
 <<<<<<<< HEAD:feature0/GradAddProcess.java
             pix = PixM.getPixM(
 ========
-            pix = matrix.PixM.getPixM(
+            pix = PixM.getPixM(
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradAddProcess.java
                     Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
@@ -60,7 +60,7 @@ public class GradAddProcess extends ProcessFile {
             ).getImagesMatrix();
 
             Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1],
-                    new matrix.PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
+                    new PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
 
             boolean b = linear.op2d2d(new char[]{'+'}, new int[][]{{0}, {1}}, new int[]{2});
 

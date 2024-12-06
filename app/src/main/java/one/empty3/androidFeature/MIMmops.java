@@ -23,6 +23,7 @@ package one.empty3.androidFeature;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
+import matrix.FilterPixM;
 import one.empty3.feature.M;
 import one.empty3.feature.app.pro.M3;
 import matrix.PixM;
@@ -31,9 +32,9 @@ import matrix.PixM;
  * Multi-Image Matching using Multi-Scale Oriented Patches
  */
 public class MIMmops {
-    public static one.empty3.featureAndroid.matrix.PixM applyMultipleFilters(one.empty3.featureAndroid.matrix.PixM matrix.PixM, int level, one.empty3.androidFeature.Filtermatrix.PixM... filter) {
+    public static matrix.PixM applyMultipleFilters(PixM pixM, int level, FilterPixM... filter) {
 
-        final one.empty3.featureAndroid.matrix.PixM[] res = {matrix.PixM};
+        final matrix.PixM[] res = {pixM};
         for (int i = 0; i < level; i++) {
             // Hl(x, y) = ∇σd Pl(x, y)∇σd Pl(x, y)T∗ gσi(x, y)
             // g      -> Gauss filter
@@ -46,19 +47,14 @@ public class MIMmops {
 
             // La dérivée et le filtre ne sont pas les mêmes. sommeMatrice(e-..)   et
             // (get(x+1)-2*get(x)+get(x-1) + get(y+1)+2*get(y)-get(y))/4/4 ou /1/1 ??
-            Arrays.stream(filter).sequential().forEach(new Consumer<one.empty3.androidFeature.Filtermatrix.PixM>() {
+            Arrays.stream(filter).sequential().forEach(new Consumer<FilterPixM>() {
                 @Override
-                public void accept(Filtermatrix.PixM filtermatrix.PixM) {
-                    res[0] = res[0].applyFilter(filtermatrix.PixM);
-
-
+                public void accept(FilterPixM filterPixM) {
+                    pixM.applyFilter(filterPixM);
                 }
             });
-
         }
-
-
-        return res[0];
+        return pixM;
     }
 
 

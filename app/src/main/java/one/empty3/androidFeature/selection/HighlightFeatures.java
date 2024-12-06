@@ -146,13 +146,13 @@ public class HighlightFeatures extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         Image read = ImageIO.read(in);
-        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read.getImage());
+        PixM pixM = PixM.getPixM(read.getImage());
         File stackItem = getStackItem(1);
-        matrix.PixM original = new matrix.PixM(ImageIO.read(stackItem));
-        int cadre = (int) Math.min((matrix.PixM.getColumns() + matrix.PixM.getLines()) / 2., 10.);
-        for (int i = 0; i < matrix.PixM.getColumns(); i++)
-            for (int j = 0; j < matrix.PixM.getLines(); j++) {
-                double luminance = matrix.PixM.luminance(i, j);
+        matrix.PixM original = new PixM(ImageIO.read(stackItem));
+        int cadre = (int) Math.min((pixM.getColumns() + pixM.getLines()) / 2., 10.);
+        for (int i = 0; i < pixM.getColumns(); i++)
+            for (int j = 0; j < pixM.getLines(); j++) {
+                double luminance = pixM.luminance(i, j);
                 if (luminance > 0.1) {
                     for (int x = i - cadre; x < i + cadre; x++)
                         for (int y = j - cadre; y < j + cadre; y++) {

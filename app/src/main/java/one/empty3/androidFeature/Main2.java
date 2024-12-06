@@ -73,7 +73,7 @@ public class Main2 {
                     Image image = one.empty3.ImageIO.read(new File("resources/" + s));
 
                     GradientFilter gradientMask = new GradientFilter(image.getWidth(), image.getHeight());
-                    matrix.PixM matrix.PixMOriginal = matrix.PixM.getmatrix.PixM(image, 300);
+                    PixM pixMOriginal = PixM.getPixM(image, 300);
                     M3 imgFprGrad = new M3(image, 300, 300, 2, 2);
                     M3 filter = gradientMask.filter(imgFprGrad);
                     matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
@@ -83,7 +83,7 @@ public class Main2 {
 
                     // Zero. +++Zero orientation variation.
                     Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                            new matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
+                            new PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
                     linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
                     matrix.PixM smoothedGrad = linear.getImages()[2]; //.applyFilter(new GaussFilterPixGMatrix(4, sigma));
                     int itereAngleGrad = 12;
@@ -98,12 +98,12 @@ public class Main2 {
                     }
 
                     for (double sigma = 0.8; sigma < 2.0; sigma += 0.2) {
-                        matrix.PixM matrix.PixM = smoothedGrad.applyFilter(new GaussFilterPixGMatrix(smoothedGrad, 4, sigma));
+                        PixM pixM = smoothedGrad.applyFilter(new GaussFilterPixGMatrix(smoothedGrad, 4, sigma));
 
 
                         for (int size = 1; size < 16; size *= 2) {
                             //
-                            M3 smoothedGradM3 = new M3(matrix.PixM.subSampling(size), 1, 1);
+                            M3 smoothedGradM3 = new M3(pixM.subSampling(size), 1, 1);
                             // Search local maximum
                             LocalExtrema localExtrema = new LocalExtrema(smoothedGradM3.getColumns(), smoothedGradM3.getLines(), 3, 2);
                             matrix.PixM[][] filter2 = localExtrema.filter(smoothedGradM3).normalize(0.0, 1.0);
@@ -146,9 +146,9 @@ public class Main2 {
                         try {
                             String sub = s + "/4/OrientedGradExtremum_2_" +
                                     +angle + ".jpg";
-                            File image = work(directory, matrix.PixM.getImage().getBitmap(), sub);
-                            Image image1 = matrix.PixM.getImage().getBitmap();
-                            Histogram.testCircleSelect(image1, new File("resources"), 10, 0.3, matrix.PixM.getColumns() / 10.0);
+                            File image = work(directory, pixM.getImage().getBitmap(), sub);
+                            Image image1 = pixM.getImage().getBitmap();
+                            Histogram.testCircleSelect(image1, new File("resources"), 10, 0.3, pixM.getColumns() / 10.0);
                             //i[0]++;
                             System.gc();
                         } catch (IOException e) {

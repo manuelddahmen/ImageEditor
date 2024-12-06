@@ -37,23 +37,23 @@ public class MagnitudeProcess extends ProcessFile {
         if (!in.getName().endsWith(".jpg"))
             return false;
         File file = in;
-        one.empty3.featureAndroid.matrix.PixM pix;
+        matrix.PixM pix;
         try {
-            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(one.empty3.ImageIO.read(file), maxRes);
+            pix = PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
-            one.empty3.featureAndroid.matrix.PixM[][] imagesMatrix = gf.filter(
+            matrix.PixM[][] imagesMatrix = gf.filter(
                     new M3(
                             pix, 2, 2)
             ).getImagesMatrix();
             Linear linearProd1 = new Linear(imagesMatrix[0][0], imagesMatrix[0][0],
-                    new one.empty3.featureAndroid.matrix.PixM(pix.getColumns(), pix.getLines()));
+                    new PixM(pix.getColumns(), pix.getLines()));
             linearProd1.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
             Linear linearProd2 = new Linear(imagesMatrix[0][1], imagesMatrix[0][1],
-                    new one.empty3.featureAndroid.matrix.PixM(pix.getColumns(), pix.getLines()));
+                    new PixM(pix.getColumns(), pix.getLines()));
             linearProd2.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
             Linear res = new Linear(linearProd1.getImages()[2], linearProd2.getImages()[2],
-                    new matrix.PixM(pix.getColumns(), pix.getLines()));
+                    new PixM(pix.getColumns(), pix.getLines()));
             res.op2d2d(new char[]{'+'}, new int[][]{{1, 0}}, new int[]{2});
             one.empty3.ImageIO.write(res.getImages()[2].normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
 

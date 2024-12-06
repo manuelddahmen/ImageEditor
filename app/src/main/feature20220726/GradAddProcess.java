@@ -41,14 +41,14 @@ public class GradAddProcess extends ProcessFile {
         File file = in;
         matrix.PixM pix;
         try {
-            pix = matrix.PixM.getmatrix.PixM(new Image(file), maxRes);
+            pix = PixM.getPixM(new Image(file), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             matrix.PixM[][] imagesMatrix = gf.filter(
                     new M3(
                             pix, 2, 2)
             ).getImagesMatrix();
-            Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1], new matrix.PixM(pix.getColumns(), pix.getLines()));
+            Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1], new PixM(pix.getColumns(), pix.getLines()));
             linear.op2d2d(new char[]{'+'}, new int[][]{{1}, {0}}, new int[]{2});
             new Image(1,1,4).saveToFile(linear.getImages()[2].normalize(0.0, 1.0).getImage(), "jpg", out);
 

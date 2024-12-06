@@ -32,10 +32,10 @@ public class DericheFilterProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
+        PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
-        ImageIO.write(matrix.PixM.getImage().getImage(), "jpg", out, shouldOverwrite);
+        ImageIO.write(pixM.getImage().getImage(), "jpg", out, shouldOverwrite);
 
 
         return false;

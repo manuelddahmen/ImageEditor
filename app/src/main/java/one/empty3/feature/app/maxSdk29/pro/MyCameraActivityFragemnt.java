@@ -118,7 +118,7 @@
 //    public Point drawPointB = null;
 //    public List<RectF> rectfs = new ArrayList<RectF>();
 //    private Bitmap currentFileZoomedBitmap;
-//    private matrix.PixM currentmatrix.PixM = null;
+//    private matrix.PixM currentPixM = null;
 //    private boolean loaded;
 //    private boolean workingResolutionOriginal = false;
 //    private Clipboard clipboard;
@@ -193,7 +193,7 @@
 //            if (currentFile != null) {
 //                if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
 //                        && clipboard.getSource() != null) {
-//                    matrix.PixM dest = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
+//                    matrix.PixM dest = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //                    int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
 //                    int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
@@ -312,8 +312,8 @@
 //
 //                faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 //
-//                if(currentmatrix.PixM!=null) {
-//                    faceIntent.putExtra("zoom", currentmatrix.PixM.getBitmap());
+//                if(currentPixM!=null) {
+//                    faceIntent.putExtra("zoom", currentpixM.getBitmap());
 //                }
 //
 //                passParameters(faceIntent);
@@ -376,14 +376,14 @@
 //                    viewById.setDrawingRectState(true);
 //                    System.err.println(viewById.getDrawingRect().toString());
 //                    if (rectF != null) {
-//                        currentmatrix.PixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
+//                        currentPixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
 //
-//                        if (currentmatrix.PixM != null) {
+//                        if (currentPixM != null) {
 //                            System.err.println("Draw Selection");
-//                            new Utils().setImageView(imageView, currentmatrix.PixM.getImage().getBitmap().getBitmap());
+//                            new Utils().setImageView(imageView, currentpixM.getImage().getBitmap().getBitmap());
 //                            if (clipboard == null && Clipboard.defaultClipboard == null) {
 //                                clipboard = Clipboard.defaultClipboard
-//                                        = new Clipboard(currentmatrix.PixM);
+//                                        = new Clipboard(currentPixM);
 //
 //                            }
 //                            if (Clipboard.defaultClipboard != null && clipboard != null) {
@@ -392,7 +392,7 @@
 //                                    drawPointA = null;
 //                                    drawPointB = null;
 //                                } else {
-//                                    clipboard.setSource(currentmatrix.PixM);
+//                                    clipboard.setSource(currentPixM);
 //                                }
 //                            }
 //                            System.err.println("Selection drawn");
@@ -464,14 +464,14 @@
 //
 //    private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
 //        if (currentFile != null) {
-//            matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
+//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //            if (drawPointA == null || drawPointB == null) {
 //                return null;
 //            }
 //
-//            double xr = 1.0 / imageView.getWidth() * matrix.PixM.getColumns();
-//            double yr = 1.0 / imageView.getHeight() * matrix.PixM.getLines();
+//            double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
+//            double yr = 1.0 / imageView.getHeight() * pixM.getLines();
 //
 //            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
 //            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
@@ -573,16 +573,16 @@
 //            if (isWorkingResolutionOriginal()) {
 //                bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
 //            }
-//            bitmap = matrix.PixM.getmatrix.PixM(bitmap, getMaxRes()).getBitmap();
+//            bitmap = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
 //        } else {
 //            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
 //                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
 //            } else {
 //                // ???
 //                if (isWorkingResolutionOriginal()) {
-//                    bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, 0).getBitmap();
+//                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
 //                }
-//                bitmap = bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, getMaxRes()).getBitmap();
+//                bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
 //            }
 //
 //            Canvas canvas = new Canvas(bitmap);
@@ -684,9 +684,9 @@
 //
 //    private matrix.PixM getSelectedZone(RectF selectedCords) {
 //        if (currentFile != null) {
-//            matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)));
+//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)));
 //
-//            return matrix.PixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
+//            return pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
 //                    (int)(selectedCords.right-selectedCords.left),
 //                    (int)(selectedCords.bottom- selectedCords.top));
 //        }

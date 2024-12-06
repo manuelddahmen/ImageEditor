@@ -67,7 +67,7 @@ public class Snake extends ProcessFile {
         int[] cpt = new int[2];
         Point3D vecTan0, vecTan;
         Point3D vecNor0, vecNor;
-        matrix.PixM pix2 = new matrix.PixM(pix.getColumns(), pix.getLines());
+        matrix.PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
         List<Point3D> p = spline.getCoefficients().getData1d();
 
         double sumOut = 0.0;
@@ -107,7 +107,7 @@ public class Snake extends ProcessFile {
         avg[0] /= cpt[0];
 
 
-        //       pix3 = new matrix.PixM(pix2.getColumns(), pix2.getLines());
+        //       pix3 = new PixM(pix2.getColumns(), pix2.getLines());
 
 
         for (double[] v : in) {
@@ -130,8 +130,8 @@ public class Snake extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            pix = matrix.PixM.getmatrix.PixM(new Image(in), 500);
-            pix3 = new matrix.PixM(pix.getColumns(), pix.getLines());
+            pix = PixM.getPixM(new Image(in), 500);
+            pix3 = new PixM(pix.getColumns(), pix.getLines());
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

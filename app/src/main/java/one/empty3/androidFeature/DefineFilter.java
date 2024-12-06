@@ -20,7 +20,9 @@
 
 package one.empty3.androidFeature;
 
-public class DefineFilter extends Filtermatrix.PixM {
+import matrix.FilterPixM;
+
+public class DefineFilter extends FilterPixM {
 
 
     public DefineFilter(double[][] matrix, double divider) {

@@ -43,8 +43,8 @@ public class Snake extends ProcessFile {
     private CourbeParametriquePolynomialeBezier spline;
     private List<double[]> in, out;
 
-    one.empty3.featureAndroid.matrix.PixM pix;
-    one.empty3.featureAndroid.matrix.PixM pix3;
+    matrix.PixM pix;
+    matrix.PixM pix3;
 
     public void initCurve() {
         double c = (double) (pix.getColumns());
@@ -64,7 +64,7 @@ public class Snake extends ProcessFile {
         int[] cpt = new int[2];
         Point3D vecTan0, vecTan;
         Point3D vecNor0, vecNor;
-        one.empty3.featureAndroid.matrix.PixM pix2 = new one.empty3.featureAndroid.matrix.PixM(pix.getColumns(), pix.getLines());
+        matrix.PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
         List<Point3D> p = spline.getCoefficients().getData1d();
 
         double sumOut = 0.0;
@@ -104,7 +104,7 @@ public class Snake extends ProcessFile {
         avg[0] /= cpt[0];
 
 
-        //       pix3 = new matrix.PixM(pix2.getColumns(), pix2.getLines());
+        //       pix3 = new PixM(pix2.getColumns(), pix2.getLines());
 
 
         for (double[] v : in) {
@@ -127,8 +127,8 @@ public class Snake extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(one.empty3.ImageIO.read(in), 500);
-            pix3 = new matrix.PixM(pix.getColumns(), pix.getLines());
+            pix = PixM.getPixM(one.empty3.ImageIO.read(in), 500);
+            pix3 = new PixM(pix.getColumns(), pix.getLines());
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

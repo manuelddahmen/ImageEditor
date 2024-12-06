@@ -39,11 +39,11 @@ public class IsleProcess extends ProcessFile {
 
         File file = in;
 
-        one.empty3.featureAndroid.matrix.PixM pix = null;
+        matrix.PixM pix = null;
         Image img = null;
         try {
             img = one.empty3.ImageIO.read(file);
-            pix = matrix.PixM.getmatrix.PixM(img, -10.0);
+            pix = PixM.getPixM(img, -10.0);
 
         } catch (Exception ex) {
 
@@ -56,8 +56,7 @@ public class IsleProcess extends ProcessFile {
 
         }
 
-        IsleFiltermatrix.PixM il = new IsleFiltermatrix.PixM
-                (pix);
+        IsleFilterPixM il = new IsleFilterPixM(pix);
         il.setValues(Color.BLUE, Color.WHITE, 0.4);
         il.filter();
         try {

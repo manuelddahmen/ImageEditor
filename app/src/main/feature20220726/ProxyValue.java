@@ -45,7 +45,7 @@ public class ProxyValue extends ProcessFile {
         matrix.PixM original = null;
 
         try {
-            original = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+            original = PixM.getPixM(new Image(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -53,7 +53,7 @@ public class ProxyValue extends ProcessFile {
 
         }
         int p = 0;
-        matrix.PixM copy = new matrix.PixM(original.getColumns(), original.getLines());
+        matrix.PixM copy = new PixM(original.getColumns(), original.getLines());
 
 
         for (int i = 0; i < original.getColumns(); i++)

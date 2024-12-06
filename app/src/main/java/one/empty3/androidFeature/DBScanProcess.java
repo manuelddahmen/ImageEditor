@@ -124,14 +124,14 @@ public class DBScanProcess extends ProcessFile {
 
         try {
             pix = matrix.PixM
-                    .getmatrix.PixM(one.empty3.ImageIO.read(in), maxRes);
+                    .getPixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex1) {
             ex1.printStackTrace();
             return false;
         }
 
 
-        matrix.PixM pix2 = new matrix.PixM(
+        matrix.PixM pix2 = new PixM(
                 pix.getColumns(),
                 pix.getLines()
         );

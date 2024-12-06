@@ -37,12 +37,12 @@ public class MakeDataset {
                        File outputCsv, int res) {
         try {
             Image img = ImageIO.read(image);
-            one.empty3.featureAndroid.matrix.PixM pix;
+            matrix.PixM pix;
             if (res > 0)
 
-                pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, res);
+                pix = PixM.getPixM(img, res);
             else
-                pix = new matrix.PixM(img);
+                pix = new PixM(img);
 
             System.out.println("size out : " + pix.getColumns() + ", " + pix.getLines());
 

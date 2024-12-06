@@ -28,22 +28,22 @@ public class Mix extends ProcessNFiles {
         if (ins.length > 1 && ins[0] != null && isImage(ins[0]) && ins[1] != null && isImage(ins[1])) {
             Image read1 = ImageIO.read(ins[0]);
             Image read2 = ImageIO.read(ins[1]);
-            one.empty3.featureAndroid.matrix.PixM matrix.PixMin1 = new one.empty3.featureAndroid.matrix.PixM(read1);
-            one.empty3.featureAndroid.matrix.PixM matrix.PixMin2 = new one.empty3.featureAndroid.matrix.PixM(read2);
-            one.empty3.featureAndroid.matrix.PixM outmatrix.PixM = new matrix.PixM(matrix.PixMin1.getColumns(), matrix.PixMin1.getLines());
+            PixM pixMin1 = new PixM(read1);
+            PixM pixMin2 = new PixM(read2);
+            matrix.PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
 
-            for (int i = 0; i < outmatrix.PixM.getColumns(); i++) {
-                for (int j = 0; j < outmatrix.PixM.getLines(); j++) {
+            for (int i = 0; i < outPixM.getColumns(); i++) {
+                for (int j = 0; j < outPixM.getLines(); j++) {
                     for (int c = 0; c < 3; c++) {
-                        matrix.PixMin1.setCompNo(c);
-                        matrix.PixMin2.setCompNo(c);
-                        outmatrix.PixM.setCompNo(c);
+                        pixMin1.setCompNo(c);
+                        pixMin2.setCompNo(c);
+                        outPixM.setCompNo(c);
 
-                        outmatrix.PixM.set(i, j, matrix.PixMin1.get(i, j) * (1 - ratio) + matrix.PixMin2.get(i, j) * (ratio));
+                        outPixM.set(i, j, pixMin1.get(i, j) * (1 - ratio) + pixMin2.get(i, j) * (ratio));
                     }
                 }
             }
-            ImageIO.write(outmatrix.PixM.getBitmap().getImage(), "jpg", out);
+            ImageIO.write(outPixM.getBitmap(), "jpg", out);
         }
         return false;
     }

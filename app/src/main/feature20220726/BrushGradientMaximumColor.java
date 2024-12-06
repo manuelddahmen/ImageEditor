@@ -54,10 +54,10 @@ public class BrushGradientMaximumColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM matrix.PixM = new matrix.PixM(new Image(in));
-        matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
-        for (int i = 0; i < matrix.PixM.getLines(); i++) {
-            for (int j = 0; j < matrix.PixM.getColumns(); j++) {
+        PixM pixM = new PixM(new Image(in));
+        PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
+        for (int i = 0; i < pixM.getLines(); i++) {
+            for (int j = 0; j < pixM.getColumns(); j++) {
                 for (int i2 = -1; i2 <= 1; i2++)
                     for (int j2 = -1; j2 <= 1; j2++) {
                         int x = i + i2;

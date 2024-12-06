@@ -250,14 +250,14 @@ public class CurveFitting extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        pix = one.empty3.feature.matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+        pix = one.empty3.feature.PixM.getPixM(new Image(in), maxRes);
 
 
         init();
 
 
-        inPix = new one.empty3.feature.matrix.PixM(pix.getImage());
-        outPix = new one.empty3.feature.matrix.PixM(pix.getImage());
+        inPix = new one.empty3.feature.PixM(pix.getImage());
+        outPix = new one.empty3.feature.PixM(pix.getImage());
 
         curveInitial = new CourbeN11();
 
@@ -315,7 +315,7 @@ public class CurveFitting extends ProcessFile {
         double e = E();
         //curveResult = modify();
 
-        one.empty3.feature.matrix.PixM p = new one.empty3.feature.matrix.PixM(pix.getColumns(), pix.getLines());
+        one.empty3.feature.matrix.PixM p = new one.empty3.feature.PixM(pix.getColumns(), pix.getLines());
 
         curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
 

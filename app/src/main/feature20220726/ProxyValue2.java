@@ -40,7 +40,7 @@ public class ProxyValue2 extends ProcessFile {
         matrix.PixM original = null;
 
         try {
-            original = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+            original = PixM.getPixM(new Image(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

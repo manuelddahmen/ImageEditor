@@ -125,12 +125,12 @@ public class Hist4Contour2 extends ProcessFile {
             return false;
         }
         matrix.PixM inP;
-        inP = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+        inP = PixM.getPixM(new Image(in), maxRes);
 
 
         double max = 0.0;
-        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
-        matrix.PixM outP0 = new matrix.PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP = new PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0.mult(1);

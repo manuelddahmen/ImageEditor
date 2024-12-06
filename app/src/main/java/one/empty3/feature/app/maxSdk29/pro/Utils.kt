@@ -821,7 +821,7 @@ class Utils {
                 PixM.getPixM(
                     one.empty3.ImageIO.read(fileIn).getBitmap(),
                     Math.max(p.getColumns(), p.getLines())
-                ).bitmap.bitmap, "jpg", fileInThumb
+                ).bitmap, "jpg", fileInThumb
             )
             val fileOut = getFilesFile("thumbOut-" + effect + randomUUID + "-jpg")
             effect.setMaxRes(30)

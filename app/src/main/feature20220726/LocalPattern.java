@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726;
 
-public class LocalPattern extends FilterMatmatrix.PixM {
+public class LocalPattern extends FilterMatPixM {
     private M3 sr;
     public static String formulaXvLogical = "count(x==v)==columns()*lines()/2";
 

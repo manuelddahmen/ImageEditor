@@ -79,7 +79,7 @@ public class SobelDerivative extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM p = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(in)), maxRes);
+        matrix.PixM p = PixM.getPixM(Objects.requireNonNull(new Image(in)), maxRes);
         matrix.PixM pOut = p.copy();
         for (int j = 0; j < p.getLines(); j++) {
             for (int i = 0; i < p.getColumns(); i++) {

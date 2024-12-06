@@ -35,7 +35,7 @@ import one.empty3.libs.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class matrix.PixM extends MImage {
+public class PixM. extends MImage {
     public static final int COMP_RED = 0;
     public static final int COMP_GREEN = 1;
     public static final int COMP_BLUE = 2;
@@ -43,12 +43,12 @@ public class matrix.PixM extends MImage {
     public static final int COMP_INTENSITY = 4;
     private int MAX_DISTANCE_ITERATIONS = 100;
 
-    public matrix.PixM(int l, int c) {
+    public PixM(int l, int c) {
 
         super(l, c);
     }
 
-    public matrix.PixM(one.empty3.libs.Image image) {
+    public PixM(one.empty3.libs.Image image) {
         super(image.getWidth(), image.getHeight());
         float[] colorComponents = new float[4];
         for (int i = 0; i < image.getWidth(); i++) {
@@ -63,7 +63,7 @@ public class matrix.PixM extends MImage {
         }
     }
 
-    public matrix.PixM(one.empty3.libs.Image image, boolean isImage) {
+    public PixM(one.empty3.libs.Image image, boolean isImage) {
         super(image);
         /*
         float[] colorComponents = new float[4];
@@ -79,15 +79,15 @@ public class matrix.PixM extends MImage {
         }*/
     }
 
-    public matrix.PixM(double[][] distances) {
+    public PixM(double[][] distances) {
         super(distances.length, distances[0].length);
         for (int i = 0; i < getColumns(); i++)
             for (int j = 0; j < getLines(); j++)
                 set(i, j, distances[i][j]);
     }
 
-    public static <T> matrix.PixM getmatrix.PixM(one.empty3.libs.Image Image) {
-        matrix.PixM matrix.PixM = new matrix.PixM(Image);
+    public static <T> matrix.PixM getPixM(one.empty3.libs.Image Image) {
+        PixM pixM = new PixM(Image);
         return matrix.PixM;
     }
 
@@ -101,11 +101,11 @@ public class matrix.PixM extends MImage {
         return new Point3D(dr, dg, db);
     }
 
-    public static matrix.PixM getmatrix.PixM(one.empty3.libs.Image image, double maxRes) {
-        return getmatrix.PixM(image, (int) maxRes);
+    public static matrix.PixM getPixM(one.empty3.libs.Image image, double maxRes) {
+        return getPixM(image, (int) maxRes);
     }
 
-    public static matrix.PixM getmatrix.PixM(one.empty3.libs.Image image, int maxRes) {
+    public static matrix.PixM getPixM(one.empty3.libs.Image image, int maxRes) {
         double f = 1.0;
         if (maxRes <= 0) {
             f = 1.0;
@@ -115,7 +115,7 @@ public class matrix.PixM extends MImage {
         double columns2 = 1.0 * image.getWidth() * f;
         double lines2 = 1.0 * image.getHeight() * f;
         Logger.getAnonymousLogger().log(Level.INFO, "matrix.PixM resampling init  --> (" + maxRes + ", " + maxRes + ")  (" + columns2 + ", " + lines2 + ")");
-        matrix.PixM matrix.PixM = new matrix.PixM((int) (columns2), ((int) lines2));
+        PixM pixM = new PixM((int) (columns2), ((int) lines2));
 
 
         for (int i = 0; i < (int) columns2; i++) {
@@ -129,13 +129,13 @@ public class matrix.PixM extends MImage {
                         , (int) (1.0 * j / lines2 * image.getHeight()));
                 float[] colorComponents = new float[4];
                 colorComponents = Color.valueOf(rgb).getComponents(colorComponents);
-                for (int com = 0; com < matrix.PixM.getCompCount(); com++) {
-                    matrix.PixM.setCompNo(com);
-                    matrix.PixM.set(i, j, colorComponents[com]);
+                for (int com = 0; com < pixM.getCompCount(); com++) {
+                    pixM.setCompNo(com);
+                    pixM.set(i, j, colorComponents[com]);
 
                     //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
                     //        (int) (cli2 * div));
-                    //matrix.PixM.set(i, j, );
+                    //pixM.set(i, j, );
                 }
             }
 
@@ -145,8 +145,8 @@ public class matrix.PixM extends MImage {
 
     }
 
-    public matrix.PixM applyFilter(Filtermatrix.PixM filter) {
-        matrix.PixM c = new matrix.PixM(columns, lines);
+    public matrix.PixM applyFilter(FilterPixM filter) {
+        matrix.PixM c = new PixM(columns, lines);
         double sum;
         for (int comp = 0; comp < getCompCount(); comp++) {
 
@@ -337,7 +337,7 @@ public class matrix.PixM extends MImage {
             minRgbai[i] = inMin;
             meanRgbai[i] = (inMax + inMin) / 2;
         }
-        matrix.PixM image = new matrix.PixM(columns, lines);
+        matrix.PixM image = new PixM(columns, lines);
         for (int i = 0; i < image.columns; i++) {
             for (int j = 0; j < image.lines; j++) {
                 for (int comp = 0; comp < getCompCount(); comp++) {
@@ -388,7 +388,7 @@ public class matrix.PixM extends MImage {
                 }
             }
         }
-        matrix.PixM image = new matrix.PixM(columns, lines);
+        matrix.PixM image = new PixM(columns, lines);
         for (int i = 0; i < image.getColumns(); i++) {
             for (int j = 0; j < image.getLines(); j++) {
                 for (int comp = 0; comp < getCompCount(); comp++) {
@@ -411,15 +411,15 @@ public class matrix.PixM extends MImage {
         double columns2 = 1.0 * columns / div;
         double lines2 = 1.0 * lines / div;
         double cli2 = 1.0 * 1 / div;
-        matrix.PixM matrix.PixM = new matrix.PixM((int) (columns2), ((int) lines2));
+        PixM pixM = new PixM((int) (columns2), ((int) lines2));
         for (int c = 0; c < getCompCount(); c++) {
             setCompNo(c);
-            matrix.PixM.setCompNo(c);
+            pixM.setCompNo(c);
             for (int i = 0; i < (int) columns2; i++)
                 for (int j = 0; j < (int) lines2; j++) {
                     double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
                             (int) (cli2 * div));
-                    matrix.PixM.set(i, j, m);
+                    pixM.set(i, j, m);
                 }
         }
         return matrix.PixM;
@@ -440,15 +440,15 @@ public class matrix.PixM extends MImage {
     public matrix.PixM copy() {
 
 
-        matrix.PixM matrix.PixM = new matrix.PixM(columns, lines);
+        PixM pixM = new PixM(columns, lines);
         for (int c = 0; c < getCompCount(); c++) {
             setCompNo(c);
-            matrix.PixM.setCompNo(c);
+            pixM.setCompNo(c);
             for (int i = 0; i < (int) columns; i++)
                 for (int j = 0; j < (int) lines; j++) {
                     //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
                     //        (int) (cli2 * div));
-                    matrix.PixM.set(i, j, get(i, j));
+                    pixM.set(i, j, get(i, j));
                 }
         }
         return matrix.PixM;
@@ -474,10 +474,10 @@ public class matrix.PixM extends MImage {
         double columns2 = 1.0 * columns / div;
         double lines2 = 1.0 * lines / div;
         double cli2 = 1.0 * 1 / div;
-        matrix.PixM matrix.PixM = new matrix.PixM((int) (columns2), ((int) lines2));
+        PixM pixM = new PixM((int) (columns2), ((int) lines2));
         for (int c = 0; c < getCompCount(); c++) {
             setCompNo(c);
-            matrix.PixM.setCompNo(c);
+            pixM.setCompNo(c);
             for (int i = 0; i < (int) columns2; i++)
                 for (int j = 0; j < (int) lines2; j++) {
                     double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
@@ -501,7 +501,7 @@ public class matrix.PixM extends MImage {
     }
 
     public matrix.PixM getColorsRegion(int x, int y, int w, int h, int sizeX, int sizeY) {
-        matrix.PixM subimage = new matrix.PixM(sizeX, sizeY);
+        matrix.PixM subimage = new PixM(sizeX, sizeY);
         for (int i = x; i < x + w; i++)
             for (int j = y; j < y + h; j++)
                 for (int c = 0; c < getCompCount(); c++) {
@@ -534,7 +534,7 @@ public class matrix.PixM extends MImage {
     }
 
     private GMatrix toGMatrix() {
-        GMatrix gMatrix = new GMatrix(matrix.PixM.getmatrix.PixM(Image));
+        GMatrix gMatrix = new GMatrix(PixM.getPixM(Image));
         return gMatrix;
     }
 
@@ -700,7 +700,7 @@ public class matrix.PixM extends MImage {
     }
 
     public matrix.PixM pasteSubImage(int x, int y, int w, int h) {
-        matrix.PixM p2 = new matrix.PixM(w, h);
+        matrix.PixM p2 = new PixM(w, h);
         for (int i = x; i < x + w; i++)
             for (int j = y; j < y + h; j++)
                 for (int c = 0; c < getCompCount(); c++) {
@@ -715,7 +715,7 @@ public class matrix.PixM extends MImage {
     public matrix.PixM copySubImage(int x, int y, int w, int h) {
         if (w <= 0 || h <= 0)
             return null;
-        matrix.PixM p2 = new matrix.PixM(w, h);
+        matrix.PixM p2 = new PixM(w, h);
         for (int i = x; i <= x + w; i++)
             for (int j = y; j <= y + h; j++)
                 for (int c = 0; c < getCompCount(); c++) {

@@ -46,7 +46,7 @@ public class IdentNullProcess extends ProcessFile {
 ========
         matrix.PixM pixM = null;
         if (maxRes > 0) {
-            pixM = matrix.PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            pixM = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
         } else {
             pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));

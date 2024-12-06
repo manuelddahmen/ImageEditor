@@ -35,8 +35,8 @@ public class ComposeNto1 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         boolean success = false;
-        matrix.PixM inpix = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
-        matrix.PixM outpix = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
+        matrix.PixM inpix = PixM.getPixM(ImageIO.read(in), maxRes);
+        matrix.PixM outpix = PixM.getPixM(ImageIO.read(in), maxRes);
         //success = processMem(inpix, outpix);
         ImageIO.write(outpix.getImage().getImage(), "jpg", out, shouldOverwrite);
         return success;

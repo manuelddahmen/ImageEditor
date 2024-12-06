@@ -197,7 +197,7 @@ public class Histogram2 extends ProcessFile {
             Image file = m.getImage().getBitmap();
 ========
         File directory = new File(out.getParent());
-        matrix.PixM imageCoutours = new matrix.PixM(one.empty3.ImageIO.read(in));
+        matrix.PixM imageCoutours = new PixM(one.empty3.ImageIO.read(in));
         this.m = imageCoutours;
         Image file = m.getImage();
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram2.java

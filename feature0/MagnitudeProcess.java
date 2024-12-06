@@ -51,7 +51,7 @@ public class MagnitudeProcess extends ProcessFile {
 <<<<<<<< HEAD:feature0/MagnitudeProcess.java
             pix = PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
 ========
-            pix = matrix.PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
+            pix = PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/MagnitudeProcess.java
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
@@ -60,10 +60,10 @@ public class MagnitudeProcess extends ProcessFile {
                             pix, 2, 2)
             ).getImagesMatrix();
             Linear linearProd1 = new Linear(imagesMatrix[0][0], imagesMatrix[0][0],
-                    new matrix.PixM(pix.getColumns(), pix.getLines()));
+                    new PixM(pix.getColumns(), pix.getLines()));
             linearProd1.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
             Linear linearProd2 = new Linear(imagesMatrix[0][1], imagesMatrix[0][1],
-                    new matrix.PixM(pix.getColumns(), pix.getLines()));
+                    new PixM(pix.getColumns(), pix.getLines()));
             linearProd2.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
             Linear res = new Linear(linearProd1.getImages()[2], linearProd2.getImages()[2],
                     new PixM(pix.getColumns(), pix.getLines()));

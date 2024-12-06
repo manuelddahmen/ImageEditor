@@ -40,9 +40,9 @@ public class MakeDataset {
             matrix.PixM pix;
             if (res > 0)
 
-                pix = matrix.PixM.getmatrix.PixM(img, res);
+                pix = PixM.getPixM(img, res);
             else
-                pix = new matrix.PixM(img);
+                pix = new PixM(img);
 
             System.out.println("size out : " + pix.getColumns() + ", " + pix.getLines());
 

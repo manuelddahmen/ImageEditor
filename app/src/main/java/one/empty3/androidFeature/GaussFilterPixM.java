@@ -20,18 +20,19 @@
 
 package one.empty3.androidFeature;
 
+import matrix.FilterPixM;
 import matrix.PixM;
 
-public class GaussFiltermatrix.PixM extends Filtermatrix.PixM {
-    private final one.empty3.featureAndroid.matrix.PixM in;
+public class GaussFilterPixM extends FilterPixM {
+    private final matrix.PixM in;
     public double sigma = 0.8;
 
-    public GaussFiltermatrix.PixM() {
+    public GaussFilterPixM() {
         super(3, 3);
         in = null;
     }
 
-    public GaussFiltermatrix.PixM(one.empty3.featureAndroid.matrix.PixM in, int squareSize) {
+    public GaussFilterPixM(matrix.PixM in, int squareSize) {
         super(squareSize, squareSize);
         this.in = in;
     }
@@ -54,8 +55,8 @@ public class GaussFiltermatrix.PixM extends Filtermatrix.PixM {
      * @param sigma gauss parameter
      * @param matrix.PixM image
      */
-    public GaussFiltermatrix.PixM(matrix.PixM matrix.PixM, int halfSquareSizeMinus1, double sigma) {
-        this(matrix.PixM, halfSquareSizeMinus1 * 2 + 1);
+    public GaussFilterPixM(PixM pixM, int halfSquareSizeMinus1, double sigma) {
+        this(pixM, halfSquareSizeMinus1 * 2 + 1);
         this.sigma = sigma;
         for (int comp = 0; comp < getCompCount(); comp++) {
             setCompNo(comp);

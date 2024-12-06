@@ -49,28 +49,28 @@ public class ExtractIntensityInfo extends
             img = one.empty3.ImageIO.read(in);
         } catch (Exception rx) {
         }
-        one.empty3.featureAndroid.matrix.PixM pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, -1);
+        matrix.PixM pix = PixM.getPixM(img, -1);
 
 
-        one.empty3.featureAndroid.matrix.PixM matrix.PixMOriginal = pix;
+        PixM pixMOriginal = pix;
 
         final one.empty3.libs.Image[] img3 = new one.empty3.libs.Image[]{pix.getImage()};
 
 
-        GradientFilter gradientMask = new GradientFilter(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines());
-        M3 imgForGrad = new M3(matrix.PixMOriginal,
+        GradientFilter gradientMask = new GradientFilter(pixMOriginal.getColumns(), pixMOriginal.getLines());
+        M3 imgForGrad = new M3(pixMOriginal,
                 2, 2);
         M3 filter = gradientMask.filter(imgForGrad);
-        one.empty3.featureAndroid.matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
+        matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
 
 
 //                    image1 = null;
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new one.empty3.featureAndroid.matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
+                new PixM(pixMOriginal.getColumns(), pixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
-        one.empty3.featureAndroid.matrix.PixM smoothedGrad = linear.getImages()[2];
+        matrix.PixM smoothedGrad = linear.getImages()[2];
 
 
         double min = 0.3;

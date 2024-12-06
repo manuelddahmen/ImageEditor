@@ -31,8 +31,8 @@ public class VectorsImage extends M3 {
 
     public VectorsImage(Image image1) {
         this(image1.getWidth(), image1.getHeight(), 2, 1);
-        one.empty3.featureAndroid.matrix.PixM matrix.PixM = new matrix.PixM(image1);
-        //M3 gradientDoubleValuesMap =matrix.PixM.applyFilter(new GradientFilter(image1));
+        PixM pixM = new PixM(image1);
+        //M3 gradientDoubleValuesMap =pixM.applyFilter(new GradientFilter(image1));
         // construire les vecteurs
     }
 

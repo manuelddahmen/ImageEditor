@@ -27,7 +27,7 @@ import one.empty3.library.Point3D;
 /*
  Le pinceau manchot.
  **/
-public class BrushGradient extends Filtermatrix.PixM {
+public class BrushGradient extends FilterPixM {
     double angle = 0.0;
     double length = 1.0;
     double large = 1.0;

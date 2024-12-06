@@ -59,10 +59,10 @@ public class ExtractIntensityInfo extends
             img = new Image(in);
         } catch (Exception rx) {
         }
-        matrix.PixM pix = matrix.PixM.getmatrix.PixM(img, -1);
+        matrix.PixM pix = PixM.getPixM(img, -1);
 
 
-        matrix.PixM matrix.PixMOriginal = pix;
+        PixM pixMOriginal = pix;
 
         final Image[] img3 = new Image[]{pix.getImage()};
 
@@ -78,7 +78,7 @@ public class ExtractIntensityInfo extends
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
+                new PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
         matrix.PixM smoothedGrad = linear.getImages()[2];
 

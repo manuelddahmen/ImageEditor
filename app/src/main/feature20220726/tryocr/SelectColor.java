@@ -35,9 +35,9 @@ public class SelectColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM matrix.PixM = new matrix.PixM(new Image(in));
+        PixM pixM = new PixM(new Image(in));
 
-        matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
+        PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
 
         float[] colorCompF = new float[4];
 
@@ -49,10 +49,10 @@ public class SelectColor extends ProcessFile {
             col[c] = (int) (colorCompF[c] * 255f);
         }
 
-        for (int i = 0; i < matrix.PixM.getColumns(); i++)
-            for (int j = 0; j < matrix.PixM.getColumns(); j++) {
+        for (int i = 0; i < pixM.getColumns(); i++)
+            for (int j = 0; j < pixM.getColumns(); j++) {
                 for (int c = 0; c < 4; c++) {
-                    matrix.PixM2.set(i, j, matrix.PixM.get(i, j) == (col[c] / 255.) ? 1 : 0);
+                    matrix.PixM2.set(i, j, pixM.get(i, j) == (col[c] / 255.) ? 1 : 0);
                 }
             }
         try {

@@ -24,7 +24,7 @@ import one.empty3.io.ProcessFile;
 
 public abstract class FilterProcessor extends ProcessFile {
     public void initFilterProcessor(
-            String filtermatrix.PixMclassname, String filterPropertiesFilename
+            String filterPixMclassname, String filterPropertiesFilename
     ) {
 
     }

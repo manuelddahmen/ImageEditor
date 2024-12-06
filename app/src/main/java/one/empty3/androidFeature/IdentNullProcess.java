@@ -30,14 +30,14 @@ public class IdentNullProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.matrix.PixM matrix.PixM = null;
+        PixM pixM = null;
         if (maxRes > 0) {
-            matrix.PixM = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            pixM = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
         } else {
-            matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+            pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
         }
-        assert matrix.PixM != null;
-        matrix.PixM.getImage().saveFile(out);
+        assert pixM != null;
+        pixM.getImage().saveFile(out);
         addSource(out);
         return true;
 

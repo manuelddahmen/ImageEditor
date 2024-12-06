@@ -20,13 +20,14 @@
 
 package one.empty3.androidFeature;
 
+import matrix.FilterPixM;
 import one.empty3.feature.app.pro.M3;
 import matrix.PixM;
 import one.empty3.library.Point3D;
 
 import java.util.*;
 
-public class HarrisToPointInterest extends Filtermatrix.PixM {
+public class HarrisToPointInterest extends FilterPixM {
     private matrix.PixM m;
 
     public HarrisToPointInterest(int c, int l) {

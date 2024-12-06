@@ -32,13 +32,13 @@ import java.io.IOException;
 public class GradProcess2 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
-        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
-        matrix.PixM matrix.PixMout = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
+        PixM pixM = PixM.getPixM(new Image(in), maxRes);
+        PixM pixMout = new PixM(pixM.getColumns(), pixM.getLines());
 
-        for (int x = 0; x < matrix.PixM.getColumns(); x++)
-            for (int y = 0; y < matrix.PixM.getColumns(); y++)
+        for (int x = 0; x < pixM.getColumns(); x++)
+            for (int y = 0; y < pixM.getColumns(); y++)
                 for (int c = 0; c < 3; c++) {
-                    matrix.PixM.setCompNo(c);
+                    pixM.setCompNo(c);
                     matrix.PixMout.setCompNo(c);
                     matrix.PixMout.set(x, y, -
                             matrix.PixMout.get(x - 1, y) -

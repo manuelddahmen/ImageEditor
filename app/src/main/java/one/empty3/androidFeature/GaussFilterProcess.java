@@ -35,12 +35,12 @@ public class GaussFilterProcess extends ProcessFile {
 
             return false;
 
-        one.empty3.featureAndroid.matrix.PixM pix = null;
+        matrix.PixM pix = null;
         Image img = null;
 
         try {
             img = one.empty3.ImageIO.read(in);
-            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, maxRes);
+            pix = PixM.getPixM(img, maxRes);
 
         } catch (Exception ex) {
 
@@ -53,9 +53,9 @@ public class GaussFilterProcess extends ProcessFile {
 
         }
 
-        GaussFiltermatrix.PixM th = new GaussFiltermatrix.PixM(pix, 1);
+        GaussFilterPixM th = new GaussFilterPixM(pix, 1);
 
-        one.empty3.featureAndroid.matrix.PixM pixRes = new one.empty3.featureAndroid.matrix.PixM(pix.getColumns(), pix.getLines());
+        matrix.PixM pixRes = new PixM(pix.getColumns(), pix.getLines());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
             pix.setCompNo(c);

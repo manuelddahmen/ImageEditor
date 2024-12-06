@@ -39,7 +39,7 @@ public class DirectMaskFilter {
     
 , p2x, p2y,c1r,c2g b a, w, h, ww, wh */
     public matrix.PixM applyOperator(String[] formulaColorComps) {
-        matrix.PixM m3 = new matrix.PixM(m1.getColumns(), m1.getLines());
+        matrix.PixM m3 = new PixM(m1.getColumns(), m1.getLines());
         AlgebraicTree[] treeA = new AlgebraicTree[formulaColorComps.length];
         try {
             for (int c = 0; c < formulaColorComps.length; c++) {

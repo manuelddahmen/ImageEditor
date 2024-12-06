@@ -23,7 +23,7 @@ package one.empty3.androidFeature;
 import matrix.PixM;
 
 public class CompileFeature {
-    one.empty3.featureAndroid.matrix.PixM pix;
+    matrix.PixM pix;
     double xc, yc, rot, scale;
 
     public void filter(matrix.PixM image) {

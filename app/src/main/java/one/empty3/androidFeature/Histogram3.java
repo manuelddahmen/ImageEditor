@@ -157,7 +157,7 @@ public class Histogram3 extends ProcessFile {
 
         init();
 
-        matrix.PixM m = new matrix.PixM(one.empty3.ImageIO.read(in));
+        matrix.PixM m = new PixM(one.empty3.ImageIO.read(in));
         Image image = m.getImage();
 
 
@@ -213,7 +213,7 @@ public class Histogram3 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        one.empty3.ImageIO.write(new matrix.PixM(img2).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
+        one.empty3.ImageIO.write(new PixM(img2).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
                 /*
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);

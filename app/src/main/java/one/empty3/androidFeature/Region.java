@@ -26,7 +26,7 @@ package one.empty3.androidFeature;
     }
 
     @Override
-    public Filtermatrix.PixM getFilter() {
+    public FilterPixM getFilter() {
         return null;
     }
 

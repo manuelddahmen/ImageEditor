@@ -118,11 +118,11 @@ public class Hist4Contour3 extends ProcessFile {
             return false;
         }
         matrix.PixM inP;
-        inP = matrix.PixM.getmatrix.PixM(Image.loadFile(in), maxRes);
+        inP = PixM.getPixM(Image.loadFile(in), maxRes);
 
 
         double max = 0.0;
-        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP = new PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0;
@@ -161,7 +161,7 @@ public class Hist4Contour3 extends ProcessFile {
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-            one.empty3.ImageIO.write(outP.normalize(0, 1, 0, 1).getBitmap().getImage(), "jpg", out);
+            one.empty3.ImageIO.write(outP.normalize(0, 1, 0, 1).getBitmap(), "jpg", out);
             //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             return true;
 

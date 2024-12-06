@@ -48,7 +48,7 @@ public class ExtremaProcess extends ProcessFile {
             return false;
 
         try {
-            pix = new matrix.PixM(new Image(in));
+            pix = new PixM(new Image(in));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

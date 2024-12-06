@@ -38,7 +38,7 @@ public class GradProcess extends ProcessFile {
         File file = in;
         matrix.PixM pix;
         try {
-            pix = matrix.PixM.getmatrix.PixM(new Image(file), maxRes);
+            pix = PixM.getPixM(new Image(file), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             matrix.PixM[][] imagesMatrix = gf.filter(

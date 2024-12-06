@@ -97,7 +97,7 @@ public class Paste extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         Image read = ImageIO.read(in);
-        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read, maxRes);
+        PixM pixM = PixM.getPixM(read, maxRes);
         return true;
     }
 }

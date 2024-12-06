@@ -30,7 +30,7 @@ public class Region extends AreaDescriptor {
     }
 
     @Override
-    public Filtermatrix.PixM getFilter() {
+    public FilterPixM getFilter() {
         return null;
     }
 

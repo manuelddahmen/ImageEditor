@@ -47,7 +47,7 @@ public class IsleProcess extends ProcessFile {
         Image img = null;
         try {
             img = new Image(file);
-            pix = matrix.PixM.getmatrix.PixM(img, -10.0);
+            pix = PixM.getPixM(img, -10.0);
 
         } catch (Exception ex) {
 

@@ -51,7 +51,7 @@ public class GradMultProcess extends ProcessFile {
 <<<<<<<< HEAD:feature0/GradMultProcess.java
             pix = PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
 ========
-            pix = matrix.PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
+            pix = PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradMultProcess.java
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
@@ -61,7 +61,7 @@ public class GradMultProcess extends ProcessFile {
             ).getImagesMatrix();
 
             Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1],
-                    new matrix.PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
+                    new PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
 
             boolean b = linear.op2d2d(new char[]{'*'}, new int[][]{{0}, {1}}, new int[]{2});
 

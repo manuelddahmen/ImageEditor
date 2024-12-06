@@ -28,25 +28,25 @@ import one.empty3.library.Point3D;
 import javaAnd.awt.*;
 
 public class OriginalLBP {
-    private final matrix.PixM matrix.PixM;
+    private final PixM pixM;
     private final float radius;
 
-    public OriginalLBP(matrix.PixM matrix.PixM, float radius) {
+    public OriginalLBP(PixM pixM, float radius) {
         this.radius = radius;
         this.matrix.PixM = matrix.PixM;
     }
 
     public void computeCircle() {
         float[] values = new float[1 + (int) (2 * Math.PI * radius)];
-        matrix.PixM m = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
-        for (int i = 0; i < matrix.PixM.getColumns(); i++)
-            for (int j = 0; j < matrix.PixM.getLines(); j++) {
-                values[0] = (float) matrix.PixM.luminance(i, j);
+        matrix.PixM m = new PixM(pixM.getColumns(), pixM.getLines());
+        for (int i = 0; i < pixM.getColumns(); i++)
+            for (int j = 0; j < pixM.getLines(); j++) {
+                values[0] = (float) pixM.luminance(i, j);
                 for (float angle = 0; angle < 2 * Math.PI * radius; angle++) {
                     Point3D p = new Point3D((double) i, (double) j, 0.0).plus(
                             new Point3D(radius * Math.cos(angle), -radius * Math.sin(angle), 0.0));
                     Point point = new Point((int) (double) p.getX(), (int) (double) p.getY());
-                    double v = matrix.PixM.luminance((int) point.getX(), (int) point.getY());
+                    double v = pixM.luminance((int) point.getX(), (int) point.getY());
                     values[(int) angle + 1] = (float) v;
                 }
                 long binary = 0;

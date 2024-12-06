@@ -109,10 +109,10 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
         matrix.PixM pix;
         try {
             if (res > 0)
-                pix = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
+                pix = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
             else
-                pix = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
-            matrix.PixM pix2 = new matrix.PixM(
+                pix = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+            matrix.PixM pix2 = new PixM(
                     pix.getColumns(),
                     pix.getLines()
             );

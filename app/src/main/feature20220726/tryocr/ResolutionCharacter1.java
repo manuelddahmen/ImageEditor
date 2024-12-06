@@ -184,7 +184,7 @@ import java.util.logging.Logger;
 //        if (!dirOut.exists() || !dirOut.isDirectory())
 //            dirOut.mkdir();
 //
-//        input = new matrix.PixM(read);
+//        input = new PixM(read);
 //        output = input.copy();
 //
 //        Logger.getAnonymousLogger().log(Level.INFO, "Image size: " + output.getColumns() + ", " + output.getLines());
@@ -774,7 +774,7 @@ import java.util.logging.Logger;
 //                numCurves++;
 //            });
 //            matrix.PixM copy = pError.copy();
-//            Linear linear = new Linear(inputCopy, pError, new matrix.PixM(input.getColumns(), input.getLines()));
+//            Linear linear = new Linear(inputCopy, pError, new PixM(input.getColumns(), input.getLines()));
 //            linear.op2d2d(new char[]{'-'}, new int[][]{{1, 0}}, new int[]{2});
 //            matrix.PixM diff = linear.getImages()[2];
 //            return diff.mean(0, 0, diff.getColumns(), diff.getLines());

@@ -383,16 +383,16 @@ package one.empty3.feature20220726; ///*
 //    }
 //
 //    public void setRegionCopy(M3 original, int ii, int ij, int iStart, int jStart, int iEnd, int jEnd,
-//                              matrix.PixM matrix.PixM, int iPaste, int jPaste) {
+//                              PixM pixM, int iPaste, int jPaste) {
 //        for (int c = 0; c < getCompCount(); c++) {
 //            original.setCompNo(c);
-//            matrix.PixM.setCompNo(c);
+//            pixM.setCompNo(c);
 //            int x = 0;
 //            for (int i = iStart; i < iEnd; i++) {
 //                int y = 0;
 //                for (int j = jStart; j < jEnd; j++) {
 //                    double v = original.get(i, j, ii, ij);
-//                    matrix.PixM.set(iPaste + x, jPaste + y, v);
+//                    pixM.set(iPaste + x, jPaste + y, v);
 //                    y++;
 //                }
 //                x++;
@@ -403,7 +403,7 @@ package one.empty3.feature20220726; ///*
 //    }
 //
 //    public void setRegionCopy(matrix.PixM original, int iStart, int jStart, int iEnd, int jEnd,
-//                              matrix.PixM matrix.PixM, int iPaste, int jPaste) {
+//                              PixM pixM, int iPaste, int jPaste) {
 //    }
 //
 //    public void setRegionCopy(matrix.PixM original, int iStart, int jStart, int iEnd, int jEnd,

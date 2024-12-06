@@ -25,8 +25,8 @@ import android.util.Log;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 
+import matrix.FilterPixM;
 import matrix.MBitmap;
-import one.empty3.androidFeature.Filtermatrix.PixM;
 import matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
@@ -78,14 +78,14 @@ public class M3 extends MBitmap{
     }
 
 
-    public M3(matrix.PixM matrix.PixM, int columnsIn, int linesIn) {
-        this(matrix.PixM.getColumns(), matrix.PixM.getLines(), columnsIn, linesIn);
+    public M3(matrix.PixM pixM, int columnsIn, int linesIn) {
+        this(pixM.getColumns(), pixM.getLines(), columnsIn, linesIn);
         for (int c = 0; c < getCompCount(); c++) {
-            matrix.PixM.setCompNo(c);
+            pixM.setCompNo(c);
             setCompNo(c);
             for (int i = 0; i < columns; i++) {
                 for (int j = 0; j < lines; j++) {
-                    double d = matrix.PixM.get(i, j);
+                    double d = pixM.get(i, j);
                     for (int ii = 0; ii < columnsIn; ii++)
                         for (int ij = 0; ij < linesIn; ij++) {
                             set(i, j, ii, ij, d);
@@ -95,8 +95,8 @@ public class M3 extends MBitmap{
         }
     }
 
-    public M3(matrix.PixM matrix.PixM[][]) {
-        this(matrix.PixM[0][0].getColumns(), matrix.PixM[0][0].getLines(), matrix.PixM.length, matrix.PixM[0].length);
+    public M3(PixM pixM[][]) {
+        this(pixM[0][0].getColumns(), pixM[0][0].getLines(), pixM.length, pixM[0].length);
 
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
@@ -105,9 +105,9 @@ public class M3 extends MBitmap{
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int c = 0; c < getCompCount(); c++) {
 
-                            matrix.PixM[ii][ij].setCompNo(c);
+                            pixM[ii][ij].setCompNo(c);
 
-                            double d = matrix.PixM[ii][ij].get(i, j);
+                            double d = pixM[ii][ij].get(i, j);
 
                             setCompNo(c);
                             set(i, j, ii, ij, d);
@@ -295,7 +295,7 @@ public class M3 extends MBitmap{
                     minRgbai[comp][ii][ij] = min;
                     meanRgbai[comp][ii][ij] = 0;
                 }
-                matrix.PixM image = new matrix.PixM(columns, lines);
+                matrix.PixM image = new PixM(columns, lines);
                 res[ii][ij] = image;
             }
         }
@@ -356,8 +356,8 @@ public class M3 extends MBitmap{
         return res;
     }
 
-    public M3 filter(Filtermatrix.PixM filter1, int ii, int ij) {
-        matrix.PixM matrix = getMatrix(ii, ij);
+    public M3 filter(FilterPixM filter1, int ii, int ij) {
+        PixM matrix = getMatrix(ii, ij);
         matrix.applyFilter(filter1);
         setMatrix(ii, ij, matrix);
         return this;
@@ -376,8 +376,8 @@ public class M3 extends MBitmap{
 
     }
 
-    public matrix.PixM getMatrix(int ii, int ij) {
-        matrix.PixM matrix = new matrix.PixM(columns, lines);
+    public PixM getMatrix(int ii, int ij) {
+        PixM matrix = new PixM(columns, lines);
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 for (int c = 0; c < getCompCount(); c++) {

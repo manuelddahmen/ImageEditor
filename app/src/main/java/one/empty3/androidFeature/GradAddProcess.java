@@ -39,20 +39,20 @@ public class GradAddProcess extends ProcessFile {
     public boolean process(File in, File out) {
         if (!isImage(in))
             return false;
-        one.empty3.featureAndroid.matrix.PixM pix;
+        matrix.PixM pix;
         try {
-            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(one.empty3.ImageIO.read(in), maxRes);
+            pix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
             if(pix==null)
                 Logger.getAnonymousLogger().log(Level.SEVERE, "Error in ProcessFile GradAddProcess. Can't create matrix.PixM");
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
-            one.empty3.featureAndroid.matrix.PixM[][] imagesMatrix = gf.filter(
+            matrix.PixM[][] imagesMatrix = gf.filter(
                     new M3(
                             pix, 2, 2)
             ).getImagesMatrix();
 
             Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1],
-                    new one.empty3.featureAndroid.matrix.PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
+                    new PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
 
             boolean b = linear.op2d2d(new char[]{'+'}, new int[][]{{0}, {1}}, new int[]{2});
 

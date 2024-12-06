@@ -22,16 +22,16 @@
 
 package one.empty3.feature20220726;
 
-public class GaussFiltermatrix.PixM extends Filtermatrix.PixM {
+public class GaussFilterPixM. extends FilterPixM {
     private final matrix.PixM in;
     public double sigma = 0.8;
 
-    public GaussFiltermatrix.PixM() {
+    public GaussFilterPixM() {
         super(3, 3);
         in = null;
     }
 
-    public GaussFiltermatrix.PixM(matrix.PixM in, int squareSize) {
+    public GaussFilterPixM(matrix.PixM in, int squareSize) {
         super(squareSize, squareSize);
         this.in = in;
     }
@@ -54,7 +54,7 @@ public class GaussFiltermatrix.PixM extends Filtermatrix.PixM {
      * @param sigma gauss parameter
      * @param matrix.PixM image
      */
-    public GaussFiltermatrix.PixM(matrix.PixM matrix.PixM, int halfSquareSizeMinus1, double sigma) {
+    public GaussFilterPixM(PixM pixM, int halfSquareSizeMinus1, double sigma) {
         this(matrix.PixM, halfSquareSizeMinus1 * 2 + 1);
         this.sigma = sigma;
         for (int comp = 0; comp < getCompCount(); comp++) {

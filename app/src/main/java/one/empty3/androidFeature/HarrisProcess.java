@@ -31,7 +31,7 @@ public class HarrisProcess extends ProcessFile {
     public boolean process(File in, File out) {
         try {
             Image img = one.empty3.ImageIO.read(in);
-            one.empty3.featureAndroid.matrix.PixM m2 = matrix.PixM.getmatrix.PixM(img, maxRes);
+            PixM m2 = PixM.getPixM(img, maxRes);
             HarrisToPointInterest h = new HarrisToPointInterest(2, 2);
 
             m2.applyFilter(h);

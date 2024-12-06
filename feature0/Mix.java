@@ -42,8 +42,8 @@ public class Mix extends ProcessNFiles {
 ========
             Image read1 = ImageIO.read(ins[0]);
             Image read2 = ImageIO.read(ins[1]);
-            matrix.PixM pixMin1 = new matrix.PixM(read1);
-            matrix.PixM pixMin2 = new matrix.PixM(read2);
+            matrix.PixM pixMin1 = new PixM(read1);
+            matrix.PixM pixMin2 = new PixM(read2);
             matrix.PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Mix.java
 

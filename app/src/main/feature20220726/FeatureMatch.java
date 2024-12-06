@@ -46,9 +46,9 @@ public class FeatureMatch extends ProcessFile {
     public List<double[]> match(matrix.PixM img1, matrix.PixM img2) {
         TrueHarrisProcess trueHarrisProcess = new TrueHarrisProcess();
 
-        img1copy = new matrix.PixM(img1.getColumns(), img1.getLines());
+        img1copy = new PixM(img1.getColumns(), img1.getLines());
         //trueHarrisProcess.processMem(img1, img1copy);
-        img2copy = new matrix.PixM(img2.getColumns(), img2.getLines());
+        img2copy = new PixM(img2.getColumns(), img2.getLines());
         //trueHarrisProcess.processMem(img2, img2copy);
 
         points1 = features(img1copy);

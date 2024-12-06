@@ -115,10 +115,10 @@ public class K_Clusterer /*extends ReadDataset*/ {
         matrix.PixM pix;
         try {
             if (res > 0)
-                pix = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(Image.loadFile(in)), res);
+                pix = PixM.getPixM(Objects.requireNonNull(Image.loadFile(in)), res);
             else
-                pix = new matrix.PixM(Objects.requireNonNull(Image.loadFile(in)));
-            matrix.PixM pix2 = new matrix.PixM(
+                pix = new PixM(Objects.requireNonNull(Image.loadFile(in)));
+            matrix.PixM pix2 = new PixM(
                     pix.getColumns(),
                     pix.getLines()
             );

@@ -26,7 +26,7 @@ import one.empty3.libs.*;
 
 import one.empty3.libs.Image;
 
-public class SelectPointColorMassAglo extends Filtermatrix.PixM {
+public class SelectPointColorMassAglo extends FilterPixM {
     private double[] tmpColor = new double[3];
     private double[] rgb;
 

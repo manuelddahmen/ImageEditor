@@ -77,7 +77,7 @@ public class GoogleFaceDetection
 
                     for (int i = 0; i < numPoly; i++) {
                         Polygon1 polygon = Polygon1.CREATOR.createFromParcel(parcel);
-                        matrix.PixM contours = matrix.PixM.CREATOR.createFromParcel(parcel);
+                        matrix.PixM contours = PixM.CREATOR.createFromParcel(parcel);
                         int colorFill = parcel.readInt();
                         int colorContours = parcel.readInt();
                         int colorTransparent = parcel.readInt();
@@ -155,20 +155,20 @@ public class GoogleFaceDetection
     }
 
     public static class FaceData implements Serializable, Serialisable {
-        private matrix.PixM photo = new matrix.PixM(1, 1);
+        private matrix.PixM photo = new PixM(1, 1);
 
         @Override
         public Serialisable decode(DataInputStream in) {
             FaceData faceData = new FaceData();
-            photo = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
+            photo = (matrix.PixM) new PixM(1, 1).decode(in);
             if (photo == null)
-                photo = new matrix.PixM(1, 1);
+                photo = new PixM(1, 1);
             return faceData;
         }
 
         public int encode(DataOutputStream out) {
             if (photo == null)
-                photo = new matrix.PixM(1, 1);
+                photo = new PixM(1, 1);
             photo.encode(out);
             return 0;
         }
@@ -211,10 +211,10 @@ public class GoogleFaceDetection
                     surface.colorTransparent = in.readInt();
                     surface.surfaceId = in.readInt();
                     surface.polygon = (Polygon1) new Polygon1().decode(in);
-                    surface.contours = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
-                    surface.filledContours = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
+                    surface.contours = (matrix.PixM) new PixM(1, 1).decode(in);
+                    surface.filledContours = (matrix.PixM) new PixM(1, 1).decode(in);
                     surface.drawOriginalImageContour = in.readBoolean();
-                    surface.actualDrawing = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
+                    surface.actualDrawing = (matrix.PixM) new PixM(1, 1).decode(in);
                     return surface;
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -233,15 +233,15 @@ public class GoogleFaceDetection
                         polygon = new Polygon1();
                     polygon.encode(out);
                     if (contours == null)
-                        contours = new matrix.PixM(1, 1);
+                        contours = new PixM(1, 1);
                     contours.encode(out);
                     if (filledContours == null) {
-                        filledContours = new matrix.PixM(1, 1);
+                        filledContours = new PixM(1, 1);
                     }
                     filledContours.encode(out);
                     out.writeBoolean(drawOriginalImageContour);
                     if (actualDrawing == null)
-                        actualDrawing = new matrix.PixM(1, 1);
+                        actualDrawing = new PixM(1, 1);
                     actualDrawing.encode(out);
 
                 } catch (Exception exception) {
@@ -522,10 +522,10 @@ public class GoogleFaceDetection
             throw new RuntimeException(e);
         }
         try {
-            matrix.PixM decode1 = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
+            matrix.PixM decode1 = (matrix.PixM) new PixM(1, 1).decode(in);
             bitmap = decode1.getBitmap();
         } catch (NullPointerException e1) {
-            bitmap = new matrix.PixM(1, 1).getBitmap();
+            bitmap = new PixM(1, 1).getBitmap();
         }
         try {
             GoogleFaceDetection faceDetection = new GoogleFaceDetection(new Image(bitmap));
@@ -557,7 +557,7 @@ public class GoogleFaceDetection
         }
         try {
             if (getBitmap() != null) {
-                new matrix.PixM(getBitmap()).encode(out);
+                new PixM(getBitmap()).encode(out);
             } else {
                 PixM pixM = new PixM(1, 1);
                 pixM.encode(out);

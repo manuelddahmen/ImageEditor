@@ -20,16 +20,17 @@
 
 package one.empty3.androidFeature;
 
+import matrix.FilterPixM;
 import matrix.PixM;
 import one.empty3.library.*;
 
-public class IntuitiveRadialGradient extends Filtermatrix.PixM {
-    private one.empty3.featureAndroid.matrix.PixM pix;
+public class IntuitiveRadialGradient extends FilterPixM {
+    private matrix.PixM pix;
     private int angles = 12;
     double rMaxPixel = 2.0, rMaxDiff = 5.0;
     private int angleCount = 2;
 
-    public IntuitiveRadialGradient(one.empty3.featureAndroid.matrix.PixM image) {
+    public IntuitiveRadialGradient(matrix.PixM image) {
         super(1, 1);
         this.pix = image;
     }
@@ -64,8 +65,8 @@ public class IntuitiveRadialGradient extends Filtermatrix.PixM {
     }
 
 
-    public one.empty3.featureAndroid.matrix.PixM filter(one.empty3.featureAndroid.matrix.PixM o) {
-        one.empty3.featureAndroid.matrix.PixM c = new matrix.PixM(o.getColumns(), o.getLines());
+    public matrix.PixM filter(matrix.PixM o) {
+        matrix.PixM c = new PixM(o.getColumns(), o.getLines());
 
         for (int comp = 0; comp < getCompCount(); comp++) {
 

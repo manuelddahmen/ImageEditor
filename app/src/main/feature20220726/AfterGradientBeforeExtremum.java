@@ -27,7 +27,7 @@ import javaAnd.awt.*;
 /*
  * liste de régions petites ou grandes
  */
-public class AfterGradientBeforeExtremum extends FilterMatmatrix.PixM {
+public class AfterGradientBeforeExtremum extends FilterMatPixM {
     private int angles;
     private double eigenValueLamba1 = 0.0, eigenValueLamba2 = 0.0;
 

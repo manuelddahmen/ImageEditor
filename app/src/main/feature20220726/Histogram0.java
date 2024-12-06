@@ -103,7 +103,7 @@ public class Histogram0 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         matrix.PixM inP;
-        inP = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+        inP = PixM.getPixM(new Image(in), maxRes);
         matrix.PixM outP = inP.copy();
         double maxR = Math.min(inP.getLines(), inP.getColumns());
         for (int i = 0; i < inP.getColumns(); i++) {

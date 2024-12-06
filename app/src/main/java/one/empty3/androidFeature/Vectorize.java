@@ -35,7 +35,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Vectorize extends ProcessFile {
-    private matrix.PixM matrix.PixM;
+    private PixM pixM;
     private double distMax = 40.;
     private final Random random = new Random();
     Point3D[][] mapPoints;
@@ -56,21 +56,21 @@ public class Vectorize extends ProcessFile {
         Image read = ImageIO.read(in);
         if (read == null)
             return false;
-        matrix.PixM = new matrix.PixM(read);
-        matrix.PixM o = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
+        pixM = new PixM(read);
+        matrix.PixM o = new PixM(pixM.getColumns(), pixM.getLines());
 
-        p = new int[matrix.PixM.getColumns()][matrix.PixM.getLines()];
-        mapPoints = new Point3D[matrix.PixM.getColumns()][matrix.PixM.getLines()];
+        p = new int[pixM.getColumns()][pixM.getLines()];
+        mapPoints = new Point3D[pixM.getColumns()][pixM.getLines()];
 
-        for (int x = 0; x < matrix.PixM.getColumns(); x++)
-            for (int y = 0; y < matrix.PixM.getLines(); y++) {
+        for (int x = 0; x < pixM.getColumns(); x++)
+            for (int y = 0; y < pixM.getLines(); y++) {
                 p[x][y] = 0;
-                if (matrix.PixM.luminance(x, y) > 0.4)
-                    mapPoints[x][y] = new Point3D((double) x, (double) y, matrix.PixM.luminance(x, y));
+                if (pixM.luminance(x, y) > 0.4)
+                    mapPoints[x][y] = new Point3D((double) x, (double) y, pixM.luminance(x, y));
             }
 
-        for (int i = 0; i < matrix.PixM.getColumns(); i++) {
-            for (int j = 0; j < matrix.PixM.getLines(); j++) {
+        for (int i = 0; i < pixM.getColumns(); i++) {
+            for (int j = 0; j < pixM.getLines(); j++) {
                 if (mapPoints[i][j] != null) {
                     lists.add(new ArrayList<>());
                     lists.get(lists.size() - 1).add(mapPoints[i][j]);

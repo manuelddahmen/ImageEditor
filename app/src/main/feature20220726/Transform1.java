@@ -46,9 +46,9 @@ public class Transform1 extends ProcessFile {
         if (!in.getName().endsWith(".jpg"))
             return false;
         File file = in;
-        matrix.PixM matrix.PixMOriginal = null;
+        PixM pixMOriginal = null;
         try {
-            matrix.PixMOriginal = matrix.PixM.getmatrix.PixM(new Image(file), 500.0);
+            matrix.PixMOriginal = PixM.getPixM(new Image(file), 500.0);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -66,7 +66,7 @@ public class Transform1 extends ProcessFile {
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
+                new PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
         matrix.PixM smoothedGrad = linear.getImages()[2].normalize(0., 1.);
         logger.info("dot outter product");
