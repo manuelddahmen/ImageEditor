@@ -31,7 +31,7 @@ package one.empty3.feature20220726;
 public class InforceDensity {
     private double rarityRatio = 0.0;
 
-    public InforceDensity(PixM m, double rarityRatio) {
+    public InforceDensity(matrix.PixM m, double rarityRatio) {
         this.rarityRatio = rarityRatio;
         Histogram h = new Histogram(m, 10, 0.3, m.getColumns() / 10, 0.1);
         // circle r grands I faible

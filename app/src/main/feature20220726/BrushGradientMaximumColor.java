@@ -54,10 +54,10 @@ public class BrushGradientMaximumColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = new PixM(new Image(in));
-        PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
-        for (int i = 0; i < pixM.getLines(); i++) {
-            for (int j = 0; j < pixM.getColumns(); j++) {
+        matrix.PixM matrix.PixM = new matrix.PixM(new Image(in));
+        matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
+        for (int i = 0; i < matrix.PixM.getLines(); i++) {
+            for (int j = 0; j < matrix.PixM.getColumns(); j++) {
                 for (int i2 = -1; i2 <= 1; i2++)
                     for (int j2 = -1; j2 <= 1; j2++) {
                         int x = i + i2;
@@ -65,12 +65,12 @@ public class BrushGradientMaximumColor extends ProcessFile {
 
                         M f = filterElem(x, y, 1);
                         double fd = f.determinant();
-                        pixM2.setValues(x, y, fd, fd, fd);
+                        matrix.PixM2.setValues(x, y, fd, fd, fd);
 
                     }
             }
         }
-        new Image(1,1,4).saveToFile(pixM2.normalize(0, 1).getImage(), "jpg", out);
+        new Image(1,1,4).saveToFile(matrix.PixM2.normalize(0, 1).getImage(), "jpg", out);
         return true;
     }
 }

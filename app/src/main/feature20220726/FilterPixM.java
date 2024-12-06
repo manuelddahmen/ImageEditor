@@ -24,7 +24,7 @@ package one.empty3.feature20220726;
 
 import one.empty3.libs.Image;
 
-public abstract class FilterPixM extends PixM {
+public abstract class Filtermatrix.PixM extends matrix.PixM {
     public final static int NORM_NONE = 0;
     public final static int NORM_MEAN = 1;
     public final static int NORM_MAX = 2;
@@ -36,22 +36,22 @@ public abstract class FilterPixM extends PixM {
         return normalize;
     }
 
-    public FilterPixM setNormalize(int normalize) {
+    public Filtermatrix.PixM setNormalize(int normalize) {
         this.normalize = normalize;
         return this;
     }
 
     private int normalize = NORM_NONE;
 
-    public FilterPixM(int l, int c) {
+    public Filtermatrix.PixM(int l, int c) {
         super(l, c);
     }
 
-    public FilterPixM(one.empty3.libs.Image image) {
+    public Filtermatrix.PixM(one.empty3.libs.Image image) {
         super(image);
     }
 
-    public FilterPixM(PixM image) {
+    public Filtermatrix.PixM(matrix.PixM image) {
         super(image.getImage());
     }
 

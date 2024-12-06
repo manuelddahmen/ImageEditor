@@ -23,7 +23,7 @@
 package one.empty3.feature20220726.kmeans;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 
 import one.empty3.libs.Image;
 import one.empty3.libs.Image;
@@ -41,12 +41,12 @@ public class MakeDataset {
                        File outputCsv, int res) {
         try {
             Image img = new Image(image);
-            PixM pix;
+            matrix.PixM pix;
             if (res > 0)
 
-                pix = PixM.getPixM(img, res);
+                pix = matrix.PixM.getmatrix.PixM(img, res);
             else
-                pix = new PixM(img);
+                pix = new matrix.PixM(img);
 
             PrintWriter pw = new PrintWriter(outputCsv);
             for (int l = 0; l < pix.getLines(); l++)

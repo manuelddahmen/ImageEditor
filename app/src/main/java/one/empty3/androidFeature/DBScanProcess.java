@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class DBScanProcess extends ProcessFile {
@@ -54,7 +54,7 @@ public class DBScanProcess extends ProcessFile {
     int c;
 
 
-    PixM pix;
+    matrix.PixM pix;
 
     public void dbscan() {
         countCentroids = 9;
@@ -123,15 +123,15 @@ public class DBScanProcess extends ProcessFile {
 
 
         try {
-            pix = PixM
-                    .getPixM(one.empty3.ImageIO.read(in), maxRes);
+            pix = matrix.PixM
+                    .getmatrix.PixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex1) {
             ex1.printStackTrace();
             return false;
         }
 
 
-        PixM pix2 = new PixM(
+        matrix.PixM pix2 = new matrix.PixM(
                 pix.getColumns(),
                 pix.getLines()
         );

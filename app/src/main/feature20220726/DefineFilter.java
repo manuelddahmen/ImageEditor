@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726;
 
-public class DefineFilter extends FilterPixM {
+public class DefineFilter extends Filtermatrix.PixM {
 
 
     public DefineFilter(double[][] matrix, double divider) {

@@ -18,12 +18,11 @@
  *
  */
 
-package one.empty3.androidFeature;
+package matrix;
 
-import one.empty3.featureAndroid.PixM;
 import one.empty3.libs.Image;
 
-public abstract class FilterPixM extends one.empty3.featureAndroid.PixM {
+public abstract class FilterPixM extends PixM {
     public final static int NORM_NONE = 0;
     public final static int NORM_MEAN = 1;
     public final static int NORM_MAX = 2;

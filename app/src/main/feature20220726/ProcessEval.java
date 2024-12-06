@@ -33,7 +33,7 @@ public abstract class ProcessEval {
     private int width = 24;
     private int height = 24;
     private ArrayList<File> files = new ArrayList<>();
-    private ArrayList<PixM> pixMaps = new ArrayList<>();
+    private ArrayList<matrix.PixM> matrix.PixMaps = new ArrayList<>();
     private ArrayList<double[]> features = new ArrayList<>();
     private double[] x;
     private double[] y;
@@ -75,8 +75,8 @@ public abstract class ProcessEval {
     }
 
     public double value(File file) {
-        PixM pixM = new PixM(Objects.requireNonNull(new Image(file)));
-        x = pixM.x;
+        matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(new Image(file)));
+        x = matrix.PixM.x;
         y = add(dotOuter(x, w), b);
         return Double.NaN;
     }

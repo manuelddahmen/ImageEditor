@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -44,9 +44,9 @@ public class Transform1 extends ProcessFile {
         if (!in.getName().endsWith(".jpg"))
             return false;
         File file = in;
-        one.empty3.featureAndroid.PixM pixMOriginal = null;
+        one.empty3.featureAndroid.matrix.PixM matrix.PixMOriginal = null;
         try {
-            pixMOriginal = one.empty3.featureAndroid.PixM.getPixM(one.empty3.ImageIO.read(file), 500.0);
+            matrix.PixMOriginal = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(one.empty3.ImageIO.read(file), 500.0);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -54,27 +54,27 @@ public class Transform1 extends ProcessFile {
 
         }
         logger.info("file loaded");
-        GradientFilter gradientMask = new GradientFilter(pixMOriginal.getColumns(), pixMOriginal.getLines());
-        M3 imgForGrad = new M3(pixMOriginal, 2, 2);
+        GradientFilter gradientMask = new GradientFilter(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines());
+        M3 imgForGrad = new M3(matrix.PixMOriginal, 2, 2);
         M3 filter = gradientMask.filter(imgForGrad);
-        one.empty3.featureAndroid.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
+        one.empty3.featureAndroid.matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
         logger.info("gradient computed");
 
 //                    image1 = null;
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new one.empty3.featureAndroid.PixM(pixMOriginal.getColumns(), pixMOriginal.getLines()));
+                new one.empty3.featureAndroid.matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
-        one.empty3.featureAndroid.PixM smoothedGrad = linear.getImages()[2].normalize(0., 1.);
+        one.empty3.featureAndroid.matrix.PixM smoothedGrad = linear.getImages()[2].normalize(0., 1.);
         logger.info("dot outter product");
-        // PixM pext = pixMOriginal;
+        // matrix.PixM pext = matrix.PixMOriginal;
         LocalExtrema le =
                 new LocalExtrema(imagesMatrix[1][0].getColumns(),
                         imagesMatrix[1][0].getLines(),
                         3, 1);
         le.setSetMin(false);
-        PixM plext3 = le.filter(new M3(smoothedGrad,
+        matrix.PixM plext3 = le.filter(new M3(smoothedGrad,
                 1, 1)
         ).getImagesMatrix()[0][0].normalize(0., 1.);
         logger.info("local maximum");
@@ -83,12 +83,12 @@ public class Transform1 extends ProcessFile {
       
        /*
       
-     pext = pixMOriginal;
+     pext = matrix.PixMOriginal;
      LocalExtrema le2 =
          new  LocalExtrema( imagesMatrix[1][0].getColumns(), 
                     imagesMatrix[1][0].getLines(),
                       5, 0);
-     PixM plext2 = le2.filter(new M3(pext,
+     matrix.PixM plext2 = le2.filter(new M3(pext,
                       1, 1)
             ).getImagesMatrix()[0][0].normalize(0.,1.);
      logger.info("local maximum 5x5");
@@ -99,7 +99,7 @@ public class Transform1 extends ProcessFile {
                       imagesMatrix[1][0].getLines(),
                       19
                            , 3);
-      PixM plext3 = le3.filter(new M3(smoothedGrad,
+      matrix.PixM plext3 = le3.filter(new M3(smoothedGrad,
                       1, 1)
             ).getImagesMatrix()[0][0].normalize(0.,1.);
      logger.info("local maximum 20x20");
@@ -112,19 +112,19 @@ public class Transform1 extends ProcessFile {
 
         //      M3 anglesTangente = a.filter(new M3(
 
-        //     new PixM[][]
+        //     new matrix.PixM[][]
         //     {{
         //        pext, imagesMatrix[0][0], imagesMatrix[1][0]
         //      }}
         //   ));
 //logger.info("angles tangentes");
-        //PixM pix = smoothedGrad;
+        //matrix.PixM pix = smoothedGrad;
         //  IntuitiveRadialGradient i
         //   = new IntuitiveRadialGradient(pix);
         //  i.setMax(2., 5., 2, 4);
-        ///   PixM rad = i.filter(pix);
+        ///   matrix.PixM rad = i.filter(pix);
         //   logger.info("radial orientation");
-        /*WriteFile.writeNext("reduite"+file.getName(), pixMOriginal.normalize(0.,1.).getImage().getBitmap());
+        /*WriteFile.writeNext("reduite"+file.getName(), matrix.PixMOriginal.normalize(0.,1.).getImage().getBitmap());
             WriteFile.writeNext("gradient gx"+file.getName(), imagesMatrix[0][0].normalize(0.,1.).getImage().getBitmap());
       WriteFile.writeNext("gradient gy"+file.getName(), imagesMatrix[1][0].normalize(0.,1.).getImage().getBitmap());
       WriteFile.writeNext("gradient phase x"+file.getName(), imagesMatrix[0][1].normalize(0.,1.).getImage().getBitmap());

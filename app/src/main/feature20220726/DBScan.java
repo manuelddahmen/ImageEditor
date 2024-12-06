@@ -127,7 +127,7 @@ public class DBScan extends ProcessFile {
             String s = in.getAbsoluteFile() + ".csv";
             MakeDataset makeDataset = new MakeDataset(in, new File(s), maxRes);
 
-            PixM p = PixM.getPixM(Objects.requireNonNull(new Image(in)), maxRes);
+            matrix.PixM p = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(in)), maxRes);
             init(maxRes, minPoints);
             ReadDataset readDataset = new ReadDataset();
             readDataset.read(new File(s));

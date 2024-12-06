@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 
 /*
  *  // 1. amplitude and scale featyre
@@ -49,7 +49,7 @@ public class DaBandFilter {
      * //Retenter sur Mres{(x,y)} pour nxn avec n = n(step-1)+1
      * @param matrix matrice d'image à analyser
      */
-    public DaBandFilter(PixM matrix) {
+    public DaBandFilter(matrix.PixM matrix) {
 
     }
 

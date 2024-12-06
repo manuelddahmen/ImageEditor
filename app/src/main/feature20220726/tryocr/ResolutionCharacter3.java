@@ -1,7 +1,7 @@
 package one.empty3.feature20220726.tryocr;//package one.empty3.feature20220726.tryocr;
 //
 //import one.empty3.feature20220726.Linear;
-//import one.empty3.feature20220726.PixM;
+//import one.empty3.feature20220726.matrix.PixM;
 //import one.empty3.libs.*;
 //import one.empty3.feature20220726.shape.Rectangle;
 //import one.empty3.library.ITexture;
@@ -52,15 +52,15 @@ import java.util.logging.Logger;
 //    private final double[] BLACK_DOUBLES = new double[]{0, 0, 0};
 //    public boolean cEchoing = false;
 //    int step = 1;// Searched Characters size.
-//    PixM outRecompose;
+//    matrix.PixM outRecompose;
 //    private javaAnd.awt.image.Image read;
 //    private String name;
 //    private int shakeTimes;
 //    private double totalError;
 //    private int numCurves;
 //    private double errorDiff = 0.0;
-//    private PixM input;
-//    private PixM output;
+//    private matrix.PixM input;
+//    private matrix.PixM output;
 //    private Map<Character, Integer[]> characterMapH;
 //    private Map<Character, Integer[]> characterMapV;
 //    private int countRects = 0;
@@ -129,7 +129,7 @@ import java.util.logging.Logger;
 //        return isExporting;
 //    }
 //
-//    public void exec(ITexture texture, PixM output, PixM input, File dirOut, String name) {
+//    public void exec(ITexture texture, matrix.PixM output, matrix.PixM input, File dirOut, String name) {
 //        output.plotCurve(new Rectangle(10, 10, output.getColumns() - 20, output.getLines() - 20), texture);
 //
 //        try {
@@ -175,7 +175,7 @@ import java.util.logging.Logger;
 //        return (int) (Math.random() * length);
 //    }
 //
-//    public void chanfrein(PixM input, PixM output, Color traceColor) {
+//    public void chanfrein(matrix.PixM input, matrix.PixM output, Color traceColor) {
 //        for (int i = 0; i < input.getColumns(); i++)
 //            for (int j = 0; j < input.getLines(); j++) {
 //                if (Arrays.equals(input.getValues(i, j), (Lumiere.getRgb(traceColor)))) {
@@ -208,9 +208,9 @@ import java.util.logging.Logger;
 //        if (!dirOut.exists() || !dirOut.isDirectory())
 //            dirOut.mkdir();
 //
-//        input = new PixM(read);
+//        input = new matrix.PixM(read);
 //        output = input.copy();
-//        outRecompose = new PixM(input.getColumns(), input.getLines());
+//        outRecompose = new matrix.PixM(input.getColumns(), input.getLines());
 //        Logger.getAnonymousLogger().log(Level.INFO, "Image size: " + output.getColumns() + ", " + output.getLines());
 //
 //        final ITexture texture = new TextureCol(Color.BLACK);
@@ -447,7 +447,7 @@ import java.util.logging.Logger;
 //                        countRects++;
 //                        if (isExporting()) {
 //                            File file = new File(dirOutChars + "-" + i + "-" + j + "-" + w + "-" + h + "-" + s[0] + ".jpg");
-//                            PixM outChar = input.copySubImage(rectangle2.getX(),
+//                            matrix.PixM outChar = input.copySubImage(rectangle2.getX(),
 //                                    rectangle2.getY(), rectangle2.getW(), rectangle2.getH());
 //                            if (!file.getParentFile().exists() || file.getParentFile().isDirectory()) {
 //                                file.getParentFile().mkdirs();
@@ -466,7 +466,7 @@ import java.util.logging.Logger;
 //        }
 //    }
 //
-//    private List<Character> recognize(PixM input, Rectangle2 rectangle2) {
+//    private List<Character> recognize(matrix.PixM input, Rectangle2 rectangle2) {
 //        int i = rectangle2.getX();
 //        int j = rectangle2.getY();
 //        int w = rectangle2.getW();
@@ -492,7 +492,7 @@ import java.util.logging.Logger;
 //        return allCharsPossible;
 //    }
 //
-//    private boolean[] testRectIs(PixM input, int x, int y, int w, int h, boolean[] result, double[] color) {
+//    private boolean[] testRectIs(matrix.PixM input, int x, int y, int w, int h, boolean[] result, double[] color) {
 //        int i, j;
 //        // XPLUS
 //        result[XPLUS] = true;
@@ -690,7 +690,7 @@ import java.util.logging.Logger;
 //        return mapCharsAlphabetLines;
 //    }
 //
-//    public List<Character> recognizeV(PixM mat, int x, int y, int w, int h) {
+//    public List<Character> recognizeV(matrix.PixM mat, int x, int y, int w, int h) {
 //
 //        List<Character> retained = new ArrayList<>();
 //        Map<Character, Integer[]> patternsVertical = characterMapV;
@@ -753,7 +753,7 @@ import java.util.logging.Logger;
 //
 //    }
 //
-//    public List<Character> recognizeH(PixM mat, int x, int y, int w, int h) {
+//    public List<Character> recognizeH(matrix.PixM mat, int x, int y, int w, int h) {
 //
 //        List<Character> retained = new ArrayList<>();
 //        Map<Character, Integer[]> patternsHorizon = characterMapH;
@@ -804,7 +804,7 @@ import java.util.logging.Logger;
 //        return retained;
 //    }
 //
-//    public boolean reduce(PixM input, Rectangle2 rectangle2origin, Rectangle2 render) {
+//    public boolean reduce(matrix.PixM input, Rectangle2 rectangle2origin, Rectangle2 render) {
 //        boolean hasChanged = true;
 //        render.setX(rectangle2origin.getX());
 //        render.setY(rectangle2origin.getY());
@@ -857,12 +857,12 @@ import java.util.logging.Logger;
 //        ArrayList<CourbeParametriquePolynomialeBezier> currentCurves = new ArrayList<>();
 //        double lastError = Double.NaN;
 //        State previousState;
-//        PixM input;
-//        PixM backgroundImage;
+//        matrix.PixM input;
+//        matrix.PixM backgroundImage;
 //        Color textColor = Color.BLACK;
 //        int dim;
 //
-//        public State(PixM image, PixM backgroundImage, int i, int j, int step) {
+//        public State(matrix.PixM image, matrix.PixM backgroundImage, int i, int j, int step) {
 //            this.input = image;
 //            this.backgroundImage = backgroundImage;
 //            xyz = Point3D.n(i + step / 2., j + step / 2., 0.);
@@ -871,16 +871,16 @@ import java.util.logging.Logger;
 //
 //        public double computeError() {
 //            State state = this;
-//            PixM pError = state.backgroundImage;
-//            PixM inputCopy = input.copy();
+//            matrix.PixM pError = state.backgroundImage;
+//            matrix.PixM inputCopy = input.copy();
 //            state.currentCurves.forEach(courbeParametriquePolynomialeBezier -> {
 //                pError.plotCurve(courbeParametriquePolynomialeBezier, new TextureCol(Color.BLACK));
 //                numCurves++;
 //            });
-//            PixM copy = pError.copy();
-//            Linear linear = new Linear(inputCopy, pError, new PixM(input.getColumns(), input.getLines()));
+//            matrix.PixM copy = pError.copy();
+//            Linear linear = new Linear(inputCopy, pError, new matrix.PixM(input.getColumns(), input.getLines()));
 //            linear.op2d2d(new char[]{'-'}, new int[][]{{1, 0}}, new int[]{2});
-//            PixM diff = linear.getImages()[2];
+//            matrix.PixM diff = linear.getImages()[2];
 //            return diff.mean(0, 0, diff.getColumns(), diff.getLines());
 //
 //        }

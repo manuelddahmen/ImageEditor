@@ -44,7 +44,7 @@ import java.util.Objects;
 import one.empty3.libs.*;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {
@@ -110,13 +110,13 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void process(File in, File inCsv, File out, int res) throws IOException {
         features = new ArrayList<>();
 
-        PixM pix;
+        matrix.PixM pix;
         try {
             if (res > 0)
-                pix = PixM.getPixM(Objects.requireNonNull(new Image(in)), res);
+                pix = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(in)), res);
             else
-                pix = new PixM(Objects.requireNonNull(new Image(in)));
-            PixM pix2 = new PixM(
+                pix = new matrix.PixM(Objects.requireNonNull(new Image(in)));
+            matrix.PixM pix2 = new matrix.PixM(
                     pix.getColumns(),
                     pix.getLines()
             );

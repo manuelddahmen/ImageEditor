@@ -24,7 +24,7 @@ package one.empty3.feature;
 package one.empty3.androidFeature;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram2.java
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 <<<<<<<< HEAD:feature0/Histogram2.java
@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class Histogram2 extends ProcessFile {
     private int numLevels = 10;
-    private one.empty3.featureAndroid.PixM m = null;
+    private matrix.PixM m = null;
     private double[] max;
     private double[] min;
 
@@ -75,7 +75,7 @@ public class Histogram2 extends ProcessFile {
     }
 
     //private final int[][][] levels;
-    public void setM(one.empty3.featureAndroid.PixM m2) {
+    public void setM(matrix.PixM m2) {
         this.m = m2;
     }
 
@@ -197,7 +197,7 @@ public class Histogram2 extends ProcessFile {
             Image file = m.getImage().getBitmap();
 ========
         File directory = new File(out.getParent());
-        one.empty3.featureAndroid.PixM imageCoutours = new one.empty3.featureAndroid.PixM(one.empty3.ImageIO.read(in));
+        matrix.PixM imageCoutours = new matrix.PixM(one.empty3.ImageIO.read(in));
         this.m = imageCoutours;
         Image file = m.getImage();
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram2.java

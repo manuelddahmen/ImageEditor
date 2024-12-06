@@ -43,7 +43,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-import matrix.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
@@ -112,13 +112,13 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void process(File in, File inCsv, File out, int res) throws IOException {
         features = new ArrayList<>();
 
-        PixM pix;
+        matrix.PixM pix;
         try {
             if (res > 0)
-                pix = PixM.getPixM(Objects.requireNonNull(Image.loadFile(in)), res);
+                pix = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(Image.loadFile(in)), res);
             else
-                pix = new PixM(Objects.requireNonNull(Image.loadFile(in)));
-            PixM pix2 = new PixM(
+                pix = new matrix.PixM(Objects.requireNonNull(Image.loadFile(in)));
+            matrix.PixM pix2 = new matrix.PixM(
                     pix.getColumns(),
                     pix.getLines()
             );

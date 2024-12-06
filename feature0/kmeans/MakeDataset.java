@@ -34,7 +34,7 @@ import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
 ========
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/MakeDataset.java

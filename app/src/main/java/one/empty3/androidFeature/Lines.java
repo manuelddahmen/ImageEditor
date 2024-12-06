@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Lines extends ProcessFile {
-    private PixM pixM;
+    private matrix.PixM matrix.PixM;
     private double pz;
     private double py;
     private double px;
@@ -120,8 +120,8 @@ public class Lines extends ProcessFile {
         Point3D pRes = null;
         int x0 = (int) (double) p0.getX();
         int y0 = (int) (double) p0.getY();
-        for (int i = Math.max(x0 - distMax1 / 2, 0); i < Math.min(x0 + distMax1 / 2, pixM.getColumns()); i++) {
-            for (int j = Math.max(y0 - distMax1 / 2, 0); j < Math.min(y0 + distMax1 / 2, pixM.getLines()); j++) {
+        for (int i = Math.max(x0 - distMax1 / 2, 0); i < Math.min(x0 + distMax1 / 2, matrix.PixM.getColumns()); i++) {
+            for (int j = Math.max(y0 - distMax1 / 2, 0); j < Math.min(y0 + distMax1 / 2, matrix.PixM.getLines()); j++) {
                 Point3D p2 = mapPoints[i][j];
                 if (p2 != null && Point3D.distance(p0, p2) < distMax1 && p2 != p0 && !p2.equals(p0)) {
                     dist = Point3D.distance(p0, p2);
@@ -148,18 +148,18 @@ public class Lines extends ProcessFile {
         listTmpX = new ArrayList<Double>();
         listTmpY = new ArrayList<Double>();
         listTmpZ = new ArrayList<Double>();
-        pixM = new PixM(ImageIO.read(in));
-        PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM = new matrix.PixM(ImageIO.read(in));
+        matrix.PixM o = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
-        p = new int[pixM.getColumns()][pixM.getLines()];
-        mapPoints = new Point3D[pixM.getColumns()][pixM.getLines()];
+        p = new int[matrix.PixM.getColumns()][matrix.PixM.getLines()];
+        mapPoints = new Point3D[matrix.PixM.getColumns()][matrix.PixM.getLines()];
 
-        for (int x = 0; x < pixM.getColumns(); x++)
-            for (int y = 0; y < pixM.getLines(); y++)
+        for (int x = 0; x < matrix.PixM.getColumns(); x++)
+            for (int y = 0; y < matrix.PixM.getLines(); y++)
                 p[x][y] = 0;
 
-        for (int i = 0; i < pixM.getColumns(); i++) {
-            for (int j = 0; j < pixM.getLines(); j++) {
+        for (int i = 0; i < matrix.PixM.getColumns(); i++) {
+            for (int j = 0; j < matrix.PixM.getLines(); j++) {
                 double valueMin = 0.4;
 
                 double valueDiff = 0.2;
@@ -168,7 +168,7 @@ public class Lines extends ProcessFile {
                 int x = i;
                 int y = j;
 
-                double valueAvg = pixM.luminance(x, y);
+                double valueAvg = matrix.PixM.luminance(x, y);
 
                 while (valueAvg >= valueMin) {
 
@@ -179,7 +179,7 @@ public class Lines extends ProcessFile {
                     Point3D p0 = null;
                     if (listTmpCurve.size() > 0) {
                         getTmp(0);
-                        if (!(x >= 0 && x < pixM.getColumns() && y >= 0 && y < pixM.getLines()) && p[x][y] == 0) {
+                        if (!(x >= 0 && x < matrix.PixM.getColumns() && y >= 0 && y < matrix.PixM.getLines()) && p[x][y] == 0) {
 
                             p0 = new Point3D(px, px, pz);
                             listTmpCurve.add(p0);
@@ -190,7 +190,7 @@ public class Lines extends ProcessFile {
 
                     p[x][y] = 1;
 
-                    valueAvg = pixM.luminance(x, y);
+                    valueAvg = matrix.PixM.luminance(x, y);
 
                 }
 
@@ -268,7 +268,7 @@ public class Lines extends ProcessFile {
                     Point point = new Point(x2, y2);
                     double px = point.getX();
                     double py = point.getY();
-                    double pz = pixM.luminance((int) point.getX(), (int) point.getY());
+                    double pz = matrix.PixM.luminance((int) point.getX(), (int) point.getY());
 
                     if (pz >= valueAvg - valueDiff && pz <= valueAvg + valueDiff && pz > valueMin && p[x2][y2] == 0) {
                         addTmp(px, py, pz);

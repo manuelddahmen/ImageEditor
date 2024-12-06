@@ -24,7 +24,7 @@ package one.empty3.feature;
 package one.empty3.androidFeature;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 <<<<<<<< HEAD:feature0/IdentNullProcess.java
@@ -44,9 +44,9 @@ public class IdentNullProcess extends ProcessFile {
         if(maxRes>0) {
             pixM = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
 ========
-        one.empty3.featureAndroid.PixM pixM = null;
+        matrix.PixM pixM = null;
         if (maxRes > 0) {
-            pixM = one.empty3.featureAndroid.PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            pixM = matrix.PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/IdentNullProcess.java
         } else {
             pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));

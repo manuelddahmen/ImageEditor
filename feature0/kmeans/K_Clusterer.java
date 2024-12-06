@@ -43,7 +43,7 @@ import one.empty3.ImageIO;
 <<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
 import one.empty3.feature.PixM;
 ========
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 import one.empty3.library.core.lighting.Colors;
 

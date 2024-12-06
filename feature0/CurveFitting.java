@@ -26,7 +26,7 @@ import one.empty3.feature.shape.Rectangle;
 ========
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.androidFeature.shape.Rectangle;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/CurveFitting.java

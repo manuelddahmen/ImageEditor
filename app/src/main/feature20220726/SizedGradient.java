@@ -38,7 +38,7 @@ sobel. 3×3 ou plus. 1*2+1
 = M3 cols, lines, sigmas
  Map of vectors. 
 */
-public class SizedGradient extends FilterPixM {
+public class SizedGradient extends Filtermatrix.PixM {
     private double dist = 2.0;
 
     public SizedGradient(double dist) {

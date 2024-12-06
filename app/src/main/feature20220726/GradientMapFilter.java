@@ -39,7 +39,7 @@ sobel. 3×3 ou plus. 1*2+1
 /*
 public class GradientMapFilter extends FilterPixGMatrix {
     private M3 map;
-    private PixM gaussMap;
+    private matrix.PixM gaussMap;
     public double gaussDerivateX(int x, int y ) {
         return 0.0;
     } 
@@ -59,8 +59,8 @@ public class GradientMapFilter extends FilterPixGMatrix {
     public double deltaGy(int x, int y) {
         return 0.0;
     } 
-    public GradientMapFilter(PixM img, int sigmas) {
-       gradient = new PixM[sigmas] ;
+    public GradientMapFilter(matrix.PixM img, int sigmas) {
+       gradient = new matrix.PixM[sigmas] ;
        super(img.getColumns(), img.getLines()) ;
        this.img = img;
        for(int i=0; i<sigmas; i++) {

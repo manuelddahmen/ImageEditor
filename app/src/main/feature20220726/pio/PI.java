@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726.pio;
 
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 
 import java.io.File;
 import java.util.*;
@@ -34,7 +34,7 @@ import one.empty3.library.Point3D;
  */
 public class PI {
     Point3D p;
-    PixM image;
+    matrix.PixM image;
     File imageFile;
 }
 

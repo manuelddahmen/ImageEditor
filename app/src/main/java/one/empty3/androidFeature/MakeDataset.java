@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
 
@@ -37,12 +37,12 @@ public class MakeDataset {
                        File outputCsv, int res) {
         try {
             Image img = ImageIO.read(image);
-            one.empty3.featureAndroid.PixM pix;
+            one.empty3.featureAndroid.matrix.PixM pix;
             if (res > 0)
 
-                pix = one.empty3.featureAndroid.PixM.getPixM(img, res);
+                pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, res);
             else
-                pix = new PixM(img);
+                pix = new matrix.PixM(img);
 
             System.out.println("size out : " + pix.getColumns() + ", " + pix.getLines());
 

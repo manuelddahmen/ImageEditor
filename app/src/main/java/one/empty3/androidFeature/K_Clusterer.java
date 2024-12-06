@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import one.empty3.ImageIO;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {
@@ -98,10 +98,10 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void process(File in, File inCsv, File out, int res) throws IOException {
         features = new ArrayList<>();
 
-        one.empty3.featureAndroid.PixM pix;
+        one.empty3.featureAndroid.matrix.PixM pix;
         try {
-            pix = one.empty3.featureAndroid.PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
-            one.empty3.featureAndroid.PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
+            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(Objects.requireNonNull(ImageIO.read(in)), res);
+            one.empty3.featureAndroid.matrix.PixM pix2 = new matrix.PixM(pix.getColumns(), pix.getLines());
 
             System.out.println("size out : " + pix2.getColumns() + ", " + pix2.getLines());
 

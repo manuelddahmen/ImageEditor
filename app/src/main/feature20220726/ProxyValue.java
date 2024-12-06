@@ -42,10 +42,10 @@ public class ProxyValue extends ProcessFile {
         if (!in.getName().endsWith(".jpg"))
             return false;
         File file = in;
-        PixM original = null;
+        matrix.PixM original = null;
 
         try {
-            original = PixM.getPixM(new Image(in), maxRes);
+            original = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -53,7 +53,7 @@ public class ProxyValue extends ProcessFile {
 
         }
         int p = 0;
-        PixM copy = new PixM(original.getColumns(), original.getLines());
+        matrix.PixM copy = new matrix.PixM(original.getColumns(), original.getLines());
 
 
         for (int i = 0; i < original.getColumns(); i++)
@@ -86,7 +86,7 @@ public class ProxyValue extends ProcessFile {
 
 
     public void searchFromTo(
-            PixM original, PixM copy, int i, int j, double min) {
+            matrix.PixM original, matrix.PixM copy, int i, int j, double min) {
         Point3D p = null;
         int i2 = i, j2 = j;
         
@@ -142,8 +142,8 @@ public class ProxyValue extends ProcessFile {
         return;
     }
 
-    public void copyPixel(PixM m1, int i, int j,
-                          PixM m2, int i2, int j2) {
+    public void copyPixel(matrix.PixM m1, int i, int j,
+                          matrix.PixM m2, int i2, int j2) {
         for (int c = 0; c < 3; c++) {
 
             m1.setCompNo(c);

@@ -59,35 +59,35 @@ public class ExtractIntensityInfo extends
             img = new Image(in);
         } catch (Exception rx) {
         }
-        PixM pix = PixM.getPixM(img, -1);
+        matrix.PixM pix = matrix.PixM.getmatrix.PixM(img, -1);
 
 
-        PixM pixMOriginal = pix;
+        matrix.PixM matrix.PixMOriginal = pix;
 
         final Image[] img3 = new Image[]{pix.getImage()};
 
 
-        GradientFilter gradientMask = new GradientFilter(pixMOriginal.getColumns(), pixMOriginal.getLines());
-        M3 imgForGrad = new M3(pixMOriginal,
+        GradientFilter gradientMask = new GradientFilter(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines());
+        M3 imgForGrad = new M3(matrix.PixMOriginal,
                 2, 2);
         M3 filter = gradientMask.filter(imgForGrad);
-        PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
+        matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
 
 
 //                    image1 = null;
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new PixM(pixMOriginal.getColumns(), pixMOriginal.getLines()));
+                new matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
-        PixM smoothedGrad = linear.getImages()[2];
+        matrix.PixM smoothedGrad = linear.getImages()[2];
 
 
         double min = 0.3;
         double rMin = 2.0;
         // varier rMin et min
 
-        PixM pix2 = smoothedGrad.copy();
+        matrix.PixM pix2 = smoothedGrad.copy();
 
         Histogram2 histogram = new Histogram2(15);
         histogram.setM(pix2);

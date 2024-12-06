@@ -23,7 +23,7 @@ package one.empty3.androidFeature.motion;
 import android.graphics.Color;
 
 import one.empty3.androidFeature.FeatureMatch;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Lumiere;
 
 import one.empty3.libs.Image;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class FeatureMotion extends Motion {
     @Override
-    public Image process(PixM frame1, PixM frame2) {
+    public Image process(matrix.PixM frame1, matrix.PixM frame2) {
         FeatureMatch featureMatch = new FeatureMatch();
 
         List<double[]> match = featureMatch.match(frame1, frame2);

@@ -43,12 +43,12 @@ public class ExtremaProcess extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
-        PixM pix = null;
+        matrix.PixM pix = null;
         if (!in.getName().endsWith(".jpg"))
             return false;
 
         try {
-            pix = new PixM(new Image(in));
+            pix = new matrix.PixM(new Image(in));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -61,7 +61,7 @@ public class ExtremaProcess extends ProcessFile {
                 neighbourSize, pointsCount);
 
 
-        PixM m = le.filter(new M3(pix, 1, 1)).getImagesMatrix()[0][0];
+        matrix.PixM m = le.filter(new M3(pix, 1, 1)).getImagesMatrix()[0][0];
 
         try {
             new Image(1,1,4).saveToFile(m.normalize(0, 1).getImage(), "jpg", out);

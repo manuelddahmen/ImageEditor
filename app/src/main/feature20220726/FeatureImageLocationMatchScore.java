@@ -28,7 +28,7 @@ public class FeatureImageLocationMatchScore {
     // matrix size, matrix values, thresoldused, x, y, imageLocation, deltaE??
     private int sizeSquare = 3;
     private int componentSize;
-    private PixM values;
+    private matrix.PixM values;
     private double thresoldused = 0.5;
     private int x;
     private int y;

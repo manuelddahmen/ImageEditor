@@ -38,12 +38,12 @@ public class GaussFilterProcess extends ProcessFile {
 
             return false;
 
-        PixM pix = null;
+        matrix.PixM pix = null;
         Image img = null;
 
         try {
             img = new Image(in);
-            pix = PixM.getPixM(img, maxRes);
+            pix = matrix.PixM.getmatrix.PixM(img, maxRes);
 
         } catch (Exception ex) {
 
@@ -56,9 +56,9 @@ public class GaussFilterProcess extends ProcessFile {
 
         }
 
-        GaussFilterPixM th = new GaussFilterPixM(pix, 1);
+        GaussFiltermatrix.PixM th = new GaussFiltermatrix.PixM(pix, 1);
 
-        PixM pixRes = new PixM(pix.getColumns(), pix.getLines());
+        matrix.PixM pixRes = new matrix.PixM(pix.getColumns(), pix.getLines());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
             pix.setCompNo(c);
@@ -69,7 +69,7 @@ public class GaussFilterProcess extends ProcessFile {
         }
 
 
-        PixM normalize = pix.normalize(0.0, 1.0);
+        matrix.PixM normalize = pix.normalize(0.0, 1.0);
 
 
         //

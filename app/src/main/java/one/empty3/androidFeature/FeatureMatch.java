@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import java.io.File;
@@ -33,8 +33,8 @@ public class FeatureMatch extends ProcessFile {
     final Point3D point = new Point3D(1., 1., 1.);
     List<double[]> points1;
     List<double[]> points2;
-    PixM img1copy;
-    PixM img2copy;
+    matrix.PixM img1copy;
+    matrix.PixM img2copy;
 
     /***
      *
@@ -42,12 +42,12 @@ public class FeatureMatch extends ProcessFile {
      * @param img2
      * @return List of double[x1][y1][x2][y2]
      */
-    public List<double[]> match(PixM img1, PixM img2) {
+    public List<double[]> match(matrix.PixM img1, matrix.PixM img2) {
         TrueHarrisProcess trueHarrisProcess = new TrueHarrisProcess();
 
-        img1copy = new PixM(img1.getColumns(), img1.getLines());
+        img1copy = new matrix.PixM(img1.getColumns(), img1.getLines());
         //trueHarrisProcess.processMem(img1, img1copy);
-        img2copy = new PixM(img2.getColumns(), img2.getLines());
+        img2copy = new matrix.PixM(img2.getColumns(), img2.getLines());
         //trueHarrisProcess.processMem(img2, img2copy);
 
         points1 = features(img1copy);
@@ -93,7 +93,7 @@ public class FeatureMatch extends ProcessFile {
         return points;
     }
 
-    private List<double[]> features(PixM img1copy) {
+    private List<double[]> features(matrix.PixM img1copy) {
 
         ArrayList<double[]> points = new ArrayList<>();
 

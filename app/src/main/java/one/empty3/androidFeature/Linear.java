@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 import java.util.Arrays;
@@ -32,10 +32,10 @@ public class Linear {
     public static final int TYPE_2D = 0;
     public static final int TYPE_2D_2D = 1;
 
-    private one.empty3.featureAndroid.PixM[] images;
+    private one.empty3.featureAndroid.matrix.PixM[] images;
     private M3[] imagesM;
 
-    public Linear(one.empty3.featureAndroid.PixM... images) {
+    public Linear(one.empty3.featureAndroid.matrix.PixM... images) {
         type = TYPE_2D_2D;
         this.imagesM = null;
         this.images = images;
@@ -50,12 +50,12 @@ public class Linear {
     public Linear(Image... bufferedImages) {
         type = TYPE_2D_2D;
         this.imagesM = null;
-        images = new one.empty3.featureAndroid.PixM[bufferedImages.length];
+        images = new one.empty3.featureAndroid.matrix.PixM[bufferedImages.length];
         final int[] i = {0};
         Arrays.stream(bufferedImages).forEach(new Consumer<Image>() {
             @Override
             public void accept(Image bufferedImage) {
-                images[i[0]] = new one.empty3.featureAndroid.PixM(bufferedImage);
+                images[i[0]] = new one.empty3.featureAndroid.matrix.PixM(bufferedImage);
                 i[0]++;
             }
         });
@@ -65,54 +65,54 @@ public class Linear {
     }
 
     public boolean op2d2d(char[] op, int[][] index, int[] indexRes) {
-        one.empty3.featureAndroid.PixM[] workingImages = null;
+        one.empty3.featureAndroid.matrix.PixM[] workingImages = null;
         assert images != null;
         for (int x = 0; x < op.length; x++) {
-            workingImages = new one.empty3.featureAndroid.PixM[images.length];//.??N
-            //new PixM[index[x].length];//.??N
+            workingImages = new one.empty3.featureAndroid.matrix.PixM[images.length];//.??N
+            //new matrix.PixM[index[x].length];//.??N
             for (int j = 0; j < index[x].length; j++) {
                 workingImages[j] = images[index[x][j]];
             }
-            one.empty3.featureAndroid.PixM pixM = new one.empty3.featureAndroid.PixM(workingImages[0].getColumns(),
+            one.empty3.featureAndroid.matrix.PixM matrix.PixM = new one.empty3.featureAndroid.matrix.PixM(workingImages[0].getColumns(),
                     workingImages[0].getLines());
             for (int m = 0; m < index[x].length; m++) {
                 assert workingImages[m] != null;
                 for (int comp = 0; comp < workingImages[m].getCompCount(); comp++) {
                     workingImages[m].setCompNo(comp);
-                    pixM.setCompNo(comp);
+                    matrix.PixM.setCompNo(comp);
                     for (int i = 0; i < workingImages[m].getColumns(); i++)
                         for (int j = 0; j < workingImages[m].getLines(); j++)
                             switch (op[x]) {
                                 case '+':
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
-                                    pixM.set(i, j, pixM.get(i, j) + workingImages[m].get(i, j));
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
+                                    matrix.PixM.set(i, j, matrix.PixM.get(i, j) + workingImages[m].get(i, j));
                                     break;
                                 case '-':
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
                                     else
-                                        pixM.set(i, j, pixM.get(i, j) - workingImages[m].get(i, j));
+                                        matrix.PixM.set(i, j, matrix.PixM.get(i, j) - workingImages[m].get(i, j));
                                     break;
                                 case '*':
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
-                                    pixM.set(i, j, pixM.get(i, j) * workingImages[m].get(i, j));
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
+                                    matrix.PixM.set(i, j, matrix.PixM.get(i, j) * workingImages[m].get(i, j));
                                     break;
                                 case '/'://divide M1/M2/M3
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
-                                    pixM.set(i, j, pixM.get(i, j) / workingImages[m].get(i, j));
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
+                                    matrix.PixM.set(i, j, matrix.PixM.get(i, j) / workingImages[m].get(i, j));
                                     break;
                                 case '~': //average
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
-                                    pixM.set(i, j, pixM.get(i, j) + workingImages[m].get(i, j) / workingImages.length);
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
+                                    matrix.PixM.set(i, j, matrix.PixM.get(i, j) + workingImages[m].get(i, j) / workingImages.length);
                                     break;
                                 case '%':
                                     if (m == 0)
-                                        pixM.set(i, j, workingImages[0].get(i, j));
-                                    pixM.set(i, j, Math.IEEEremainder(pixM.get(i, j), workingImages[m].get(i, j)));
+                                        matrix.PixM.set(i, j, workingImages[0].get(i, j));
+                                    matrix.PixM.set(i, j, Math.IEEEremainder(matrix.PixM.get(i, j), workingImages[m].get(i, j)));
                                     break;
                                 case '|':
                                     // Norme
@@ -120,8 +120,8 @@ public class Linear {
                             }
                 }
             }
-            pixM.normalize(0.0, 1.0);
-            workingImages[indexRes[x]] = pixM;
+            matrix.PixM.normalize(0.0, 1.0);
+            workingImages[indexRes[x]] = matrix.PixM;
         }
         this.images = workingImages == null ? images : workingImages;
         return true;
@@ -131,7 +131,7 @@ public class Linear {
         return type;
     }
 
-    public PixM[] getImages() {
+    public matrix.PixM[] getImages() {
         return images;
     }
 }

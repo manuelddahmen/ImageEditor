@@ -20,14 +20,14 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library1.tree.*;
 
 public class DirectMaskFilter {
-    one.empty3.featureAndroid.PixM m1;
-    one.empty3.featureAndroid.PixM m2;
+    one.empty3.featureAndroid.matrix.PixM m1;
+    one.empty3.featureAndroid.matrix.PixM m2;
 
-    public DirectMaskFilter(one.empty3.featureAndroid.PixM m1, one.empty3.featureAndroid.PixM m2) {
+    public DirectMaskFilter(one.empty3.featureAndroid.matrix.PixM m1, one.empty3.featureAndroid.matrix.PixM m2) {
 
         this.m1 = m1;
         this.m2 = m2;
@@ -36,8 +36,8 @@ public class DirectMaskFilter {
     /* (M3.p =) = p1x, p1y,
     
 , p2x, p2y,c1r,c2g b a, w, h, ww, wh */
-    public one.empty3.featureAndroid.PixM applyOperator(String[] formulaColorComps) {
-        one.empty3.featureAndroid.PixM m3 = new PixM(m1.getColumns(), m1.getLines());
+    public one.empty3.featureAndroid.matrix.PixM applyOperator(String[] formulaColorComps) {
+        one.empty3.featureAndroid.matrix.PixM m3 = new matrix.PixM(m1.getColumns(), m1.getLines());
         AlgebraicTree[] treeA = new AlgebraicTree[formulaColorComps.length];
         try {
             for (int c = 0; c < formulaColorComps.length; c++) {

@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import java.io.File;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 import one.empty3.libs.Image;
 
@@ -68,7 +68,7 @@ public class Hist4Contour3 extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, PixM m) {
+    public Circle getLevel(Circle c, matrix.PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -117,12 +117,12 @@ public class Hist4Contour3 extends ProcessFile {
         if (!isImage(in)) {
             return false;
         }
-        PixM inP;
-        inP = PixM.getPixM(Image.loadFile(in), maxRes);
+        matrix.PixM inP;
+        inP = matrix.PixM.getmatrix.PixM(Image.loadFile(in), maxRes);
 
 
         double max = 0.0;
-        PixM outP = new PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0;

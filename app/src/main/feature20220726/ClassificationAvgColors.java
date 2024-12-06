@@ -47,8 +47,8 @@ public class ClassificationAvgColors extends ProcessFile {
         // Processed by "classification
         // Non filtered image
         Image original = new Image(in);
-        PixM pixMOriginal = new PixM(Objects.requireNonNull(original));
-        PixM toProcess = new PixM(original);
+        matrix.PixM matrix.PixMOriginal = new matrix.PixM(Objects.requireNonNull(original));
+        matrix.PixM toProcess = new matrix.PixM(original);
         Map<Integer, double[]> c = classification.kClusterer.centroids;
         Map<Integer, Point3D> sum = new HashMap<>();
         Map<Integer, Integer> count = new HashMap<>();
@@ -58,7 +58,7 @@ public class ClassificationAvgColors extends ProcessFile {
             public void accept(Integer integer, double[] doubles) {
                 sum.putIfAbsent(integer, Point3D.O0);
                 count.putIfAbsent(integer, 0);
-                sum.put(integer, sum.get(integer).plus(pixMOriginal.getP((int) doubles[0], (int) doubles[1])));
+                sum.put(integer, sum.get(integer).plus(matrix.PixMOriginal.getP((int) doubles[0], (int) doubles[1])));
                 count.put(integer, count.get(integer) + 1);
             }
         });

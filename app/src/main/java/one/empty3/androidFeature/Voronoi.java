@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.libs.Image;
@@ -58,23 +58,23 @@ public class Voronoi extends ProcessFile {
         try {
             List<Point3D> points = new ArrayList<>();
             Image read = one.empty3.ImageIO.read(in);
-            PixM pixM = PixM.getPixM(read, maxRes);
-            PixM pixMOut = pixM.copy();
-            for (int i = 0; i < pixM.getColumns(); i++) {
-                for (int j = 0; j < pixM.getLines(); j++) {
-                    if (pixM.luminance(i, j) > 0.4) {
-                        points.add(new Point3D((double) i, (double) j, pixM.luminance(i, j)));
+            matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read, maxRes);
+            matrix.PixM matrix.PixMOut = matrix.PixM.copy();
+            for (int i = 0; i < matrix.PixM.getColumns(); i++) {
+                for (int j = 0; j < matrix.PixM.getLines(); j++) {
+                    if (matrix.PixM.luminance(i, j) > 0.4) {
+                        points.add(new Point3D((double) i, (double) j, matrix.PixM.luminance(i, j)));
                     }
                 }
             }
 
 
-            for (int i = 0; i < pixM.getColumns(); i++) {
-                for (int j = 0; j < pixM.getLines(); j++) {
+            for (int i = 0; i < matrix.PixM.getColumns(); i++) {
+                for (int j = 0; j < matrix.PixM.getLines(); j++) {
                     Point3D near = near(new Point3D((double) i, (double) j, 0.0), points);
                     if (near != null) {
-                        Point3D p = pixM.getP((int) (double) near.get(0), (int) (double) near.get(1));
-                        pixMOut.setValues(i, j, p.getX(), p.getY(), p.getZ());
+                        Point3D p = matrix.PixM.getP((int) (double) near.get(0), (int) (double) near.get(1));
+                        matrix.PixMOut.setValues(i, j, p.getX(), p.getY(), p.getZ());
                     } else {
                         //System.out.println("Error near==null");
                     }
@@ -82,7 +82,7 @@ public class Voronoi extends ProcessFile {
             }
 
 
-            one.empty3.ImageIO.write(pixMOut.getImage().getImage(), "jpg", out, shouldOverwrite);
+            one.empty3.ImageIO.write(matrix.PixMOut.getImage().getImage(), "jpg", out, shouldOverwrite);
 
             return true;
 

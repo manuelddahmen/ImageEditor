@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
@@ -35,7 +35,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Vectorize extends ProcessFile {
-    private PixM pixM;
+    private matrix.PixM matrix.PixM;
     private double distMax = 40.;
     private final Random random = new Random();
     Point3D[][] mapPoints;
@@ -56,21 +56,21 @@ public class Vectorize extends ProcessFile {
         Image read = ImageIO.read(in);
         if (read == null)
             return false;
-        pixM = new PixM(read);
-        PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM = new matrix.PixM(read);
+        matrix.PixM o = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
-        p = new int[pixM.getColumns()][pixM.getLines()];
-        mapPoints = new Point3D[pixM.getColumns()][pixM.getLines()];
+        p = new int[matrix.PixM.getColumns()][matrix.PixM.getLines()];
+        mapPoints = new Point3D[matrix.PixM.getColumns()][matrix.PixM.getLines()];
 
-        for (int x = 0; x < pixM.getColumns(); x++)
-            for (int y = 0; y < pixM.getLines(); y++) {
+        for (int x = 0; x < matrix.PixM.getColumns(); x++)
+            for (int y = 0; y < matrix.PixM.getLines(); y++) {
                 p[x][y] = 0;
-                if (pixM.luminance(x, y) > 0.4)
-                    mapPoints[x][y] = new Point3D((double) x, (double) y, pixM.luminance(x, y));
+                if (matrix.PixM.luminance(x, y) > 0.4)
+                    mapPoints[x][y] = new Point3D((double) x, (double) y, matrix.PixM.luminance(x, y));
             }
 
-        for (int i = 0; i < pixM.getColumns(); i++) {
-            for (int j = 0; j < pixM.getLines(); j++) {
+        for (int i = 0; i < matrix.PixM.getColumns(); i++) {
+            for (int j = 0; j < matrix.PixM.getLines(); j++) {
                 if (mapPoints[i][j] != null) {
                     lists.add(new ArrayList<>());
                     lists.get(lists.size() - 1).add(mapPoints[i][j]);

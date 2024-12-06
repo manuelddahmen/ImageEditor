@@ -22,8 +22,8 @@
 
 package one.empty3.feature20220726.violajonesclassifier;
 
-import one.empty3.feature20220726.GaussFilterPixM;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.GaussFiltermatrix.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 
@@ -42,7 +42,7 @@ import java.util.logging.Logger;
 
 
 public class PartMatch extends ProcessFile {
-    List<PixM> featuresDescriptors = new ArrayList<>();
+    List<matrix.PixM> featuresDescriptors = new ArrayList<>();
     /// Partitioning searches for features.
     double featureMaxSize;//%original
     double featureMinSize;//PX
@@ -54,7 +54,7 @@ public class PartMatch extends ProcessFile {
         for (int n = 4; n <= N; n *= 2) {
             for (double a = 0; a < 1.; a += 1 / 16.) {
 
-                PixM pixM = new PixM(n, n);
+                matrix.PixM matrix.PixM = new matrix.PixM(n, n);
 
                 double lineAx = (Math.cos(Math.PI * 2 * a) + 0.5) * n;
                 double lineAy = (Math.sin(Math.PI * 2 * a) + 0.5) * n;
@@ -68,12 +68,12 @@ public class PartMatch extends ProcessFile {
                     for (int j = 0; j < n; j++) {
                         Point2D p = new Point2D(i, j);
                         double sign = Math.signum(prod2(pb.moins(pa), pb.moins(p)));
-                        pixM.setValues(i, j, sign, sign, sign);
+                        matrix.PixM.setValues(i, j, sign, sign, sign);
                     }
-                new Image(1,1,4).saveToFile(pixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
+                new Image(1,1,4).saveToFile(matrix.PixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
                         + n + "_angle_" + a + ".jpg"));
 
-                featuresDescriptors.add(pixM);
+                featuresDescriptors.add(matrix.PixM);
             }
         }
     }
@@ -93,7 +93,7 @@ public class PartMatch extends ProcessFile {
 
     }
 
-    public double computeScore(PixM image, int x, int y, int n, PixM match) {
+    public double computeScore(matrix.PixM image, int x, int y, int n, matrix.PixM match) {
         double score = 0.0;
         for (int i = x; i < x + n; i++) {
             for (int j = y; j < y + n; j++) {
@@ -103,7 +103,7 @@ public class PartMatch extends ProcessFile {
         return Math.abs(score / n / n);
     }
 
-    public double intensity(PixM image, int x, int y, int n) {
+    public double intensity(matrix.PixM image, int x, int y, int n) {
         double score = 0.0;
         for (int i = x; i < x + n; i++) {
             for (int j = y; j < y + n; j++) {
@@ -117,7 +117,7 @@ public class PartMatch extends ProcessFile {
     public boolean process(File in, File out) {
         featuresDescriptors = new ArrayList<>();
 
-        PixM pix = PixM.getPixM(new Image(in), maxRes);
+        matrix.PixM pix = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
 
         Image outImg = pix.getImage();
 
@@ -152,11 +152,11 @@ public class PartMatch extends ProcessFile {
         return true;
     }
 
-    private void classify(double m, PixM pixM) {
+    private void classify(double m, matrix.PixM matrix.PixM) {
 
     }
 
-    private double matchScore(PixM pix, int i, int j, int n, PixM pixM) {
+    private double matchScore(matrix.PixM pix, int i, int j, int n, matrix.PixM matrix.PixM) {
         return 0;
     }
 

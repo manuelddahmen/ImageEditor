@@ -74,7 +74,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 
@@ -648,7 +648,7 @@ public class ActivitySuperClass extends AppCompatActivity {
         if (maxRes > 0) {
         System.err.println("FileInputStream" + choose_directoryData);
             photo = BitmapFactory.decodeStream(choose_directoryData, null, options);
-            photo = PixM.getPixM(photo, maxRes).getImage().getImage();
+            photo = matrix.PixM.getmatrix.PixM(photo, maxRes).getImage().getImage();
             System.err.println("Get file (bitmap) : " + photo);
         } else {
             System.err.println("FileInputStream" + choose_directoryData);

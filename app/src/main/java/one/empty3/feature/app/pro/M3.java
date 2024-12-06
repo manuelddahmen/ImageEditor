@@ -26,8 +26,8 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 
 import matrix.MBitmap;
-import one.empty3.androidFeature.FilterPixM;
-import one.empty3.featureAndroid.PixM;
+import one.empty3.androidFeature.Filtermatrix.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 
@@ -78,14 +78,14 @@ public class M3 extends MBitmap{
     }
 
 
-    public M3(PixM pixM, int columnsIn, int linesIn) {
-        this(pixM.getColumns(), pixM.getLines(), columnsIn, linesIn);
+    public M3(matrix.PixM matrix.PixM, int columnsIn, int linesIn) {
+        this(matrix.PixM.getColumns(), matrix.PixM.getLines(), columnsIn, linesIn);
         for (int c = 0; c < getCompCount(); c++) {
-            pixM.setCompNo(c);
+            matrix.PixM.setCompNo(c);
             setCompNo(c);
             for (int i = 0; i < columns; i++) {
                 for (int j = 0; j < lines; j++) {
-                    double d = pixM.get(i, j);
+                    double d = matrix.PixM.get(i, j);
                     for (int ii = 0; ii < columnsIn; ii++)
                         for (int ij = 0; ij < linesIn; ij++) {
                             set(i, j, ii, ij, d);
@@ -95,8 +95,8 @@ public class M3 extends MBitmap{
         }
     }
 
-    public M3(PixM pixM[][]) {
-        this(pixM[0][0].getColumns(), pixM[0][0].getLines(), pixM.length, pixM[0].length);
+    public M3(matrix.PixM matrix.PixM[][]) {
+        this(matrix.PixM[0][0].getColumns(), matrix.PixM[0][0].getLines(), matrix.PixM.length, matrix.PixM[0].length);
 
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
@@ -105,9 +105,9 @@ public class M3 extends MBitmap{
                     for (int ij = 0; ij < linesIn; ij++) {
                         for (int c = 0; c < getCompCount(); c++) {
 
-                            pixM[ii][ij].setCompNo(c);
+                            matrix.PixM[ii][ij].setCompNo(c);
 
-                            double d = pixM[ii][ij].get(i, j);
+                            double d = matrix.PixM[ii][ij].get(i, j);
 
                             setCompNo(c);
                             set(i, j, ii, ij, d);
@@ -275,12 +275,12 @@ public class M3 extends MBitmap{
         return compNo;
     }
 
-    public PixM[][] getImagesMatrix() {
+    public matrix.PixM[][] getImagesMatrix() {
         return normalize(0.0, 1.0);
     }
 
-    public PixM[][] normalize(final double min, final double max) {
-        PixM[][] res = new PixM[columnsIn][linesIn];
+    public matrix.PixM[][] normalize(final double min, final double max) {
+        matrix.PixM[][] res = new matrix.PixM[columnsIn][linesIn];
 
         double[][][] maxRgbai = new double[compCount][columnsIn][linesIn];
         double[][][] meanRgbai = new double[compCount][columnsIn][linesIn];
@@ -295,7 +295,7 @@ public class M3 extends MBitmap{
                     minRgbai[comp][ii][ij] = min;
                     meanRgbai[comp][ii][ij] = 0;
                 }
-                PixM image = new PixM(columns, lines);
+                matrix.PixM image = new matrix.PixM(columns, lines);
                 res[ii][ij] = image;
             }
         }
@@ -356,14 +356,14 @@ public class M3 extends MBitmap{
         return res;
     }
 
-    public M3 filter(FilterPixM filter1, int ii, int ij) {
-        PixM matrix = getMatrix(ii, ij);
+    public M3 filter(Filtermatrix.PixM filter1, int ii, int ij) {
+        matrix.PixM matrix = getMatrix(ii, ij);
         matrix.applyFilter(filter1);
         setMatrix(ii, ij, matrix);
         return this;
     }
 
-    public void setMatrix(int ii, int ij, PixM matrix) {
+    public void setMatrix(int ii, int ij, matrix.PixM matrix) {
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 for (int c = 0; c < getCompCount(); c++) {
@@ -376,8 +376,8 @@ public class M3 extends MBitmap{
 
     }
 
-    public PixM getMatrix(int ii, int ij) {
-        PixM matrix = new PixM(columns, lines);
+    public matrix.PixM getMatrix(int ii, int ij) {
+        matrix.PixM matrix = new matrix.PixM(columns, lines);
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
                 for (int c = 0; c < getCompCount(); c++) {

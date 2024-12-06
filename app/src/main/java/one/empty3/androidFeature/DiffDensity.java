@@ -21,13 +21,13 @@
 package one.empty3.androidFeature;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import java.io.File;
 
 public class DiffDensity extends ProcessFile {
-    private PixM densities;
+    private matrix.PixM densities;
     private Point3D[] colors;
 
     @Override

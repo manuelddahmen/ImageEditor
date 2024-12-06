@@ -25,7 +25,7 @@ import android.graphics.BitmapFactory;
 import java.io.File;
 
 import one.empty3.feature.M;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 public class BrushGradientMaximumColor extends ProcessFile {
@@ -53,10 +53,10 @@ public class BrushGradientMaximumColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.PixM pixM = new one.empty3.featureAndroid.PixM(BitmapFactory.decodeFile(in.getAbsolutePath()));
-        one.empty3.featureAndroid.PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
-        for (int i = 0; i < pixM.getLines(); i++) {
-            for (int j = 0; j < pixM.getColumns(); j++) {
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM = new one.empty3.featureAndroid.matrix.PixM(BitmapFactory.decodeFile(in.getAbsolutePath()));
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
+        for (int i = 0; i < matrix.PixM.getLines(); i++) {
+            for (int j = 0; j < matrix.PixM.getColumns(); j++) {
                 for (int i2 = -1; i2 <= 1; i2++)
                     for (int j2 = -1; j2 <= 1; j2++) {
                         int x = i + i2;
@@ -64,12 +64,12 @@ public class BrushGradientMaximumColor extends ProcessFile {
 
                         M f = filterElem(x, y, 1);
                         double fd = f.determinant();
-                        pixM2.setValues(x, y, fd, fd, fd);
+                        matrix.PixM2.setValues(x, y, fd, fd, fd);
 
                     }
             }
         }
-        one.empty3.ImageIO.write(pixM2.normalize(0, 1).getBitmap().getImage(), "jpg", out);
+        one.empty3.ImageIO.write(matrix.PixM2.normalize(0, 1).getBitmap().getImage(), "jpg", out);
         return true;
     }
 }

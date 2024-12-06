@@ -31,7 +31,7 @@ package one.empty3.androidFeature;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.libs.Color;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Histogram3.java
 import one.empty3.libs.Image;

@@ -23,7 +23,7 @@
 package one.empty3.feature20220726.tryocr;
 
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -34,24 +34,24 @@ public class ReadLines extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = new PixM(new Image(in));
+        matrix.PixM matrix.PixM = new matrix.PixM(new Image(in));
 
-        PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
         // Block of texts (aligned horizontally)
         int maxSize = 30;
-        double countEmpty[][][] = new double[maxSize][pixM.getColumns()][pixM.getLines()];
-        double countNotEmpty[][][] = new double[maxSize][pixM.getColumns()][pixM.getLines()];
+        double countEmpty[][][] = new double[maxSize][matrix.PixM.getColumns()][matrix.PixM.getLines()];
+        double countNotEmpty[][][] = new double[maxSize][matrix.PixM.getColumns()][matrix.PixM.getLines()];
         double[] valueBlack = new double[]{1, 1, 1};
         double[] valueWhite = new double[]{0, 0, 0};
-        for (int i = 0; i < pixM.getColumns(); i++)
-            for (int j = 0; j < pixM.getLines(); j++) {
+        for (int i = 0; i < matrix.PixM.getColumns(); i++)
+            for (int j = 0; j < matrix.PixM.getLines(); j++) {
                 int size = 0;
                 do {
                     size++;
-                    for (int x = i - maxSize; x >= 0 && x < pixM.getColumns() && x < i + maxSize; x++)
-                        for (int y = i - maxSize; y >= 0 && y < pixM.getLines() && y < j + maxSize; y++) {
-                            double[] values = pixM.getValues(x, y);
+                    for (int x = i - maxSize; x >= 0 && x < matrix.PixM.getColumns() && x < i + maxSize; x++)
+                        for (int y = i - maxSize; y >= 0 && y < matrix.PixM.getLines() && y < j + maxSize; y++) {
+                            double[] values = matrix.PixM.getValues(x, y);
 
                             if (valueWhite.equals(values)) {
                                 countNotEmpty[size][i][j]++;
@@ -77,11 +77,11 @@ public class ReadLines extends ProcessFile {
          * masse blancs des 2 côtés au-dessus et au-dessous. caractères séparables par des points noirs, perpendiculaires.
          */
 
-        PixM pixOut1 = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM pixOut1 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
         // STEP2 Lines = lines of 0 and 1 and 0 for height
         File out2 = new File(out.getAbsolutePath() + "-2.jpg");
-        for (int i = 0; i < pixM.getColumns(); i++)
-            for (int j = 0; j < pixM.getLines(); j++) {
+        for (int i = 0; i < matrix.PixM.getColumns(); i++)
+            for (int j = 0; j < matrix.PixM.getLines(); j++) {
                 double sum = 0;
                 for (int s = 0; s < maxSize; s++)
                     if (countNotEmpty[s][i][j] / maxSize > sum)
@@ -89,7 +89,7 @@ public class ReadLines extends ProcessFile {
                 pixOut1.setValues(i, j, sum, sum, sum);
             }
         new Image(1,1,4).saveToFile(pixOut1.getImage(), "jpg", out2);
-        new Image(1,1,4).saveToFile(pixM2.getImage(), "jpg", out);
+        new Image(1,1,4).saveToFile(matrix.PixM2.getImage(), "jpg", out);
         return true;
     }
 

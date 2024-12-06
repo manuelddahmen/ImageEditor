@@ -20,19 +20,19 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 /*
  Le pinceau manchot.
  **/
-public class BrushGradient extends FilterPixM {
+public class BrushGradient extends Filtermatrix.PixM {
     double angle = 0.0;
     double length = 1.0;
     double large = 1.0;
-    PixM m;
+    matrix.PixM m;
 
-    public BrushGradient(PixM p) {
+    public BrushGradient(matrix.PixM p) {
         super(p.getColumns(), p.getLines());
         this.m = p;
     }

@@ -48,7 +48,7 @@ import one.empty3.library.core.lighting.Colors;
  */
 public class RegionLineCorner extends ProcessFile {
     public final int numLevels = 5;
-    private PixM m = null;
+    private matrix.PixM m = null;
     private double[] max;
     private double[] min;
 
@@ -87,7 +87,7 @@ public class RegionLineCorner extends ProcessFile {
     }
 
     //private final int[][][] levels;
-    public void setM(PixM m2) {
+    public void setM(matrix.PixM m2) {
         this.m = m2;
     }
 
@@ -142,8 +142,8 @@ public class RegionLineCorner extends ProcessFile {
         return 0.0;
     }
 
-    public PixM reconstruct(List<List<Circle>> circle) {
-        PixM rec = m.copy();
+    public matrix.PixM reconstruct(List<List<Circle>> circle) {
+        matrix.PixM rec = m.copy();
         return rec;
     }
 
@@ -276,7 +276,7 @@ public class RegionLineCorner extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        PixM imageCoutours = PixM.getPixM(new Image(in), 500.0);
+        matrix.PixM imageCoutours = matrix.PixM.getmatrix.PixM(new Image(in), 500.0);
         this.m = imageCoutours;
         Image file = m.getImage();
 

@@ -34,13 +34,13 @@ import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.PolyLine;
 
 public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImageView {
-    protected PixM pixels = null;
+    protected matrix.PixM pixels = null;
     protected final Paint paint = new Paint();
     private Context thisActivity = null;
 
@@ -109,9 +109,9 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
                 setImageBitmap(bm);
                 if(that.equals(ImageViewSelection.class)) {
                     if(thisActivity!=null) {
-                        pixels = PixM.getPixM(bm, new Utils().getMaxRes(thisActivity));
+                        pixels = matrix.PixM.getmatrix.PixM(bm, new Utils().getMaxRes(thisActivity));
                     } else {
-                        pixels = new PixM(bm);
+                        pixels = new matrix.PixM(bm);
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class ImageViewSelection extends androidx.appcompat.widget.AppCompatImage
 
     }
 
-    public void setPixels(@NotNull PixM pixM) {
-        pixels = pixM;
+    public void setPixels(@NotNull matrix.PixM matrix.PixM) {
+        pixels = matrix.PixM;
     }
 }

@@ -24,15 +24,15 @@ package one.empty3.feature20220726;
 
 import one.empty3.libs.*;
 
-public class IsleFilterPixM
-        extends FilterPixM {
+public class IsleFiltermatrix.PixM
+        extends Filtermatrix.PixM {
     private Color selColor;
     private Color oppositeColor;
     private double threshold;
     private float selComps[] = new float[4];
     private float oppComps[] = new float[4];
 
-    public IsleFilterPixM(PixM pix) {
+    public IsleFiltermatrix.PixM(matrix.PixM pix) {
         super(pix);
     }
 

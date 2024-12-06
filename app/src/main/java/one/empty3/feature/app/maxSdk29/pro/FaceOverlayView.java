@@ -35,7 +35,7 @@ import java.util.Objects;
 import one.empty3.Polygon1;
 import one.empty3.androidFeature.GoogleFaceDetection;
 import one.empty3.library.ColorTexture;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 import one.empty3.libs.Image;
@@ -245,7 +245,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
             Bitmap bitmap = Bitmap.createBitmap(ints, w, h, Bitmap.Config.ARGB_8888);
 
-            faceSurface.setActualDrawing(PixM.getPixM(bitmap, new Utils().getMaxRes(this.getContext())));
+            faceSurface.setActualDrawing(matrix.PixM.getmatrix.PixM(bitmap, new Utils().getMaxRes(this.getContext())));
 
             fillPolygon(faceSurface, faceSurface.getPolygon1(), faceSurface.getColorContours(), faceSurface.getColorFill());
         }
@@ -312,10 +312,10 @@ public class FaceOverlayView extends ImageViewSelection {
 
             polygonContour.texture(new ColorTexture(inColor));
 
-            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, -1, 0.0, point0, scale.x);//ùCopy!
-            if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
-                faceSurface.setContours(pixM);
-                faceSurface.setFilledContours(pixM);
+            matrix.PixM matrix.PixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, -1, 0.0, point0, scale.x);//ùCopy!
+            if (matrix.PixM != null && matrix.PixM.getLines() > 0 && matrix.PixM.getColumns() > 0) {
+                faceSurface.setContours(matrix.PixM);
+                faceSurface.setFilledContours(matrix.PixM);
 
             }
         }
@@ -542,7 +542,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
                 if (googleFaceDetection != null && googleFaceDetection.getBitmap() != null) {
                     //Bitmap bitmap2 = googleFaceDetection.getBitmap();
-                    //faceData.setPhoto(new PixM(bitmap2).copySubImage((int) a.x, (int) a.y, (int) (b.x - a.x), (int) (b.y - a.y)));
+                    //faceData.setPhoto(new matrix.PixM(bitmap2).copySubImage((int) a.x, (int) a.y, (int) (b.x - a.x), (int) (b.y - a.y)));
                 }
             }
             action(face, faceData);

@@ -26,7 +26,7 @@ import one.empty3.feature.PixM;
 ========
 package one.empty3.androidFeature.motion;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/Motion.java
 import one.empty3.libs.Image;
 

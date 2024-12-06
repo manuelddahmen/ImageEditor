@@ -22,14 +22,14 @@
 
 package one.empty3.feature20220726.motion;
 
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 
 import one.empty3.libs.Image;
 
 public class WebcamMotion extends Motion {
 
     @Override
-    public Image process(PixM frame1, PixM frame2) {
+    public Image process(matrix.PixM frame1, matrix.PixM frame2) {
         return null;
     }
 }

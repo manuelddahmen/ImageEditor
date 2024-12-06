@@ -23,7 +23,7 @@ package one.empty3.androidFeature;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 
@@ -74,7 +74,7 @@ public class Histogram3 extends ProcessFile {
 
     }
 
-    public Circle getLevel(PixM m, Circle c) {
+    public Circle getLevel(matrix.PixM m, Circle c) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -108,7 +108,7 @@ public class Histogram3 extends ProcessFile {
     }
 
 
-    public List<Circle> getPointsOfInterest(PixM m, final double rMin0, double iMin) {
+    public List<Circle> getPointsOfInterest(matrix.PixM m, final double rMin0, double iMin) {
         ArrayList<Circle> circles;
         circles = new ArrayList<>();
 
@@ -157,7 +157,7 @@ public class Histogram3 extends ProcessFile {
 
         init();
 
-        PixM m = new PixM(one.empty3.ImageIO.read(in));
+        matrix.PixM m = new matrix.PixM(one.empty3.ImageIO.read(in));
         Image image = m.getImage();
 
 
@@ -213,7 +213,7 @@ public class Histogram3 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        one.empty3.ImageIO.write(new PixM(img2).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
+        one.empty3.ImageIO.write(new matrix.PixM(img2).normalize(0., 1.).getImage().getImage(), "JPEG", out, shouldOverwrite);
                 /*
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
                 one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);

@@ -22,7 +22,7 @@ package one.empty3.androidFeature.pio;
 
 import java.io.File;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 /*
@@ -30,7 +30,7 @@ import one.empty3.library.Point3D;
  */
 public class PI {
     Point3D p;
-    PixM image;
+    matrix.PixM image;
     File imageFile;
 }
 

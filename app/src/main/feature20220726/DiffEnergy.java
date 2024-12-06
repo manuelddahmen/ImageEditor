@@ -34,16 +34,16 @@ import java.util.Objects;
 public class DiffEnergy extends ProcessFile {
     static PrintWriter pw;
     double[] energy = new double[3];
-    private PixM i2;
-    private PixM i1;
+    private matrix.PixM i2;
+    private matrix.PixM i1;
 
     public DiffEnergy() {
         super();
     }
 
-    public void setPixMS(int img1, int img2) {
-        i1 = PixM.getPixM(Objects.requireNonNull(new Image(getStackItem(img1))), maxRes);
-        i2 = PixM.getPixM(Objects.requireNonNull(new Image(getStackItem(img2))), maxRes);
+    public void setmatrix.PixMS(int img1, int img2) {
+        i1 = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(getStackItem(img1))), maxRes);
+        i2 = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(new Image(getStackItem(img2))), maxRes);
 
 
     }

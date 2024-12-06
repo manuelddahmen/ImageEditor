@@ -21,7 +21,7 @@
 package one.empty3.androidFeature.histograms;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
@@ -70,7 +70,7 @@ public class Histogram extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, PixM m) {
+    public Circle getLevel(Circle c, matrix.PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -103,9 +103,9 @@ public class Histogram extends ProcessFile {
     public boolean process(File in, File out) {
         if (isImage(in))
             return false;
-        PixM inP;
-        inP = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
-        PixM outP = inP.copy();
+        matrix.PixM inP;
+        inP = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+        matrix.PixM outP = inP.copy();
         double maxR = Math.min(inP.getLines(), inP.getColumns()) / 5.;
         for (int i = 0; i < inP.getColumns(); i++) {
             for (int j = 0; j < inP.getLines(); j++) {

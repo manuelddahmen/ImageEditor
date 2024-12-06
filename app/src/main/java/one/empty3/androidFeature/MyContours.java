@@ -24,7 +24,7 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
@@ -42,9 +42,9 @@ public class MyContours extends ProcessFile {
      * @param img Image sur laquelle dessiner
      * @param col Couleur ou texture de dessin
      */
-    public PixM pasteList(PixM img, ITexture col) {
+    public matrix.PixM pasteList(matrix.PixM img, ITexture col) {
 
-        final PixM res = new PixM(img.getColumns(), img.getLines());
+        final matrix.PixM res = new matrix.PixM(img.getColumns(), img.getLines());
         for (int i = 0; i < img.getColumns() * img.getLines(); i++) {
 
             int ix = (i % img.getColumns());
@@ -90,11 +90,11 @@ public class MyContours extends ProcessFile {
         return new Point3D(x + Math.cos(a) * r, y + Math.sin(a) * r, 0.0);
     }
 
-    public boolean checkPointColorEquals(PixM img, int x, int y, int x1, int y1) {
+    public boolean checkPointColorEquals(matrix.PixM img, int x, int y, int x1, int y1) {
         return img.getP(x, y).moins(img.getP(x1, y1)).norme() < 0.3;
     }
 
-    private double[] lookForColor(PixM img, int x, int y, double[] search) {
+    private double[] lookForColor(matrix.PixM img, int x, int y, double[] search) {
         Point3D searchP = new Point3D(search);
         double[] colorProxy = new double[]{0., 0., 0.};
         Point3D c0 = img.getP(x, y);
@@ -141,9 +141,9 @@ public class MyContours extends ProcessFile {
         if (!in.getAbsolutePath().endsWith("jpg"))
             return false;
         Image read = ImageIO.read(in);
-        PixM pixM = PixM.getPixM(read, maxRes);
-        PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
-        ImageIO.write(pixM1.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
+        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read, maxRes);
+        matrix.PixM matrix.PixM1 = pasteList(matrix.PixM, new ColorTexture(Color.BLACK));
+        ImageIO.write(matrix.PixM1.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 

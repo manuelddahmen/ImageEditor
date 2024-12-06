@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -30,14 +30,14 @@ public class IdentNullProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.PixM pixM = null;
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM = null;
         if (maxRes > 0) {
-            pixM = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            matrix.PixM = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
         } else {
-            pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+            matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
         }
-        assert pixM != null;
-        pixM.getImage().saveFile(out);
+        assert matrix.PixM != null;
+        matrix.PixM.getImage().saveFile(out);
         addSource(out);
         return true;
 

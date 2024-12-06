@@ -26,7 +26,7 @@ import java.util.List;
 
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 /*
@@ -34,13 +34,13 @@ import one.empty3.library.Point3D;
  */
 public abstract class Selection extends ProcessFile {
     private List<Point3D> selectedPoints = new ArrayList<>();
-    private PixM image;
+    private matrix.PixM image;
     public static final int SELECTION_TYPE_COLOR = 1;
     public static final int SELECTION_TYPE_COLOR_FROM_POINT = 2;
     public static final int SELECTION_TYPE_COLOR_FROM_RECT = 4;
     public static final int SELECTION_OPTION_PRESELECTION = 8;
 
-    public List<Point3D> select(List<Point3D> preSelection, PixM pix,
+    public List<Point3D> select(List<Point3D> preSelection, matrix.PixM pix,
                                 int rgb, double threshold) {
         List<Point3D> list = new ArrayList<>();
         double[] doubles = Lumiere.getDoubles(rgb);
@@ -56,7 +56,7 @@ public abstract class Selection extends ProcessFile {
         return list;
     }
 
-    public List<Point3D> selectColorPoint(List<Point3D> preSelection, PixM pix,
+    public List<Point3D> selectColorPoint(List<Point3D> preSelection, matrix.PixM pix,
                                           int rgb, int x, int y, double threshold) {
         List<Point3D> list = new ArrayList<>();
         double[] doubles = Lumiere.getDoubles(rgb);
@@ -73,10 +73,10 @@ public abstract class Selection extends ProcessFile {
     }
 
 
-    public abstract List<Point3D> selectPoint(List<Point3D> preSelection, PixM pix,
+    public abstract List<Point3D> selectPoint(List<Point3D> preSelection, matrix.PixM pix,
                                               int x, int y);
 
-    public abstract List<Point3D> selectInRect(List<Point3D> preSelection, PixM pix,
+    public abstract List<Point3D> selectInRect(List<Point3D> preSelection, matrix.PixM pix,
                                                int x1, int y1, int x2, int y2);
 
     @Override

@@ -21,7 +21,7 @@
 package one.empty3.androidFeature.snakes;
 
 import one.empty3.feature.M;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import java.util.ArrayList;
@@ -95,8 +95,8 @@ public class DipSnake /*extends ParametricCurve*/ {
         return new Point3D(x.get(T), y.get(T), 0.0);
     }
 
-    public double pointsIn(PixM original) {
-        PixM m = new PixM(original.getColumns(), original.getLines());
+    public double pointsIn(matrix.PixM original) {
+        matrix.PixM m = new matrix.PixM(original.getColumns(), original.getLines());
         //m.fillIn(this, Color.colorTexture(Color.BLACK), Color.colorTexture(Color.WHITE));
         double moy = 0.0;
         int countIn = 0;
@@ -122,7 +122,7 @@ public class DipSnake /*extends ParametricCurve*/ {
     }
 
     public double pointsOut(M original) {
-        PixM m = new PixM(original.getColumns(), original.getLines());
+        matrix.PixM m = new matrix.PixM(original.getColumns(), original.getLines());
 
         //m.fillIn(this, Color.colorTexture(Color.WHITE), Color.colorTexture(Color.WHITE));
         for (int l = 0; l < original.getLines(); l++)
@@ -152,7 +152,7 @@ public class DipSnake /*extends ParametricCurve*/ {
         return e;
     }
 
-    public double energy(PixM image) {
+    public double energy(matrix.PixM image) {
         //return energyCurve() + energyGradient(image) - energyExt(image);
         return 0.0;
     }
@@ -162,17 +162,17 @@ public class DipSnake /*extends ParametricCurve*/ {
 
     }
 
-    public double energyGradient(PixM image) {
+    public double energyGradient(matrix.PixM image) {
         return pointsIn(image);
 
     }
 
     /*
-        public double energyExt(PixM image) {
+        public double energyExt(matrix.PixM image) {
             return pointsOut(image);
         }
     */
-    public void energyMinimization(PixM image) {
+    public void energyMinimization(matrix.PixM image) {
         double energy = energy(image);
 
         int N = 4;

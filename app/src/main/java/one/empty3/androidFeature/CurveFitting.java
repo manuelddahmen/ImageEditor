@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.androidFeature.shape.Rectangle;
 import one.empty3.io.ProcessFile;
@@ -56,7 +56,7 @@ public class CurveFitting extends ProcessFile {
      *     Vu dans Dr Lingrand, et R. Szeliski.
      */
 
-    PixM pix = null;
+    matrix.PixM pix = null;
     private double lambda1 = 0.01, lambda2 = 0.01, lambda3 = 1.0;
     double[] outAvg = new double[]{0, 0, 0}, inAvg = new double[]{0, 0, 0};
     private double arcLength;
@@ -65,8 +65,8 @@ public class CurveFitting extends ProcessFile {
     private CourbeParametriquePolynomialeBezier curveInitial;
     private double[][] deltaE;
     private HashMap<Integer, List<Integer>> border;
-    private PixM inPix;
-    private PixM outPix;
+    private matrix.PixM inPix;
+    private matrix.PixM outPix;
 
     public void init() {
         border = new HashMap<>();
@@ -241,14 +241,14 @@ public class CurveFitting extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        pix = PixM.getPixM(ImageIO.read(in), maxRes);
+        pix = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
 
 
         init();
 
 
-        inPix = new PixM(pix.getImage().getImage());
-        outPix = new PixM(pix.getImage().getImage());
+        inPix = new matrix.PixM(pix.getImage().getImage());
+        outPix = new matrix.PixM(pix.getImage().getImage());
 
         curveInitial = new CourbeN11();
 
@@ -306,7 +306,7 @@ public class CurveFitting extends ProcessFile {
         double e = E();
         //curveResult = modify();
 
-        PixM p = new PixM(pix.getColumns(), pix.getLines());
+        matrix.PixM p = new matrix.PixM(pix.getColumns(), pix.getLines());
 
         curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
 
@@ -319,7 +319,7 @@ public class CurveFitting extends ProcessFile {
             rectangle.setIncrU(0.1);
         }
 
-        PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
+        matrix.PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
 
         // E = Sout + Sin + Scourbe :
         // Convergence vers ?

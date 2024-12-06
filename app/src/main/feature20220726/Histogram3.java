@@ -78,7 +78,7 @@ public class Histogram3 extends ProcessFile {
 
     }
 
-    public Circle getLevel(PixM m, Circle c) {
+    public Circle getLevel(matrix.PixM m, Circle c) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -112,7 +112,7 @@ public class Histogram3 extends ProcessFile {
     }
 
 
-    public List<Circle> getPointsOfInterest(PixM m, final double rMin0, double iMin) {
+    public List<Circle> getPointsOfInterest(matrix.PixM m, final double rMin0, double iMin) {
         ArrayList<Circle> circles;
         circles = new ArrayList<>();
 
@@ -161,7 +161,7 @@ public class Histogram3 extends ProcessFile {
 
         init();
 
-        PixM m = new PixM(new Image(in));
+        matrix.PixM m = new matrix.PixM(new Image(in));
         Image image = m.getImage();
 
 
@@ -217,7 +217,7 @@ public class Histogram3 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        new Image(1,1,4).saveToFile(new PixM(img2.bufferedImage).normalize(0., 1.).getImage(), "JPEG", out);
+        new Image(1,1,4).saveToFile(new matrix.PixM(img2.bufferedImage).normalize(0., 1.).getImage(), "JPEG", out);
                 /*
                 new Image(1,1,4).saveToFile(img, "JPEG", fileToWrite);
                 new Image(1,1,4).saveToFile(img, "JPEG", fileToWrite2);

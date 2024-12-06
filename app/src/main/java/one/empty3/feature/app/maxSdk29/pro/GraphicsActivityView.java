@@ -35,7 +35,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.AlgebraicTree;
@@ -45,7 +45,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
     final double[] values = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     final AlgebraicTree[] AlgebraicTree = new AlgebraicTree[cords.length];
     HashMap<String, Double> stringDoubleHashMap;
-    private PixM current;
+    private matrix.PixM current;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,9 +124,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
             try {
                 Image read = one.empty3.ImageIO.read(currentFile1);
                 if (getMaxRes() > 0 && read!=null) {
-                    current = PixM.getPixM(Objects.requireNonNull(read).getImage(), getMaxRes());
+                    current = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(read).getImage(), getMaxRes());
                 } else if(read!=null){
-                    current = new PixM(Objects.requireNonNull(read));
+                    current = new matrix.PixM(Objects.requireNonNull(read));
                 }
             } catch (NullPointerException ignored) {
 
@@ -134,9 +134,9 @@ public class GraphicsActivityView extends ActivitySuperClass {
         }
         if (current == null) {
             if (getMaxRes() <= 0) {
-                current = new PixM(getMaxRes(), getMaxRes());
+                current = new matrix.PixM(getMaxRes(), getMaxRes());
             } else {
-                current = new PixM(w, h);
+                current = new matrix.PixM(w, h);
             }
         }
         w = current.getColumns();

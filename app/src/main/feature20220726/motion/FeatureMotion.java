@@ -25,7 +25,7 @@ package one.empty3.feature20220726.motion;
 import one.empty3.libs.*;
 
 import one.empty3.feature20220726.FeatureMatch;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.library.Lumiere;
 
 import javaAnd.awt.*;
@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 
 public class FeatureMotion extends Motion {
     @Override
-    public Image process(PixM frame1, PixM frame2) {
+    public Image process(matrix.PixM frame1, matrix.PixM frame2) {
         FeatureMatch featureMatch = new FeatureMatch();
 
         List<double[]> match = featureMatch.match(frame1, frame2);

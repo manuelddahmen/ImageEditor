@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -38,12 +38,12 @@ public class TrueHarrisProcess extends ProcessFile {
 
         File file = in;
 
-        one.empty3.featureAndroid.PixM pix = null;
+        one.empty3.featureAndroid.matrix.PixM pix = null;
         Image img = null;
 
         try {
             img = one.empty3.ImageIO.read(file);
-            pix = one.empty3.featureAndroid.PixM.getPixM(img, maxRes);
+            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, maxRes);
 
         } catch (Exception ex) {
 
@@ -57,18 +57,18 @@ public class TrueHarrisProcess extends ProcessFile {
         }
 
         TrueHarris th = new TrueHarris(pix);
-        one.empty3.featureAndroid.PixM pixM = new one.empty3.featureAndroid.PixM(pix.getImage().getImage());
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM = new one.empty3.featureAndroid.matrix.PixM(pix.getImage().getImage());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
-            pixM.setCompNo(c);
+            matrix.PixM.setCompNo(c);
             pix.setCompNo(c);
             for (int i = 0; i < pix.getColumns(); i++)
                 for (int j = 0; j < pix.getLines(); j++)
-                    pixM.set(i, j, th.filter(i, j));
+                    matrix.PixM.set(i, j, th.filter(i, j));
         }
 
 
-        PixM normalize = pixM.normalize(0.0, 1.0);
+        matrix.PixM normalize = matrix.PixM.normalize(0.0, 1.0);
 
 
         //

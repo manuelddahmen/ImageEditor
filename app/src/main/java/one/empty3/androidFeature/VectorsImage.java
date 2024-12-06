@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 public class VectorsImage extends M3 {
@@ -31,8 +31,8 @@ public class VectorsImage extends M3 {
 
     public VectorsImage(Image image1) {
         this(image1.getWidth(), image1.getHeight(), 2, 1);
-        one.empty3.featureAndroid.PixM pixM = new PixM(image1);
-        //M3 gradientDoubleValuesMap =pixM.applyFilter(new GradientFilter(image1));
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM = new matrix.PixM(image1);
+        //M3 gradientDoubleValuesMap =matrix.PixM.applyFilter(new GradientFilter(image1));
         // construire les vecteurs
     }
 

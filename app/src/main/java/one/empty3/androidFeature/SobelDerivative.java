@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.ImageIO;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -61,7 +61,7 @@ public class SobelDerivative extends ProcessFile {
 
     }
 
-    public double filter(one.empty3.featureAndroid.PixM p, int x, int y) {
+    public double filter(one.empty3.featureAndroid.matrix.PixM p, int x, int y) {
         int dy = (int) (lines / 2);
         int dX = (int) (columns / 2);
         double sumX = 0, sumY = 0;
@@ -76,8 +76,8 @@ public class SobelDerivative extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.PixM p = one.empty3.featureAndroid.PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
-        PixM pOut = p.copy();
+        one.empty3.featureAndroid.matrix.PixM p = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+        matrix.PixM pOut = p.copy();
         for (int j = 0; j < p.getLines(); j++) {
             for (int i = 0; i < p.getColumns(); i++) {
                 for (int c = 0; c < 3; c++) {

@@ -27,7 +27,7 @@ package one.empty3.androidFeature.histograms;
 
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Histogram1.java
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;

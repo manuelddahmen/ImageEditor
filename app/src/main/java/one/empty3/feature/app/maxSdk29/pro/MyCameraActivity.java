@@ -78,7 +78,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 import one.empty3.ImageIO;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import javaAnd.awt.Point;
 import one.empty3.libs.Image;
@@ -112,7 +112,7 @@ public class MyCameraActivity extends ActivitySuperClass {
     public Point drawPointB = null;
     public List<RectF> rectfs = new ArrayList<RectF>();
     private Bitmap currentFileZoomedBitmap;
-    private PixM currentPixM = null;
+    private matrix.PixM currentmatrix.PixM = null;
     private boolean loaded;
     private boolean workingResolutionOriginal = false;
     private Clipboard clipboard;
@@ -176,8 +176,8 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (currentFile.getCurrentFile() != null) {
                     imageView = findViewById(R.id.currentImageView);
                     Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
-                    if (currentPixM != null) {
-                        intent1.putExtra("zoom", currentPixM.getBitmap().getImage());
+                    if (currentmatrix.PixM != null) {
+                        intent1.putExtra("zoom", currentmatrix.PixM.getBitmap().getImage());
                     passParameters(intent1);
                     }
                 }
@@ -206,7 +206,7 @@ public class MyCameraActivity extends ActivitySuperClass {
             if (currentFile.getCurrentFile() != null) {
                 if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
                         && clipboard.getSource() != null) {
-                    PixM dest = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).getImage());
+                    matrix.PixM dest = new matrix.PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).getImage());
 
                     int x = (int) Math.min(clipboard.getDestination().right, clipboard.getDestination().left);
                     int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
@@ -333,8 +333,8 @@ public class MyCameraActivity extends ActivitySuperClass {
 
                 faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 
-                if (currentPixM != null) {
-                    faceIntent.putExtra("zoom", currentPixM.getBitmap().getImage());
+                if (currentmatrix.PixM != null) {
+                    faceIntent.putExtra("zoom", currentmatrix.PixM.getBitmap().getImage());
                 }
 
                 passParameters(faceIntent);
@@ -409,14 +409,14 @@ public class MyCameraActivity extends ActivitySuperClass {
                     viewById.setDrawingRectState(true);
                     System.err.println(viewById.getDrawingRect().toString());
                     if (rectF != null) {
-                        currentPixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
+                        currentmatrix.PixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
 
-                        if (currentPixM != null) {
+                        if (currentmatrix.PixM != null) {
                             System.err.println("Draw Selection");
-                            new Utils().setImageView(imageView, currentPixM.getImage().getImage());
+                            new Utils().setImageView(imageView, currentmatrix.PixM.getImage().getImage());
                             if (clipboard == null && Clipboard.defaultClipboard == null) {
                                 clipboard = Clipboard.defaultClipboard
-                                        = new Clipboard(currentPixM);
+                                        = new Clipboard(currentmatrix.PixM);
 
                             }
                             if (Clipboard.defaultClipboard != null && clipboard != null) {
@@ -425,12 +425,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                                     drawPointA = null;
                                     drawPointB = null;
                                 } else {
-                                    clipboard.setSource(currentPixM);
+                                    clipboard.setSource(currentmatrix.PixM);
                                 }
                             }
                             System.err.println("Selection drawn");
                         } else {
-                            System.err.println("current PixM == null");
+                            System.err.println("current matrix.PixM == null");
 
                         }
                     }
@@ -500,14 +500,14 @@ public class MyCameraActivity extends ActivitySuperClass {
     }
     private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
         if (currentFile != null) {
-            PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).getImage());
+            matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(ImageIO.read(currentFile.getCurrentFile())).getImage());
 
             if (drawPointA == null || drawPointB == null) {
                 return null;
             }
 
-            double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
-            double yr = 1.0 / imageView.getHeight() * pixM.getLines();
+            double xr = 1.0 / imageView.getWidth() * matrix.PixM.getColumns();
+            double yr = 1.0 / imageView.getHeight() * matrix.PixM.getLines();
 
             int x1 = (int) Math.min(drawPointA.getX() * xr, drawPointB.getX() * xr);
             int x2 = (int) Math.max(drawPointA.getX() * xr, drawPointB.getX() * xr);
@@ -617,7 +617,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         } else if (drawable.getCurrent() instanceof BitmapDrawable) {
             if (isWorkingResolutionOriginal()) {
                 bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
-                bitmap = PixM.getPixM(bitmapOriginal, getMaxRes()).getBitmap().getImage();
+                bitmap = matrix.PixM.getmatrix.PixM(bitmapOriginal, getMaxRes()).getBitmap().getImage();
             }
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
@@ -625,10 +625,10 @@ public class MyCameraActivity extends ActivitySuperClass {
             } else {
                 // ???
                 if (isWorkingResolutionOriginal()) {
-                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap().getImage();
+                    bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, 0).getBitmap().getImage();
                 }
                 if (bitmap != null) {
-                    bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap().getImage();
+                    bitmap = bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, getMaxRes()).getBitmap().getImage();
                 }
             }
 
@@ -737,12 +737,12 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
     @Nullable
-    private PixM getSelectedZone(RectF selectedCords) {
+    private matrix.PixM getSelectedZone(RectF selectedCords) {
         if (currentFile != null) {
             try {
-                PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile.getCurrentFile())));
+                matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile.getCurrentFile())));
 
-                return pixM.copySubImage((int) (selectedCords.left), (int) (selectedCords.top),
+                return matrix.PixM.copySubImage((int) (selectedCords.left), (int) (selectedCords.top),
                         (int) (selectedCords.right - selectedCords.left),
                         (int) (selectedCords.bottom - selectedCords.top));
             } catch (RuntimeException ex) {

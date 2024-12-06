@@ -32,23 +32,23 @@ import java.io.IOException;
 public class GradProcess2 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = PixM.getPixM(new Image(in), maxRes);
-        PixM pixMout = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+        matrix.PixM matrix.PixMout = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
-        for (int x = 0; x < pixM.getColumns(); x++)
-            for (int y = 0; y < pixM.getColumns(); y++)
+        for (int x = 0; x < matrix.PixM.getColumns(); x++)
+            for (int y = 0; y < matrix.PixM.getColumns(); y++)
                 for (int c = 0; c < 3; c++) {
-                    pixM.setCompNo(c);
-                    pixMout.setCompNo(c);
-                    pixMout.set(x, y, -
-                            pixMout.get(x - 1, y) -
-                            pixMout.get(x, y - 1) -
-                            pixMout.get(x + 1, y) -
-                            pixMout.get(x, y + 1)
-                            + 4 * pixMout.get(x, y + 1));
+                    matrix.PixM.setCompNo(c);
+                    matrix.PixMout.setCompNo(c);
+                    matrix.PixMout.set(x, y, -
+                            matrix.PixMout.get(x - 1, y) -
+                            matrix.PixMout.get(x, y - 1) -
+                            matrix.PixMout.get(x + 1, y) -
+                            matrix.PixMout.get(x, y + 1)
+                            + 4 * matrix.PixMout.get(x, y + 1));
                 }
 
-        new Image(1,1,4).saveToFile(pixMout.normalize(0, 1).getImage(), "jpg", out);
+        new Image(1,1,4).saveToFile(matrix.PixMout.normalize(0, 1).getImage(), "jpg", out);
         return true;
     }
 }

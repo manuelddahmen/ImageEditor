@@ -29,7 +29,7 @@ import one.empty3.libs.Image;
 public
 class EffectMotion extends Motion {
     @Override
-    public Image process(PixM frame1, PixM frame2) {
+    public Image process(matrix.PixM frame1, matrix.PixM frame2) {
         return frame2.getImage();
     }
 }

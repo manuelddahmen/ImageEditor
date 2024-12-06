@@ -46,7 +46,7 @@ public class Histogram {
     private double min;
     private List<Circle> circles
             = new ArrayList<>();
-    private PixM m = null;
+    private matrix.PixM m = null;
     private double levelMin;
 
     public class Circle {
@@ -73,7 +73,7 @@ public class Histogram {
     //private final int[][][] levels;
 
 
-    public Histogram(PixM image, int levels, double min, double radiusIncr, double levelMin) {
+    public Histogram(matrix.PixM image, int levels, double min, double radiusIncr, double levelMin) {
         this.diffLevel = 1.0 / levels;
         this.min = min;
         //this.levels = new int[levels][image.getColumns()][image.getLines()];
@@ -153,7 +153,7 @@ public class Histogram {
             Image img = file;
             Image img2 = new Image(img.getWidth(), img.getHeight(), Image.TYPE_INT_RGB);
             Image img3 = new Image(img.getWidth(), img.getHeight(), Image.TYPE_INT_RGB);
-            Histogram histogram = new Histogram(new PixM(img), levels, min, radiusIncr, 0.1);
+            Histogram histogram = new Histogram(new matrix.PixM(img), levels, min, radiusIncr, 0.1);
             int finalI = i;
             List<Circle> pointsOfInterest = histogram.getPointsOfInterest(0.1);
             pointsOfInterest.stream().forEach(circle -> {

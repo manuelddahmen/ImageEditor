@@ -33,7 +33,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import one.empty3.ImageIO;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.androidFeature.shape.Rectangle;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/selection/PasteRect.java
 import one.empty3.io.ProcessFile;

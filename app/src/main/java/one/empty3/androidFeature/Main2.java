@@ -73,23 +73,23 @@ public class Main2 {
                     Image image = one.empty3.ImageIO.read(new File("resources/" + s));
 
                     GradientFilter gradientMask = new GradientFilter(image.getWidth(), image.getHeight());
-                    PixM pixMOriginal = PixM.getPixM(image, 300);
+                    matrix.PixM matrix.PixMOriginal = matrix.PixM.getmatrix.PixM(image, 300);
                     M3 imgFprGrad = new M3(image, 300, 300, 2, 2);
                     M3 filter = gradientMask.filter(imgFprGrad);
-                    PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
+                    matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
 
 
 //                    image = null;
 
                     // Zero. +++Zero orientation variation.
                     Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                            new PixM(pixMOriginal.getColumns(), pixMOriginal.getLines()));
+                            new matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
                     linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
-                    PixM smoothedGrad = linear.getImages()[2]; //.applyFilter(new GaussFilterPixGMatrix(4, sigma));
+                    matrix.PixM smoothedGrad = linear.getImages()[2]; //.applyFilter(new GaussFilterPixGMatrix(4, sigma));
                     int itereAngleGrad = 12;
                     M3 filter3 = new AfterGradientBeforeExtremum(itereAngleGrad).filter(new M3(smoothedGrad, 1, 1));
 
-                    work(directory, pixMOriginal.getImage().getBitmap(), s + "/original.jpg");
+                    work(directory, matrix.PixMOriginal.getImage().getBitmap(), s + "/original.jpg");
 
                     for (double angle = 0.8;
                          angle < 2 * Math.PI; angle += 2 * Math.PI / itereAngleGrad) {
@@ -98,16 +98,16 @@ public class Main2 {
                     }
 
                     for (double sigma = 0.8; sigma < 2.0; sigma += 0.2) {
-                        PixM pixM = smoothedGrad.applyFilter(new GaussFilterPixGMatrix(smoothedGrad, 4, sigma));
+                        matrix.PixM matrix.PixM = smoothedGrad.applyFilter(new GaussFilterPixGMatrix(smoothedGrad, 4, sigma));
 
 
                         for (int size = 1; size < 16; size *= 2) {
                             //
-                            M3 smoothedGradM3 = new M3(pixM.subSampling(size), 1, 1);
+                            M3 smoothedGradM3 = new M3(matrix.PixM.subSampling(size), 1, 1);
                             // Search local maximum
                             LocalExtrema localExtrema = new LocalExtrema(smoothedGradM3.getColumns(), smoothedGradM3.getLines(), 3, 2);
-                            PixM[][] filter2 = localExtrema.filter(smoothedGradM3).normalize(0.0, 1.0);
-                            PixM filter1 = filter2[0][0];
+                            matrix.PixM[][] filter2 = localExtrema.filter(smoothedGradM3).normalize(0.0, 1.0);
+                            matrix.PixM filter1 = filter2[0][0];
                             Image image1 = filter1.getImage().getBitmap();
                             System.out.println("Original read image");
                             work(directory, imagesMatrix[0][0].getImage().getBitmap(), s + "/1/sigma" + sigma + "/size" + size + "gradient.jpg");
@@ -131,24 +131,24 @@ public class Main2 {
 
     private void stream(M3 smoothedGradM3, double angle, String s) {
         //int[] i = {0};
-        Arrays.stream(smoothedGradM3.getImagesMatrix()).forEach(pixMS -> Arrays.stream(pixMS).forEach(pixM1 -> {
+        Arrays.stream(smoothedGradM3.getImagesMatrix()).forEach(matrix.PixMS -> Arrays.stream(matrix.PixMS).forEach(matrix.PixM1 -> {
                     LocalExtrema localExtrema1 = new LocalExtrema(smoothedGradM3.getColumns(), smoothedGradM3.getLines(), 3, 0);
-                    M3 extremaOrientedGrad = localExtrema1.filter(new M3(pixM1, 1, 1));
+                    M3 extremaOrientedGrad = localExtrema1.filter(new M3(matrix.PixM1, 1, 1));
                     try {
                         System.out.println("Gradient (gx,gy).(nx,ny)");
-                        work(directory, pixM1.getImage().getBitmap(), s + "/4/OrientedGradExtremum_1_" + angle + ".jpg");
+                        work(directory, matrix.PixM1.getImage().getBitmap(), s + "/4/OrientedGradExtremum_1_" + angle + ".jpg");
                         System.gc();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     System.out.println("oriented grad extremum search (max==1.0) ");
-                    Arrays.stream(extremaOrientedGrad.getImagesMatrix()).forEach(pixMS1 -> Arrays.stream(pixMS1).forEach(pixM -> {
+                    Arrays.stream(extremaOrientedGrad.getImagesMatrix()).forEach(matrix.PixMS1 -> Arrays.stream(matrix.PixMS1).forEach(matrix.PixM -> {
                         try {
                             String sub = s + "/4/OrientedGradExtremum_2_" +
                                     +angle + ".jpg";
-                            File image = work(directory, pixM.getImage().getBitmap(), sub);
-                            Image image1 = pixM.getImage().getBitmap();
-                            Histogram.testCircleSelect(image1, new File("resources"), 10, 0.3, pixM.getColumns() / 10.0);
+                            File image = work(directory, matrix.PixM.getImage().getBitmap(), sub);
+                            Image image1 = matrix.PixM.getImage().getBitmap();
+                            Histogram.testCircleSelect(image1, new File("resources"), 10, 0.3, matrix.PixM.getColumns() / 10.0);
                             //i[0]++;
                             System.gc();
                         } catch (IOException e) {

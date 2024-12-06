@@ -33,7 +33,7 @@ import java.util.Random;
 ========
 import matrix.MBitmap;
 import one.empty3.androidFeature.FilterPixM;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/feature/app/pro/M3.java
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;

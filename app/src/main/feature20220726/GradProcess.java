@@ -36,12 +36,12 @@ public class GradProcess extends ProcessFile {
 
     public boolean process(File in, File out) {
         File file = in;
-        PixM pix;
+        matrix.PixM pix;
         try {
-            pix = PixM.getPixM(new Image(file), maxRes);
+            pix = matrix.PixM.getmatrix.PixM(new Image(file), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
-            PixM[][] imagesMatrix = gf.filter(
+            matrix.PixM[][] imagesMatrix = gf.filter(
                     new M3(
                             pix, 2, 2)
             ).getImagesMatrix();

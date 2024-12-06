@@ -23,23 +23,23 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import android.graphics.RectF;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 
 class Clipboard {
     public static Clipboard defaultClipboard;
     public boolean copied = false;
-    private PixM source;
+    private matrix.PixM source;
     private RectF destination;
 
-    public Clipboard(PixM source) {
+    public Clipboard(matrix.PixM source) {
         this.source = source;
     }
 
-    public PixM getSource() {
+    public matrix.PixM getSource() {
         return source;
     }
 
-    public void setSource(PixM source) {
+    public void setSource(matrix.PixM source) {
         this.source = source;
     }
 

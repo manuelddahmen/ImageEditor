@@ -21,13 +21,13 @@
 package one.empty3.androidFeature;
 
 import one.empty3.androidFeature.motion.Motion;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 public
 class EffectMotion extends Motion {
     @Override
-    public Image process(one.empty3.featureAndroid.PixM frame1, PixM frame2) {
+    public Image process(one.empty3.featureAndroid.matrix.PixM frame1, matrix.PixM frame2) {
         return frame2.getImage();
     }
 }

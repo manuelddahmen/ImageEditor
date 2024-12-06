@@ -31,7 +31,7 @@ package one.empty3.androidFeature.motion;
 import android.graphics.Color;
 
 import one.empty3.androidFeature.FeatureMatch;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/motion/FeatureMotion.java
 import one.empty3.library.Lumiere;
 

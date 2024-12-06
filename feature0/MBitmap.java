@@ -37,7 +37,7 @@ import java.util.stream.IntStream;
 import one.empty3.feature.M;
 import one.empty3.feature.MatrixFormatException;
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class MBitmap */

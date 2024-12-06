@@ -28,7 +28,7 @@ de lumierrs filtrers.
 package one.empty3.feature20220726.pio;
 
 import one.empty3.libs.*;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.*;
 import one.empty3.library.*;
@@ -41,11 +41,11 @@ import javaAnd.awt.image.imageio.ImageIO;
 class Circle {
 
     double x, y, r, a;
-    public PixM m;
+    public matrix.PixM m;
     Color c;
     double i;
 
-    public Circle(PixM m, double x, double a,
+    public Circle(matrix.PixM m, double x, double a,
                   double y, double r) {
         this.x = x;
         this.y = y;
@@ -211,12 +211,12 @@ private int sizeElement = 20, elementSize=20;
 
 
     public boolean process(File in, File out) {
-        PixM moutA, moutB;
+        matrix.PixM moutA, moutB;
         try {
 
             if (!in.getName().endsWith(".jpg"))
                 return false;
-            PixM pi = new PixM(new Image(in));
+            matrix.PixM pi = new matrix.PixM(new Image(in));
             moutA = pi;
             moutB = pi;
             // work on featutes

@@ -22,17 +22,17 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 
-public class IsleFilterPixM
-        extends FilterPixM {
+public class IsleFiltermatrix.PixM
+        extends Filtermatrix.PixM {
     private Color selColor;
     private Color oppositeColor;
     private double threshold;
     private float selComps[] = new float[4];
     private float oppComps[] = new float[4];
 
-    public IsleFilterPixM(PixM pix) {
+    public IsleFiltermatrix.PixM(matrix.PixM pix) {
         super(pix);
     }
 

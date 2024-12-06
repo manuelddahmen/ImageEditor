@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.libs.Image;
@@ -31,7 +31,7 @@ public class HarrisProcess extends ProcessFile {
     public boolean process(File in, File out) {
         try {
             Image img = one.empty3.ImageIO.read(in);
-            one.empty3.featureAndroid.PixM m2 = PixM.getPixM(img, maxRes);
+            one.empty3.featureAndroid.matrix.PixM m2 = matrix.PixM.getmatrix.PixM(img, maxRes);
             HarrisToPointInterest h = new HarrisToPointInterest(2, 2);
 
             m2.applyFilter(h);

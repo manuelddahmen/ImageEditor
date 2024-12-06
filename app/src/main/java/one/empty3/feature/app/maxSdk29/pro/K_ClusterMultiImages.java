@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.ImageIO;
 import one.empty3.androidFeature.kmeans.Distance;
@@ -106,13 +106,13 @@ public class K_ClusterMultiImages /*extends ReadDataset*/ {
     public void process(File in, File inCsv, File out, int res) throws IOException {
         features = new ArrayList<>();
 
-        PixM pix;
+        matrix.PixM pix;
         try {
             if (res > 0)
-                pix = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
+                pix = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
             else
-                pix = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
-            PixM pix2 = new PixM(
+                pix = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+            matrix.PixM pix2 = new matrix.PixM(
                     pix.getColumns(),
                     pix.getLines()
             );

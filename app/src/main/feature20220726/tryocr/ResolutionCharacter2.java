@@ -1,7 +1,7 @@
 package one.empty3.feature20220726.tryocr;//package one.empty3.feature20220726.tryocr;
 //
 //import one.empty3.feature20220726.Linear;
-//import one.empty3.feature20220726.PixM;
+//import one.empty3.feature20220726.matrix.PixM;
 //import one.empty3.feature20220726.shape.Rectangle;
 //import one.empty3.library.ITexture;
 //import one.empty3.library.Lumiere;
@@ -54,8 +54,8 @@ import java.util.logging.Logger;
 //    private double totalError;
 //    private int numCurves;
 //    private double errorDiff = 0.0;
-//    private PixM input;
-//    private PixM output;
+//    private matrix.PixM input;
+//    private matrix.PixM output;
 //    private Map<Character, Integer[]> characterMapH;
 //    private Map<Character, Integer[]> characterMapV;
 //    private int countRects = 0;
@@ -122,7 +122,7 @@ import java.util.logging.Logger;
 //
 //    }
 //
-//    static void exec(ITexture texture, PixM output, PixM input, File dirOut, String name) {
+//    static void exec(ITexture texture, matrix.PixM output, matrix.PixM input, File dirOut, String name) {
 //        output.plotCurve(new Rectangle(10, 10, output.getColumns() - 20, output.getLines() - 20), texture);
 //
 //        try {
@@ -164,7 +164,7 @@ import java.util.logging.Logger;
 //        return (int) (Math.random() * length);
 //    }
 //
-//    public void chanfrein(PixM input, PixM output, Color traceColor) {
+//    public void chanfrein(matrix.PixM input, matrix.PixM output, Color traceColor) {
 //        for (int i = 0; i < input.getColumns(); i++)
 //            for (int j = 0; j < input.getLines(); j++) {
 //                if (Arrays.equals(input.getValues(i, j), (Lumiere.getRgb(traceColor)))) {
@@ -197,7 +197,7 @@ import java.util.logging.Logger;
 //        if (!dirOut.exists() || !dirOut.isDirectory())
 //            dirOut.mkdir();
 //
-//        input = new PixM(read);
+//        input = new matrix.PixM(read);
 //        output = input.copy();
 //
 //        Logger.getAnonymousLogger().log(Level.INFO, "Image size: " + output.getColumns() + ", " + output.getLines());
@@ -431,7 +431,7 @@ import java.util.logging.Logger;
 //                    countRects ++;
 //                    if(isExporting()) {
 //                        File file = new File(dirOutChars + "-" + i + "-" + j + "-" + w + "-" + h+".jpg");
-//                        PixM outChar = input.copySubImage(i, j, w, h);
+//                        matrix.PixM outChar = input.copySubImage(i, j, w, h);
 //                        if(!file.getParentFile().exists() || file.getParentFile().isDirectory()) {
 //                            file.getParentFile().mkdirs();
 //                            try {
@@ -447,7 +447,7 @@ import java.util.logging.Logger;
 //        }
 //    }
 //
-//    private List<Character> recognize(PixM input, int i, int j, int w, int h) {
+//    private List<Character> recognize(matrix.PixM input, int i, int j, int w, int h) {
 //        if (System.currentTimeMillis() % 100 == 0)
 //            System.gc();
 //        List<Character> ch = recognizeH(input, i, j, w, h);
@@ -469,7 +469,7 @@ import java.util.logging.Logger;
 //        return allCharsPossible;
 //    }
 //
-//    private boolean[] testRectIs(PixM input, int x, int y, int w, int h, boolean[] result, double[] color) {
+//    private boolean[] testRectIs(matrix.PixM input, int x, int y, int w, int h, boolean[] result, double[] color) {
 //        int i, j;
 //        result[0] = true;
 //        for (i = x; i <= x + w; i++)
@@ -666,7 +666,7 @@ import java.util.logging.Logger;
 //        return mapCharsAlphabetLines;
 //    }
 //
-//    public List<Character> recognizeV(PixM mat, int x, int y, int w, int h) {
+//    public List<Character> recognizeV(matrix.PixM mat, int x, int y, int w, int h) {
 //
 //        List<Character> retained = new ArrayList<>();
 //        Map<Character, Integer[]> patternsVertical = characterMapV;
@@ -718,7 +718,7 @@ import java.util.logging.Logger;
 //    }
 //
 //
-//    public List<Character> recognizeH(PixM mat, int x, int y, int w, int h) {
+//    public List<Character> recognizeH(matrix.PixM mat, int x, int y, int w, int h) {
 //
 //        List<Character> retained = new ArrayList<>();
 //        Map<Character, Integer[]> patternsHorizon = characterMapH;
@@ -786,12 +786,12 @@ import java.util.logging.Logger;
 //        ArrayList<CourbeParametriquePolynomialeBezier> currentCurves = new ArrayList<>();
 //        double lastError = Double.NaN;
 //        State previousState;
-//        PixM input;
-//        PixM backgroundImage;
+//        matrix.PixM input;
+//        matrix.PixM backgroundImage;
 //        Color textColor = Color.BLACK;
 //        int dim;
 //
-//        public State(PixM image, PixM backgroundImage, int i, int j, int step) {
+//        public State(matrix.PixM image, matrix.PixM backgroundImage, int i, int j, int step) {
 //            this.input = image;
 //            this.backgroundImage = backgroundImage;
 //            xyz = Point3D.n(i + step / 2., j + step / 2., 0.);
@@ -800,16 +800,16 @@ import java.util.logging.Logger;
 //
 //        public double computeError() {
 //            State state = this;
-//            PixM pError = state.backgroundImage;
-//            PixM inputCopy = input.copy();
+//            matrix.PixM pError = state.backgroundImage;
+//            matrix.PixM inputCopy = input.copy();
 //            state.currentCurves.forEach(courbeParametriquePolynomialeBezier -> {
 //                pError.plotCurve(courbeParametriquePolynomialeBezier, new TextureCol(Color.BLACK));
 //                numCurves++;
 //            });
-//            PixM copy = pError.copy();
-//            Linear linear = new Linear(inputCopy, pError, new PixM(input.getColumns(), input.getLines()));
+//            matrix.PixM copy = pError.copy();
+//            Linear linear = new Linear(inputCopy, pError, new matrix.PixM(input.getColumns(), input.getLines()));
 //            linear.op2d2d(new char[]{'-'}, new int[][]{{1, 0}}, new int[]{2});
-//            PixM diff = linear.getImages()[2];
+//            matrix.PixM diff = linear.getImages()[2];
 //            return diff.mean(0, 0, diff.getColumns(), diff.getLines());
 //
 //        }

@@ -25,7 +25,7 @@ de lumierrs filtrers.
 
 package one.empty3.androidFeature.pio;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
@@ -35,11 +35,11 @@ import java.io.File;
 class Circle {
 
     double x, y, r, a;
-    public PixM m;
+    public matrix.PixM m;
     Color c;
     double i;
 
-    public Circle(PixM m, double x, double a,
+    public Circle(matrix.PixM m, double x, double a,
                   double y, double r) {
         this.x = x;
         this.y = y;
@@ -205,12 +205,12 @@ private int sizeElement = 20, elementSize=20;
 
 
     public boolean process(File in, File out) {
-        PixM moutA, moutB;
+        matrix.PixM moutA, moutB;
         try {
 
             if (!in.getName().endsWith(".jpg"))
                 return false;
-            PixM pi = new PixM(one.empty3.ImageIO.read(in));
+            matrix.PixM pi = new matrix.PixM(one.empty3.ImageIO.read(in));
             moutA = pi;
             moutB = pi;
             // work on featutes

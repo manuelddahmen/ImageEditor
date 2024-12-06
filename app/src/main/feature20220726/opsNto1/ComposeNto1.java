@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726.opsNto1;
 
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import javaAnd.awt.image.imageio.ImageIO;
@@ -39,8 +39,8 @@ public class ComposeNto1 extends ProcessFile {
     public boolean process(File in, File out) {
         try {
             boolean success = false;
-            PixM inpix = PixM.getPixM(new Image(in), maxRes);
-            PixM outpix = PixM.getPixM(new Image(in), maxRes);
+            matrix.PixM inpix = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
+            matrix.PixM outpix = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
             //success = processMem(inpix, outpix);
             new Image(1,1,4).saveToFile(outpix.getImage(), "jpg", out);
             return success;

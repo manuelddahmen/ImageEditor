@@ -25,7 +25,7 @@ import one.empty3.Polygon1;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Matrix33;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 import one.empty3.library.Serialisable;
 import one.empty3.library.StructureMatrix;
@@ -77,7 +77,7 @@ public class GoogleFaceDetection
 
                     for (int i = 0; i < numPoly; i++) {
                         Polygon1 polygon = Polygon1.CREATOR.createFromParcel(parcel);
-                        PixM contours = PixM.CREATOR.createFromParcel(parcel);
+                        matrix.PixM contours = matrix.PixM.CREATOR.createFromParcel(parcel);
                         int colorFill = parcel.readInt();
                         int colorContours = parcel.readInt();
                         int colorTransparent = parcel.readInt();
@@ -155,20 +155,20 @@ public class GoogleFaceDetection
     }
 
     public static class FaceData implements Serializable, Serialisable {
-        private PixM photo = new PixM(1, 1);
+        private matrix.PixM photo = new matrix.PixM(1, 1);
 
         @Override
         public Serialisable decode(DataInputStream in) {
             FaceData faceData = new FaceData();
-            photo = (PixM) new PixM(1, 1).decode(in);
+            photo = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
             if (photo == null)
-                photo = new PixM(1, 1);
+                photo = new matrix.PixM(1, 1);
             return faceData;
         }
 
         public int encode(DataOutputStream out) {
             if (photo == null)
-                photo = new PixM(1, 1);
+                photo = new matrix.PixM(1, 1);
             photo.encode(out);
             return 0;
         }
@@ -178,11 +178,11 @@ public class GoogleFaceDetection
             return 0;
         }
 
-        public PixM getPhoto() {
+        public matrix.PixM getPhoto() {
             return photo;
         }
 
-        public void setPhoto(PixM photo) {
+        public void setPhoto(matrix.PixM photo) {
             this.photo = photo;
         }
 
@@ -193,10 +193,10 @@ public class GoogleFaceDetection
             private int colorTransparent = -1;
             private int surfaceId;
             private Polygon1 polygon;
-            private PixM contours;
-            private PixM filledContours;
+            private matrix.PixM contours;
+            private matrix.PixM filledContours;
             @Nullable
-            public PixM actualDrawing;
+            public matrix.PixM actualDrawing;
 
             public Surface() {
 
@@ -211,10 +211,10 @@ public class GoogleFaceDetection
                     surface.colorTransparent = in.readInt();
                     surface.surfaceId = in.readInt();
                     surface.polygon = (Polygon1) new Polygon1().decode(in);
-                    surface.contours = (PixM) new PixM(1, 1).decode(in);
-                    surface.filledContours = (PixM) new PixM(1, 1).decode(in);
+                    surface.contours = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
+                    surface.filledContours = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
                     surface.drawOriginalImageContour = in.readBoolean();
-                    surface.actualDrawing = (PixM) new PixM(1, 1).decode(in);
+                    surface.actualDrawing = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
                     return surface;
                 } catch (Exception exception) {
                     exception.printStackTrace();
@@ -233,15 +233,15 @@ public class GoogleFaceDetection
                         polygon = new Polygon1();
                     polygon.encode(out);
                     if (contours == null)
-                        contours = new PixM(1, 1);
+                        contours = new matrix.PixM(1, 1);
                     contours.encode(out);
                     if (filledContours == null) {
-                        filledContours = new PixM(1, 1);
+                        filledContours = new matrix.PixM(1, 1);
                     }
                     filledContours.encode(out);
                     out.writeBoolean(drawOriginalImageContour);
                     if (actualDrawing == null)
-                        actualDrawing = new PixM(1, 1);
+                        actualDrawing = new matrix.PixM(1, 1);
                     actualDrawing.encode(out);
 
                 } catch (Exception exception) {
@@ -257,9 +257,9 @@ public class GoogleFaceDetection
             }
 
 
-            public Surface(int surfaceId, Polygon1 polygon, PixM contours,
+            public Surface(int surfaceId, Polygon1 polygon, matrix.PixM contours,
                            int colorFill, int colorContours, int colorTransparent,
-                           PixM filledContours, boolean drawOriginalImageContour) {
+                           matrix.PixM filledContours, boolean drawOriginalImageContour) {
                 this.surfaceId = surfaceId;
                 this.polygon = polygon;
                 this.contours = contours;
@@ -286,11 +286,11 @@ public class GoogleFaceDetection
                 this.polygon = polygon;
             }
 
-            public PixM getContours() {
+            public matrix.PixM getContours() {
                 return contours;
             }
 
-            public void setContours(PixM contours) {
+            public void setContours(matrix.PixM contours) {
                 this.contours = contours;
             }
 
@@ -344,20 +344,20 @@ public class GoogleFaceDetection
                         '}';
             }
 
-            public void setFilledContours(PixM filledContours) {
+            public void setFilledContours(matrix.PixM filledContours) {
                 this.filledContours = filledContours;
             }
 
-            public PixM getFilledContours() {
+            public matrix.PixM getFilledContours() {
                 return filledContours;
             }
 
             @Nullable
-            public PixM getActualDrawing() {
+            public matrix.PixM getActualDrawing() {
                 return actualDrawing;
             }
 
-            public void setActualDrawing(@Nullable PixM actualDrawing) {
+            public void setActualDrawing(@Nullable matrix.PixM actualDrawing) {
                 this.actualDrawing = actualDrawing;
             }
 
@@ -403,7 +403,7 @@ public class GoogleFaceDetection
             public void rotate(@NotNull Surface from) {
                 @NotNull Polygon1 polygonFrom = from.polygon;
                 @NotNull Polygon1 polygonTo = this.polygon;
-                @NotNull PixM actualDrawingFrom = from.actualDrawing;
+                @NotNull matrix.PixM actualDrawingFrom = from.actualDrawing;
                 Point3D isocentreFrom = polygonFrom.getIsocentre();
                 Point3D isocentreTo = polygonTo.getIsocentre();
                 Point3D anglesFrom = from.getPolygonAngles();
@@ -416,10 +416,10 @@ public class GoogleFaceDetection
 
 
                 StructureMatrix<Point3D> boundRect2d = polygon.getBoundRect2d();
-                // 2 Computed rotated PixM
+                // 2 Computed rotated matrix.PixM
                 for (double i = boundRect2d.getElem(0).getX(); i < boundRect2d.getElem(1).getX(); i++) {
                     for (double j = boundRect2d.getElem(0).getY(); j < boundRect2d.getElem(1).getY(); j++) {
-                        // Se replacer (i,j,0) dans le pixm d'origine, from
+                        // Se replacer (i,j,0) dans le matrix.PixM d'origine, from
                         Point3D p = new Point3D(i, j, 0.0);
                         Point3D translated = p.plus(isocentreFrom).moins(isocentreTo);
                         Point3D dst = rotation.mult(translated);
@@ -522,10 +522,10 @@ public class GoogleFaceDetection
             throw new RuntimeException(e);
         }
         try {
-            PixM decode1 = (PixM) new PixM(1, 1).decode(in);
+            matrix.PixM decode1 = (matrix.PixM) new matrix.PixM(1, 1).decode(in);
             bitmap = decode1.getBitmap().getImage();
         } catch (NullPointerException e1) {
-            bitmap = new PixM(1, 1).getBitmap().getImage();
+            bitmap = new matrix.PixM(1, 1).getBitmap().getImage();
         }
         try {
             GoogleFaceDetection faceDetection = new GoogleFaceDetection(new Image(bitmap));
@@ -557,11 +557,11 @@ public class GoogleFaceDetection
         }
         try {
             if (getBitmap() != null) {
-                new PixM(getBitmap()).encode(out);
+                new matrix.PixM(getBitmap()).encode(out);
             } else {
-                PixM pixM = new PixM(1, 1);
-                pixM.encode(out);
-                setBitmap(pixM.getBitmap().getImage());
+                matrix.PixM matrix.PixM = new matrix.PixM(1, 1);
+                matrix.PixM.encode(out);
+                setBitmap(matrix.PixM.getBitmap().getImage());
             }
             System.out.println("Number of face to save : " + dataFaces.size());
             out.writeInt(dataFaces.size());
@@ -592,11 +592,11 @@ public class GoogleFaceDetection
         return 0;
     }
 
-    public PixM getFunctionResult(String functionAbij, int idSurface) {
+    public matrix.PixM getFunctionResult(String functionAbij, int idSurface) {
         if (functionAbij == null || functionAbij.isEmpty()) {
             functionAbij = "";
         }
-        PixM a;
+        matrix.PixM a;
         List<FaceData.Surface> surfaces = new ArrayList<>();
         getDataFaces().forEach(new Consumer<FaceData>() {
             @Override

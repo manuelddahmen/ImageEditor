@@ -24,7 +24,7 @@ package one.empty3.feature;
 package one.empty3.androidFeature;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/TransformColor.java
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
@@ -38,7 +38,7 @@ public class TransformColor extends ProcessFile {
 <<<<<<<< HEAD:feature0/TransformColor.java
             PixM pix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 ========
-        one.empty3.featureAndroid.PixM pix = PixM.getPixM(ImageIO.read(in), maxRes);
+        matrix.PixM pix = PixM.getPixM(ImageIO.read(in), maxRes);
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/TransformColor.java
 
         for (int i = 0; i < pix.getColumns(); i++) {

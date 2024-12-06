@@ -27,7 +27,7 @@ import one.empty3.feature.PixM;
 package one.empty3.androidFeature.snakes;
 
 import one.empty3.feature.M;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/snakes/DipSnake.java
 import one.empty3.library.Point3D;
 

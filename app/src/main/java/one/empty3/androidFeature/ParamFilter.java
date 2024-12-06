@@ -34,7 +34,7 @@ public class ParamFilter extends ProcessFile {
 
 
     @Override
-    public boolean processMem(PixM in, PixM out) {
+    public boolean processMem(matrix.PixM in, matrix.PixM out) {
 
         return super.processMem(in, out);
     }

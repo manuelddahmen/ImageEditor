@@ -53,7 +53,7 @@ public class Lines6 extends ProcessFile {
     ArrayList<Double> listTmpX = new ArrayList<>();
     ArrayList<Double> listTmpY = new ArrayList<>();
     ArrayList<Double> listTmpZ = new ArrayList<>();
-    private PixM pixM;
+    private matrix.PixM matrix.PixM;
     private double pz;
     private double py;
     private double px;
@@ -97,14 +97,14 @@ public class Lines6 extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        pixM = null;
-        pixM = new PixM(new Image(in));
+        matrix.PixM = null;
+        matrix.PixM = new matrix.PixM(new Image(in));
         ArrayList<List<Point3D>> lists = new ArrayList<>();
-        PixM o = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM o = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
         double valueDiff = 0.2;
 
-        int[][] p = new int[pixM.getColumns()][pixM.getLines()];//!!
+        int[][] p = new int[matrix.PixM.getColumns()][matrix.PixM.getLines()];//!!
         listTmpCurve = new ArrayList<Point3D>();
 //[] x, y-> pCount, subListRef.
         double distMax;
@@ -113,22 +113,22 @@ public class Lines6 extends ProcessFile {
             pz = 0.0;
             py = 0.0;
             px = 0.0;
-            distMax = (pixM.getColumns() + pixM.getLines()) >> 1;//???
+            distMax = (matrix.PixM.getColumns() + matrix.PixM.getLines()) >> 1;//???
             random = new Random();
 
-            for (int x = 0; x < pixM.getColumns(); x++)
-                for (int y = 0; y < pixM.getLines(); y++)
+            for (int x = 0; x < matrix.PixM.getColumns(); x++)
+                for (int y = 0; y < matrix.PixM.getLines(); y++)
                     p[x][y] = 0;
 
-            for (int i = 0; i < pixM.getColumns(); i++) {
-                for (int j = 0; j < pixM.getLines(); j++) {
+            for (int i = 0; i < matrix.PixM.getColumns(); i++) {
+                for (int j = 0; j < matrix.PixM.getLines(); j++) {
 // remove long complicated uncertain loop//
 
                     int x = i;
                     int y = j;
                     if (!isInBound(new Point3D((double) x, (double) y, 0.0)))
                         continue;
-                    double valueAvg = pixM.norme(x, y);
+                    double valueAvg = matrix.PixM.norme(x, y);
 
                     if (valueAvg >= levels - valueDiff && valueAvg <= levels + valueDiff && p[x][y] == 0) {//2nd condition
 
@@ -158,7 +158,7 @@ public class Lines6 extends ProcessFile {
             final double distNormal = 1.1;//0.9??
             list3.add(new ArrayList<>());
             list3.get(list3.size() - 1).add(point3D);
-            distMax = (pixM.getColumns() + pixM.getLines()) >> 1;
+            distMax = (matrix.PixM.getColumns() + matrix.PixM.getLines()) >> 1;
 
             if (isInBound(point3D)) {
                 for (int j = 0; j < list2.size(); j++) {
@@ -250,7 +250,7 @@ public class Lines6 extends ProcessFile {
                 } else if (temp1b) {
                     Point3D d1 = distanceCurvePoint(temp1, p1);
                     double distance = Point3D.distance(d1, p1);
-                    if (listTemp1 == points || distance < pixM.getColumns() / 5.) {
+                    if (listTemp1 == points || distance < matrix.PixM.getColumns() / 5.) {
                         temp1.add(p1);
                     } else {
                         temp2b = true;
@@ -263,7 +263,7 @@ public class Lines6 extends ProcessFile {
                     double distance = Point3D.distance(d2, p1);
                     if (listTemp2 == points) {
                         temp2.add(p1);
-                    } else if (distance > pixM.getColumns() / 5.) {
+                    } else if (distance > matrix.PixM.getColumns() / 5.) {
                         temp2b = false;
 
                     }
@@ -283,8 +283,8 @@ public class Lines6 extends ProcessFile {
 
         Paste paste = new Paste();
 
-        PixM stack = new PixM(
-                pixM.getColumns(), pixM.getLines()
+        matrix.PixM stack = new matrix.PixM(
+                matrix.PixM.getColumns(), matrix.PixM.getLines()
                 //new Image(getStackItem(1))
         );
 
@@ -308,7 +308,7 @@ public class Lines6 extends ProcessFile {
     }
 
     private boolean isInBound(Point3D p1) {
-        return p1.get(0) >= 0 && p1.get(0) < pixM.getColumns() && p1.get(1) >= 0 && p1.get(1) < pixM.getLines();
+        return p1.get(0) >= 0 && p1.get(0) < matrix.PixM.getColumns() && p1.get(1) >= 0 && p1.get(1) < matrix.PixM.getLines();
     }
 
     public void addTmp(double x, double y, double z) {
@@ -342,9 +342,9 @@ public class Lines6 extends ProcessFile {
                     Point point = new Point(x2, y2);
                     px = point.getX();
                     py = point.getY();
-                    pz = pixM.norme((int) point.getX(), (int) point.getY());
+                    pz = matrix.PixM.norme((int) point.getX(), (int) point.getY());
                     if (pz >= valueAvg - valueDiff && pz <= valueAvg + valueDiff && pz > valueMin
-                            && px >= 0.0 && px < pixM.getColumns() && py >= 0 && py < pixM.getLines()) {
+                            && px >= 0.0 && px < matrix.PixM.getColumns() && py >= 0 && py < matrix.PixM.getLines()) {
                         addTmp(px, py, pz);
                         break;
                     }

@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -39,11 +39,11 @@ public class IsleProcess extends ProcessFile {
 
         File file = in;
 
-        one.empty3.featureAndroid.PixM pix = null;
+        one.empty3.featureAndroid.matrix.PixM pix = null;
         Image img = null;
         try {
             img = one.empty3.ImageIO.read(file);
-            pix = PixM.getPixM(img, -10.0);
+            pix = matrix.PixM.getmatrix.PixM(img, -10.0);
 
         } catch (Exception ex) {
 
@@ -56,7 +56,7 @@ public class IsleProcess extends ProcessFile {
 
         }
 
-        IsleFilterPixM il = new IsleFilterPixM
+        IsleFiltermatrix.PixM il = new IsleFiltermatrix.PixM
                 (pix);
         il.setValues(Color.BLUE, Color.WHITE, 0.4);
         il.filter();

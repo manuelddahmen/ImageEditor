@@ -24,7 +24,7 @@ package one.empty3.feature20220726.tryocr;
 
 import one.empty3.libs.*;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -35,9 +35,9 @@ public class SelectColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = new PixM(new Image(in));
+        matrix.PixM matrix.PixM = new matrix.PixM(new Image(in));
 
-        PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
+        matrix.PixM matrix.PixM2 = new matrix.PixM(matrix.PixM.getColumns(), matrix.PixM.getLines());
 
         float[] colorCompF = new float[4];
 
@@ -49,14 +49,14 @@ public class SelectColor extends ProcessFile {
             col[c] = (int) (colorCompF[c] * 255f);
         }
 
-        for (int i = 0; i < pixM.getColumns(); i++)
-            for (int j = 0; j < pixM.getColumns(); j++) {
+        for (int i = 0; i < matrix.PixM.getColumns(); i++)
+            for (int j = 0; j < matrix.PixM.getColumns(); j++) {
                 for (int c = 0; c < 4; c++) {
-                    pixM2.set(i, j, pixM.get(i, j) == (col[c] / 255.) ? 1 : 0);
+                    matrix.PixM2.set(i, j, matrix.PixM.get(i, j) == (col[c] / 255.) ? 1 : 0);
                 }
             }
         try {
-            new Image(1,1,4).saveToFile(pixM2.getImage(), "jpg", out);
+            new Image(1,1,4).saveToFile(matrix.PixM2.getImage(), "jpg", out);
             return true;
         } catch (Exception ex) {}
 

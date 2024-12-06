@@ -21,11 +21,11 @@
 package one.empty3.androidFeature.motion;
 
 import one.empty3.androidFeature.Linear;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 public abstract class DiffMotion extends Motion {
-    public Image process(PixM frame1, PixM frame2) {
+    public Image process(matrix.PixM frame1, matrix.PixM frame2) {
 
         Linear linear = new Linear(frame1, frame2, frame1.copy());
         linear.op2d2d(new char[]{'-'}, new int[][]{{1, 0, 2}}, new int[]{2});

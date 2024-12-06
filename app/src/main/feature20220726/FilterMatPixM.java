@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726;
 
-public abstract class FilterMatPixM {
+public abstract class FilterMatmatrix.PixM {
 /*
     public int getCompNo() {
         return compNo;

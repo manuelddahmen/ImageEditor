@@ -43,11 +43,11 @@ public class IsleProcess extends ProcessFile {
 
         File file = in;
 
-        PixM pix = null;
+        matrix.PixM pix = null;
         Image img = null;
         try {
             img = new Image(file);
-            pix = PixM.getPixM(img, -10.0);
+            pix = matrix.PixM.getmatrix.PixM(img, -10.0);
 
         } catch (Exception ex) {
 
@@ -60,7 +60,7 @@ public class IsleProcess extends ProcessFile {
 
         }
 
-        IsleFilterPixM il = new IsleFilterPixM
+        IsleFiltermatrix.PixM il = new IsleFiltermatrix.PixM
                 (pix);
         il.setValues(Color.BLUE.getRGB(), Color.WHITE.getRGB(), 0.4);
         il.filter();

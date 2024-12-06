@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726.histograms;
 
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ObjectWithProperties;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
@@ -80,7 +80,7 @@ public class Hist4Contour2 extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, PixM m) {
+    public Circle getLevel(Circle c, matrix.PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -124,13 +124,13 @@ public class Hist4Contour2 extends ProcessFile {
         if (!isImage(in)) {
             return false;
         }
-        PixM inP;
-        inP = PixM.getPixM(new Image(in), maxRes);
+        matrix.PixM inP;
+        inP = matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
 
 
         double max = 0.0;
-        PixM outP = new PixM(inP.getColumns(), inP.getLines());
-        PixM outP0 = new PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM outP0 = new matrix.PixM(inP.getColumns(), inP.getLines());
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         Circle c = null;
         Point3D maxP = Point3D.O0.mult(1);

@@ -79,7 +79,7 @@
 //import javaAnd.awt.Point;
 //import one.empty3.libs.Image;
 //import one.empty3.ImageIO;
-//import one.empty3.feature20220726.PixM;
+//import one.empty3.feature20220726.matrix.PixM;
 //
 //class ExampleActivity : AppCompatActivity(R.layout.main) {
 //        override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,7 +118,7 @@
 //    public Point drawPointB = null;
 //    public List<RectF> rectfs = new ArrayList<RectF>();
 //    private Bitmap currentFileZoomedBitmap;
-//    private PixM currentPixM = null;
+//    private matrix.PixM currentmatrix.PixM = null;
 //    private boolean loaded;
 //    private boolean workingResolutionOriginal = false;
 //    private Clipboard clipboard;
@@ -193,7 +193,7 @@
 //            if (currentFile != null) {
 //                if (clipboard != null && clipboard.copied && clipboard.getDestination() != null
 //                        && clipboard.getSource() != null) {
-//                    PixM dest = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
+//                    matrix.PixM dest = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //                    int x = (int) Math.min( clipboard.getDestination().right, clipboard.getDestination().left);
 //                    int y = (int) Math.min(clipboard.getDestination().bottom, clipboard.getDestination().top);
@@ -312,8 +312,8 @@
 //
 //                faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 //
-//                if(currentPixM!=null) {
-//                    faceIntent.putExtra("zoom", currentPixM.getBitmap());
+//                if(currentmatrix.PixM!=null) {
+//                    faceIntent.putExtra("zoom", currentmatrix.PixM.getBitmap());
 //                }
 //
 //                passParameters(faceIntent);
@@ -376,14 +376,14 @@
 //                    viewById.setDrawingRectState(true);
 //                    System.err.println(viewById.getDrawingRect().toString());
 //                    if (rectF != null) {
-//                        currentPixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
+//                        currentmatrix.PixM = getSelectedZone(getSelectedCordsImgToView(bitmap, viewById));
 //
-//                        if (currentPixM != null) {
+//                        if (currentmatrix.PixM != null) {
 //                            System.err.println("Draw Selection");
-//                            new Utils().setImageView(imageView, currentPixM.getImage().getBitmap().getBitmap());
+//                            new Utils().setImageView(imageView, currentmatrix.PixM.getImage().getBitmap().getBitmap());
 //                            if (clipboard == null && Clipboard.defaultClipboard == null) {
 //                                clipboard = Clipboard.defaultClipboard
-//                                        = new Clipboard(currentPixM);
+//                                        = new Clipboard(currentmatrix.PixM);
 //
 //                            }
 //                            if (Clipboard.defaultClipboard != null && clipboard != null) {
@@ -392,12 +392,12 @@
 //                                    drawPointA = null;
 //                                    drawPointB = null;
 //                                } else {
-//                                    clipboard.setSource(currentPixM);
+//                                    clipboard.setSource(currentmatrix.PixM);
 //                                }
 //                            }
 //                            System.err.println("Selection drawn");
 //                        } else {
-//                            System.err.println("current PixM == null");
+//                            System.err.println("current matrix.PixM == null");
 //
 //                        }
 //                    }
@@ -464,14 +464,14 @@
 //
 //    private RectF getSelectedCordsImgToView(Bitmap bitmap, ImageView imageView) {
 //        if (currentFile != null) {
-//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
+//            matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)).getBitmap());
 //
 //            if (drawPointA == null || drawPointB == null) {
 //                return null;
 //            }
 //
-//            double xr = 1.0 / imageView.getWidth() * pixM.getColumns();
-//            double yr = 1.0 / imageView.getHeight() * pixM.getLines();
+//            double xr = 1.0 / imageView.getWidth() * matrix.PixM.getColumns();
+//            double yr = 1.0 / imageView.getHeight() * matrix.PixM.getLines();
 //
 //            int x1 = (int) Math.min(drawPointA.getX()*xr, drawPointB.getX()*xr);
 //            int x2 = (int) Math.max(drawPointA.getX()*xr, drawPointB.getX()*xr);
@@ -573,16 +573,16 @@
 //            if (isWorkingResolutionOriginal()) {
 //                bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
 //            }
-//            bitmap = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
+//            bitmap = matrix.PixM.getmatrix.PixM(bitmap, getMaxRes()).getBitmap();
 //        } else {
 //            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
 //                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
 //            } else {
 //                // ???
 //                if (isWorkingResolutionOriginal()) {
-//                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
+//                    bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, 0).getBitmap();
 //                }
-//                bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
+//                bitmap = bitmapOriginal = matrix.PixM.getmatrix.PixM(bitmap, getMaxRes()).getBitmap();
 //            }
 //
 //            Canvas canvas = new Canvas(bitmap);
@@ -682,11 +682,11 @@
 //    }
 //
 //
-//    private PixM getSelectedZone(RectF selectedCords) {
+//    private matrix.PixM getSelectedZone(RectF selectedCords) {
 //        if (currentFile != null) {
-//            PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)));
+//            matrix.PixM matrix.PixM = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(currentFile)));
 //
-//            return pixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
+//            return matrix.PixM.copySubImage((int)(selectedCords.left), (int)(selectedCords.top),
 //                    (int)(selectedCords.right-selectedCords.left),
 //                    (int)(selectedCords.bottom- selectedCords.top));
 //        }

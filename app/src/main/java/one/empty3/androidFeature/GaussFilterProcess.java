@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.libs.Image;
@@ -35,12 +35,12 @@ public class GaussFilterProcess extends ProcessFile {
 
             return false;
 
-        one.empty3.featureAndroid.PixM pix = null;
+        one.empty3.featureAndroid.matrix.PixM pix = null;
         Image img = null;
 
         try {
             img = one.empty3.ImageIO.read(in);
-            pix = one.empty3.featureAndroid.PixM.getPixM(img, maxRes);
+            pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, maxRes);
 
         } catch (Exception ex) {
 
@@ -53,9 +53,9 @@ public class GaussFilterProcess extends ProcessFile {
 
         }
 
-        GaussFilterPixM th = new GaussFilterPixM(pix, 1);
+        GaussFiltermatrix.PixM th = new GaussFiltermatrix.PixM(pix, 1);
 
-        one.empty3.featureAndroid.PixM pixRes = new one.empty3.featureAndroid.PixM(pix.getColumns(), pix.getLines());
+        one.empty3.featureAndroid.matrix.PixM pixRes = new one.empty3.featureAndroid.matrix.PixM(pix.getColumns(), pix.getLines());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
             pix.setCompNo(c);
@@ -66,7 +66,7 @@ public class GaussFilterProcess extends ProcessFile {
         }
 
 
-        PixM normalize = pix.normalize(0.0, 1.0);
+        matrix.PixM normalize = pix.normalize(0.0, 1.0);
 
 
         //

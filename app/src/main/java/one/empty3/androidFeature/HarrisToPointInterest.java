@@ -21,13 +21,13 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import java.util.*;
 
-public class HarrisToPointInterest extends FilterPixM {
-    private PixM m;
+public class HarrisToPointInterest extends Filtermatrix.PixM {
+    private matrix.PixM m;
 
     public HarrisToPointInterest(int c, int l) {
         super(c, l);
@@ -62,7 +62,7 @@ public class HarrisToPointInterest extends FilterPixM {
     public List<Point3D> getPoi() {
         LocalExtrema le = new LocalExtrema(m.getColumns(),
                 lines, 3, 0);
-        PixM m2 = le.filter(new M3(m, 1, 1)).getImagesMatrix()[0][0];
+        matrix.PixM m2 = le.filter(new M3(m, 1, 1)).getImagesMatrix()[0][0];
         List<Point3D> poi = new ArrayList<>();
         for (int i = 0; i < columns; i++)
             for (int j = 0; j < lines; j++)

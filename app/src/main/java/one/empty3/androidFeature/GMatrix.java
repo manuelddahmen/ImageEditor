@@ -30,7 +30,7 @@ import java.util.Vector;
 
 import one.empty3.feature.app.pro.M3;
 import one.empty3.feature.MatrixFormatException;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -107,7 +107,7 @@ public class GMatrix {
         return;
     }
 
-    public GMatrix(PixM pix) {
+    public GMatrix(matrix.PixM pix) {
         this.lines = pix.getLines();
         this.columns = pix.getColumns();
         x = new double[lines * columns * 3];
@@ -349,16 +349,16 @@ public class GMatrix {
     }
 
     public void setRegionCopy(M3 original, int ii, int ij, int iStart, int jStart, int iEnd, int jEnd,
-                              PixM pixM, int iPaste, int jPaste) {
+                              matrix.PixM matrix.PixM, int iPaste, int jPaste) {
         for (int c = 0; c < getCompCount(); c++) {
             original.setCompNo(c);
-            pixM.setCompNo(c);
+            matrix.PixM.setCompNo(c);
             int x = 0;
             for (int i = iStart; i < iEnd; i++) {
                 int y = 0;
                 for (int j = jStart; j < jEnd; j++) {
                     double v = original.get(i, j, ii, ij);
-                    pixM.set(iPaste + x, jPaste + y, v);
+                    matrix.PixM.set(iPaste + x, jPaste + y, v);
                     y++;
                 }
                 x++;
@@ -368,11 +368,11 @@ public class GMatrix {
         }
     }
 
-    public void setRegionCopy(PixM original, int iStart, int jStart, int iEnd, int jEnd,
-                              PixM pixM, int iPaste, int jPaste) {
+    public void setRegionCopy(matrix.PixM original, int iStart, int jStart, int iEnd, int jEnd,
+                              matrix.PixM matrix.PixM, int iPaste, int jPaste) {
     }
 
-    public void setRegionCopy(PixM original, int iStart, int jStart, int iEnd, int jEnd,
+    public void setRegionCopy(matrix.PixM original, int iStart, int jStart, int iEnd, int jEnd,
                               M3 m3, int iPaste, int jPaste, int iiPaste, int ijPaste) {
     }
 }

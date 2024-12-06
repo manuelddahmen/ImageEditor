@@ -25,13 +25,13 @@ package one.empty3.feature20220726;
 import one.empty3.*;
 import one.empty3.library.*;
 
-public class IntuitiveRadialGradient extends FilterPixM {
-    private PixM pix;
+public class IntuitiveRadialGradient extends Filtermatrix.PixM {
+    private matrix.PixM pix;
     private int angles = 12;
     double rMaxPixel = 2.0, rMaxDiff = 5.0;
     private int angleCount = 2;
 
-    public IntuitiveRadialGradient(PixM image) {
+    public IntuitiveRadialGradient(matrix.PixM image) {
         super(1, 1);
         this.pix = image;
     }
@@ -66,8 +66,8 @@ public class IntuitiveRadialGradient extends FilterPixM {
     }
 
 
-    public PixM filter(PixM o) {
-        PixM c = new PixM(o.getColumns(), o.getLines());
+    public matrix.PixM filter(matrix.PixM o) {
+        matrix.PixM c = new matrix.PixM(o.getColumns(), o.getLines());
 
         for (int comp = 0; comp < getCompCount(); comp++) {
 

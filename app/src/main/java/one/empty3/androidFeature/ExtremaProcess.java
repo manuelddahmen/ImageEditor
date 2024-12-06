@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -38,12 +38,12 @@ public class ExtremaProcess extends ProcessFile {
     }
 
     public boolean process(File in, File out) {
-        one.empty3.featureAndroid.PixM pix = null;
+        one.empty3.featureAndroid.matrix.PixM pix = null;
         if (!isImage(in))
             return false;
 
         try {
-            pix = new one.empty3.featureAndroid.PixM(one.empty3.ImageIO.read(in));
+            pix = new one.empty3.featureAndroid.matrix.PixM(one.empty3.ImageIO.read(in));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -59,7 +59,7 @@ public class ExtremaProcess extends ProcessFile {
         M3 filter = le.filter(new M3(pix, 2, 2));
         if(filter==null || filter.getImagesMatrix()== null || filter.getImagesMatrix().length==0 || filter.getImagesMatrix()[0]==null || filter.getImagesMatrix()[0].length==0)
             return false;
-        PixM m =filter.getImagesMatrix()[0][0];
+        matrix.PixM m =filter.getImagesMatrix()[0][0];
 
         try {
             one.empty3.ImageIO.write(m.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);

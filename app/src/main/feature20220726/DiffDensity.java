@@ -28,7 +28,7 @@ import one.empty3.library.Point3D;
 import java.io.File;
 
 public class DiffDensity extends ProcessFile {
-    private PixM densities;
+    private matrix.PixM densities;
     private Point3D[] colors;
 
     @Override

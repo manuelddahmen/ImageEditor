@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726;
 
-public class GradientFilter extends FilterMatPixM {
+public class GradientFilter extends FilterMatmatrix.PixM {
 
     protected int columnsIn = 2;
     protected int linesIn = 2;

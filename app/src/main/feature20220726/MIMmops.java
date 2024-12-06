@@ -29,9 +29,9 @@ import java.util.function.Consumer;
  * Multi-Image Matching using Multi-Scale Oriented Patches
  */
 public class MIMmops {
-    public static PixM applyMultipleFilters(PixM pixM, int level, FilterPixM... filter) {
+    public static matrix.PixM applyMultipleFilters(matrix.PixM matrix.PixM, int level, Filtermatrix.PixM... filter) {
 
-        final PixM[] res = {pixM};
+        final matrix.PixM[] res = {matrix.PixM};
         for (int i = 0; i < level; i++) {
             // Hl(x, y) = ∇σd Pl(x, y)∇σd Pl(x, y)T∗ gσi(x, y)
             // g      -> Gauss filter
@@ -44,10 +44,10 @@ public class MIMmops {
 
             // La dérivée et le filtre ne sont pas les mêmes. sommeMatrice(e-..)   et
             // (get(x+1)-2*get(x)+get(x-1) + get(y+1)+2*get(y)-get(y))/4/4 ou /1/1 ??
-            Arrays.stream(filter).sequential().forEach(new Consumer<FilterPixM>() {
+            Arrays.stream(filter).sequential().forEach(new Consumer<Filtermatrix.PixM>() {
                 @Override
-                public void accept(FilterPixM filterPixM) {
-                    res[0] = res[0].applyFilter(filterPixM);
+                public void accept(Filtermatrix.PixM filtermatrix.PixM) {
+                    res[0] = res[0].applyFilter(filtermatrix.PixM);
 
 
                 }
@@ -60,7 +60,7 @@ public class MIMmops {
     }
 
 
-    public M matGrad(PixM image, M3 gradientX, M3 gradientY) {
+    public M matGrad(matrix.PixM image, M3 gradientX, M3 gradientY) {
         M matGrad = null;
         // image :  smoothes
         // image : gradientX M3(w, h, 2, 1)

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import one.empty3.ImageIO;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
@@ -43,7 +43,7 @@ public class Paste extends ProcessFile {
      * @param img Image sur laquelle dessiner
      * @param col Couleur ou texture de dessin
      */
-    public void pasteList(List<Point3D> points, PixM img, ITexture col) {
+    public void pasteList(List<Point3D> points, matrix.PixM img, ITexture col) {
 
         for (int i = 0; i < points.size(); i++) {
 
@@ -70,7 +70,7 @@ public class Paste extends ProcessFile {
      * @param img Image sur laquelle dessiner
      * @param objets Objets à dessiner sur l'image (3d-2d)
      */
-    public void pasteList(List<Point3D> points, PixM img, Scene objets) {
+    public void pasteList(List<Point3D> points, matrix.PixM img, Scene objets) {
 
         for (int i = 0; i < points.size(); i++) {
 
@@ -97,7 +97,7 @@ public class Paste extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         Image read = ImageIO.read(in);
-        PixM pixM = PixM.getPixM(read, maxRes);
+        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read, maxRes);
         return true;
     }
 }

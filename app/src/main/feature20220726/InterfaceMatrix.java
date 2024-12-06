@@ -26,7 +26,7 @@ public interface InterfaceMatrix {
 
     public void init(int columns, int lines);
 //    public void init(Image Image);
-//    public void init(PixM Image);
+//    public void init(matrix.PixM Image);
 
 
     public void setCompNo(int no);

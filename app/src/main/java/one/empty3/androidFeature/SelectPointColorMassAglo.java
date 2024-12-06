@@ -23,7 +23,7 @@ package one.empty3.androidFeature;
 import one.empty3.libs.Image;
 import one.empty3.libs.Color;
 
-public class SelectPointColorMassAglo extends FilterPixM {
+public class SelectPointColorMassAglo extends Filtermatrix.PixM {
     private double[] tmpColor = new double[3];
     private double[] rgb;
 

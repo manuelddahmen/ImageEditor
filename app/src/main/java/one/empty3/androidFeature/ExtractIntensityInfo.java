@@ -23,7 +23,7 @@ package one.empty3.androidFeature;
 import android.graphics.Color;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.io.ProcessFile;
 
@@ -49,35 +49,35 @@ public class ExtractIntensityInfo extends
             img = one.empty3.ImageIO.read(in);
         } catch (Exception rx) {
         }
-        one.empty3.featureAndroid.PixM pix = one.empty3.featureAndroid.PixM.getPixM(img, -1);
+        one.empty3.featureAndroid.matrix.PixM pix = one.empty3.featureAndroid.matrix.PixM.getmatrix.PixM(img, -1);
 
 
-        one.empty3.featureAndroid.PixM pixMOriginal = pix;
+        one.empty3.featureAndroid.matrix.PixM matrix.PixMOriginal = pix;
 
         final one.empty3.libs.Image[] img3 = new one.empty3.libs.Image[]{pix.getImage()};
 
 
-        GradientFilter gradientMask = new GradientFilter(pixMOriginal.getColumns(), pixMOriginal.getLines());
-        M3 imgForGrad = new M3(pixMOriginal,
+        GradientFilter gradientMask = new GradientFilter(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines());
+        M3 imgForGrad = new M3(matrix.PixMOriginal,
                 2, 2);
         M3 filter = gradientMask.filter(imgForGrad);
-        one.empty3.featureAndroid.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
+        one.empty3.featureAndroid.matrix.PixM[][] imagesMatrix = filter.getImagesMatrix();//.normalize(0, 1);
 
 
 //                    image1 = null;
 
         // Zero. +++Zero orientation variation.
         Linear linear = new Linear(imagesMatrix[1][0], imagesMatrix[0][0],
-                new one.empty3.featureAndroid.PixM(pixMOriginal.getColumns(), pixMOriginal.getLines()));
+                new one.empty3.featureAndroid.matrix.PixM(matrix.PixMOriginal.getColumns(), matrix.PixMOriginal.getLines()));
         linear.op2d2d(new char[]{'*'}, new int[][]{{1, 0}}, new int[]{2});
-        one.empty3.featureAndroid.PixM smoothedGrad = linear.getImages()[2];
+        one.empty3.featureAndroid.matrix.PixM smoothedGrad = linear.getImages()[2];
 
 
         double min = 0.3;
         double rMin = 2.0;
         // varier rMin et min
 
-        PixM pix2 = smoothedGrad.copy();
+        matrix.PixM pix2 = smoothedGrad.copy();
 
         Histogram2 histogram = new Histogram2(15);
         histogram.setM(pix2);

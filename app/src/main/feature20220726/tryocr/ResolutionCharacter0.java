@@ -44,7 +44,7 @@ import java.util.logging.Logger;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.Linear;
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.feature20220726.shape.Rectangle;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
@@ -79,8 +79,8 @@ public class ResolutionCharacter0 implements Runnable {
     private double totalError;
     private int numCurves;
     private double errorDiff = 0.0;
-    private PixM input;
-    private PixM output;
+    private matrix.PixM input;
+    private matrix.PixM output;
 
     public ResolutionCharacter0(Image read, String name) {
         this(read, name, new File("testsResults"));
@@ -155,7 +155,7 @@ public class ResolutionCharacter0 implements Runnable {
         return (int) (Math.random() * length);
     }
 
-    public void chanfrein(PixM input, PixM output, Color traceColor) {
+    public void chanfrein(matrix.PixM input, matrix.PixM output, Color traceColor) {
         for (int i = 0; i < input.getColumns(); i++)
             for (int j = 0; j < input.getLines(); j++) {
                 if (Arrays.equals(input.getValues(i, j), (Lumiere.getRgb(traceColor)))) {
@@ -184,7 +184,7 @@ public class ResolutionCharacter0 implements Runnable {
         if (!dirOut.exists() || !dirOut.isDirectory())
             dirOut.mkdir();
 
-        input = new PixM(read);
+        input = new matrix.PixM(read);
         output = input.copy();
 
         Logger.getAnonymousLogger().log(Level.INFO, "Image size: " + output.getColumns() + ", " + output.getLines());
@@ -274,7 +274,7 @@ public class ResolutionCharacter0 implements Runnable {
         //ResolutionCharacter0.execute(texture, output, input, dirOut, name);
     }
 
-    private List<Character> recognize(PixM input, int i, int j, int w, int h) {
+    private List<Character> recognize(matrix.PixM input, int i, int j, int w, int h) {
         if (System.currentTimeMillis() % 100 == 0)
             System.gc();
         List<Character> ch = recognizeH(input, i, j, w, h);
@@ -296,7 +296,7 @@ public class ResolutionCharacter0 implements Runnable {
         return allCharPossible;
     }
 
-    private boolean[] testRectIs(PixM input, int x, int y, int w, int h, double[] color) {
+    private boolean[] testRectIs(matrix.PixM input, int x, int y, int w, int h, double[] color) {
         double DIFF = 0.4;
         boolean[] w0h1w2h3 = new boolean[4];
         int i, j;
@@ -497,7 +497,7 @@ public class ResolutionCharacter0 implements Runnable {
         return mapCharsAlphabetLines;
     }
 
-    public List<Character> recognizeV(PixM mat, int x, int y, int w, int h) {
+    public List<Character> recognizeV(matrix.PixM mat, int x, int y, int w, int h) {
 
         List<Character> retained = new ArrayList<>();
         Map<Character, Integer[]> patternsVertical = patternsV();
@@ -550,7 +550,7 @@ public class ResolutionCharacter0 implements Runnable {
     }
 
 
-    public List<Character> recognizeH(PixM mat, int x, int y, int w, int h) {
+    public List<Character> recognizeH(matrix.PixM mat, int x, int y, int w, int h) {
 
         List<Character> retained = new ArrayList<>();
         Map<Character, Integer[]> patternsHorizon = patternsH();
@@ -621,12 +621,12 @@ public class ResolutionCharacter0 implements Runnable {
         ArrayList<CourbeParametriquePolynomialeBezier> currentCurves = new ArrayList<>();
         double lastError = Double.NaN;
         State previousState;
-        PixM input;
-        PixM backgroundImage;
+        matrix.PixM input;
+        matrix.PixM backgroundImage;
         int textColor = Color.BLACK.getRGB();
         int dim;
 
-        public State(PixM image, PixM backgroundImage, int i, int j, int step) {
+        public State(matrix.PixM image, matrix.PixM backgroundImage, int i, int j, int step) {
             this.input = image;
             this.backgroundImage = backgroundImage;
             xyz = Point3D.n(i + step / 2., j + step / 2., 0.);
@@ -635,16 +635,16 @@ public class ResolutionCharacter0 implements Runnable {
 
         public double computeError() {
             State state = this;
-            PixM pError = state.backgroundImage;
-            PixM inputCopy = input.copy();
+            matrix.PixM pError = state.backgroundImage;
+            matrix.PixM inputCopy = input.copy();
             state.currentCurves.forEach(courbeParametriquePolynomialeBezier -> {
                 pError.plotCurve(courbeParametriquePolynomialeBezier, new TextureCol(Color.BLACK));
                 numCurves++;
             });
-            PixM copy = pError.copy();
-            Linear linear = new Linear(inputCopy, pError, new PixM(input.getColumns(), input.getLines()));
+            matrix.PixM copy = pError.copy();
+            Linear linear = new Linear(inputCopy, pError, new matrix.PixM(input.getColumns(), input.getLines()));
             linear.op2d2d(new char[]{'-'}, new int[][]{{1, 0}}, new int[]{2});
-            PixM diff = linear.getImages()[2];
+            matrix.PixM diff = linear.getImages()[2];
             return diff.mean(0, 0, diff.getColumns(), diff.getLines());
 
         }

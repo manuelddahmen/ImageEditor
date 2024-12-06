@@ -33,7 +33,7 @@ import one.empty3.feature.PixM;
 ========
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/histograms/Hist4Contour.java
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class Hist4Contour extends ProcessFile {

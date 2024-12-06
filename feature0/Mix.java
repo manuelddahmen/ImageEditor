@@ -8,7 +8,7 @@ package one.empty3.androidFeature;
 
 import java.io.File;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Mix.java
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
@@ -42,9 +42,9 @@ public class Mix extends ProcessNFiles {
 ========
             Image read1 = ImageIO.read(ins[0]);
             Image read2 = ImageIO.read(ins[1]);
-            one.empty3.featureAndroid.PixM pixMin1 = new one.empty3.featureAndroid.PixM(read1);
-            one.empty3.featureAndroid.PixM pixMin2 = new one.empty3.featureAndroid.PixM(read2);
-            one.empty3.featureAndroid.PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
+            matrix.PixM pixMin1 = new matrix.PixM(read1);
+            matrix.PixM pixMin2 = new matrix.PixM(read2);
+            matrix.PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/Mix.java
 
             for (int i = 0; i < outPixM.getColumns(); i++) {

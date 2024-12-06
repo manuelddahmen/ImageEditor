@@ -24,8 +24,8 @@ import one.empty3.io.ProcessFile ;
 import java.io.File ;
 public class Compare extends ProcessFile {
      public boolean process (File in, File out ){
-        PixM p = PixM.getPixM() ;
-PixM p2 = PixM.getPixM() ;
+        matrix.PixM p = matrix.PixM.getmatrix.PixM() ;
+matrix.PixM p2 = matrix.PixM.getmatrix.PixM() ;
 new DiffE().dist(p, p2)
 } 
 } 

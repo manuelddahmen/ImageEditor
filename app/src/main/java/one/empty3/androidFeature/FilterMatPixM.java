@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
 
-public abstract class FilterMatPixM {
+public abstract class FilterMatmatrix.PixM {
 /*
     public int getCompNo() {
         return compNo;

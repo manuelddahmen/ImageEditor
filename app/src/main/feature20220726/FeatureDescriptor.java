@@ -29,11 +29,11 @@ import javaAnd.awt.image.imageio.ImageIO;
 import java.util.*;
 import java.io.File;
 /*
-public class FeatureDescriptor extends PixM {
+public class FeatureDescriptor extends matrix.PixM {
 
 
-    private PixM m;
-    private PixM pi;
+    private matrix.PixM m;
+    private matrix.PixM pi;
     private List<Point3D> poi;
 
     public FeatureDescriptor() {
@@ -48,7 +48,7 @@ public class FeatureDescriptor extends PixM {
         return true;
     }
 
-    public void setPixM(PixM m) {
+    public void setmatrix.PixM(matrix.PixM m) {
         this.m = m;
         HarrisToPointInterest h = new HarrisToPointInterest(
                 m.getColumns(), m.getLines());
@@ -64,9 +64,9 @@ public class FeatureDescriptor extends PixM {
 
         for (File file : set) {
             try {
-                PixM pm = new PixM(new Image(file));
+                matrix.PixM pm = new matrix.PixM(new Image(file));
                 for (FeatureDescriptor f : fd) {
-                    f.setPixM(pm);
+                    f.setmatrix.PixM(pm);
                     for (int i = 0; i < poi.size(); i++) {
                         double de = f.deltaEnergy((int) (double) (poi.get(i).getX()), (int) (double) (poi.get(i).getY()));
                         if (de < 0.5) {

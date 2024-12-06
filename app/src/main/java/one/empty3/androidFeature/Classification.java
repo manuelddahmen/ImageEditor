@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import one.empty3.library.core.lighting.Colors;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;
@@ -63,10 +63,10 @@ public class Classification extends ProcessFile {
         }
         if (!in.getName().endsWith(".jpg"))
             return false;
-        PixM selectPointColorMassAglo = null;
+        matrix.PixM selectPointColorMassAglo = null;
         Image read = null;
         read = new Image(Objects.requireNonNull(ImageIO.read(in)).getImage());
-        selectPointColorMassAglo = PixM.getPixM(read, maxRes);
+        selectPointColorMassAglo = matrix.PixM.getmatrix.PixM(read, maxRes);
         imageOut = one.empty3.ImageIO.read(in);
         SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read);
         int color = Color.WHITE;

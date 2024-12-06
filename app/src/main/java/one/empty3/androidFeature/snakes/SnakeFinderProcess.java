@@ -21,7 +21,7 @@
 package one.empty3.androidFeature.snakes;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 import one.empty3.ImageIO;
@@ -36,7 +36,7 @@ public class SnakeFinderProcess extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         DipSnake snake = new DipSnake();
-        PixM image = PixM.getPixM(ImageIO.read(in), maxRes);
+        matrix.PixM image = matrix.PixM.getmatrix.PixM(ImageIO.read(in), maxRes);
         for (int i = 0; i < 6; i++) {
             snake.add(i, new Point3D(image.getColumns() / 2 + 0.6 * image.getColumns() / 2 * Math.cos(2 * 3.1416),
                     image.getLines() / 2 - 0.6 * image.getLines() / 2 * Math.sin(2 * 3.1416),

@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature.motion;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.libs.Image;
 
 import java.util.ArrayList;
@@ -43,18 +43,18 @@ public abstract class Motion /*extends ProcessFile */ {
     }
 
     public Image processFrame() {
-        PixM frame1 = null;
-        PixM frame2 = null;
+        matrix.PixM frame1 = null;
+        matrix.PixM frame2 = null;
         if (frames.size() == 0 || frames.get(0) == null)
             return null;
         if (frames.size() >= 2 && frames.size() < BUFFER_MAX_FRAMES) {
 
-            frame1 = new PixM(frames.get(0));
-            frame2 = new PixM(frames.get(1));
+            frame1 = new matrix.PixM(frames.get(0));
+            frame2 = new matrix.PixM(frames.get(1));
             frames.remove(0);
         } else if (frames.size() >= BUFFER_MAX_FRAMES) {
-            frame1 = new PixM(frames.get(0));
-            frame2 = new PixM(frames.get(1));
+            frame1 = new matrix.PixM(frames.get(0));
+            frame2 = new matrix.PixM(frames.get(1));
             frames.remove(0);
         } else {
             return null;
@@ -63,6 +63,6 @@ public abstract class Motion /*extends ProcessFile */ {
         return process(frame1, frame2);
     }
 
-    public abstract Image process(PixM frame1, PixM frame2);
+    public abstract Image process(matrix.PixM frame1, matrix.PixM frame2);
 
 }

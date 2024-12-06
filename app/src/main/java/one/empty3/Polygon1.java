@@ -112,7 +112,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import one.empty3.androidFeature.GoogleFaceDetection;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.ClosedCurve;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
@@ -283,17 +283,17 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                 (pCanvas.get(1) - position.y) / scale, 0.0);
     }
 
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean[] columnLeft, boolean[] columnRight) {
+    public boolean leftToRightScanmatrix.PixM(matrix.PixM matrix.PixM, int x, int y, boolean[] columnLeft, boolean[] columnRight) {
         boolean foundLeft = columnLeft[y];
         boolean foundRight = columnRight[y];
-        if (x >= 0 && x < pixM.getColumns()) {
+        if (x >= 0 && x < matrix.PixM.getColumns()) {
             for (int i = 0; i < x && !foundLeft; i++) {
-                if (!pixM.getP(i, y).equals(Point3D.O0)) {
+                if (!matrix.PixM.getP(i, y).equals(Point3D.O0)) {
                     foundLeft = true;
                 }
             }
-            for (int i = x; i < pixM.getColumns() && !foundRight; i++) {
-                if (!pixM.getP(i, y).equals(Point3D.O0)) {
+            for (int i = x; i < matrix.PixM.getColumns() && !foundRight; i++) {
+                if (!matrix.PixM.getP(i, y).equals(Point3D.O0)) {
                     foundRight = true;
                 }
             }
@@ -303,17 +303,17 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean isDrawingOnImage) {
+    public boolean leftToRightScanmatrix.PixM(matrix.PixM matrix.PixM, int x, int y, boolean isDrawingOnImage) {
         boolean foundLeft = false;
         boolean foundRight = false;
-        if (x >= 0 && x < pixM.getColumns()) {
+        if (x >= 0 && x < matrix.PixM.getColumns()) {
             for (int i = 0; i < x && !foundLeft; i++) {
-                if (!pixM.getP(i, y).equals(Point3D.O0)) {
+                if (!matrix.PixM.getP(i, y).equals(Point3D.O0)) {
                     foundLeft = true;
                 }
             }
-            for (int i = x; i < pixM.getColumns() && !foundRight; i++) {
-                if (!pixM.getP(i, y).equals(Point3D.O0)) {
+            for (int i = x; i < matrix.PixM.getColumns() && !foundRight; i++) {
+                if (!matrix.PixM.getP(i, y).equals(Point3D.O0)) {
                     foundRight = true;
                 }
             }
@@ -321,7 +321,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Image image, int transparent, double deep, PointF position, double scale) {
+    public matrix.PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Image image, int transparent, double deep, PointF position, double scale) {
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
@@ -348,9 +348,9 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         if (!(widthBox > 0 && heightBox > 0))
             return null;
 
-        PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
+        matrix.PixM matrix.PixM = new matrix.PixM((int) (widthBox), (int) (heightBox));
 
-        faceSurface.setContours(pixM);
+        faceSurface.setContours(matrix.PixM);
 
         int count = 0;
 
@@ -373,7 +373,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
             ParametricCurve curve = new LineSegment(new Point3D(p1.get(0) - left, p1.get(1) - top, 0.0), new Point3D(p2.get(0) - left, p2.get(1) - top, 0.0));
             curve.texture(new ColorTexture(colorTemp));
             curve.setIncrU(0.1);
-            pixM.plotCurve(curve, new ColorTexture(colorTemp));
+            matrix.PixM.plotCurve(curve, new ColorTexture(colorTemp));
         }
 
         //paint = new Paint();
@@ -390,9 +390,9 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
-                double[] color = pixM.getValues(xMap, yMap);
+                double[] color = matrix.PixM.getValues(xMap, yMap);
 
-                double[] colorP1 = pixM.getValues(xMap + 1, yMap);
+                double[] colorP1 = matrix.PixM.getValues(xMap + 1, yMap);
 
                 int imageColor = Lumiere.getInt(color);
                 int imageColorP1 = Lumiere.getInt(colorP1);
@@ -409,7 +409,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                 } else if (imageColor == colorTemp && currentColor[(int) yMap] == transparent && imageColorP1 != colorTemp) {
                     currentColor[(int) yMap] = colorTemp;
                 } else if (currentColor[(int) yMap] == colorTemp &&
-                        leftToRightScanPixM(pixM, xMap, yMap, isDrawingOnImage)) {
+                        leftToRightScanmatrix.PixM(matrix.PixM, xMap, yMap, isDrawingOnImage)) {
 
                     if (!isDrawingOnImage && i < canvas.getWidth() && i >= 0 && j < canvas.getHeight() && j >= 0) {
                         //Point3D positionOnPicture = new Point3D((double) i, (double) j, 0.0);
@@ -418,7 +418,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                         //pixels++;
                     } else if (isDrawingOnImage && i < image.getWidth() && i >= 0 && j < image.getHeight() && j >= 0) {
                         image.setRgb((int) i, (int) j, colorTemp);
-                        pixM.setValues(xMap, yMap, fillColorArrayPolygon1);
+                        matrix.PixM.setValues(xMap, yMap, fillColorArrayPolygon1);
                         pixels++;
 
                     }
@@ -430,7 +430,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         }
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
-        return pixM;
+        return matrix.PixM;
     }
 
     @Override
@@ -467,7 +467,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         if (!(widthBox > 0 && heightBox > 0))
             return;
 
-        PixM pixM = surface.getFilledContours();
+        matrix.PixM matrix.PixM = surface.getFilledContours();
 
         int count = 0;
 
@@ -482,9 +482,9 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
-                double[] color = pixM.getValues(xMap, yMap);
+                double[] color = matrix.PixM.getValues(xMap, yMap);
                 int colorToDraw = Lumiere.getInt(color);
-                if (!PixM.equalsArrays(transparent, color, 0.05))
+                if (!matrix.PixM.equalsArrays(transparent, color, 0.05))
                     mCopy.setRgb((int) i, (int) j, colorToDraw);
                 pixels++;
 

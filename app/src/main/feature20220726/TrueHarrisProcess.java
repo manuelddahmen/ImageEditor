@@ -41,12 +41,12 @@ public class TrueHarrisProcess extends ProcessFile {
 
         File file = in;
 
-        PixM pix = null;
+        matrix.PixM pix = null;
         Image img = null;
 
         try {
             img = new Image(file);
-            pix = PixM.getPixM(img, maxRes);
+            pix = matrix.PixM.getmatrix.PixM(img, maxRes);
 
         } catch (Exception ex) {
 
@@ -60,18 +60,18 @@ public class TrueHarrisProcess extends ProcessFile {
         }
 
         TrueHarris th = new TrueHarris(pix);
-        PixM pixM = new PixM(pix.getImage());
+        matrix.PixM matrix.PixM = new matrix.PixM(pix.getImage());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
-            pixM.setCompNo(c);
+            matrix.PixM.setCompNo(c);
             pix.setCompNo(c);
             for (int i = 0; i < pix.getColumns(); i++)
                 for (int j = 0; j < pix.getLines(); j++)
-                    pixM.set(i, j, th.filter(i, j));
+                    matrix.PixM.set(i, j, th.filter(i, j));
         }
 
 
-        PixM normalize = pixM.normalize(0.0, 1.0);
+        matrix.PixM normalize = matrix.PixM.normalize(0.0, 1.0);
 
 
         //

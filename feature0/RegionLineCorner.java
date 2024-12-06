@@ -26,7 +26,7 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
@@ -45,7 +45,7 @@ import one.empty3.library.core.lighting.Colors;
  */
 public class RegionLineCorner extends ProcessFile {
     public final int numLevels = 5;
-    private one.empty3.featureAndroid.PixM m = null;
+    private matrix.PixM m = null;
     private double[] max;
     private double[] min;
 
@@ -84,7 +84,7 @@ public class RegionLineCorner extends ProcessFile {
     }
 
     //private final int[][][] levels;
-    public void setM(one.empty3.featureAndroid.PixM m2) {
+    public void setM(matrix.PixM m2) {
         this.m = m2;
     }
 
@@ -139,8 +139,8 @@ public class RegionLineCorner extends ProcessFile {
         return 0.0;
     }
 
-    public one.empty3.featureAndroid.PixM reconstruct(List<List<Circle>> circle) {
-        one.empty3.featureAndroid.PixM rec = m.copy();
+    public matrix.PixM reconstruct(List<List<Circle>> circle) {
+        matrix.PixM rec = m.copy();
         return rec;
     }
 
@@ -280,7 +280,7 @@ public class RegionLineCorner extends ProcessFile {
             Image file = m.getImage().getBitmap();
 ========
         File directory = new File(out.getParent());
-        one.empty3.featureAndroid.PixM imageCoutours = PixM.getPixM(ImageIO.read(in), 500.0);
+        matrix.PixM imageCoutours = PixM.getPixM(ImageIO.read(in), 500.0);
         this.m = imageCoutours;
         Image file = m.getImage();
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/RegionLineCorner.java

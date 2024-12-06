@@ -25,7 +25,7 @@ import one.empty3.feature.PixM;
 ========
 package one.empty3.androidFeature.opsNto1;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/opsNto1/ComposeNto1.java
 import one.empty3.io.ProcessFile;
 

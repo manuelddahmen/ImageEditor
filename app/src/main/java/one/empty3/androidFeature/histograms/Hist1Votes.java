@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.Objects;
 
 import one.empty3.io.ProcessFile;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class Hist1Votes extends ProcessFile {
@@ -50,7 +50,7 @@ public class Hist1Votes extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, PixM m) {
+    public Circle getLevel(Circle c, matrix.PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -94,8 +94,8 @@ public class Hist1Votes extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM inP = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
-        PixM outP = new PixM(inP.getColumns(), inP.getLines());
+        matrix.PixM inP = new matrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
+        matrix.PixM outP = new matrix.PixM(inP.getColumns(), inP.getLines());
 
         int[] ints = new int[inP.getLines() * inP.getColumns() * 3];
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;

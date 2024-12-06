@@ -28,7 +28,7 @@ package one.empty3.androidFeature;
 
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradAddProcess.java
 import one.empty3.io.ProcessFile;
 
@@ -44,23 +44,23 @@ public class GradAddProcess extends ProcessFile {
     public boolean process(File in, File out) {
         if (!isImage(in))
             return false;
-        one.empty3.featureAndroid.PixM pix;
+        matrix.PixM pix;
         try {
 <<<<<<<< HEAD:feature0/GradAddProcess.java
             pix = PixM.getPixM(
 ========
-            pix = one.empty3.featureAndroid.PixM.getPixM(
+            pix = matrix.PixM.getPixM(
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradAddProcess.java
                     Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
-            one.empty3.featureAndroid.PixM[][] imagesMatrix = gf.filter(
+            matrix.PixM[][] imagesMatrix = gf.filter(
                     new M3(
                             pix, 2, 2)
             ).getImagesMatrix();
 
             Linear linear = new Linear(imagesMatrix[0][0], imagesMatrix[0][1],
-                    new one.empty3.featureAndroid.PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
+                    new matrix.PixM(imagesMatrix[0][0].getColumns(), imagesMatrix[0][0].getLines()));
 
             boolean b = linear.op2d2d(new char[]{'+'}, new int[][]{{0}, {1}}, new int[]{2});
 

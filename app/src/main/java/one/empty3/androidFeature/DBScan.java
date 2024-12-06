@@ -24,7 +24,7 @@ import android.graphics.Color;
 
 import one.empty3.androidFeature.kmeans.MakeDataset;
 import one.empty3.androidFeature.kmeans.ReadDataset;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.core.lighting.Colors;
 
@@ -123,7 +123,7 @@ public class DBScan extends ProcessFile {
             String s = in.getAbsoluteFile() + ".csv";
             MakeDataset makeDataset = new MakeDataset(in, new File(s), maxRes);
 
-            one.empty3.featureAndroid.PixM p = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
+            one.empty3.featureAndroid.matrix.PixM p = matrix.PixM.getmatrix.PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
             init(maxRes, minPoints);
             ReadDataset readDataset = new ReadDataset();
             readDataset.read(new File(s));

@@ -20,12 +20,12 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 
 public class CompileFeature {
-    one.empty3.featureAndroid.PixM pix;
+    one.empty3.featureAndroid.matrix.PixM pix;
     double xc, yc, rot, scale;
 
-    public void filter(PixM image) {
+    public void filter(matrix.PixM image) {
     }
 } 

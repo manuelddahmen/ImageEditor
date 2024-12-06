@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import one.empty3.library.Lumiere;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 import one.empty3.library.Point3D;
 
 public class SelectionImpl extends Selection {
-    public List<Point3D> select(List<Point3D> preSelection, PixM pix, int rgb, double threshold) {
+    public List<Point3D> select(List<Point3D> preSelection, matrix.PixM pix, int rgb, double threshold) {
         List<Point3D> selection = new ArrayList();
         double[] doubles = Lumiere.getDoubles(rgb);
         if (preSelection != null) {
@@ -66,7 +66,7 @@ public class SelectionImpl extends Selection {
     }
 
     @Override
-    public List<Point3D> selectColorPoint(List<Point3D> preSelection, PixM pix, int rgb,
+    public List<Point3D> selectColorPoint(List<Point3D> preSelection, matrix.PixM pix, int rgb,
                                           int x, int y, double threshold) {
         ArrayList<Point3D> selection = new ArrayList();
         double[] doubles = Lumiere.getDoubles(rgb);
@@ -105,12 +105,12 @@ public class SelectionImpl extends Selection {
     }
 
     @Override
-    public List<Point3D> selectPoint(List<Point3D> preSelection, PixM pix, int x, int y) {
+    public List<Point3D> selectPoint(List<Point3D> preSelection, matrix.PixM pix, int x, int y) {
         return null;
     }
 
     @Override
-    public List<Point3D> selectInRect(List<Point3D> preSelection, PixM pix, int x1, int y1, int x2, int y2) {
+    public List<Point3D> selectInRect(List<Point3D> preSelection, matrix.PixM pix, int x1, int y1, int x2, int y2) {
         return null;
     }
 }

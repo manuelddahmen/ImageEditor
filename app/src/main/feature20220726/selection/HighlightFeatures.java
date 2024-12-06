@@ -22,7 +22,7 @@
 
 package one.empty3.feature20220726.selection;
 
-import one.empty3.feature20220726.PixM;
+import one.empty3.feature20220726.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
@@ -50,7 +50,7 @@ public class HighlightFeatures extends ProcessFile {
      * @param img Image sur laquelle dessiner
      * @param col Couleur ou texture de dessin
      */
-    public void pasteList(List<Point3D> points, PixM img, ITexture col) {
+    public void pasteList(List<Point3D> points, matrix.PixM img, ITexture col) {
 
         for (int i = 0; i < points.size(); i++) {
 
@@ -77,7 +77,7 @@ public class HighlightFeatures extends ProcessFile {
      * @param img Image sur laquelle dessiner
      * @param objets Objets à dessiner sur l'image (3d-2d)
      */
-    public void pasteList(List<Point3D> points, PixM img, Scene objets) {
+    public void pasteList(List<Point3D> points, matrix.PixM img, Scene objets) {
 
         for (int i = 0; i < points.size(); i++) {
 
@@ -154,13 +154,13 @@ public class HighlightFeatures extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         Image read = new Image(new Image(in));
-        PixM pixM = PixM.getPixM(read);
+        matrix.PixM matrix.PixM = matrix.PixM.getmatrix.PixM(read);
         File stackItem = getStackItem(1);
-        PixM original = new PixM(new Image(stackItem));
-        int cadre = (int) Math.min((pixM.getColumns() + pixM.getLines()) / 2., 10.);
-        for (int i = 0; i < pixM.getColumns(); i++)
-            for (int j = 0; j < pixM.getLines(); j++) {
-                double luminance = pixM.luminance(i, j);
+        matrix.PixM original = new matrix.PixM(new Image(stackItem));
+        int cadre = (int) Math.min((matrix.PixM.getColumns() + matrix.PixM.getLines()) / 2., 10.);
+        for (int i = 0; i < matrix.PixM.getColumns(); i++)
+            for (int j = 0; j < matrix.PixM.getLines(); j++) {
+                double luminance = matrix.PixM.luminance(i, j);
                 if (luminance > 0.1) {
                     for (int x = i - cadre; x < i + cadre; x++)
                         for (int y = j - cadre; y < j + cadre; y++) {

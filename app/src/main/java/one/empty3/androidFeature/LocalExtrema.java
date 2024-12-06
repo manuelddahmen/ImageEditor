@@ -21,10 +21,10 @@
 package one.empty3.androidFeature;
 
 import one.empty3.feature.app.pro.M3;
-import one.empty3.featureAndroid.PixM;
+import matrix.matrix.PixM;
 
 
-public class LocalExtrema extends FilterMatPixM {
+public class LocalExtrema extends FilterMatmatrix.PixM {
     private boolean setMin = false;
     private final int pointsCount;
     private final int neighbourSize;
@@ -105,9 +105,9 @@ public class LocalExtrema extends FilterMatPixM {
     }
 
     private double lambda1dot2div1sum2(M3 original, int compNo, int i, int j) {
-        one.empty3.featureAndroid.PixM pixM = new PixM(3, 3);
-//        pixM.setRegionCopy(original, 0, 0, i - 1, j - 1, i + 1, j + 1, pixM, 0, 0);
-        return pixM.determinant() / pixM.diagonalSum();
+        one.empty3.featureAndroid.matrix.PixM matrix.PixM = new matrix.PixM(3, 3);
+//        matrix.PixM.setRegionCopy(original, 0, 0, i - 1, j - 1, i + 1, j + 1, matrix.PixM, 0, 0);
+        return matrix.PixM.determinant() / matrix.PixM.diagonalSum();
     }
 
     @Override

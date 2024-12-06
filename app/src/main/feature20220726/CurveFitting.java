@@ -24,7 +24,7 @@ package one.empty3.feature20220726;
 
 import one.empty3.libs.*;
 
-import one.empty3.feature.PixM;
+import one.empty3.feature.matrix.PixM;
 import one.empty3.feature20220726.shape.Rectangle;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Axe;
@@ -65,7 +65,7 @@ public class CurveFitting extends ProcessFile {
      *     Vu dans Dr Lingrand, et R. Szeliski.
      */
 
-    one.empty3.feature.PixM pix = null;
+    one.empty3.feature.matrix.PixM pix = null;
     private double lambda1 = 0.01, lambda2 = 0.01, lambda3 = 1.0;
     double[] outAvg = new double[]{0, 0, 0}, inAvg = new double[]{0, 0, 0};
     private double arcLength;
@@ -74,8 +74,8 @@ public class CurveFitting extends ProcessFile {
     private CourbeParametriquePolynomialeBezier curveInitial;
     private double[][] deltaE;
     private HashMap<Integer, List<Integer>> border;
-    private one.empty3.feature.PixM inPix;
-    private one.empty3.feature.PixM outPix;
+    private one.empty3.feature.matrix.PixM inPix;
+    private one.empty3.feature.matrix.PixM outPix;
 
     public void init() {
         border = new HashMap<>();
@@ -250,14 +250,14 @@ public class CurveFitting extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        pix = one.empty3.feature.PixM.getPixM(new Image(in), maxRes);
+        pix = one.empty3.feature.matrix.PixM.getmatrix.PixM(new Image(in), maxRes);
 
 
         init();
 
 
-        inPix = new one.empty3.feature.PixM(pix.getImage());
-        outPix = new one.empty3.feature.PixM(pix.getImage());
+        inPix = new one.empty3.feature.matrix.PixM(pix.getImage());
+        outPix = new one.empty3.feature.matrix.PixM(pix.getImage());
 
         curveInitial = new CourbeN11();
 
@@ -315,7 +315,7 @@ public class CurveFitting extends ProcessFile {
         double e = E();
         //curveResult = modify();
 
-        one.empty3.feature.PixM p = new one.empty3.feature.PixM(pix.getColumns(), pix.getLines());
+        one.empty3.feature.matrix.PixM p = new one.empty3.feature.matrix.PixM(pix.getColumns(), pix.getLines());
 
         curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
 
@@ -328,7 +328,7 @@ public class CurveFitting extends ProcessFile {
             rectangle.setIncrU(0.1);
         }
 
-        PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
+        matrix.PixM normalize = p.normalize(0.0, 1.0, 0.0, 1.0);
 
         // E = Sout + Sin + Scourbe :
         // Convergence vers ?

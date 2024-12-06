@@ -23,9 +23,9 @@
 package one.empty3.feature20220726;
 
 public class CompileFeature {
-    PixM pix;
+    matrix.PixM pix;
     double xc, yc, rot, scale;
 
-    public void filter(PixM image) {
+    public void filter(matrix.PixM image) {
     }
 } 
