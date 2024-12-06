@@ -176,18 +176,9 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
 
                 int rgb = image.getPixel(
                         (int) (1.0 * i / columns2 * image.getWidth()), (int) (1.0 * j / lines2 * image.getHeight()));
-                double[] colorComponents = new double[3];
-                colorComponents = Lumiere.getDoubles(rgb);
-                for (int com = 0; com < pixM.getCompCount(); com++) {
-                    pixM.setCompNo(com);
-                    pixM.set(i, j, colorComponents[com]);
-
-                    //double m = mean((int) (i * div), (int) (j * div), (int) (cli2 * div),
-                    //        (int) (cli2 * div));
-                    //pixM.set(i, j, );
-                }
+                one.empty3.libs.Color c = new one.empty3.libs.Color(rgb);
+                pixM.setValues(i, j, c.getRed() / 255d, c.getGreen() / 255d, c.getBlue() / 255d);
             }
-
         }
         return pixM;
 
