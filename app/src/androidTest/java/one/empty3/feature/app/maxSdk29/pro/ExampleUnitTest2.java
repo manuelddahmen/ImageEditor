@@ -62,7 +62,7 @@ public class ExampleUnitTest2 {
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
             FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-            pixM.getBitmap().saveFile(outputimage);
+            pixM.getImage().saveFile(outputimage);
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -117,7 +117,7 @@ public class ExampleUnitTest2 {
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
         //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-        pixM.getBitmap().saveFile(outputimage);
+        pixM.getImage().saveFile(outputimage);
         //fileOutputStream.close();
     }
 
@@ -139,7 +139,7 @@ public class ExampleUnitTest2 {
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
         //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-        pixM.getBitmap().saveFile(outputimage);
+        pixM.getImage().saveFile(outputimage);
         //fileOutputStream.close();
     }
 
@@ -163,7 +163,7 @@ public class ExampleUnitTest2 {
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
         //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-        pixM.getBitmap().saveFile(outputimage);
+        pixM.getImage().saveFile(outputimage);
         //fileOutputStream.close();
     }
 
@@ -197,7 +197,7 @@ public class ExampleUnitTest2 {
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
             //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-            pixM.getBitmap().saveFile(outputimage);
+            pixM.getImage().saveFile(outputimage);
             //fileOutputStream.close();
 
             Image image = Image.loadFile(outputimage);
