@@ -40,7 +40,10 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         Bitmap mIcon11 = null;
         try {
             InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            options.inPremultiplied = false;
+            mIcon11 = BitmapFactory.decodeStream(in, null, options);
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
             e.printStackTrace();

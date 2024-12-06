@@ -423,6 +423,11 @@ public class ActivitySuperClass extends AppCompatActivity {
     }
 
     public void testIfValidBitmap() {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inPremultiplied = false;
+
+
         try {
         if (currentFile.getCurrentFile() == null)
             loadInstanceState();
@@ -431,7 +436,7 @@ public class ActivitySuperClass extends AppCompatActivity {
                 return;
             }
                 FileInputStream fileInputStream = new FileInputStream(currentFile.getCurrentFile());
-                if (BitmapFactory.decodeStream(fileInputStream)
+                if (BitmapFactory.decodeStream(fileInputStream, null, options)
                         == null)
                     ;
 
@@ -517,10 +522,12 @@ public class ActivitySuperClass extends AppCompatActivity {
             }
             try {
                 if (currentFile.getCurrentFile() != null) {
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                    options.inPremultiplied = false;
                     properties.setProperty("currentFile", currentFile.getCurrentFile().getAbsolutePath());
                     File file = new Utils().writeFile(this,
-                            BitmapFactory.decodeStream(
-                                    new FileInputStream(currentFile.getCurrentFile())),
+                            BitmapFactory.decodeStream(new FileInputStream(currentFile.getCurrentFile()), null, options),
                             getImageViewPersistantFile(), getImageViewPersistantFile(),
                             maxRes, true);
                     if (file != null)
@@ -633,16 +640,19 @@ public class ActivitySuperClass extends AppCompatActivity {
 
 
     public Bitmap loadImage(InputStream choose_directoryData, boolean isCurrentFile) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inPremultiplied = false;
         imageView = findViewById(R.id.currentImageView);
         Bitmap photo = null;
         if (maxRes > 0) {
-            System.err.println("FileInputStream" + choose_directoryData);
-            photo = BitmapFactory.decodeStream(choose_directoryData);
+        System.err.println("FileInputStream" + choose_directoryData);
+            photo = BitmapFactory.decodeStream(choose_directoryData, null, options);
             photo = PixM.getPixM(photo, maxRes).getImage().getImage();
             System.err.println("Get file (bitmap) : " + photo);
         } else {
             System.err.println("FileInputStream" + choose_directoryData);
-            photo = BitmapFactory.decodeStream(choose_directoryData);
+            photo = BitmapFactory.decodeStream(choose_directoryData, null, options);
             System.err.println("Get file (bitmap) : " + photo);
         }
         if (photo != null && isCurrentFile) {
@@ -757,7 +767,11 @@ public class ActivitySuperClass extends AppCompatActivity {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
         //       InputStream realPathFromURI = getRealPathFromURI(imageUri);
         InputStream realPathFromURI = getRealPathFromURI(imageUri);
-        Bitmap bitmap = BitmapFactory.decodeStream(realPathFromURI);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inPremultiplied = false;
+
+        Bitmap bitmap = BitmapFactory.decodeStream(realPathFromURI, null, options);
         File file = new Utils().writePhoto(this, new Image(bitmap), "imported-" + UUID.randomUUID() + "--");
         if (file != null && file.exists()) {
             // Update UI to reflect image being shared

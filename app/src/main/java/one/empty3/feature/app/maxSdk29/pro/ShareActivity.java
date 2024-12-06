@@ -51,10 +51,14 @@ public class ShareActivity extends ActivitySuperClass {
     void handleSendImage(Uri imageUri) {
         Bitmap bitmap = null;
         try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            options.inPremultiplied = false;
             // Works with content://, file://, or android.resource:// URIs
             InputStream inputStream =
                     getContentResolver().openInputStream(imageUri);
-            bitmap = BitmapFactory.decodeStream(inputStream);
+            bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+            bitmap.setHasAlpha(false); ;
             File imageViewPersistantFile = getImageViewPersistantFile();
             one.empty3.ImageIO.write(bitmap, "jpg", imageViewPersistantFile);
 

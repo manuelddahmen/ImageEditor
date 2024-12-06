@@ -479,9 +479,12 @@ class Utils {
             if (data != null) {
                 var inputStream: InputStream? = null
                 inputStream = activity.getRealPathFromURI(data)
-                val bitmapDecodeStream: Bitmap = BitmapFactory.decodeStream(inputStream)
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                options.inPremultiplied = true;
+                val bitmapDecodeStream: Bitmap? = BitmapFactory.decodeStream(inputStream, null, options)
                 currentFile = getFilesFile("imported-")
-                bitmapDecodeStream.compress(
+                bitmapDecodeStream?.compress(
                     Bitmap.CompressFormat.JPEG, 100, FileOutputStream(currentFile)
                 )
                 return currentFile
@@ -613,8 +616,11 @@ class Utils {
                         FileInputStream(activity.currentFile.currentFile) ?: return false
                     var mBitmap: Bitmap
                     try {
+                        val options = BitmapFactory.Options()
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        options.inPremultiplied = true;
                         mBitmap =
-                            BitmapFactory.decodeStream(fileInputStream) ?: return false
+                            BitmapFactory.decodeStream(fileInputStream, null, options) ?: return false
                     } catch (ex: OutOfMemoryError) {
                         Toast.makeText(
                             activity.applicationContext,
@@ -729,7 +735,10 @@ class Utils {
         val imageFile = activity.imageViewPersistantFile
         if (file && (imageFile != null) && imageFile.exists()) {
             try {
-                var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile))
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                options.inPremultiplied = true;
+                var bitmap = BitmapFactory.decodeStream(FileInputStream(imageFile), null, options)
                 if (bitmap != null) {
                     try {
                         activity.imageView =
@@ -755,8 +764,11 @@ class Utils {
     public fun createCurrentUniqueFile(activity: ActivitySuperClass): File? {
         try {
             if (activity.currentFile.currentFile != null) {
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                options.inPremultiplied = true;
                 val photo =
-                    BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile))
+                    BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile), null, options)
                 System.err.println("Get file (bitmap) : $photo")
                 activity.currentFile.add(
                     DataApp(

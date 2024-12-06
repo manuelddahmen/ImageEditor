@@ -97,7 +97,7 @@ android {
 
 dependencies {
     implementation "one.empty3.libs:commons-mp:0.0.6"
-    implementation("one.empty3:empty3-library-mp:2024.11.29-2")
+    implementation("one.empty3:empty3-library-mp:2024.12.3")
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     testImplementation 'junit:junit:4.13.2'

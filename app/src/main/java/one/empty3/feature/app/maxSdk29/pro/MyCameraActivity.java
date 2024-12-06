@@ -158,6 +158,11 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (checkSelfPermission(Manifest.permission.USE_FULL_SCREEN_INTENT) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.USE_FULL_SCREEN_INTENT}, MY_CAMERA_PERMISSION_CODE);
                 }
+                if (checkSelfPermission(Manifest.permission.USE_FULL_SCREEN_INTENT) != PackageManager.PERMISSION_GRANTED &&
+                        checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
@@ -171,9 +176,9 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (currentFile.getCurrentFile() != null) {
                     imageView = findViewById(R.id.currentImageView);
                     Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
-                    passParameters(intent1);
                     if (currentPixM != null) {
                         intent1.putExtra("zoom", currentPixM.getBitmap().getImage());
+                    passParameters(intent1);
                     }
                 }
             }
@@ -547,7 +552,10 @@ public class MyCameraActivity extends ActivitySuperClass {
         protected Object doInBackground(Object[] objects) {
             try {
                 if (file != null) {
-                    Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file));
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                    options.inPremultiplied = false;
+                    Bitmap photo = BitmapFactory.decodeStream(new FileInputStream(file), null, options);
                     System.err.println("Photo bitmap : " + file.toURI() + "\nFile exists?" + file.exists());
                     new Utils().setImageView(imageView, photo);
                     //imageView.setBackground(Drawable.createFromStream(new FileInputStream(currentBitmap), "chosenImage"));
@@ -697,11 +705,15 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         if (file && imageFile != null && imageFile.exists()) {
             try {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                options.inPremultiplied = false;
                 Bitmap imageViewBitmap = null;
                 if (isWorkingResolutionOriginal()) {
-                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
+
+                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile), null, options);
                 } else if(imageFileLow!=null && imageFileLow.exists()){
-                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFileLow));
+                    imageViewBitmap = BitmapFactory.decodeStream(new FileInputStream(imageFileLow), null, options);
                 } else
                     return;
 
@@ -785,16 +797,20 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     private void startCreation() {
 
+
         requireWriteTempFilePermission();
 
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*"});
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        Intent intent2 = Intent.createChooser(intent, "Choose a file");
-        System.err.println(intent2);
-        startActivityForResult(intent2, ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER);
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*"});
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+
+            Intent intent2 = Intent.createChooser(intent, "Choose a file");
+            System.err.println(intent2);
+            startActivityForResult(intent2, ONCLICK_STARTACTIVITY_CODE_PHOTO_CHOOSER);
+
     }
 
     private void startCreationMovie() {
@@ -811,7 +827,10 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     public void fillGallery(Bitmap photo, InputStream fileInputStream) throws FileNotFoundException {
         if (photo == null) {
-            photo = BitmapFactory.decodeStream(fileInputStream);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            options.inPremultiplied = false;
+            photo = BitmapFactory.decodeStream(fileInputStream, null, options);
         }
         final Bitmap p2 = photo;
 
@@ -1100,13 +1119,16 @@ public class MyCameraActivity extends ActivitySuperClass {
         }
     }
 
-    private void requireWriteTempFilePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    private boolean requireWriteTempFilePermission() {
             requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES,
                     Manifest.permission.READ_EXTERNAL_STORAGE}, 2621621);
-        } else {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2621621);
-        }
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2621621);
+        if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED&&
+                 checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED)
+            return true;
+        else
+            return false;
     }
 
     public void fillFromStorageState(File data) {
@@ -1114,7 +1136,10 @@ public class MyCameraActivity extends ActivitySuperClass {
         try {
             choose_directoryData = new FileInputStream(data);
             Bitmap photo = null;
-            photo = BitmapFactory.decodeStream(choose_directoryData);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            options.inPremultiplied = false;
+            photo = BitmapFactory.decodeStream(choose_directoryData, null, options);
             try {
                 System.err.println("Get file (bitmap) : " + photo);
 

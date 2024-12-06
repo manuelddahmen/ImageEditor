@@ -17,7 +17,7 @@ if (hasProperty('buildScan')) {
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903071
+def code = 336903078
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
@@ -208,7 +208,7 @@ android {
         minSdk 29
         javaVersionEnum
         versionCode code
-        versionName "9.3-9"
+        versionName "9.3-11-beta"
         signingConfig signingConfigs.release
     }
 
@@ -233,7 +233,7 @@ dependencies {
     implementation(project(":partialandroid"))
     implementation "one.empty3.libs:commons-mp:0.0.6"
     //implementation fileTree(dir: '../../empty3-library-mp/build/libs', include: ['*.jar'])
-    implementation("one.empty3:empty3-library-mp:2024.11.30-2")
+    implementation("one.empty3:empty3-library-mp:2024.12.3")
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
     implementation 'com.google.android.play:asset-delivery:2.2.2'
