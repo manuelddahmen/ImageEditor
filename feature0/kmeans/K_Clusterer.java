@@ -1,28 +1,26 @@
 /*
- * Copyright (c) 2024.
  *
- *
- *  Copyright 2023 Manuel Daniel Dahmen
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  * Copyright (c) 2024. Manuel Daniel Dahmen
+ *  *
+ *  *
+ *  *    Copyright 2024 Manuel Daniel Dahmen
+ *  *
+ *  *    Licensed under the Apache License, Version 2.0 (the "License");
+ *  *    you may not use this file except in compliance with the License.
+ *  *    You may obtain a copy of the License at
+ *  *
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  *    Unless required by applicable law or agreed to in writing, software
+ *  *    distributed under the License is distributed on an "AS IS" BASIS,
+ *  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  *    See the License for the specific language governing permissions and
+ *  *    limitations under the License.
  *
  *
  */
 
-<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
-package one.empty3.feature.kmeans;
-========
 package one.empty3.androidFeature.kmeans;
->>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 /*
  * Programmed by Shephalika Shekhar
  * Class for Kmeans Clustering implemetation
@@ -35,29 +33,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import java.util.Map;
 import java.util.Objects;
 
-import one.empty3.ImageIO;
-<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
+
 import matrix.PixM;
-========
-import matrix.PixM;
->>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
 import one.empty3.library.core.lighting.Colors;
+import one.empty3.libs.Color;
+import one.empty3.libs.Image;
 
 public class K_Clusterer /*extends ReadDataset*/ {
-    public List<double[]> features;
-    public final int numberOfFeatures = 5;
-    private static final int K = 20;
-    protected Map<double[], Integer> clustersPrint;
-    protected Map<double[], Integer> clusters;
-    public Map<Integer, double[]> centroids;
-    private boolean random = true;
 
-    public K_Clusterer() {
-    }
+    public List<double[]> features = new ArrayList<>();
+    public final int numberOfFeatures = 5;
+    private boolean random;
 
     public List<double[]> getFeatures() {
         return features;
@@ -65,29 +60,25 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     public void read(File s) throws NumberFormatException, IOException {
 
+        File file = s;
+
         try {
-            BufferedReader readFile = new BufferedReader(new FileReader(s));
-            int j = 0;
+            BufferedReader readFile = new BufferedReader(new FileReader(file));
             String line;
             while ((line = readFile.readLine()) != null) {
 
                 String[] split = line.split(" ");
                 double[] feature = new double[5];
-                int i;
-
-                assert split.length == 5;
+                int i = 0;
 
                 for (i = 0; i < split.length; i++)
                     feature[i] = Double.parseDouble(split[i]);
 
                 features.add(feature);
 
-                j++;
             }
             readFile.close();
 
-
-            System.out.println("MakeDataset csv out size: " + j + " " + features.size());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -96,9 +87,24 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
 
     void display() {
-        for (double[] db : features) {
-            System.out.println(db[0] + " " + db[1] + " " + db[2] + " " + db[3] + " " + db[4]);
+        Iterator<double[]> itr = features.iterator();
+        while (itr.hasNext()) {
+            double db[] = itr.next();
+            for (int i = 0; i < db.length; i++) {
+                System.out.print(db[i] + " ");
+            }
+
         }
+
+    }
+
+    private static final int K = 3;
+    static int k = 3;
+    protected Map<double[], Integer> clustersPrint;
+    protected Map<double[], Integer> clusters;
+    public Map<Integer, double[]> centroids;
+
+    public K_Clusterer() {
     }
 
 
@@ -106,23 +112,24 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void process(File in, File inCsv, File out, int res) throws IOException {
         features = new ArrayList<>();
 
-        PixM pix;
+        matrix.PixM pix;
         try {
-            pix = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
-            PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
-
-            System.out.println("size out : " + pix2.getColumns() + ", " + pix2.getLines());
+            if (res > 0)
+                pix = PixM.getPixM(Objects.requireNonNull(Image.loadFile(in)), res);
+            else
+                pix = new PixM(Objects.requireNonNull(Image.loadFile(in)));
+            matrix.PixM pix2 = new PixM(
+                    pix.getColumns(),
+                    pix.getLines()
+            );
 
             String fileCsv = inCsv.getAbsolutePath();
             features.clear();
             read(inCsv); //load data
 
 
-            //display();
-
-
             //ReadDataset r1 = new ReadDataset();
-            //System.out.println("Enter the filename with path");
+            //Logger.getAnonymousLogger().log(Level.INFO, "Enter the filename with path");
             //r1.read(inCsv); //load data
             int ex = 1;
             clusters = new HashMap<>();
@@ -140,10 +147,8 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 double[] x1 = new double[numberOfFeatures];
                 int r = 0;
                 for (int i = 0; i < k; i++) {
-                    int r1 = (int) (Math.random() * features.size());
-                    r1 = (r1 >= features.size() ? features.size() - 1 : r1);
 
-                    x1 = features.get(r1);
+                    x1 = features.get(r++);
                     centroids.put(i, x1);
 
                 }
@@ -156,7 +161,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
                     for (int j = 0; j < k; j++) {
                         List<double[]> list = new ArrayList<>();
                         for (double[] key : clusters.keySet()) {
-                            if (Objects.equals(clusters.get(key), j)) {
+                            if (clusters.get(key) == j) {
                                 list.add(key);
                             }
                         }
@@ -180,63 +185,59 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 for (int i = 0; i < k; i++) {
                     double sse = 0;
                     for (double[] key : clusters.keySet()) {
-                        if (Objects.equals(clusters.get(key), i)) {
+                        if (clusters.get(key) == i) {
                             sse += Math.pow(Distance.eucledianDistance(key, centroids.get(i)), 2);
                         }
                     }
                     wcss += sse;
                 }
                 String dis = "";
-                dis = "Euclidean";
-                ex++;
-            } while (ex < 1);
+                if (distance == 1)
+                    dis = "Euclidean";
+                else
+                    dis = "Manhattan";
+                ex = 0;
+            } while (ex == 1);
 
-            android.graphics.Color[] colors = new android.graphics.Color[K];
-            for (int i = 0; i < K; i++)
-                colors[i] = Colors.random();
             clustersPrint = clusters;
 
-
-            double[][] realValues = new double[K][6];
-
-
-            centroids.forEach((i, doubles) -> {
-                clustersPrint.forEach((d1, i2) -> {
-
-                    for (int j = 2; j < 5; j++) {
-                        pix.setCompNo(j - 2);
-                        realValues[i2][j] += pix.get((int) (float) (d1[0]), (int) (float) (d1[1]));
+            Color[] colors = new Color[k];
+            if (random) {
+                for (int i = 0; i < k; i++)
+                    colors[i] = Colors.random();
+            } else {
+                int[] count = new int[k];
+                double[][] sums = new double[k][numberOfFeatures];
+                centroids.forEach((integer1, db1) -> {
+                    if(clusters!=null && !clusters.isEmpty()) {
+                        clustersPrint.forEach((doubles, integer2) -> {
+                            if (Objects.equals(integer1, integer2)) {
+                                for (int i1 = 2; i1 < numberOfFeatures; i1++) {
+                                    sums[integer2][i1] += doubles[i1];
+                                    count[integer2]++;
+                                }
+                            }
+                        });
+                        for (int i1 = 2; i1 < numberOfFeatures; i1++) {
+                            sums[integer1][i1] = sums[integer1][i1] / count[i1];
+                            colors[integer1] = Color.newCol(sums[integer1][i1], sums[integer1][i1], sums[integer1][i1]);
+                        }
                     }
-                    realValues[i2][5]++;
                 });
-            });
-
-
-            for (int i2 = 0; i2 < K; i2++) {
-                for (int j = 2; j < 5; j++) {
-                    realValues[i2][j] /= realValues[i2][5];
-                }
             }
-            centroids.forEach((i, doubles) -> {
-                clustersPrint.forEach((d1, i2) -> {
-                    if (random) {
-                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                                colors[i2].red(), colors[i2].green(), colors[i2].blue());
-                    } else {
-                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                                realValues[i2][2], realValues[i2][3], realValues[i2][4]);
-                    }
-                });
-            });
+            clustersPrint = clusters;
 
-<<<<<<<< HEAD:feature0/kmeans/K_Clusterer.java
-            one.empty3.ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out);//.getImage().getBitmap()
-========
-            ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getBitmap(), "jpg", out);//.getImage().getBitmap()
->>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/kmeans/K_Clusterer.java
+            centroids.forEach((integer1, db1) ->
+                    clustersPrint.forEach((doubles, integer2) -> {
+                        pix2.setValues((int) (float) (doubles[0]), (int) (float) (doubles[1]),
+                                colors[integer2].getRed() / 255f, colors[integer2].getGreen() / 255f,
+                                colors[integer2].getBlue() / 255f);
+
+                    }));
+
+            pix2.normalize(0.0, 1.0).getImage().saveToFile(out.getAbsolutePath());
 
         } catch (Exception ex1) {
-            System.err.println(ex1.getMessage());
             ex1.printStackTrace();
         }
     }

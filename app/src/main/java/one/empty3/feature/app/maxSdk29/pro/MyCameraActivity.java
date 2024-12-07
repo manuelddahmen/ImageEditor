@@ -176,10 +176,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                 if (currentFile.getCurrentFile() != null) {
                     imageView = findViewById(R.id.currentImageView);
                     Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
+
                     if (currentPixM != null) {
                         intent1.putExtra("zoom", currentPixM.getBitmap());
-                    passParameters(intent1);
                     }
+                    passParameters(intent1);
+
                 }
             }
         });

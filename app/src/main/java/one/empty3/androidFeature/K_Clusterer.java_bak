@@ -23,7 +23,7 @@ package one.empty3.androidFeature;
  * Programmed by Shephalika Shekhar
  * Class for Kmeans Clustering implemetation
  */
-
+/*
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +39,7 @@ import one.empty3.ImageIO;
 import matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 
-public class K_Clusterer /*extends ReadDataset*/ {
+public class K_Clusterer /*extends ReadDataset {
     public List<double[]> features;
     public final int numberOfFeatures = 5;
     private static final int K = 20;
@@ -277,3 +277,4 @@ public class K_Clusterer /*extends ReadDataset*/ {
         this.random = b;
     }
 }
+*/
