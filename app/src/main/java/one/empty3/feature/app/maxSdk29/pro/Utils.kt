@@ -770,11 +770,17 @@ class Utils {
                 val photo =
                     BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile), null, options)
                 System.err.println("Get file (bitmap) : $photo")
-                activity.currentFile.add(
-                    DataApp(
-                        this.writePhoto(activity, Image(photo), "create-unique" + UUID.randomUUID())
+                if(photo!=null) {
+                    activity.currentFile.add(
+                        DataApp(
+                            this.writePhoto(
+                                activity,
+                                Image(photo),
+                                "create-unique" + UUID.randomUUID()
+                            )
+                        )
                     )
-                )
+                }
                 return activity.currentFile.currentFile
             }
         } catch (e: FileNotFoundException) {

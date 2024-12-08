@@ -1,13 +1,22 @@
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.feature.app.maxSdk29.pro.test;
 
 import one.empty3.Main2022;
 import one.empty3.io.ProcessFile;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.Objects;
 import java.util.function.BiConsumer;
-
+import one.empty3.Main2022;
+import one.empty3.androidFeature.IdentNullProcess;
+import matrix.PixM;
+import one.empty3.io.ProcessFile;
+import one.empty3.library.Lumiere;
+import one.empty3.library.Point3D;
+import one.empty3.libs.Color;
+import one.empty3.libs.Image;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -33,13 +42,13 @@ public class ExampleUnitTest {
         try {
             processFile.setMaxRes(1200);
             processFile.shouldOverwrite = true;
-            if (processFile.isImage(in)) {
+            //if (ProcessFile.isImage(in)) {
                 Assert.assertTrue(processFile.process(in, out));
                 countTestsProcessFiles++;
-            } else {
+            /*} else {
                 System.err.println("ProcessFile returns false\nor in.isImage==false\nor in not exist\nor in is not a file\n" + processFile.getClass());
                 nonApplicable++;
-            }
+            }*/
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             System.err.println("ProcessFile throws exception\n" + processFile.getClass());

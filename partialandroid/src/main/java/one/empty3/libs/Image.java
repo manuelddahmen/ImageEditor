@@ -18,13 +18,13 @@ import java.nio.Buffer;
 public class Image extends BitmapDrawable implements IImageMp {
     private Bitmap image;
 
-    public Image(Bitmap image) {
+    public Image(@NotNull Bitmap image) {
         if (image != null) {
             setImage(image);
         }
     }
 
-    private void setImage(Bitmap image) {
+    private void setImage(@NotNull Bitmap image) {
         this.image = image;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);

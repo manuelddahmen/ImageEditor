@@ -18,7 +18,7 @@
  *
  */
 
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.feature.app.maxSdk29.pro.test;
 
 import static androidx.appcompat.content.res.AppCompatResources.getDrawable;
 
@@ -51,6 +51,8 @@ import java.util.UUID;
 import one.empty3.Polygon1;
 import one.empty3.androidFeature.GoogleFaceDetection;
 import matrix.PixM;
+import one.empty3.feature.app.maxSdk29.pro.FaceOverlayView;
+import one.empty3.feature.app.maxSdk29.pro.R;
 import one.empty3.library.Point3D;
 import one.empty3.libs.Image;
 

@@ -1,10 +1,9 @@
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.feature.app.maxSdk29.pro.test;
 
 import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.GrantPermissionRule;
 
+import com.google.firebase.BuildConfig;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +42,11 @@ public class ExampleUnitTest2 {
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
-    String emulatorPhotosDirPath = "/storage/170E-321D/Pictures/m";
+    final String emulatorPhotosDirPath = "/storage/170E-321D/Pictures/";
+
+    @Before
+    public void perms() {
+    }
 
     @Test
     public void testBitmapPixMColors() {
@@ -56,19 +62,10 @@ public class ExampleUnitTest2 {
             }
         }
         PixM pixM = new PixM(bitmap);
-        try {
-            File outputimage = new File(emulatorPhotosDirPath + "/../testBitmapPixMColorRed100x100.jpg");
-            if (outputimage.exists())
-                outputimage.delete();
-            outputimage = new File(outputimage.getAbsolutePath());
-            FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-            pixM.getImage().saveFile(outputimage);
-            fileOutputStream.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        File outputimage = new File(emulatorPhotosDirPath + "testBitmapPixMColorRed100x100.jpg");
+        if (outputimage.exists())
+            outputimage.delete();
+        pixM.getImage().saveFile(outputimage);
     }
 
     @Test
@@ -84,19 +81,11 @@ public class ExampleUnitTest2 {
                 bitmap.setPixel(i, j, color.getRGB());
             }
         }
-        try {
-            File outputimage = new File(emulatorPhotosDirPath + "/../testBitmapColorRed100x100.jpg");
-            if (outputimage.exists())
-                outputimage.delete();
-            outputimage = new File(outputimage.getAbsolutePath());
-            FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            fileOutputStream.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        File outputimage = new File(emulatorPhotosDirPath + "testBitmapColorRed100x100.jpg");
+        outputimage = new File(outputimage.getAbsolutePath());
+        if (outputimage.exists())
+            outputimage.delete();
+        new Image(bitmap).saveFile(outputimage);
     }
 
     @Test
@@ -112,10 +101,12 @@ public class ExampleUnitTest2 {
                 pixM.set(pixM.index(i, j), color.getRGB());
             }
         }
-        File outputimage = new File(emulatorPhotosDirPath + "/../testPixMColorRed1000x1000.jpg");
+        File outputimage = new File(emulatorPhotosDirPath + "testPixMColorRed1000x1000.jpg");
         if (outputimage.exists())
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
+        if (outputimage.exists())
+            outputimage.delete();
         //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
         pixM.getImage().saveFile(outputimage);
         //fileOutputStream.close();
@@ -134,7 +125,7 @@ public class ExampleUnitTest2 {
                 pixM.set(pixM.index(i, j), color.getRGB());
             }
         }
-        File outputimage = new File(emulatorPhotosDirPath + "/../testPixMColorsAndroidColorValueOf1.jpg");
+        File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidColorValueOf1.jpg");
         if (outputimage.exists())
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
@@ -158,10 +149,12 @@ public class ExampleUnitTest2 {
                 pixM.setValues(i, j, color.getRed() / 255d, color.getGreen() / 255d, color.getBlue() / 255d);
             }
         }
-        File outputimage = new File(emulatorPhotosDirPath + "/../testPixMColorsAndroidColorValueOf2.jpg");
+        File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidColorValueOf2.jpg");
         if (outputimage.exists())
             outputimage.delete();
         outputimage = new File(outputimage.getAbsolutePath());
+        if (outputimage.exists())
+            outputimage.delete();
         //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
         pixM.getImage().saveFile(outputimage);
         //fileOutputStream.close();
@@ -192,12 +185,14 @@ public class ExampleUnitTest2 {
                     pixM.setP(i, j, p);
                 }
             }
-            File outputimage = new File(emulatorPhotosDirPath + "/../testPixMColorsAndroidGetPsetP-"+colorsName[k]+".jpg");
+            File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidGetPsetP-"+colorsName[k]+".jpg");
             if (outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
             //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
             pixM.getImage().saveFile(outputimage);
+            if (outputimage.exists())
+                outputimage.delete();
             //fileOutputStream.close();
 
             Image image = Image.loadFile(outputimage);
@@ -217,6 +212,8 @@ public class ExampleUnitTest2 {
         try {
             processFile.setMaxRes(maxRes);
             ProcessFile.shouldOverwrite = true;
+            if (out.exists())
+                out.delete();
             if (processFile.process(in, out)) {
                 countTestsProcessFiles++;
             } else {
@@ -234,12 +231,13 @@ public class ExampleUnitTest2 {
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
-                    "android.permission.WRITE_EXTERNAL_STORAGE");
+                    "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.READ_MEDIA_IMAGES");
 
     @Test
     public void testAllTestInMain2022() {
         // Context of the app under test.
-        File ins = new File(emulatorPhotosDirPath);
+        File ins = new File(emulatorPhotosDirPath+"m");
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

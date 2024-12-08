@@ -1,12 +1,12 @@
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.feature.app.maxSdk29.pro.test;
 
 import android.graphics.Bitmap;
 
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 
+import one.empty3.feature.app.maxSdk29.pro.Utils;
 import one.empty3.libs.Color;
 import one.empty3.libs.Image;
 import one.empty3.ImageIO;

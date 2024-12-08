@@ -1,4 +1,4 @@
-package one.empty3.feature.app.maxSdk29.pro;
+package one.empty3.feature.app.maxSdk29.pro.test;
 
 
 import static androidx.test.espresso.action.ViewActions.click;
@@ -13,6 +13,8 @@ import androidx.test.rule.GrantPermissionRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import one.empty3.feature.app.maxSdk29.pro.MyCameraActivity;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
