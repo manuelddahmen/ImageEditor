@@ -20,6 +20,7 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import android.Manifest;
@@ -35,6 +36,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -162,6 +164,8 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        EdgeToEdge.enable(this);
 
         Intent intent = getIntent();
         String action = intent.getAction();
