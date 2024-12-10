@@ -801,14 +801,14 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
     }
 
     public void replaceColor(int oldColorFill, int newColorFill, double d) {
-        double[] doublesOld = Lumiere.getDoubles(oldColorFill);
-        double[] doublesNew = Lumiere.getDoubles(newColorFill);
+        double[] doublesOld = Lumiere.getDoubles(oldColorFill|0xff000000);
+        double[] doublesNew = Lumiere.getDoubles(newColorFill|0xff000000);
 
         Point3D p0 = new Point3D(doublesOld);
         for (int i = 0; i < getColumns(); i++) {
             for (int j = 0; j < getLines(); j++) {
                 if (getP(i, j).moins(p0).norme() < d) {
-                    setValues(i, j, doublesNew);
+                    setInt(index(i, j), newColorFill);
                 }
             }
         }

@@ -69,8 +69,7 @@ class FaceActivitySettings : ActivitySuperClass() {
         GoogleFaceDetection.getInstance(false, null)
     private lateinit var selectedSurfaces: ArrayList<Surface>
     private var currentSurface = 0
-    private var selectedColor: android.graphics.Color =
-        android.graphics.Color.valueOf(android.graphics.Color.BLUE)
+    private var selectedColor: Color = one.empty3.libs.Color.valueOf(android.graphics.Color.BLUE)
     private var selectedImage: Bitmap? = null
     private var selectedOption = SELECTED_OPTION_COLOR
 
@@ -276,6 +275,37 @@ class FaceActivitySettings : ActivitySuperClass() {
             }
 
         }
+
+        val applyColor = findViewById<Button>(R.id.applyColor)
+        applyColor.setOnClickListener {
+            try {
+                if (selectedSurfaceAllPicture != null && selectedImage != null
+                    && selectedSurfaceAllPicture!!.filledContours != null
+                    && selectedSurfaceAllPicture!!.contours != null
+                ) {
+                    val filledContours = selectedSurfaceAllPicture!!.filledContours
+                    val coloredImage : Bitmap = Bitmap.createBitmap(filledContours.columns, filledContours.lines, Bitmap.Config.ARGB_8888)
+                    for(i in 0 until filledContours.columns) {
+                        for(j in 0 until filledContours.lines) {
+                            coloredImage.setPixel(i, j, selectedColor.toArgb().or(0xff000000.toInt()))
+                        }
+                    }
+                    filledContours.paintIfNot(
+                        0, 0, filledContours.columns, filledContours.lines,
+                        coloredImage,
+                        selectedSurfaceAllPicture!!.colorContours,
+                        selectedSurfaceAllPicture!!.contours
+                    )
+                    drawSurface()
+                    drawSurfaces()
+
+                }
+            } catch (ex: RuntimeException) {
+                ex.printStackTrace()
+            }
+
+        }
+        /*
         val applyColor = findViewById<Button>(R.id.applyColor)
         applyColor.setOnClickListener {
 
@@ -304,7 +334,7 @@ class FaceActivitySettings : ActivitySuperClass() {
                 drawSurfaces()
             }
         }
-
+*/
 
         val fileChooserModel = findViewById<Button>(R.id.choose_model)
 
