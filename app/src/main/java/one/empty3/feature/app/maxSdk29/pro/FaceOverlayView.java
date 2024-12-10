@@ -312,7 +312,7 @@ public class FaceOverlayView extends ImageViewSelection {
 
             polygonContour.texture(new ColorTexture(inColor));
 
-            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, -1, 0.0, point0, scale.x);//ùCopy!
+            PixM pixM = polygonContour.fillPolygon2D(faceSurface, mCanvas, mCopy, 0, 0.0, point0, scale.x);//ùCopy!
             if (pixM != null && pixM.getLines() > 0 && pixM.getColumns() > 0) {
                 faceSurface.setContours(pixM);
                 faceSurface.setFilledContours(pixM);
@@ -329,7 +329,9 @@ public class FaceOverlayView extends ImageViewSelection {
             if (googleFaceDetection != null) {
                 for (GoogleFaceDetection.FaceData face : googleFaceDetection.getDataFaces()) {
                     for (GoogleFaceDetection.FaceData.Surface surface : face.getFaceSurfaces()) {
-                        surface.getPolygon1().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
+                        if(surface.getPolygon1()!=null) {
+                            surface.getPolygon1().fillPolygon2DFromData(surface, mCopy, surface.getColorTransparent());
+                        }
                     }
                 }
             }

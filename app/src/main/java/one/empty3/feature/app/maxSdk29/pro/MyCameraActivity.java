@@ -178,7 +178,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     Intent intent1 = new Intent(getApplicationContext(), ChooseEffectsActivity2.class);
 
                     if (currentPixM != null) {
-                        intent1.putExtra("zoom", currentPixM.getBitmap());
+                        intent1.putExtra("zoom", currentPixM.getBitmap().getBitmap());
                     }
                     passParameters(intent1);
 
@@ -215,7 +215,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                     int w = (int) Math.abs(clipboard.getDestination().right - clipboard.getDestination().left);
                     int h = (int) Math.abs(clipboard.getDestination().bottom - clipboard.getDestination().top);
                     dest.pasteSubImage(clipboard.getSource(), x, y, w, h);
-                    Bitmap bitmap = dest.getBitmap();
+                    Bitmap bitmap = dest.getBitmap().getBitmap();
                     currentFile.add(new DataApp(new Utils().writePhoto(this, new Image(bitmap), "copy_paste")));
                     new Utils().setImageView(imageView, bitmap);
                     paste.setBackgroundColor(Color.rgb(40, 255, 40));
@@ -336,7 +336,7 @@ public class MyCameraActivity extends ActivitySuperClass {
                 faceIntent.setClass(getApplicationContext(), FaceActivity.class);
 
                 if (currentPixM != null) {
-                    faceIntent.putExtra("zoom", currentPixM.getBitmap());
+                    faceIntent.putExtra("zoom", currentPixM.getBitmap().getBitmap());
                 }
 
                 passParameters(faceIntent);
@@ -619,7 +619,7 @@ public class MyCameraActivity extends ActivitySuperClass {
         } else if (drawable.getCurrent() instanceof BitmapDrawable) {
             if (isWorkingResolutionOriginal()) {
                 bitmapOriginal = ((BitmapDrawable) drawable.getCurrent()).getBitmap();
-                bitmap = PixM.getPixM(bitmapOriginal, getMaxRes()).getBitmap();
+                bitmap = PixM.getPixM(bitmapOriginal, getMaxRes()).getBitmap().getBitmap();
             }
         } else {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
@@ -627,10 +627,10 @@ public class MyCameraActivity extends ActivitySuperClass {
             } else {
                 // ???
                 if (isWorkingResolutionOriginal()) {
-                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap();
+                    bitmapOriginal = PixM.getPixM(bitmap, 0).getBitmap().getBitmap();
                 }
                 if (bitmap != null) {
-                    bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap();
+                    bitmap = bitmapOriginal = PixM.getPixM(bitmap, getMaxRes()).getBitmap().getBitmap();
                 }
             }
 

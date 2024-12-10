@@ -40,20 +40,20 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     protected int columns;
     protected int lines;
     protected int compNo;
-    public double[] x;
+    public int[] x;
 
     public MBitmap(int c, int l) {
         try {
-            x = new double[c * l * 3];
+            x = new int[c * l * 3];
         } catch (OutOfMemoryError err1) {
             Log.e(MBitmap.class.toString(), err1.getMessage(), err1);
             c = maxRes;
             l = (int) (1.0 * maxRes / c * l);
             try {
-                x = new double[l * c * 3];
+                x = new int[l * c * 3];
             } catch (OutOfMemoryError err) {
                 err.printStackTrace();
-                x = new double[100 * 100 * 3];
+                x = new int[100 * 100 * 3];
                 l = 100;
                 c = 100;
                 Log.e(MBitmap.class.toString(), err.getMessage(), err);
@@ -238,7 +238,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount && x != null) {
-            return ((x[index(column, line)]));
+            return (((x[index(column, line)]))>>((2-compNo)*8))|0xff000000;
         } else
             return r.next(); // OutOfBound?
     }
@@ -277,7 +277,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
 
     public void set(int column, int line, double d) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && x != null) {
-            x[index(column, line)] = d;
+            x[index(column, line)] = (int)( d*255);
         }
     }
 
@@ -480,4 +480,5 @@ public class MBitmap /*implements InterfaceMatrix*/ {
     public void setRegionCopy(PixM original, int iStart, int jStart, int iEnd, int jEnd,
                               M3 m3, int iPaste, int jPaste, int iiPaste, int ijPaste) {
     }
+
 }

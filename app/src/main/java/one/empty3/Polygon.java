@@ -2,47 +2,7 @@
  * Copyright (c) 2024.
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- *
- */
-
-/*
- * Copyright (c) 2024.
- *
- *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- *
- */
-
-/*
- * Copyright (c) 2024.
- *
- *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2023 Manuel Daniel Dahmen
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -98,6 +58,7 @@
  */
 package one.empty3;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -106,16 +67,13 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import one.empty3.androidFeature.GoogleFaceDetection;
 import matrix.PixM;
-import one.empty3.library.ClosedCurve;
+import one.empty3.androidFeature.GoogleFaceDetection;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
@@ -123,45 +81,39 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.library.Representable;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.TextureCol;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.SurfaceElem;
-import one.empty3.libs.Image;
 
 
-public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve, Parcelable {
+public class Polygon extends Polygon1 {
 
     /*__
      *
      */
     private StructureMatrix<Point3D> points = new StructureMatrix<>(1, Point3D.class);
 
-    public Polygon1() {
+    public Polygon() {
         super();
         declareProperties();
     }
 
-    public Polygon1(Color c) {
+    public Polygon(Color c) {
         this();
-        texture(new TextureCol(c.toArgb()));
+        texture(new ColorTexture(c.toArgb()));
     }
 
-    public Polygon1(ITexture c) {
-        this();
-        texture(c);
+
+    public Polygon(Point3D[] list, Color c) {
+        this(list, new ColorTexture(c.toArgb()));
     }
 
-    public Polygon1(Point3D[] list, Color c) {
-        this(list, new TextureCol(c.toArgb()));
-    }
-
-    public Polygon1(Point3D[] list, ITexture c) {
+    public Polygon(Point3D[] list, ITexture c) {
         this();
         this.texture = c;
         points.setAll(list);
     }
 
-    protected Polygon1(Parcel in) {
+    protected Polygon(Parcel in) {
         int size = in.readInt();
         double[] pointsListXyz = new double[size * 3];
         in.readDoubleArray(pointsListXyz);
@@ -174,15 +126,15 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         setPoints(point3Ds);
     }
 
-    public static final Creator<Polygon1> CREATOR = new Creator<Polygon1>() {
+    public static final Creator<Polygon> CREATOR = new Creator<Polygon>() {
         @Override
-        public Polygon1 createFromParcel(Parcel in) {
-            return new Polygon1(in);
+        public Polygon createFromParcel(Parcel in) {
+            return new Polygon(in);
         }
 
         @Override
-        public Polygon1[] newArray(int size) {
-            return new Polygon1[size];
+        public Polygon[] newArray(int size) {
+            return new Polygon[size];
         }
     };
 
@@ -228,7 +180,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Polygon1 polygone = (Polygon1) o;
+        Polygon polygone = (Polygon) o;
 
         return getPoints() != null ? getPoints().equals(polygone.getPoints()) : polygone.getPoints() == null;
 
@@ -305,7 +257,9 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public boolean leftToRightScanPixM(PixM pixM, int x, int y, boolean isDrawingOnImage) {
+    public boolean leftToRightScanPixM(@NonNull PixM pixM, int x, int y, boolean isDrawingOnImage) {
+        if(pixM==null)
+            return false;
         boolean foundLeft = false;
         boolean foundRight = false;
         if (x >= 0 && x < pixM.getColumns()) {
@@ -323,7 +277,8 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         return !(foundLeft && !foundRight) || (foundLeft && foundRight) && !(!foundLeft && !foundRight);
     }
 
-    public matrix.PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Image image, int transparent, double deep, PointF position, double scale) {
+    public PixM fillPolygon2D(GoogleFaceDetection.FaceData.Surface faceSurface, Canvas canvas, Bitmap bitmap, int transparent, double deep, PointF position, double scale) {
+        int TRANSPARENT = -1;
         boolean isDrawingOnImage = true;
         int pixels = 0;
 
@@ -332,7 +287,7 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
 
-        faceSurface.setPolygon1(this);
+        faceSurface.setPolygon1(this);//!!!???
 
         if (!isDrawingOnImage) {
             boundRect2d.setElem(getPosition(boundRect2d.getElem(0), scale, position), 0);
@@ -353,7 +308,8 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         PixM pixM = new PixM((int) (widthBox), (int) (heightBox));
 
         faceSurface.setContours(pixM);
-
+        if(faceSurface.getActualDrawing()==null)
+            faceSurface.setActualDrawing(pixM.copy());
         int count = 0;
 
         int[] currentColor = new int[(int) (heightBox + 1)];
@@ -380,13 +336,14 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
 
         //paint = new Paint();
 
-        double[] fillColorArrayPolygon1 = Lumiere.getDoubles(colorTemp);
+        double[] fillColorArrayPolygon = Lumiere.getDoubles(colorTemp);
         //paint.setColor(colorTemp);
         //paint.setAntiAlias(true);
         //paint.setStrokeWidth(2);
         int paintColor = colorTemp;
         System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
 
+        double[] color1 = new double[3];
         for (double i = left; i < right; i++) {
             for (double j = top; j < bottom; j++) {
                 int xMap = (int) (i - left);
@@ -418,11 +375,18 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                         //canvas.drawPoint((int) (double) positionOnPicture.get(0),
                         //        (int) (double) positionOnPicture.get(1), colorTemp);
                         //pixels++;
-                    } else if (isDrawingOnImage && i < image.getWidth() && i >= 0 && j < image.getHeight() && j >= 0) {
-                        image.setRgb((int) i, (int) j, colorTemp);
-                        pixM.setValues(xMap, yMap, fillColorArrayPolygon1);
+                    } else if (isDrawingOnImage && i < bitmap.getWidth() && i >= 0 && j < bitmap.getHeight() && j >= 0) {
+                        if(faceSurface.isDrawOriginalImageContour()) {
+                            int x2 = (int) (1.0 * (i-left) * faceSurface.actualDrawing.getColumns()/(right-left));
+                            int y2 = (int) (1.0 * (j-top)   * faceSurface.actualDrawing.getLines()/(bottom - top));
+                            color1 = faceSurface.getActualDrawing().getValues(x2, y2);
+                            bitmap.setPixel((int) i, (int) j, Lumiere.getInt(color1));
+                            pixM.setValues(xMap, yMap, color1);
+                        } else {
+                            bitmap.setPixel((int) i, (int) j, colorTemp);
+                            pixM.setValues(xMap, yMap, fillColorArrayPolygon);
+                        }
                         pixels++;
-
                     }
                 }
 
@@ -453,11 +417,15 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         parcel.writeDoubleArray(pointsListXyz);
     }
 
-    public void fillPolygon2DFromData(@NotNull GoogleFaceDetection.FaceData.Surface surface, one.empty3.libs.Image mCopy, int black) {
+    public void fillPolygon2DFromData(@NonNull GoogleFaceDetection.FaceData.Surface surface,
+                                      @NonNull Bitmap mCopy, int black, boolean drawOriginalImageContour) {
         int pixels = 0;
 
 
         StructureMatrix<Point3D> boundRect2d = this.getBoundRect2d();
+
+        double leftImg = boundRect2d.getElem(0).get(0);
+        double rightImg = boundRect2d.getElem(1).get(0);
 
         double left = (boundRect2d.getElem(0).get(0) - 1);
         double top = (boundRect2d.getElem(0).get(1) - 1);
@@ -468,16 +436,16 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
 
         if (!(widthBox > 0 && heightBox > 0))
             return;
+        PixM pixMilled, pixMori;
 
-        PixM pixM = surface.getFilledContours();
-
-        if(pixM!=null) {
+        pixMori = surface.getActualDrawing();
+        pixMilled = surface.getFilledContours();
 
         int count = 0;
 
-        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")s");
+        System.out.println("filLPolygon2D: (" + (right - left) + ", " + (bottom - top) + ")");
 
-        one.empty3.libs.Color transparent = new one.empty3.libs.Color(surface.getColorTransparent());
+        int transparent = surface.getColorTransparent();
 
 
         final double[] floats = new double[3];
@@ -486,34 +454,47 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
                 int xMap = (int) (i - left);
                 int yMap = (int) (j - top);
 
-                Point3D rgb = pixM.getRgb(xMap, yMap);
-                int color = Color.valueOf((float)(double)rgb.get(0), (float)(double)rgb.get(1), (float)(double)rgb.get(2)).toArgb();
-                int colorToDraw = color;
-                if (!(transparent.getRGB()== color)|| ((colorToDraw&0xff000000)>0))
-                    mCopy.setRgb((int) i, (int) j, colorToDraw);
-                pixels++;
+
+                if (pixMilled != null && mCopy!=null) {
+                    double[] color = pixMilled.getValues(xMap, yMap);
+                    int colorToDraw = Lumiere.getInt(color);
+                    if (transparent != colorToDraw
+                            && i >= 0 && i < mCopy.getWidth() && j >= 0 && j < mCopy.getHeight()) {
+                        if (drawOriginalImageContour) {
+                            int a = (int) (xMap / (right - left) * pixMori.getColumns());
+                            int b = (int) (yMap / (bottom - top) * pixMori.getLines());
+                            if (a >= 0 && b >= 0 && pixMori!=null&&a < pixMori.getColumns() && b < pixMori.getLines()) {
+                                int anInt1 = Lumiere.getInt(pixMori.getValues(a, b));
+                                mCopy.setPixel((int) i, (int) j, anInt1);
+                            }
+                        } else {
+                            mCopy.setPixel((int) i, (int) j, colorToDraw);
+                        }
+                    }
+                    pixels++;
 
 
-                count++;
+                    count++;
+                }
             }
         }
         System.out.println("Points count : " + count + " | Points drawn : " + pixels + "fillPolygon");
 
-        }
         return;
     }
 
+    @Override
     public Serialisable decode(DataInputStream in) {
-        Polygon1 p = new Polygon1();
+        Polygon p = new Polygon();
         try {
             int points = in.readInt();
             for (int i = 0; i < points; i++) {
-                Point3D p0 = new Point3D();
-                for (int j = 0; j < 3; j++) {
+                Point3D p1 = new Point3D();
+                for (int j = 0; j <3; j++) {
 
-                    p0.set(j, in.readDouble());
+                    p1.set(j ,in.readDouble());
                 }
-                p.getPoints().setElem(p0, i);
+                p.getPoints().setElem(p1, i);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -521,11 +502,12 @@ public class Polygon1 extends Representable implements SurfaceElem, ClosedCurve,
         return (Serialisable) p;
     }
 
+    @Override
     public int encode(DataOutputStream out) {
         try {
             out.writeInt(getPoints().data1d.size());
             for (int i = 0; i < getPoints().data1d.size(); i++) {
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j <3; j++) {
                     out.writeDouble(getPoints().getElem(i).get(j));
                 }
             }

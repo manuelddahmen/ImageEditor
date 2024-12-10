@@ -86,6 +86,8 @@ public class Image extends BitmapDrawable implements IImageMp {
     }
 
     public void setRgb(int x, int y, int rgb) {
+        if(x < 0 || y < 0 || x >= getWidth() || y >= getHeight())
+            return;
         image.setPixel(x, y, rgb);
     }
 

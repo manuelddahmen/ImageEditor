@@ -195,7 +195,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
         progress = 100;
 
             if(current!=null) {
-                Bitmap bitmap = current.normalize(0, 1).getBitmap();
+                Bitmap bitmap = current.normalize(0, 1).getBitmap().getBitmap();
                 File graphics_math = new Utils().writePhoto(this, new Image(bitmap), "graphics_math");
                 this.currentFile.add(new DataApp(graphics_math));
                 new Utils().setImageView(image, bitmap);

@@ -83,7 +83,7 @@ public class Color extends android.graphics.Color implements IColorMp {
         int red = (int) (colorObject.red()*255f);
         int green = (int) (colorObject.green()*255);
         int blue = (int) (colorObject.blue()*255);
-        int color = ((red << 16) | (green << 8));;
+        int color = ((red << 16) | (green << 8) | blue)|0xFF000000;;
         return color;
     }
     public int getRed() {

@@ -98,7 +98,7 @@ public class ExampleUnitTest2 {
         int height = pixM.getLines();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                pixM.set(pixM.index(i, j), color.getRGB());
+                pixM.setInt(pixM.index(i, j), color.getRGB());
             }
         }
         File outputimage = new File(emulatorPhotosDirPath + "testPixMColorRed1000x1000.jpg");
@@ -122,7 +122,7 @@ public class ExampleUnitTest2 {
         int height = pixM.getLines();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                pixM.set(pixM.index(i, j), color.getRGB());
+                pixM.setInt(pixM.index(i, j), color.getRGB());
             }
         }
         File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidColorValueOf1.jpg");
@@ -191,12 +191,6 @@ public class ExampleUnitTest2 {
             outputimage = new File(outputimage.getAbsolutePath());
             //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
             pixM.getImage().saveFile(outputimage);
-            if (outputimage.exists())
-                outputimage.delete();
-            //fileOutputStream.close();
-
-            Image image = Image.loadFile(outputimage);
-            image.saveFile(new File(outputimage.getAbsolutePath()+"Rewrite.jpg"));
         }
     }
 

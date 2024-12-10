@@ -263,11 +263,10 @@ class FaceActivitySettings : ActivitySuperClass() {
                     val filledContours = selectedSurfaceAllPicture!!.filledContours
                     filledContours.paintIfNot(
                         0, 0, filledContours.columns, filledContours.lines,
-                        selectedImage!!, 0xFF000000.toInt()
+                        selectedImage!!,
+                        selectedSurfaceAllPicture!!.colorContours,
+                        selectedSurfaceAllPicture!!.contours
                     )
- //                       selectedSurfaceAllPicture!!.colorContours,
- //                       selectedSurfaceAllPicture!!.contours.bitmap
-
                     drawSurface()
                     drawSurfaces()
 
@@ -658,7 +657,7 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceObject != null) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceObject
-                        .filledContours.bitmap.copy(
+                        .filledContours.bitmap.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
@@ -675,14 +674,14 @@ class FaceActivitySettings : ActivitySuperClass() {
             if (selectedSurfaceAllPicture!!.isDrawOriginalImageContour) {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(
+                        .filledContours.bitmap.bitmap.copy(
                             Bitmap.Config.ARGB_8888, true
                         )
                 )
             } else {
                 polygonView.setImageBitmap3(
                     selectedSurfaceAllPicture!!
-                        .filledContours.bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                        .filledContours.bitmap.bitmap.copy(Bitmap.Config.ARGB_8888, true)
                 )
             }
         }
