@@ -10,6 +10,7 @@ import one.empty3.Main2022
 import one.empty3.feature.app.maxSdk29.pro.Constants
 import matrix.MBitmap.maxRes
 import one.empty3.androidFeature.Mix
+import one.empty3.feature.app.maxSdk29.pro.AppData
 import one.empty3.io.ProcessFile
 import java.io.File
 import java.util.UUID
@@ -174,6 +175,7 @@ class EffectWorker
 
                                                 currentOutputFile = currentOutputFile1
                                                 totalOutput = currentOutputFile
+
                                             } catch (ex: RuntimeException) {
                                                 ex.printStackTrace()
                                             }
@@ -222,6 +224,7 @@ class EffectWorker
 
                         currentOutputFile = totalOutput
                         currentOutputFileFinal = totalOutput
+
                     }
                 }
             }
@@ -239,10 +242,9 @@ class EffectWorker
             val outputData = Data.Builder()
                 .putString(Constants.KEY_IMAGE_URI, currentOutputFileFinal.toString())
                 .build()
-            Main2022.setOutputFile(currentOutputFileFinal!!)
+            Main2022.setOutputFile(currentOutputFileFinal)
             return Result.success(outputData)
         } else {
-            Main2022.setOutputFile(null)
             return Result.failure()
         }
     }

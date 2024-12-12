@@ -20,8 +20,6 @@
 
 package one.empty3.androidFeature.histograms;
 
-import androidx.annotation.NonNull;
-
 import java.io.File;
 
 import one.empty3.io.ProcessFile;
@@ -161,8 +159,7 @@ public class Hist4Contour3 extends ProcessFile {
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-            outP.normalize(0, 1, 0, 1).getBitmap().saveFile(out);
-            //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+            outP.normalize(0, 1).getBitmap().saveFile(out);
             return true;
 
         } catch (Exception ignored) {

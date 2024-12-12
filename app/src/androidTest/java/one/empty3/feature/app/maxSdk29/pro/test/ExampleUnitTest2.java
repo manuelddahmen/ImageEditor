@@ -42,7 +42,7 @@ public class ExampleUnitTest2 {
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
-    final String emulatorPhotosDirPath = "/storage/170E-321D/Pictures/";
+    final String emulatorPhotosDirPath = "/storage/16FA-111D/Pictures/";
 
     @Before
     public void perms() {
@@ -203,6 +203,11 @@ public class ExampleUnitTest2 {
         System.out.println("ProcessFile : " + processFile.getClass());
         System.out.println("in : " + in.getAbsolutePath());
         System.out.println("out: " + out.getAbsolutePath());
+        try {
+            processFile = processFile.getClass().newInstance();
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
         try {
             processFile.setMaxRes(maxRes);
             ProcessFile.shouldOverwrite = true;
