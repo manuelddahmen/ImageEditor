@@ -45,9 +45,9 @@ class FaceActivity : ActivitySuperClass() {
 
         selectedPoint = Point()
         try {
-            if (intent.extras?.getDouble("selectedPoint.x") != null && intent.extras?.getDouble("selectedPoint.y") != null) {
-                selectedPoint.x = (intent.extras?.getDouble("selectedPoint.x")!!.toInt())
-                selectedPoint.y = (intent.extras?.getDouble("selectedPoint.y")!!.toInt())
+            if (intent.extras?.getInt("selectedPoint.x") != null && intent.extras?.getInt("selectedPoint.y") != null) {
+                selectedPoint.x = intent.extras?.getInt("selectedPoint.x")!!
+                selectedPoint.y = intent.extras?.getInt("selectedPoint.y")!!
             }
         } catch (ex : RuntimeException) {
             ex.printStackTrace()

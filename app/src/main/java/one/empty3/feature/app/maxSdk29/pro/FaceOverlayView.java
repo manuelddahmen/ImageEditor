@@ -31,6 +31,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import one.empty3.Polygon1;
 import one.empty3.androidFeature.GoogleFaceDetection;
@@ -336,6 +338,7 @@ public class FaceOverlayView extends ImageViewSelection {
                 }
             }
         }
+        assert mCopy != null;
         mCopy = new Image(mCopy.getImage().copy(Bitmap.Config.ARGB_8888, true));
 
     }
@@ -535,8 +538,14 @@ public class FaceOverlayView extends ImageViewSelection {
 
                 int[] ints = new int[w * h];
 
-                googleFaceDetection.getBitmap().getPixels(ints, 0, w - 1, x, y, w, h);
-
+                int stride = w-1;
+                if(Math.abs(stride)>=w) {
+                    googleFaceDetection.getBitmap().getPixels(ints, 0, stride, x, y, w, h);
+                } else {
+                    stride = w;
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "Error in face detection : googleFaceDetection.getBitmap().getPixels(ints, 0, stride, x, y, w, h);");
+                    googleFaceDetection.getBitmap().getPixels(ints, 0, stride, x, y, w, h);
+                }
 
                 PointF a = coordCanvas(new PointF((int) (rect.left), (int) (rect.top)));
                 PointF b = coordCanvas(new PointF((int) (rect.right), (int) (rect.bottom)));

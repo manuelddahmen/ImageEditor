@@ -60,12 +60,12 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
 
     public PixM(Bitmap image) {
         this(image.getWidth(), image.getHeight());
-        double [] colorComponents = new double[4];
+        double[] colorComponents = new double[4];
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
                 int pix = image.getPixel(i, j);
-                x[index(i,j)] = pix;
+                x[index(i, j)] = pix;
             }
         }
     }
@@ -77,7 +77,7 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
                 int pix = image.getPixel(i, j);
-                x[index(i,j)] = pix;
+                x[index(i, j)] = pix;
             }
         }
     }
@@ -126,6 +126,9 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
     }
 
     public Point3D getRgb(int i, int j) {
+        if (i < 0 || i >= getColumns() || j < 0 || j >= getLines()) {
+            return Point3D.O0;
+        }
         setCompNo(0);
         double dr = get(i, j);
         setCompNo(1);
@@ -801,8 +804,8 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
     }
 
     public void replaceColor(int oldColorFill, int newColorFill, double d) {
-        double[] doublesOld = Lumiere.getDoubles(oldColorFill|0xff000000);
-        double[] doublesNew = Lumiere.getDoubles(newColorFill|0xff000000);
+        double[] doublesOld = Lumiere.getDoubles(oldColorFill | 0xff000000);
+        double[] doublesNew = Lumiere.getDoubles(newColorFill | 0xff000000);
 
         Point3D p0 = new Point3D(doublesOld);
         for (int i = 0; i < getColumns(); i++) {
@@ -854,24 +857,25 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
         tmpColor3 = Lumiere.getDoubles(colorPaint);
         for (int i = x; i < width; i++) {
             for (int j = y; j < height; j++) {
-                double percentXtarget = 1.0*(i-x)/width;
-                double percentYtarget = 1.0*(j-y)/height;
-                double percentXsource = 1.0*(i-x)/width;
-                double percentYsource = 1.0*(j-y)/height;
+                double percentXtarget = 1.0 * (i - x) / width;
+                double percentYtarget = 1.0 * (j - y) / height;
+                double percentXsource = 1.0 * (i - x) / width;
+                double percentYsource = 1.0 * (j - y) / height;
                 assert bitmapToDraw != null;
                 double xOrig = Math.min(percentXtarget * bitmapToDraw.getWidth(), bitmapToDraw.getWidth() - 1);
                 double yOrig = Math.min(percentYtarget * bitmapToDraw.getHeight(), bitmapToDraw.getHeight() - 1);
                 double xFilter = Math.min(percentXtarget * filledImage.getColumns(), filledImage.getColumns() - 1);
                 double yFilter = Math.min(percentYtarget * filledImage.getLines(), filledImage.getLines() - 1);
                 int pixel = bitmapToDraw.getPixel((int) xOrig, (int) yOrig);
-                double [] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
+                double[] pixelIfNot = filledImage.getValues((int) xFilter, (int) yFilter);
                 tmpColor2 = Lumiere.getDoubles(pixel);
-                if (!equalsArrays(pixelsFilterValue, pixelIfNot, 0.01) ) {
+                if (!equalsArrays(pixelsFilterValue, pixelIfNot, 0.01)) {
                     setValues(i, j, tmpColor2);
                 }
             }
         }
     }
+
     public PixM resize(int columnsResized, int linesResized) {
         PixM resized = new PixM(columnsResized, linesResized);
         Point3D incr = new Point3D(1.0, 1.0, 0.0);

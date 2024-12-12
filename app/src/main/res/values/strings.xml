@@ -66,7 +66,7 @@
     <string name="image_preview_before_and_after_rendering_effects">Image preview, before and after rendering effects
     </string>
     <string name="about">About</string>
-    <string name="maxRes_1200">400.0</string>
+    <string name="maxRes_1200" translatable="false">150.0</string>
     <string name="maximum_resolution">Maximum resolution</string>
     <string name="share">Share</string>
     <string name="beta">Beta?</string>

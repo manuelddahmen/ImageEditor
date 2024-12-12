@@ -43,7 +43,7 @@
     <string name="image_preview_before_and_after_rendering_effects">معاينة الصورة قبل وبعد عرض التأثيرات
      </string>
     <string name="about">حول</string>
-    <string name="maxRes_1200">400.0</string>
+    <string name="maxRes_1200">150.0</string>
     <string name="maximum_resolution">الحد الأقصى للدقة</string>
     <string name="share">مشاركة</string>
     <string name="beta">بيتا؟</string>

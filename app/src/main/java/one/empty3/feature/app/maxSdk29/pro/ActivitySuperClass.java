@@ -22,18 +22,24 @@ package one.empty3.feature.app.maxSdk29.pro;
 
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Path;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.DisplayCutout;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -166,7 +172,8 @@ public class ActivitySuperClass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         EdgeToEdge.enable(this);
-
+        //getWindow().getWindowManager().updateViewLayout(this.getWindow().getDecorView(),
+                //        new WindowManager.LayoutParams(LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER));
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();

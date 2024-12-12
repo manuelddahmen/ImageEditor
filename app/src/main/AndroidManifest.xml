@@ -44,6 +44,7 @@
             android:supportsRtl="true"
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu"
+        android:windowSoftInputMode="adjustResize"
             >
         <property
                 android:name="android.adservices.AD_SERVICES_CONFIG"
@@ -75,6 +76,7 @@
                 android:exported="false"
                 android:label="@string/title_activity_scrolling"
                 android:theme="@style/Theme.FeatureAppmain.NoActionBar"
+
                 />
         <activity
                 android:name=".MainActivityFragments"
