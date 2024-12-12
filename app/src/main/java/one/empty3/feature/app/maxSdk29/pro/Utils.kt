@@ -47,6 +47,7 @@ import androidx.preference.PreferenceManager
 //import com.linkedin.android.litr.analytics.TrackTransformationInfo
 //import com.linkedin.android.litr.filter.GlFilter
 import javaAnd.awt.Point
+import kotlinx.coroutines.Dispatchers
 import one.empty3.libs.Image
 import matrix.MBitmap
 import matrix.PixM
@@ -68,6 +69,7 @@ class Utils {
     val cordsValues: Array<String> = arrayOf("x", "y", "z", "r", "g", "b", "a", "t", "u", "v")
     private val INT_WRITE_STORAGE: Int = 8728932
     public var maxRes: Int = 500
+
     /***
      * Write copy of original file in data folder
      * @param bitmap
@@ -482,7 +484,8 @@ class Utils {
                 val options = BitmapFactory.Options()
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 options.inPremultiplied = true;
-                val bitmapDecodeStream: Bitmap? = BitmapFactory.decodeStream(inputStream, null, options)
+                val bitmapDecodeStream: Bitmap? =
+                    BitmapFactory.decodeStream(inputStream, null, options)
                 currentFile = getFilesFile("imported-")
                 bitmapDecodeStream?.compress(
                     Bitmap.CompressFormat.JPEG, 100, FileOutputStream(currentFile)
@@ -620,7 +623,8 @@ class Utils {
                         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                         options.inPremultiplied = true;
                         mBitmap =
-                            BitmapFactory.decodeStream(fileInputStream, null, options) ?: return false
+                            BitmapFactory.decodeStream(fileInputStream, null, options)
+                                ?: return false
                     } catch (ex: OutOfMemoryError) {
                         Toast.makeText(
                             activity.applicationContext,
@@ -768,9 +772,13 @@ class Utils {
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 options.inPremultiplied = true;
                 val photo =
-                    BitmapFactory.decodeStream(FileInputStream(activity.currentFile.currentFile), null, options)
+                    BitmapFactory.decodeStream(
+                        FileInputStream(activity.currentFile.currentFile),
+                        null,
+                        options
+                    )
                 System.err.println("Get file (bitmap) : $photo")
-                if(photo!=null) {
+                if (photo != null) {
                     activity.currentFile.add(
                         DataApp(
                             this.writePhoto(
@@ -896,5 +904,6 @@ class Utils {
     fun createCurrentUniqueFile(applicationContext: Context, filename: String): File? {
         return applicationContext.getExternalFilesDir(filename)
     }
+
 }
 

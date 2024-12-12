@@ -36,6 +36,8 @@ import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.UUID
 import java.util.function.Consumer
+import java.util.logging.Level
+import java.util.logging.Logger
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     Build.VERSION.SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -812,18 +814,20 @@ class FaceActivitySettings : ActivitySuperClass() {
 
             if (maxRes > 0) {
                 System.err.println("FileInputStream$chosenData")
-                photo0 = BitmapFactory.decodeStream(chosenData)
-                photo1 = PixM.getPixM(Image(photo0), maxRes.toDouble())
-                System.err.println("Get file (bitmap) : $photo0")
-            } else {
-                System.err.println("FileInputStream$chosenData")
                 photo = BitmapFactory.decodeStream(chosenData)
                 photo1 = PixM.getPixM(Image(photo), maxRes.toDouble())
                 System.err.println("Get file (bitmap) : $photo")
+            } else {
+                System.err.println("FileInputStream$chosenData")
+                photo = BitmapFactory.decodeStream(chosenData)
+                photo1 = PixM(Image(photo))
+                System.err.println("Get file (bitmap) : $photo")
             }
-            if (photo1 != null) {
-                photo = photo1.bitmap as Bitmap?
+            if(photo!=null) {
                 this.selectedImage = photo
+                Logger.getAnonymousLogger().log(Level.INFO, "Image loaded")
+            } else {
+                Logger.getAnonymousLogger().log(Level.INFO, "Image not loaded : null")
 
             }
         } catch (ex: RuntimeException) {
