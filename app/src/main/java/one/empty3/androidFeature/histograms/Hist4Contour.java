@@ -98,7 +98,7 @@ public class Hist4Contour extends ProcessFile {
         double intensity = 0.0;
         for (double i = c.x - c.r; i <= c.x + c.r; i++) {
             for (double j = c.y - c.r; j <= c.y + c.r; j++) {
-                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.x + c.r < m.getLines()
+                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.y + c.r < m.getLines()
                         && (i == c.x - c.r || j == c.y - c.r || i == c.x + c.r || j == c.y + c.r)) {
                     intensity += m.getIntensity((int) i, (int) j);
                     count++;

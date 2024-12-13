@@ -83,7 +83,7 @@ public class Histogram1 extends ProcessFile {
         for (double i = c.x - c.r; i <= c.x + c.r; i++) {
             for (double j = c.y - c.r; j <= c.y + c.r; j++) {
                 if (Math.sqrt((i - c.x) * (i - c.x) + (j - c.y) * (j - c.y)) <= c.r
-                        && c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.x + c.r < m.getLines()) {
+                        && c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.y + c.r < m.getLines()) {
                     intensity += m.getIntensity((int) i, (int) j);
                     count++;
                     Point3D p = m.getP((int) i, (int) j);
