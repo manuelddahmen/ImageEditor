@@ -621,7 +621,8 @@ public class GoogleFaceDetection
                         algebraicTree.setParameter("i", (double) i);
                         algebraicTree.setParameter("j", (double) j);
                         StructureMatrix<Double> eval = algebraicTree.eval();
-                        surface.actualDrawing.set(i, j, eval.getElem(0), eval.getElem(1), eval.getElem(2));
+                        assert surface.actualDrawing != null;
+                        surface.actualDrawing.setValues(i, j, eval.getElem(0), eval.getElem(1), eval.getElem(2));
                     }
                 }
             } catch (AlgebraicFormulaSyntaxException e) {

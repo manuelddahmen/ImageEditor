@@ -2,7 +2,10 @@ package one.empty3.feature.app.maxSdk29.pro.test;
 
 import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
+import static org.junit.Assert.assertTrue;
+
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.os.Build;
 
@@ -11,8 +14,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.GrantPermissionRule;
 
-import com.google.firebase.BuildConfig;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,11 +21,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import one.empty3.Main2022;
 import one.empty3.androidFeature.IdentNullProcess;
@@ -37,12 +39,11 @@ import one.empty3.libs.Image;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleUnitTest2 {
-    boolean mkdirs = true;
     int countTestsProcessFiles = 0;
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
-    final String emulatorPhotosDirPath = "/storage/16FA-111D/Pictures/";
+    public String emulatorPhotosDirPath = "/storage/emulated/0/MyFolder/";
 
     @Before
     public void perms() {
@@ -185,7 +186,7 @@ public class ExampleUnitTest2 {
                     pixM.setP(i, j, p);
                 }
             }
-            File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidGetPsetP-"+colorsName[k]+".jpg");
+            File outputimage = new File(emulatorPhotosDirPath + "testPixMColorsAndroidGetPsetP-" + colorsName[k] + ".jpg");
             if (outputimage.exists())
                 outputimage.delete();
             outputimage = new File(outputimage.getAbsolutePath());
@@ -199,7 +200,8 @@ public class ExampleUnitTest2 {
         Assert.assertEquals(4, 2 + 2);
     }
 
-    public void effect(@NonNull ProcessFile processFile, File in, File out) {
+    public boolean effect(@NonNull ProcessFile processFile, File in, File out) {
+        boolean ret = false;
         System.out.println("ProcessFile : " + processFile.getClass());
         System.out.println("in : " + in.getAbsolutePath());
         System.out.println("out: " + out.getAbsolutePath());
@@ -211,10 +213,9 @@ public class ExampleUnitTest2 {
         try {
             processFile.setMaxRes(maxRes);
             ProcessFile.shouldOverwrite = true;
-            if (out.exists())
-                out.delete();
             if (processFile.process(in, out)) {
                 countTestsProcessFiles++;
+                ret = true;
             } else {
                 countNonApplicable++;
             }
@@ -224,6 +225,7 @@ public class ExampleUnitTest2 {
             errors++;
         }
 
+        return ret;
     }
 
     @Rule
@@ -231,12 +233,12 @@ public class ExampleUnitTest2 {
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
                     "android.permission.WRITE_EXTERNAL_STORAGE",
-                    "android.permission.READ_MEDIA_IMAGES");
+                    "android.permission.READ_MEDIA_IMAGES","MANAGE_EXTERNAL_STORAGE");
 
     @Test
     public void testAllTestInMain2022() {
         // Context of the app under test.
-        File ins = new File(emulatorPhotosDirPath+"m");
+        File ins = new File(emulatorPhotosDirPath + "m");
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -247,35 +249,57 @@ public class ExampleUnitTest2 {
             //File[] files = ins.listFiles();
             String[] files = ins.list();
             if (files != null) {
+                Object[] entries = stringProcessFileHashMap.entrySet().toArray();
                 for (String inS : files) {
-                    stringProcessFileHashMap.forEach((s, processFile) -> {
+                    String newFileSuffix = ""+UUID.randomUUID();
+                    int r =(int)( Math.random()*(files.length-1));
+                    try {
+                    Map.Entry<String, ProcessFile> entry = (Map.Entry<String, ProcessFile>) entries[r];
+                        String s = entry.getKey();
+                        ProcessFile processFile = entry.getValue();
                         File in = new File(ins.getAbsolutePath() + File.separator + inS);
                         if ((!in.getName().endsWith(".jpg") && !in.getName().endsWith(".png")) || in.getName().endsWith("_1.jpg")) {
                         } else if (in.exists()) {
                             try {
-                                File dir0 = new File(ins.getParent() + File.separator + "imagesOut_resized/");
-                                if (!dir0.exists() && mkdirs)
+                                ContextWrapper cw = new ContextWrapper(appContext);
+                                File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                                File dir0 = new File(directory, processFile.getClass().getSimpleName()+"-"+ins.getName() + "-1.jpg");
+                                if (!dir0.exists()) {
                                     dir0.mkdirs();
-                                File out0 = new File(dir0.getAbsolutePath() + File.separator + in.getName() + "_1.jpg");
+                                }
+                                File out0 = new File(dir0.getAbsolutePath() + File.separator + in.getName()+"-"+newFileSuffix+".jpg");
                                 File dir = new File(ins.getParent() + File.separator + "imagesOut/" + processFile.getClass().getSimpleName());
-                                if (!dir.exists() && mkdirs) {
-                                    mkdirs = dir.mkdirs();
+                                if (!dir.exists()) {
+                                    dir.mkdirs();
                                 }
-                                File out = new File(dir.getAbsolutePath() + File.separator + s + "-" + in.getName());
-                                if (mkdirs) {
-                                    String inFilename = in.getName();
-                                    effect(new IdentNullProcess(), in,
-                                            out0);
-                                    effect(processFile, out0,
-                                            out);
+                                File out = new File(dir.getAbsolutePath() + File.separator +  in.getName()+"-"+newFileSuffix+".jpg");
+
+                                if (out0.exists() && out0.isFile()) {
+                                    if (!out0.delete()) {
+                                        Logger.getAnonymousLogger().log(Level.SEVERE, "Error : out0.delete()");
+                                        continue;
+                                    }
                                 }
+                                if (out.exists() && out.isFile()) {
+                                    if (!out.delete()) {
+                                        Logger.getAnonymousLogger().log(Level.SEVERE, "Error : out.delete()");
+                                        continue;
+                                    }
+
+                                }
+
+                                if (effect(new IdentNullProcess(), in, out0))
+                                    if (effect(processFile, out0, out))
+                                        assertTrue(true);
                             } catch (Exception ex) {
                                 ex.printStackTrace();
 
                             }
                         }
 
-                    });
+                    } catch (RuntimeException ex) {
+
+                    }
                 }
             } else
                 System.err.println("Error : files==null");

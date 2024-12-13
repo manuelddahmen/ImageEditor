@@ -128,7 +128,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             do {
                 int k = K;
                 //Scanner sc = new Scanner(System.in);
-                int max_iterations = 100;//sc.nextInt();
+                int max_iterations = 1000;//sc.nextInt();
                 int distance = 1;//sc.nextInt();
                 //Hashmap to store centroids with index
                 // calculating initial centroids
@@ -224,7 +224,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 });
             });
 
-            pix2.normalize(0.0, 1.0).getImage().saveFile(out);
+            pix2./*normalize(0.0, 1.0).*/getImage().saveFile(out);
         } catch (Exception ex1) {
             System.err.println(ex1.getMessage());
             ex1.printStackTrace();

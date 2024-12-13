@@ -66,7 +66,7 @@ public class Hist4Contour3 extends ProcessFile {
         return 0.0;
     }
 
-    public Circle getLevel(Circle c, matrix.PixM m) {
+    public Circle getLevel(Circle c, PixM m) {
         // I mean. Parcourir le cercle
         // mesurer I / numPoints
         // for(int i=Math.sqrt()
@@ -77,7 +77,7 @@ public class Hist4Contour3 extends ProcessFile {
         double intensity = 0.0;
         for (double i = c.x - c.r; i <= c.x + c.r; i++) {
             for (double j = c.y - c.r; j <= c.y + c.r; j++) {
-                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.x + c.r < m.getLines()
+                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.y + c.r < m.getLines()
                         && (i == c.x - c.r || j == c.y - c.r || i == c.x + c.r || j == c.y + c.r)) {
                     intensity += m.getIntensity((int) i, (int) j);
                     count++;
@@ -116,7 +116,7 @@ public class Hist4Contour3 extends ProcessFile {
             return false;
         }
         matrix.PixM inP;
-        inP = PixM.getPixM(Image.loadFile(in), maxRes);
+        inP = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
 
         double max = 0.0;
