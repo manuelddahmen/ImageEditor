@@ -367,7 +367,9 @@
                     android:value=""
                     />
         </service>
-   
+        <meta-data android:name="google_analytics_default_allow_ad_user_data" android:value="true" />
+        <meta-data android:name="google_analytics_default_allow_ad_personalization_signals" android:value="true" />
+
     </application>
 
 </manifest>
