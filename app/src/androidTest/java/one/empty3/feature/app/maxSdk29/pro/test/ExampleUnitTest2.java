@@ -43,7 +43,7 @@ public class ExampleUnitTest2 {
     private int countNonApplicable = 0;
     private int errors = 0;
     int maxRes = 15;
-    public String emulatorPhotosDirPath = "/storage/emulated/0/MyFolder/";
+    public String emulatorPhotosDirPath = "/storage/emulated/0/Download/";
 
     @Before
     public void perms() {
@@ -194,6 +194,58 @@ public class ExampleUnitTest2 {
             pixM.getImage().saveFile(outputimage);
         }
     }
+    @Test
+    public void testPixMGetSetRGB() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        System.out.println(appContext.getPackageName());
+
+        Color[] colors = new Color[3];
+        colors[0] = new Color(0xFFFF0000);
+        colors[1] = new Color(0xFF00FF00);
+        colors[2] = new Color(0xFF0000FF);
+        String[] colorsName = {"RED", "GREEN", "BLUE"};
+        for (int k = 0; k < 3; k++) {
+            PixM pixM = new PixM(1000, 1000);
+            int width = pixM.getColumns();
+            int height = pixM.getLines();
+            Color color = colors[k];
+
+
+            PixM pixM2 = new PixM(1000, 1000);
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    for (int l = 0; l < 3; l++) {
+                        pixM2.setValues(i, j, color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f);
+
+                    }
+                }
+            }
+
+
+
+            System.out.println(color.getRed() + " " + color.getGreen() + " " + color.getBlue());
+            pixM.setP(0, 0, new Point3D(Lumiere.getDoubles(color.getColor())));
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    for (int l = 0; l < 3; l++) {
+                            pixM.setCompNo(l);
+                            pixM2.setCompNo(l);
+                            pixM.set(i, j, pixM2.get(i, j));
+                    }
+                    double[] d1 = new double[5];
+                    Point3D p = pixM.getP(0, 0);
+                    pixM.setP(i, j, p);
+                }
+            }
+            File outputimage = new File(emulatorPhotosDirPath + "testPixMGetSetRGB-" + colorsName[k] + ".jpg");
+            if (outputimage.exists())
+                outputimage.delete();
+            outputimage = new File(outputimage.getAbsolutePath());
+            //FileOutputStream fileOutputStream = new FileOutputStream(outputimage);
+            pixM.getImage().saveFile(outputimage);
+        }
+    }
 
     @Test
     public void addition_isCorrect() {
@@ -233,7 +285,7 @@ public class ExampleUnitTest2 {
             GrantPermissionRule.grant(
                     "android.permission.READ_MEDIA_IMAGES",
                     "android.permission.WRITE_EXTERNAL_STORAGE",
-                    "android.permission.READ_MEDIA_IMAGES","MANAGE_EXTERNAL_STORAGE");
+                    "android.permission.READ_MEDIA_IMAGES");
 
     @Test
     public void testAllTestInMain2022() {

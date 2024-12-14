@@ -41,11 +41,12 @@ import java.util.Objects;
 import one.empty3.ImageIO;
 import matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
+import one.empty3.libs.Color;
 
 public class K_Clusterer /*extends ReadDataset*/ {
     public List<double[]> features;
     public final int numberOfFeatures = 5;
-    private static final int K = 20;
+    private static final int K = 3;
     protected Map<double[], Integer> clustersPrint;
     protected Map<double[], Integer> clusters;
     public Map<Integer, double[]> centroids;
@@ -61,6 +62,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
     public void read(File s) throws NumberFormatException, IOException {
 
         try {
+            features = new ArrayList<>();
             BufferedReader readFile = new BufferedReader(new FileReader(s));
             int j = 0;
             String line;
@@ -92,7 +94,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
     void display() {
         for (double[] db : features) {
-            System.out.println(db[0] + " " + db[1] + " " + db[2] + " " + db[3] + " " + db[4]);
+            //System.out.println(db[0] + " " + db[1] + " " + db[2] + " " + db[3] + " " + db[4]);
         }
     }
 
@@ -108,51 +110,49 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
             System.out.println("size out : " + pix2.getColumns() + ", " + pix2.getLines());
 
-            String fileCsv = inCsv.getAbsolutePath();
-            features.clear();
-            read(inCsv); //load data
-
-
-            //display();
-
-
             //ReadDataset r1 = new ReadDataset();
-            //System.out.println("Enter the filename with path");
-            //r1.read(inCsv); //load data
-            int ex = 1;
-            clusters = new HashMap<>();
-            centroids = new HashMap<>();
-
+            //r1.read(inCsv);
             //features = r1.features;
+            read(inCsv);
+            int ex=1;
+            int k = K;
+            int max_iterations = 200;
+            int distance = 2;
 
-            do {
-                int k = K;
-                //Scanner sc = new Scanner(System.in);
-                int max_iterations = 1000;//sc.nextInt();
-                int distance = 1;//sc.nextInt();
                 //Hashmap to store centroids with index
+                Map<Integer, double[]> centroids = new HashMap<>();
                 // calculating initial centroids
                 double[] x1 = new double[numberOfFeatures];
-                int r = 0;
+                int r =0;
                 for (int i = 0; i < k; i++) {
-                    int r1 = (int) (Math.random() * features.size());
-                    r1 = (r1 >= features.size() ? features.size() - 1 : r1);
 
-                    x1 = features.get(r1);
+                    x1=features.get(r++);
                     centroids.put(i, x1);
 
                 }
                 //Hashmap for finding cluster indexes
+                Map<double[], Integer> clusters = new HashMap<>();
                 clusters = kmeans(distance, centroids, k);
                 // initial cluster print
-                double[] db = new double[numberOfFeatures];
+	/*	for (double[] key : clusters.keySet()) {
+			for (int i = 0; i < key.length; i++) {
+				System.out.print(key[i] + ", ");
+			}
+			System.out.print(clusters.get(key) + "\n");
+		}
+		*/
+                double db[] = new double[numberOfFeatures];
                 //reassigning to new clusters
                 for (int i = 0; i < max_iterations; i++) {
                     for (int j = 0; j < k; j++) {
                         List<double[]> list = new ArrayList<>();
                         for (double[] key : clusters.keySet()) {
-                            if (Objects.equals(clusters.get(key), j)) {
+                            if (clusters.get(key)==j) {
                                 list.add(key);
+//					for(int x=0;x<key.length;x++){
+//						System.out.print(key[x]+", ");
+//						}
+//					System.out.println();
                             }
                         }
                         db = centroidCalculator(j, list);
@@ -163,36 +163,48 @@ public class K_Clusterer /*extends ReadDataset*/ {
                     clusters = kmeans(distance, centroids, k);
 
                 }
+
+                //final cluster print
+                System.out.println("\nFinal Clustering of Data");
+                System.out.println("Feature1\tFeature2\tFeature3\tFeature4\tCluster");
                 for (double[] key : clusters.keySet()) {
                     for (int i = 0; i < key.length; i++) {
-                        //System.out.print(key[i] + "\t \t");
+                        System.out.print(key[i] + "\t \t");
                     }
+                    //System.out.print(clusters.get(key) + "\n");
                 }
 
                 //Calculate WCSS
-                double wcss = 0;
+                double wcss=0;
 
-                for (int i = 0; i < k; i++) {
-                    double sse = 0;
+                for(int i=0;i<k;i++){
+                    double sse=0;
                     for (double[] key : clusters.keySet()) {
-                        if (Objects.equals(clusters.get(key), i)) {
-                            sse += Math.pow(Distance.eucledianDistance(key, centroids.get(i)), 2);
+                        if (clusters.get(key)==i) {
+                            sse+=Math.pow(Distance.eucledianDistance(key, centroids.get(i)),2);
                         }
                     }
-                    wcss += sse;
+                    wcss+=sse;
                 }
-                String dis = "";
-                dis = "Euclidean";
-                ex++;
-            } while (ex < 1);
+                String dis="";
+                if(distance ==1)
+                    dis="Euclidean";
+                else
+                    dis="Manhattan";
+                System.out.println("\n*********Programmed by Shephalika Shekhar************\n*********Results************\nDistance Metric: "+dis);
+                System.out.println("Iterations: "+max_iterations);
+                System.out.println("Number of Clusters: "+k);
+                System.out.println("WCSS: "+wcss);
+                System.out.println("Press 1 if you want to continue else press 0 to exit..");
+                ex=0;
 
-            android.graphics.Color[] colors = new android.graphics.Color[K];
+            Color[] colors = new Color[K];
             for (int i = 0; i < K; i++)
                 colors[i] = Colors.random();
             clustersPrint = clusters;
 
 
-            double[][] realValues = new double[K][6];
+            double[][] realValues = new double[k][6];
 
 
             centroids.forEach((i, doubles) -> {
@@ -207,7 +219,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             });
 
 
-            for (int i2 = 0; i2 < K; i2++) {
+            for (int i2 = 0; i2 < k; i2++) {
                 for (int j = 2; j < 5; j++) {
                     realValues[i2][j] /= realValues[i2][5];
                 }
@@ -224,7 +236,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 });
             });
 
-            pix2./*normalize(0.0, 1.0).*/getImage().saveFile(out);
+            pix2.normalize(0.0, 1.0).getImage().saveFile(out);
         } catch (Exception ex1) {
             System.err.println(ex1.getMessage());
             ex1.printStackTrace();

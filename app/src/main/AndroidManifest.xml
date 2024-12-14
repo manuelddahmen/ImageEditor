@@ -44,7 +44,6 @@
             android:supportsRtl="true"
             android:usesCleartextTraffic="true"
             tools:targetApi="tiramisu"
-        android:windowSoftInputMode="adjustResize"
             >
         <property
                 android:name="android.adservices.AD_SERVICES_CONFIG"
@@ -65,7 +64,8 @@
                 android:name=".ui.login.LoginActivity2"
                 android:exported="false"
                 android:label="@string/title_activity_login2"
-                /> <!-- Trigger Google Play services to install the backported photo picker module. -->
+                android:windowSoftInputMode="adjustResize"
+                    /> <!-- Trigger Google Play services to install the backported photo picker module. -->
         <property
                 android:name=".REQUIRE_SECURE_ENV"
                 android:value="1"
@@ -76,23 +76,27 @@
                 android:exported="false"
                 android:label="@string/title_activity_scrolling"
                 android:theme="@style/Theme.FeatureAppmain.NoActionBar"
+            android:windowSoftInputMode="adjustResize"
 
                 />
         <activity
                 android:name=".MainActivityFragments"
                 android:exported="false"
+            android:windowSoftInputMode="adjustResize"
                 />
         <activity
                 android:name=".SettingsScrollingActivity"
                 android:exported="false"
                 android:label="@string/title_activity_settings_scrolling"
                 android:theme="@style/Theme.FeatureAppmain.NoActionBar"
+            android:windowSoftInputMode="adjustResize"
                 />
         <activity
                 android:name=".PictureDataActivity"
                 android:exported="false"
                 android:label="@string/title_activity_picture_data"
                 android:theme="@style/Theme.FeatureAppmain"
+            android:windowSoftInputMode="adjustResize"
                 />
         <activity
                 android:name=".VisualFaceEffects"
@@ -100,6 +104,7 @@
                 android:hardwareAccelerated="true"
                 android:label="Face Visual Effects"
                 android:theme="@style/Theme.FeatureAppmain"
+            android:windowSoftInputMode="adjustResize"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -113,20 +118,20 @@
                 android:name=".FaceEffectListActivity"
                 android:exported="false"
                 android:label="@string/title_activity_face_effect_list"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
                 android:name=".ReshapeActivity"
                 android:exported="false"
-                
+            android:windowSoftInputMode="adjustResize"
                 />
         <activity
                 android:name=".TextActivity"
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="@string/title_activity_text"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -134,7 +139,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="@string/title_activity_choose_effect_list"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
             <intent-filter>
@@ -156,6 +161,7 @@
                 android:enabled="true"
                 android:exported="true"
                 android:theme="@style/Theme.FeatureAppmain"
+            android:windowSoftInputMode="adjustResize"
                 >
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.MAIN" />
@@ -204,7 +210,7 @@
                 android:name=".LicenceUserData"
                 android:exported="false"
                 android:hardwareAccelerated="true"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -212,7 +218,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="LicenceUserData2"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -220,7 +226,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Simple Calculator"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -228,7 +234,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Draw graphics"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -236,7 +242,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Draw graphics"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 />
         <activity
@@ -244,7 +250,7 @@
                 android:exported="false"
                 android:hardwareAccelerated="true"
                 android:label="Face Paint"
-                
+            android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.FeatureAppmain"
                 >
             <intent-filter>
@@ -272,6 +278,7 @@
                 android:hardwareAccelerated="true"
                 android:label="@string/work_with_photos"
                 android:theme="@style/Theme.FeatureAppmain"
+            android:windowSoftInputMode="adjustResize"
                 ></activity>
         
         <provider

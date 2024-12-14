@@ -33,21 +33,22 @@ public class Image extends BitmapDrawable implements IImageMp {
 
     public Image(int width, int height) {
         setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
-        ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }
     }
 
     public Image(int columns, int lines, int i) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }
     }
 
 
     public int getRgb(int x, int y) {
+        if(image == null)
+            return getBitmap().getPixel(x,y);
         return image.getPixel(x, y);
     }
 
@@ -88,7 +89,9 @@ public class Image extends BitmapDrawable implements IImageMp {
     public void setRgb(int x, int y, int rgb) {
         if(x < 0 || y < 0 || x >= getWidth() || y >= getHeight())
             return;
-        image.setPixel(x, y, rgb);
+        if(image != null)
+            image.setPixel(x, y, rgb);
+        getBitmap().setPixel(x, y, rgb);
     }
 
     public static Image loadFile(File path) {

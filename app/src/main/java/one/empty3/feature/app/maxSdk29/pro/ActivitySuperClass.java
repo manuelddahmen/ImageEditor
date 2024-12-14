@@ -39,6 +39,7 @@ import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.DisplayCutout;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -172,13 +173,14 @@ public class ActivitySuperClass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         EdgeToEdge.enable(this);
-        //getWindow().getWindowManager().updateViewLayout(this.getWindow().getDecorView(),
-                //        new WindowManager.LayoutParams(LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER));
+
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
 
         getParameters(intent);
+
+
 
         purchasesUpdatedListener = new PurchasesUpdatedListener() {
             @Override
