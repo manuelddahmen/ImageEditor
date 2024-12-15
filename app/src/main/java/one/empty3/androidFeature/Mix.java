@@ -1,6 +1,8 @@
 package one.empty3.androidFeature;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import matrix.PixM;
 import one.empty3.libs.Image;
@@ -24,26 +26,39 @@ public class Mix extends ProcessNFiles {
         super.processFiles(out, ins);
 
         double ratio = 1.0 * progress / MAX_PROGRESS;
-
+        boolean catched = false;
         if (ins.length > 1 && ins[0] != null && isImage(ins[0]) && ins[1] != null && isImage(ins[1])) {
-            Image read1 = ImageIO.read(ins[0]);
-            Image read2 = ImageIO.read(ins[1]);
+            Image read1 = Image.loadFile(ins[0]);
+            Image read2 = Image.loadFile(ins[1]);
             PixM pixMin1 = new PixM(read1);
-            PixM pixMin2 = new PixM(read2);
-            matrix.PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
+            PixM pixMin2 = null;
+            PixM outPixM = null;
+            try {
+                pixMin2 = new PixM(read2);
+                outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
+            } catch (RuntimeException ex) {
+                Logger.getAnonymousLogger().log(Level.INFO, "Failed to load image #2", ex);
+                catched = true;
+            }
+            if(!catched) {
+                for (int i = 0; i < outPixM.getColumns(); i++) {
+                    for (int j = 0; j < outPixM.getLines(); j++) {
+                        for (int c = 0; c < 3; c++) {
+                            pixMin1.setCompNo(c);
+                            pixMin2.setCompNo(c);
+                            outPixM.setCompNo(c);
 
-            for (int i = 0; i < outPixM.getColumns(); i++) {
-                for (int j = 0; j < outPixM.getLines(); j++) {
-                    for (int c = 0; c < 3; c++) {
-                        pixMin1.setCompNo(c);
-                        pixMin2.setCompNo(c);
-                        outPixM.setCompNo(c);
-
-                        outPixM.set(i, j, pixMin1.get(i, j) * (1 - ratio) + pixMin2.get(i, j) * (ratio));
+                            outPixM.set(i, j, pixMin1.get(i, j) * (1 - ratio) + pixMin2.get(i, j) * (ratio));
+                        }
                     }
                 }
+                ImageIO.write(outPixM.getBitmap().getBitmap(), "jpg", out);
+                return true;
             }
-            ImageIO.write(outPixM.getBitmap().getBitmap(), "jpg", out);
+        }
+        if((ins.length==1 && isImage(ins[0])) || catched ) {
+            ImageIO.write(Image.loadFile(ins[0]).getBitmap(), "jpg", out);
+            return true;
         }
         return false;
     }

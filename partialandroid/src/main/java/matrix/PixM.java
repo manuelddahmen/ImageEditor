@@ -58,7 +58,7 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
         super(l, c);
     }
 
-    public PixM(Bitmap image) {
+    public PixM(@NotNull Bitmap image) {
         this(image.getWidth(), image.getHeight());
         double[] colorComponents = new double[4];
         for (int i = 0; i < image.getWidth(); i++) {
@@ -70,7 +70,7 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
         }
     }
 
-    public PixM(Bitmap image, boolean isBitmap) {
+    public PixM(@NotNull Bitmap image, boolean isBitmap) {
         this(image.getWidth(), image.getHeight());
         double[] colorComponents = new double[3];
         for (int i = 0; i < image.getWidth(); i++) {
@@ -90,7 +90,7 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
     }
 
     public PixM(@NotNull Image read) {
-        this(read.getBitmap());
+        this(read.getImage());
         if (read.getBitmap() == null)
             throw new NullPointerException("public PixM(@NotNull Image read) || bitmap is null");
     }
