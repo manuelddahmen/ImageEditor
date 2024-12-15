@@ -228,7 +228,7 @@ public class Lines extends ProcessFile {
             Color r = Color.newCol((float) r(), (float) r(), (float) r());
             p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.));
         });
-        ImageIO.write(o.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
+        Image.saveFile(o.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 

@@ -85,7 +85,7 @@ public class Classification extends ProcessFile {
                 }
             }
 
-        ImageIO.write(imageOut, "jpg", out, false);
+        imageOut.saveFile( out);
         return true;
     }
 

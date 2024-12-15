@@ -23,8 +23,6 @@ public class Mix extends ProcessNFiles {
 
     @Override
     public boolean processFiles(File out, File... ins) {
-        super.processFiles(out, ins);
-
         double ratio = 1.0 * progress / MAX_PROGRESS;
         boolean catched = false;
         if (ins.length > 1 && ins[0] != null && isImage(ins[0]) && ins[1] != null && isImage(ins[1])) {
@@ -52,12 +50,12 @@ public class Mix extends ProcessNFiles {
                         }
                     }
                 }
-                ImageIO.write(outPixM.getBitmap().getBitmap(), "jpg", out);
+                Image.saveFile(outPixM.getBitmap().getBitmap(), "jpg", out);
                 return true;
             }
         }
         if((ins.length==1 && isImage(ins[0])) || catched ) {
-            ImageIO.write(Image.loadFile(ins[0]).getBitmap(), "jpg", out);
+            Image.saveFile(Image.loadFile(ins[0]).getBitmap(), "jpg", out);
             return true;
         }
         return false;

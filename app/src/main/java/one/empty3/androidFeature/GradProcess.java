@@ -24,7 +24,7 @@ package one.empty3.androidFeature;
 import java.io.File;
 import java.util.Objects;
 
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -53,7 +53,7 @@ public class GradProcess extends ProcessFile {
 
             matrix.PixM image = linear.getImages()[2];
 
-            one.empty3.ImageIO.write(image.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
+            one.empty3.Image.saveFile(image.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
             addSource(out);
             return true;

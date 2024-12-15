@@ -74,7 +74,7 @@ public class GaussFilterProcess extends ProcessFile {
 
         try {
 
-            one.empty3.ImageIO.write(normalize.getImage().getImage(), "JPEG", out, shouldOverwrite);
+            normalize.getImage().saveFile( out);
             return true;
         } catch (Exception ex) {
 

@@ -20,7 +20,9 @@
 
 package one.empty3.androidFeature;
 
-import one.empty3.feature.app.pro.M3;
+import matrix.FilterMatPixM;
+import matrix.M3;
+import matrix.M3;
 import matrix.PixM;
 
 

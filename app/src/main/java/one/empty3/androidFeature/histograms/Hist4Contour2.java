@@ -25,6 +25,7 @@ import java.io.File;
 import one.empty3.io.ProcessFile;
 import matrix.PixM;
 import one.empty3.library.Point3D;
+import one.empty3.libs.Image;
 
 public class Hist4Contour2 extends ProcessFile {
     private int kMax = 3;
@@ -146,9 +147,9 @@ public class Hist4Contour2 extends ProcessFile {
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
-            //one.empty3.ImageIO.write(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
-            one.empty3.ImageIO.write(outP.normalize(0, 1).getBitmap().getBitmap(), "jpg", out);
-            //one.empty3.ImageIO.write(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+            //one.empty3.Image.saveFile(outP.normalize(0, 1).getImage().getBitmap(), "jpg", out);
+            outP.getImage().saveFile(out);
+            //one.empty3.Image.saveFile(outP0.normalize(0, 1).getImage().getBitmap(), "jpg", out);
             return true;
 
         } catch (Exception ignored) {

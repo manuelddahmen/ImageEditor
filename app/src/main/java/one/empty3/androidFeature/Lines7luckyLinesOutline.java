@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 import javaAnd.awt.Point;
+import one.empty3.Image;
 import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;
@@ -328,7 +329,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
                 }
             }
 */
-        ImageIO.write(img3.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
+        Image.saveFile(img3.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
 
         return true;
 

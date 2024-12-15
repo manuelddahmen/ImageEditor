@@ -38,7 +38,8 @@ public class ComposeNto1 extends ProcessFile {
         matrix.PixM inpix = PixM.getPixM(ImageIO.read(in), maxRes);
         matrix.PixM outpix = PixM.getPixM(ImageIO.read(in), maxRes);
         //success = processMem(inpix, outpix);
-        ImageIO.write(outpix.getImage().getImage(), "jpg", out, shouldOverwrite);
+        outpix.getBitmap().saveFile(out);
+
         return success;
     }
 

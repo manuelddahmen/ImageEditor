@@ -37,7 +37,7 @@ public class Main2 {
         System.out.print("\n(width, height) = " + imageToWrite.getWidth() +
                 ", " + imageToWrite.getHeight() + ")");
 
-        if (!one.empty3.ImageIO.write(imageToWrite, "jpg", file)) {
+        if (!one.empty3.Image.saveFile(imageToWrite, "jpg", file)) {
             System.out.println("Error inappropriate writer or not found " + "JEG");
             System.exit(-2);
         } else {

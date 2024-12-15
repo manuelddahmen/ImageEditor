@@ -24,7 +24,7 @@
 //                img.setRGB(i, j, new Color(255, 255, 255, imgArray[i][j]).getRGB());
 //            }
 //        }
-//        one.empty3.ImageIO.write(img, "png", outFile);
+//        one.empty3.Image.saveFile(img, "png", outFile);
 //    }
 //
 //    public static void writeImage(double[][] imgArray, File outFile) throws Exception {
@@ -34,11 +34,11 @@
 //                img.setRGB(i, j, (int) imgArray[i][j]);
 //            }
 //        }
-//        one.empty3.ImageIO.write(img, "png", outFile);
+//        one.empty3.Image.saveFile(img, "png", outFile);
 //    }
 //
 //    public static void writeImage(Image image, File outFile) throws Exception {
-//        one.empty3.ImageIO.write(image, "png", outFile);
+//        one.empty3.Image.saveFile(image, "png", outFile);
 //    }
 //
 //    public static void writeImage(double[][] sobelArray, File outFile, int threshold) throws Exception {
@@ -50,7 +50,7 @@
 //                }
 //            }
 //        }
-//        one.empty3.ImageIO.write(img, "png", outFile);
+//        one.empty3.Image.saveFile(img, "png", outFile);
 //    }
 //
 //    public static void superimposeCircles(List<CircleHit> hits, one.empty3.libs.Color in, File out) {
@@ -69,7 +69,7 @@
 //            }
 //        }
 //        try {
-//            one.empty3.ImageIO.write(in, "jpg", out);
+//            one.empty3.Image.saveFile(in, "jpg", out);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -96,7 +96,7 @@
 //            }
 //        }
 //
-//        one.empty3.ImageIO.write(totalCircles, "png", out);
+//        one.empty3.Image.saveFile(totalCircles, "png", out);
 //    }
 /// */
 //    public static one.empty3.libs.Color scaledSobelResult(double[][] sobelTotal) {

@@ -20,6 +20,7 @@
 
 package one.empty3.androidFeature;
 
+import one.empty3.Image;
 import one.empty3.ImageIO;
 import matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -88,7 +89,7 @@ public class SobelDerivative extends ProcessFile {
                 }
             }
         }
-        ImageIO.write(pOut.normalize(0, 1).getImage().getImage(), "jpg", out, shouldOverwrite);
+        Image.saveFile(pOut.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

@@ -21,7 +21,7 @@
 package one.empty3.androidFeature;
 
 import matrix.FilterPixM;
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 import one.empty3.library.Point3D;
 

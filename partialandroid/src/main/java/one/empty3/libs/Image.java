@@ -24,6 +24,14 @@ public class Image extends BitmapDrawable implements IImageMp {
         }
     }
 
+    public static void saveFile(Bitmap bitmap, String jpg, File out) {
+        new Image(bitmap).saveFile(out);
+    }
+
+    public static void saveFile(Image img4, String jpeg, File out, boolean shouldOverwrite) {;
+        img4.saveFile(out);
+    }
+
     private void setImage(@NotNull Bitmap image) {
         this.image = image;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

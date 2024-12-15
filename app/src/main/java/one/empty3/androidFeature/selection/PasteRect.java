@@ -155,7 +155,7 @@ public class PasteRect extends ProcessFile {
         PixM pixM = PixM.getPixM(read, maxRes);
         getSource("paste");
         PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
-        ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+        pixM1.normalize(0, 1).getImage().saveFile( out);
         return true;
     }
 

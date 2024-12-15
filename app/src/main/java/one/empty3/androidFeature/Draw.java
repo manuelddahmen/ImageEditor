@@ -31,7 +31,7 @@ public class Draw extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            one.empty3.ImageIO.write(one.empty3.ImageIO.read(in), "jpg", out, shouldOverwrite);
+            one.empty3.ImageIO.read(in).saveFile( out);
 
         } catch (Exception ex) {
             ex.printStackTrace();

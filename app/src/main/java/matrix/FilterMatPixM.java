@@ -18,9 +18,7 @@
  *
  */
 
-package one.empty3.androidFeature;
-
-import one.empty3.feature.app.pro.M3;
+package matrix;
 
 public abstract class FilterMatPixM {
 /*

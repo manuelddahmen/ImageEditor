@@ -22,7 +22,7 @@ package one.empty3.androidFeature;
 
 import android.graphics.Color;
 
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.io.ProcessFile;
@@ -132,8 +132,7 @@ public class ExtractIntensityInfo extends
 
 
         try {
-            one.empty3.ImageIO.write(pix.getImage().getImage(),
-                    "JPEG", out, shouldOverwrite);
+            pix.getImage().saveFile(out);
         } catch (Exception ex) {
         }
 

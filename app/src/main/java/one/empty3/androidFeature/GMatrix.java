@@ -28,7 +28,7 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.Vector;
 
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import one.empty3.feature.MatrixFormatException;
 import matrix.PixM;
 import one.empty3.library.Point3D;

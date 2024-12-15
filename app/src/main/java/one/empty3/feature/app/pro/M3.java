@@ -17,7 +17,7 @@
  *
  *
  */
-
+/*
 package one.empty3.feature.app.pro;
 
 import android.util.Log;
@@ -431,3 +431,4 @@ public class M3 extends MBitmap{
         return linesIn;
     }
 }
+*/

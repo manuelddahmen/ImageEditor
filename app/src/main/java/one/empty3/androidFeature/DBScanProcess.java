@@ -168,7 +168,7 @@ public class DBScanProcess extends ProcessFile {
                 }
         });
         try {
-            one.empty3.ImageIO.write(pix2.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
+            pix2.normalize(0.0, 1.0).getImage().saveFile(out);
         } catch (Exception ex1) {
             ex1.printStackTrace();
 

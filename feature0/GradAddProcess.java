@@ -27,7 +27,7 @@ import one.empty3.ImageIO;
 package one.empty3.androidFeature;
 
 
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradAddProcess.java
 import one.empty3.io.ProcessFile;

@@ -21,6 +21,7 @@
 package one.empty3.androidFeature;
 
 import matrix.PixM;
+import one.empty3.Image;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
@@ -35,7 +36,7 @@ public class DericheFilterProcess extends ProcessFile {
         PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
 
 
-        ImageIO.write(pixM.getImage().getImage(), "jpg", out, shouldOverwrite);
+        Image.saveFile(pixM.getImage(), "jpg", out, shouldOverwrite);
 
 
         return false;

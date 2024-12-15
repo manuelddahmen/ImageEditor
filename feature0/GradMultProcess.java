@@ -30,7 +30,7 @@ import java.io.File;
 <<<<<<<< HEAD:feature0/GradMultProcess.java
 import one.empty3.ImageIO;
 ========
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 >>>>>>>> origin/newBranch3:app/src/main/java/one/empty3/androidFeature/GradMultProcess.java
 import one.empty3.io.ProcessFile;

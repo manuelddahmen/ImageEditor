@@ -111,7 +111,7 @@ class TextWorker
                         if (effectListStr.contains(trim)) {
                             processFile = Class.forName(it1).getDeclaredConstructor().newInstance() as ProcessFile
                             currentProcessFile = currentProcessInFile
-                            if (processFile != null) {
+                            if (true) {
                                 currentOutputFile = File(
                                         nextFile(
                                                 currentProcessInFile.parentFile!!.absolutePath,
@@ -130,18 +130,18 @@ class TextWorker
                                     ) {
                                         val lastCurrentProcessFile = currentProcessFile
 
-                                        processFile!!.setMaxRes(maxRes)
-                                        if (!(processFile!!.process(
+                                        processFile.setMaxRes(maxRes)
+                                        if (!(processFile.process(
                                                 currentProcessFile,
                                                 currentOutputFile
                                         ))
                                         ) {
 
                                             println("Error processing file.Error processing file.")
-                                            println("Error in " + processFile!!.javaClass.name)
+                                            println("Error in " + processFile.javaClass.name)
                                             Toast.makeText(
                                                     applicationContext,
-                                                    ("Error while applying filter" + (processFile!!.javaClass.name)),
+                                                    ("Error while applying filter" + (processFile.javaClass.name)),
                                             Toast.LENGTH_LONG
                                             ).show()
                                             Main2022.setOutputFile(null)
@@ -158,7 +158,7 @@ class TextWorker
                                                     )
                                                 )
                                                 mix.progressColor = Mix.MAX_PROGRESS
-                                                val pf = processFile!!.javaClass.simpleName
+                                                val pf = processFile.javaClass.simpleName
                                                 if (Main2022.effectsFactors != null && Main2022.effectsFactors[pf] != null)
                                                     mix.progressColor =
                                                             Main2022.effectsFactors[pf]!!
@@ -166,7 +166,7 @@ class TextWorker
                                                         println("mix.progressColor=" + mix.progressColor);
                                                 mix.processFiles(
                                                         currentOutputFile1,
-                                                        lastCurrentProcessFile,
+                                                        currentProcessFile,
                                                         currentOutputFile
                                                 )
 

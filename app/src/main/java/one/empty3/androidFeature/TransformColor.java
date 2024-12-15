@@ -21,6 +21,7 @@
 package one.empty3.androidFeature;
 
 import matrix.PixM;
+import one.empty3.Image;
 import one.empty3.io.ProcessFile;
 
 import one.empty3.ImageIO;
@@ -42,7 +43,7 @@ public class TransformColor extends ProcessFile {
             }
         }
 
-        ImageIO.write(pix.normalize(0.0, 1.0).getImage().getImage(), "jpg", out, shouldOverwrite);
+        Image.saveFile(pix.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
         return true;
     }

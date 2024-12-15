@@ -59,7 +59,7 @@ public class ProxyValue2 extends ProcessFile {
 
 
         try {
-            one.empty3.ImageIO.write(copy.getImage().getImage(), "jpg", out, shouldOverwrite);
+            one.empty3.Image.saveFile(copy.getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

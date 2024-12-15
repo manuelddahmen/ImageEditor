@@ -137,7 +137,7 @@ public class Snake extends ProcessFile {
         classification();
 
         try {
-            one.empty3.ImageIO.write(pix3.normalize(0., 1.).getImage().getImage(),
+            one.empty3.Image.saveFile(pix3.normalize(0., 1.).getImage(),
                     "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();

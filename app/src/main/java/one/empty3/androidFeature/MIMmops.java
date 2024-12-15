@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 import matrix.FilterPixM;
 import one.empty3.feature.M;
-import one.empty3.feature.app.pro.M3;
+import matrix.M3;
 import matrix.PixM;
 
 /*

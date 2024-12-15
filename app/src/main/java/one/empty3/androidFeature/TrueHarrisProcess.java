@@ -57,7 +57,7 @@ public class TrueHarrisProcess extends ProcessFile {
         }
 
         TrueHarris th = new TrueHarris(pix);
-        PixM pixM = new PixM(pix.getImage().getImage());
+        PixM pixM = new PixM(pix.getImage());
         for (int c = 0; c < 3; c++) {
             th.setCompNo(c);
             pixM.setCompNo(c);
@@ -76,7 +76,7 @@ public class TrueHarrisProcess extends ProcessFile {
 
         try {
 
-            one.empty3.ImageIO.write(normalize.getImage().getImage(), "JPEG", out, shouldOverwrite);
+            one.empty3.Image.saveFile(normalize.getImage(), "JPEG", out, shouldOverwrite);
             return true;
         } catch (Exception ex) {
 
