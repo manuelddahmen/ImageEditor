@@ -258,7 +258,7 @@ public class ExampleUnitTest2 {
         System.out.println("in : " + in.getAbsolutePath());
         System.out.println("out: " + out.getAbsolutePath());
         try {
-            processFile = processFile.getClass().newInstance();
+            processFile = processFile.getClass().getDeclaredConstructor().newInstance();
         } catch (IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }

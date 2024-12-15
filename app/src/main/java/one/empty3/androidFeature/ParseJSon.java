@@ -35,7 +35,7 @@ public class ParseJSon {
 
                 Class c = Class.forName(classname);
                 ProcessFile pf = (ProcessFile)
-                        (c.newInstance());
+                        (c.getDeclaredConstructor().newInstance());
 
                 o.add(pf);
 

@@ -110,7 +110,7 @@ class EffectWorker
                         val effectListStr: String = it1
                         val trim = it1.trim()
                         if (effectListStr.contains(trim)) {
-                            processFile = Class.forName(it1).newInstance() as ProcessFile
+                            processFile = Class.forName(it1).getDeclaredConstructor().newInstance() as ProcessFile
                             currentProcessFile = currentProcessInFile
                             if (processFile != null) {
                                 currentOutputFile = File(

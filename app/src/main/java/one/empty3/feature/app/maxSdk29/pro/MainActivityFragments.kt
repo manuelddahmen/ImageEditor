@@ -15,7 +15,7 @@ class MainActivityFragments : AppCompatActivity() {
 /*
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, myCameraActivityVerion5)
-                //.replace(R.id.container, MainActivityFragmentsFragment.newInstance())
+                //.replace(R.id.container, MainActivityFragmentsFragment.getDeclaredConstructor().newInstance())
                 .commitNow()
 */        }
     }
