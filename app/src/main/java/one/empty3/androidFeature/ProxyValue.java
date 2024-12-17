@@ -52,19 +52,23 @@ public class ProxyValue extends ProcessFile {
 
             for (int j = 0; j < original.getLines(); j++)
 
-
                 if (original.luminance(i, j) < min) {
 
                     searchFromTo(original, copy, i, j, min * 2);
                     p++;
 
                 } else {
-                    copy.set(i, j, original.get(i, j));
+                    for (int l = 0; l < 3; l++) {
+                        original.setCompNo(l);
+                        copy.setCompNo(l);
+                        copy.set(i, j, original.get(i, j));
+                    }
                 }
 
 
         try {
-            one.empty3.Image.saveFile(copy.getImage(), "jpg", out, shouldOverwrite);
+            copy.getImage().saveFile( out);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -77,8 +81,7 @@ public class ProxyValue extends ProcessFile {
     }
 
 
-    public void searchFromTo(
-            matrix.PixM original, matrix.PixM copy, int i, int j, double min) {
+    public void searchFromTo(matrix.PixM original, matrix.PixM copy, int i, int j, double min) {
         Point3D p = null;
         int i2 = i, j2 = j;
         

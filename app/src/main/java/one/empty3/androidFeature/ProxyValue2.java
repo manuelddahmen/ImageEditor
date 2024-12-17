@@ -45,21 +45,29 @@ public class ProxyValue2 extends ProcessFile {
         }
         int p = 0;
         matrix.PixM copy = original.copy();
+        double min = 0.2;
         for (int i = 0; i < original.getColumns(); i++)
 
             for (int j = 0; j < original.getLines(); j++)
 
 
-                if (copy.luminance(i, j) < 0.3) {
+                if (original.luminance(i, j) < min) {
 
-                    searchFromTo(original, copy, i, j, 0.3);
+                    searchFromTo(original, copy, i, j, min * 2);
                     p++;
 
+                } else {
+                    for (int l = 0; l < 3; l++) {
+                        original.setCompNo(l);
+                        copy.setCompNo(l);
+                        copy.set(i, j, original.get(i, j));
+                    }
                 }
 
 
         try {
-            one.empty3.Image.saveFile(copy.getImage(), "jpg", out, shouldOverwrite);
+            copy.getImage().saveFile( out);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -69,6 +77,7 @@ public class ProxyValue2 extends ProcessFile {
         System.out.println("point " + p);
 
         return true;
+
     }
 
 
