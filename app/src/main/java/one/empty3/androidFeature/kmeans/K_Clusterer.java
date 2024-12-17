@@ -33,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
     protected Map<double[], Integer> clustersPrint;
     protected Map<double[], Integer> clusters;
     public Map<Integer, double[]> centroids;
-    private boolean random = true;
+    private boolean random = false;
 
     public K_Clusterer() {
     }
@@ -199,7 +200,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             ex = 0;
             Color[] colors = new Color[k];
             for (int i = 0; i < K; i++)
-                colors[i] = Colors.random();
+                colors[i] = Color.newCol((float)Math.random(),(float) Math.random(),(float) Math.random());
             clustersPrint = clusters;
 
 
@@ -225,13 +226,13 @@ public class K_Clusterer /*extends ReadDataset*/ {
             }
             centroids.forEach((i, doubles) -> {
                 clustersPrint.forEach((d1, i2) -> {
-                    if (random) {
-                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                                colors[i2].red(), colors[i2].green(), colors[i2].blue());
-                    } else {
-                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                                realValues[i2][2], realValues[i2][3], realValues[i2][4]);
-                    }
+                        if (random) {
+                            pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
+                                    colors[i2].red(), colors[i2].green(), colors[i2].blue());
+                        } else {
+                            pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
+                                    realValues[i2][2], realValues[i2][3], realValues[i2][4]);
+                        }
                 });
             });
 
