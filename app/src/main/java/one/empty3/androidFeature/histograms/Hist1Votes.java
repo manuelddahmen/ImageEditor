@@ -62,11 +62,15 @@ public class Hist1Votes extends ProcessFile {
         double intensity = 0.0;
         for (double i = c.x - c.r; i <= c.x + c.r; i++) {
             for (double j = c.y - c.r; j <= c.y + c.r; j++) {
-                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.x + c.r < m.getLines()
+                if (c.x - c.r >= 0 && c.y - c.r >= 0 && c.x + c.r < m.getColumns() && c.y + c.r < m.getLines()
                         && (i == c.x - c.r || j == c.y - c.r || i == c.x + c.r || j == c.y + c.r)) {
                     intensity += m.getIntensity((int) i, (int) j);
                     count++;
-                    Point3D p = m.getP((int) i, (int) j);
+                    int i1 =  (int) i;
+                    int j1 = (int) j;
+                    if(i1<0 || j1<0 || i1>=m.getColumns() || j1>=m.getLines())
+                        continue;
+                    Point3D p = m.getP((int) i1, (int) j1);
                     if (p.norme() > 0.3 && p.moins(c.maxColor).norme() > 0.3) {
                         c.maxColor = p;
                         sum++;
