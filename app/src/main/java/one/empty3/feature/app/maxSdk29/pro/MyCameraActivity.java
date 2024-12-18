@@ -230,7 +230,6 @@ public class MyCameraActivity extends ActivitySuperClass {
                 }
             } else toastButtonDisabled(v);
         });
-        /*
         View about = findViewById(R.id.About);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,7 +237,6 @@ public class MyCameraActivity extends ActivitySuperClass {
                 openUserData(v);
             }
         });
-*///Put in menu
         View shareView = findViewById(R.id.share);
         shareView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -788,7 +786,7 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     private void openUserData(@NonNull View view) {
         //saveImageState(isWorkingResolutionOriginal());
-        Intent intent = new Intent(view.getContext(), LicenceUserData.class);
+        Intent intent = new Intent(view.getContext(), LicenceUserData2.class);
         passParameters(intent);
     }
 

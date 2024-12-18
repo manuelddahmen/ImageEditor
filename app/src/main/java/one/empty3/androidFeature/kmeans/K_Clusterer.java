@@ -33,7 +33,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
     protected Map<double[], Integer> clustersPrint;
     protected Map<double[], Integer> clusters;
     public Map<Integer, double[]> centroids;
-    private boolean random = false;
+    private boolean random = true;
 
     public K_Clusterer() {
     }
@@ -200,7 +199,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             ex = 0;
             Color[] colors = new Color[k];
             for (int i = 0; i < K; i++)
-                colors[i] = Color.newCol((float)Math.random(),(float) Math.random(),(float) Math.random());
+                colors[i] = Color.newCol(Math.random(), Math.random(), Math.random());
             clustersPrint = clusters;
 
 
@@ -226,13 +225,15 @@ public class K_Clusterer /*extends ReadDataset*/ {
             }
             centroids.forEach((i, doubles) -> {
                 clustersPrint.forEach((d1, i2) -> {
+                    if(Objects.equals(i2, i)) {
                         if (random) {
                             pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                                    colors[i2].red(), colors[i2].green(), colors[i2].blue());
+                                    colors[i2].getRed() / 255f, colors[i2].getGreen() / 255f, colors[i2].getBlue() / 255f);
                         } else {
                             pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
                                     realValues[i2][2], realValues[i2][3], realValues[i2][4]);
                         }
+                    }
                 });
             });
 

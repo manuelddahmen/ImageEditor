@@ -40,7 +40,7 @@ public class KMeansRandom extends ProcessFile {
             if(!dir.exists())
                 dir.mkdir();
 
-            File inCsv = new File(dir.getAbsolutePath()+File.separator+"kMeans"+in.getName()+".csv");;
+            File inCsv = new File(out.getAbsolutePath() + ".csv");
 
             new MakeDataset(in, inCsv, maxRes);
 
