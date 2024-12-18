@@ -299,7 +299,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="title_activity_settings_scrolling" translatable="false">Settings</string>
     <string name="large_text" translatable="false">
     </string>
-    <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_settings">Settings</string>
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
     <string name="licenses" translatable="false" />
