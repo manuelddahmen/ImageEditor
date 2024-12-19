@@ -93,7 +93,7 @@ public class Main2022 {
                 listProcessClasses.put("IdentNullProcess", IdentNullProcess.class.newInstance());
                 //listProcessClasses.put("", IsleProcess.class.newInstance());
                 listProcessClasses.put("KMeans", KMeans.class.newInstance());
-                                listProcessClasses.put("KMeansRandom", KMeansRandom.class.newInstance());
+                listProcessClasses.put("KMeansRandom", KMeansRandom.class.newInstance());
                 //listProcessClasses.put("Lines", Lines.class.newInstance());
                 //listProcessClasses.put("Lines3", Lines3.class.newInstance());
                 //listProcessClasses.put("Lines4", Lines4.class.newInstance());

@@ -31,9 +31,6 @@ class LicenceUserData2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
-        findViewById<Button>(R.id.buttonBack).setOnClickListener {
-            backToMain(it)
-        }
         findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openLink(it)
         }

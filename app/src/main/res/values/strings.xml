@@ -18,13 +18,15 @@
   ~
   -->
 <resources>
+    <string name="browser_list_background_color" translatable="false">#FFF</string>
+    <string name="browser_title_foreground_color" translatable="false">#000</string>
+    <string name="app_name">Image Editor</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
     <string name="com.crashlytics.android.build_id" translatable="false">1</string>
-    <string name="app_name">Image Featuring Editor</string>
     <string name="capture_button_alt">Capture</string>
     <string name="switch_camera_button_alt">Switch camera</string>
     <string name="gallery_button_alt">Gallery</string>
-    <string name="back_button_alt">Back</string>
+    <string name="back_button_alt">"    Application doesn’t disclose the collection of any personal and sensitive information from children nor other users."</string>
     <string name="share_button_alt">Share</string>
     <string name="share_hint">Share using</string>
     <string name="capture_mode_camera">Camera</string>
@@ -41,10 +43,8 @@
     <string name="filePath">one.empty3.feature.app</string>
     <string name="capturePhoto">Camera</string>
     <string name="choosePhoto">Gallery</string>
-    <string name="andex_file_selection_title">Movie</string>
-    <string name="browser_title_background_color" translatable="false">#000</string>
-    <string name="browser_title_foreground_color" translatable="false">#FFF</string>
-    <string name="browser_list_background_color" translatable="false">#AAA</string>
+    <string name="andex_file_selection_title">"    The Applications aren't exclusively for children or teenagers."</string>
+    <string name="browser_title_background_color">"    Contact: DAHMEN Manuel (dathewolf@gmail.com>)"</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_fullscreen_camera_live_effect">FullscreenActivityCameraLiveEffect
     </string>
@@ -69,7 +69,7 @@
     <string name="maxRes_1200" translatable="false">150.0</string>
     <string name="maximum_resolution">Maximum resolution</string>
     <string name="share">Share</string>
-    <string name="beta">Beta?</string>
+    <string name="beta">"    [Calculator]"</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles"><![CDATA[Privacy policy and Family Policy for Image Featuring (FeatureApp) and Simple Calculator Apps by DaTheWolf — one.empty3
 Simple Calculator [Application]
 Image Featuring [Application]
@@ -107,7 +107,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="privacy_policy_and_families_policy">
         <![CDATA[ <string name="privacy_policy_and_families_policy">
         <![CDATA[Privacy policy and Families policy for Apps by DaTheWolf — one.empty3 Calculator (calculette simple) [Application] Image Featuring [Application] Privacy policy Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family. Application is not designed especially to children. Families Policy Application doesn’t share user-provided information with third parties; and Application doesn’t share the user’s physical location with other users. Application doesn’t display Ads Application doesn’t disclose the collection of any personal and sensitive information from children. User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data. App name: Calculator (calculette simple) Contact: DAHMEN Manuel (dathewolf@gmail.com>) [Street Address]]]></string>
-    <string name="POLICY_URI" translatable="false">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+    <string name="POLICY_URI" translatable="false">https://empty3.app/android/privacy.html</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -168,51 +168,6 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="edit_text_here_or_by_push_numbers">Edit text here or by push numbers</string>
     <string name="result">Result</string>
     <string name="about_and_policies">About and privacy policy</string>
-    <string name="about2"> [Privacy policy and Family Policy for Image Featuring (FeatureApp) and Simple Calculator Apps by DaTheWolf — one.empty3
-    Simple Calculator [Application]
-    Image Editor [Application]
-
-
-    Families Policy
-    Calculator (simple calculator) [Application] is a calculus application
-
-    Image Editor (Image Editor) [Application] is a image manipulation app
-
-    The Applications aren't exclusively for children or teenagers.
-
-    Privacy policy
-
-
-    Image Featuring (FeatureApp) [ Application ]collects the following User Data:
-
-    - Username and password
-
-    Application doesn’t share the user’s location with other users.
-
-    Application doesn’t display Ads
-
-    Application doesn’t disclose the collection of any personal and sensitive information from children nor other users.
-
-
-
-    Application Other User Data are collected as anonymous data on Google Firebase. Application is not collecting supplementary data.
-
-    [Calculator]
-
-    Contact: DAHMEN Manuel (dathewolf@gmail.com>)
-
-    Licence
-    Code sous licence Apache 2.
-
-    Droits d'auteur
-    https://github.com/shephalika21
-
-    Politique de confidentialité et de vie privée
-    https://empty3.app/privacy
-
-    Livres ou cours utilisés (dont)
-    https://www.cs.washington.edu/academics/courses/
-        (Computer Vision course - 2010)</string>
     <string name="title_activity_formula_store">FormulaStore</string>
     <string name="store_formula">Store Formula</string>
     <string name="add">Add</string>
@@ -299,7 +254,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="title_activity_settings_scrolling" translatable="false">Settings</string>
     <string name="large_text" translatable="false">
     </string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings" translatable="false">Settings</string>
     <string name="refresh">Refresh</string>
     <string name="licence">Licence</string>
     <string name="licenses" translatable="false" />
@@ -359,4 +314,5 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="string_privacy_license"><![CDATA[\n    <h1>Privacy policy and Family Policy for Image Featuring (FeatureApp) and Simple Calculator Apps by DaTheWolf — one.empty3</h1>\n    <h2>Simple Calculator [Application]\n    <p>Image Editor [Application]\n\n\n    <h2>Families Policy</h2>\n    <p>Calculator (simple calculator) [Application] is a calculus application\n\n    <p>Image Editor (Image Editor) [Application] is a image manipulation app\n\n    <p>The Applications aren&#39;t exclusively for children or teenagers.\n\n    <h2>Privacy policy\n\n\n    <p>Image Featuring (FeatureApp) [ Application ]collects the following User Data:\n\n    <ul>li>Username and password</li></ul>\n\n    <p>Application doesn’t share the user’s location with other users.\n\n    <p>Application doesn’t display Ads\n\n    <p>Application doesn’t disclose the collection of any personal and sensitive information from children nor other users.\n\n\n\n    <p>Application Other User Data are collected as anonymous data on Google Firebase. Application is not collecting supplementary data.</p>\n\n    <p>[Calculator]</p>\n\n    <p>Contact: DAHMEN Manuel (dathewolf@gmail.com>)</p>\n\n    <h2>licenses and copyrights</h3>\n    <h3>Licence<h3>\n    <p>Code sous licence Apache 2.</p>\n\n    <h3>Droits d&#39;auteur</h3>\n\n        <p>KMeans filters</p>\n        <p><a href=&#39;https://github.com/shephalika21&#39;>https://github.com/shephalika21</a></p>\n\n    <h3WPolitique de confidentialité et de vie privée</h3>\n    <p><a href=&quot;https://empty3.app/privacy&quot;>https://empty3.app/privacy</a></p>\n\n    <h3>Livres ou cours utilisés (dont)</h3>\n    <p><a href=&quot;https://www.cs.washington.edu/academics/courses/&quot;>https://www.cs.washington.edu/academics/courses/</a>\n        (Computer Vision course - 2010)</p>\n\n]]></string>
 </resources>
