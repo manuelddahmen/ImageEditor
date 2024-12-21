@@ -24,12 +24,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LicenceUserData">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
         android:text="@string/string_privacy_license"
         android:id="@+id/textViewUserData1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:inputType="text"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="6dp"
         android:textSize="16sp"
@@ -46,7 +49,7 @@
         app:layout_constraintTop_toTopOf="parent">
         </TextView>
 
-
+</ScrollView>
     <Button
         android:id="@+id/AboutButton"
         android:layout_width="wrap_content"

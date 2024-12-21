@@ -36,13 +36,6 @@ class LicenceUserData2 : AppCompatActivity() {
         }
     }
 
-    private fun backToMain(view: View) {
-
-        val intent: Intent = Intent(view.context, Calculator::class.java).apply {
-        }
-        startActivity(intent)
-    }
-
 
     fun openLink(view: View) {
         val uri: Uri = Uri.parse(getString(R.string.POLICY_URI))

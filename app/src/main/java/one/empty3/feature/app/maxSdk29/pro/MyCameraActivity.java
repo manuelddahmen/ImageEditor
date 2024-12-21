@@ -786,7 +786,9 @@ public class MyCameraActivity extends ActivitySuperClass {
 
     private void openUserData(@NonNull View view) {
         //saveImageState(isWorkingResolutionOriginal());
-        Intent intent = new Intent(view.getContext(), LicenceUserData2.class);
+        Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO);
+         intent.setClass(view.getContext(), LicenceUserData2.class);
+
         passParameters(intent);
     }
 
