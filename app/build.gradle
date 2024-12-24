@@ -17,7 +17,7 @@ if (hasProperty('buildScan')) {
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903105
+def code = 336903106
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
@@ -208,7 +208,7 @@ android {
         minSdk 29
         javaVersionEnum
         versionCode code
-        versionName "9.3-36-beta"
+        versionName "9.3-37-beta"
         signingConfig signingConfigs.release
     }
 
@@ -289,6 +289,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-appcheck:18.0.0'
     implementation 'com.google.firebase:firebase-appcheck-playintegrity:18.0.0'
     implementation 'androidx.constraintlayout:constraintlayout-core:1.1.0'
+    implementation 'androidx.core:core:1.13.0'
     def versions_work = "2.9.0"
     implementation "androidx.work:work-runtime:2.9.0"
     implementation "androidx.work:work-runtime-ktx:2.9.0"

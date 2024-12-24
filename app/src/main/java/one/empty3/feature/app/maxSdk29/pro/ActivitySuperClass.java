@@ -182,6 +182,7 @@ public class ActivitySuperClass extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
+
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -189,6 +190,8 @@ public class ActivitySuperClass extends AppCompatActivity {
                     .detectUnsafeIntentLaunch()
                     .build());
         }
+
+        getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
 /*
         ViewCompat.setOnApplyWindowInsetsListener(this.drawerLayout.getRootView(), (v, windowInsets) -> {
             Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures());

@@ -23,6 +23,7 @@ package one.empty3.feature.app.maxSdk29.pro;
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Insets
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -31,6 +32,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkInfo
 import one.empty3.Main2022
@@ -56,7 +58,6 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var hasRun = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         classnames = ArrayList()
 
         Main2022.effects = classnames
