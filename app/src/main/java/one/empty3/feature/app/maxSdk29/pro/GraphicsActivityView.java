@@ -76,11 +76,11 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         });
 
-
+*/
         printValues();
         Logger.getAnonymousLogger().log(Level.INFO,
                 "currentFile=" + getClass().toString() + " " + currentFile);
-  */  }
+    }
 
     private void printValues() {
 

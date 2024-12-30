@@ -58,6 +58,7 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
     private var hasRun = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         classnames = ArrayList()
 
         Main2022.effects = classnames
