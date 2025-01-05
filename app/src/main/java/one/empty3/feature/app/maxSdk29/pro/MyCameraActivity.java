@@ -20,6 +20,8 @@
 
 package one.empty3.feature.app.maxSdk29.pro;
 
+import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
+import static androidx.navigation.ui.NavigationUI.setupWithNavController;
 import static com.google.firebase.database.collection.BuildConfig.APPLICATION_ID;
 import static java.nio.file.Files.copy;
 
@@ -56,10 +58,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -119,6 +127,11 @@ public class MyCameraActivity extends ActivitySuperClass {
     private boolean copied;
     private AppBarConfiguration appBarConfiguration;
 
+
+    private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +139,22 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         setContentView(R.layout.main);
 
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.drawer_layout);
+
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_graph_nav)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        setupActionBarWithNavController(this,  navController, mAppBarConfiguration);
+        setupWithNavController(navigationView, navController);
 
 
         String type = getIntent().getType();
@@ -1227,6 +1256,11 @@ public class MyCameraActivity extends ActivitySuperClass {
             currentFile.addNull(null);
         }
     }
-}
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return navController.navigateUp()
+                || super.onSupportNavigateUp();
+    }}
 
 

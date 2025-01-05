@@ -67,19 +67,20 @@ public class Undo {
     public void add(DataApp dataApp) {
         if (current < 0) {
             data.add(0, dataApp);
-        } else if (current + 1 > data.size()) {
+        } else if (current >= data.size()) {
             data.add(dataApp);
+            current = data.size()-1;
         } else {
             data.add(current + 1, dataApp);
+            current = current+1;
         }
-        current = data.indexOf(dataApp);
     }
 
     public DataApp getDataApp() {
         if (data.size() > current && current>=0 && data.get(current) != null) {
             return data.get(current);
-        } else {
-            //return new DataApp();
+        } else if(current<0 && !data.isEmpty()){
+            return data.get(data.size()-1);
         }
         return null;
     }
@@ -110,18 +111,17 @@ public class Undo {
     }
 
     public DataApp back() {
-        if(current>0 && data.size()>0) {
+        if(current>0 && !data.isEmpty()) {
             current--;
             return getDataApp();
         }
         return getDataApp();
     }
     public DataApp next() {
-        if(current<data.size()-1 && data.size()>1) {
+        if(current<=data.size()-1 && data.size()>1) {
             current++;
             return getDataApp();
         }
-        // idée créer une nouvelle image si current au dernier élément. Donc new BufferesImage()
         return getDataApp();
     }
 
