@@ -25,15 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <!--
-    Buttons in button bars should be borderless; use `style="?android:attr/buttonBarButtonStyle"` (and `?android:attr/buttonBarStyle` on the parent)
-    -->
-    <androidx.drawerlayout.widget.DrawerLayout
+<!--
+    <androidx.appcompat.widget.Toolbar
+        style="@android:style/Theme.Material.NoActionBar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:id="@+id/drawer_layout"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/main_menu">
+        app:layout_constraintBottom_toTopOf="@id/nav_host_fragment_content_main"/>
+
 
     <fragment
         android:id="@+id/nav_host_fragment_content_main"
@@ -41,30 +41,42 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+        app:navGraph="@navigation/nav_graph"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/drawer_layout"/>
 
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:id="@+id/nav_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/activity_main_drawer"
-            app:headerLayout="@layout/header_navigation_drawer"/>
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:id="@+id/drawer_layout"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment_content_main">
+
     </androidx.drawerlayout.widget.DrawerLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/nav_view"
+        app:layout_constraintTop_toBottomOf="@id/drawer_layout"
+        app:layout_constraintBottom_toTopOf="@id/main_menu"
+        app:menu="@menu/activity_main_drawer"/>
+        //app:headerLayout="@layout/header_navigation_drawer"/>-->
 
     <LinearLayout
+
             android:layout_margin="30dp"
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
             android:layout_height="96dp"
             android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/currentImageView"
-            app:layout_constraintTop_toBottomOf="@id/drawer_layout">
+            app:layout_constraintTop_toBottomOf="@id/nav_view">
 
         <LinearLayout
                 app:layout_constraintBottom_toTopOf="@+id/selectButtonsLayout"
@@ -285,13 +297,13 @@
                 android:id="@+id/undo"
                 android:text="@string/undo"
                 android:layout_weight="0.5"
-                android:layout_height="40dp"  android:layout_width="wrap_content"/>
+                android:layout_height="48dp"  android:layout_width="wrap_content"/>
 
         <Button
                 android:id="@+id/redo"
                 android:text="@string/redo"
                 android:layout_weight="0.5" android:layout_width="wrap_content"
-                android:layout_height="40dp" />
+                android:layout_height="48dp" />
     </LinearLayout>
     <FrameLayout android:id="@+id/adsFragment"
             android:layout_width="match_parent"

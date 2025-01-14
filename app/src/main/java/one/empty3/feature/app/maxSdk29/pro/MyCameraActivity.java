@@ -50,6 +50,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,6 +67,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -126,9 +128,6 @@ public class MyCameraActivity extends ActivitySuperClass {
     private Clipboard clipboard;
     private boolean copied;
     private AppBarConfiguration appBarConfiguration;
-
-
-    private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
 
 
@@ -138,25 +137,23 @@ public class MyCameraActivity extends ActivitySuperClass {
 
 
         setContentView(R.layout.main);
+        getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
 
-
+/*
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.drawer_layout);
-
+        NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_graph_nav)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        setupActionBarWithNavController(this,  navController, mAppBarConfiguration);
-        setupWithNavController(navigationView, navController);
-
-
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        setupActionBarWithNavController(this,  navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(
+                toolbar, navController, appBarConfiguration);
+*/
         String type = getIntent().getType();
 
         maxRes = new Utils().getMaxRes(this);
