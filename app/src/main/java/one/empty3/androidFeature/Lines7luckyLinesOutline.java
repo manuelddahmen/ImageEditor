@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.Image;
 import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;

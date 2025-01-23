@@ -58,7 +58,7 @@
 //package one.empty3.library;
 //
 //import one.empty3.library.core.nurbs.*;
-//import one.empty3.pointset.PCont;
+//import one.empty3.library.Pointset.PCont;
 //
 //import java.io.File;
 //
@@ -66,7 +66,7 @@
 //import android.graphics.Canvas;
 //import android.graphics.Color;
 //import android.graphics.Paint;
-//import javaAnd.awt.Point
+//import one.empty3.library.Point
 //import android.os.Build;
 //
 //import androidx.annotation.RequiresApi;

@@ -236,9 +236,9 @@ dependencies {
     // Kotlin
     implementation 'androidx.activity:activity-ktx:$activity_version'
     implementation(project(":partialandroid"))
-    implementation "one.empty3.libs:commons-mp:0.0.6"
+    implementation "one.empty3.libs:commons-mp:0.0.7"
     //implementation fileTree(dir: '../../empty3-library-mp/build/libs', include: ['*.jar'])
-    implementation("one.empty3:empty3-library-mp:2024.1.4")
+    implementation("one.empty3:empty3-library-mp:2025.1.22")
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
     implementation 'com.google.android.play:asset-delivery:2.2.2'

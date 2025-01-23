@@ -43,14 +43,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import one.empty3.libs.Color;
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;
 import one.empty3.library.core.nurbs.Point3DS;
 import one.empty3.library.core.nurbs.RPv;
 import one.empty3.library.core.nurbs.ThickSurface;
-import one.empty3.pointset.PCont;
+import one.empty3.library.Pointset.PCont;
 /*__
  * * Classe de rendu graphique
  */

@@ -28,7 +28,7 @@
 package one.empty3;
 
 import one.empty3.libs.Color;
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.library.Camera;
 import one.empty3.library.ECImage;
 import one.empty3.library.ITexture;

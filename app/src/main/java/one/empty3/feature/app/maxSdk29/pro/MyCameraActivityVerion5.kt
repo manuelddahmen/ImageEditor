@@ -34,7 +34,7 @@ package one.empty3.feature.app.maxSdk29.pro
 //import androidx.core.app.ActivityCompat
 //import androidx.core.content.FileProvider
 //import com.google.android.datatransport.BuildConfig
-//import javaAnd.awt.Point
+//import one.empty3.library.Point
 //import one.empty3.libs.Image
 //import one.empty3.ImageIO
 //import one.empty3.feature20220726.PixM

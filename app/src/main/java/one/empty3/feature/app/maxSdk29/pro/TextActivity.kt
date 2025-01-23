@@ -43,7 +43,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import javaAnd.awt.Point
+import one.empty3.library.Point
 import one.empty3.libs.Image
 import java.io.File
 import java.io.FileInputStream
@@ -152,7 +152,7 @@ class TextActivity() : ActivitySuperClass() {
                             (event.rawX - viewX - outRect.left) / imageView.width * currentImage!!.width
                         val y =
                             (event.rawY - viewY - outRect.top) / imageView.height * currentImage!!.height
-                        drawTextPointA = Point(x.toInt(), y.toInt())
+                        drawTextPointA = Point(x.toDouble(), y.toDouble())
                         return true
                     }
                 }

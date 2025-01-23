@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 
 import java.util.Random;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;

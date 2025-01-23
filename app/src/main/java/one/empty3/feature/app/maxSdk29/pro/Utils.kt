@@ -46,7 +46,7 @@ import androidx.preference.PreferenceManager
 //import com.linkedin.android.litr.TransformationOptions
 //import com.linkedin.android.litr.analytics.TrackTransformationInfo
 //import com.linkedin.android.litr.filter.GlFilter
-import javaAnd.awt.Point
+import one.empty3.library.Point
 import kotlinx.coroutines.Dispatchers
 import one.empty3.libs.Image
 import matrix.MBitmap
@@ -729,8 +729,8 @@ class Utils {
     fun setMaxResImage(activity: ActivitySuperClass, bitmap: Bitmap): Point? {
         val imageRatio = getImageRatio(bitmap)
         return Point(
-            (getMaxRes(activity, null) / imageRatio).toInt(),
-            (getMaxRes(activity, null) * imageRatio).toInt()
+            (getMaxRes(activity, null) / imageRatio).toDouble(),
+            (getMaxRes(activity, null) * imageRatio).toDouble()
         )
     }
 

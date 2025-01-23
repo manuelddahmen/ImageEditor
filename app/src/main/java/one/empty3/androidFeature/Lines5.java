@@ -20,7 +20,7 @@
 
 package one.empty3.androidFeature;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;

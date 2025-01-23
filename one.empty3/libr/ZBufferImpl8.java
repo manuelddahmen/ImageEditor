@@ -43,12 +43,12 @@
 package one.empty3.library;
 
 import one.empty3.library.core.nurbs.*;
-import one.empty3.pointset.PCont;
+import one.empty3.library.Pointset.PCont;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Picture;
-import javaAnd.awt.Point
+import one.empty3.library.Point
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
