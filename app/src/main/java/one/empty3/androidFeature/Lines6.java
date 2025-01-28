@@ -293,7 +293,7 @@ public class Lines6 extends ProcessFile {
                     stack, new ColorTexture(new one.empty3.libs.Color(((android.graphics.Color.WHITE)))));
         });
 
-        Image.saveFile(stack.getImage(), "jpg", out, shouldOverwrite);
+        stack.getImage().saveFile( out);
 
         addSource(out);
 

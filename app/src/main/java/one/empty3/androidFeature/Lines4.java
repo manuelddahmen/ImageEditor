@@ -370,7 +370,7 @@ public class Lines4 extends ProcessFile {
                 }
             }
         }
-        Image.saveFile(o.getImage(), "jpg", out, shouldOverwrite);
+        o.getImage().saveFile( out);
 
         return true;
 

@@ -410,13 +410,12 @@ public class Lines5colors extends ProcessFile {
 
             }
         });
-        Image.saveFile(o.normalize(0.0, 1.0).getImage(), "jpg", new File(out.getAbsolutePath() + "-dotted.jpg"), shouldOverwrite);
+        o.normalize(0.0, 1.0).getImage().saveFile( new File(out.getAbsolutePath() + "-dotted.jpg"));
         //one.empty3.Image.saveFile(bLines, "jpg",
         //        new File(out.getAbsolutePath() + "-blines.jpg"));
 //            one.empty3.Image.saveFile(linesImg2, "jpg",
 //                    new File(out.getAbsolutePath() + "-lines-yAxB.jpg"));
-        Image.saveFile(img3.normalize(0.0, 1.0).getImage(), "jpg",
-                new File(out.getAbsolutePath()), shouldOverwrite);
+        img3.normalize(0.0, 1.0).getImage().saveFile(new File(out.getAbsolutePath()));
         return true;
 
     }

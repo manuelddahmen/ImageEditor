@@ -958,4 +958,10 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
     public void setInt(int index, int rgb) {
         x[index] = rgb;
     }
+/*
+    public one.empty3.library.Point3D getP(int i, int j) {
+        Lumiere.getDouble(getRgb(i,j));
+        return null;
+    }
+*/
 }

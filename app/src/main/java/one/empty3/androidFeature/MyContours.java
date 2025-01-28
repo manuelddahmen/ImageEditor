@@ -143,7 +143,7 @@ public class MyContours extends ProcessFile {
         Image read = ImageIO.read(in);
         PixM pixM = PixM.getPixM(read, maxRes);
         PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
-        Image.saveFile(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+        pixM1.normalize(0, 1).getImage().saveFile( out);
         return true;
     }
 

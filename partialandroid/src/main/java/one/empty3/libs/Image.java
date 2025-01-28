@@ -7,12 +7,12 @@ import android.os.Build;
 
 import org.jetbrains.annotations.NotNull;
 
-import one.empty3.library.core.nurbs.F;
 import one.empty3.libs.commons.IImageMp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.Buffer;
 
 public class Image extends BitmapDrawable implements IImageMp {
@@ -24,11 +24,31 @@ public class Image extends BitmapDrawable implements IImageMp {
         }
     }
 
-    public static void saveFile(Bitmap bitmap, String jpg, File out) {
+    public Image(File image) throws IOException {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inMutable = true;
+        setImage(BitmapFactory.decodeFile(image.getAbsolutePath(), options));
+    }
+    public Image(int width, int height) {
+        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            setBitmap(image);
+        }
+    }
+
+    public Image(int columns, int lines, int i) {
+        setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.RGB_565));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            setBitmap(image);
+        }
+    }
+
+
+    public void saveFile(Bitmap bitmap, String jpg, File out) {
         new Image(bitmap).saveFile(out);
     }
 
-    public static void saveFile(Image img4, String jpeg, File out, boolean shouldOverwrite) {;
+    public void saveFile(Image img4, String jpeg, File out, boolean shouldOverwrite) {;
         img4.saveFile(out);
     }
 
@@ -39,19 +59,6 @@ public class Image extends BitmapDrawable implements IImageMp {
         }
     }
 
-    public Image(int width, int height) {
-        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setBitmap(image);
-        }
-    }
-
-    public Image(int columns, int lines, int i) {
-            setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setBitmap(image);
-        }
-    }
 
 
     public int getRgb(int x, int y) {
@@ -60,8 +67,7 @@ public class Image extends BitmapDrawable implements IImageMp {
         return image.getPixel(x, y);
     }
 
-    @Override
-    public IImageMp getFromFile(File file) {
+    public static IImageMp getFromFile(File file) {
         return loadFile(file);
     }
 

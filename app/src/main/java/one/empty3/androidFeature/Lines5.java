@@ -283,7 +283,7 @@ public class Lines5 extends ProcessFile {
         );
         temp2.forEach(point3D -> System.out.printf("POINT LIST TEMP2 %s", point3D));
 
-        Image.saveFile(bLines, "jpg", out, shouldOverwrite);
+        bLines.saveFile(out);
         return true;
 
     }
