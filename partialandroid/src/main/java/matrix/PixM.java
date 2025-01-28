@@ -35,7 +35,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 
-import one.empty3.feature.M;
 import one.empty3.feature.V;
 import one.empty3.library.ITexture;
 import one.empty3.library.LineSegment;
@@ -222,6 +221,23 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
         return c;
     }
 
+
+    @Override
+    public Image getBitmap() {
+        return super.getBitmap();
+    }
+
+    public Image getImage() {
+        Image image = new one.empty3.libs.Image(columns, lines);
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                //double[] values = getValues(i, j);
+                image.setRgb(i, j, getInt(i, j));//Lumiere.getInt(values));
+            }
+        }
+        return image;
+
+    }
     public V derivative(int x, int y, int order, V originValue) {
         if (originValue == null) {
             originValue = new V(2, 1);
@@ -237,29 +253,8 @@ public class PixM extends M implements Parcelable, Serializable, Serialisable {
         return originValue;
     }
 
-    public Image getBitmap() {
-        Bitmap image = Bitmap.createBitmap(columns,
-                lines, Bitmap.Config.ARGB_8888);
 
 
-        double[] rgba = new double[3];
-        for (int i = 0; i < image.getWidth(); i++) {
-            for (int j = 0; j < image.getHeight(); j++) {
-                for (int c = 0; c < 3; c++) {
-                    setCompNo(c);
-                    rgba[c] = get(i, j);
-                }
-                image.setPixel(i, j, Lumiere.getInt(rgba));
-            }
-        }
-        return new Image(image);
-
-    }
-
-
-    public Image getImage() {
-        return getBitmap();
-    }
 /*
 
     public void plotCurve(ParametricCurve curve, ITexture texture) {

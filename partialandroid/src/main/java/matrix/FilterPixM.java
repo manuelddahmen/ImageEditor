@@ -20,6 +20,8 @@
 
 package matrix;
 
+import android.graphics.Bitmap;
+
 import one.empty3.libs.Image;
 
 public abstract class FilterPixM extends PixM {
@@ -37,6 +39,10 @@ public abstract class FilterPixM extends PixM {
     public FilterPixM setNormalize(int normalize) {
         this.normalize = normalize;
         return this;
+    }
+
+    public Image getBitmap() {
+        return super.getBitmap();
     }
 
     private int normalize = NORM_NONE;

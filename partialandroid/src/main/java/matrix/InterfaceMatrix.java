@@ -22,6 +22,8 @@ package matrix;
 
 import android.graphics.Bitmap;
 
+import one.empty3.libs.Image;
+
 public interface InterfaceMatrix {
 
     public void init(int columns, int lines);
@@ -41,5 +43,5 @@ public interface InterfaceMatrix {
 
     public double[] getValues(int column, int line);
 
-    Bitmap getBitmap();
+    Image getBitmap();
 }
