@@ -25,19 +25,17 @@ public class Image extends BitmapDrawable implements IImageMp {
     }
 
     public Image(File image) throws IOException {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inMutable = true;
-        setImage(BitmapFactory.decodeFile(image.getAbsolutePath(), options));
+        setImage(BitmapFactory.decodeFile(image.getAbsolutePath()));
     }
     public Image(int width, int height) {
-        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565));
+        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }
     }
 
     public Image(int columns, int lines, int i) {
-        setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.RGB_565));
+            setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(image);
         }
