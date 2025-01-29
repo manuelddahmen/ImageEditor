@@ -11,7 +11,7 @@ public class Color extends android.graphics.Color implements IColorMp {
     }
 
     public Color(int rgb) {
-        this.colorObject = android.graphics.Color.valueOf(rgb);
+        this.colorObject = android.graphics.Color.valueOf(0xff000000|rgb);
     }
 
     public static Color newCol(double r, double g, double b) {
@@ -60,17 +60,16 @@ public class Color extends android.graphics.Color implements IColorMp {
     }
 
     public void setRGB(int rgb) {
-        rgb = rgb ;
-        this.colorObject = android.graphics.Color.valueOf(rgb);
+        this.colorObject = android.graphics.Color.valueOf(0xff000000|rgb);
     }
 
     public void setRGB(int r, int g, int b) {
         this.colorObject = android.graphics.Color.valueOf(
-                android.graphics.Color.argb(255, r, g, b));
+                android.graphics.Color.rgb( r, g, b));
     }
 
     public void setRgb(int rgb) {
-        this.colorObject = android.graphics.Color.valueOf(rgb);
+        this.colorObject = android.graphics.Color.valueOf(0xff000000|rgb);
     }
 
     public int getRGB() {
@@ -88,22 +87,22 @@ public class Color extends android.graphics.Color implements IColorMp {
     }
     public int getRed() {
         if(colorObject == null)
-            return (int) (super.getComponents()[0]*255);
-        return (int) (colorObject.getComponents()[0] * 255f);
+            return (int) (super.red()*255);
+        return (int) (colorObject.red()*255);
     }
 
     public int getGreen() {
 
         if(colorObject == null)
-            return (int) (super.getComponents()[1]*255);
-        return (int) (colorObject.getComponents()[1] * 255f);
+            return (int) (super.green()*255);
+        return (int) (colorObject.green() * 255f);
     }
 
     public int getBlue() {
         if(colorObject == null)
-            return (int) (super.getComponents()[2]*255);
+            return (int) (super.blue()*255);
 
-        return (int) (colorObject.getComponents()[2] * 255f);
+        return (int) (colorObject.blue() * 255f);
     }
 
     public int getAlpha() {
@@ -111,5 +110,25 @@ public class Color extends android.graphics.Color implements IColorMp {
             return (int) (super.getComponents()[3]*255);
 
         return (int) (colorObject.alpha() * 255f);
+    }
+
+    public float red() {
+        if(colorObject == null)
+            return (int) (super.red());
+        return (int) (colorObject.red());
+    }
+
+    public float green() {
+
+        if(colorObject == null)
+            return (int) (super.green());
+        return (int) (colorObject.green());
+    }
+
+    public float blue() {
+        if(colorObject == null)
+            return (int) (super.blue());
+
+        return (int) (colorObject.blue());
     }
 }

@@ -1,54 +1,60 @@
 /*
- * Copyright (c) 2024.
+ *
+ *  *
+ *  *  * Copyright (c) 2025. Manuel Daniel Dahmen
+ *  *  *
+ *  *  *
+ *  *  *    Copyright 2024 Manuel Daniel Dahmen
+ *  *  *
+ *  *  *    Licensed under the Apache License, Version 2.0 (the "License");
+ *  *  *    you may not use this file except in compliance with the License.
+ *  *  *    You may obtain a copy of the License at
+ *  *  *
+ *  *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  *  *
+ *  *  *    Unless required by applicable law or agreed to in writing, software
+ *  *  *    distributed under the License is distributed on an "AS IS" BASIS,
+ *  *  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  *  *    See the License for the specific language governing permissions and
+ *  *  *    limitations under the License.
+ *  *
+ *  *
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *  * Created by $user $date
  *
  *
  */
-
 package matrix;
 
-
-import android.graphics.Bitmap;
-
-import java.util.PrimitiveIterator;
-import java.util.Random;
+import org.jetbrains.annotations.NotNull;
 
 import one.empty3.feature.MatrixFormatException;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 import one.empty3.libs.Image;
 
+import java.util.Arrays;
+import java.util.PrimitiveIterator;
+import java.util.Random;
+
 public class M implements InterfaceMatrix {
     public static PrimitiveIterator.OfDouble r = new Random().doubles().iterator();
     public static final Double noValue = r.next();
     protected int columns;
     protected int lines;
-    int[] x;
-    protected int compNo;
-    public int compCount = 3;
+    protected int[] x;
+    protected int compNo = 0;
+    public final int compCount = 3;
 
     public M(int c, int l) {
         this.lines = l;
         this.columns = c;
         x = new int[l * c];
-        for (int i = 0; i < x.length; i++)
-            x[i] = 0;
-        //System.out.println("Columns=" + columns + "\n Lines = " + lines+ " \n Total size ="+x.length);
+        Arrays.fill(x, 0);
+        //Logger.getAnonymousLogger().log(Level.INFO, "Columns=" + columns + "\n Lines = " + lines+ " \n Total size ="+x.length);
     }
-
 
     public int getColumns() {
         return columns;
@@ -78,9 +84,9 @@ public class M implements InterfaceMatrix {
         return null;
     }
 
-    /*public static GMatrix diag(GMatrix square) {
-        GMatrix matrix = new GMatrix(square.getColumns());
-        for (int i = 0; i < matrix.getColumns(); i++)
+    /*public static M diag(M square) {
+        M matrix = new M(square.columns);
+        for (int i = 0; i < matrix.columns; i++)
             matrix.set(i, i, square.get(i, i));
 
         return matrix;
@@ -88,29 +94,11 @@ public class M implements InterfaceMatrix {
 
     public double[] getValues(int i, int j) {
 
-        double[] v = new double[getCompCount()];
-
-        for (int d = 0; d < getCompCount(); d++) {
-            setCompNo(d);
-            v[d] = get(i, j);
-        }
+        double[] v;
+        v = readComps(i, j);
         return v;
     }
 
-    @Override
-    public Image getBitmap() {
-        Image image = new Image(columns, lines, 1);
-        for (int i = 0; i < getColumns(); i++) {
-            for (int j = 0; j < getLines(); j++) {
-                for (int k = 0; k < 3; k++) {
-                    setCompNo(k);
-                    image.setRgb(i, j, Lumiere.getInt(getValues(i, j)));
-                }
-            }
-
-        }
-        return image;
-    }
     public static double[] getVector(int add, double[]... vectors) {
         int d = 0;
         for (int i = 0; i < vectors.length; i++)
@@ -125,29 +113,36 @@ public class M implements InterfaceMatrix {
         return f;
     }
 
-    public void setP(int i, int j, Point3D p) {
-        for (int d = 0; d < 3; d++) {
-            setCompNo(d);
-            set(i, j, p.get(d));
+    public void setP(int i, int j, @NotNull Point3D p) {
+        int v = 0;
+        if (i >= 0 && i < columns && j >= 0 && j < lines) {
+            for (int d = 0; d < 3; d++) {
+                v += ((int) (p.get(d) * 255d)) << ((2 - d) * 8);
+            }
         }
+        x[index(i, j)] = v;
     }
 
     public Point3D getP(int i, int j) {
-        Point3D p = new Point3D();
-
-        for (int d = 0; d < 3; d++) {
-            setCompNo(d);
-            p.set(d, get(i, j));
+        Point3D p = new Point3D(0.0,0.0,0.0);
+        if (i >= 0 && i < columns && j >= 0 && j < lines) {
+            int[] ints = readCompsInts(i, j);
+            for (int k = 0; k < 3; k++) {
+                p.set(k, ints[k] / 255.0);
+            }
         }
         return p;
+
     }
 
     public void setValues(int i, int j, double... v) {
+
+
         for (int d = 0; d < v.length; d++) {
-            setCompNo(d);
-            set(i, j, v[d]);
+            if (d < compCount) {
+                writeComp(i, j, v[d], d);
+            }
         }
-        return;
     }
 
     public M(PixM pix) {
@@ -163,7 +158,6 @@ public class M implements InterfaceMatrix {
                 }
             }
         }
-        //System.out.println("Columns=" + columns + "\n Lines = " + lines+ " \n Total size ="+x.length);
     }
 
 
@@ -173,6 +167,19 @@ public class M implements InterfaceMatrix {
         x = new int[l * c];
     }
 
+    @Override
+    public Image getBitmap() {
+        Image image = new one.empty3.libs.Image(columns, lines);
+        for (int i = 0; i < getColumns(); i++) {
+            for (int j = 0; j < getLines(); j++) {
+                for (int k = 0; k < 3; k++) {
+                    image.setRgb(i, j, getInt(i, j));
+                }
+            }
+
+        }
+        return image;
+    }
 
     public M(int cl) {
         this(cl, cl);
@@ -180,10 +187,12 @@ public class M implements InterfaceMatrix {
 
     public double get(int column, int line) {
         if (column >= 0 && column < columns && line >= 0 && line < lines && compNo >= 0 && compNo < compCount) {
-            return Lumiere.getDoubles(x[index(column, line)])[compNo];
+            return readComps(column, line)[compNo];
         } else
             return noValue; // OutOfBound?
     }
+
+
 
     public double getIntensity(int column, int line) {
         double i = 0;
@@ -212,17 +221,10 @@ public class M implements InterfaceMatrix {
         this.compNo = compNo;
     }
 
+
     public int index(int column, int line) {
-        return  ((line * columns + column));
+        return ((line * columns + column));
     }
-
-    public void set(int column, int line, double d) {
-        if (column >= 0 && column < columns && line >= 0 && line < lines && compNo<compCount) {
-            writeComp(column, line, d, compNo);
-        }
-
-    }
-
 
     /***
      * Must be correct drawing
@@ -242,23 +244,24 @@ public class M implements InterfaceMatrix {
             int mask1 = 0xffffffff - (0xff << ((2 - compNoP) * 8));
 
             pixelValue = (pixelValue & mask1) +  (((int)(d * 0xff)) << ((2 - compNoP) * 8));
-            x[index] = pixelValue;
+            x[index] = pixelValue|0xff000000;
         }
         setCompNo(tmpCompNo);
     }
 
     public void writeComps(int i, int j, int color) {
         int index = index(i, j);
-        x[index] = color;
+        x[index] = color|0xff000000;
 
     }
+
     public double[] readCompsA(int i, int j) {
         if(i>=0&&i<columns&&j>=0&&j<lines&&index(i,j)<x.length&&index(i,j)>=0) {
             int d = x[index(i, j)];
-            int a = ((d & 0xFF000000) >> 24);
-            int r = ((d & 0x00FF0000) >> 16);
-            int g = ((d & 0x0000FF00) >> 8);
-            int b = ((d & 0x000000FF));
+            int a = ((d & 0xFF000000) >> 24) & 0xFF;
+            int r = ((d & 0x00FF0000) >> 16) & 0xFF;
+            int g = ((d & 0x0000FF00) >> 8) & 0xFF;
+            int b = ((d & 0x000000FF)) & 0xFF;
             return new double[]{r / 255., g / 255., b / 255., a / 255.};
         }
         return new double[]{(double) 0 / 255f, (double) 0 / 255f, (double) 0/ 255f};
@@ -274,6 +277,7 @@ public class M implements InterfaceMatrix {
         return new double[]{(double) c[0] / 255f, (double) c[1] / 255f, (double) c[2] / 255f};
     }
 
+
     public int getInt(int i, int j) {
         return x[index(i, j)];
     }
@@ -287,11 +291,22 @@ public class M implements InterfaceMatrix {
         return new int[]{c[0], c[1], c[2]};
     }
 
+    public void set(int column, int line, double d) {
+        if (column >= 0 && column < columns && line >= 0 && line < lines && compNo<compCount) {
+            writeComp(column, line, d, compNo);
+        }
 
-    @Override
+    }
+
     public void set(int column, int line, double... values) {
         setValues(column, line, values);
     }
+
+    public void set(int index, int value) {
+        x[index] = value;
+    }
+
+
 
     public M tild() {
         M m = new M(lines, columns);
@@ -323,13 +338,13 @@ public class M implements InterfaceMatrix {
     }
 
     private M dot(M m) {
-        if (!isSquare() || columns == m.getLines())
+        if (!isSquare() || columns == m.lines)
             throw new MatrixFormatException("determinant: not square matrix");
-        M res = new M(m.getColumns(), lines);
+        M res = new M(m.columns, lines);
         for (int comp = 0; comp < getCompNo(); comp++) {
             res.setCompNo(comp);
             this.setCompNo(comp);
-            for (int i = 0; i < m.getColumns(); i++) {
+            for (int i = 0; i < m.columns; i++) {
                 for (int j = 0; j < lines; j++) {
                     for (int k = 0; k < lines; k++)
                         res.set(i, j, res.get(i, j) + get(i, k) * res.get(k, j));
@@ -511,10 +526,14 @@ public class M implements InterfaceMatrix {
     }
 
     public static M diag(M d) {
-        M matrix = new M(d.getLines(), d.getColumns());
-        for (int i = 0; i < d.getLines(); i++)
+        M matrix = new M(d.lines, d.columns);
+        for (int i = 0; i < d.lines; i++)
             matrix.set(i, i, d.get(i, i));
         return matrix;
+    }
+
+    public int[]  getX() {
+        return x;
     }
 
 

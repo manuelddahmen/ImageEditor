@@ -102,8 +102,8 @@ public class Image extends BitmapDrawable implements IImageMp {
         if(x < 0 || y < 0 || x >= getWidth() || y >= getHeight())
             return;
         if(image != null)
-            image.setPixel(x, y, rgb);
-        getBitmap().setPixel(x, y, rgb);
+            image.setPixel(x, y, rgb|0xFF000000);
+        getBitmap().setPixel(x, y, rgb|0xFF000000);
     }
 
     public static Image loadFile(File path) {

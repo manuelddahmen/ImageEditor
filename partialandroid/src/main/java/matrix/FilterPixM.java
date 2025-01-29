@@ -56,7 +56,7 @@ public abstract class FilterPixM extends PixM {
     }
 
     public FilterPixM(PixM image) {
-        super(image.getImage().getImage());
+        super(image.getImage());
     }
 
     public abstract double filter(double i, double i1);

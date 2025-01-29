@@ -178,8 +178,7 @@ public class ExampleUnitTest2 {
             int height = pixM.getLines();
             Color color = colors[k];
             System.out.println(color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-            pixM.setP(0, 0, new Point3D(Lumiere.getDoubles(color.getColor())));
-
+            pixM.setP(0, 0, new Point3D(color.getRed()/255d, color.getGreen()/255d, color.getBlue()/255d));
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     double[] d1 = new double[5];
@@ -234,7 +233,6 @@ public class ExampleUnitTest2 {
                             pixM2.setCompNo(l);
                             pixM.set(i, j, pixM2.get(i, j));
                     }
-                    double[] d1 = new double[5];
                     Point3D p = pixM.getP(0, 0);
                     pixM.setP(i, j, p);
                 }
