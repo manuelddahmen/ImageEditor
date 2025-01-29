@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2024.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/Theme.FeatureAppmain">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintVertical_weight="0.5"
+    android:id="@+id/imageViewLayout">
+    <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
+        android:id="@+id/currentImageView"
+        android:theme="@style/Theme.FeatureAppmain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/image_preview_before_and_after_rendering_effects"
+        android:src="@drawable/app_icon"
+        app:srcCompat="@drawable/app_icon"
+        />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintVertical_weight="0.5"
+        style="@style/Theme.FeatureAppmain"
+        android:id="@+id/text_details"
+        app:layout_constraintStart_toEndOf="@id/imageViewLayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:labelFor="@id/currentImageView"
+            android:id="@+id/font_size"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:autofillHints="Text size in dp (~pixels*4) "
+            android:text="@string/textDp"
+            android:inputType="text|number" />
+
+        <EditText
+            android:labelFor="@id/currentImageView"
+            android:id="@+id/textViewOnImage"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="match_parent"
+            android:layout_height="192dp"
+            android:autofillHints="Ajouter un texte"
+            android:gravity="top"
+            android:hint="@string/ecrire_du_texte_ici"
+            android:inputType="textShortMessage"
+            android:text="" />
+
+        <Button
+            android:id="@+id/textApplyButton"
+            style="@style/Theme.FeatureAppmain"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/apply" />
+
+
+        <Button
+                android:id="@+id/buttonTextToMain"
+                style="@style/Theme.FeatureAppmain"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/main" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

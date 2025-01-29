@@ -484,12 +484,12 @@ public class MyCameraActivity extends ActivitySuperClass {
                 passParameters(settingsIntent);
             }
         });
-        Button loginButton = findViewById(R.id.myButton);
+        /*Button loginButton = findViewById(R.id.myButton);
         loginButton.setOnClickListener(view -> {
             Intent login = new Intent();
             login.setClass(getApplicationContext(), LoginActivity2.class);
             startActivity(login);
-        });
+        });*/
         Button undo = findViewById(R.id.undo);
         undo.setOnClickListener(new View.OnClickListener() {
             @Override

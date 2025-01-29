@@ -17,7 +17,7 @@ if (hasProperty('buildScan')) {
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = "21"
-def code = 336903108
+def code = 336903110
 //3 sept. 2023, 14:F27:03 (UTC).
 // 7 : 20 oct. 2023 22:41:00 (UTC)
 
