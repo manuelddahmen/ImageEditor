@@ -30,9 +30,12 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.WorkInfo
 import one.empty3.Main2022
@@ -65,8 +68,20 @@ class ChooseEffectsActivity2 : ActivitySuperClass() {
         Main2022.indices = ArrayList()
         Main2022.listOfFactors()
         setContentView(R.layout.recycler_view_effect_activity)
-
-        //maxRes = Utils().getMaxRes(this)
+        val view1:View = findViewById(R.id.main_layout_xml);
+        ViewCompat.setOnApplyWindowInsetsListener(view1) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
 
         recyclerView = findViewById(R.id.recycler_view_effect)
         val processFileArrayAdapter = ProcessFileArrayAdapter()

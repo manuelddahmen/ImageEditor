@@ -26,6 +26,7 @@
     android:background="#F3E6E6"
     android:backgroundTintMode="add"
     android:orientation="vertical"
+    android:id="@+id/main_layout_xml"
     android:theme="@style/Theme.FeatureAppmain"
 
     >

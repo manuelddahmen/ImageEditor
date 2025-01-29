@@ -17,6 +17,9 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import one.empty3.libs.Image
 import one.empty3.androidFeature.GoogleFaceDetection
 import java.io.DataInputStream
@@ -37,6 +40,22 @@ class FaceActivity : ActivitySuperClass() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_face)
+
+        val view1:View = findViewById(R.id.main_layout_xml);
+        ViewCompat.setOnApplyWindowInsetsListener(view1) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
+
 
         faceOverlayView = findViewById<FaceOverlayView>(R.id.face_overlay)
 

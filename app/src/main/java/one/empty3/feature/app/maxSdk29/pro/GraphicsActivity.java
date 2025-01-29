@@ -30,6 +30,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
 
 import java.util.logging.Level;
@@ -45,6 +48,19 @@ public class GraphicsActivity extends ActivitySuperClass {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.graphics);
+
+        View view1 = findViewById(R.id.main_layout_xml);
+        ViewCompat.setOnApplyWindowInsetsListener(view1, (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures());
+            // Apply the insets as padding to the view. Here, set all the dimensions
+            // as appropriate to your layout. You can also update the view's margin if
+            // more appropriate.
+            view1.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            // Return CONSUMED if you don't want the window insets to keep passing down
+            // to descendant views.
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         Button x = findViewById(R.id.buttonX);
         Button y = findViewById(R.id.buttonY);

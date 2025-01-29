@@ -21,6 +21,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import one.empty3.androidFeature.GoogleFaceDetection
 import one.empty3.androidFeature.GoogleFaceDetection.FaceData.Surface
 import matrix.PixM
@@ -101,6 +104,20 @@ class FaceActivitySettings : ActivitySuperClass() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.face_draw_settings)
+        val view1:View = findViewById(R.id.main_layout_xml);
+        ViewCompat.setOnApplyWindowInsetsListener(view1) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
 
         thisActivity = this
 
