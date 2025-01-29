@@ -185,28 +185,9 @@ public class ActivitySuperClass extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         super.onCreate(savedInstanceState);
-/*
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectUnsafeIntentLaunch()
-                    .build());
-        }
-*/
 
-/*
-        ViewCompat.setOnApplyWindowInsetsListener(this.drawerLayout.getRootView(), (v, windowInsets) -> {
-            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures());
-            // Apply the insets as padding to the view. Here, set all the dimensions
-            // as appropriate to your layout. You can also update the view's margin if
-            // more appropriate.
-            //this.drawerLayout.getRootView().setPadding(insets.left, insets.top, insets.right, insets.bottom);
 
-            // Return CONSUMED if you don't want the window insets to keep passing down
-            // to descendant views.
-            return WindowInsetsCompat.CONSUMED;
-        });
-*/
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();

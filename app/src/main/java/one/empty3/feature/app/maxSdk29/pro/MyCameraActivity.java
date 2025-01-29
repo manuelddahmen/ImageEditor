@@ -63,6 +63,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -138,6 +141,18 @@ public class MyCameraActivity extends ActivitySuperClass {
 
         setContentView(R.layout.main);
         getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
+        View view1 = findViewById(R.id.main_layout_xml);
+        ViewCompat.setOnApplyWindowInsetsListener(view1, (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures());
+            // Apply the insets as padding to the view. Here, set all the dimensions
+            // as appropriate to your layout. You can also update the view's margin if
+            // more appropriate.
+            view1.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            // Return CONSUMED if you don't want the window insets to keep passing down
+            // to descendant views.
+            return WindowInsetsCompat.CONSUMED;
+        });
 
 /*
         Toolbar toolbar = findViewById(R.id.toolbar);
