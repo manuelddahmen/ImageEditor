@@ -24,6 +24,7 @@
     android:id="@+id/main_layout_xml"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:theme="@style/Theme.FeatureAppmain">
 
     <ScrollView
@@ -45,7 +46,7 @@
                     android:id="@+id/buttonDraw"
                     android:layout_width="64dp"
                     android:layout_height="48dp"
-                    android:text="@string/draw2"
+                    android:text="@string/apply"
                     app:layout_constraintTop_toTopOf="parent"
                     android:theme="@style/Theme.FeatureAppmain"
 
@@ -56,7 +57,7 @@
                     android:id="@+id/buttonMainActivity"
                     android:layout_width="64dp"
                     android:layout_height="48dp"
-                    android:text="@string/main"
+                    android:text="@string/back"
                     app:layout_constraintTop_toTopOf="parent"
                     android:theme="@style/Theme.FeatureAppmain"
 

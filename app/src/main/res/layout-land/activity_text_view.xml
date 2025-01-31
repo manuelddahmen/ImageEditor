@@ -24,7 +24,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    style="@style/Theme.FeatureAppmain">
+    style="@style/Theme.FeatureAppmain"
+    android:id="@+id/main_layout_xml">
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
                 style="@style/Theme.FeatureAppmain"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/main" />
+                android:text="@string/back" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

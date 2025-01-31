@@ -23,7 +23,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Theme.FeatureAppmain">
+    style="@style/Theme.FeatureAppmain"
+    android:id="@+id/main_layout_xml">
 
     <one.empty3.feature.app.maxSdk29.pro.ImageViewSelection
         android:id="@+id/currentImageView"
@@ -86,7 +87,7 @@
                 style="@style/Theme.FeatureAppmain"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/main" />
+                android:text="@string/back" />
 
     </LinearLayout>
 

@@ -84,7 +84,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
                 draw();
             }
         });
-/*
+
         Button back = findViewById(R.id.buttonMainActivity);
         back.setOnClickListener(view -> {
             Intent intentGraphics = new Intent(getApplicationContext(), MyCameraActivity.class);
@@ -92,7 +92,7 @@ public class GraphicsActivityView extends ActivitySuperClass {
 
         });
 
-*/
+
         printValues();
         Logger.getAnonymousLogger().log(Level.INFO,
                 "currentFile=" + getClass().toString() + " " + currentFile);
